@@ -1663,7 +1663,16 @@ restating the question. Lead with the answer.
 - The transcripts contain a lot of swearing. Paraphrase around it rather \
 than quoting it — the person asking has not asked to be sworn at.
 - Give the timestamp. The episode name is added for you, so do not repeat \
-it."""
+it.
+- If nothing in the excerpts is actually about what was asked, reply with \
+exactly: "I couldn't find that in the episodes I've indexed." Nothing else. \
+Do not offer the closest related moment, a different topic, or a guess at \
+what they meant: a related moment is not an answer, and posting one in \
+public replies to a question the show never covered. This overrides the \
+rules above about leading with an answer, which apply only when the \
+excerpts DO cover the question. Broad means the excerpts cover the topic \
+in many places, so pick the best one; absent means they do not cover it, \
+so say so."""
 
 
 # Kept for callers that want the default shape.
@@ -3370,6 +3379,9 @@ class MentionBot:
                  site: str | None = None,
                  token_label: str | None = None,
                  elon_index=None,
+                 # The model the bot answers with, when it differs from the
+                 # page's. None means the index's own default.
+                 search_model: str | None = None,
                  mcg_index=None,
                  state_path: Path = STATE_PATH) -> None:
         self._client = client
@@ -3392,6 +3404,7 @@ class MentionBot:
         self._verified_only = verified_only
         self.per_author = per_author_cap
         self._post_limit = post_limit
+        self._search_model = search_model or None
         self._summaries = summaries
         self._summary_limit = summary_limit
         # Who was on screen, read off the show's own lower third. Passed
@@ -4227,7 +4240,8 @@ class MentionBot:
             logger.info("%s: answering from the %s archive", mention.id, corpus)
 
         result = await index.search(
-            asked, instruction=reply_style(self._post_limit))
+            asked, instruction=reply_style(self._post_limit),
+            model=self._search_model)
 
         # Ask once more before giving up. The same question has produced a
         # flat "I couldn't find that" one minute and a good cited answer the
@@ -4240,7 +4254,8 @@ class MentionBot:
             logger.info("%s missed on the first pass — asking again",
                         mention.id)
             retry = await index.search(
-                asked, instruction=reply_style(self._post_limit))
+                asked, instruction=reply_style(self._post_limit),
+                model=self._search_model)
             if not is_a_miss(retry.answer):
                 result = retry
 
@@ -4272,7 +4287,8 @@ class MentionBot:
                 logger.info("%s: nothing in the broadcast — trying %s",
                             mention.id, name)
                 elsewhere = await other.search(
-                    asked, instruction=reply_style(self._post_limit))
+                    asked, instruction=reply_style(self._post_limit),
+                    model=self._search_model)
                 if not is_a_miss(elsewhere.answer):
                     logger.info("%s: answered from the %s archive instead",
                                 mention.id, name)

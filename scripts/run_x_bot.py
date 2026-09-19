@@ -122,6 +122,7 @@ def build(dry_run: bool, cap: int | None, links: bool | None):
         verified_only=settings.x_bot_verified_only,
         per_author_cap=settings.x_bot_per_author_cap,
         post_limit=settings.x_bot_post_limit,
+        search_model=settings.x_bot_search_model or None,
         summary_limit=settings.x_bot_summary_limit,
         summaries=SummaryStore(),
         # Both entry points pass this. A bot built here without it would

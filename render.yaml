@@ -190,6 +190,15 @@ services:
       # a higher ceiling would only ever buy walls of text.
       - key: X_BOT_POST_LIMIT
         value: "1500"
+      # The bot answers on DeepSeek V4.1 Flash through UsePod; the page stays
+      # on Haiku. Measured 2026-09-20 (scripts/bot_model_trial.py, with the
+      # bot's not-there rule): DeepSeek declined 20/21 absent topics and
+      # answered 38/40 real questions; read by hand, the one "answered"
+      # absent topic and one "miss" were both correct, so 21/21 and 39/40.
+      # Opus 5 scored 19/21 and 38/40, Haiku 18/21 and 37/40. Median 9.9s
+      # with a slow tail to ~60s: fine for a reply, not for the page.
+      - key: X_BOT_SEARCH_MODEL
+        value: "deepseek-v4-1-flash"
       # Summaries already exist and run to ~3,100 characters. Trimming one
       # to answer size would cut the back half of an episode off.
       - key: X_BOT_SUMMARY_LIMIT

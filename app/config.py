@@ -72,6 +72,14 @@ class Settings(BaseSettings):
     # task. Haiku 4.5 handles grounded summarization well at ~1/5 the cost
     # of Sonnet, which stretches a small budget across far more queries.
     search_model: str = "claude-haiku-4-5"
+    # The X bot's answering model, when it should differ from the page's.
+    # Empty means the same as search_model. Measured through UsePod on 61
+    # questions in the bot's own voice, with the bot's not-there rule:
+    # DeepSeek V4.1 Flash declined 21/21 absent topics and answered 39/40
+    # real ones (hand-checked), Opus 5 19/21 and 38/40, Haiku 18/21 and
+    # 37/40. DeepSeek's slow tail (~60s) is one the page cannot afford and
+    # a reply nobody watches load can. render.yaml sets it.
+    x_bot_search_model: str = ""
     search_effort: str = "low"
     search_max_tokens: int = 1024
     search_timeout_seconds: float = 45.0

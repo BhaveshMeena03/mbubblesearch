@@ -403,11 +403,12 @@ class FakeIndex:
         self._then = then
         self.asked: list[str] = []
 
-    async def search(self, query, top_k=None, instruction=None):
+    async def search(self, query, top_k=None, instruction=None, model=None):
         # instruction is the per-surface style note; recorded so a test can
         # assert the bot asks for reply-shaped answers rather than page-shaped
-        # ones.
+        # ones. model likewise, so a test can see which one the bot asked for.
         self.instructed = instruction
+        self.modeled = model
         self.asked.append(query)
         if self._then is not None and len(self.asked) > 1:
             self._answer = self._then
@@ -4744,3 +4745,44 @@ async def test_an_ordinary_question_still_reaches_retrieval(tmp_path):
     await bot.tick("2026-09-15")
     await bot.tick("2026-09-15")
     assert index.asked == ["what did ansem say about zcash"]
+
+
+@pytest.mark.anyio
+async def test_the_bot_answers_on_its_own_model_when_given_one(tmp_path):
+    """The bot runs Opus 5 while the page stays on Haiku, through one index.
+
+    Measured through UsePod in the bot's own voice: Opus with the not-there
+    rule answered 38/40 real questions to Haiku's 37 and declined 19/21
+    absent topics to Haiku's 18, at about twice the latency -- a cost the
+    page cannot pay and a reply nobody watches load can.
+    """
+    client = FakeClient([[mention("1")], [mention("2")]])
+    index = FakeIndex()
+    bot = MentionBot(client, index, state_path=tmp_path / "s.json",
+                     search_model="claude-opus-5")
+    await bot.tick("2026-08-26")
+    await bot.tick("2026-08-26")
+    assert index.modeled == "claude-opus-5"
+
+
+@pytest.mark.anyio
+async def test_without_a_bot_model_the_index_default_is_used(tmp_path):
+    client = FakeClient([[mention("1")], [mention("2")]])
+    index = FakeIndex()
+    bot = MentionBot(client, index, state_path=tmp_path / "s.json")
+    await bot.tick("2026-08-26")
+    await bot.tick("2026-08-26")
+    assert index.modeled is None
+
+
+def test_the_not_there_rule_uses_the_exact_words_the_bot_keys_on():
+    """A stronger model offers "the closest thing is..." for a topic the show
+    never covered; Opus did for 18 of 21 without this rule. The rule has to
+    say the exact not-found sentence, because that sentence is what the bot's
+    stay-silent logic and the page's other-archive fallback look for."""
+    from app.podcast import NOT_FOUND_ANSWER
+    from app.x_bot import reply_style
+
+    style = reply_style(1500)
+    assert f'"{NOT_FOUND_ANSWER}."' in style
+    assert "closest related moment" in style
