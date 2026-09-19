@@ -399,6 +399,18 @@ async def main() -> int:
     episodes = {e["episode_id"]: e for e in json.loads(EPISODES.read_text())}
     index = PodcastIndex()
     rows, n = [], 0
+    # Every answer here is a paid model call, and they go through UsePod.
+    # His shell points ANTHROPIC_BASE_URL at Anthropic, which overrides .env,
+    # so one forgotten `env -u` spent real Anthropic credit on a run meant
+    # for UsePod. Refuse to start rather than find out on the invoice.
+    from urllib.parse import urlparse
+
+    from app.config import get_settings
+    host = (urlparse(get_settings().anthropic_base_url or "").hostname or "")
+    if host != "api.usepod.ai":
+        print(f"  refusing to run: model calls would go to {host or 'Anthropic'}, "
+              f"not UsePod. Run it as: env -u ANTHROPIC_BASE_URL ...")
+        return 2
     started = time.time()
 
     for name, questions in SETS.items():
@@ -407,6 +419,7 @@ async def main() -> int:
         for question in asked:
             n += 1
             row = {"set": name, "q": question}
+            asked_at = time.time()
             try:
                 result = await index.search(question)
             except Exception as exc:                            # noqa: BLE001
@@ -417,6 +430,8 @@ async def main() -> int:
                 await asyncio.sleep(args.pause)
                 continue
 
+            row["seconds"] = round(time.time() - asked_at, 1)
+            row["model"] = getattr(result, "model", None)
             answer = result.answer or ""
             reply = format_reply(answer, result.hits,
                                  include_links="always", limit=1500)
@@ -460,6 +475,10 @@ async def main() -> int:
         note = ", ".join(sorted({r["verdict"] for r in bad}))
         print(f"  {name:8} {good:3}/{len(mine):<3} "
               f"{'· ' + note if note else ''}")
+    took = sorted(r["seconds"] for r in rows if "seconds" in r)
+    if took:
+        print(f"\n  latency: median {took[len(took) // 2]:.1f}s · "
+              f"p90 {took[int(len(took) * 0.9)]:.1f}s · slowest {took[-1]:.1f}s")
     total = sum(1 for r in rows if r["verdict"] in ("ok", "pass"))
     print(f"  {'-' * 68}")
     print(f"  {total}/{len(rows)} · {time.time() - started:.0f}s\n")

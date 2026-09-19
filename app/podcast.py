@@ -1211,13 +1211,17 @@ class PodcastIndex:
     REFUSAL_ANSWER = REFUSAL_ANSWER  # class alias for callers
 
     def _build_request(self, query: str, hits: list[PodcastHit],
-                       instruction: str | None = None) -> dict:
+                       instruction: str | None = None,
+                       model: str | None = None) -> dict:
         # A search answer is short and grounded — keep the request minimal
         # and fast. Config knobs are model-specific, so add them per family:
         #  - Haiku 4.5: no `effort` (400s) and no thinking → cheapest/fastest
         #  - Sonnet 5 / Opus 4.6+: effort + thinking disabled
         #  - Fable 5: thinking always on (omit), plus refusal fallback
-        model = self._settings.search_model
+        # Per call, so the bot can answer on a different model from the
+        # page without a second index: the page stays on the fast one and
+        # the bot, where nobody watches a spinner, can use the stronger.
+        model = model or self._settings.search_model
         request: dict = {
             "model": model,
             "max_tokens": self._settings.search_max_tokens,
@@ -1286,6 +1290,7 @@ class PodcastIndex:
     async def search(
         self, query: str, top_k: int | None = None,
         instruction: str | None = None,
+        model: str | None = None,
     ) -> PodcastSearchResponse:
         """Answer `query` from the index.
 
@@ -1297,7 +1302,7 @@ class PodcastIndex:
         """
         hits = await self.retrieve(query, top_k)
         primary, can_fall_back = self._llm()
-        request = self._build_request(query, hits, instruction)
+        request = self._build_request(query, hits, instruction, model=model)
         try:
             response = await primary.with_options(
                 timeout=self._settings.search_timeout_seconds

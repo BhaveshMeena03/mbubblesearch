@@ -36,3 +36,16 @@ def test_mcg_payload_keeps_every_passage():
 def test_elon_payload_keeps_every_passage():
     result = SimpleNamespace(answer="cites 9:00", hits=_hits(9))
     assert len(main._elon_payload("q", result)["hits"]) == 9
+
+
+def test_a_per_call_model_reaches_the_request_and_the_default_is_untouched():
+    """The bot passes model=; the page passes nothing and stays on search_model."""
+    from app.podcast import PodcastIndex
+
+    index = PodcastIndex.__new__(PodcastIndex)
+    index._settings = main.get_settings()
+    hits = _hits(1)
+    assert index._build_request("q", hits)["model"] == index._settings.search_model
+    opus = index._build_request("q", hits, model="claude-opus-5")
+    assert opus["model"] == "claude-opus-5"
+    assert opus["thinking"] == {"type": "disabled"}

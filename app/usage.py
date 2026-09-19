@@ -62,6 +62,10 @@ def writable_path(preferred: Path) -> Path:
 PRICES: dict[str, tuple[float, float]] = {
     "claude-fable-5": (10.00, 50.00),
     "claude-mythos-5": (10.00, 50.00),
+    # Not yet in the table this was built from; UsePod's centralized-
+    # fallback listing for it, 2026-09-19. Conservative on purpose: the
+    # marketplace route actually billed is about a tenth of this.
+    "claude-opus-5": (4.00, 20.00),
     "claude-opus-4-8": (5.00, 25.00),
     "claude-opus-4-7": (5.00, 25.00),
     "claude-opus-4-6": (5.00, 25.00),
