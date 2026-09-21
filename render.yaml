@@ -34,6 +34,18 @@ services:
       # Anthropic without anything failing or anyone noticing.
       - key: ANTHROPIC_BASE_URL
         sync: false
+      # Whether this service may bill Anthropic directly. Absent means no,
+      # which is the setting everything runs on: the code refuses to build
+      # an Anthropic-direct client without it, so a proxy outage is
+      # downtime rather than a surprise invoice.
+      #
+      # Dashboard-managed on purpose, and deliberately not given a value
+      # here: set it to true in Render an hour before a live demo, when a
+      # dead page costs more than a few dollars of inference, and delete
+      # it again afterwards. A value in this file would be restored by the
+      # next blueprint sync and quietly undo that.
+      - key: ALLOW_ANTHROPIC_DIRECT
+        sync: false
       - key: VOYAGE_API_KEY
         sync: false
       - key: PINECONE_API_KEY

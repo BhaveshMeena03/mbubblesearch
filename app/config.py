@@ -28,6 +28,20 @@ class Settings(BaseSettings):
     # concierge answers Bullpen support questions and does not go through
     # anybody else's account.
     anthropic_base_url: str = ""
+    # Whether this process may bill Anthropic directly. Off, and the client
+    # factory refuses to build a direct client at all rather than quietly
+    # spending on the owner's account.
+    #
+    # It was on, implicitly, and it cost real money: on 2026-09-21 the
+    # proxy timed out during a benchmark and the search fell back to
+    # Anthropic direct, on the owner's key, for every request inside a
+    # five-minute cooldown. Nothing failed, so nothing said so.
+    #
+    # The switch exists because there is one hour where downtime is worse
+    # than a bill -- a live demo -- so it can be armed in the Render
+    # dashboard beforehand and turned off after. Everywhere else, UsePod
+    # or nothing.
+    allow_anthropic_direct: bool = False
     # Swap via env with no code changes:
     #   ANTHROPIC_MODEL=claude-opus-4-8   stronger reasoning ($5/$25)
     #   ANTHROPIC_MODEL=claude-fable-5    max capability ($10/$50)
@@ -477,12 +491,25 @@ _PLACEHOLDER_KEY = "unused-the-proxy-authenticates-by-url"
 
 
 def anthropic_client_kwargs(settings: Settings) -> dict:
-    """Constructor arguments for an Anthropic client, direct or proxied."""
+    """Constructor arguments for an Anthropic client, direct or proxied.
+
+    Refuses to build a direct one unless ALLOW_ANTHROPIC_DIRECT says so.
+    An empty ANTHROPIC_BASE_URL is the same request in a quieter costume --
+    it is how a misconfigured deploy bills Anthropic without anyone
+    choosing to -- so it is refused on the same terms.
+    """
     base = (settings.anthropic_base_url or "").strip()
+    host = (urlparse(base).hostname or "").lower() if base else ""
+    going_direct = not base or host == "api.anthropic.com"
+    if going_direct and not settings.allow_anthropic_direct:
+        raise RuntimeError(
+            "refusing to build an Anthropic-direct client: "
+            f"ANTHROPIC_BASE_URL is {base or 'unset'} and "
+            "ALLOW_ANTHROPIC_DIRECT is off. Point it at the proxy, or set "
+            "ALLOW_ANTHROPIC_DIRECT=true to bill Anthropic on purpose."
+        )
     if not base:
         return {"api_key": settings.anthropic_api_key}
-    host = (urlparse(base).hostname or "").lower()
-    going_direct = host == "api.anthropic.com"
     return {
         "base_url": base,
         "api_key": settings.anthropic_api_key if going_direct

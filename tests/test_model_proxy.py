@@ -35,8 +35,34 @@ import pytest  # noqa: E402
 from app.config import anthropic_client_kwargs, get_settings, redact  # noqa: E402
 
 
-def _settings(base: str):
-    return get_settings().model_copy(update={"anthropic_base_url": base})
+def _settings(base: str, direct_allowed: bool = True):
+    return get_settings().model_copy(update={
+        "anthropic_base_url": base,
+        "allow_anthropic_direct": direct_allowed,
+    })
+
+
+class TestDirectIsRefusedUnlessArmed:
+    """Off by default. A proxy timeout on 2026-09-21 sent a benchmark to
+    Anthropic on the owner's key for every request inside the cooldown,
+    and the bill was the first anyone knew. The switch is for the hour
+    before a live demo, nothing else."""
+
+    @pytest.mark.parametrize("base", ["", "https://api.anthropic.com"])
+    def test_it_raises_rather_than_billing_anthropic(self, base):
+        s = _settings(base, direct_allowed=False)
+        with pytest.raises(RuntimeError, match="ALLOW_ANTHROPIC_DIRECT"):
+            anthropic_client_kwargs(s)
+
+    def test_a_proxy_is_unaffected_by_the_switch(self):
+        s = _settings("https://api.usepod.ai/proxy/sometoken",
+                      direct_allowed=False)
+        assert anthropic_client_kwargs(s)["api_key"] != s.anthropic_api_key
+
+    def test_armed_it_goes_direct_with_the_real_key(self):
+        s = _settings("")
+        kw = anthropic_client_kwargs(s)
+        assert kw == {"api_key": s.anthropic_api_key}
 
 
 class TestTheKeyOnlyGoesToAnthropic:
@@ -82,24 +108,20 @@ class TestTheTokenIsNeverPrinted:
         assert "s" * 60 not in redact(line)[:80]
 
 
-class TestNothingReachesAnthropicDirectly:
-    """The fallback is gone, by the owner's instruction, after it spent his
-    Anthropic credits during a proxy outage on 2026-09-21. Downtime is the
-    accepted cost: a proxy failure raises and the page says so."""
-
-    def test_only_one_client_is_built(self):
+class TestTheFallbackIsDisarmedUnlessArmed:
+    def test_it_is_only_built_when_the_switch_is_on(self):
         source = (ROOT / "app" / "podcast.py").read_text()
-        assert source.count("AsyncAnthropic(") == 1
+        assert "if self._proxied and settings.allow_anthropic_direct:" in source
 
-    def test_the_real_key_is_never_handed_to_a_second_client(self):
+    def test_both_answer_paths_still_fall_back_when_it_is_armed(self):
+        """The plain endpoint and the SSE one. A proxy failure that only the
+        non-streaming path survived would take down the website."""
         source = (ROOT / "app" / "podcast.py").read_text()
-        assert "settings.anthropic_api_key" not in source
+        assert source.count("self._proxy_broke(exc)") >= 2
 
-    def test_no_answer_path_retries_somewhere_else(self):
+    def test_disarmed_a_failure_is_a_failure(self):
         source = (ROOT / "app" / "podcast.py").read_text()
-        for gone in ("self._fallback", "_proxy_broke", "PROXY_COOLDOWN_SECONDS",
-                     "ANTHROPIC_DIRECT_URL"):
-            assert gone not in source, gone
+        assert source.count("if not can_fall_back:\n                raise") >= 2
 
     def test_the_stream_does_not_fall_back_once_text_is_flowing(self):
         """Restarting mid-answer would repeat what is already on screen or
