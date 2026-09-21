@@ -82,23 +82,24 @@ class TestTheTokenIsNeverPrinted:
         assert "s" * 60 not in redact(line)[:80]
 
 
-class TestTheFallbackIsHeldReady:
-    def test_a_proxy_means_a_direct_client_is_built_too(self):
-        source = (ROOT / "app" / "podcast.py").read_text()
-        assert "self._fallback = None" in source
-        assert 'if "base_url" in anthropic_client_kwargs(settings)' in source
+class TestNothingReachesAnthropicDirectly:
+    """The fallback is gone, by the owner's instruction, after it spent his
+    Anthropic credits during a proxy outage on 2026-09-21. Downtime is the
+    accepted cost: a proxy failure raises and the page says so."""
 
-    def test_both_answer_paths_fall_back(self):
-        """The plain endpoint and the SSE one. A proxy failure that only the
-        non-streaming path survived would take down the website, which is
-        the surface people are actually sent to."""
+    def test_only_one_client_is_built(self):
         source = (ROOT / "app" / "podcast.py").read_text()
-        assert source.count("self._proxy_broke(exc)") >= 2
+        assert source.count("AsyncAnthropic(") == 1
 
-    def test_a_failure_stops_the_proxy_being_retried_every_time(self):
-        """An outage should cost one slow answer, not one per visitor."""
+    def test_the_real_key_is_never_handed_to_a_second_client(self):
         source = (ROOT / "app" / "podcast.py").read_text()
-        assert "PROXY_COOLDOWN_SECONDS" in source
+        assert "settings.anthropic_api_key" not in source
+
+    def test_no_answer_path_retries_somewhere_else(self):
+        source = (ROOT / "app" / "podcast.py").read_text()
+        for gone in ("self._fallback", "_proxy_broke", "PROXY_COOLDOWN_SECONDS",
+                     "ANTHROPIC_DIRECT_URL"):
+            assert gone not in source, gone
 
     def test_the_stream_does_not_fall_back_once_text_is_flowing(self):
         """Restarting mid-answer would repeat what is already on screen or
