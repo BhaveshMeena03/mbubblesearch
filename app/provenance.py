@@ -80,6 +80,10 @@ PUBLISHERS = frozenset({
     "Tesla", "SpaceX", "Lex Fridman", "PowerfulJRE", "TED",
     "All-In Podcast", "The Economist", "VideoFromSpace",
     "Nikhil Kamath", "Dwarkesh Patel",
+    # The DealBook Summit is the New York Times' own conference and this
+    # is the channel it posts the stage recordings on, so it is the
+    # original publisher by the same test as a podcast's own feed.
+    "New York Times Events",
 })
 
 
