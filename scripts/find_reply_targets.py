@@ -60,6 +60,14 @@ WATCHLIST = [
     "pumpdotfun", "a1lon9", "0xMert_", "aeyakovenko", "brian_armstrong",
     "jessepollak", "LucaNetz", "ErikVoorhees", "AskVenice", "tushar_jain",
     "coinbase", "longdotxyz",
+    # Added 2026-09-20. Every one of them is either a guest whose own words
+    # are in the archive or the company a guest runs, which is the only
+    # thing that makes a reply worth posting: their business, in their
+    # voice, with the second it was said.
+    "WClementeIII", "buffalu__", "jito_sol", "heliuslabs", "gregosuri",
+    "akashnet_", "pudgypenguins", "FrankDeGods", "notthreadguy", "base",
+    "UsePodAI", "0xgilbert", "sendaifun", "MetaDAOProject", "AssetDash",
+    "clawpumptech", "MCGlive",
 ]
 # Answered from the Musk archive instead. Kept apart for the same reason
 # the namespaces are: a reply to Elon sourced from a Market Bubble episode
