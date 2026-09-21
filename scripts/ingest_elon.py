@@ -99,6 +99,23 @@ SOURCES = [
      "Joe Rogan Experience #2281 - Elon Musk"),
     ("O4wBUysNe2k", "PowerfulJRE", "2025-10-31",
      "Joe Rogan Experience #2404 - Elon Musk"),
+
+    # Interviews on the channel of the publication that recorded them,
+    # which is the same provenance test the podcasts pass. Both are the
+    # two-person shape the pipeline handles.
+    #
+    # The 2024 conversation with Trump is the Space itself, still up on
+    # the account that hosted it. Every YouTube copy is a re-upload on
+    # somebody else's channel -- the top result is labelled a supercut --
+    # and an edit of a conversation cited to the second is the one thing
+    # this archive cannot afford. X's own recording has no such problem.
+    ("2BfMuHDfGJI", "New York Times Events", "2023-11-30",
+     "Elon Musk on Advertisers, Trust and the “Wild Storm” in His "
+     "Mind | DealBook Summit 2023"),
+    ("XuoqKYxDHVc", "The Economist", "2026-07-29",
+     "The full-length interview with Elon Musk | The Economist"),
+    ("1nAKEpNkLwoxL", "Donald J. Trump", "2024-08-12",
+     "Donald Trump and Elon Musk on X Spaces"),
 ]
 
 
@@ -106,11 +123,35 @@ def load() -> list[dict]:
     return load_episodes(OUT)
 
 
+def source_url(vid: str) -> str:
+    """Where this recording lives.
+
+    An X Space is its own kind of source: the recording is hosted by X on
+    the account that opened it, there is no second copy to confuse it
+    with, and yt-dlp fetches it from the same URL a listener would open.
+    Ids that are not YouTube's eleven characters are Space ids.
+    """
+    if len(vid) != 11:
+        return f"https://x.com/i/spaces/{vid}"
+    return f"https://www.youtube.com/watch?v={vid}"
+
+
 def fetch_audio(video_id: str) -> Path:
     AUDIO_DIR.mkdir(exist_ok=True)
     path = AUDIO_DIR / f"{video_id}.m4a"
     if path.exists() and path.stat().st_size > 1_000_000:
         return path
+    if len(video_id) != 11:                       # an X Space, not YouTube
+        done = subprocess.run(
+            [YTDLP, "--no-warnings", "-f", "bestaudio/best",
+             "--extract-audio", "--audio-format", "m4a",
+             "-o", str(path), source_url(video_id)],
+            capture_output=True, text=True, timeout=3600)
+        if done.returncode == 0 and path.exists():
+            return path
+        path.unlink(missing_ok=True)
+        last = ((done.stderr or "").strip().splitlines() or ["?"])[-1]
+        raise RuntimeError(f"download failed: {last[:160]}")
     # Clients rotate per attempt, and the format selector falls back rather
     # than insisting. "bestaudio" alone is not always offered -- episode #49
     # refused it outright with "Requested format is not available" -- and
@@ -169,7 +210,10 @@ def main() -> int:
 
     print(f"  {len(have)} already in {OUT.name}, {len(todo)} to do\n")
     for vid, channel, date, title in todo:
-        ok, why = admissible(channel, title)
+        # A Space is admissible by construction: X hosts the one recording
+        # on the account that opened it, so there is no re-upload for a
+        # citation to land in by mistake.
+        ok, why = (True, "") if len(vid) != 11 else admissible(channel, title)
         if not ok:
             print(f"  REFUSED {vid}: {why}")
             continue
@@ -192,8 +236,11 @@ def main() -> int:
         merge([{
             "episode_id": vid,
             "title": title,
-            "url": f"https://www.youtube.com/watch?v={vid}",
-            "platform": "youtube",
+            "url": source_url(vid),
+            # "other" is what the Market Bubble broadcasts already use
+            # for x.com; the schema has no separate X value and
+            # inventing one fails validation at embed time.
+            "platform": "youtube" if len(vid) == 11 else "other",
             "published_at": date,
             "channel": channel,
             "segments": kept,
