@@ -59,6 +59,13 @@ _ALIASES: dict[str, str] = {
     "corweave": "CoreWeave",
     "lucanets": "Luca Netz",
     "bull penn": "Bullpen",
+    # Published before it was caught: a reply on 2026-09-22 read "a Vibu
+    # post saying Solana does 65% of all on-chain activity", because the
+    # transcript of Market Bubble #15 says "Vibu tweeted" at 35:47. He is
+    # Vibhu, and the account had already written his handle correctly in
+    # an earlier post -- so the archive contradicted itself in public over
+    # a caption error nobody had corrected.
+    "vibu": "Vibhu",
 }
 
 _ALTERNATION = "|".join(

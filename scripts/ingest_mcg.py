@@ -1,0 +1,216 @@
+"""Bring the MCG Live archive up to date.
+
+    .venv/bin/python scripts/ingest_mcg.py --list
+    .venv/bin/python scripts/ingest_mcg.py
+    .venv/bin/python scripts/ingest_mcg.py --only zJsQAfBROiQ
+
+Two tabs, not one. The channel posts interviews to /videos and the daily
+show to /streams, and an earlier pass read only /videos -- which is how
+this archive once concluded MCG had four episodes when it had 225. The
+missing set is computed against data/mcg_index.json by video id, so a
+retitled upload is not re-ingested and a renamed tab cannot hide one.
+
+Per episode: download the audio, transcribe it locally, embed the windows
+into the `mcg` namespace, then add a row to the shelf. The row is written
+LAST and only after the embedding returns, because the shelf is what
+--list diffs against: a row saved before its vectors would mark an episode
+done that nobody can search.
+
+Transcripts are not kept. That is the existing design for this archive --
+the shelf holds titles, urls and durations, the vectors hold the text, and
+clips for MCG come from YouTube's own caption track. Keeping 1,000 hours
+of MCG transcripts in the repo would double it for no query that needs
+them.
+
+Resumable. It is hours of laptop time, something will interrupt it, and
+anything already in the shelf is skipped.
+"""
+
+from __future__ import annotations
+
+import argparse
+import asyncio
+import json
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
+
+from app.config import get_settings  # noqa: E402
+from app.podcast import PodcastIndex  # noqa: E402
+from app.provenance import drop_hallucinated  # noqa: E402
+from app.schemas import Episode  # noqa: E402
+
+# This archive is NOT in the default index. It has its own -- mcg-search --
+# and the namespace name is the same in both, which is exactly how a first
+# run of this script put thirteen vectors somewhere nothing reads: the app
+# builds its MCG index with index_name=mcg_pinecone_index, and anything
+# that forgets that writes into the concierge's index instead.
+SHELF = ROOT / "data" / "mcg_index.json"
+AUDIO_DIR = Path("/tmp/mcg_audio")
+YTDLP = next((str(p) for p in (ROOT / ".venv" / "bin" / "yt-dlp",)
+              if p.is_file()), shutil.which("yt-dlp") or "yt-dlp")
+
+# format, tab. The shelf already uses these two words, and the page groups
+# on them, so they are not ours to rename.
+TABS = [("interview", "https://www.youtube.com/@MCG_live/videos"),
+        ("stream", "https://www.youtube.com/@MCG_live/streams")]
+
+# A show is hours; a trailer is seconds. The shortest real episode in the
+# shelf is around twelve minutes, so this only drops clips and shorts.
+LONG_ENOUGH = 10 * 60
+
+
+def shelf() -> list[dict]:
+    return json.loads(SHELF.read_text())
+
+
+def enumerate_tab(url: str, limit: int) -> list[dict]:
+    """Flat listing: ids, titles and durations, no dates and no cost."""
+    done = subprocess.run(
+        [YTDLP, "--flat-playlist", "-J", "--playlist-end", str(limit), url],
+        capture_output=True, text=True, timeout=900)
+    if done.returncode != 0:
+        raise SystemExit(f"  could not list {url}: "
+                         f"{(done.stderr or '').strip().splitlines()[-1:]}")
+    return json.loads(done.stdout).get("entries", [])
+
+
+def published(video_id: str) -> str:
+    """YYYY-MM-DD, fetched per video because a flat listing has no date."""
+    done = subprocess.run(
+        [YTDLP, "--no-warnings", "--print", "%(upload_date)s",
+         f"https://www.youtube.com/watch?v={video_id}"],
+        capture_output=True, text=True, timeout=300)
+    raw = (done.stdout or "").strip()
+    return f"{raw[:4]}-{raw[4:6]}-{raw[6:8]}" if len(raw) == 8 else ""
+
+
+def pending(limit: int) -> list[dict]:
+    have = {row["id"] for row in shelf()}
+    found = []
+    for fmt, url in TABS:
+        for entry in enumerate_tab(url, limit):
+            vid = entry.get("id")
+            seconds = int(entry.get("duration") or 0)
+            if not vid or vid in have or seconds < LONG_ENOUGH:
+                continue
+            found.append({"id": vid, "title": entry.get("title") or vid,
+                          "seconds": seconds, "format": fmt})
+            have.add(vid)
+    return found
+
+
+def fetch_audio(video_id: str) -> Path:
+    AUDIO_DIR.mkdir(exist_ok=True)
+    path = AUDIO_DIR / f"{video_id}.m4a"
+    if path.exists() and path.stat().st_size > 1_000_000:
+        return path
+    last = ""
+    # Same client rotation as the Musk ingest: which one YouTube answers
+    # depends on what it is challenging that day, so vary the client
+    # rather than only the retry.
+    for client in ("tv_embedded", "", "web_embedded", "android"):
+        cmd = [YTDLP, "--no-warnings", "-f", "bestaudio[ext=m4a]/bestaudio/best",
+               "--extract-audio", "--audio-format", "m4a", "-o", str(path)]
+        if client:
+            cmd += ["--extractor-args", f"youtube:player_client={client}"]
+        cmd += [f"https://www.youtube.com/watch?v={video_id}"]
+        done = subprocess.run(cmd, capture_output=True, text=True, timeout=7200)
+        if done.returncode == 0 and path.exists():
+            return path
+        last = ((done.stderr or "").strip().splitlines() or ["?"])[-1]
+        path.unlink(missing_ok=True)
+    raise RuntimeError(f"download failed: {last[:160]}")
+
+
+def transcribe(path: Path) -> list[dict]:
+    import mlx_whisper
+    result = mlx_whisper.transcribe(
+        str(path), path_or_hf_repo="mlx-community/whisper-turbo",
+        language="en", verbose=False)
+    return [{"t": round(s["start"], 2), "text": s["text"].strip()}
+            for s in result.get("segments", []) if s.get("text", "").strip()]
+
+
+def add_to_shelf(row: dict) -> None:
+    """Newest first, by date rather than by arrival.
+
+    Prepending looked the same until a batch finished: episodes land in
+    whatever order they transcribe, so the file's first row was the last
+    one ingested, not the most recent show. Nothing reads the order --
+    main.py sorts on published_at -- but a file that claims an order
+    should keep it.
+    """
+    rows = [r for r in shelf() if r["id"] != row["id"]] + [row]
+    rows.sort(key=lambda r: (r.get("published_at") or "", r["id"]),
+              reverse=True)
+    SHELF.write_text(json.dumps(rows, indent=1))
+
+
+async def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--list", action="store_true", help="show what is missing")
+    ap.add_argument("--only", help="one video id")
+    ap.add_argument("--limit", type=int, default=60,
+                    help="how deep to read each tab")
+    args = ap.parse_args()
+
+    todo = pending(args.limit)
+    if args.only:
+        todo = [t for t in todo if t["id"] == args.only]
+
+    hours = sum(t["seconds"] for t in todo) / 3600
+    print(f"  {len(shelf())} episodes on the shelf, {len(todo)} to add "
+          f"({hours:.1f} hours of audio)\n")
+    for t in todo:
+        print(f"  {t['id']}  {t['seconds'] // 60:4}m  {t['format']:9} "
+              f"{t['title'][:52]}")
+    if args.list or not todo:
+        return 0
+
+    settings = get_settings()
+    index = PodcastIndex(namespace=settings.mcg_namespace,
+                         index_name=settings.mcg_pinecone_index)
+    print(f"  writing to index {settings.mcg_pinecone_index!r}, "
+          f"namespace {settings.mcg_namespace!r}")
+    for n, item in enumerate(todo, 1):
+        print(f"\n  [{n}/{len(todo)}] {item['id']}  {item['title'][:54]}",
+              flush=True)
+        try:
+            audio = fetch_audio(item["id"])
+            print(f"     {audio.stat().st_size // 1_000_000} MB, "
+                  f"transcribing…", flush=True)
+            segments = transcribe(audio)
+        except Exception as exc:                            # noqa: BLE001
+            print(f"     failed: {exc}")
+            continue
+        kept, dropped = drop_hallucinated(segments)
+        if dropped:
+            print(f"     dropped hallucinated: {', '.join(dropped)}")
+        date = published(item["id"])
+        episode = Episode(
+            episode_id=item["id"], title=item["title"],
+            url=f"https://www.youtube.com/watch?v={item['id']}",
+            platform="youtube", published_at=date or None,
+            segments=kept,
+        )
+        windows = await index.ingest([episode])
+        print(f"     {len(kept)} segments -> {windows} searchable passages",
+              flush=True)
+        add_to_shelf({"id": item["id"], "title": item["title"],
+                      "url": episode.url, "published_at": date,
+                      "seconds": item["seconds"], "format": item["format"]})
+        audio.unlink(missing_ok=True)
+
+    rows = shelf()
+    print(f"\n  shelf: {len(rows)} episodes, "
+          f"{sum(r['seconds'] for r in rows) / 3600:.1f} hours")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(asyncio.run(main()))

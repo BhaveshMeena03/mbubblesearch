@@ -57,15 +57,23 @@ API = "https://api.x.com/2"
 WATCHLIST = [
     "Raydium", "solana", "JupiterExchange", "phantom", "Polymarket",
     "HyperliquidX", "RobinhoodApp", "vladtenev", "JohannKerbrat",
-    "pumpdotfun", "a1lon9", "0xMert_", "aeyakovenko", "brian_armstrong",
+    "Pumpfun", "a1lon9", "0xMert_", "toly", "brian_armstrong",
     "jessepollak", "LucaNetz", "ErikVoorhees", "AskVenice", "tushar_jain",
     "coinbase", "longdotxyz",
+    # Handles verified against the API on 2026-09-22, by bio, not by guess:
+    # @Pumpfun (713k, "Trade internet trends"), @toly (2.7m, "Co-Founder of
+    # Solana Labs"), @WClemente (795k), @akashnet (129k, "decentralized
+    # compute marketplace"). The ones they replace never resolved.
+    #
+    # Left out rather than guessed: Mert and Helius. "0xmert" exists with
+    # 419 followers and "helius_labs" belongs to someone at CyberCapital,
+    # so a lookalike would put this account's replies under a squatter.
+    #
     # Added 2026-09-20. Every one of them is either a guest whose own words
     # are in the archive or the company a guest runs, which is the only
     # thing that makes a reply worth posting: their business, in their
     # voice, with the second it was said.
-    "WClementeIII", "buffalu__", "jito_sol", "heliuslabs", "gregosuri",
-    "akashnet_", "pudgypenguins", "FrankDeGods", "notthreadguy", "base",
+    "WClemente", "buffalu__", "gregosuri", "akashnet", "pudgypenguins", "FrankDeGods", "notthreadguy", "base",
     "UsePodAI", "0xgilbert", "sendaifun", "MetaDAOProject", "AssetDash",
     "clawpumptech", "MCGlive",
 ]
