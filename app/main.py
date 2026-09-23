@@ -38,7 +38,7 @@ from fastapi.responses import (
 from fastapi.staticfiles import StaticFiles
 from voyageai import error as voyage_error
 
-from . import attribution, market, og_card, quotes, sources
+from . import attribution, market, mcg_transcript, og_card, quotes, sources
 from . import mcg_guests as mcg_guest_index
 from .agent import REFUSAL_MESSAGE, ConciergeAgent
 from .answer_cache import AnswerCache, make_key
@@ -137,6 +137,7 @@ STATS: dict = {
     "asset_detail_views": 0,
     "mcg_asset_dashboard_views": 0,
     "mcg_asset_detail_views": 0,
+    "mcg_clips_requested": 0,
     "unanswered_chats": 0,
     "refusals": 0,
 }
@@ -2092,3 +2093,108 @@ async def podcast_clip_file(job_id: str, request: Request):
     _track("clips_downloaded")
     return FileResponse(job.path, media_type="video/mp4",
                         filename=f"market-bubble-{job.id}.mp4")
+
+
+# An MCG episode assembled for the clipper, kept briefly.
+#
+# Market Bubble clips read their captions from data/episodes.json, which is
+# in the image. MCG has no transcripts anywhere on disk by design, so the
+# words come back from the vectors that hold them -- one filtered query per
+# episode, cached because a viewer who clips a moment usually clips the one
+# beside it next.
+_MCG_CLIP_TTL = 900
+_mcg_clip_episodes: dict[str, tuple[float, dict]] = {}
+
+
+async def _mcg_clip_episode(request: Request, episode_id: str) -> dict | None:
+    """The episode a clip needs: url, title, and captions with seconds."""
+    row = next((e for e in _mcg_episodes() if e.get("id") == episode_id), None)
+    if row is None:
+        return None
+
+    now = asyncio.get_event_loop().time()
+    hit = _mcg_clip_episodes.get(episode_id)
+    if hit and now - hit[0] < _MCG_CLIP_TTL:
+        return hit[1]
+
+    index = getattr(request.app.state, "mcg", None)
+    if index is None:
+        return None
+    settings = get_settings()
+    try:
+        # Blocking client on a single-worker server, same reason the render
+        # itself is threaded off.
+        segments = await asyncio.to_thread(
+            mcg_transcript.rebuild, index.index, settings.mcg_namespace,
+            settings.embedding_dimension, episode_id)
+    except Exception as exc:  # noqa: BLE001 — a clip is not worth a 500
+        logger.warning("MCG transcript rebuild failed for %s: %s",
+                       episode_id, exc)
+        return None
+    if not segments:
+        return None
+
+    episode = {"episode_id": episode_id, "title": row.get("title", ""),
+               "url": row.get("url", ""), "platform": "youtube",
+               "segments": segments}
+    if len(_mcg_clip_episodes) >= 32:
+        _mcg_clip_episodes.clear()
+    _mcg_clip_episodes[episode_id] = (now, episode)
+    return episode
+
+
+@app.post("/v1/mcg/clip", dependencies=[Depends(clip_rate_limit)])
+async def mcg_clip(req: ClipRequest, request: Request) -> dict:
+    """Queue a clip from the MCG archive. Same queue, same renderer.
+
+    Note for production: MCG is entirely YouTube, and YouTube refuses a
+    datacentre IP. Market Bubble's clips are mostly X broadcast replays,
+    which is why they work without one, so this path needs CLIP_PROXY set
+    or it fails the bot check rather than the render.
+    """
+    service = getattr(request.app.state, "clips", None)
+    if service is None or not ffmpeg_available():
+        raise HTTPException(
+            status_code=503,
+            detail="Clipping is not available on this server.")
+
+    episode = await _mcg_clip_episode(request, req.episode_id)
+    if episode is None:
+        raise HTTPException(status_code=404, detail="No such episode.")
+
+    start, end = float(req.start), float(req.end)
+    length = end - start
+    if length < MIN_CLIP_SECONDS or length > MAX_CLIP_SECONDS:
+        raise HTTPException(
+            status_code=400,
+            detail=f"A clip has to be between {MIN_CLIP_SECONDS} and "
+                   f"{MAX_CLIP_SECONDS} seconds — that one is "
+                   f"{length:.0f}.")
+    if service.queued_count() >= 4:
+        raise HTTPException(
+            status_code=429,
+            detail="A few clips are already rendering — try again shortly.",
+            headers={"Retry-After": "120"})
+
+    job = service.submit(episode, start, end)
+    _track("mcg_clips_requested")
+    return {"job_id": job.id, "status": job.status,
+            "seconds": round(length, 1),
+            "queue_position": service.queued_count()}
+
+
+@app.get("/v1/mcg/clip/{job_id}")
+async def mcg_clip_status(job_id: str, request: Request) -> dict:
+    """Same jobs as the other archive -- an id is an id -- with this
+    archive's file url, so a caller never has to switch prefixes."""
+    body = await podcast_clip_status(job_id, request)
+    if body.get("url"):
+        body["url"] = f"/v1/mcg/clip/{job_id}/file"
+    return body
+
+
+@app.get("/v1/mcg/clip/{job_id}/file")
+async def mcg_clip_file(job_id: str, request: Request):
+    return await podcast_clip_file(job_id, request)
+
+

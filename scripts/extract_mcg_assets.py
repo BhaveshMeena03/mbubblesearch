@@ -36,7 +36,6 @@ import asyncio
 import json
 import logging
 import os
-import re
 import sys
 from pathlib import Path
 
@@ -48,15 +47,12 @@ sys.path.insert(0, str(ROOT))
 from app.assets import aggregate  # noqa: E402
 from app.assets_store import AssetStore  # noqa: E402
 from app.config import anthropic_client_kwargs, get_settings  # noqa: E402
-
-# Private, and imported anyway rather than reimplemented. The two archives
-# store their timestamps differently -- interviews carry `text_ts`, streams
-# carry `text` plus a comma-separated `line_times` -- and app/podcast.py
-# already knows both, including when to fall back. A second reading of the
-# same metadata in this file is how the two drift apart; this script read
-# only `text_ts` for exactly that reason and silently skipped 230 episodes,
-# 727 hours of them, every one a stream.
-from app.podcast import _stamped  # noqa: E402
+from app.mcg_transcript import (  # noqa: E402,F401
+    MAX_WINDOWS,
+    rebuild,
+    seconds,
+    to_segments,
+)
 from scripts.extract_assets import USAGE, extract_episode  # noqa: E402
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
@@ -68,63 +64,6 @@ OUT = ROOT / "data" / "mcg_assets.json"
 # The namespace assets live in inside the MCG index. Its passages are in
 # "mcg"; these are beside them, not among them.
 ASSET_NAMESPACE = "assets"
-
-# Vectors per episode. A four-hour stream windows to well under two hundred,
-# and Pinecone caps a metadata-bearing query at a thousand.
-MAX_WINDOWS = 1000
-
-# "[2:11] " or "[1:00:44] " at the start of a line.
-_STAMP = re.compile(r"^\[(\d{1,2}:\d{2}(?::\d{2})?)\]\s*(.*)$")
-
-
-def seconds(stamp: str) -> float:
-    """mm:ss or h:mm:ss -> seconds."""
-    parts = [int(p) for p in stamp.split(":")]
-    while len(parts) < 3:
-        parts.insert(0, 0)
-    return parts[0] * 3600 + parts[1] * 60 + parts[2]
-
-
-def to_segments(texts: list[str]) -> list[dict]:
-    """Every timestamped line across an episode's windows, in order, once.
-
-    Deduplicated on the timestamp and the opening of the line rather than on
-    the line alone: a window boundary can repeat a line verbatim, and two
-    genuinely different lines can share a second.
-    """
-    seen: set[tuple[float, str]] = set()
-    out: list[dict] = []
-    for text in texts:
-        for line in (text or "").splitlines():
-            found = _STAMP.match(line.strip())
-            if not found:
-                continue
-            said = found.group(2).strip()
-            if not said:
-                continue
-            at = seconds(found.group(1))
-            key = (at, said[:48])
-            if key in seen:
-                continue
-            seen.add(key)
-            out.append({"t": at, "text": said})
-    out.sort(key=lambda s: s["t"])
-    return out
-
-
-def rebuild(index, namespace: str, dimension: int, video_id: str) -> list[dict]:
-    """One episode's transcript, reassembled from its own vectors."""
-    probe = [0.0] * dimension
-    probe[0] = 1.0                       # valid for cosine; never ranked on
-    found = index.query(vector=probe, top_k=MAX_WINDOWS, namespace=namespace,
-                        include_metadata=True,
-                        filter={"episode_id": {"$eq": video_id}})
-    windows = [(m["metadata"].get("start_seconds") or 0,
-                _stamped(m["metadata"]))
-               for m in found.get("matches", [])]
-    windows.sort(key=lambda w: float(w[0]))
-    return to_segments([w[1] for w in windows])
-
 
 async def main() -> int:
     ap = argparse.ArgumentParser()

@@ -51,7 +51,12 @@ CACHE = ROOT / "data" / ".asset_cache"
 # Window size in characters. Bigger windows = fewer calls = cheaper, but the
 # model needs enough context to tell analysis from a name-drop.
 WINDOW_CHARS = int(os.environ.get("EXTRACT_WINDOW_CHARS", "6000"))
-MAX_CONCURRENCY = 4
+# Four was sized for a fifteen-episode archive. MCG is 645, each about
+# thirty windows, and at four in flight the whole pass measured ~58s an
+# episode -- ten hours of wall clock for work that costs the same in
+# tokens whatever the rate. Configurable rather than raised outright,
+# because the right number belongs to the run and not to the file.
+MAX_CONCURRENCY = int(os.environ.get("EXTRACT_CONCURRENCY", "4"))
 
 EXTRACT_TOOL = {
     "name": "record_assets",

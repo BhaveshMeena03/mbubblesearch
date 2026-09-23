@@ -58,6 +58,21 @@ services:
       # simply stop placing clips -- quietly, with nothing failing.
       - key: GROQ_API_KEY
         sync: false
+      # An outbound residential proxy for the clip downloader.
+      #
+      # Market Bubble clips come from X broadcast replays, which this
+      # service fetches from its own IP without complaint, so clipping has
+      # never needed one. MCG is entirely YouTube, and YouTube refuses a
+      # datacentre IP -- the same limit documented at the top of
+      # .github/workflows/sync-episodes.yml, where it is why the sync can
+      # detect a new episode but not fetch it.
+      #
+      # So without this set, /v1/mcg/clip fails the bot check rather than
+      # the render, while every other clip keeps working. Dashboard-managed
+      # because the URL carries credentials; the value is the same one the
+      # repo's YTDLP_PROXY secret holds.
+      - key: CLIP_PROXY
+        sync: false
       - key: ANTHROPIC_MODEL
         value: claude-sonnet-5
       - key: PINECONE_INDEX
