@@ -88,6 +88,16 @@ jobs:
           # the notify-only behaviour this workflow had before.
           YTDLP_PROXY: ${{ secrets.YTDLP_PROXY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # The proxy every model call goes through. Without it this job
+          # builds an Anthropic-direct client, and since 8a67eff the code
+          # refuses to do that -- so four scheduled runs in a row died at
+          # PodcastIndex(), before they had even looked for a new episode.
+          # The failure was the gate working: unset, this step would have
+          # billed the Anthropic key above for the summary and asset calls.
+          #
+          # Carries its auth token in the path, so it is a secret rather
+          # than a value here, the same as it is on Render.
+          ANTHROPIC_BASE_URL: ${{ secrets.ANTHROPIC_BASE_URL }}
           VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
           PINECONE_API_KEY: ${{ secrets.PINECONE_API_KEY }}
           PINECONE_INDEX: bullpen-concierge
