@@ -1244,7 +1244,15 @@ async def asset_detail(symbol: str, request: Request) -> dict:
 
 # Symbols CoinGecko cannot price and Jupiter will never list. Skipping them
 # saves two upstream round trips per row that can only ever return nothing.
-_UNPRICEABLE_CLASSES = {"stock", "index", "commodity", "other"}
+#
+# Stocks and indices used to sit here too, and for a year that was right:
+# AAPL is not a Solana mint, so the only lookup available would have been
+# CoinGecko, where "AAPL" is whichever memecoin claimed the ticker. They
+# come out now because market.lookup_stock resolves them through the
+# tokenized share instead -- AAPL to AAPLx -- which is a real identity with
+# a real liquidity check behind it. A stock that has no verified share still
+# returns None; it just returns None for a better reason.
+_UNPRICEABLE_CLASSES = {"commodity", "other"}
 
 _CG_TTL_SECONDS = 600
 _MARKET_TTL_SECONDS = 60
@@ -1278,18 +1286,28 @@ async def _market_for(ticker: str, asset_class: str | None) -> dict | None:
         return None
     cache: dict = app.state._market_cache
     now = asyncio.get_event_loop().time()
-    hit = cache.get(ticker)
+    # Keyed on the class as well as the ticker. The two roads answer
+    # differently for the same string -- COIN is a stock here and a memecoin
+    # on CoinGecko -- so a cache keyed on the ticker alone would serve one
+    # row's answer to the other.
+    key = (ticker, asset_class)
+    hit = cache.get(key)
     if hit and now - hit[0] < _MARKET_TTL_SECONDS:
         return hit[1]
     try:
-        table = await _coingecko_table()
-        data = await market.quote(ticker, coingecko_table=table)
+        if asset_class in market.TOKENIZED_CLASSES:
+            # No CoinGecko table on this path, and not as an optimisation:
+            # reaching it at all is the bug it is there to prevent.
+            data = await market.quote(ticker, asset_class=asset_class)
+        else:
+            table = await _coingecko_table()
+            data = await market.quote(ticker, coingecko_table=table)
     except Exception as exc:  # noqa: BLE001
         logger.warning("market lookup failed for %s: %s", ticker, exc)
         data = None
     if len(cache) >= 256:                # bounded: the ticker space is not
         cache.clear()
-    cache[ticker] = (now, data)
+    cache[key] = (now, data)
     return data
 
 

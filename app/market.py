@@ -62,6 +62,43 @@ _MINT_RE = re.compile(r"^[1-9A-HJ-NP-Za-km-z]{32,44}$")
 _SYMBOL_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,19}$")
 
 
+# --------------------------------------------------------------------------
+# Tokenized equities
+# --------------------------------------------------------------------------
+#
+# The hosts talk about NVDA and TSLA as much as they talk about SOL, and a
+# stock could only ever be a dead row here: not a Solana mint, so no price
+# and no route, which is why "stock" sat in the unpriceable set. Backed's
+# xStocks put the same equities on Solana as verified SPL tokens -- NVDA
+# trades as NVDAx -- so the question stops being "is this a stock" and
+# becomes the one this file already answers: does the ticker resolve to a
+# verified mint with real liquidity.
+#
+# It is also where guessing would do the most damage. Searching Jupiter for
+# NVDAx on 2026-09-24 returned the real token, verified with $2.99M of
+# liquidity, followed by three impostors at about $6.4K -- one copying the
+# symbol exactly, another naming itself "Nvidia Stonk". TSLAx returned an
+# impostor that copies the real name, "Tesla xStock", character for
+# character. Every fake was unverified, which is the gate that matters.
+STOCK_SUFFIX = "x"
+
+# Higher than the crypto floor, on purpose. The real xStocks sampled sat
+# between $0.67M and $6.1M; every impostor sat between $3K and $23K. 250K is
+# comfortably between the two and still admits a thinly traded real listing.
+STOCK_MIN_LIQUIDITY_USD = 250_000
+
+# Backed names each one "<Company> xStock". Not sufficient alone -- an
+# impostor copies it -- but it is one more thing a fake has to clear, and it
+# costs a genuine listing nothing.
+_XSTOCK_NAME_RE = re.compile(r"xstock", re.I)
+
+# Asset classes that can only ever be reached through a tokenized share.
+# Deliberately NOT routed to CoinGecko afterwards: CoinGecko prices crypto,
+# so "AAPL" there is whatever memecoin claimed the ticker, and a stock row
+# showing a memecoin's price is worse than a stock row showing nothing.
+TOKENIZED_CLASSES = frozenset({"stock", "index"})
+
+
 def valid_mint(mint: object) -> bool:
     """True only for a well-formed Solana mint address."""
     return isinstance(mint, str) and bool(_MINT_RE.match(mint))
@@ -118,6 +155,41 @@ def pick_token(candidates: list[dict], symbol: str, *,
     return max(viable, key=lambda c: _as_float(c.get("liquidity")))
 
 
+def pick_tokenized_stock(candidates: list[dict], ticker: str, *,
+                         min_liquidity: float = STOCK_MIN_LIQUIDITY_USD,
+                         ) -> dict | None:
+    """The verified tokenized share for a stock ticker, or None.
+
+    Same shape as pick_token and the same contract -- every rule can only
+    reject -- with two additions, because the impostors here are better at
+    impersonation than a memecoin squatting on a ticker:
+
+      * the symbol must be the ticker plus the suffix, so NVDA only ever
+        matches NVDAx and never the "NVDA" memecoin that shares the name
+      * the name must say xStock, which is the issuer's own convention
+
+    Verification is still what does the real work. Among the eight tokens
+    Jupiter returned for NVDAx and TSLAx, exactly one of each was verified,
+    and it was the right one both times.
+    """
+    want = _ticker(ticker)
+    if not want:
+        return None
+    want += STOCK_SUFFIX
+
+    viable = [
+        c for c in candidates
+        if _ticker(c.get("symbol")) == want
+        and c.get("isVerified") is True
+        and valid_mint(c.get("id"))
+        and _XSTOCK_NAME_RE.search(str(c.get("name") or ""))
+        and _as_float(c.get("liquidity")) >= min_liquidity
+    ]
+    if not viable:
+        return None
+    return max(viable, key=lambda c: _as_float(c.get("liquidity")))
+
+
 def _as_float(v: object) -> float:
     """Upstream numerics are not guaranteed; a bad one must not raise."""
     try:
@@ -136,6 +208,11 @@ def summarise(token: dict) -> dict:
         "price_usd": token.get("usdPrice"),
         "change_24h_pct": stats.get("priceChange"),
         "source": "jupiter",
+        # The on-chain ticker when the thing being priced is a share rather
+        # than the asset itself. Null for ordinary crypto, and present in
+        # both cases for the same reason `trade` is: a key that is sometimes
+        # absent gets skipped, a key that is null gets handled.
+        "tokenized_as": None,
         "trade": {
             "venue": "Jupiter",
             "chain": "solana",
@@ -158,6 +235,7 @@ def from_coingecko(row: dict) -> dict:
         "price_usd": row.get("current_price"),
         "change_24h_pct": row.get("price_change_percentage_24h"),
         "source": "coingecko",
+        "tokenized_as": None,
         "trade": None,
     }
 
@@ -186,6 +264,49 @@ async def lookup(symbol: str, *, client: httpx.AsyncClient | None = None,
         return None
     hit = pick_token(data, symbol)
     return summarise(hit) if hit else None
+
+
+def summarise_stock(token: dict, ticker: str) -> dict:
+    """A tokenized share as a quote, reported under the ticker discussed.
+
+    The show says NVDA, so the row says NVDA. The share it actually routes
+    through is NVDAx and that is stated rather than hidden: somebody
+    clicking through is buying a Backed-issued token on Solana, not stock
+    in a brokerage account, and the page has to be able to say so.
+    """
+    quote = summarise(token)
+    quote["symbol"] = ticker
+    quote["tokenized_as"] = token.get("symbol")
+    return quote
+
+
+async def lookup_stock(ticker: str, *, client: httpx.AsyncClient | None = None,
+                       timeout: float = 8.0) -> dict | None:
+    """Resolve a stock ticker to its tokenized share on Solana, or None."""
+    owns = client is None
+    client = client or httpx.AsyncClient(timeout=timeout)
+    ticker = clean_symbol(ticker)
+    if ticker is None:
+        return None
+    try:
+        # Searched by the ON-CHAIN symbol, because that is what Jupiter
+        # indexes: a query for "NVDA" returns the memecoin of that name and
+        # not the share.
+        r = await client.get(JUPITER_SEARCH,
+                             params={"query": ticker + STOCK_SUFFIX})
+        r.raise_for_status()
+        data = r.json()
+    except Exception as exc:  # noqa: BLE001 — market data must never 500 a page
+        logger.warning("jupiter stock lookup failed for %s: %s", ticker, exc)
+        return None
+    finally:
+        if owns:
+            await client.aclose()
+
+    if not isinstance(data, list):
+        return None
+    hit = pick_tokenized_stock(data, ticker)
+    return summarise_stock(hit, ticker) if hit else None
 
 
 # --------------------------------------------------------------------------
@@ -246,17 +367,25 @@ async def fetch_coingecko_table(*, client: httpx.AsyncClient | None = None,
 # The combined answer
 # --------------------------------------------------------------------------
 
-async def quote(symbol: str, *, coingecko_table: dict[str, dict] | None = None,
+async def quote(symbol: str, *, asset_class: str | None = None,
+                coingecko_table: dict[str, dict] | None = None,
                 client: httpx.AsyncClient | None = None) -> dict | None:
     """Price plus, only where it is earned, a trade route.
 
     Jupiter is tried first because it answers both questions at once. Falling
     back to CoinGecko yields a price with `trade: None` — priced, not
     tradeable, which is the correct outcome for BTC, XRP and the rest.
+
+    A stock takes a different road entirely and never reaches CoinGecko:
+    see TOKENIZED_CLASSES for why a ticker like AAPL must not be looked up
+    in a crypto price table.
     """
     ticker = clean_symbol(symbol)
     if ticker is None:
         return None
+
+    if asset_class in TOKENIZED_CLASSES:
+        return await lookup_stock(ticker, client=client)
 
     on_solana = await lookup(ticker, client=client)
     if on_solana is not None:

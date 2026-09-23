@@ -109,6 +109,11 @@
   .mkch.up{color:var(--green)}
   .mkch.down{color:#e5605e}
   .mkliq{font-size:12px;color:var(--muted)}
+  /* The on-chain instrument behind a stock row. Quiet, but never absent
+     when it applies: it is the difference between NVDA and NVDAx. */
+  .mktok{font-size:11px;font-weight:600;letter-spacing:.04em;
+    color:var(--muted);border:1px solid var(--line);border-radius:5px;
+    padding:2px 6px}
   .mkoff{font-size:12px;color:var(--muted);border:1px dashed var(--line);
     border-radius:8px;padding:4px 10px}
   .mkgo{display:inline-flex;align-items:center;gap:6px;background:#16c78418;
@@ -189,9 +194,12 @@
 
 <script>
 var API = "";
-// Crypto only for now. Stocks/indices stay in the JSON (already extracted), so
-// re-enabling them later is a one-line change here.
-var CLASSES = ["crypto"];
+// Crypto, and now stocks and indices too. They were extracted all along and
+// hidden here, because a stock row could only ever show an empty strip: the
+// price came from a crypto table that does not list equities and the trade
+// route needed a Solana mint. Both are answered now through the tokenized
+// share, so a row about NVDA can price NVDA and route to NVDAx.
+var CLASSES = ["crypto", "stock", "index"];
 var DATA = [], SHOW_TAIL = false;
 
 function esc(s){ return String(s == null ? "" : s)
@@ -376,19 +384,30 @@ function marketHtml(m){
   var chTxt = ch === null ? "" : (ch >= 0 ? "+" : "") + ch.toFixed(1) + "%";
   var t = m.trade;
   var url = t ? safeUrl(t.swap_url) : "";
+  /* A stock resolves through a tokenized share, and the row says which one.
+     Somebody clicking through on NVDA is buying NVDAx, a token on Solana --
+     not stock in a brokerage account, with none of what that carries -- and
+     a button that hid the difference would be the dishonest version of this
+     feature. The ticker they clicked is what they came for; the instrument
+     they get is what the strip has to name. */
+  var tok = typeof m.tokenized_as === "string" ? m.tokenized_as : "";
 
   return '<div class="mkbar">' +
     '<span class="mkpx">' + esc(price(m.price_usd)) + '</span>' +
     (chTxt ? '<span class="mkch ' + chCls + '">' + esc(chTxt) + '</span>' : '') +
+    (tok ? '<span class="mktok">as ' + esc(tok) + '</span>' : '') +
     (t && typeof t.liquidity_usd === "number"
       ? '<span class="mkliq">' + esc(money(t.liquidity_usd)) + ' liquidity</span>'
       : '') +
     (url
       ? '<a class="mkgo" href="' + esc(url) + '" target="_blank" ' +
-        'rel="noopener noreferrer nofollow">Trade on Jupiter \u2197</a>'
+        'rel="noopener noreferrer nofollow">Trade ' +
+        (tok ? esc(tok) + ' ' : '') + 'on Jupiter \u2197</a>'
       : '<span class="mkoff">Price only \u00b7 not tradeable on Solana</span>') +
     '<span class="mknfa">Live price' +
-      (m.source ? ' via ' + esc(m.source) : '') + '. Not advice.</span>' +
+      (m.source ? ' via ' + esc(m.source) : '') +
+      (tok ? '. Tokenized share, not the listed stock' : '') +
+      '. Not advice.</span>' +
   '</div>';
 }
 

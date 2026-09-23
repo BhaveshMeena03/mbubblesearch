@@ -365,3 +365,79 @@ def test_partial_coingecko_failure_still_returns_a_table(monkeypatch):
 
     table = asyncio.run(_market.fetch_coingecko_table(client=Client(), pages=4))
     assert set(table) == {"S1", "S2"}, "partial results must survive"
+
+
+# --- tokenized equities ----------------------------------------------------
+#
+# The fixtures below are the shape Jupiter actually returned on 2026-09-24,
+# impostors included. Every rejection here is a swap link that would
+# otherwise have gone out under a stock the hosts discussed.
+
+XSTOCK_MINT = "Xsc9qvGR1efVDFGLrVsmkzv3qi45LTBjeUKSPmx9qEh"
+PUMP_MINT = "EXoXNpJzrRm1HhKGfqVG1ftPCBciiNBjDQLTfjbYpump"
+
+REAL_NVDA = {"id": XSTOCK_MINT, "symbol": "NVDAx", "name": "NVIDIA xStock",
+             "isVerified": True, "liquidity": 2_990_866.01,
+             "usdPrice": 225.22, "stats24h": {"priceChange": 1.4}}
+
+# Same symbol, unverified, $6.7K of liquidity. This is the one a naive
+# symbol match would have found for "NVDA".
+FAKE_NVDA = {"id": PUMP_MINT, "symbol": "NVDAx", "name": "Nvidia Stonk",
+             "isVerified": None, "liquidity": 6_718.88, "usdPrice": 3.98e-06}
+
+# The nastier one: it copies the real name character for character.
+FAKE_TSLA = {"id": "4o64vXsPwenUhCnDdJPFh7B9wSXiicVg9zmuHTfbpump",
+             "symbol": "TSLAx", "name": "Tesla xStock",
+             "isVerified": None, "liquidity": 3_540.45, "usdPrice": 3.3e-06}
+
+
+def test_the_verified_xstock_wins_over_its_impostors():
+    hit = _market.pick_tokenized_stock([FAKE_NVDA, REAL_NVDA, FAKE_NVDA], "NVDA")
+    assert hit is not None and hit["id"] == XSTOCK_MINT
+
+
+def test_an_unverified_lookalike_is_refused_even_with_the_right_name():
+    """Name and symbol both copied; only verification separates them."""
+    assert _market.pick_tokenized_stock([FAKE_TSLA], "TSLA") is None
+
+
+def test_the_bare_ticker_never_matches_the_share():
+    """NVDA is a memecoin on Solana. Only NVDAx is the share."""
+    memecoin = dict(REAL_NVDA, symbol="NVDA", name="NVDA")
+    assert _market.pick_tokenized_stock([memecoin], "NVDA") is None
+
+
+def test_a_verified_token_without_the_issuer_name_is_refused():
+    assert _market.pick_tokenized_stock(
+        [dict(REAL_NVDA, name="Nvidia Wrapped")], "NVDA") is None
+
+
+def test_thin_liquidity_is_refused_at_the_stock_floor():
+    """Clears the crypto floor, misses the stricter one stocks are held to."""
+    thin = dict(REAL_NVDA, liquidity=_market.MIN_LIQUIDITY_USD + 1)
+    assert thin["liquidity"] < _market.STOCK_MIN_LIQUIDITY_USD
+    assert _market.pick_tokenized_stock([thin], "NVDA") is None
+
+
+def test_a_stock_quote_reports_the_ticker_and_names_the_share():
+    q = _market.summarise_stock(REAL_NVDA, "NVDA")
+    assert q["symbol"] == "NVDA", "the row is about the stock discussed"
+    assert q["tokenized_as"] == "NVDAx", "and must say what it routes through"
+    assert q["trade"]["swap_url"].endswith(XSTOCK_MINT)
+
+
+def test_crypto_quotes_say_they_are_not_tokenized():
+    """The key is always present, so no consumer has to infer its absence."""
+    assert _market.summarise(tok("SOL"))["tokenized_as"] is None
+    assert _market.from_coingecko(cg("BTC"))["tokenized_as"] is None
+
+
+def test_a_stock_never_falls_through_to_the_crypto_table(monkeypatch):
+    """AAPL on CoinGecko is a memecoin. A stock row must not print its price."""
+    async def _no_share(ticker, **kw):
+        return None
+    monkeypatch.setattr(_market, "lookup_stock", _no_share)
+    table = build_symbol_table([cg("AAPL", price=0.004)])
+    q = asyncio.run(_market.quote("AAPL", asset_class="stock",
+                                  coingecko_table=table))
+    assert q is None
