@@ -47,9 +47,25 @@ def _chunk_hits(hits: list[dict], budget: int) -> list[list[dict]]:
 
 
 class AssetStore:
-    def __init__(self) -> None:
+    """One archive's extracted assets.
+
+    Parameterised by index and namespace so a second archive can use the
+    same store without sharing its rows. MCG lives in its own Pinecone
+    index, and its assets go in a namespace of their own beside its
+    passages -- if both archives wrote to "assets" in one index, a row
+    saying NVDA was discussed would carry moments from two different shows
+    and no way to tell which.
+
+    The defaults are the Market Bubble archive, so existing callers are
+    unchanged.
+    """
+
+    def __init__(self, index_name: str | None = None,
+                 namespace: str = NAMESPACE) -> None:
         settings = get_settings()
         self._settings = settings
+        self._index_name = index_name or settings.pinecone_index
+        self._namespace = namespace
         self._index = None
 
     @property
@@ -57,7 +73,7 @@ class AssetStore:
         if self._index is None:
             self._index = Pinecone(
                 api_key=self._settings.pinecone_api_key
-            ).Index(self._settings.pinecone_index)
+            ).Index(self._index_name)
         return self._index
 
     def _placeholder_vector(self) -> list[float]:
@@ -91,7 +107,7 @@ class AssetStore:
                             "hits": json.dumps(chunk, separators=(",", ":")),
                         },
                     } for i, chunk in enumerate(chunks)],
-                    namespace=NAMESPACE,
+                    namespace=self._namespace,
                 )
             # Re-running with fewer hits (or migrating off the old unchunked
             # "assets-<id>" record) must not leave orphans behind.
@@ -99,7 +115,7 @@ class AssetStore:
                 i for i in self._ids_for_episode(episode_id) if i not in new_ids
             ]
             if stale:
-                self.index.delete(ids=stale, namespace=NAMESPACE)
+                self.index.delete(ids=stale, namespace=self._namespace)
                 logger.info("assets: removed %d stale record(s) for %s",
                             len(stale), episode_id)
 
@@ -122,7 +138,7 @@ class AssetStore:
     def _all_ids(self) -> list[str]:
         return [
             item.id if hasattr(item, "id") else str(item)
-            for page in self.index.list(namespace=NAMESPACE)
+            for page in self.index.list(namespace=self._namespace)
             for item in (page.vectors if hasattr(page, "vectors") else page)
         ]
 
@@ -143,7 +159,7 @@ class AssetStore:
             ids = self._all_ids()
             if not ids:
                 return []
-            fetched = self.index.fetch(ids=ids, namespace=NAMESPACE)
+            fetched = self.index.fetch(ids=ids, namespace=self._namespace)
             hits: list[dict] = []
             for v in fetched.vectors.values():
                 raw = (v.metadata or {}).get("hits", "[]")
@@ -165,7 +181,7 @@ class AssetStore:
         def _count() -> int:
             return sum(
                 1
-                for page in self.index.list(namespace=NAMESPACE)
+                for page in self.index.list(namespace=self._namespace)
                 for _ in (page.vectors if hasattr(page, "vectors") else page)
             )
         # Bounded: the Pinecone client has no read timeout, and this sits

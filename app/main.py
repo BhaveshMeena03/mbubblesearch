@@ -134,6 +134,8 @@ STATS: dict = {
     "episode_summary_views": 0,
     "asset_dashboard_views": 0,
     "asset_detail_views": 0,
+    "mcg_asset_dashboard_views": 0,
+    "mcg_asset_detail_views": 0,
     "unanswered_chats": 0,
     "refusals": 0,
 }
@@ -378,6 +380,12 @@ async def lifespan(app: FastAPI):
     app.state.summaries = SummaryStore()
     app.state.assets = AssetStore()
     _s = get_settings()
+    # The MCG archive keeps its assets beside its passages, in its own
+    # index. Built unconditionally: unlike the search index above it needs
+    # no episode list to be useful, and an empty store falls back to the
+    # committed data/mcg_assets.json rather than failing.
+    app.state.mcg_assets = AssetStore(index_name=_s.mcg_pinecone_index,
+                                      namespace="assets")
     # One cache, shared by every surface. The key carries the surface name,
     # so sharing the store cannot leak an answer between knowledge bases.
     app.state.answers = AnswerCache(
@@ -697,6 +705,8 @@ def _shortcut(path: str, target: str) -> None:
 for _path, _target in (("/elon", "/demo/elon.html"),
                        ("/musk", "/demo/elon.html"),
                        ("/mcg", "/demo/mcg.html"),
+                       ("/mcg/assets", "/demo/mcg-assets.html"),
+                       ("/mcg/tokens", "/demo/mcg-assets.html"),
                        ("/method", "/demo/how-it-works.html")):
     _shortcut(_path, _target)
 
@@ -1167,33 +1177,52 @@ async def podcast_ingest(
     return {"windows_indexed": count, "cached_answers_dropped": dropped}
 
 
-async def _assets_report(request: Request) -> dict:
-    """The aggregated asset report, cached. Shared by the list and detail views."""
-    store = request.app.state.assets
+async def _report_for(store, fallback: Path, slot: str) -> dict:
+    """One archive's aggregated asset report, cached.
 
+    Takes the store and its committed fallback rather than reading either
+    from app.state, because there are two archives now and they must not
+    share a cache slot: one report served under the other's name would put
+    Market Bubble timestamps on an MCG row, and every link would land in
+    the wrong video.
+    """
     # Short TTL cache: aggregation is pure CPU but the Pinecone fetch isn't.
-    cached = getattr(app.state, "_assets_cache", None)
+    cached = getattr(app.state, slot, None)
     now = asyncio.get_event_loop().time()
     if cached and now - cached[0] < 300:
         return cached[1]
 
-    try:
-        hits = await store.all_hits()
-    except Exception as exc:  # noqa: BLE001 — dashboard must not 500
-        logger.warning("asset store unavailable (%s); using local file", exc)
-        hits = []
+    hits = []
+    if store is not None:
+        try:
+            hits = await store.all_hits()
+        except Exception as exc:  # noqa: BLE001 — dashboard must not 500
+            logger.warning("asset store unavailable (%s); using local file", exc)
+            hits = []
 
     if hits:
         report = aggregate_assets(hits)
         report["episodes_processed"] = len({h.get("episode_id") for h in hits})
+    elif fallback.exists():
+        report = json.loads(fallback.read_text())
     else:
-        path = _ROOT / "data" / "assets.json"
-        if not path.exists():
-            return {"assets": [], "total_hits": 0, "episodes_processed": 0}
-        report = json.loads(path.read_text())
+        return {"assets": [], "total_hits": 0, "episodes_processed": 0}
 
-    app.state._assets_cache = (now, report)
+    setattr(app.state, slot, (now, report))
     return report
+
+
+async def _assets_report(request: Request) -> dict:
+    """The Market Bubble asset report. Shared by the list and detail views."""
+    return await _report_for(request.app.state.assets,
+                             _ROOT / "data" / "assets.json", "_assets_cache")
+
+
+async def _mcg_assets_report(request: Request) -> dict:
+    """The same, for the MCG archive."""
+    return await _report_for(getattr(request.app.state, "mcg_assets", None),
+                             _ROOT / "data" / "mcg_assets.json",
+                             "_mcg_assets_cache")
 
 
 @app.get("/v1/assets", dependencies=[Depends(public_rate_limit)])
@@ -1238,6 +1267,46 @@ async def asset_detail(symbol: str, request: Request) -> dict:
         "moments": row.get("moments", []),
         "market": await _market_for(ticker, row.get("asset_class")),
         "disclaimer": "What was said on the podcast, with timestamps. "
+                      "Not advice, not a recommendation, not a price forecast.",
+    }
+
+
+@app.get("/v1/mcg/assets", dependencies=[Depends(public_rate_limit)])
+async def mcg_assets(request: Request) -> dict:
+    """Assets discussed across the MCG Live archive.
+
+    A separate report from /v1/assets rather than a filter over it. MCG runs
+    one project per episode across 645 shows; merging the two would double
+    the rows under a page named after one of them, and a row's moments would
+    link into whichever archive happened to mention the ticker.
+    """
+    _track("mcg_asset_dashboard_views")
+    return await _mcg_assets_report(request)
+
+
+@app.get("/v1/mcg/assets/{symbol}", dependencies=[Depends(public_rate_limit)])
+async def mcg_asset_detail(symbol: str, request: Request) -> dict:
+    """One asset, as MCG discussed it, with the same market block."""
+    ticker = market.clean_symbol(symbol)
+    if ticker is None:
+        raise HTTPException(status_code=404, detail="Unknown asset.")
+
+    report = await _mcg_assets_report(request)
+    row = next((a for a in report.get("assets", [])
+                if str(a.get("symbol", "")).upper() == ticker), None)
+    if row is None:
+        raise HTTPException(status_code=404, detail="Unknown asset.")
+
+    _track("mcg_asset_detail_views")
+    return {
+        "symbol": row.get("symbol"),
+        "name": row.get("name"),
+        "asset_class": row.get("asset_class"),
+        "mentions": row.get("mentions"),
+        "analysis": row.get("analysis"),
+        "moments": row.get("moments", []),
+        "market": await _market_for(ticker, row.get("asset_class")),
+        "disclaimer": "What was said on MCG Live, with timestamps. "
                       "Not advice, not a recommendation, not a price forecast.",
     }
 
