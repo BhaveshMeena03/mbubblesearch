@@ -9,13 +9,19 @@ difference is where the words come from. That archive keeps its transcripts
 in data/episodes.json; this one deliberately does not (see ingest_mcg.py),
 so the only copy of the text is the metadata on the vectors themselves.
 
-That turns out to be enough. Each MCG vector carries `text_ts`, the window
-with its timestamps, and at 21,527 vectors over 1,024.7 hours they tile the
-archive rather than overlapping it -- roughly one window every three
-minutes, around 2,500 characters each. Rebuilding an episode is a filtered
-query, a parse of the timestamps, and a sort. Nothing is re-downloaded and
-nothing is re-transcribed, which is the difference between a few dollars
-and a week of laptop time.
+That turns out to be enough. The 21,527 vectors tile 1,024.7 hours rather
+than overlapping -- roughly one window every three minutes, about 2,500
+characters each -- so rebuilding an episode is a filtered query, a parse
+and a sort. Nothing is re-downloaded and nothing is re-transcribed, which
+is the difference between a few dollars and a week of laptop time.
+
+The timestamps live in two shapes and both have to be read. Interviews
+carry `text_ts`, the stamped copy; streams carry `text` with a
+comma-separated `line_times` beside it, which is a hundred bytes against a
+duplicate of the whole passage. app/podcast.py._stamped knows both, so it
+is imported rather than reimplemented here -- reading only `text_ts`, as
+this did at first, skipped 230 episodes and 727 hours without once
+failing, because every one of them simply looked empty.
 
 Rows land in the MCG index, in a namespace of its own. Two archives writing
 assets into one namespace would produce rows where NVDA carries moments
@@ -42,6 +48,14 @@ sys.path.insert(0, str(ROOT))
 from app.assets import aggregate  # noqa: E402
 from app.assets_store import AssetStore  # noqa: E402
 from app.config import anthropic_client_kwargs, get_settings  # noqa: E402
+# Private, and imported anyway rather than reimplemented. The two archives
+# store their timestamps differently -- interviews carry `text_ts`, streams
+# carry `text` plus a comma-separated `line_times` -- and app/podcast.py
+# already knows both, including when to fall back. A second reading of the
+# same metadata in this file is how the two drift apart; this script read
+# only `text_ts` for exactly that reason and silently skipped 230 episodes,
+# 727 hours of them, every one a stream.
+from app.podcast import _stamped  # noqa: E402
 
 from scripts.extract_assets import USAGE, extract_episode  # noqa: E402
 
@@ -106,7 +120,7 @@ def rebuild(index, namespace: str, dimension: int, video_id: str) -> list[dict]:
                         include_metadata=True,
                         filter={"episode_id": {"$eq": video_id}})
     windows = [(m["metadata"].get("start_seconds") or 0,
-                m["metadata"].get("text_ts") or "")
+                _stamped(m["metadata"]))
                for m in found.get("matches", [])]
     windows.sort(key=lambda w: float(w[0]))
     return to_segments([w[1] for w in windows])

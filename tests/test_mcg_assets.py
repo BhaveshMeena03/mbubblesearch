@@ -164,3 +164,45 @@ def test_the_short_path_reaches_the_page(client):
     r = client.get("/mcg/assets", follow_redirects=False)
     assert r.status_code == 301
     assert r.headers["location"] == "/demo/mcg-assets.html"
+
+
+# --- the second metadata shape -------------------------------------------
+#
+# Streams store `text` plus a comma-separated `line_times`; interviews store
+# the stamped copy as `text_ts`. Reading only the latter skipped 230 of 645
+# episodes -- 727 hours, every one a stream -- and looked exactly like an
+# archive where nothing was said.
+
+def test_a_stream_window_rebuilds_from_line_times():
+    class Index:
+        def query(self, **kw):
+            return {"matches": [{"metadata": {
+                "start_seconds": 1335,
+                "text": "first line\nsecond line",
+                "line_times": "1335,1342",
+            }}]}
+    segs = rebuild(Index(), "mcg", 1024, "vid")
+    assert [s["text"] for s in segs] == ["first line", "second line"]
+    assert [s["t"] for s in segs] == [1335, 1342]
+
+
+def test_both_metadata_shapes_rebuild_together():
+    """One episode can hold windows of each shape; neither may be dropped."""
+    class Index:
+        def query(self, **kw):
+            return {"matches": [
+                {"metadata": {"start_seconds": 0, "text_ts": "[0:05] stamped"}},
+                {"metadata": {"start_seconds": 60, "text": "timed",
+                              "line_times": "60"}},
+            ]}
+    segs = rebuild(Index(), "mcg", 1024, "vid")
+    assert [s["text"] for s in segs] == ["stamped", "timed"]
+
+
+def test_times_that_do_not_line_up_are_not_invented():
+    """Fewer times than lines means the stamps are unknown, not guessable."""
+    class Index:
+        def query(self, **kw):
+            return {"matches": [{"metadata": {
+                "start_seconds": 10, "text": "a\nb\nc", "line_times": "10,20"}}]}
+    assert rebuild(Index(), "mcg", 1024, "vid") == []

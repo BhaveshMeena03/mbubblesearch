@@ -290,6 +290,13 @@ async def main() -> int:
                                 "guests": []}
             logger.info("[%d/%d] %-52s no introduction found",
                         n, len(todo), row["title"][:52])
+            # Written here too. This branch used to `continue` straight
+            # past the save at the bottom of the loop, which was invisible
+            # until the last episode of a 645-episode run landed in it: the
+            # file ended with 644 entries, and the missing one would have
+            # been re-read on every future run as though it had never been
+            # looked at.
+            out_path.write_text(json.dumps(known, indent=1))
             continue
         found = await read_episode(client, model, row["title"], excerpts)
         kept = [g for g in found if keep(g, segments)]
