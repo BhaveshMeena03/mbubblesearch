@@ -41,6 +41,7 @@ from voyageai import error as voyage_error
 from . import attribution, market, og_card, quotes, sources
 from .agent import REFUSAL_MESSAGE, ConciergeAgent
 from .answer_cache import AnswerCache, make_key
+from . import mcg_guests as mcg_guest_index
 from .assets import aggregate as aggregate_assets
 from .assets_store import AssetStore
 from .clawpump import NAMESPACE as CLAWPUMP_NAMESPACE
@@ -1737,7 +1738,12 @@ async def mcg_episodes() -> list[dict]:
         ({"episode_id": e.get("id", ""), "title": e.get("title", ""),
           "url": e.get("url", ""),
           "published_at": e.get("published_at", ""),
-          "seconds": int(float(e.get("seconds") or 0))}
+          "seconds": int(float(e.get("seconds") or 0)),
+          # Who was on it and what it was about. Two different strengths of
+          # claim and they stay separate here: `guests` were introduced out
+          # loud and checked against the transcript, `subject` is read off
+          # the title and is never a speaker.
+          **mcg_guest_index.for_episode(e.get("id", ""), e.get("title", ""))}
          for e in _mcg_episodes()),
         key=lambda e: e["published_at"], reverse=True)
 
