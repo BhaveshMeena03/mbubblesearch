@@ -137,6 +137,11 @@ def test_the_highlight_pool_is_shipped():
 _NOT_SHIPPED = {
     ".usage.json": "written at runtime, not read from the repo",
     "assets.json": "fallback only; the live asset store is read first",
+    # Same rule as its Market Bubble twin, and the same consequence: until
+    # extract_mcg_assets.py has run with --store, the MCG asset page is
+    # empty in production rather than showing a partial pilot as if it
+    # were the archive.
+    "mcg_assets.json": "fallback only; the live asset store is read first",
     "episodes.json": "shipped gzipped as episodes.json.gz",
     "elon_episodes.json": "shipped gzipped as elon_episodes.json.gz",
 }

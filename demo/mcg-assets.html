@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MCG Live · every token they've covered</title>
+<meta name="description" content="Every token, stock and index discussed across 645 MCG Live episodes, ranked by how deeply it was covered — with links to the exact moment.">
+<meta property="og:title" content="Every token covered on MCG Live">
+<meta property="og:description" content="One project per episode, 1,024.7 hours of it. Ranked by real coverage, with live prices. Jump to the exact moment.">
+<meta property="og:type" content="website">
+<!-- This page had no image and no twitter card, so a link to it unfurled as
+     a bare row while the other two pages got a full-width preview. Sharing
+     the search image is deliberate: they are the same product and the same
+     brand, and a shared card beats no card by a wide margin. -->
+<meta property="og:url" content="https://search.lexthedev.com/demo/mcg-assets.html">
+<meta property="og:image" content="https://search.lexthedev.com/demo/og-mcg.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Every token covered on MCG Live">
+<meta name="twitter:description" content="One project per episode, 1,024.7 hours of it. Ranked by real coverage, with live prices. Jump to the exact moment.">
+<meta name="twitter:image" content="https://search.lexthedev.com/demo/og-mcg.png">
+<link rel="stylesheet" href="/demo/ui.css">
+<style>
+  :root{
+    --bg:#0b0e11;--panel:#12161c;--line:#232a33;--text:#e6e8ea;
+    --muted:#8a939e;--green:#16c784;--amber:#e8c157;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);min-height:100vh;
+    font:15px/1.55 var(--sans);font-feature-settings:"tnum" 1;
+    padding:28px 20px 60px}
+  .wrap{max-width:940px;margin:0 auto}
+  .topbar{display:flex;align-items:center;justify-content:space-between;
+    gap:14px;margin-bottom:18px;flex-wrap:wrap}
+  .brand{font-weight:700;letter-spacing:.5px;font-size:14px}
+  .brand span{color:var(--green)}
+  @media(max-width:560px){
+    .topbar{flex-direction:column;align-items:flex-start;gap:10px}
+  }
+  h1{font-family:var(--display);font-weight:400;font-size:42px;
+    line-height:1.12;letter-spacing:-.01em;margin-bottom:10px}
+  h1 em{color:var(--green);font-style:normal}
+  .sub{color:var(--muted);margin-bottom:22px;max-width:640px}
+
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:12px;margin-bottom:26px}
+  .tile{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:14px 16px}
+  .tile b{display:block;font-size:26px;line-height:1.1;margin-bottom:2px}
+  .tile span{color:var(--muted);font-size:12px;text-transform:uppercase;
+    letter-spacing:.6px}
+
+  .chartbox{background:var(--panel);border:1px solid var(--line);
+    border-radius:14px;padding:18px 20px;margin-bottom:26px;overflow-x:auto}
+  .chartbox h2{font-size:13px;text-transform:uppercase;letter-spacing:1px;
+    color:var(--muted);font-weight:600;margin-bottom:14px}
+
+  .controls{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+  #q{flex:1;min-width:200px;background:var(--panel);border:1px solid var(--line);
+    border-radius:12px;color:var(--text);padding:11px 14px;font-size:15px;outline:none}
+  #q:focus{border-color:var(--green)}
+  .chip{font-size:13px;background:transparent;color:var(--muted);
+    border:1px solid var(--line);border-radius:16px;padding:7px 14px;cursor:pointer}
+  .chip:hover{border-color:var(--green);color:var(--green)}
+  .chip.on{background:#16c78418;border-color:#16c78455;color:var(--green)}
+
+  .row{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    margin-bottom:8px;overflow:hidden}
+  .head{display:flex;align-items:center;gap:12px;padding:13px 16px;cursor:pointer;
+    transition:border-color .15s}
+  .head:hover{background:#161b22}
+  .sym{font-weight:700;font-size:15px;min-width:74px}
+  .nm{color:var(--muted);font-size:14px;overflow:hidden;text-overflow:ellipsis;
+    white-space:nowrap;flex:1}
+  .cls{font-size:11px;color:var(--muted);border:1px solid var(--line);
+    border-radius:10px;padding:2px 8px;text-transform:uppercase;letter-spacing:.5px}
+  .num{font-size:13px;color:var(--muted);white-space:nowrap}
+  .num b{color:var(--green);font-size:15px}
+  .caret{color:var(--muted);font-size:12px;width:12px}
+
+  .moments{display:none;border-top:1px solid var(--line);padding:6px 16px 12px}
+  .row.open .moments{display:block}
+
+  /* Live market strip — only rendered when a ticker resolves to a verified
+     mint, so its absence is silent rather than an error state. */
+  .mk{display:none}
+  .row.open .mk{display:block}
+  .mkbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    padding:11px 16px;border-top:1px solid var(--line);background:#0e1319}
+
+  /* Loading skeleton. Same bar, same padding, same gaps, so the real strip
+     replaces it without the row changing height or anything shifting. */
+  .sk{display:block;height:13px;border-radius:5px;
+    background:linear-gradient(90deg,#1a212a 25%,#232c37 37%,#1a212a 63%);
+    background-size:400% 100%;animation:skpulse 1.3s ease-in-out infinite}
+  .sk-px{width:74px;height:16px}
+  .sk-ch{width:44px}
+  .sk-liq{width:104px}
+  .sk-go{width:132px;height:28px;border-radius:9px}
+  @keyframes skpulse{0%{background-position:100% 0}100%{background-position:0 0}}
+  /* Respect a reader who has asked the OS for less motion. */
+  @media (prefers-reduced-motion:reduce){ .sk{animation:none} }
+
+  /* The real strip fades in, so data arriving reads as a transition rather
+     than a flicker. */
+  .mkin{animation:mkfade .18s ease-out}
+  @keyframes mkfade{from{opacity:0}to{opacity:1}}
+  .mkpx{font-weight:700;font-size:15px}
+  .mkch{font-size:13px;font-weight:600}
+  .mkch.up{color:var(--green)}
+  .mkch.down{color:#e5605e}
+  .mkliq{font-size:12px;color:var(--muted)}
+  /* The on-chain instrument behind a stock row. Quiet, but never absent
+     when it applies: it is the difference between NVDA and NVDAx. */
+  .mktok{font-size:11px;font-weight:600;letter-spacing:.04em;
+    color:var(--muted);border:1px solid var(--line);border-radius:5px;
+    padding:2px 6px}
+  .mkoff{font-size:12px;color:var(--muted);border:1px dashed var(--line);
+    border-radius:8px;padding:4px 10px}
+  .mkgo{display:inline-flex;align-items:center;gap:6px;background:#16c78418;
+    border:1px solid #16c78466;color:var(--green);border-radius:8px;
+    padding:5px 11px;font-size:12px;font-weight:600;text-decoration:none}
+  .mkgo:hover{background:#16c78428}
+  .mknfa{font-size:11px;color:var(--muted);margin-left:auto}
+  @media(max-width:560px){ .mknfa{margin-left:0;width:100%} }
+  .mo{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #1b212a;
+    align-items:flex-start}
+  .mo:last-child{border-bottom:none}
+  .ts{color:var(--green);font-weight:700;font-size:13px;white-space:nowrap;
+    text-decoration:none;min-width:64px}
+  .ts:hover{text-decoration:underline}
+  .mtext{font-size:13.5px;color:#c8cdd3}
+  .mep{display:block;color:var(--muted);font-size:12px;margin-top:3px;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .tag{font-size:10px;letter-spacing:.5px;text-transform:uppercase;
+    border-radius:8px;padding:1px 6px;margin-left:6px;vertical-align:1px}
+  .tag.analysis{background:#16c78420;color:var(--green)}
+  .tag.mention{background:#232a33;color:var(--muted)}
+
+  .note{background:transparent;border:1px solid var(--line);
+    color:var(--muted);border-radius:12px;padding:13px 16px;
+    font-size:12.5px;margin-bottom:22px}
+  .foot{color:var(--muted);font-size:12.5px;margin-top:28px;line-height:1.7}
+  .empty{color:var(--muted);padding:20px 0}
+  @media(max-width:620px){
+    h1{font-size:32px}
+    .nm{display:none}
+    .sym{min-width:62px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="brand">THE MCG <span>INDEX</span> · tokens</div>
+    <span style="display:inline-flex;gap:10px;flex-wrap:wrap">
+    <a class="btn btn-primary btn-back" href="/demo/mcg.html"><span class="arw">←</span><svg class="ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.75" stroke="currentColor" stroke-width="1.7"/><path d="M10.6 10.6 14 14" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M6 5.3l3 1.7-3 1.7z" fill="currentColor"/></svg>Search every episode</a>
+    <a class="btn btn-ghost" href="/demo/concierge.html"><svg class="ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14 7.4c0 2.9-2.7 5.3-6 5.3-.7 0-1.4-.1-2-.3L2.5 13.5l.9-2.5A5 5 0 0 1 2 7.4C2 4.5 4.7 2.1 8 2.1s6 2.4 6 5.3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Bullpen Concierge</a>
+    </span>
+  </div>
+
+  <h1>Every token they've <em>actually covered</em>.</h1>
+  <p class="sub">Pulled from every MCG Live episode — one project per show,
+    645 of them. Ranked by how much the show genuinely dug in, not just how
+    often a name got dropped. Every row links to the exact moment.</p>
+
+  <div class="note" id="note">
+    Built from YouTube's auto-generated captions, which mis-hear ticker names.
+    Counts are <b>approximate</b>, and this describes only what was said on the
+    show — it is not financial advice or a signal of any kind. MCG has no
+    speaker labels, so a row says what was said and when, never who said it.
+  </div>
+
+  <div class="tiles" id="tiles"></div>
+
+  <div class="chartbox">
+    <h2>Most analyzed</h2>
+    <div id="chart"></div>
+  </div>
+
+  <div class="controls">
+    <input id="q" placeholder="Filter by ticker or name…" autocomplete="off">
+    <button class="chip" id="tail" title="Tokens mentioned only once across all
+      episodes — mostly caption errors">+ single mentions</button>
+  </div>
+
+  <div id="list"><p class="empty">Loading…</p></div>
+
+  <p class="foot">
+    Tokens are extracted from the transcripts by a language model, then
+    normalized (caption manglings merged, non-assets like platforms and
+    categories filtered out). Low-confidence hits are dropped. Some error
+    remains — treat the tail of the list with more suspicion than the top.
+  </p>
+</div>
+
+<script>
+var API = "";
+// Crypto, and now stocks and indices too. They were extracted all along and
+// hidden here, because a stock row could only ever show an empty strip: the
+// price came from a crypto table that does not list equities and the trade
+// route needed a Solana mint. Both are answered now through the tokenized
+// share, so a row about NVDA can price NVDA and route to NVDAx.
+var CLASSES = ["crypto", "stock", "index"];
+var DATA = [], SHOW_TAIL = false;
+
+function esc(s){ return String(s == null ? "" : s)
+  .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;").replace(/'/g,"&#39;"); }
+
+/* Only ever emit http(s) links — never javascript:/data: from data. */
+function safeUrl(u){
+  try{ var p = new URL(u, location.href);
+       return (p.protocol === "http:" || p.protocol === "https:") ? p.href : "";
+  }catch(e){ return ""; }
+}
+
+function tiles(assets, episodes){
+  var analysis = 0, refs = 0;
+  assets.forEach(function(a){ analysis += a.analysis; refs += a.mentions; });
+  document.getElementById("tiles").innerHTML =
+    tile(assets.length, "tokens discussed") +
+    tile(analysis, "analysis segments") +
+    tile(episodes, "episodes covered") +
+    tile(refs, "total references");
+}
+function tile(n, label){
+  return '<div class="tile"><b>' + esc(n) + '</b><span>' + esc(label) + '</span></div>';
+}
+
+function chart(assets){
+  var top = assets.slice(0, 10);
+  if(!top.length){ document.getElementById("chart").innerHTML = ""; return; }
+  var max = Math.max.apply(null, top.map(function(a){ return a.analysis; })) || 1;
+  var rowH = 26, w = 620, labelW = 92, barW = w - labelW - 46;
+  var h = top.length * rowH;
+  var svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" width="100%" height="' + h +
+            '" role="img" aria-label="Most analyzed assets">';
+  top.forEach(function(a, i){
+    var y = i * rowH, bw = Math.max(2, (a.analysis / max) * barW);
+    svg += '<text x="0" y="' + (y + 15) + '" fill="#e6e8ea" font-size="12.5" ' +
+           'font-weight="700">' + esc(a.symbol) + '</text>';
+    svg += '<rect x="' + labelW + '" y="' + (y + 4) + '" width="' + bw +
+           '" height="14" rx="3" fill="#16c784" opacity="' +
+           (0.45 + 0.55 * (a.analysis / max)).toFixed(2) + '"/>';
+    svg += '<text x="' + (labelW + bw + 8) + '" y="' + (y + 15) +
+           '" fill="#8a939e" font-size="12">' + esc(a.analysis) + '</text>';
+  });
+  document.getElementById("chart").innerHTML = svg + '</svg>';
+}
+
+function render(){
+  var term = document.getElementById("q").value.trim().toLowerCase();
+  var rows = DATA.filter(function(a){
+    if(!SHOW_TAIL && a.single_reference) return false;
+    if(!term) return true;
+    return (a.symbol + " " + a.name).toLowerCase().indexOf(term) !== -1;
+  });
+  if(!rows.length){
+    document.getElementById("list").innerHTML =
+      '<p class="empty">Nothing matches that.</p>';
+    return;
+  }
+  document.getElementById("list").innerHTML = rows.map(function(a, i){
+    return '<div class="row" data-i="' + i + '">' +
+      '<div class="head">' +
+        '<span class="caret">▸</span>' +
+        '<span class="sym">' + esc(a.symbol) + '</span>' +
+        '<span class="nm">' + esc(a.name) + '</span>' +
+        '<span class="cls">' + esc(a.asset_class) + '</span>' +
+        '<span class="num"><b>' + esc(a.analysis) + '</b> analysis</span>' +
+        '<span class="num">' + esc(a.mentions) + ' refs</span>' +
+      '</div>' +
+      '<div class="mk" data-sym="' + esc(a.symbol) + '"></div>' +
+      '<div class="moments">' + moments(a.moments) + '</div>' +
+    '</div>';
+  }).join("");
+
+  [].forEach.call(document.querySelectorAll(".row"), function(row){
+    row.querySelector(".head").addEventListener("click", function(){
+      row.classList.toggle("open");
+      row.querySelector(".caret").textContent =
+        row.classList.contains("open") ? "▾" : "▸";
+      if(row.classList.contains("open")) loadMarket(row);
+    });
+  });
+}
+
+/* Top tokens have 100+ moments — dumping them all makes the page unusable.
+   Lead with the substantive analysis, cap the list, and say what's hidden. */
+var MOMENT_CAP = 12;
+function moments(ms){
+  if(!ms || !ms.length) return '<p class="empty">No moments recorded.</p>';
+  var ordered = ms.slice().sort(function(a, b){
+    if(a.kind === b.kind) return 0;
+    return a.kind === "analysis" ? -1 : 1;   // analysis first
+  });
+  var shown = ordered.slice(0, MOMENT_CAP);
+  var hidden = ordered.length - shown.length;
+  var more = hidden > 0
+    ? '<p class="empty" style="padding:10px 0 2px;font-size:12.5px">+ ' +
+      hidden + ' more reference' + (hidden === 1 ? '' : 's') +
+      ' — search the full transcript on the <a href="/demo/mcg.html" ' +
+      'style="color:#16c784">search page</a>.</p>'
+    : '';
+  return shown.map(function(m){
+    var url = safeUrl(m.deep_link || "");
+    var ts = url
+      ? '<a class="ts" href="' + esc(url) + '" target="_blank" rel="noopener">' +
+        esc(m.timestamp) + '</a>'
+      : '<span class="ts">' + esc(m.timestamp) + '</span>';
+    return '<div class="mo">' + ts +
+      '<div><span class="mtext">' + esc(m.note) +
+      '<span class="tag ' + (m.kind === "analysis" ? "analysis" : "mention") +
+      '">' + esc(m.kind) + '</span></span>' +
+      '<span class="mep">' + esc(m.episode_title) + '</span></div></div>';
+  }).join("") + more;
+}
+
+document.getElementById("q").addEventListener("input", render);
+document.getElementById("tail").addEventListener("click", function(){
+  SHOW_TAIL = !SHOW_TAIL;
+  this.classList.toggle("on", SHOW_TAIL);
+  render();
+});
+
+/* Live market data is fetched per row, on first expand — 201 lookups on page
+   load would hammer the upstream and stall the page for data most visitors
+   never scroll to. Absent market data is a normal state, not an error: a
+   ticker only resolves when it maps to a verified mint with real liquidity. */
+function loadMarket(row){
+  var box = row.querySelector(".mk");
+  if(!box || box.dataset.loaded) return;
+  box.dataset.loaded = "1";
+  var sym = box.getAttribute("data-sym") || "";
+
+  /* Show the shape of the answer immediately. The lookup takes a beat --
+     around half a second warm, longer on the first token of a session while
+     the upstream caches fill -- and an empty strip for that long reads as
+     broken rather than loading. A skeleton in the same layout means the row
+     never appears to jump: the price simply replaces its own placeholder. */
+  box.innerHTML = '<div class="mkbar mkskel">' +
+    '<span class="sk sk-px"></span><span class="sk sk-ch"></span>' +
+    '<span class="sk sk-liq"></span><span class="sk sk-go"></span></div>';
+
+  fetch(API + "/v1/mcg/assets/" + encodeURIComponent(sym))
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(d){
+      box.innerHTML = marketHtml(d && d.market);
+      /* Fade the real strip in, so the swap from skeleton to data is a
+         transition rather than a flicker. */
+      var bar = box.querySelector(".mkbar");
+      if(bar){ bar.classList.add("mkin"); }
+    })
+    .catch(function(){ box.innerHTML = ""; });
+}
+
+function money(n){
+  if(typeof n !== "number" || !isFinite(n)) return "";
+  if(n >= 1e9) return "$" + (n/1e9).toFixed(2) + "B";
+  if(n >= 1e6) return "$" + (n/1e6).toFixed(1) + "M";
+  if(n >= 1e3) return "$" + Math.round(n/1e3) + "K";
+  return "$" + n.toFixed(2);
+}
+
+/* Crypto prices span nine orders of magnitude here — $77,267 and $0.00000317
+   in the same column. Group the thousands, and give sub-dollar prices enough
+   significant figures to actually distinguish them. */
+function price(n){
+  if(typeof n !== "number" || !isFinite(n)) return "";
+  if(n >= 1) return "$" + n.toLocaleString("en-US",
+    {minimumFractionDigits:2, maximumFractionDigits:2});
+  if(n >= 0.01) return "$" + n.toFixed(4);
+  return "$" + n.toPrecision(3);
+}
+
+/* Price and tradeability are separate answers, and the strip says so.
+   Everything we can price gets a price. Only an asset that resolved to a
+   verified Solana mint gets a button — the rest say plainly that they are
+   priced but not tradeable here, rather than leaving a silent gap the
+   reader has to interpret. */
+function marketHtml(m){
+  if(!m || typeof m.price_usd !== "number") return "";
+  var ch = typeof m.change_24h_pct === "number" ? m.change_24h_pct : null;
+  var chCls = ch === null ? "" : (ch >= 0 ? "up" : "down");
+  var chTxt = ch === null ? "" : (ch >= 0 ? "+" : "") + ch.toFixed(1) + "%";
+  var t = m.trade;
+  var url = t ? safeUrl(t.swap_url) : "";
+  /* A stock resolves through a tokenized share, and the row says which one.
+     Somebody clicking through on NVDA is buying NVDAx, a token on Solana --
+     not stock in a brokerage account, with none of what that carries -- and
+     a button that hid the difference would be the dishonest version of this
+     feature. The ticker they clicked is what they came for; the instrument
+     they get is what the strip has to name. */
+  var tok = typeof m.tokenized_as === "string" ? m.tokenized_as : "";
+
+  return '<div class="mkbar">' +
+    '<span class="mkpx">' + esc(price(m.price_usd)) + '</span>' +
+    (chTxt ? '<span class="mkch ' + chCls + '">' + esc(chTxt) + '</span>' : '') +
+    (tok ? '<span class="mktok">as ' + esc(tok) + '</span>' : '') +
+    (t && typeof t.liquidity_usd === "number"
+      ? '<span class="mkliq">' + esc(money(t.liquidity_usd)) + ' liquidity</span>'
+      : '') +
+    (url
+      ? '<a class="mkgo" href="' + esc(url) + '" target="_blank" ' +
+        'rel="noopener noreferrer nofollow">Trade ' +
+        (tok ? esc(tok) + ' ' : '') + 'on Jupiter \u2197</a>'
+      : '<span class="mkoff">Price only \u00b7 not tradeable on Solana</span>') +
+    '<span class="mknfa">Live price' +
+      (m.source ? ' via ' + esc(m.source) : '') +
+      (tok ? '. Tokenized share, not the listed stock' : '') +
+      '. Not advice.</span>' +
+  '</div>';
+}
+
+fetch(API + "/v1/mcg/assets")
+  .then(function(r){ return r.json(); })
+  .then(function(d){
+    DATA = (d.assets || []).filter(function(a){
+      return CLASSES.indexOf(a.asset_class) !== -1;
+    });
+    if(!DATA.length){
+      document.getElementById("list").innerHTML =
+        '<p class="empty">No asset data yet — run scripts/extract_assets.py.</p>';
+      return;
+    }
+    var solid = DATA.filter(function(a){ return !a.single_reference; });
+    tiles(solid, d.episodes_processed || 0);
+    chart(solid);
+    render();
+  })
+  .catch(function(){
+    document.getElementById("list").innerHTML =
+      '<p class="empty">Couldn\'t load asset data. Try again shortly.</p>';
+  });
+</script>
+</body>
+</html>

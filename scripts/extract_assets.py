@@ -50,7 +50,7 @@ CACHE = ROOT / "data" / ".asset_cache"
 
 # Window size in characters. Bigger windows = fewer calls = cheaper, but the
 # model needs enough context to tell analysis from a name-drop.
-WINDOW_CHARS = 6000
+WINDOW_CHARS = int(os.environ.get("EXTRACT_WINDOW_CHARS", "6000"))
 MAX_CONCURRENCY = 4
 
 EXTRACT_TOOL = {
@@ -153,6 +153,30 @@ def _windows(segments: list[dict], budget: int) -> list[tuple[float, str]]:
     return out
 
 
+# What a run actually spent, filled in as the responses come back. Printed
+# at the end of a run and by the MCG extractor, because "about two dollars"
+# was an estimate from a character count and the only way to know what a
+# second archive costs before committing to 645 episodes of it is to meter
+# the first few.
+USAGE = {"calls": 0, "input_tokens": 0, "output_tokens": 0,
+         "cache_writes": 0, "cache_reads": 0}
+
+
+def _meter(resp) -> None:
+    use = getattr(resp, "usage", None)
+    if use is None:
+        return
+    USAGE["calls"] += 1
+    USAGE["input_tokens"] += getattr(use, "input_tokens", 0) or 0
+    USAGE["output_tokens"] += getattr(use, "output_tokens", 0) or 0
+    # Cached input is billed at a tenth of the rate, so a run that reads the
+    # cache and a run that does not are different prices for identical work.
+    # Counted separately rather than folded in, because a proxy that
+    # silently drops cache_control would otherwise look like a cheap run.
+    USAGE["cache_writes"] += getattr(use, "cache_creation_input_tokens", 0) or 0
+    USAGE["cache_reads"] += getattr(use, "cache_read_input_tokens", 0) or 0
+
+
 async def _extract_window(
     client: AsyncAnthropic, model: str, text: str, sem: asyncio.Semaphore
 ) -> list[dict]:
@@ -162,11 +186,19 @@ async def _extract_window(
                 resp = await client.messages.create(
                     model=model,
                     max_tokens=2048,
-                    system=SYSTEM,
+                    # The instructions and the schema are byte-identical on
+                    # every call and were being re-sent with each one: at
+                    # 6,000-character windows they were about half the input
+                    # tokens of the entire run. Marked cacheable, they are
+                    # billed once per five-minute window and read back at a
+                    # tenth of the rate. Nothing about the output changes.
+                    system=[{"type": "text", "text": SYSTEM,
+                             "cache_control": {"type": "ephemeral"}}],
                     tools=[EXTRACT_TOOL],
                     tool_choice={"type": "tool", "name": "record_assets"},
                     messages=[{"role": "user", "content": f"<excerpt>\n{text}\n</excerpt>"}],
                 )
+                _meter(resp)
                 for block in resp.content:
                     if block.type == "tool_use":
                         return block.input.get("assets", [])
