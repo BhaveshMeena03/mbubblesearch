@@ -81,6 +81,10 @@ COPY data/broadcast_links.json ./data/broadcast_links.json
 COPY data/youtube_map.json ./data/youtube_map.json
 COPY data/guest_windows.json ./data/guest_windows.json
 COPY data/speaker_map.json ./data/speaker_map.json
+# Who was on each MCG episode. Read at runtime by /v1/mcg/episodes, so it
+# has to be in the image or every episode deploys with an empty guest list
+# and nothing anywhere says why.
+COPY data/mcg_guests.json ./data/mcg_guests.json
 COPY widget ./widget
 COPY demo ./demo
 
