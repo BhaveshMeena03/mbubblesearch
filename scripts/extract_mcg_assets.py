@@ -48,6 +48,7 @@ sys.path.insert(0, str(ROOT))
 from app.assets import aggregate  # noqa: E402
 from app.assets_store import AssetStore  # noqa: E402
 from app.config import anthropic_client_kwargs, get_settings  # noqa: E402
+
 # Private, and imported anyway rather than reimplemented. The two archives
 # store their timestamps differently -- interviews carry `text_ts`, streams
 # carry `text` plus a comma-separated `line_times` -- and app/podcast.py
@@ -56,7 +57,6 @@ from app.config import anthropic_client_kwargs, get_settings  # noqa: E402
 # only `text_ts` for exactly that reason and silently skipped 230 episodes,
 # 727 hours of them, every one a stream.
 from app.podcast import _stamped  # noqa: E402
-
 from scripts.extract_assets import USAGE, extract_episode  # noqa: E402
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")

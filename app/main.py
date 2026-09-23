@@ -39,9 +39,9 @@ from fastapi.staticfiles import StaticFiles
 from voyageai import error as voyage_error
 
 from . import attribution, market, og_card, quotes, sources
+from . import mcg_guests as mcg_guest_index
 from .agent import REFUSAL_MESSAGE, ConciergeAgent
 from .answer_cache import AnswerCache, make_key
-from . import mcg_guests as mcg_guest_index
 from .assets import aggregate as aggregate_assets
 from .assets_store import AssetStore
 from .clawpump import NAMESPACE as CLAWPUMP_NAMESPACE

@@ -17,7 +17,6 @@ from app import main as main_module
 from app.assets_store import AssetStore
 from scripts.extract_mcg_assets import rebuild, seconds, to_segments
 
-
 # --- rebuilding a transcript from window metadata -------------------------
 
 @pytest.mark.parametrize("stamp,want", [
