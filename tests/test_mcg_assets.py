@@ -15,7 +15,7 @@ from fastapi.testclient import TestClient
 
 from app import main as main_module
 from app.assets_store import AssetStore
-from scripts.extract_mcg_assets import rebuild, seconds, to_segments
+from app.mcg_transcript import rebuild, seconds, to_segments
 
 # --- rebuilding a transcript from window metadata -------------------------
 

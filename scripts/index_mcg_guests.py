@@ -47,8 +47,8 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from app.config import anthropic_client_kwargs, get_settings  # noqa: E402
+from app.mcg_transcript import rebuild  # noqa: E402
 from scripts.extract_assets import USAGE, _meter  # noqa: E402
-from scripts.extract_mcg_assets import rebuild  # noqa: E402
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 logger = logging.getLogger("mcg-guests")
