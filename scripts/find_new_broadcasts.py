@@ -47,9 +47,16 @@ SHOW = "MarketBubble"
 # A broadcast post carries a video and reads like an episode title. Replies
 # and plain commentary do not, so both signals are required — one alone
 # picks up every clip and screenshot the account posts between shows.
+# "Live with", not only "Live w/". The show wrote it out in full on
+# 2026-09-24 -- "You're not bullish enough - Live with @rasmr_eth" -- and
+# the episode was invisible to this script and to the watcher, which
+# between them exist so that nobody has to notice a show by hand. Nothing
+# failed; both reported "with video but not titled like an episode" and
+# carried on.
 LOOKS_LIKE_AN_EPISODE = re.compile(
-    r"""(?ix) \b(?: live\s+w/ | market\s+bubble | ep(?:isode)?\s*\#?\s*\d
-                  | presented\s+by | draft\s+night )\b""")
+    r"""(?ix) \b(?: live\s+w(?:/|ith\b) | market\s+bubble
+                  | ep(?:isode)?\s*\#?\s*\d
+                  | presented\s+by | draft\s+night )""")
 
 # Ep 19 went out as a post LINKING to the broadcast player, with nothing
 # attached -- the first of nineteen shows posted that way. The filter
