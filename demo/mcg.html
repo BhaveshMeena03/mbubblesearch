@@ -96,10 +96,22 @@ moment.">
     text-transform:uppercase}
   .mark span{font-family:"IBM Plex Mono",monospace;font-size:10.5px;
     letter-spacing:.18em;text-transform:uppercase;color:var(--blue)}
-  nav{display:flex;gap:18px;font-family:"IBM Plex Mono",monospace;
+  /* A rule that draws itself under the word you are pointing at. The nav
+     was four flat labels that changed colour, which reads as text rather
+     than as somewhere to go -- and on a page whose whole promise is that
+     everything is one click away, the way out should look like a way
+     out. */
+  nav{display:flex;gap:20px;font-family:"IBM Plex Mono",monospace;
     font-size:11px;letter-spacing:.1em;text-transform:uppercase}
-  nav a{color:var(--dim);text-decoration:none}
-  nav a:hover{color:var(--blue)}
+  nav a{position:relative;color:var(--dim);text-decoration:none;
+    padding-bottom:5px;transition:color .16s ease}
+  nav a::after{content:"";position:absolute;left:0;right:100%;bottom:0;
+    height:1px;background:var(--blue);transition:right .2s ease}
+  nav a:hover{color:var(--ink)}
+  nav a:hover::after{right:0}
+  /* Where you already are: stated, not clickable-looking. */
+  nav a.here{color:var(--ink);cursor:default}
+  nav a.here::after{right:0;background:var(--rule-dark)}
 
   .readout{display:grid;grid-template-columns:repeat(3,1fr);
     border-bottom:1px solid var(--rule-dark);
@@ -389,6 +401,7 @@ moment.">
       <a href="/">Market Bubble</a>
       <a href="/elon">Musk</a>
       <a href="/mcg/assets">Tokens</a>
+      <a class="here">Search</a>
     </nav>
   </header>
 
