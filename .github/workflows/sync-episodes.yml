@@ -149,6 +149,12 @@ jobs:
 
       - name: Install dependencies
         run: |
+          # ffmpeg is not on ubuntu-latest, and this job needs it twice:
+          # yt-dlp extracts the audio with it, and to_chunks splits that
+          # audio to clear the transcriber's upload cap. Without it every
+          # download ends "Postprocessing: ffprobe and ffmpeg not found".
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install --upgrade yt-dlp
