@@ -53,7 +53,7 @@ from .clipper import (
     ffmpeg_available,
 )
 from .config import get_settings
-from .dedupe import canonical_episode_ids, episode_number
+from .dedupe import canonical_episode_ids, episode_number, group_by_show
 from .ingest import IngestionPipeline
 from .podcast import REFUSAL_ANSWER as PODCAST_REFUSAL
 from .podcast import PodcastIndex, inference_routes
@@ -388,6 +388,16 @@ async def lifespan(app: FastAPI):
     # committed data/mcg_assets.json rather than failing.
     app.state.mcg_assets = AssetStore(index_name=_s.mcg_pinecone_index,
                                       namespace="assets")
+    # Build both asset reports now, in the background, so the first person
+    # to open a dashboard is not the one who pays for it. Each takes about
+    # eight seconds against a full archive and neither blocks startup: the
+    # page falls back to its committed file until the warm lands, and a
+    # failure here is logged rather than fatal.
+    for _slot, _store, _file in (
+            ("_assets_cache", app.state.assets, _ROOT / "data" / "assets.json"),
+            ("_mcg_assets_cache", app.state.mcg_assets,
+             _ROOT / "data" / "mcg_assets.json")):
+        asyncio.create_task(_refresh_report(_store, _file, _slot))
     # One cache, shared by every surface. The key carries the surface name,
     # so sharing the store cannot leak an answer between knowledge bases.
     app.state.answers = AnswerCache(
@@ -1179,21 +1189,52 @@ async def podcast_ingest(
     return {"windows_indexed": count, "cached_answers_dropped": dropped}
 
 
-async def _report_for(store, fallback: Path, slot: str) -> dict:
-    """One archive's aggregated asset report, cached.
+_SHOW_OF: dict[str, str] | None = None
 
-    Takes the store and its committed fallback rather than reading either
-    from app.state, because there are two archives now and they must not
-    share a cache slot: one report served under the other's name would put
-    Market Bubble timestamps on an MCG row, and every link would land in
-    the wrong video.
+
+def _show_of() -> dict[str, str]:
+    """episode file id -> the show it belongs to.
+
+    The index holds a file per upload and one evening reaches it up to four
+    times: the X broadcast, the YouTube cut, and clips of both. Counting
+    ids therefore counts uploads, which is how the asset dashboard came to
+    claim "49 episodes covered" for an archive of twenty shows, with rows
+    like "Mizkif gave his chat $400,000 to trade" padding the total.
+
+    MCG ids are absent from this map and fall through to themselves, which
+    is correct: that archive really is one file per episode.
     """
-    # Short TTL cache: aggregation is pure CPU but the Pinecone fetch isn't.
-    cached = getattr(app.state, slot, None)
-    now = asyncio.get_event_loop().time()
-    if cached and now - cached[0] < 300:
-        return cached[1]
+    global _SHOW_OF
+    if _SHOW_OF is not None:
+        return _SHOW_OF
+    try:
+        episodes = list(_episodes_by_id().values())
+        mapped: dict[str, str] = {}
+        for group in group_by_show(episodes):
+            show = min(e["episode_id"] for e in group)
+            for episode in group:
+                mapped[episode["episode_id"]] = show
+        _SHOW_OF = mapped
+    except Exception as exc:  # noqa: BLE001 — a count must not take the page
+        logger.warning("could not group files into shows (%s); counting "
+                       "files", exc)
+        _SHOW_OF = {}
+    return _SHOW_OF
 
+
+# How long a built report is considered current. Thirty minutes rather
+# than five, because these only change when an extraction runs -- which is
+# a deliberate, occasional job, not something traffic causes. A short TTL
+# on near-static data buys nothing and costs a visitor the rebuild.
+_REPORT_TTL = 1800
+
+# Slots with a refresh already in flight, so a burst of traffic against a
+# stale cache starts one rebuild rather than one per request.
+_refreshing: set[str] = set()
+
+
+async def _build_report(store, fallback: Path, slot: str) -> dict:
+    """Fetch, aggregate and cache one archive's report. Slow by nature."""
     hits = []
     if store is not None:
         try:
@@ -1204,14 +1245,57 @@ async def _report_for(store, fallback: Path, slot: str) -> dict:
 
     if hits:
         report = aggregate_assets(hits)
-        report["episodes_processed"] = len({h.get("episode_id") for h in hits})
+        shows = _show_of()
+        report["episodes_processed"] = len(
+            {shows.get(h.get("episode_id"), h.get("episode_id")) for h in hits})
     elif fallback.exists():
         report = json.loads(fallback.read_text())
     else:
         return {"assets": [], "total_hits": 0, "episodes_processed": 0}
 
-    setattr(app.state, slot, (now, report))
+    setattr(app.state, slot, (asyncio.get_event_loop().time(), report))
     return report
+
+
+async def _refresh_report(store, fallback: Path, slot: str) -> None:
+    """Rebuild behind a served response. Never raises into a request."""
+    try:
+        await _build_report(store, fallback, slot)
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("could not refresh %s (%s); keeping the old one",
+                       slot, exc)
+    finally:
+        _refreshing.discard(slot)
+
+
+async def _report_for(store, fallback: Path, slot: str) -> dict:
+    """One archive's aggregated asset report, served from cache.
+
+    Takes the store and its committed fallback rather than reading either
+    from app.state, because there are two archives now and they must not
+    share a cache slot: one report served under the other's name would put
+    Market Bubble timestamps on an MCG row, and every link would land in
+    the wrong video.
+
+    Nobody waits on a rebuild. A warm cache answers immediately even when
+    it is stale, and the refresh happens behind the response -- measured on
+    the finished MCG archive, building one takes eight seconds, of which
+    0.05 is the actual aggregation and the rest is Pinecone round trips.
+    Twelve seconds of "Loading..." was what a visitor saw before this, and
+    the page is the pitch.
+
+    The only caller that can still wait is the first one after a cold
+    start, and the lifespan warms both archives so that caller is usually
+    the server itself.
+    """
+    cached = getattr(app.state, slot, None)
+    if cached:
+        age = asyncio.get_event_loop().time() - cached[0]
+        if age >= _REPORT_TTL and slot not in _refreshing:
+            _refreshing.add(slot)
+            asyncio.create_task(_refresh_report(store, fallback, slot))
+        return cached[1]
+    return await _build_report(store, fallback, slot)
 
 
 async def _assets_report(request: Request) -> dict:

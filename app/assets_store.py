@@ -157,41 +157,55 @@ class AssetStore:
             timeout=self._settings.pinecone_read_timeout_seconds,
         ))
 
-    async def all_hits(self) -> list[dict]:
-        """Every stored hit across every episode, ready to aggregate."""
-        def _load() -> list[dict]:
-            ids = self._all_ids()
-            if not ids:
-                return []
-            hits: list[dict] = []
-            # Fetched in batches, because Pinecone puts the ids in the
-            # QUERY STRING and a long enough list stops being a request.
-            # This read every id in one call and worked for a year on one
-            # archive; MCG's extraction pushed the namespace past seven
-            # hundred records and every call came back 414 Request-URI Too
-            # Large. Nothing logged it as a failure -- all_hits raised, the
-            # dashboard caught it, fell back to a committed file that is
-            # deliberately not in the image, and served an empty archive.
-            # 32-char ids at 100 per batch is about 3KB of URL against the
-            # 8KB a proxy typically allows.
-            for start in range(0, len(ids), FETCH_BATCH):
-                fetched = self.index.fetch(ids=ids[start:start + FETCH_BATCH],
-                                           namespace=self._namespace)
-                for v in fetched.vectors.values():
-                    raw = (v.metadata or {}).get("hits", "[]")
-                    try:
-                        hits.extend(json.loads(raw))
-                    except (ValueError, TypeError):
-                        logger.warning("assets: unparseable hits blob, skipping")
-            return hits
+    def _fetch_batch(self, ids: list[str]) -> list[dict]:
+        """One page of records, parsed. Runs in its own thread."""
+        fetched = self.index.fetch(ids=ids, namespace=self._namespace)
+        hits: list[dict] = []
+        for v in fetched.vectors.values():
+            raw = (v.metadata or {}).get("hits", "[]")
+            try:
+                hits.extend(json.loads(raw))
+            except (ValueError, TypeError):
+                logger.warning("assets: unparseable hits blob, skipping")
+        return hits
 
-        # Bounded: the Pinecone client has no read timeout, and this sits
-        # on the request path holding a thread from the bounded to_thread
-        # pool. A hang here starves every offloaded call in the process.
-        return await asyncio.wait_for(
-            asyncio.to_thread(_load),
-            timeout=self._settings.pinecone_read_timeout_seconds,
+    async def all_hits(self) -> list[dict]:
+        """Every stored hit across every archive's episodes, ready to
+        aggregate.
+
+        Batched, because Pinecone puts the ids in the QUERY STRING and a
+        long enough list stops being a request. This read every id in one
+        call and worked for a year on one archive; MCG's extraction pushed
+        the namespace past seven hundred records and every call came back
+        414 Request-URI Too Large. 32-char ids at 100 per batch is about
+        3KB of URL against the 8KB a proxy typically allows.
+
+        The batches then run CONCURRENTLY, which is the difference between
+        a page that loads and a page somebody waits on. Measured against
+        the finished MCG archive: listing 743 ids took 4.2s and eight
+        sequential fetches took 7.9s, for 12.2s of "Loading..." before
+        anything appeared. Aggregating those 20,512 hits is 0.05s -- none
+        of the cost was ever the work, all of it was round trips taken one
+        at a time.
+
+        Bounded: the Pinecone client has no read timeout, and this sits on
+        the request path holding threads from the bounded to_thread pool.
+        A hang here starves every offloaded call in the process.
+        """
+        timeout = self._settings.pinecone_read_timeout_seconds
+        ids = await asyncio.wait_for(asyncio.to_thread(self._all_ids),
+                                     timeout=timeout)
+        if not ids:
+            return []
+
+        batches = [ids[n:n + FETCH_BATCH]
+                   for n in range(0, len(ids), FETCH_BATCH)]
+        pages = await asyncio.wait_for(
+            asyncio.gather(*(asyncio.to_thread(self._fetch_batch, b)
+                             for b in batches)),
+            timeout=timeout,
         )
+        return [hit for page in pages for hit in page]
 
     async def episode_count(self) -> int:
         def _count() -> int:

@@ -148,6 +148,20 @@ def fetch_audio(video_id: str) -> Path:
             return path
         last = ((done.stderr or "").strip().splitlines() or ["?"])[-1]
         path.unlink(missing_ok=True)
+
+        # The proxy negotiates TLS the old way and yt-dlp refuses it:
+        # "SSLV3_ALERT_HANDSHAKE_FAILURE: The server may not support the
+        # current cipher list." Retried once with the flag its own error
+        # message names, rather than weakening every request to suit one
+        # hop -- the first attempt stays strict and this only runs when
+        # that attempt has already failed on the handshake.
+        if "HANDSHAKE_FAILURE" in last or "cipher list" in last:
+            done = subprocess.run([*cmd, "--legacy-server-connect"],
+                                  capture_output=True, text=True, timeout=7200)
+            if done.returncode == 0 and path.exists():
+                return path
+            last = ((done.stderr or "").strip().splitlines() or ["?"])[-1]
+            path.unlink(missing_ok=True)
     raise RuntimeError(f"download failed: {last[:160]}")
 
 
