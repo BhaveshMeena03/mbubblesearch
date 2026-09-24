@@ -37,7 +37,11 @@
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--bg);color:var(--text);min-height:100vh;
     font:15px/1.55 var(--sans);font-feature-settings:"tnum" 1;
-    padding:28px 20px 60px}
+    /* Matches the archive page exactly. This carried 28px of top padding
+       inherited from the other archive's dashboard, which pushed the
+       wordmark to y=54 while the page you arrive from sits it at y=26 --
+       so moving between them nudged the whole header down. */
+    padding:0 20px 90px}
   .wrap{max-width:940px;margin:0 auto}
   /* One pool of the channel's green, lifted from the archive page so the
      two share a background rather than two different blacks. */
