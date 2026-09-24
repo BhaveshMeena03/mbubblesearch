@@ -373,9 +373,13 @@
   .brand-name b{color:var(--green);font-weight:600}
   .site-nav{display:flex;gap:22px}
   .site-nav a[hidden]{display:none!important}
-  .site-nav a{color:var(--muted);text-decoration:none;font-size:14px;
-    transition:color .15s ease}
+  .site-nav a{position:relative;color:var(--muted);text-decoration:none;
+    font-size:14px;padding-bottom:5px;transition:color .15s ease}
+  /* The same rule the other archive's nav draws, in this one's green. */
+  .site-nav a::after{content:"";position:absolute;left:0;right:100%;
+    bottom:0;height:1px;background:var(--green);transition:right .2s ease}
   .site-nav a:hover{color:var(--text)}
+  .site-nav a:hover::after{right:0}
   @media (max-width:560px){ .site-nav{display:none} }
 
   /* ---- depth -----------------------------------------------------------

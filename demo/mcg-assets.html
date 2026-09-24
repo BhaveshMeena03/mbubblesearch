@@ -57,10 +57,19 @@
     text-transform:uppercase}
   .mark span{font-family:"IBM Plex Mono",monospace;font-size:10.5px;
     letter-spacing:.18em;text-transform:uppercase;color:var(--green)}
-  nav{display:flex;gap:18px;font-family:"IBM Plex Mono",monospace;
+  /* A rule that draws itself under the word you are pointing at, and a
+     stated "you are here". Four flat labels that only changed colour read
+     as text rather than as somewhere to go. */
+  nav{display:flex;gap:20px;font-family:"IBM Plex Mono",monospace;
     font-size:11px;letter-spacing:.1em;text-transform:uppercase}
-  nav a{color:var(--muted);text-decoration:none}
-  nav a:hover{color:var(--green)}
+  nav a{position:relative;color:var(--muted);text-decoration:none;
+    padding-bottom:5px;transition:color .16s ease}
+  nav a::after{content:"";position:absolute;left:0;right:100%;bottom:0;
+    height:1px;background:var(--green);transition:right .2s ease}
+  nav a:hover{color:var(--text)}
+  nav a:hover::after{right:0}
+  nav a.here{color:var(--text);cursor:default}
+  nav a.here::after{right:0;background:var(--rule-dark)}
   @media (max-width:640px){
     header{flex-direction:column;align-items:flex-start;gap:10px}
   }
@@ -206,9 +215,13 @@
       <b>The MCG Index</b><span>tokens</span>
     </a>
     <nav>
+      <!-- First, and named for what it does. This read "Archive", which
+           is not the word anyone scans for when they want to get back to
+           the thing they were searching. -->
+      <a href="/demo/mcg.html">&larr; Search</a>
       <a href="/">Market Bubble</a>
       <a href="/elon">Musk</a>
-      <a href="/demo/mcg.html">Archive</a>
+      <a class="here">Tokens</a>
     </nav>
   </header>
 
