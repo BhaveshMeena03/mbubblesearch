@@ -67,6 +67,26 @@ TABS = [("interview", "https://www.youtube.com/@MCG_live/videos"),
 LONG_ENOUGH = 10 * 60
 
 
+def proxy_args() -> list[str]:
+    """--proxy for yt-dlp, or nothing when YTDLP_PROXY is unset.
+
+    The same shape fetch_episodes uses, and the reason the first scheduled
+    run of this job indexed nothing: the workflow passed YTDLP_PROXY in and
+    this file had never heard of it. YouTube answered every download with
+    "Sign in to confirm you're not a bot", each episode was caught and
+    logged as a failure, and the job finished green in sixteen seconds
+    having done nothing at all.
+
+    Read at call time so a shell can set it without reimporting.
+
+    The channel listing is deliberately NOT proxied -- it is not refused
+    from a datacentre and a quiet run should spend no proxy bandwidth.
+    Only fetching a video is.
+    """
+    proxy = os.environ.get("YTDLP_PROXY", "").strip()
+    return ["--proxy", proxy] if proxy else []
+
+
 def shelf() -> list[dict]:
     return json.loads(SHELF.read_text())
 
@@ -85,7 +105,7 @@ def enumerate_tab(url: str, limit: int) -> list[dict]:
 def published(video_id: str) -> str:
     """YYYY-MM-DD, fetched per video because a flat listing has no date."""
     done = subprocess.run(
-        [YTDLP, "--no-warnings", "--print", "%(upload_date)s",
+        [YTDLP, "--no-warnings", *proxy_args(), "--print", "%(upload_date)s",
          f"https://www.youtube.com/watch?v={video_id}"],
         capture_output=True, text=True, timeout=300)
     raw = (done.stdout or "").strip()
@@ -117,7 +137,8 @@ def fetch_audio(video_id: str) -> Path:
     # depends on what it is challenging that day, so vary the client
     # rather than only the retry.
     for client in ("tv_embedded", "", "web_embedded", "android"):
-        cmd = [YTDLP, "--no-warnings", "-f", "bestaudio[ext=m4a]/bestaudio/best",
+        cmd = [YTDLP, "--no-warnings", *proxy_args(),
+               "-f", "bestaudio[ext=m4a]/bestaudio/best",
                "--extract-audio", "--audio-format", "m4a", "-o", str(path)]
         if client:
             cmd += ["--extractor-args", f"youtube:player_client={client}"]
@@ -292,6 +313,8 @@ async def main() -> int:
                          index_name=settings.mcg_pinecone_index)
     print(f"  writing to index {settings.mcg_pinecone_index!r}, "
           f"namespace {settings.mcg_namespace!r}")
+    failures: list[str] = []
+    added = 0
     for n, item in enumerate(todo, 1):
         print(f"\n  [{n}/{len(todo)}] {item['id']}  {item['title'][:54]}",
               flush=True)
@@ -302,6 +325,7 @@ async def main() -> int:
             segments = transcribe(audio)
         except Exception as exc:                            # noqa: BLE001
             print(f"     failed: {exc}")
+            failures.append(f"{item['id']}: {str(exc)[:120]}")
             continue
         kept, dropped = drop_hallucinated(segments)
         if dropped:
@@ -319,11 +343,26 @@ async def main() -> int:
         add_to_shelf({"id": item["id"], "title": item["title"],
                       "url": episode.url, "published_at": date,
                       "seconds": item["seconds"], "format": item["format"]})
+        added += 1
         audio.unlink(missing_ok=True)
 
     rows = shelf()
     print(f"\n  shelf: {len(rows)} episodes, "
           f"{sum(r['seconds'] for r in rows) / 3600:.1f} hours")
+
+    # Having work and completing none of it is a failure, and it has to
+    # say so. The first scheduled run of this found three episodes, was
+    # refused by YouTube on all three, caught each one, and exited green
+    # in sixteen seconds -- which is indistinguishable, from the outside,
+    # from an archive that was already up to date.
+    if todo and not added:
+        print(f"\n  indexed NOTHING out of {len(todo)} episode(s):")
+        for line in failures:
+            print(f"    {line}")
+        return 1
+    if failures:
+        print(f"\n  {len(failures)} of {len(todo)} failed, "
+              f"{added} indexed; the rest will retry next run")
     return 0
 
 
