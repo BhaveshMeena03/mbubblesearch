@@ -19,35 +19,86 @@
 <meta name="twitter:description" content="One project per episode, 1,024.7 hours of it. Ranked by real coverage, with live prices. Jump to the exact moment.">
 <meta name="twitter:image" content="https://search.lexthedev.com/demo/og-mcg.png">
 <link rel="stylesheet" href="/demo/ui.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
   :root{
-    --bg:#0b0e11;--panel:#12161c;--line:#232a33;--text:#e6e8ea;
-    --muted:#8a939e;--green:#16c784;--amber:#e8c157;
+    /* MCG's palette, not Market Bubble's. This page was cloned from the
+       other archive's dashboard and kept its colours, so clicking "tokens"
+       from the MCG page landed somewhere that looked like a different
+       product. The token NAMES are unchanged on purpose -- every rule in
+       this file already reads them, so re-pointing the values re-skins the
+       page without touching a single component. */
+    --bg:#080b09;--panel:#0f1411;--line:#1c241f;--text:#e8f2ea;
+    --muted:#8b9c91;--green:#6ecf9e;--amber:#e8c157;
+    --rule-dark:#2c3a31;--faint:#5f6c63;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--bg);color:var(--text);min-height:100vh;
     font:15px/1.55 var(--sans);font-feature-settings:"tnum" 1;
     padding:28px 20px 60px}
   .wrap{max-width:940px;margin:0 auto}
-  .topbar{display:flex;align-items:center;justify-content:space-between;
-    gap:14px;margin-bottom:18px;flex-wrap:wrap}
-  .brand{font-weight:700;letter-spacing:.5px;font-size:14px}
-  .brand span{color:var(--green)}
-  @media(max-width:560px){
-    .topbar{flex-direction:column;align-items:flex-start;gap:10px}
+  /* One pool of the channel's green, lifted from the archive page so the
+     two share a background rather than two different blacks. */
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(760px 420px at 50% -8%, rgba(110,207,158,.10), transparent 70%),
+      radial-gradient(900px 600px at 85% 8%, rgba(110,207,158,.045), transparent 70%)}
+  .wrap{position:relative;z-index:1}
+
+  /* Header, wordmark and nav copied from demo/mcg.html so the two pages
+     have one chrome. Same items in the same order: moving between them
+     should feel like a section change, not a different site. */
+  header{display:flex;align-items:baseline;justify-content:space-between;
+    gap:16px;padding:26px 0 12px;border-bottom:1px solid var(--rule-dark)}
+  .mark{display:flex;align-items:baseline;gap:11px;text-decoration:none}
+  .mark b{font-weight:800;font-size:22px;letter-spacing:.01em;color:var(--text);
+    text-transform:uppercase}
+  .mark span{font-family:"IBM Plex Mono",monospace;font-size:10.5px;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--green)}
+  nav{display:flex;gap:18px;font-family:"IBM Plex Mono",monospace;
+    font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+  nav a{color:var(--muted);text-decoration:none}
+  nav a:hover{color:var(--green)}
+  @media (max-width:640px){
+    header{flex-direction:column;align-items:flex-start;gap:10px}
   }
+
   h1{font-family:var(--display);font-weight:400;font-size:42px;
     line-height:1.12;letter-spacing:-.01em;margin-bottom:10px}
   h1 em{color:var(--green);font-style:normal}
   .sub{color:var(--muted);margin-bottom:22px;max-width:640px}
 
-  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-    gap:12px;margin-bottom:26px}
-  .tile{background:var(--panel);border:1px solid var(--line);border-radius:12px;
-    padding:14px 16px}
-  .tile b{display:block;font-size:26px;line-height:1.1;margin-bottom:2px}
-  .tile span{color:var(--muted);font-size:12px;text-transform:uppercase;
-    letter-spacing:.6px}
+  /* The archive page's readout rather than a row of rounded cards: ruled
+     columns, mono labels above the figure. It is the best thing on that
+     page -- it answers "how much is in here" before anyone asks -- so the
+     dashboard states its own size the same way. */
+  /* Four cells, four columns. At three the last one dropped to a row of
+     its own and read as an afterthought rather than part of the readout. */
+  .tiles{display:grid;grid-template-columns:repeat(4,1fr);
+    border-bottom:1px solid var(--rule-dark);margin-bottom:26px;
+    font-family:"IBM Plex Mono",monospace}
+  .tile{padding:13px 0 15px;border-right:1px solid var(--line)}
+  .tile + .tile{padding-left:22px}
+  .tile:last-child{border-right:0}
+  .tile b{display:block;font-size:26px;line-height:1.1;order:2;
+    font-weight:700;letter-spacing:-.01em}
+  .tile span{display:block;color:var(--faint);font-size:10.5px;
+    text-transform:uppercase;letter-spacing:.18em;margin-bottom:6px}
+  @media (max-width:640px){
+    .tiles{grid-template-columns:1fr 1fr}
+    .tile:nth-child(2n){border-right:0}
+    .tile:nth-child(2n+1){padding-left:0}
+  }
+
+  footer{margin-top:52px;padding-top:18px;
+    border-top:1px solid var(--rule-dark);display:flex;gap:18px;
+    justify-content:space-between;flex-wrap:wrap;
+    font-family:"IBM Plex Mono",monospace;font-size:11.5px;
+    color:var(--faint);line-height:1.6}
+  footer a{color:var(--muted)}
+  footer span{max-width:620px}
 
   .chartbox{background:var(--panel);border:1px solid var(--line);
     border-radius:14px;padding:18px 20px;margin-bottom:26px;overflow-x:auto}
@@ -150,13 +201,16 @@
 </head>
 <body>
 <div class="wrap">
-  <div class="topbar">
-    <div class="brand">THE MCG <span>INDEX</span> · tokens</div>
-    <span style="display:inline-flex;gap:10px;flex-wrap:wrap">
-    <a class="btn btn-primary btn-back" href="/demo/mcg.html"><span class="arw">←</span><svg class="ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.75" stroke="currentColor" stroke-width="1.7"/><path d="M10.6 10.6 14 14" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M6 5.3l3 1.7-3 1.7z" fill="currentColor"/></svg>Search every episode</a>
-    <a class="btn btn-ghost" href="/demo/concierge.html"><svg class="ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14 7.4c0 2.9-2.7 5.3-6 5.3-.7 0-1.4-.1-2-.3L2.5 13.5l.9-2.5A5 5 0 0 1 2 7.4C2 4.5 4.7 2.1 8 2.1s6 2.4 6 5.3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Bullpen Concierge</a>
-    </span>
-  </div>
+  <header>
+    <a class="mark" href="/demo/mcg.html">
+      <b>The MCG Index</b><span>tokens</span>
+    </a>
+    <nav>
+      <a href="/">Market Bubble</a>
+      <a href="/elon">Musk</a>
+      <a href="/demo/mcg.html">Archive</a>
+    </nav>
+  </header>
 
   <h1>Every token they've <em>actually covered</em>.</h1>
   <p class="sub">Pulled from every MCG Live episode — one project per show,
@@ -185,12 +239,14 @@
 
   <div id="list"><p class="empty">Loading…</p></div>
 
-  <p class="foot">
-    Tokens are extracted from the transcripts by a language model, then
-    normalized (caption manglings merged, non-assets like platforms and
-    categories filtered out). Low-confidence hits are dropped. Some error
-    remains — treat the tail of the list with more suspicion than the top.
-  </p>
+  <footer>
+    <span>Extracted from the transcripts by a language model, then normalized
+    — caption manglings merged, platforms and categories filtered out.
+    Low-confidence hits dropped. Treat the tail of the list with more
+    suspicion than the top.</span>
+    <span><a href="/demo/mcg.html">Ask MCG Live anything</a> ·
+    built by <a href="https://x.com/Lexx_eth">@Lexx_eth</a></span>
+  </footer>
 </div>
 
 <script>
