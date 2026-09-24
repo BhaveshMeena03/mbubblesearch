@@ -159,7 +159,24 @@ jobs:
           pip install -r requirements.txt
           pip install --upgrade yt-dlp
 
-      - name: Ingest
+      # DETECT ONLY, by decision on 2026-09-24.
+      #
+      # The runner can see what is new and cannot fetch it. YouTube refuses
+      # a datacentre IP, YTDLP_PROXY is supposed to be the way around that,
+      # and on three consecutive downloads it produced three different
+      # symptoms of the same wall: a bot check, a "format is not available"
+      # from a truncated response, and a read timeout. The transcription
+      # path itself is fine -- it was tested on real audio and matched the
+      # local transcript word for word.
+      #
+      # So this lists what is missing and says so, rather than attempting a
+      # download that fails and turning the daily signal into two red
+      # emails a day that nobody reads. Indexing happens on the laptop,
+      # where it works, with the command this step prints.
+      #
+      # If the proxy is ever fixed, drop --list and this becomes a real
+      # sync again; everything else is already in place.
+      - name: Detect
         env:
           YTDLP_PROXY: ${{ secrets.YTDLP_PROXY }}
           # Transcription. Without it the run finds the episodes and then
@@ -170,11 +187,15 @@ jobs:
           VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
           PINECONE_API_KEY: ${{ secrets.PINECONE_API_KEY }}
         run: |
-          # --max-new caps the WORK, not the lookback. A week of backlog is
-          # twenty episodes; three at a time finishes, records what it did,
-          # and takes the rest on the next run.
-          python scripts/ingest_mcg.py --limit 12 --max-new 3
+          set -o pipefail
+          python scripts/ingest_mcg.py --list --limit 12 | tee pending.txt
+          if grep -qE "^  [A-Za-z0-9_-]{6,}" pending.txt; then
+            echo "::warning::New MCG episodes are not indexed yet. Run this \
+          locally:  .venv/bin/python scripts/ingest_mcg.py"
+          fi
 
+      # Kept for the day the download works again: in detect-only mode the
+      # shelf never changes and this exits immediately.
       - name: Commit the shelf
         if: always()
         run: |
