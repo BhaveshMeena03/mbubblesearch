@@ -22,6 +22,10 @@ from .config import get_settings
 logger = logging.getLogger(__name__)
 
 NAMESPACE = "assets"
+
+# Ids per fetch. See all_hits: the ids travel in the URL, so this is a
+# limit on the request line rather than on Pinecone.
+FETCH_BATCH = 100
 MAX_METADATA_CHARS = 30_000  # Pinecone caps metadata at 40KB; stay under it
 
 
@@ -159,14 +163,26 @@ class AssetStore:
             ids = self._all_ids()
             if not ids:
                 return []
-            fetched = self.index.fetch(ids=ids, namespace=self._namespace)
             hits: list[dict] = []
-            for v in fetched.vectors.values():
-                raw = (v.metadata or {}).get("hits", "[]")
-                try:
-                    hits.extend(json.loads(raw))
-                except (ValueError, TypeError):
-                    logger.warning("assets: unparseable hits blob, skipping")
+            # Fetched in batches, because Pinecone puts the ids in the
+            # QUERY STRING and a long enough list stops being a request.
+            # This read every id in one call and worked for a year on one
+            # archive; MCG's extraction pushed the namespace past seven
+            # hundred records and every call came back 414 Request-URI Too
+            # Large. Nothing logged it as a failure -- all_hits raised, the
+            # dashboard caught it, fell back to a committed file that is
+            # deliberately not in the image, and served an empty archive.
+            # 32-char ids at 100 per batch is about 3KB of URL against the
+            # 8KB a proxy typically allows.
+            for start in range(0, len(ids), FETCH_BATCH):
+                fetched = self.index.fetch(ids=ids[start:start + FETCH_BATCH],
+                                           namespace=self._namespace)
+                for v in fetched.vectors.values():
+                    raw = (v.metadata or {}).get("hits", "[]")
+                    try:
+                        hits.extend(json.loads(raw))
+                    except (ValueError, TypeError):
+                        logger.warning("assets: unparseable hits blob, skipping")
             return hits
 
         # Bounded: the Pinecone client has no read timeout, and this sits
