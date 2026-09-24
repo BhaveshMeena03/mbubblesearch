@@ -31,9 +31,12 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import os
 import shutil
 import subprocess
 import sys
+import tempfile
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -127,8 +130,108 @@ def fetch_audio(video_id: str) -> Path:
     raise RuntimeError(f"download failed: {last[:160]}")
 
 
+# Hosted transcription, for anywhere that is not this laptop.
+#
+# mlx_whisper is Apple silicon only, which is the whole reason MCG was
+# never added to the twice-daily sync: the runner cannot import it. Groq
+# serves the same family of model over HTTP, so a runner can do the work
+# the laptop was doing.
+#
+# Chunked because the upload cap is 24MB and the median episode here is
+# fifty minutes, with the longest at six hours. Downsampling to 16kHz mono
+# -- which is what Whisper listens at anyway, so nothing is lost -- turns
+# an hour of audio into about 15MB, and a fifteen-minute chunk into about
+# 3.6MB. Well clear of the cap with room for a talkative episode.
+GROQ_URL = "https://api.groq.com/openai/v1/audio/transcriptions"
+GROQ_MODEL = "whisper-large-v3-turbo"
+CHUNK_SECONDS = 15 * 60
+
+
+def to_chunks(path: Path, work: Path) -> list[tuple[float, Path]]:
+    """The episode as 16kHz mono mp3 pieces, each with its start time."""
+    work.mkdir(parents=True, exist_ok=True)
+    pattern = work / "chunk%04d.mp3"
+    done = subprocess.run(
+        ["ffmpeg", "-loglevel", "error", "-i", str(path),
+         "-ac", "1", "-ar", "16000", "-b:a", "32k",
+         "-f", "segment", "-segment_time", str(CHUNK_SECONDS),
+         str(pattern)],
+        capture_output=True, text=True, timeout=3600)
+    if done.returncode != 0:
+        raise RuntimeError(f"split failed: {(done.stderr or '')[-200:]}")
+    return [(n * float(CHUNK_SECONDS), f)
+            for n, f in enumerate(sorted(work.glob("chunk*.mp3")))]
+
+
+def transcribe_via_groq(path: Path, api_key: str) -> list[dict]:
+    """Segments with real timestamps, stitched back across the chunks.
+
+    Every chunk's clock starts at zero, so each segment is shifted by where
+    its chunk began. Getting that wrong does not fail -- it produces an
+    episode whose every citation is silently minutes out, which is worse
+    than no episode at all.
+    """
+    import httpx
+
+    segments: list[dict] = []
+    with tempfile.TemporaryDirectory() as tmp:
+        chunks = to_chunks(path, Path(tmp))
+        print(f"     {len(chunks)} chunk(s) to transcribe", flush=True)
+        for offset, chunk in chunks:
+            for attempt in range(6):
+                try:
+                    with open(chunk, "rb") as fh:
+                        r = httpx.post(
+                            GROQ_URL, timeout=600.0,
+                            headers={"Authorization": f"Bearer {api_key}"},
+                            files={"file": (chunk.name, fh, "audio/mpeg")},
+                            data={"model": GROQ_MODEL,
+                                  "response_format": "verbose_json",
+                                  "timestamp_granularities[]": "segment",
+                                  "language": "en", "temperature": "0"})
+                    # The free tier's hourly allowance is smaller than a
+                    # day of this show. A batch job can wait; it is the
+                    # only caller that can.
+                    if r.status_code == 429:
+                        wait = float(r.headers.get("retry-after") or 30)
+                        print(f"     rate limited, waiting {wait:.0f}s",
+                              flush=True)
+                        time.sleep(min(wait, 120))
+                        continue
+                    r.raise_for_status()
+                    body = r.json() or {}
+                except Exception as exc:                    # noqa: BLE001
+                    if attempt == 5:
+                        raise RuntimeError(f"transcribe failed: {exc}") from exc
+                    time.sleep(5 * (attempt + 1))
+                    continue
+                for seg in body.get("segments", []):
+                    said = (seg.get("text") or "").strip()
+                    if said:
+                        segments.append({"t": round(offset + float(
+                            seg.get("start") or 0.0), 2), "text": said})
+                break
+    segments.sort(key=lambda s: s["t"])
+    return segments
+
+
 def transcribe(path: Path) -> list[dict]:
-    import mlx_whisper
+    """Locally when this machine can, hosted when it cannot.
+
+    The laptop keeps using MLX -- it is free and already downloaded. A
+    runner has no MLX and a GROQ_API_KEY instead, and takes the other road
+    without the caller knowing which one it got.
+    """
+    try:
+        import mlx_whisper
+    except ImportError:
+        key = os.environ.get("GROQ_API_KEY", "").strip()
+        if not key:
+            raise RuntimeError(
+                "no transcriber: mlx_whisper will not import here and "
+                "GROQ_API_KEY is unset") from None
+        return transcribe_via_groq(path, key)
+
     result = mlx_whisper.transcribe(
         str(path), path_or_hf_repo="mlx-community/whisper-turbo",
         language="en", verbose=False)
@@ -157,15 +260,27 @@ async def main() -> int:
     ap.add_argument("--only", help="one video id")
     ap.add_argument("--limit", type=int, default=60,
                     help="how deep to read each tab")
+    # A cap on WORK, which --limit is not: that one says how far back to
+    # look, and a sync that has not run for a week would happily find
+    # twenty episodes and try to transcribe all of them. On a runner with
+    # a six-hour ceiling that is a job which never finishes and never
+    # records what it did. Newest first, the rest next time.
+    ap.add_argument("--max-new", type=int, default=0,
+                    help="at most N new episodes this run (0 = no cap)")
     args = ap.parse_args()
 
     todo = pending(args.limit)
     if args.only:
         todo = [t for t in todo if t["id"] == args.only]
+    capped = 0
+    if args.max_new and len(todo) > args.max_new:
+        capped = len(todo) - args.max_new
+        todo = todo[:args.max_new]
 
     hours = sum(t["seconds"] for t in todo) / 3600
     print(f"  {len(shelf())} episodes on the shelf, {len(todo)} to add "
-          f"({hours:.1f} hours of audio)\n")
+          f"({hours:.1f} hours of audio)"
+          + (f", {capped} left for the next run" if capped else "") + "\n")
     for t in todo:
         print(f"  {t['id']}  {t['seconds'] // 60:4}m  {t['format']:9} "
               f"{t['title'][:52]}")
