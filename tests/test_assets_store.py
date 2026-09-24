@@ -129,3 +129,48 @@ def test_hung_write_times_out_instead_of_blocking(store):
     store._settings.pinecone_write_timeout_seconds = 0.2
     with pytest.raises((asyncio.TimeoutError, TimeoutError)):
         asyncio.run(store.store("e1", "Ep", _hits(1)))
+
+
+# --- reading back more than a few hundred records -------------------------
+
+class _UrlLimitedIndex(_FakeIndex):
+    """Pinecone, with the constraint that actually broke it.
+
+    fetch() sends its ids in the QUERY STRING, so the request line grows
+    with the batch. A real proxy answers 414 past roughly 8KB; this refuses
+    at the same shape so a regression fails here rather than in production.
+    """
+
+    URL_LIMIT = 8_000
+
+    def __init__(self, vectors=None):
+        super().__init__(vectors)
+        self.batches = []
+
+    def fetch(self, ids, namespace):
+        self.batches.append(len(ids))
+        # 32-char id plus a separator and escaping, the way it travels.
+        if sum(len(i) + 3 for i in ids) > self.URL_LIMIT:
+            raise RuntimeError("414 Request-URI Too Large")
+        return super().fetch(ids, namespace)
+
+
+def test_a_namespace_too_big_for_one_url_still_reads():
+    """743 records in the MCG namespace made every read a 414.
+
+    Nothing surfaced it: all_hits raised, the dashboard caught it, fell
+    back to a file that is deliberately not in the image, and served an
+    empty archive from a Pinecone namespace that was completely intact.
+    """
+    store = AssetStore()
+    index = _UrlLimitedIndex()
+    store._index = index
+    for n in range(743):
+        index.upsert([{"id": f"{n:032x}",
+                       "metadata": {"hits": json.dumps([{"symbol": "SOL"}])}}],
+                     "assets")
+
+    hits = asyncio.run(store.all_hits())
+    assert len(hits) == 743, "every record has to come back"
+    assert len(index.batches) > 1, "one call for 743 ids is the bug"
+    assert max(index.batches) <= 100
