@@ -95,22 +95,40 @@ def test_the_default_store_is_unchanged():
 
 # --- the routes -----------------------------------------------------------
 
+def _hit(symbol, episode, url, note="said a thing"):
+    return {"symbol": symbol, "name": symbol, "asset_class": "crypto",
+            "kind": "analysis", "confidence": "high", "episode_id": episode,
+            "episode_title": f"{episode} title", "start_seconds": 90,
+            "note": note, "url": url}
+
+
+# Each archive's own rows, so neither report comes from a file on disk.
+# These used to read the committed data/mcg_assets.json, which tied the
+# suite to a 7.8MB generated artifact and tested the fixture more than the
+# code. Serving from the store is also the path production actually takes.
+MCG_HITS = [_hit("ORGO", "yt1", "https://www.youtube.com/watch?v=yt1"),
+            _hit("ICM", "yt2", "https://www.youtube.com/watch?v=yt2")]
+MB_HITS = [_hit("ZEC", "x-1", "https://x.com/MarketBubble/status/1"),
+           _hit("VVV", "x-2", "https://x.com/MarketBubble/status/2")]
+
+
 @pytest.fixture
 def client(monkeypatch):
-    """Both stores empty, so both reports come from their committed file."""
-    async def nothing_stored():
-        return []
+    """Each store answers with its own archive's rows."""
+    class Store:
+        def __init__(self, hits):
+            self._hits = hits
 
-    class Empty:
-        all_hits = staticmethod(nothing_stored)
+        async def all_hits(self):
+            return list(self._hits)
 
     async def no_market(ticker, asset_class=None):
         return None
 
     monkeypatch.setattr(main_module, "_market_for", no_market)
     with TestClient(main_module.app) as c:
-        c.app.state.assets = Empty()
-        c.app.state.mcg_assets = Empty()
+        c.app.state.assets = Store(MB_HITS)
+        c.app.state.mcg_assets = Store(MCG_HITS)
         # Both caches cleared: the app may have served either report
         # already, and a warm slot would hide the bug this file is about.
         for slot in ("_assets_cache", "_mcg_assets_cache"):
@@ -121,7 +139,7 @@ def client(monkeypatch):
 
 def test_the_mcg_dashboard_answers(client):
     body = client.get("/v1/mcg/assets").json()
-    assert body["assets"], "no rows from the committed fallback"
+    assert body["assets"], "no rows from the store"
     assert body["total_hits"] > 0
 
 
