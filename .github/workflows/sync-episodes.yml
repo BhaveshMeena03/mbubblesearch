@@ -122,3 +122,66 @@ jobs:
             echo "This is the known datacentre-IP limit, not a code failure."
             echo "Finish it locally:  .venv/bin/python scripts/sync_latest.py"
           fi
+
+  # MCG Live, which until now was only ever indexed by hand.
+  #
+  # It could not run here before for one reason: ingest_mcg transcribed with
+  # mlx_whisper, which is Apple silicon only and will not import on a
+  # runner. It now falls back to Groq's hosted Whisper, chunked to clear the
+  # 24MB upload cap -- a median episode here is fifty minutes and the
+  # longest is six hours.
+  #
+  # Separate job rather than more steps on the one above: Market Bubble's
+  # sync is half a minute and this is potentially an hour, and a slow
+  # transcription should not hold up the archive that syncs quickly.
+  mcg:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    # The shelf is committed at the end, so this needs to write.
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install --upgrade yt-dlp
+
+      - name: Ingest
+        env:
+          YTDLP_PROXY: ${{ secrets.YTDLP_PROXY }}
+          # Transcription. Without it the run finds the episodes and then
+          # cannot read them, which is the state this job existed to end.
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_BASE_URL: ${{ secrets.ANTHROPIC_BASE_URL }}
+          VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
+          PINECONE_API_KEY: ${{ secrets.PINECONE_API_KEY }}
+        run: |
+          # --max-new caps the WORK, not the lookback. A week of backlog is
+          # twenty episodes; three at a time finishes, records what it did,
+          # and takes the rest on the next run.
+          python scripts/ingest_mcg.py --limit 12 --max-new 3
+
+      - name: Commit the shelf
+        if: always()
+        run: |
+          # data/mcg_index.json is both the record of what has been ingested
+          # AND what the deployed site lists. Left uncommitted, the next run
+          # would re-transcribe the same episodes and the site would never
+          # show them.
+          if git diff --quiet -- data/mcg_index.json; then
+            echo "no new episodes; nothing to commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/mcg_index.json
+          git commit -m "Add the new MCG episodes this sync indexed"
+          git push
