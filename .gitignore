@@ -45,3 +45,9 @@ data/speakers/
 data/sweeps/
 .pytest_cache/
 audio
+
+# The full MCG asset report, written by scripts/extract_mcg_assets.py.
+# 7.8MB of generated output that nothing in production reads -- the live
+# dashboard is served from Pinecone, and .dockerignore keeps this out of
+# the image on purpose. Regenerate it with the extractor; do not commit it.
+data/mcg_assets.json

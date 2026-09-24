@@ -391,8 +391,9 @@ async def lifespan(app: FastAPI):
     # Build both asset reports now, in the background, so the first person
     # to open a dashboard is not the one who pays for it. Each takes about
     # eight seconds against a full archive and neither blocks startup: the
-    # page falls back to its committed file until the warm lands, and a
-    # failure here is logged rather than fatal.
+    # page falls back to its committed file where one exists (Market
+    # Bubble's) until the warm lands, and a failure here is logged
+    # rather than fatal.
     for _slot, _store, _file in (
             ("_assets_cache", app.state.assets, _ROOT / "data" / "assets.json"),
             ("_mcg_assets_cache", app.state.mcg_assets,
