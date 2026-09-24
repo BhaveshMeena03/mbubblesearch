@@ -12,6 +12,8 @@ company (Anthropic) and a platform (Polymarket) as tradeable assets.
 
 from __future__ import annotations
 
+import re
+
 # Canonical symbols. Several entries merge on NAME rather than symbol, which
 # is far more reliable when the caption garbled the ticker itself.
 ALIASES = {
@@ -47,7 +49,26 @@ NAMES = {
     "ANSEM": "Ansem (The Black Bull)", "PENGU": "Pudgy Penguins",
     "TON": "Toncoin", "SPX": "S&P 500", "HYPE": "Hyperliquid",
     "PUMP": "Pump.fun", "SOL": "Solana", "BTC": "Bitcoin", "ETH": "Ethereum",
+    # The extractor expanded this one itself and got it embarrassingly
+    # wrong -- it published "ICM (or Intercourse Markets)" on the eleventh
+    # most discussed row in the archive. It is Internet Capital Markets,
+    # which MCG says in its own episode titles ("ICM.Run: Internet Capital
+    # Markets") and its guests say out loud: "internet capital market is
+    # the way for anyone with an internet connection to..."
+    "ICM": "Internet Capital Markets",
 }
+
+# A name the model was unsure of, written as a guess with its alternative
+# in brackets: "Rude AI (or Rude Edge)", "io (or IO token)". The hedge is
+# not a name and should never reach a row -- publishing it states in public
+# that we do not know what the thing is called. The confident half is kept,
+# which is what the model would have written had it not hedged.
+_HEDGE = re.compile(r"\s*\((?:or|aka|a\.k\.a\.?)\s+[^)]*\)\s*$", re.I)
+
+
+def clean_name(name: str) -> str:
+    """The name without the model's second guess attached."""
+    return _HEDGE.sub("", (name or "").strip()).strip()
 
 BLOCK_SYMBOLS = {
     "N/A", "NA", "UNKNOWN", "NONE", "NFT", "NFTS", "PUNK", "",
@@ -116,7 +137,7 @@ def aggregate(hits: list[dict], min_confidence: str = "medium") -> dict:
     for h in kept:
         a = assets.setdefault(h["symbol"], {
             "symbol": h["symbol"],
-            "name": NAMES.get(h["symbol"], h.get("name", "")),
+            "name": NAMES.get(h["symbol"], clean_name(h.get("name", ""))),
             "asset_class": h.get("asset_class", "other"),
             "mentions": 0, "analysis": 0, "episodes": set(), "moments": [],
         })
@@ -124,7 +145,7 @@ def aggregate(hits: list[dict], min_confidence: str = "medium") -> dict:
         if h.get("kind") == "analysis":
             a["analysis"] += 1
         if not a["name"] and h.get("name"):
-            a["name"] = h["name"]
+            a["name"] = clean_name(h["name"])
         a["episodes"].add(h.get("episode_id", ""))
         a["moments"].append({
             "episode_id": h.get("episode_id", ""),

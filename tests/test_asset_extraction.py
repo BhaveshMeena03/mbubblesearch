@@ -147,3 +147,42 @@ class TestFormatting:
         assert _deep_link("https://youtu.be/x", 61) == "https://youtu.be/x?t=61s"
         assert _deep_link("https://y/w?v=1", 5) == "https://y/w?v=1&t=5s"
         assert _deep_link("", 5) == ""
+
+
+# --- names the extractor was not sure of ----------------------------------
+#
+# A model that cannot place a ticker writes its uncertainty into the name
+# field: "ICM (or Intercourse Markets)". That shipped, on the eleventh most
+# discussed row in the MCG archive, 97 segments of analysis behind it. The
+# hedge is not a name -- publishing it announces that we do not know what
+# the thing is called, on a page whose whole claim is knowing.
+
+from app.assets import NAMES, clean_name
+
+
+def test_a_hedged_name_loses_the_hedge():
+    assert clean_name("Rude AI (or Rude Edge)") == "Rude AI"
+    assert clean_name("io (or IO token)") == "io"
+    assert clean_name("Liinal (or Lil)") == "Liinal"
+
+
+def test_a_real_parenthetical_is_not_a_hedge():
+    """Only an explicit alternative is stripped, not every bracket."""
+    assert clean_name("Ansem (The Black Bull)") == "Ansem (The Black Bull)"
+    assert clean_name("Pump.fun") == "Pump.fun"
+    assert clean_name("") == ""
+
+
+def test_icm_is_internet_capital_markets():
+    """MCG's own titles say so, and its guests say it out loud."""
+    assert NAMES["ICM"] == "Internet Capital Markets"
+
+
+def test_the_published_row_uses_the_corrected_name():
+    hits = [{"symbol": "ICM", "name": "ICM (or Intercourse Markets)",
+             "asset_class": "crypto", "kind": "analysis", "confidence": "high",
+             "episode_id": "v1", "episode_title": "t", "start_seconds": 10,
+             "note": "n", "url": "u"}]
+    row = aggregate(hits)["assets"][0]
+    assert row["name"] == "Internet Capital Markets"
+    assert "Intercourse" not in row["name"]
