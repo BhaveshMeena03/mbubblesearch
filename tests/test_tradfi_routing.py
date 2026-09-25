@@ -40,8 +40,8 @@ class TestTheFinanceArchiveAnswersItsOwn:
         assert corpus_for(question) == "tradfi"
 
     @pytest.mark.parametrize("question", [
-        "what does dalio think about the debt cycle",
-        "schwarzman on private credit",
+        "what does jamie dimon think about the debt cycle",
+        "what did buffett say about private credit",
     ])
     def test_an_unindexed_subject_falls_back_to_the_broadcast(self, question):
         """Routable only once there is something of theirs to answer from.
