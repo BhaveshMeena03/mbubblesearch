@@ -51,3 +51,7 @@ audio
 # dashboard is served from Pinecone, and .dockerignore keeps this out of
 # the image on purpose. Regenerate it with the extractor; do not commit it.
 data/mcg_assets.json
+# 6,219 of Ansem's posts, fetched once and expensive to refetch. Kept out
+# of the repo for the same reason as mcg_assets.json: it is fetched data,
+# not source, and it is somebody else's timeline.
+data/ansem_posts.json
