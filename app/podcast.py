@@ -53,6 +53,13 @@ logger = logging.getLogger(__name__)
 _HOSTS_IN_QUESTION = (
     ("Ansem", re.compile(r"(?i)\bansem\b")),
     ("FaZe Banks", re.compile(r"(?i)\b(?:faze\s+)?banks\b")),
+    # Not a host. A guest normally cannot be filtered on, because nobody
+    # labelled his lines -- but rasmr was on an episode with only two
+    # people in the room, which made his voice cluster unambiguous, and
+    # the name was confirmed by ear rather than guessed from the title.
+    # So his passages exist to filter, and a question about him should
+    # reach them instead of the whole episode.
+    ("rasmr", re.compile(r"(?i)\brasmr(?:_eth)?\b")),
 )
 
 
@@ -316,8 +323,9 @@ is. Never present a stale take as current.
 4. Summarize faithfully. Do not put words in the hosts' mouths or invent \
 quotes — paraphrase what the excerpt actually says.
 5. Name a speaker only when the excerpt makes it unambiguous. These are \
-auto-generated captions with NO speaker labels: an episode whose title lists \
-four guests gives you no way to tell which of them is talking, and a \
+auto-generated captions and MOST lines carry no speaker label: an episode \
+whose title lists four guests gives you no way to tell which of them is \
+talking, and a \
 confident guess puts a real quote under the wrong person's name. That \
 happened: "Austin Federa said they get flamed for claiming 1.5 million \
 users" — it was FOMO's own co-founder, and Federa is from a different \
@@ -330,6 +338,10 @@ when the excerpt says the name, or someone is addressed by it.
 FaZe Banks: I put close to seven figures in Hyperliquid". That prefix is \
 the strongest thing that establishes who spoke, and outranks everything \
 below. Attribute a line to the name in front of it and to nobody else. \
+The prefix is authoritative whoever it names: the hosts carry one most \
+often, but a guest whose voice has been identified is labelled the same \
+way, so a name you do not recognise in a prefix is still that line's \
+speaker and must be used rather than softened to "a guest". \
 A line with no prefix falls through to the `voices` attribute in rule \
 5g, and only when that cannot settle it is the speaker unknown — then \
 describe it as "one of the hosts" or "a guest", never as the person the \
@@ -344,6 +356,17 @@ about Solana, the \
 excerpts came back containing both hosts and a line prefixed "Ansem:" \
 was reported as Banks saying it, because the question had named Banks. \
 The prefix outranks the question every time.
+
+5b-ii. When the question asks what ONE person said, build the answer from \
+the lines carrying THAT person's prefix. A retrieved passage is a stretch \
+of conversation, so it contains the people they were talking to as well; a \
+line prefixed with a different name is somebody answering them, not more \
+of what they said. Either attribute it to the name it carries — "Ansem \
+replied that ..." — or leave it out. Folding a reply into the named \
+person's position is how "what does rasmr think about realized pnl" \
+reported Ansem's line, "your ability to actually keep the capital ... is \
+what actually matters", as rasmr's own view, when rasmr had only asked \
+the question that prompted it.
 
 5c. A name INSIDE a line is a person being talked about, not the person \
 talking. "FaZe Banks: I'm gonna help continue to guide Z the best way I \
