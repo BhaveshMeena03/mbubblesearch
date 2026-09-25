@@ -38,7 +38,7 @@ from app.assets import (  # noqa: E402,F401
     timestamp,
 )
 from app.assets_store import AssetStore  # noqa: E402
-from app.config import get_settings  # noqa: E402
+from app.config import anthropic_client_kwargs, get_settings  # noqa: E402
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 logger = logging.getLogger("extract")
@@ -210,10 +210,16 @@ async def _extract_window(
                 return []
             except Exception as exc:  # noqa: BLE001
                 if attempt == 3:
-                    logger.warning("  window failed after retries: %s", exc)
-                    return []
+                    # Raise rather than return []. An empty list here is
+                    # indistinguishable from "this window discussed no
+                    # assets", and extract_episode writes that straight to
+                    # the cache -- so a run that lost its credentials would
+                    # record every episode as silent, permanently, and the
+                    # next run would trust the cache and skip them.
+                    raise RuntimeError(
+                        f"window failed after 4 attempts: {exc}") from exc
                 await asyncio.sleep(2 * (attempt + 1))
-        return []
+        raise RuntimeError("window exhausted its retries")
 
 
 async def extract_episode(
@@ -260,6 +266,9 @@ async def main() -> None:
                     help="only process the first N episodes (pilot)")
     ap.add_argument("--all", action="store_true", help="process every episode")
     ap.add_argument("--force", action="store_true", help="ignore the cache")
+    ap.add_argument("--allow-shrink", action="store_true",
+                    help="permit a report that covers fewer episodes than "
+                         "the one already on disk")
     ap.add_argument("--min-confidence", default="medium",
                     choices=["low", "medium", "high"])
     ap.add_argument("--store", action="store_true",
@@ -272,7 +281,10 @@ async def main() -> None:
 
     settings = get_settings()
     model = os.environ.get("EXTRACT_MODEL", "claude-haiku-4-5")
-    client = AsyncAnthropic(api_key=settings.anthropic_api_key)
+    # Through the proxy, like everything else that spends money on a
+    # model. Built bare, this went straight to api.anthropic.com on a
+    # key that only the proxy accepts, and every window 401'd.
+    client = AsyncAnthropic(**anthropic_client_kwargs(settings))
 
     episodes = json.loads(EPISODES.read_text())
     if not args.all:
@@ -298,6 +310,22 @@ async def main() -> None:
 
     report = aggregate(all_hits, args.min_confidence)
     report["episodes_processed"] = len(episodes)
+
+    # The report is rebuilt from scratch each run, so a partial run does not
+    # add to the index -- it replaces it. One `--episodes 15` run cut a
+    # 21-show index down to 10, and the loss only surfaced when a token the
+    # hosts had discussed on air could not be found on the dashboard.
+    def _covered(rep: dict) -> set[str]:
+        return {m["episode_id"] for a in rep.get("assets", [])
+                for m in a.get("moments", [])}
+
+    if OUT.exists() and not args.allow_shrink:
+        lost = _covered(json.loads(OUT.read_text())) - _covered(report)
+        if lost:
+            raise SystemExit(
+                f"refusing to write {OUT.name}: it would drop {len(lost)} "
+                f"episode(s) already indexed, e.g. {sorted(lost)[:3]}. "
+                "Re-run with --all, or pass --allow-shrink to overwrite.")
     OUT.write_text(json.dumps(report, indent=2))
 
     logger.info("\n%-8s %-22s %8s %9s %8s", "SYMBOL", "NAME", "ANALYSIS",
