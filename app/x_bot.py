@@ -3407,12 +3407,24 @@ def _tradfi_subjects() -> set[str]:
 
 _TRADFI_NAMES = _tradfi_subjects()
 
-_OF_THE_TRADFI_ARCHIVE = re.compile(
-    r"(?i)\b(blackrock|black\s*rock|ibit|milken|davos)\b"
-    + ("|" + "|".join(
-        r"\b" + re.escape(n) + r"\b" for n in sorted(_TRADFI_NAMES,
-                                                      key=len, reverse=True))
-       if _TRADFI_NAMES else ""))
+# A named person is a stronger signal than a venue, and the two are
+# matched at different points for a reason.
+#
+# Saylor's longest interview is a Lex Fridman episode, and "what did
+# saylor say on lex fridman" matched the Musk pattern on the venue and
+# went to an archive Saylor is not in. Checking the whole finance pattern
+# first would have fixed that and broken the reverse: Musk has been to
+# Davos, so "what did elon say at davos" would have left his own archive.
+#
+# So the person goes ahead of the Musk archive and the venue stays behind
+# it. Naming somebody beats naming a room they were both in.
+_TRADFI_PERSON = re.compile(
+    "(?i)" + "|".join(r"\b" + re.escape(n) + r"\b"
+                      for n in sorted(_TRADFI_NAMES, key=len, reverse=True))
+) if _TRADFI_NAMES else None
+
+_TRADFI_VENUE = re.compile(
+    r"(?i)\b(blackrock|black\s*rock|ibit|milken|davos)\b")
 
 
 def corpus_for(question: str) -> str:
@@ -3434,11 +3446,13 @@ def corpus_for(question: str) -> str:
     text = _OWN_HANDLE.sub(" ", question or "")
     if _OF_THE_SHOW.search(text):
         return "podcast"
+    if _TRADFI_PERSON is not None and _TRADFI_PERSON.search(text):
+        return "tradfi"
     if _OF_THE_MUSK_ARCHIVE.search(text):
         return "elon"
     if _OF_THE_MCG_ARCHIVE.search(text):
         return "mcg"
-    if _OF_THE_TRADFI_ARCHIVE.search(text):
+    if _TRADFI_VENUE.search(text):
         return "tradfi"
     return "podcast"
 

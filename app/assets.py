@@ -22,6 +22,19 @@ ALIASES = {
     "ethereum": "ETH", "eth": "ETH", "ether": "ETH",
     "hyperliquid": "HYPE", "hype": "HYPE",
     "bonk": "BONK", "bunk": "BONK",
+    # Whisper hears Dregg as "drag". Confirmed twice over: the MCG guest
+    # index caught the host saying "let's pull up Ember and talk a little
+    # bit about drag", and MCG's own post about that segment names
+    # @ember_arlynx and $DREGG. Safe as a global alias because no other
+    # archive has an asset called drag; an ordinary use of the word never
+    # reaches here, since these only fire on something the model already
+    # classified as an asset.
+    #
+    # Deliberately NOT aliasing "gto". It is Jito on the broadcast and
+    # Jatevo on MCG, two different projects behind the same mangling, and
+    # one table cannot serve both. The broadcast's copy was fixed in the
+    # transcripts instead.
+    "drag": "DREGG", "dregg": "DREGG",
     "dogecoin": "DOGE", "doge": "DOGE",
     "ansem": "ANSEM", "anom": "ANSEM", "anthem": "ANSEM",
     "pudgy": "PENGU", "penguins": "PENGU", "pudgy penguins": "PENGU",
