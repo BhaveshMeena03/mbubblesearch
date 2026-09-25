@@ -127,6 +127,14 @@ class Settings(BaseSettings):
     # 444 hours to move them somewhere tidier.
     mcg_pinecone_index: str = "mcg-search"
     mcg_namespace: str = "mcg"
+    # Long-form finance interviews -- Fink, Dalio, Schwarzman, the Davos
+    # and Milken panels. A namespace inside the main index, the way the
+    # Musk archive is, rather than an index of its own like MCG: the
+    # separation that matters here is the routing, because nothing in a
+    # BlackRock panel is ever going to be mistaken for Market Bubble by
+    # an embedding. A typo would point it at an empty namespace and the
+    # bot would fall back to the broadcast, which is the safe direction.
+    tradfi_namespace: str = "tradfi"
     # Hard ceiling on a single Pinecone write. The SDK's HTTP client has no
     # read timeout, so a half-open socket (seen once: a write hung 2.5h with
     # the connection ESTABLISHED but dead) blocks forever. Bounding the write

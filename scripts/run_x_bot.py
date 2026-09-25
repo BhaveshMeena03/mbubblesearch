@@ -112,6 +112,8 @@ def build(dry_run: bool, cap: int | None, links: bool | None):
         mcg_index=_second_archive(
             "MCG", namespace=settings.mcg_namespace,
             index_name=settings.mcg_pinecone_index),
+        tradfi_index=_second_archive(
+            "finance", namespace=settings.tradfi_namespace),
         daily_reply_cap=cap if cap is not None else settings.x_bot_daily_reply_cap,
         include_links=(links if links is not None
                        else settings.x_bot_include_links),

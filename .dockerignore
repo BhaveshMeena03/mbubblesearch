@@ -19,6 +19,9 @@ data/
 # Gzipped because the raw file is 7.6MB and every ingest rewrites it.
 !data/episodes.json.gz
 !data/elon_episodes.json.gz
+# The finance archive, same treatment as the Musk one: the server
+# reads this shelf to decide the archive exists at all.
+!data/tradfi_episodes.json.gz
 !data/mcg_index.json
 !data/mcg_summaries.json.gz
 # Which broadcast player each X episode's citations should point at. Read

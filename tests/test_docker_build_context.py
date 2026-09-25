@@ -144,6 +144,7 @@ _NOT_SHIPPED = {
     "mcg_assets.json": "fallback only; the live asset store is read first",
     "episodes.json": "shipped gzipped as episodes.json.gz",
     "elon_episodes.json": "shipped gzipped as elon_episodes.json.gz",
+    "tradfi_episodes.json": "shipped gzipped as tradfi_episodes.json.gz",
 }
 
 

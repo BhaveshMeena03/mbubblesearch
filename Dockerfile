@@ -62,6 +62,11 @@ COPY data/episodes.json.gz ./data/episodes.json.gz
 # The Musk archive, same treatment. Without this line the /v1/elon
 # routes deploy complete and answer from nothing.
 COPY data/elon_episodes.json.gz ./data/elon_episodes.json.gz
+# The finance archive. Without this the tradfi namespace is wired,
+# the routing points at it, and _tradfi_episodes() returns [] — so
+# the index is never built and every finance question quietly falls
+# back to the broadcast. Third time this line has been the bug.
+COPY data/tradfi_episodes.json.gz ./data/tradfi_episodes.json.gz
 # The MCG listing. 97KB, not the 31MB of transcripts: the passages
 # come back from Pinecone with their text, and only the shelf is
 # served from disk. Forgetting this line is what made /v1/mcg/archive
