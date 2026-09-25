@@ -7198,5 +7198,84 @@
   "title": "Vibhu on Solana's ICM Revolution, $300M Drip Collectibles & The Future of Web3 | MCG Show",
   "url": "https://www.youtube.com/watch?v=c8_sczVlVro",
   "guests": []
+ },
+ "gQU9V7n-cRM": {
+  "title": "\ud83d\udd34 LIVE: BTC cools while Alts show strength | RHC recovery? | Market update + Interviews",
+  "url": "https://www.youtube.com/watch?v=gQU9V7n-cRM",
+  "guests": [
+   {
+    "at_seconds": 3695,
+    "evidence": "let's pull up Ember and, uh, and talk a little bit about drag Ember. Welcome to MCG. Welcome back to MCG.",
+    "name": "Ember",
+    "project": "Drag",
+    "role": "Co-founder"
+   }
+  ]
+ },
+ "bckrJLRN_l0": {
+  "title": "\ud83d\udd34 LIVE: Crypto Pulling Back...Buy the Dip? | Market Update + Interviews",
+  "url": "https://www.youtube.com/watch?v=bckrJLRN_l0",
+  "guests": [
+   {
+    "at_seconds": 1077,
+    "evidence": "Let's pull up Potato to talk about Argus and all things going on over there. Mr. Potato, welcome to the show.",
+    "name": "Potato",
+    "project": "Argus",
+    "role": "Argus representative"
+   },
+   {
+    "at_seconds": 2856,
+    "evidence": "James, welcome to the show. We're excited to talk.",
+    "name": "James",
+    "project": "TrendsApp",
+    "role": ""
+   },
+   {
+    "at_seconds": 5381,
+    "evidence": "So, we have the pleasure of getting Ranga up today from Solomon Labs. Ranga, welcome back to MCG.",
+    "name": "Ranga",
+    "project": "Solomon Labs",
+    "role": ""
+   }
+  ]
+ },
+ "RbFy5eDmm5g": {
+  "title": "Discussing $PYTH's recent achievements on-stream | NASDAQ Deal",
+  "url": "https://www.youtube.com/watch?v=RbFy5eDmm5g",
+  "guests": []
+ },
+ "gTl0GwRHeAU": {
+  "title": "\ud83d\udd34 LIVE: Bears Are Cooked | $600M BTC Shorts Liquidated | Market Update + Interviews",
+  "url": "https://www.youtube.com/watch?v=gTl0GwRHeAU",
+  "guests": [
+   {
+    "at_seconds": 1274,
+    "evidence": "I got Billy from dual mint coming up to talk to us about robotics and financing robots and all that good stuff here. Bill, welcome to MTG.",
+    "name": "Bill",
+    "project": "Dual Mint",
+    "role": ""
+   },
+   {
+    "at_seconds": 4274,
+    "evidence": "Akhil welcome. And, uh, we'll, we'll chat with you.",
+    "name": "Akhil",
+    "project": "Listed",
+    "role": ""
+   },
+   {
+    "at_seconds": 6700,
+    "evidence": "Good on you, Michael. That was a great appearance on MCG.",
+    "name": "Michael",
+    "project": "PIF",
+    "role": ""
+   },
+   {
+    "at_seconds": 6761,
+    "evidence": "Lucas, man. Welcome back to the show.",
+    "name": "Lucas",
+    "project": "Street",
+    "role": ""
+   }
+  ]
  }
 }
