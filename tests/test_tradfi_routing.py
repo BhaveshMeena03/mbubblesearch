@@ -16,7 +16,7 @@ from pathlib import Path
 
 import pytest
 
-from app.x_bot import _OF_THE_TRADFI_ARCHIVE, corpus_for
+from app.x_bot import _TRADFI_PERSON, _TRADFI_VENUE, corpus_for
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -93,7 +93,8 @@ class TestTheBroadcastKeepsItsOwn:
         avoid.
         """
         assert corpus_for(question) == "podcast"
-        assert not _OF_THE_TRADFI_ARCHIVE.search(question)
+        assert not _TRADFI_VENUE.search(question)
+        assert _TRADFI_PERSON is None or not _TRADFI_PERSON.search(question)
 
 
 class TestTheOtherArchivesAreUntouched:
@@ -121,7 +122,9 @@ class TestTheOtherArchivesAreUntouched:
             if ":" not in title or "LIVE" in title[:12].upper():
                 continue
             name = title.split(":", 1)[0].strip().strip("🔴 ").strip()
-            if name and _OF_THE_TRADFI_ARCHIVE.search(name):
+            if name and (_TRADFI_VENUE.search(name) or (
+                    _TRADFI_PERSON is not None
+                    and _TRADFI_PERSON.search(name))):
                 stolen.append(name)
         assert not stolen, f"finance pattern captures MCG projects: {stolen[:5]}"
 
@@ -218,3 +221,31 @@ class TestTheArchiveGrowsWithoutCodeChanges:
             dropped = (len(stolen) < 4 or stolen in _TOO_ORDINARY
                        or bool(_OF_THE_SHOW.search(stolen)))
             assert dropped, f"{stolen!r} would have been routed away"
+
+
+class TestAPersonBeatsAVenue:
+    """Saylor's longest interview is a Lex Fridman episode.
+
+    "what did saylor say on lex fridman" matched the Musk pattern on the
+    venue and went to an archive he is not in. Moving the whole finance
+    pattern ahead of Musk would have broken the reverse, because Musk has
+    been to Davos.
+    """
+
+    def test_a_finance_person_wins_over_a_musk_venue(self):
+        from app.x_bot import _TRADFI_NAMES
+        if "saylor" not in _TRADFI_NAMES:
+            pytest.skip("saylor not indexed")
+        assert corpus_for("what did saylor say on lex fridman") == "tradfi"
+        assert corpus_for("saylor on the joe rogan podcast") == "tradfi"
+
+    def test_musk_still_wins_a_venue_they_both_attended(self):
+        assert corpus_for("what did elon say at davos") == "elon"
+        assert corpus_for("musk on blackrock") == "elon"
+
+    def test_a_venue_alone_still_reaches_the_finance_archive(self):
+        assert corpus_for("what was said at davos about tokenisation") == "tradfi"
+
+    def test_the_broadcast_still_wins_everything(self):
+        assert corpus_for("what did ansem say about davos") == "podcast"
+        assert corpus_for("did banks mention saylor on the show") == "podcast"
