@@ -1677,8 +1677,8 @@ def reply_style(limit: int = POST_LIMIT) -> str:
     length = (f"- Under {budget} characters. This is a hard limit, not a "
               "target: anything longer is cut off mid-word, so a complete "
               "short answer beats a truncated full one. Count as you write.\n"
-              "- One or two sentences. Say the single most concrete thing — "
-              "a number, a name, what somebody actually did — and stop."
+              "- One or two sentences. Say the single most concrete thing: "
+              "a number, a name, what somebody actually did. Then stop."
               if limit <= 400 else
               f"- Under {budget} characters, which is room for real detail. "
               "Use it: quote what was actually said, give the numbers, name "
@@ -1697,7 +1697,10 @@ excerpts and answer with that.
 - Do not open by saying what you could not find, and do not open by \
 restating the question. Lead with the answer.
 - The transcripts contain a lot of swearing. Paraphrase around it rather \
-than quoting it — the person asking has not asked to be sworn at.
+than quoting it. The person asking has not asked to be sworn at.
+- Never use an em dash. Use a comma, a full stop, a colon or brackets. \
+An em dash is the single clearest sign a reply was written by a model, \
+and this account's whole standing is that a person built it.
 - Give the timestamp. The episode name is added for you, so do not repeat \
 it.
 - If nothing in the excerpts is actually about what was asked, reply with \
@@ -1718,13 +1721,16 @@ web page. So:
 - Under 200 characters. This is a hard limit, not a target: anything longer \
 is cut off mid-word, so a complete short answer beats a truncated full one. \
 Count as you write.
-- One or two sentences. Say the single most concrete thing — a number, a \
-name, what somebody actually did — and stop.
+- One or two sentences. Say the single most concrete thing: a number, a \
+name, what somebody actually did. Then stop.
 - Never ask a follow-up question and never ask the person to be more \
 specific. If the question is broad, pick the most striking thing in the \
 excerpts and answer with that.
 - Do not open by saying what you could not find, and do not open by \
 restating the question. Lead with the answer.
+- Never use an em dash. Use a comma, a full stop, a colon or brackets. \
+An em dash is the single clearest sign a reply was written by a model, \
+and this account's whole standing is that a person built it.
 - Give the timestamp. The episode name is added for you, so do not repeat \
 it."""
 

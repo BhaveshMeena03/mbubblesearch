@@ -39,12 +39,13 @@ class TestTheFinanceArchiveAnswersItsOwn:
     def test_an_indexed_subject_reaches_it(self, question):
         assert corpus_for(question) == "tradfi"
 
-    @pytest.mark.parametrize("question", [
-        "what does jamie dimon think about the debt cycle",
-        "what did buffett say about private credit",
-    ])
-    def test_an_unindexed_subject_falls_back_to_the_broadcast(self, question):
+    def test_an_unindexed_subject_falls_back_to_the_broadcast(self):
         """Routable only once there is something of theirs to answer from.
+
+        The name is chosen against the live shelf rather than written in.
+        Twice now this test has failed because somebody it called
+        unindexed got indexed an hour later, which is the design working
+        and the test asserting yesterday's archive.
 
         Naming somebody in a pattern before their recordings are indexed
         sends the question to an archive that has never heard of them,
@@ -52,7 +53,17 @@ class TestTheFinanceArchiveAnswersItsOwn:
         Falling back to the broadcast is the safe direction, and it is
         what the MCG split does too: the show wins ties.
         """
-        assert corpus_for(question) == "podcast"
+        from app.x_bot import _TRADFI_NAMES
+        candidate = next(
+            (n for n in ("warren buffett", "christine lagarde", "jerome powell",
+                         "abigail johnson", "david solomon")
+             if n not in _TRADFI_NAMES
+             and n.split()[-1] not in _TRADFI_NAMES),
+            None)
+        if candidate is None:
+            pytest.skip("every stand-in name is now indexed")
+        assert corpus_for(f"what did {candidate} say about private credit") == (
+            "podcast")
 
 
 class TestTheBroadcastKeepsItsOwn:
