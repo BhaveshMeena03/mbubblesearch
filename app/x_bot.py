@@ -136,6 +136,42 @@ _CITES_A_TIME = re.compile(
 _WHITESPACE = re.compile(r"\s+")
 
 
+# A host asking about his own lines. "i" is a stopword -- it has to be,
+# or every question retrieves on it -- so "what did i say about IMD" went
+# to the index as "say about IMD" and came back with whoever discussed the
+# token. Ansem asked about his own show and was told the excerpts did not
+# contain him speaking.
+#
+# Narrow on purpose. Rewriting every "i" would turn "can i ask" into "can
+# Ansem ask", so the pronoun is only substituted when the question is
+# actually about something the asker said.
+_ASKS_ABOUT_SELF = re.compile(
+    r"\bdid\s+i\b"
+    r"|\bi\s+(?:say|said|says|think|thought|call|called|mention|mentioned"
+    r"|predict|predicted|tell|told)\b"
+    r"|\bmy\s+(?:take|takes|call|calls|thesis|view|views|opinion|point"
+    r"|prediction|predictions|words)\b",
+    re.I)
+_SELF = re.compile(r"\b(i|me|my|mine|myself)\b", re.I)
+
+
+def as_speaker(question: str, speaker: str | None) -> str:
+    """"what did i say about IMD" -> "what did Ansem say about IMD".
+
+    Returns the question untouched for anyone the archive does not know,
+    which is almost everyone: a stranger's "i" refers to a person with no
+    lines in it, and substituting a name there would invent a speaker.
+    """
+    if not (speaker and question and _ASKS_ABOUT_SELF.search(question)):
+        return question
+
+    def one(match: re.Match) -> str:
+        word = match.group(1).lower()
+        return f"{speaker}'s" if word in ("my", "mine") else speaker
+
+    return _SELF.sub(one, question)
+
+
 def question_from(text: str, handle: str = "mbubbleSearch") -> str:
     """The question inside a post that tagged the bot.
 
@@ -3376,6 +3412,7 @@ class MentionBot:
                  highlights: list | None = None,
                  questions: object | None = None,
                  priority_authors: set | None = None,
+                 speaker_ids: dict | None = None,
                  site: str | None = None,
                  token_label: str | None = None,
                  elon_index=None,
@@ -3433,6 +3470,9 @@ class MentionBot:
         # audience. A stranger getting no reply costs nothing. One of
         # them getting no reply is the only failure here that does.
         self._priority = set(priority_authors or ())
+        # author id -> the name that speaker carries in the
+        # archive, so a host can ask what he himself said.
+        self._speaker_ids = dict(speaker_ids or {})
         # Set by compose, committed by _answer once a reply is posted.
         self._cited_episode: str | None = None
         self._site = site
@@ -3933,6 +3973,11 @@ class MentionBot:
         # ROOT POST is a question, which it usually is not -- a clip caption
         # is a statement, so a real question under it went unanswered.
         asked = question
+        # Before retrieval, and only on `question`: `asked` has to stay the
+        # words the person typed, because the guards below ask whether a
+        # question was asked, not what it retrieves on.
+        question = as_speaker(
+            question, self._speaker_ids.get(getattr(mention, "author_id", "")))
         # A bare tag with nothing attached gets nothing back. Anything else
         # falls through: the length check exists to keep retrieval from
         # running on nothing, not to decide who deserves a reply, and it was

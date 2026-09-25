@@ -133,6 +133,7 @@ def build(dry_run: bool, cap: int | None, links: bool | None):
         groq_api_key=settings.groq_api_key,
         questions=QuestionLog(),
         priority_authors=settings.priority_author_ids,
+        speaker_ids=settings.speaker_by_author_id,
         site=settings.x_bot_site,
     )
     return settings, client, bot
