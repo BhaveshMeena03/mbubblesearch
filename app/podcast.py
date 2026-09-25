@@ -357,6 +357,13 @@ excerpts came back containing both hosts and a line prefixed "Ansem:" \
 was reported as Banks saying it, because the question had named Banks. \
 The prefix outranks the question every time.
 
+5b-i. When a question names one person, their lines arrive inside \
+<said-by name="..."> and everyone else's inside <context>. Only the \
+<said-by> lines are that person's words. <context> is who they were \
+talking to: quote it if you attribute it to the name on its own line, \
+and never as the person the question asked about. If an excerpt has only \
+<context>, that passage contains nothing they said.
+
 5b-ii. When the question asks what ONE person said, build the answer from \
 the lines carrying THAT person's prefix. A retrieved passage is a stretch \
 of conversation, so it contains the people they were talking to as well; a \
@@ -470,6 +477,77 @@ def source_label(title: str, aired: str | None) -> str:
     else:
         show = name[:40]
     return f"{year} {show}".strip()
+
+
+# "[3:46:08] Ansem: it's essentially..." -- a stamped line that carries a
+# speaker. The name is bounded because a colon inside ordinary speech
+# ("the thing is: nobody knows") must not read as an attribution.
+_ATTRIBUTED = re.compile(r"^\[[^\]]{1,40}\]\s*([A-Za-z][\w .'-]{0,30}?):\s")
+
+
+def speaker_asked_about(query: str, hits: list) -> str | None:
+    """The one labelled speaker this question is about, or None.
+
+    Drawn from the hits rather than a list of names, so it works for
+    anyone the archive has labelled without this file knowing who they
+    are. None when the question names nobody, or names more than one:
+    "what did ansem and banks disagree about" wants the conversation.
+    """
+    names: set[str] = set()
+    for hit in hits:
+        for name in getattr(hit, "speakers", None) or ():
+            if name:
+                names.add(name)
+    found = [n for n in names
+             if re.search(rf"\b{re.escape(n)}\b", query or "", re.I)]
+    return found[0] if len(found) == 1 else None
+
+
+def _split_by_speaker(text: str, speaker: str) -> tuple[list[str], list[str]]:
+    """(their lines, everything else) from a stamped passage.
+
+    A line with no prefix is context, not theirs. That is the whole point:
+    an unlabelled line is a line nobody identified, and handing it over as
+    though the named person said it is the error this exists to stop.
+    """
+    theirs: list[str] = []
+    rest: list[str] = []
+    wanted = speaker.strip().lower()
+    for line in text.splitlines():
+        found = _ATTRIBUTED.match(line)
+        (theirs if found and found.group(1).strip().lower() == wanted
+         else rest).append(line)
+    return theirs, rest
+
+
+def _sectioned(hit: PodcastHit, with_source: bool,
+               about: str | None) -> str:
+    """The passage body, split by speaker when the question named one.
+
+    Telling the model a name prefix outranks the question did not hold. A
+    retrieved passage is a stretch of conversation, so when rasmr asks
+    something and Ansem answers it, the passage that best matches "what
+    does rasmr think about realized pnl" is the one where Ansem gives the
+    answer -- and the reply reported Ansem's line as rasmr's view. Two
+    prompt rules failed to stop it.
+
+    So the split is structural rather than instructed. Their lines and
+    everybody else's arrive in different elements, and merging them means
+    ignoring the markup instead of ignoring a sentence.
+    """
+    text = _body(hit, with_source)
+    if not about:
+        return escape(text)
+    theirs, rest = _split_by_speaker(text, about)
+    if not theirs:
+        # Nothing here is theirs. Handing the passage over unmarked is how
+        # the question's name gets attached to whoever did speak.
+        return ("<context>\n" + escape("\n".join(rest)) + "\n</context>")
+    out = (f"<said-by name={quoteattr(about)}>\n"
+           + escape("\n".join(theirs)) + "\n</said-by>")
+    if rest:
+        out += ("\n<context>\n" + escape("\n".join(rest)) + "\n</context>")
+    return out
 
 
 def _body(hit: PodcastHit, with_source: bool) -> str:
@@ -1206,7 +1284,8 @@ class PodcastIndex:
 
     @staticmethod
     def _format(hits: list[PodcastHit], *,
-                stamp_lines_with_source: bool = False) -> str:
+                stamp_lines_with_source: bool = False,
+                about: str | None = None) -> str:
         if not hits:
             return "<excerpts>\n(nothing indexed matched this query)\n</excerpts>"
         # Chronological, so a topic reads in the order it was discussed.
@@ -1237,7 +1316,7 @@ class PodcastIndex:
             # Prefer the per-line timestamped copy so the model can cite the
             # line it used. Falls back to the plain text for anything
             # indexed before that field existed.
-            + f">\n{escape(_body(h, stamp_lines_with_source))}\n</excerpt>"
+            + f">\n{_sectioned(h, stamp_lines_with_source, about)}\n</excerpt>"
             for h in hits
         ]
         return "<excerpts>\n" + "\n\n".join(blocks) + "\n</excerpts>"
@@ -1277,7 +1356,9 @@ class PodcastIndex:
                         # there. Stamping every line only taught the model
                         # to echo "[2021 Lex Fridman #252 · 28:08]" into
                         # the reply itself.
-                        {"type": "text", "text": self._format(hits)},
+                        {"type": "text",
+                         "text": self._format(
+                             hits, about=speaker_asked_about(query, hits))},
                         {"type": "text", "text": query,
                          "cache_control": {"type": "ephemeral"}},
                         # Per-surface style, added to the user turn rather
