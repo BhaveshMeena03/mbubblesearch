@@ -4,6 +4,8 @@ It reports what was said and cites it. It must never invent a market, never
 500 when the market lookup fails, and never accept a ticker it cannot vouch
 for — a swap link on a public page is the thing that has to be right.
 """
+import re
+
 import pytest
 from fastapi.testclient import TestClient
 
@@ -71,8 +73,20 @@ class TestHappyPath:
         assert "not advice" in b["disclaimer"].lower()
 
     def test_every_moment_carries_a_citation(self, client):
+        """Either platform, because the archive holds both.
+
+        This asserted a youtube.com prefix, which was true only while the
+        report happened to cover YouTube uploads -- a partial run had cut
+        it to ten of twenty-one shows. Covering every show brought the X
+        broadcasts back in, and their citation is the status url with
+        plain seconds rather than "120s" (see assets.deep_link). What is
+        worth asserting is that a moment opens at its own second, not
+        which site is hosting it.
+        """
         for m in client.get("/v1/assets/SOL").json()["moments"]:
-            assert m.get("deep_link", "").startswith("https://www.youtube.com/")
+            link = m.get("deep_link", "")
+            assert re.match(r"https://(www\.youtube\.com|x\.com)/", link), link
+            assert re.search(r"[?&]t=\d+s?$", link), link
             assert "timestamp" in m
 
 
