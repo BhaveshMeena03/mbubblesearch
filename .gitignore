@@ -55,3 +55,6 @@ data/mcg_assets.json
 # of the repo for the same reason as mcg_assets.json: it is fetched data,
 # not source, and it is somebody else's timeline.
 data/ansem_posts.json
+# The finance transcripts. Raw like episodes.json and for the same
+# reason: rewritten on every ingest, shipped as the gzip beside it.
+data/tradfi_episodes.json

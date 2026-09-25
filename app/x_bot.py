@@ -3345,6 +3345,70 @@ _OF_THE_MCG_ARCHIVE = re.compile(
         if _MCG_NAMES else ""))
 
 
+# Things that are only in the finance archive.
+#
+# Every term here was counted against the Market Bubble transcripts
+# before it was allowed in, because the cost of getting this wrong is
+# answering a question about the show from a BlackRock panel:
+#
+#     blackrock     8 lines across  4 uploads
+#     larry fink    2 lines across  2 uploads
+#     dalio / schwarzman / milken / davos / ibit   0
+#     etf          29 lines across 17 uploads   <- excluded
+#
+# "etf" is the "tesla" of this archive. The hosts talk about ETFs
+# constantly, and routing on it would have taken questions away from
+# seventeen uploads. Nothing goes in this pattern that has not been
+# counted the same way first.
+#
+# "blackrock" is kept despite eight hits because _OF_THE_SHOW is matched
+# before this one: "what did ansem say about blackrock" names the host
+# and never reaches here.
+# The institutions and venues, which are fixed. The people are not: the
+# archive is meant to grow, and a page or a regex edit per person does
+# not scale. So the names are read off the shelf, exactly the way MCG
+# reads project names off its index -- a subject indexed tonight is
+# routable in the morning without touching this file.
+def _tradfi_subjects() -> set[str]:
+    path = Path(__file__).resolve().parent.parent / "data" / "tradfi_episodes.json"
+    try:
+        rows = json.loads(path.read_text())
+    except Exception:                                   # noqa: BLE001
+        return set()
+    rows = rows if isinstance(rows, list) else list(rows.values())
+    names: set[str] = set()
+    for row in rows:
+        subject = (row.get("subject") or "").strip().lower()
+        if not subject or subject == "unknown":
+            continue
+        candidates = {subject}
+        parts = subject.split()
+        if len(parts) > 1:
+            candidates.add(parts[-1])          # the surname people type
+        for name in candidates:
+            if len(name) < 4 or name in _TOO_ORDINARY:
+                continue
+            # The guard that matters. A subject whose name the broadcast
+            # or the Musk archive already says belongs to them, not here:
+            # index someone called Banks and "what did banks say" would
+            # stop being a question about the show. The show wins ties,
+            # which is the rule everywhere else in this file.
+            if _OF_THE_SHOW.search(name) or _OF_THE_MUSK_ARCHIVE.search(name):
+                continue
+            names.add(name)
+    return names
+
+
+_TRADFI_NAMES = _tradfi_subjects()
+
+_OF_THE_TRADFI_ARCHIVE = re.compile(
+    r"(?i)\b(blackrock|black\s*rock|ibit|milken|davos)\b"
+    + ("|" + "|".join(
+        r"\b" + re.escape(n) + r"\b" for n in sorted(_TRADFI_NAMES,
+                                                      key=len, reverse=True))
+       if _TRADFI_NAMES else ""))
+
+
 def corpus_for(question: str) -> str:
     """"podcast" or "elon" — which archive should answer this.
 
@@ -3368,6 +3432,8 @@ def corpus_for(question: str) -> str:
         return "elon"
     if _OF_THE_MCG_ARCHIVE.search(text):
         return "mcg"
+    if _OF_THE_TRADFI_ARCHIVE.search(text):
+        return "tradfi"
     return "podcast"
 
 
@@ -3420,6 +3486,7 @@ class MentionBot:
                  # page's. None means the index's own default.
                  search_model: str | None = None,
                  mcg_index=None,
+                 tradfi_index=None,
                  state_path: Path = STATE_PATH) -> None:
         self._client = client
         self._index = index
@@ -3432,6 +3499,10 @@ class MentionBot:
         # same reason: a deploy without it must answer from the broadcast
         # rather than raise inside the reply loop.
         self._mcg_index = mcg_index
+        # Long-form finance interviews. Optional like the other
+        # two: a deploy without it answers from the broadcast
+        # rather than raising inside the reply loop.
+        self._tradfi_index = tradfi_index
         self.cap = daily_reply_cap
         self.include_links = include_links
         self._min_question = min_question_chars
@@ -4277,7 +4348,8 @@ class MentionBot:
         corpus = corpus_for(routed_on)
         # An archive that is not wired answers nothing; the question falls
         # back to the broadcast rather than to an index that is None.
-        available = {"elon": self._elon_index, "mcg": self._mcg_index}
+        available = {"elon": self._elon_index, "mcg": self._mcg_index,
+                     "tradfi": self._tradfi_index}
         if corpus != "podcast" and not available.get(corpus):
             corpus = "podcast"
         index = available.get(corpus) or self._index

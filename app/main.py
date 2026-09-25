@@ -236,6 +236,7 @@ async def _run_x_bot(app: FastAPI, settings) -> None:
         # show cannot answer. It never changes what a Market Bubble
         # question returns.
         elon_index=getattr(app.state, "elon", None),
+        tradfi_index=getattr(app.state, "tradfi", None),
         # And the MCG archive, from its own Pinecone index. Routed by
         # project name -- corpus_for reads the 341 names off the shipped
         # episode index -- and the broadcast still wins every tie, so
@@ -375,6 +376,21 @@ async def lifespan(app: FastAPI):
     except Exception as exc:                                    # noqa: BLE001
         logger.warning("the MCG archive did not start: %s", exc)
         app.state.mcg = None
+
+    # The fourth corpus, a namespace beside the Musk one. Built only when
+    # there is something in it, for the same reason as the other two: an
+    # empty index that answers confidently is worse than one that is not
+    # there at all, because the bot falls back to the broadcast when an
+    # archive is missing and says nothing when it is present and empty.
+    try:
+        _s_tradfi = get_settings()
+        app.state.tradfi = (
+            PodcastIndex(ledger=app.state.usage,
+                         namespace=_s_tradfi.tradfi_namespace)
+            if _tradfi_episodes() else None)
+    except Exception as exc:                                    # noqa: BLE001
+        logger.warning("the finance archive did not start: %s", exc)
+        app.state.tradfi = None
 
     app.state.agent = ConciergeAgent(ledger=app.state.usage)
     app.state.clawpump_agent = ClawPumpAgent(ledger=app.state.usage)
@@ -1701,6 +1717,36 @@ def _elon_episodes() -> list[dict]:
         logger.warning("could not load the Musk archive: %s", exc)
         _ELON_CACHE = []
     return _ELON_CACHE
+
+
+_TRADFI_FILE = _ROOT / "data" / "tradfi_episodes.json"
+_TRADFI_CACHE: list[dict] | None = None
+
+
+def _tradfi_episodes() -> list[dict]:
+    """The finance transcripts, parsed once, on first use.
+
+    Same shape and same laziness as the Musk archive, including the
+    gzipped fallback: .dockerignore excludes data/ and lets a named few
+    back in, so a transcript that is merely committed does not reach the
+    server.
+    """
+    global _TRADFI_CACHE
+    if _TRADFI_CACHE is not None:
+        return _TRADFI_CACHE
+    try:
+        packed = _TRADFI_FILE.with_suffix(".json.gz")
+        if _TRADFI_FILE.exists():
+            _TRADFI_CACHE = json.loads(_TRADFI_FILE.read_text())
+        elif packed.exists():
+            with gzip.open(packed, "rt", encoding="utf-8") as fh:
+                _TRADFI_CACHE = json.load(fh)
+        else:
+            _TRADFI_CACHE = []
+    except Exception as exc:                                    # noqa: BLE001
+        logger.warning("could not load the finance archive: %s", exc)
+        _TRADFI_CACHE = []
+    return _TRADFI_CACHE
 
 
 def _runtime(episode: dict) -> float:
