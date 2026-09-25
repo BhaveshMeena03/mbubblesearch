@@ -443,6 +443,26 @@ class Settings(BaseSettings):
         return {p.strip() for p in self.x_bot_priority_authors.split(",")
                 if p.strip()}
 
+    # Who "I" is. A host asking "what did i say about IMD" is asking about
+    # his own lines, but pronouns are stopwords, so the question retrieved
+    # on the topic alone and the answer came back "the excerpts don't
+    # contain you speaking" -- to the host, about his own show.
+    #
+    # Ids rather than handles, for the same reason as the priority list: a
+    # mention carries the id, and a handle can change hands. The names on
+    # the right have to match the speaker labels in the archive exactly,
+    # because they are substituted into the search string.
+    x_bot_speaker_ids: str = "973261472:Ansem,363811679:FaZe Banks"
+
+    @property
+    def speaker_by_author_id(self) -> dict[str, str]:
+        out: dict[str, str] = {}
+        for pair in self.x_bot_speaker_ids.split(","):
+            author, _, name = pair.partition(":")
+            if author.strip() and name.strip():
+                out[author.strip()] = name.strip()
+        return out
+
     @field_validator(
         "anthropic_api_key", "voyage_api_key", "pinecone_api_key",
         "admin_token", "x_api_key", "x_api_secret", "x_access_token",

@@ -28,6 +28,7 @@ from app.x_api import (
 from app.x_bot import (
     BotState,
     MentionBot,
+    as_speaker,
     asks_whats_being_discussed,
     fingerprint,
     format_reply,
@@ -4786,3 +4787,47 @@ def test_the_not_there_rule_uses_the_exact_words_the_bot_keys_on():
     style = reply_style(1500)
     assert f'"{NOT_FOUND_ANSWER}."' in style
     assert "closest related moment" in style
+
+
+class TestAHostAsksWhatHeHimselfSaid:
+    """"what did i say about IMD", asked by the person who said it.
+
+    Pronouns are stopwords -- they have to be, or every question retrieves
+    on "i" -- so this reached the index as "say about IMD" and came back
+    with whoever had discussed the token. Asked by Ansem, on his own show,
+    the answer was "the excerpts don't contain you speaking."
+    """
+
+    def test_a_host_becomes_his_own_name(self):
+        assert as_speaker("what did i say about IMD", "Ansem") == (
+            "what did Ansem say about IMD")
+
+    def test_the_possessive_survives(self):
+        assert as_speaker("what's my take on hyperliquid", "Ansem") == (
+            "what's Ansem's take on hyperliquid")
+
+    def test_a_stranger_is_left_alone(self):
+        """The dangerous case: everyone else.
+
+        Substituting a name into a stranger's "i" would answer a question
+        about them with somebody else's lines -- inventing a speaker,
+        which is the one thing this archive must never do.
+        """
+        assert as_speaker("what did i say about IMD", None) == (
+            "what did i say about IMD")
+
+    def test_a_pronoun_that_is_not_about_speaking_is_left_alone(self):
+        """Rewriting every "i" would ask the archive about "can Ansem ask"."""
+        for question in ("can i ask you something",
+                         "where do i find the episode",
+                         "i love this bot"):
+            assert as_speaker(question, "Ansem") == question
+
+    def test_a_question_that_already_names_somebody_is_untouched(self):
+        assert as_speaker("what did ansem say about IMD", "Ansem") == (
+            "what did ansem say about IMD")
+
+    def test_the_other_host_gets_his_own_label(self):
+        """The name substituted has to match the archive's label exactly."""
+        assert as_speaker("when did i call zcash", "FaZe Banks") == (
+            "when did FaZe Banks call zcash")
