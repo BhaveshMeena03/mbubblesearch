@@ -736,6 +736,8 @@ for _path, _target in (("/elon", "/demo/elon.html"),
                        ("/musk", "/demo/elon.html"),
                        ("/mcg", "/demo/mcg.html"),
                        ("/mcg/assets", "/demo/mcg-assets.html"),
+                       ("/finance", "/demo/finance.html"),
+                       ("/record", "/demo/finance.html"),
                        ("/mcg/tokens", "/demo/mcg-assets.html"),
                        ("/method", "/demo/how-it-works.html")):
     _shortcut(_path, _target)
@@ -1842,6 +1844,110 @@ def _elon_payload(question: str, result) -> dict:
     for hit in (result.hits or []):
         data = hit.model_dump() if hasattr(hit, "model_dump") else dict(hit)
         data["episode_seconds"] = lengths.get(data.get("episode_id"), 0)
+        hits.append(data)
+    return {"question": question, "answer": result.answer, "hits": hits}
+
+
+@app.get("/v1/finance/archive", dependencies=[Depends(public_rate_limit)])
+async def finance_archive() -> dict:
+    """What the finance archive holds, including who is in it.
+
+    `subjects` is the part the other archives have no equivalent of: this
+    one is not a show, it is a set of people, and it grows by adding
+    another rather than another episode of the same thing.
+    """
+    episodes = _tradfi_episodes()
+    if not episodes:
+        raise HTTPException(status_code=503, detail="unavailable")
+    dates = sorted(e.get("published_at") or "" for e in episodes
+                   if e.get("published_at"))
+    subjects: dict[str, dict] = {}
+    for episode in episodes:
+        who = episode.get("subject") or "unknown"
+        row = subjects.setdefault(who, {"subject": who, "recordings": 0,
+                                        "seconds": 0})
+        row["recordings"] += 1
+        row["seconds"] += int(_runtime(episode))
+    return {
+        "recordings": len(episodes),
+        "hours": round(sum(_runtime(e) for e in episodes) / 3600, 1),
+        "lines": sum(len(e.get("segments") or []) for e in episodes),
+        "first": dates[0] if dates else "",
+        "last": dates[-1] if dates else "",
+        "subjects": sorted(subjects.values(),
+                           key=lambda s: -s["seconds"]),
+    }
+
+
+@app.get("/v1/finance/episodes", dependencies=[Depends(public_rate_limit)])
+async def finance_episodes() -> list[dict]:
+    """The shelf, oldest first, carrying the subject on every row."""
+    return sorted(
+        ({"episode_id": e["episode_id"], "title": e.get("title", ""),
+          "url": e.get("url", ""), "subject": e.get("subject", "unknown"),
+          "published_at": e.get("published_at") or "",
+          "seconds": int(_runtime(e))} for e in _tradfi_episodes()),
+        key=lambda e: e["published_at"])
+
+
+@app.post("/v1/finance/search",
+          dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
+                        Depends(daily_budget), Depends(per_client_daily)])
+async def finance_search(
+    body: PodcastSearchRequest,
+    request: Request,
+    answers: AnswerCache = Depends(get_answers),
+) -> dict:
+    """Ask the finance archive. Same engine, fourth corpus."""
+    _track("finance_searches", q=body.query[:120])
+    index = getattr(request.app.state, "tradfi", None)
+    if index is None:
+        raise HTTPException(status_code=503, detail="The archive is not loaded.")
+
+    # Surface-keyed like the others, so no two archives can serve each
+    # other's cached answers.
+    key = make_key(body.query, surface="finance", top_k=body.top_k)
+    cached = answers.get(key)
+    if cached is not None:
+        per_client_daily.refund(request)
+        return _finance_payload(body.query, cached)
+
+    try:
+        result = await index.search(body.query, top_k=body.top_k)
+    except anthropic.RateLimitError as exc:
+        raise HTTPException(status_code=429,
+                            detail="Rate limited; retry shortly.") from exc
+    except anthropic.APIError as exc:
+        logger.error("Anthropic error on the finance archive: %s",
+                     type(exc).__name__)
+        raise HTTPException(status_code=502,
+                            detail="Model provider error.") from exc
+    # Same guard as the Musk archive, and for the same reason: these are
+    # public figures the model has heard talk before, so it can name a
+    # plausible interview it was never shown.
+    fixed, relabelled = sources.correct(result.answer, result.hits)
+    if relabelled:
+        logger.warning("source corrected on the finance archive: %s",
+                       "; ".join(relabelled))
+        result = result.model_copy(update={"answer": fixed})
+    answers.put(key, result)
+    return _finance_payload(body.query, result)
+
+
+def _finance_payload(question: str, result) -> dict:
+    """The page's shape, with the subject on every hit.
+
+    Without it a citation says "Legends Live @Citi" and the reader has to
+    know that is a Fink conversation. The archive is organised by person,
+    so the person travels with the passage.
+    """
+    shelf = {e["episode_id"]: e for e in _tradfi_episodes()}
+    hits = []
+    for hit in (result.hits or []):
+        data = hit.model_dump() if hasattr(hit, "model_dump") else dict(hit)
+        row = shelf.get(data.get("episode_id")) or {}
+        data["episode_seconds"] = int(_runtime(row)) if row else 0
+        data["subject"] = row.get("subject", "")
         hits.append(data)
     return {"question": question, "answer": result.answer, "hits": hits}
 
