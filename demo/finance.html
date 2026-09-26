@@ -74,7 +74,7 @@ moment they said it, down to the second.">
   }
   .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px 72px; }
 
-  header { padding: 52px 0 26px; border-bottom: 1px solid var(--rule-2); }
+  header { padding: 6px 0 24px; border-bottom: 1px solid var(--rule-2); }
   .eyebrow {
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase;
@@ -82,8 +82,8 @@ moment they said it, down to the second.">
   }
   h1 {
     font-family: "Instrument Serif", Georgia, serif;
-    font-weight: 400; font-size: clamp(38px, 7vw, 62px); line-height: 1.04;
-    letter-spacing: -.5px; margin: 14px 0 12px;
+    font-weight: 400; font-size: clamp(36px, 6.2vw, 54px); line-height: 1.04;
+    letter-spacing: -.5px; margin: 10px 0 10px;
   }
   h1 em { font-style: italic; color: var(--accent); }
   .lede { color: var(--ink-2); max-width: 54ch; margin: 0; }
@@ -179,9 +179,12 @@ moment they said it, down to the second.">
   .cite p { margin: 0; color: var(--ink-2); font-size: 15px; }
   /* The two or three the answer named, against the seven it read. */
   .cite.used { box-shadow: inset 3px 0 0 var(--accent); padding-left: 13px; }
-  .answer a.at { color: var(--accent); text-decoration: none;
-    border-bottom: 1px solid var(--accent-w); }
-  .answer a.at:hover { border-bottom-color: var(--accent); }
+  .answer button.at {
+    appearance: none; background: none; border: 0; padding: 0;
+    font: inherit; cursor: pointer; color: var(--accent);
+    border-bottom: 1px solid var(--accent-w);
+  }
+  .answer button.at:hover { border-bottom-color: var(--accent); }
 
   /* The shelf. Before you search, the page was a headline, five cards
      and an empty column: nothing to read, nothing to click, and no
@@ -218,12 +221,31 @@ moment they said it, down to the second.">
     .shelf { column-count: 2; column-gap: 34px; }
   }
 
+  /* Every recording plays here, the way they do on the other archives.
+     Shipping links instead sent people to YouTube and lost them, on the
+     one page whose whole claim is that the moment is right there. */
+  .player { margin: 10px 0 2px; }
+  .player:empty { display: none; }
+  .player iframe { width: 100%; aspect-ratio: 16/9; border: 0;
+    border-radius: 4px; display: block; background: #000; }
+  .cite .play, .group .play {
+    appearance: none; border: 1px solid var(--rule-2); background: var(--card);
+    color: var(--ink-2); font: inherit; font-size: 12px; cursor: pointer;
+    padding: 3px 9px; border-radius: 999px; margin-left: 8px;
+  }
+  .cite .play:hover, .group .play:hover {
+    border-color: var(--accent); color: var(--accent);
+  }
+
   .note {
     margin: 30px 0 0; padding-top: 18px; border-top: 1px solid var(--rule);
     color: var(--ink-3); font-size: 13.5px; max-width: 62ch;
   }
   .note a { color: var(--ink-2); }
-  nav.back { margin: 0 0 4px; font-size: 14px; color: var(--ink-2); }
+  /* Right, like every other page. The switcher is a way out, not the
+     first thing to read. */
+  nav.back { display: flex; justify-content: flex-end;
+             padding: 14px 0 0; font-size: 14px; color: var(--ink-2); }
   nav.back a { color: inherit; text-decoration: none; }
 
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
@@ -363,6 +385,50 @@ moment they said it, down to the second.">
     return gap <= CITE_WINDOW ? best : null;
   }
 
+  // Same shape as the other archives: nocookie, no related videos, no
+  // channel branding. This is a citation, not a channel.
+  function embedFor(url, sec) {
+    var u = String(url || "");
+    var id = (/[?&]v=([A-Za-z0-9_-]{6,})/.exec(u)
+              || /youtu\.be\/([A-Za-z0-9_-]{6,})/.exec(u) || [])[1];
+    if (!id) return null;
+    return "https://www.youtube-nocookie.com/embed/" + id +
+           "?start=" + (sec || 0) + "&rel=0&modestbranding=1&autoplay=1";
+  }
+
+  // One player at a time. Two videos talking over each other is the
+  // failure everyone has met on a news site.
+  function playHere(slot, url, sec) {
+    var src = embedFor(url, sec);
+    if (!src) return;
+    var open = slot.firstChild;
+    document.querySelectorAll(".player").forEach(function (o) {
+      o.innerHTML = "";
+    });
+    if (open) return;               // clicking the open one closes it
+    var f = document.createElement("iframe");
+    f.src = src;
+    f.allow = "accelerometer; autoplay; encrypted-media; picture-in-picture";
+    f.setAttribute("allowfullscreen", "");
+    f.title = "the recording at this moment";
+    slot.appendChild(f);
+    slot.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }
+
+  // Delegated, because every card and every shelf row is built after
+  // this runs.
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest ? e.target.closest("[data-play]") : null;
+    if (!b) return;
+    e.preventDefault();
+    var slot = b.closest(".cite, .group li, .answer")
+      ? b.closest(".cite, .group li, .answer").querySelector(".player")
+      : null;
+    if (!slot) return;
+    playHere(slot, b.getAttribute("data-url"),
+             parseInt(b.getAttribute("data-sec"), 10) || 0);
+  });
+
   function atSecond(url, sec) {
     if (!url) return "";
     return url + (url.indexOf("?") > -1 ? "&" : "?") + "t=" + sec + "s";
@@ -382,8 +448,12 @@ moment they said it, down to the second.">
         var hit = nearestHit(hits, sec);
         if (!hit || !hit.url) return all;
         used[hit.episode_id + "@" + hit.timestamp] = true;
-        return before + '<a class="at" href="' + esc(atSecond(hit.url, sec)) +
-               '" target="_blank" rel="noopener">' + esc(stamp) + "</a>";
+        // A button, not a link out. The moment plays on the page, which
+        // is the whole promise; the card underneath still carries a real
+        // link for anyone who wants the recording itself.
+        return before + '<button class="at" type="button" data-play' +
+               ' data-url="' + esc(hit.url) + '" data-sec="' + sec +
+               '" title="play this moment">' + esc(stamp) + '</button>';
       });
     return { html: html, used: used };
   }
@@ -408,7 +478,7 @@ moment they said it, down to the second.">
     var cited = linkTimestamps(data.answer, hits);
 
     var html = '<div class="answer"><div class="q">' + esc(data.question) +
-               "</div>" + cited.html + "</div>";
+               "</div>" + cited.html + '<div class="player"></div></div>';
 
     if (hits.length) {
       // "Cited" overstated it. The model reads every passage and quotes
@@ -432,8 +502,11 @@ moment they said it, down to the second.">
             ? '<a class="at" href="' + esc(link) +
               '" target="_blank" rel="noopener">' + esc(h.timestamp) + "</a>"
             : '<span class="at">' + esc(h.timestamp) + "</span>") +
+          (h.url ? ' <button class="play" type="button" data-play' +
+                   ' data-url="' + esc(h.url) + '" data-sec="' +
+                   (seconds(h.timestamp) || 0) + '">play here</button>' : "") +
           "</div><p>" + esc(text.slice(0, 320)) +
-          (text.length > 320 ? "…" : "") + "</p></div>";
+          (text.length > 320 ? "…" : "") + '</p><div class="player"></div></div>';
       }).join("");
     }
     elOut.innerHTML = html;
@@ -489,11 +562,12 @@ moment they said it, down to the second.">
       return '<div class="group"><h3>' + esc(name) +
         "<span>" + items.length + " \u00b7 " + hours(mins) + "</span></h3><ol>" +
         items.map(function (r) {
-          return "<li><a href=" + '"' + esc(r.url) + '"' +
-            ' target="_blank" rel="noopener">' +
+          return '<li><a href="' + esc(r.url) + '"' +
+            ' data-play data-url="' + esc(r.url) + '" data-sec="0">' +
             '<span class="t">' + esc(r.title) + "</span>" +
             '<span class="d">' + esc((r.published_at || "").slice(0, 4)) +
-            " \u00b7 " + Math.round(r.seconds / 60) + "m</span></a></li>";
+            " \u00b7 " + Math.round(r.seconds / 60) +
+            'm</span></a><div class="player"></div></li>';
         }).join("") + "</ol></div>";
     }).join("");
   }
