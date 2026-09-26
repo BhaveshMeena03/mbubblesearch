@@ -462,6 +462,7 @@
   .foot .ticks{position:static;transform:none;margin:0;flex-wrap:wrap;
     justify-content:flex-end}
 </style>
+  <script src="/demo/nav.js" defer></script>
 </head>
 <body>
 <div class="wrap">
@@ -471,18 +472,13 @@
       <span class="brand-name">Market Bubble <b>Search</b></span>
     </a>
     <nav class="site-nav">
-      <!-- The other two archives, named rather than explained. "How it
-           works" was here and is not any more: a visitor who has just
-           arrived wants to know what else there is, not how it is built,
-           and the method page is still linked from the footer for the
-           handful who do. -->
-      <a href="/elon">Elon</a>
-      <a href="/mcg">MCG</a>
-      <!-- The asset dashboard was reachable only by typing its URL. It is
-           built from this archive and is the second thing anyone asks for
-           after a search box, so it belongs in the nav rather than in the
-           head of whoever built it. -->
-      <a href="/demo/assets.html">Tokens</a>
+      <!-- One switcher rather than a link per archive. There are four
+           now, plus two token dashboards, and every page carried its own
+           hand-written list: they disagreed with each other and the
+           finance archive was in none of them. demo/nav.js owns the
+           list, so adding the fifth is one row there rather than an edit
+           in five files and one forgotten. -->
+      <span data-archives></span>
       <!-- Revealed by the summaries fetch below, so it is never
            a link to a section that is not there. -->
       <a href="#eps" hidden>Episodes</a>
