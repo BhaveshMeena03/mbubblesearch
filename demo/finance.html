@@ -177,6 +177,11 @@ moment they said it, down to the second.">
   }
   .cite a.at:hover { border-bottom-color: var(--accent); }
   .cite p { margin: 0; color: var(--ink-2); font-size: 15px; }
+  /* The two or three the answer named, against the seven it read. */
+  .cite.used { box-shadow: inset 3px 0 0 var(--accent); padding-left: 13px; }
+  .answer a.at { color: var(--accent); text-decoration: none;
+    border-bottom: 1px solid var(--accent-w); }
+  .answer a.at:hover { border-bottom-color: var(--accent); }
 
   /* The shelf. Before you search, the page was a headline, five cards
      and an empty column: nothing to read, nothing to click, and no
@@ -335,30 +340,100 @@ moment they said it, down to the second.">
     });
   }
 
-  function drawAnswer(data) {
-    var hits = (data.hits || []).filter(function (h) {
-      // The filter is applied here rather than sent to the server: the
-      // archive is one namespace, and narrowing retrieval to one person
-      // would drop the passage where somebody answers them.
-      return !subject || h.subject === subject;
+  function seconds(stamp) {
+    var p = String(stamp).split(":").map(function (n) { return parseInt(n, 10); });
+    if (p.some(isNaN)) return null;
+    return p.length === 3 ? p[0] * 3600 + p[1] * 60 + p[2] : p[0] * 60 + p[1];
+  }
+
+  // How far a cited time may sit from a passage's start and still belong
+  // to it. Beyond this the model is naming a moment that is not in front
+  // of it, and the timestamp stays plain text rather than linking
+  // somewhere confident and wrong.
+  var CITE_WINDOW = 400;
+
+  function nearestHit(hits, sec) {
+    var best = null, gap = Infinity;
+    hits.forEach(function (h) {
+      var t = seconds(h.timestamp);
+      if (t === null) return;
+      var d = Math.abs(t - sec);
+      if (d < gap) { gap = d; best = h; }
     });
-    var html =
-      '<div class="answer"><div class="q">' + esc(data.question) + "</div>" +
-      esc(data.answer) + "</div>";
+    return gap <= CITE_WINDOW ? best : null;
+  }
+
+  function atSecond(url, sec) {
+    if (!url) return "";
+    return url + (url.indexOf("?") > -1 ? "&" : "?") + "t=" + sec + "s";
+  }
+
+  // Every time the answer names becomes a link into the recording at
+  // that second. Without this "around 55:01" was plain text and the only
+  // link on the card opened the passage start, about forty seconds
+  // earlier, which undercuts the one promise this page makes.
+  function linkTimestamps(answer, hits) {
+    var used = {};
+    var html = esc(answer).replace(
+      /(^|[\s(>\[–-])(\d{1,2}:\d{2}(?::\d{2})?)(?![\d:])/g,
+      function (all, before, stamp) {
+        var sec = seconds(stamp);
+        if (sec === null) return all;
+        var hit = nearestHit(hits, sec);
+        if (!hit || !hit.url) return all;
+        used[hit.episode_id + "@" + hit.timestamp] = true;
+        return before + '<a class="at" href="' + esc(atSecond(hit.url, sec)) +
+               '" target="_blank" rel="noopener">' + esc(stamp) + "</a>";
+      });
+    return { html: html, used: used };
+  }
+
+  // Matched against the exact sentence the prompt tells the model to
+  // use, not a guess at what a refusal sounds like. "don't have" and
+  // "not in the" are ordinary prose: a first pass on those relabelled a
+  // perfectly good Dimon answer as a refusal.
+  function isRefusal(answer) {
+    return /couldn'?t find that|could not find that/i.test(answer || "");
+  }
+
+  function drawAnswer(data) {
+    // Deliberately unfiltered. Filtering to the selected person dropped
+    // every passage the answer was written from whenever the question
+    // was about somebody else, and showed one unrelated passage under
+    // "1 passage cited" -- a citation the answer never used. The person
+    // is a lens on the question, which the query prefix already applies,
+    // not a filter on the evidence.
+    var hits = data.hits || [];
+    var refused = isRefusal(data.answer);
+    var cited = linkTimestamps(data.answer, hits);
+
+    var html = '<div class="answer"><div class="q">' + esc(data.question) +
+               "</div>" + cited.html + "</div>";
+
     if (hits.length) {
-      html += '<h2 class="sub">' + hits.length +
-              (hits.length === 1 ? " passage" : " passages") + " cited</h2>";
+      // "Cited" overstated it. The model reads every passage and quotes
+      // two or three, so this says what it searched and marks the ones
+      // it actually named.
+      html += '<h2 class="sub">' + (refused
+        ? "closest passages, none of which answered it"
+        : hits.length + " passages searched") + "</h2>";
       html += hits.map(function (h) {
-        return '<div class="cite"><div class="head">' +
+        var wasUsed = cited.used[h.episode_id + "@" + h.timestamp];
+        var text = h.text || "";
+        var link = h.url ? atSecond(h.url, seconds(h.timestamp) || 0)
+                         : h.deep_link;
+        return '<div class="cite' + (wasUsed ? " used" : "") + '">' +
+          '<div class="head">' +
           '<span class="subj">' + esc(h.subject || "") + "</span>" +
           '<span class="src">' + esc(h.title || "") +
           (h.published_at ? " · " + esc(h.published_at.slice(0, 10)) : "") +
           "</span>" +
-          (h.deep_link
-            ? '<a class="at" href="' + esc(h.deep_link) +
+          (link
+            ? '<a class="at" href="' + esc(link) +
               '" target="_blank" rel="noopener">' + esc(h.timestamp) + "</a>"
             : '<span class="at">' + esc(h.timestamp) + "</span>") +
-          "</div><p>" + esc((h.text || "").slice(0, 320)) + "</p></div>";
+          "</div><p>" + esc(text.slice(0, 320)) +
+          (text.length > 320 ? "…" : "") + "</p></div>";
       }).join("");
     }
     elOut.innerHTML = html;
