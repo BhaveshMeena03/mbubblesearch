@@ -1948,6 +1948,12 @@ def _finance_payload(question: str, result) -> dict:
         row = shelf.get(data.get("episode_id")) or {}
         data["episode_seconds"] = int(_runtime(row)) if row else 0
         data["subject"] = row.get("subject", "")
+        # The recording's own URL. PodcastHit carries deep_link, which
+        # points at the passage start, and the page needs to build a link
+        # to the second the answer actually names -- about forty seconds
+        # later in the Fink case, which is the difference between "cited
+        # to the second" being true and being a slogan.
+        data["url"] = row.get("url", "")
         hits.append(data)
     return {"question": question, "answer": result.answer, "hits": hits}
 
