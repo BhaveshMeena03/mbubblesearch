@@ -10,6 +10,7 @@ deliberately absent because the hosts say both constantly.
 So every term in the finance pattern was counted against the real
 transcripts before it was allowed in, and these tests hold that line.
 """
+import gzip
 import json
 import re
 from pathlib import Path
@@ -37,6 +38,17 @@ class TestTheFinanceArchiveAnswersItsOwn:
         "what did fink say about tokenisation",
     ])
     def test_an_indexed_subject_reaches_it(self, question):
+        """Needs the shelf, which is gitignored and not in CI.
+
+        data/tradfi_episodes.json is rewritten on every ingest and ships
+        as the gzip beside it, so a checkout has no subjects to route on
+        and every name here falls back to the broadcast. That is correct
+        behaviour, not a failure, so the test says so rather than
+        asserting something the environment cannot provide.
+        """
+        from app.x_bot import _TRADFI_NAMES
+        if not _TRADFI_NAMES:
+            pytest.skip("no finance shelf in this checkout")
         assert corpus_for(question) == "tradfi"
 
     def test_an_unindexed_subject_falls_back_to_the_broadcast(self):
@@ -138,7 +150,18 @@ class TestTheWordsWereCountedFirst:
     CEILING = 10
 
     def test_every_finance_term_is_rare_in_the_broadcast(self):
-        rows = json.loads((ROOT / "data" / "episodes.json").read_text())
+        # The raw shelf is gitignored; the gzip beside it is what ships
+        # and what the server reads, so the check runs against that in a
+        # fresh checkout and against either locally.
+        raw = ROOT / "data" / "episodes.json"
+        packed = ROOT / "data" / "episodes.json.gz"
+        if raw.exists():
+            rows = json.loads(raw.read_text())
+        elif packed.exists():
+            with gzip.open(packed, "rt", encoding="utf-8") as fh:
+                rows = json.load(fh)
+        else:
+            pytest.skip("no broadcast transcripts in this checkout")
         uniq = {}
         for row in rows:
             uniq.setdefault(row["episode_id"], row)
@@ -166,8 +189,10 @@ class TestAnArchiveThatIsNotWiredIsHarmless:
         not in the table, and the question falls back to the broadcast
         rather than to an index that is None.
         """
+        # A venue rather than a person: venues are hardcoded, so this
+        # tests the fallback itself instead of whether a shelf exists.
         available = {"elon": object(), "mcg": object(), "tradfi": None}
-        corpus = corpus_for("what did larry fink say about bitcoin")
+        corpus = corpus_for("what was said at davos about tokenisation")
         assert corpus == "tradfi"
         if corpus != "podcast" and not available.get(corpus):
             corpus = "podcast"
