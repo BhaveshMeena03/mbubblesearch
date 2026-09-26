@@ -98,8 +98,27 @@ BLOCK_NAMES = {
 CONFIDENCE_RANK = {"low": 0, "medium": 1, "high": 2}
 
 
-def canonical(symbol: str, name: str) -> str:
-    for key in (symbol.strip().lower(), name.strip().lower()):
+# Manglings that mean different projects in different archives, so they
+# cannot live in the global table above.
+#
+# "GTO" is Jito on the broadcast, where Lucas from Jito Labs was a guest,
+# and Jatevo on MCG, where Luca runs a decentralised compute project with
+# fourteen mentions of his own. Aliasing it globally would have merged
+# one man's project into another's, which is a worse outcome than leaving
+# the mangling alone.
+ARCHIVE_ALIASES = {
+    "podcast": {"gto": "JITO"},
+    "mcg": {"gto": "JTVO", "gtvo": "JTVO", "jatevo": "JTVO"},
+}
+
+
+def canonical(symbol: str, name: str, archive: str | None = None) -> str:
+    keys = (symbol.strip().lower(), name.strip().lower())
+    local = ARCHIVE_ALIASES.get(archive or "", {})
+    for key in keys:
+        if key in local:
+            return local[key]
+    for key in keys:
         if key in ALIASES:
             return ALIASES[key]
     return symbol.strip().upper().lstrip("$")
@@ -131,7 +150,8 @@ def deep_link(url: str, seconds: float) -> str:
     return f"{url}{sep}t={int(seconds)}{suffix}"
 
 
-def aggregate(hits: list[dict], min_confidence: str = "medium") -> dict:
+def aggregate(hits: list[dict], min_confidence: str = "medium",
+              archive: str | None = None) -> dict:
     """Roll per-window hits up into one record per asset."""
     floor = CONFIDENCE_RANK[min_confidence]
 
@@ -140,7 +160,7 @@ def aggregate(hits: list[dict], min_confidence: str = "medium") -> dict:
         if CONFIDENCE_RANK.get(h.get("confidence", "low"), 0) < floor:
             continue
         h = dict(h)
-        h["symbol"] = canonical(h["symbol"], h.get("name", ""))
+        h["symbol"] = canonical(h["symbol"], h.get("name", ""), archive)
         if not is_asset(h["symbol"], h.get("name", "")):
             blocked += 1
             continue

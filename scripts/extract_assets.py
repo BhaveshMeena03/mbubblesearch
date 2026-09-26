@@ -308,7 +308,7 @@ async def main() -> None:
                                "re-run with --store to retry",
                                ep["episode_id"], exc)
 
-    report = aggregate(all_hits, args.min_confidence)
+    report = aggregate(all_hits, args.min_confidence, archive="podcast")
     report["episodes_processed"] = len(episodes)
 
     # The report is rebuilt from scratch each run, so a partial run does not

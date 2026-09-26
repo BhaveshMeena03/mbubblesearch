@@ -108,7 +108,8 @@ async def main() -> int:
         if store is not None and hits:
             await store.store(row["id"], row["title"], hits)
 
-    report = aggregate(every, min_confidence=args.min_confidence)
+    report = aggregate(every, min_confidence=args.min_confidence,
+                       archive="mcg")
     OUT.write_text(json.dumps(report, indent=1))
     logger.info("\n  %d assets from %d hits -> %s",
                 len(report.get("assets", [])), report.get("total_hits", 0),
