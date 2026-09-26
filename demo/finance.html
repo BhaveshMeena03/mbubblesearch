@@ -1,0 +1,367 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>The Record — what finance's biggest names actually said, to the second</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Fink, Dalio, Dimon, Schwarzman and Saylor. Twelve years
+of long-form interviews, transcribed and searchable by meaning. Ask a question, get the
+moment they said it, down to the second.">
+
+<meta property="og:title" content="The Record — what finance's biggest names actually said">
+<meta property="og:description" content="Fink, Dalio, Dimon, Schwarzman, Saylor. 19 recordings, 22.5 hours, 2014 to 2026. Searchable by meaning, cited to the second.">
+<meta property="og:url" content="https://search.lexthedev.com/finance">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Record">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Record — what finance's biggest names actually said">
+<meta name="twitter:description" content="Fink, Dalio, Dimon, Schwarzman, Saylor. 19 recordings, 22.5 hours, 2014 to 2026. Cited to the second.">
+
+<!--
+  A deliberately different room again, and this time a lit one.
+
+  Market Bubble is warm because its audience already loves the show. The
+  Musk page is an instrument because what it has to earn is trust in the
+  citation. This archive has a third problem: its subjects are people this
+  audience is suspicious of by default. Fink, Dimon and Schwarzman are the
+  opposition in most rooms where Ansem is quoted.
+
+  So it does not try to be liked and it does not try to look technical. It
+  reads as a document of record: warm paper, ink, a serif for the names
+  because names carry authority, tabular monospace for anything you would
+  cite, hairline rules, and nothing that moves unless you asked it to. The
+  point is to be the thing somebody links when another person says "he
+  never said that".
+
+  Light on purpose, too. The other three archives are dark, and a fourth
+  dark page would read as the same product with a different noun in the
+  headline rather than a different archive with a different job.
+-->
+
+<style>
+  @font-face { font-family: "Instrument Serif";
+    src: url("/demo/fonts/InstrumentSerif-Regular.ttf") format("truetype");
+    font-display: swap; }
+  @font-face { font-family: "InterV";
+    src: url("/demo/fonts/Inter-Variable.ttf") format("truetype");
+    font-display: swap; }
+
+  :root {
+    --paper:   #f4f1ea;
+    --card:    #fbfaf7;
+    --ink:     #17150f;
+    --ink-2:   #4b4639;
+    --ink-3:   #8a8371;
+    --rule:    #ddd7c8;
+    --rule-2:  #c8c0ac;
+    /* One accent, used only where something is a citation or a control.
+       Oxblood rather than a crypto green: this page is not selling a
+       trade, it is reporting a sentence somebody said on the record. */
+    --accent:  #7c2128;
+    --accent-w:#f0e4e2;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: "InterV", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 16px; line-height: 1.55;
+    /* A faint tooth so a full-bleed cream does not read as "unstyled". */
+    background-image:
+      radial-gradient(rgba(124,33,40,.025) 1px, transparent 1px);
+    background-size: 3px 3px;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px 72px; }
+
+  header { padding: 52px 0 26px; border-bottom: 1px solid var(--rule-2); }
+  .eyebrow {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  h1 {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-weight: 400; font-size: clamp(38px, 7vw, 62px); line-height: 1.04;
+    letter-spacing: -.5px; margin: 14px 0 12px;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .lede { color: var(--ink-2); max-width: 54ch; margin: 0; }
+
+  /* --- the spine: this archive is people, not episodes ------------- */
+  .who { display: grid; gap: 1px; background: var(--rule);
+         border: 1px solid var(--rule); margin: 26px 0 0; }
+  @media (min-width: 720px) { .who { grid-template-columns: repeat(5, 1fr); } }
+  .who button {
+    appearance: none; border: 0; cursor: pointer; text-align: left;
+    background: var(--card); color: inherit; font: inherit;
+    padding: 13px 14px 12px; display: block; width: 100%;
+    transition: background .12s ease;
+  }
+  .who button:hover { background: var(--accent-w); }
+  .who button[aria-pressed="true"] {
+    background: var(--ink); color: var(--paper);
+  }
+  .who button[aria-pressed="true"] .meta { color: #b4ac97; }
+  .who .name {
+    font-family: "Instrument Serif", Georgia, serif; font-size: 19px;
+    line-height: 1.15; display: block;
+  }
+  .who .meta {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 11px; color: var(--ink-3); letter-spacing: .02em;
+    display: block; margin-top: 3px; font-variant-numeric: tabular-nums;
+  }
+
+  /* --- ask ---------------------------------------------------------- */
+  form { display: flex; gap: 9px; margin: 22px 0 0; }
+  input[type=search] {
+    flex: 1; min-width: 0; font: inherit; color: var(--ink);
+    background: var(--card); border: 1px solid var(--rule-2);
+    padding: 13px 14px; border-radius: 2px;
+  }
+  input[type=search]:focus {
+    outline: 2px solid var(--accent); outline-offset: -1px;
+    border-color: transparent;
+  }
+  button.ask {
+    font: inherit; font-weight: 600; cursor: pointer; border: 0;
+    background: var(--ink); color: var(--paper);
+    padding: 13px 22px; border-radius: 2px;
+  }
+  button.ask:disabled { opacity: .45; cursor: default; }
+
+  .tries { margin: 12px 0 0; display: flex; flex-wrap: wrap; gap: 7px; }
+  .tries button {
+    font: inherit; font-size: 13.5px; cursor: pointer;
+    background: transparent; color: var(--ink-2);
+    border: 1px solid var(--rule-2); border-radius: 999px;
+    padding: 5px 13px;
+  }
+  .tries button:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* --- answer ------------------------------------------------------- */
+  .answer {
+    margin: 30px 0 0; background: var(--card);
+    border: 1px solid var(--rule-2); border-left: 3px solid var(--accent);
+    padding: 22px 24px; white-space: pre-wrap;
+  }
+  .answer .q {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12px; letter-spacing: .04em; color: var(--ink-3);
+    text-transform: uppercase; margin-bottom: 10px; white-space: normal;
+  }
+
+  h2.sub {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--ink-3); margin: 34px 0 10px; font-weight: 400;
+  }
+
+  .cite { border-top: 1px solid var(--rule); padding: 15px 0 14px; }
+  .cite:last-child { border-bottom: 1px solid var(--rule); }
+  .cite .head {
+    display: flex; flex-wrap: wrap; gap: 9px; align-items: baseline;
+    margin-bottom: 6px;
+  }
+  .cite .subj {
+    font-family: "Instrument Serif", Georgia, serif; font-size: 18px;
+  }
+  .cite .src { color: var(--ink-3); font-size: 13.5px; }
+  .cite a.at {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12.5px; font-variant-numeric: tabular-nums;
+    color: var(--accent); text-decoration: none;
+    border-bottom: 1px solid var(--accent-w); padding-bottom: 1px;
+    margin-left: auto;
+  }
+  .cite a.at:hover { border-bottom-color: var(--accent); }
+  .cite p { margin: 0; color: var(--ink-2); font-size: 15px; }
+
+  .note {
+    margin: 30px 0 0; padding-top: 18px; border-top: 1px solid var(--rule);
+    color: var(--ink-3); font-size: 13.5px; max-width: 62ch;
+  }
+  .note a { color: var(--ink-2); }
+  nav.back { margin: 0 0 4px; font-size: 13.5px; }
+  nav.back a { color: var(--ink-3); text-decoration: none; }
+  nav.back a:hover { color: var(--accent); }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <nav class="back"><a href="/">&larr; every archive</a></nav>
+
+  <header>
+    <div class="eyebrow" id="stat">loading the shelf</div>
+    <h1>What they <em>actually</em> said.</h1>
+    <p class="lede">Twelve years of long-form interviews with the people who
+      run the money, transcribed and searchable by meaning. Ask a question,
+      get the sentence and the second it was said.</p>
+
+    <div class="who" id="who"></div>
+
+    <form id="form">
+      <input type="search" id="q" autocomplete="off"
+             placeholder="when did fink change his mind on bitcoin">
+      <button class="ask" id="go" type="submit">Ask</button>
+    </form>
+
+    <div class="tries" id="tries"></div>
+  </header>
+
+  <div id="out"></div>
+
+  <p class="note">
+    Every answer is written only from passages in these recordings, and every
+    citation links into the recording at the second it came from. If the
+    archive does not cover a question it says so rather than guessing. Part of
+    <a href="/">the same engine</a> that indexes Market Bubble, MCG Live and
+    the Musk interviews.
+  </p>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var API = "";
+  var subject = null;             // null = everyone
+  var busy = false;
+
+  var elWho = document.getElementById("who");
+  var elStat = document.getElementById("stat");
+  var elOut = document.getElementById("out");
+  var elQ = document.getElementById("q");
+  var elGo = document.getElementById("go");
+  var elTries = document.getElementById("tries");
+
+  var SUGGESTIONS = [
+    "when did fink change his mind on bitcoin",
+    "what does dalio say about the debt cycle",
+    "what did dimon say about bitcoin",
+    "why does saylor think bitcoin is digital energy",
+    "what is schwarzman's view on private credit"
+  ];
+
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;",
+               '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  function hours(sec) {
+    var h = Math.floor(sec / 3600), m = Math.round((sec % 3600) / 60);
+    return h ? h + "h " + (m < 10 ? "0" : "") + m + "m" : m + "m";
+  }
+
+  function drawWho(data) {
+    elStat.textContent =
+      data.recordings + " recordings · " + data.hours + " hours · " +
+      data.lines.toLocaleString() + " spoken lines · " +
+      (data.first || "").slice(0, 4) + " to " + (data.last || "").slice(0, 4);
+
+    elWho.innerHTML = data.subjects.map(function (s) {
+      return '<button type="button" data-subject="' + esc(s.subject) + '" ' +
+             'aria-pressed="false">' +
+             '<span class="name">' + esc(s.subject) + "</span>" +
+             '<span class="meta">' + s.recordings + " rec · " +
+             hours(s.seconds) + "</span></button>";
+    }).join("");
+
+    Array.prototype.forEach.call(elWho.querySelectorAll("button"), function (b) {
+      b.addEventListener("click", function () {
+        var name = b.getAttribute("data-subject");
+        subject = (subject === name) ? null : name;
+        Array.prototype.forEach.call(elWho.querySelectorAll("button"), function (x) {
+          x.setAttribute("aria-pressed",
+            x.getAttribute("data-subject") === subject ? "true" : "false");
+        });
+        elQ.placeholder = subject
+          ? "ask about " + subject.toLowerCase()
+          : "when did fink change his mind on bitcoin";
+        elQ.focus();
+      });
+    });
+  }
+
+  function drawTries() {
+    elTries.innerHTML = SUGGESTIONS.map(function (s) {
+      return "<button type=button>" + esc(s) + "</button>";
+    }).join("");
+    Array.prototype.forEach.call(elTries.querySelectorAll("button"), function (b) {
+      b.addEventListener("click", function () {
+        elQ.value = b.textContent;
+        ask();
+      });
+    });
+  }
+
+  function drawAnswer(data) {
+    var hits = (data.hits || []).filter(function (h) {
+      // The filter is applied here rather than sent to the server: the
+      // archive is one namespace, and narrowing retrieval to one person
+      // would drop the passage where somebody answers them.
+      return !subject || h.subject === subject;
+    });
+    var html =
+      '<div class="answer"><div class="q">' + esc(data.question) + "</div>" +
+      esc(data.answer) + "</div>";
+    if (hits.length) {
+      html += '<h2 class="sub">' + hits.length +
+              (hits.length === 1 ? " passage" : " passages") + " cited</h2>";
+      html += hits.map(function (h) {
+        return '<div class="cite"><div class="head">' +
+          '<span class="subj">' + esc(h.subject || "") + "</span>" +
+          '<span class="src">' + esc(h.title || "") +
+          (h.published_at ? " · " + esc(h.published_at.slice(0, 10)) : "") +
+          "</span>" +
+          (h.deep_link
+            ? '<a class="at" href="' + esc(h.deep_link) +
+              '" target="_blank" rel="noopener">' + esc(h.timestamp) + "</a>"
+            : '<span class="at">' + esc(h.timestamp) + "</span>") +
+          "</div><p>" + esc((h.text || "").slice(0, 320)) + "</p></div>";
+      }).join("");
+    }
+    elOut.innerHTML = html;
+  }
+
+  function ask() {
+    var q = elQ.value.trim();
+    if (!q || busy) return;
+    busy = true;
+    elGo.disabled = true;
+    elOut.innerHTML = '<div class="answer"><div class="q">' + esc(q) +
+                      '</div>reading the archive…</div>';
+    fetch(API + "/v1/finance/search", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ query: subject ? subject + ": " + q : q })
+    }).then(function (r) {
+      if (!r.ok) throw new Error(r.status === 503
+        ? "The archive is not loaded."
+        : "Something went wrong (" + r.status + ").");
+      return r.json();
+    }).then(function (data) {
+      data.question = q;
+      drawAnswer(data);
+    }).catch(function (err) {
+      elOut.innerHTML = '<div class="answer">' + esc(err.message) + "</div>";
+    }).then(function () {
+      busy = false;
+      elGo.disabled = false;
+    });
+  }
+
+  document.getElementById("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    ask();
+  });
+
+  fetch(API + "/v1/finance/archive")
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (d) { if (d) { drawWho(d); drawTries(); } else {
+      elStat.textContent = "the archive is not loaded";
+    } })
+    .catch(function () { elStat.textContent = "the archive is not loaded"; });
+})();
+</script>
