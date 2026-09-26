@@ -55,7 +55,8 @@ from app.clipper import (  # noqa: E402
 # MCG is deliberately absent: data/mcg_index.json is a shelf, not
 # transcripts, and captions come from segments this machine does not hold.
 EPISODES = [ROOT / "data" / "episodes.json",
-            ROOT / "data" / "elon_episodes.json"]
+            ROOT / "data" / "elon_episodes.json",
+            ROOT / "data" / "tradfi_episodes.json"]
 SEARCH = "https://search.lexthedev.com"
 
 
@@ -69,6 +70,18 @@ SEARCH = "https://search.lexthedev.com"
 # Not as good as the archive's Whisper text -- auto-subs punctuate badly
 # and mishear names -- but a clip with slightly rough captions beats the
 # 458 episodes that currently cannot be clipped at all.
+def youtube_title(url: str) -> str:
+    """The video's own title, for the label burned into the clip."""
+    try:
+        done = subprocess.run(
+            [_ytdlp_binary(), "--no-warnings", "--print",
+             "%(title)s", url],
+            capture_output=True, text=True, timeout=120)
+        return (done.stdout or "").strip()
+    except Exception:                                   # noqa: BLE001
+        return ""
+
+
 def youtube_segments(url: str) -> list[dict]:
     """[{t, text}] from YouTube's auto-caption track."""
     with tempfile.TemporaryDirectory() as tmp:
@@ -214,9 +227,16 @@ def main() -> None:
             sys.exit("  --youtube needs --at")
         vid = re.search(r"(?:v=|youtu\.be/)([A-Za-z0-9_-]{6,})", args.youtube)
         episode_id = vid.group(1) if vid else args.youtube
+        # The title is burned into the clip, so defaulting it to "MCG
+        # Live" put that label on a Michael Saylor video. Use the shelf's
+        # own title when the recording is one of ours, then the video's
+        # real title, and only fall back to a generic label when neither
+        # is available.
+        known = episodes.get(episode_id, {}).get("title")
         episodes[episode_id] = {
             "episode_id": episode_id,
-            "title": args.title or "MCG Live",
+            "title": args.title or known or youtube_title(args.youtube)
+                     or "YouTube",
             "url": f"https://www.youtube.com/watch?v={episode_id}",
             "platform": "youtube",
             "segments": youtube_segments(args.youtube),

@@ -36,6 +36,8 @@ moment they said it, down to the second.">
   headline rather than a different archive with a different job.
 -->
 
+<script src="/demo/nav.js" defer></script>
+
 <style>
   @font-face { font-family: "Instrument Serif";
     src: url("/demo/fonts/InstrumentSerif-Regular.ttf") format("truetype");
@@ -176,20 +178,54 @@ moment they said it, down to the second.">
   .cite a.at:hover { border-bottom-color: var(--accent); }
   .cite p { margin: 0; color: var(--ink-2); font-size: 15px; }
 
+  /* The shelf. Before you search, the page was a headline, five cards
+     and an empty column: nothing to read, nothing to click, and no
+     reason to believe the archive is real. What is in it is the most
+     convincing thing it has, so it stays on the page rather than
+     appearing only after somebody thinks of a question. */
+  .shelf { margin: 38px 0 0; }
+  .group { margin: 0 0 26px; break-inside: avoid; }
+  .group h3 {
+    font-family: "Instrument Serif", Georgia, serif; font-weight: 400;
+    font-size: 21px; margin: 0 0 2px; display: flex; align-items: baseline;
+    gap: 10px;
+  }
+  .group h3 span {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 11px; color: var(--ink-3); letter-spacing: .04em;
+    font-variant-numeric: tabular-nums;
+  }
+  .group ol { list-style: none; margin: 8px 0 0; padding: 0; }
+  .group li { border-top: 1px solid var(--rule); }
+  .group li:last-child { border-bottom: 1px solid var(--rule); }
+  .group a {
+    display: flex; gap: 12px; align-items: baseline; padding: 9px 2px;
+    color: inherit; text-decoration: none;
+  }
+  .group a:hover { background: var(--accent-w); }
+  .group .t { flex: 1; min-width: 0; font-size: 14.5px; }
+  .group .d {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 11.5px; color: var(--ink-3); white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  @media (min-width: 760px) {
+    .shelf { column-count: 2; column-gap: 34px; }
+  }
+
   .note {
     margin: 30px 0 0; padding-top: 18px; border-top: 1px solid var(--rule);
     color: var(--ink-3); font-size: 13.5px; max-width: 62ch;
   }
   .note a { color: var(--ink-2); }
-  nav.back { margin: 0 0 4px; font-size: 13.5px; }
-  nav.back a { color: var(--ink-3); text-decoration: none; }
-  nav.back a:hover { color: var(--accent); }
+  nav.back { margin: 0 0 4px; font-size: 14px; color: var(--ink-2); }
+  nav.back a { color: inherit; text-decoration: none; }
 
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 
 <div class="wrap">
-  <nav class="back"><a href="/">&larr; every archive</a></nav>
+  <nav class="back"><span data-archives></span></nav>
 
   <header>
     <div class="eyebrow" id="stat">loading the shelf</div>
@@ -210,6 +246,9 @@ moment they said it, down to the second.">
   </header>
 
   <div id="out"></div>
+
+  <h2 class="sub" id="shelf-head">what is in it</h2>
+  <div class="shelf" id="shelf"></div>
 
   <p class="note">
     Every answer is written only from passages in these recordings, and every
@@ -356,6 +395,38 @@ moment they said it, down to the second.">
     e.preventDefault();
     ask();
   });
+
+  function drawShelf(rows) {
+    var by = {};
+    rows.forEach(function (r) {
+      (by[r.subject] = by[r.subject] || []).push(r);
+    });
+    // Newest first inside each person, because what they said most
+    // recently is what somebody is usually checking against.
+    var names = Object.keys(by).sort(function (a, b) {
+      return by[b].length - by[a].length || a.localeCompare(b);
+    });
+    document.getElementById("shelf").innerHTML = names.map(function (name) {
+      var items = by[name].slice().sort(function (a, b) {
+        return (b.published_at || "").localeCompare(a.published_at || "");
+      });
+      var mins = items.reduce(function (n, r) { return n + r.seconds; }, 0);
+      return '<div class="group"><h3>' + esc(name) +
+        "<span>" + items.length + " \u00b7 " + hours(mins) + "</span></h3><ol>" +
+        items.map(function (r) {
+          return "<li><a href=" + '"' + esc(r.url) + '"' +
+            ' target="_blank" rel="noopener">' +
+            '<span class="t">' + esc(r.title) + "</span>" +
+            '<span class="d">' + esc((r.published_at || "").slice(0, 4)) +
+            " \u00b7 " + Math.round(r.seconds / 60) + "m</span></a></li>";
+        }).join("") + "</ol></div>";
+    }).join("");
+  }
+
+  fetch(API + "/v1/finance/episodes")
+    .then(function (r) { return r.ok ? r.json() : []; })
+    .then(function (rows) { if (rows.length) drawShelf(rows); })
+    .catch(function () {});
 
   fetch(API + "/v1/finance/archive")
     .then(function (r) { return r.ok ? r.json() : null; })
