@@ -74,7 +74,7 @@ moment they said it, down to the second.">
   }
   .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px 72px; }
 
-  header { padding: 6px 0 24px; border-bottom: 1px solid var(--rule-2); }
+  header { padding: 0 0 24px; border-bottom: 1px solid var(--rule-2); }
   .eyebrow {
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase;
@@ -224,10 +224,25 @@ moment they said it, down to the second.">
   /* Every recording plays here, the way they do on the other archives.
      Shipping links instead sent people to YouTube and lost them, on the
      one page whose whole claim is that the moment is right there. */
-  .player { margin: 10px 0 2px; }
+  .player { margin: 26px 0 8px; }
   .player:empty { display: none; }
   .player iframe { width: 100%; aspect-ratio: 16/9; border: 0;
     border-radius: 4px; display: block; background: #000; }
+  .player .cap {
+    display: flex; gap: 10px; align-items: baseline; margin: 8px 0 0;
+    font-size: 13px; color: var(--ink-3);
+  }
+  .player .cap button {
+    appearance: none; border: 0; background: none; font: inherit;
+    color: var(--ink-3); cursor: pointer; margin-left: auto;
+    text-decoration: underline;
+  }
+  .player .cap button:hover { color: var(--accent); }
+  .archsw > summary:focus-visible,
+  .group a:focus-visible, .cite .play:focus-visible,
+  .answer button.at:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px;
+  }
   .cite .play, .group .play {
     appearance: none; border: 1px solid var(--rule-2); background: var(--card);
     color: var(--ink-2); font: inherit; font-size: 12px; cursor: pointer;
@@ -242,20 +257,31 @@ moment they said it, down to the second.">
     color: var(--ink-3); font-size: 13.5px; max-width: 62ch;
   }
   .note a { color: var(--ink-2); }
-  /* Right, like every other page. The switcher is a way out, not the
-     first thing to read. */
-  nav.back { display: flex; justify-content: flex-end;
-             padding: 14px 0 0; font-size: 14px; color: var(--ink-2); }
-  nav.back a { color: inherit; text-decoration: none; }
+  /* One row: what is in the archive on the left, the way out on the
+     right, sharing a baseline. On its own line the switcher lined up
+     with nothing and read as floating above the page. */
+  .topline {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 16px; padding: 18px 0 0;
+  }
+  .topline nav.back { font-size: 14px; color: var(--ink-2); }
+  .topline nav.back a { color: inherit; text-decoration: none; }
+  /* The browser's own focus ring is a blue rounded box that belongs to
+     no palette on this site. */
+  .archsw > summary:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px;
+  }
 
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 
 <div class="wrap">
-  <nav class="back"><span data-archives></span></nav>
+  <div class="topline">
+    <div class="eyebrow" id="stat">loading the shelf</div>
+    <nav class="back"><span data-archives></span></nav>
+  </div>
 
   <header>
-    <div class="eyebrow" id="stat">loading the shelf</div>
     <h1>What they <em>actually</em> said.</h1>
     <p class="lede">Twelve years of long-form interviews with the people who
       run the money, transcribed and searchable by meaning. Ask a question,
@@ -273,6 +299,11 @@ moment they said it, down to the second.">
   </header>
 
   <div id="out"></div>
+
+  <!-- One player for the page. Per-card and per-row players sat inside
+       a two-column shelf and rendered at a third of the width, on the
+       page whose whole point is watching the moment. -->
+  <div class="player" id="player"></div>
 
   <h2 class="sub" id="shelf-head">what is in it</h2>
   <div class="shelf" id="shelf"></div>
@@ -396,23 +427,33 @@ moment they said it, down to the second.">
            "?start=" + (sec || 0) + "&rel=0&modestbranding=1&autoplay=1";
   }
 
-  // One player at a time. Two videos talking over each other is the
-  // failure everyone has met on a news site.
-  function playHere(slot, url, sec) {
+  // One player, one recording at a time, and it says what it is
+  // playing. Clicking the moment already open closes it, so there is
+  // always an obvious way to stop the sound.
+  var playing = "";
+
+  function playHere(url, sec, label) {
+    var slot = document.getElementById("player");
     var src = embedFor(url, sec);
-    if (!src) return;
-    var open = slot.firstChild;
-    document.querySelectorAll(".player").forEach(function (o) {
-      o.innerHTML = "";
-    });
-    if (open) return;               // clicking the open one closes it
+    if (!slot || !src) return;
+    if (playing === src) { slot.innerHTML = ""; playing = ""; return; }
+    slot.innerHTML = "";
     var f = document.createElement("iframe");
     f.src = src;
     f.allow = "accelerometer; autoplay; encrypted-media; picture-in-picture";
     f.setAttribute("allowfullscreen", "");
-    f.title = "the recording at this moment";
+    f.title = label || "the recording at this moment";
     slot.appendChild(f);
-    slot.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    var cap = document.createElement("div");
+    cap.className = "cap";
+    cap.innerHTML = "<span></span><button type=button>stop</button>";
+    cap.firstChild.textContent = label || "";
+    cap.lastChild.addEventListener("click", function () {
+      slot.innerHTML = ""; playing = "";
+    });
+    slot.appendChild(cap);
+    playing = src;
+    slot.scrollIntoView({ block: "center", behavior: "smooth" });
   }
 
   // Delegated, because every card and every shelf row is built after
@@ -421,12 +462,9 @@ moment they said it, down to the second.">
     var b = e.target.closest ? e.target.closest("[data-play]") : null;
     if (!b) return;
     e.preventDefault();
-    var slot = b.closest(".cite, .group li, .answer")
-      ? b.closest(".cite, .group li, .answer").querySelector(".player")
-      : null;
-    if (!slot) return;
-    playHere(slot, b.getAttribute("data-url"),
-             parseInt(b.getAttribute("data-sec"), 10) || 0);
+    playHere(b.getAttribute("data-url"),
+             parseInt(b.getAttribute("data-sec"), 10) || 0,
+             b.getAttribute("data-label") || "");
   });
 
   function atSecond(url, sec) {
@@ -453,6 +491,8 @@ moment they said it, down to the second.">
         // link for anyone who wants the recording itself.
         return before + '<button class="at" type="button" data-play' +
                ' data-url="' + esc(hit.url) + '" data-sec="' + sec +
+               '" data-label="' + esc((hit.subject ? hit.subject + " \u00b7 " : "") +
+                                      (hit.title || "") + " \u00b7 " + stamp) +
                '" title="play this moment">' + esc(stamp) + '</button>';
       });
     return { html: html, used: used };
@@ -478,7 +518,7 @@ moment they said it, down to the second.">
     var cited = linkTimestamps(data.answer, hits);
 
     var html = '<div class="answer"><div class="q">' + esc(data.question) +
-               "</div>" + cited.html + '<div class="player"></div></div>';
+               "</div>" + cited.html + "</div>";
 
     if (hits.length) {
       // "Cited" overstated it. The model reads every passage and quotes
@@ -504,9 +544,12 @@ moment they said it, down to the second.">
             : '<span class="at">' + esc(h.timestamp) + "</span>") +
           (h.url ? ' <button class="play" type="button" data-play' +
                    ' data-url="' + esc(h.url) + '" data-sec="' +
-                   (seconds(h.timestamp) || 0) + '">play here</button>' : "") +
+                   (seconds(h.timestamp) || 0) + '" data-label="' +
+                   esc((h.subject ? h.subject + " \u00b7 " : "") +
+                       (h.title || "") + " \u00b7 " + h.timestamp) +
+                   '">play here</button>' : "") +
           "</div><p>" + esc(text.slice(0, 320)) +
-          (text.length > 320 ? "…" : "") + '</p><div class="player"></div></div>';
+          (text.length > 320 ? "…" : "") + "</p></div>";
       }).join("");
     }
     elOut.innerHTML = html;
@@ -563,11 +606,12 @@ moment they said it, down to the second.">
         "<span>" + items.length + " \u00b7 " + hours(mins) + "</span></h3><ol>" +
         items.map(function (r) {
           return '<li><a href="' + esc(r.url) + '"' +
-            ' data-play data-url="' + esc(r.url) + '" data-sec="0">' +
+            ' data-play data-url="' + esc(r.url) + '" data-sec="0"' +
+            ' data-label="' + esc(name + " \u00b7 " + r.title) + '">' +
             '<span class="t">' + esc(r.title) + "</span>" +
             '<span class="d">' + esc((r.published_at || "").slice(0, 4)) +
             " \u00b7 " + Math.round(r.seconds / 60) +
-            'm</span></a><div class="player"></div></li>';
+            "m</span></a></li>";
         }).join("") + "</ol></div>";
     }).join("");
   }
