@@ -148,6 +148,11 @@ async def main() -> int:
         # archive answer confidently.
         row = {
             "episode_id": vid,
+            # The clipper decides X broadcast vs YouTube from this,
+            # and without it every finance clip was captioned "X
+            # broadcast" and carried a note saying the moment was
+            # not in the YouTube upload, on a YouTube video.
+            "platform": "youtube",
             "title": title,
             "subject": args.subject or "unknown",
             "url": episode.url,
