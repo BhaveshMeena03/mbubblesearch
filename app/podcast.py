@@ -140,7 +140,13 @@ REFUSAL_ANSWER = ("I can't help with that one — try asking about "
 # whether any of it was relevant. Kept as a constant rather than interpolated
 # into the prompt below, because SYSTEM_PROMPT's exact bytes are the prompt
 # cache key — a test asserts the two stay in step.
-NOT_FOUND_ANSWER = "I couldn't find that in the episodes I've indexed"
+# Deliberately archive-agnostic. It read "the episodes I've indexed",
+# which is true of the broadcast and MCG and false of the other two: the
+# Musk archive is interviews and the finance archive is recordings, so a
+# refusal there named a thing that is not in it. The constant is matched
+# by _MISS_SENTENCE and stripped by the hedging pass, so the wording
+# lives here once rather than in each of them.
+NOT_FOUND_ANSWER = "I couldn't find that in the archive"
 
 # The Musk archive answers from its own prompt, not this one.
 #
@@ -174,7 +180,7 @@ excerpt to another, and never name one the episode does not name.
 
 Rules:
 1. Answer strictly from the excerpts. If they do not contain the answer, \
-say "I couldn't find that in the episodes I've indexed", do not use \
+say "I couldn't find that in the archive", do not use \
 outside knowledge about Elon Musk, however well known, and do not guess. \
 Say that plainly, without explaining what the excerpts are instead.
 2. Cite the moment. Every line inside an excerpt begins with its own \
@@ -265,7 +271,7 @@ different episodes are usually about different projects.
 
 Rules:
 1. Answer strictly from the excerpts. If they do not contain the answer, \
-say "I couldn't find that in the episodes I've indexed", do not use \
+say "I couldn't find that in the archive", do not use \
 outside knowledge about any project, however well known, and do not \
 guess. Say it plainly, without explaining what the excerpts are instead.
 2. Cite the moment. Every line inside an excerpt begins with its own \
@@ -301,7 +307,7 @@ date the episode aired. Excerpts are given oldest first.
 
 Rules:
 1. Answer strictly from the excerpts. If they don't contain the answer, say \
-"I couldn't find that in the episodes I've indexed", do not use outside \
+"I couldn't find that in the archive", do not use outside \
 knowledge and do not guess.
 2. Cite the moment. Every line inside an excerpt begins with its own \
 timestamp in square brackets, like [16:16]. Cite the timestamp of the line \

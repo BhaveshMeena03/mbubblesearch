@@ -214,7 +214,7 @@ def _unhandle(text: str, handle: str = "mbubbleSearch") -> str:
         "@mbubbleSearch what did @blknoiz06 say about zcash"
             searched for: "what did say about zcash"
 
-    and the reply was "I couldn't find that in the episodes I've indexed",
+    and the reply was "I couldn't find that in the archive",
     for a question the engine answers fine when the name is typed as a
     word. X autocompletes handles, so people type them constantly.
 
@@ -941,7 +941,7 @@ _CA_PHRASINGS = (
 
 _MISS_PHRASINGS = (
     NOT_FOUND_ANSWER + ".",
-    NOT_FOUND_ANSWER + " — it may be in a part I have not indexed yet.",
+    NOT_FOUND_ANSWER + ", though it may be in a part I have not indexed yet.",
     # Drops the leading "I ", rather than lowercasing the tail — .lower()
     # turned "I've" into "i've", a typo in the one reply that is already
     # admitting it has nothing.
@@ -1704,7 +1704,7 @@ and this account's whole standing is that a person built it.
 - Give the timestamp. The episode name is added for you, so do not repeat \
 it.
 - If nothing in the excerpts is actually about what was asked, reply with \
-exactly: "I couldn't find that in the episodes I've indexed." Nothing else. \
+exactly: "I couldn't find that in the archive." Nothing else. \
 Do not offer the closest related moment, a different topic, or a guess at \
 what they meant: a related moment is not an answer, and posting one in \
 public replies to a question the show never covered. This overrides the \
@@ -2614,7 +2614,7 @@ _A_CITATION = re.compile(r"\b\d{1,2}:\d{2}(?::\d{2})?\b")
 def strip_leading_denial(answer: str) -> tuple[str, bool]:
     """Drop an opening that says nothing was found, when something was.
 
-    "I couldn't find that in the episodes I've indexed. The excerpts
+    "I couldn't find that in the archive. The excerpts
     mention Michael Cat repeatedly -- head of production at Market
     Bubble, around 3:05." The first sentence is wrong and it is the only
     one most people read.
@@ -3863,7 +3863,7 @@ class MentionBot:
         """A fact, when nothing was actually asked.
 
         There is nothing to admit to missing if no question was put, and
-        "I couldn't find that in the episodes I've indexed" posted under a
+        "I couldn't find that in the archive" posted under a
         description of the tool reads as the tool failing at the moment it
         is being recommended. That is where it landed.
         """
@@ -4519,7 +4519,7 @@ class MentionBot:
         # between two other people arrives looking like a fresh summons:
         # "@TheGreatCattsby @mbubbleSearch 🤣😂 it only answers from what
         # was said on the broadcast sorry 😅" was an aside to a friend,
-        # and got "I couldn't find that in the episodes I've indexed"
+        # and got "I couldn't find that in the archive"
         # posted underneath it.
         #
         # A miss is a good reply to a real question and a bad one to

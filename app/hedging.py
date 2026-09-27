@@ -1,6 +1,6 @@
 """Delete the denial an answer then contradicts.
 
-    "I couldn't find that in the episodes I've indexed. The excerpts
+    "I couldn't find that in the archive. The excerpts
      mention Michael Cat repeatedly — described as the head of
      production at Market Bubble around 3:05."
 

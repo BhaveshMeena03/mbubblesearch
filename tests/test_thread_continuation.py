@@ -46,7 +46,7 @@ def would_reply(asked: str) -> bool:
 
 ASIDE = ("@TheGreatCattsby @mbubbleSearch 🤣😂 it only answers from what "
          "was said on the broadcast sorry 😅")
-MISS = "I couldn't find that in the episodes I've indexed."
+MISS = "I couldn't find that in the archive."
 
 
 class TestTheMessageThatCausedIt:

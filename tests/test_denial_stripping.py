@@ -77,9 +77,9 @@ class TestRepliesThatActuallyWentOut:
 
 class TestARealRefusalSurvives:
     @pytest.mark.parametrize("refusal", [
-        "I couldn't find that in the episodes I've indexed.",
+        "I couldn't find that in the archive.",
         "I looked, and couldn't find that in the episodes I've indexed.",
-        "I couldn't find that in the episodes I've indexed. Try naming the "
+        "I couldn't find that in the archive. Try naming the "
         "guest or the episode?",
         "There's no mention of that in the transcripts I have.",
     ])
@@ -104,7 +104,7 @@ class TestACleanAnswerIsNotTouched:
     def test_a_denial_with_no_citation_after_it_is_kept(self):
         """The guard is the citation, not the wording -- an answer that
         denies and then waffles has not actually found anything."""
-        before = ("I couldn't find that in the episodes I've indexed. The "
+        before = ("I couldn't find that in the archive. The "
                   "transcripts cover a lot of ground but nothing matching "
                   "what you asked about specifically here today.")
         after, changed = strip_leading_denial(before)

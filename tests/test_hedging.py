@@ -1,6 +1,6 @@
 """An answer must not open by denying what it goes on to say.
 
-    "I couldn't find that in the episodes I've indexed. The excerpts
+    "I couldn't find that in the archive. The excerpts
      mention Michael Cat repeatedly — described as the head of
      production at Market Bubble around 3:05."
 
@@ -38,7 +38,7 @@ class TestDenialsThatWerePosted:
     """Every one of these is a live reply, not an invention."""
 
     @pytest.mark.parametrize("answer,gone", [
-        ("I couldn't find that in the episodes I've indexed. The excerpts "
+        ("I couldn't find that in the archive. The excerpts "
          "mention \"Michael Cat\" repeatedly—described as the head of "
          "production at Market Bubble around 3:05.",
          "I couldn't find"),
@@ -71,7 +71,7 @@ class TestDenialsThatWerePosted:
         """The timestamp is the whole product. Removing the denial must
         never take the evidence with it."""
         out, _ = strip_denial(
-            "I couldn't find that in the episodes I've indexed. The excerpts "
+            "I couldn't find that in the archive. The excerpts "
             "mention Michael Cat as head of production around 3:05.")
         assert "3:05" in out
 
@@ -88,7 +88,7 @@ class TestDenialsThatWerePosted:
 class TestWhatMustSurviveUntouched:
     @pytest.mark.parametrize("answer", [
         # A real refusal. Cites nothing, so there is nothing to contradict.
-        "I couldn't find that in the episodes I've indexed.",
+        "I couldn't find that in the archive.",
         "I looked, and couldn't find that in the episodes I've indexed.",
         "I couldn't find that. Try naming the guest or the episode?",
         # A clean answer with no denial in it at all.
@@ -108,7 +108,7 @@ class TestWhatMustSurviveUntouched:
     def test_a_refusal_keeps_its_whole_meaning(self):
         """This is most of what makes the account trustworthy. Mangling it
         would be far worse than the bug being fixed."""
-        refusal = "I couldn't find that in the episodes I've indexed."
+        refusal = "I couldn't find that in the archive."
         assert strip_denial(refusal) == (refusal, None)
 
 
@@ -148,7 +148,7 @@ class TestItRunsInTheReplyPath:
 class TestTheWebsiteGetsTheSameRepair:
     """The X bot has stripped these since this module existed. The website
     did not, and the website is the surface people are sent to -- so the
-    same answer read "I couldn't find that in the episodes I've indexed"
+    same answer read "I couldn't find that in the archive"
     there and read correctly on X.
 
     It cannot be repaired after the fact on the site, because the site
