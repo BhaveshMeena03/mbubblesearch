@@ -13,6 +13,7 @@ import { dirname, join } from "path";
 const CARDS = {
   default: { html: "og-card.html", png: "og-image.png" },
   mcg: { html: "og-mcg-card.html", png: "og-mcg.png" },
+  finance: { html: "og-finance-card.html", png: "og-finance.png" },
 };
 
 const which = process.argv[2] || "default";
