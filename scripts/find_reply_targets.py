@@ -76,11 +76,23 @@ WATCHLIST = [
     "WClemente", "buffalu__", "gregosuri", "akashnet", "pudgypenguins", "FrankDeGods", "notthreadguy", "base",
     "UsePodAI", "0xgilbert", "sendaifun", "MetaDAOProject", "AssetDash",
     "clawpumptech", "MCGlive",
+    # Added 2026-09-28. The two hosts were missing, which is why a scan
+    # never surfaced the account this whole archive is built out of. They
+    # are the strongest case for the list's own rule, not an exception to
+    # it: their words ARE the corpus, so a receipt under their post is
+    # sourced from the show they were speaking on.
+    "blknoiz06", "rasmr_eth",
 ]
 # Answered from the Musk archive instead. Kept apart for the same reason
 # the namespaces are: a reply to Elon sourced from a Market Bubble episode
 # would say the account cannot tell its archives apart.
 ELON = {"elonmusk"}
+
+# Handles whose replies are read as well as their posts. The hosts only: a
+# reply from Ansem or rasmr is usually a compressed version of something
+# they argued through on the show, which is exactly what the archive can
+# answer with. Everyone else's replies are support chatter.
+WITH_REPLIES = frozenset({"blknoiz06", "rasmr_eth"})
 
 # A non-owned post read, per the X pay-per-use table. Printed so the cost
 # of a run is known rather than discovered on the invoice.
@@ -103,8 +115,19 @@ async def get(http, creds, url: str, params: dict) -> dict:
 
 
 async def recent_posts(http, creds, handles: list[str], per_account: int,
-                       hours: float) -> tuple[list[dict], list[str], int]:
-    """Original posts (no replies, no reposts) from the last `hours`."""
+                       hours: float,
+                       with_replies: frozenset[str] = frozenset(),
+                       ) -> tuple[list[dict], list[str], int]:
+    """Posts from the last `hours`; reposts never, replies only where asked.
+
+    Replies were excluded outright until it turned out the one reply this
+    account has had back from Ansem came from exactly that shape: he posted
+    "$IMD next btw", the bot answered with him explaining IMD's mechanism on
+    the show at 3:46:08, and he said "thanks bot". A host restating a thesis
+    in a reply is the best possible target, because the archive already has
+    him saying it at length. For a brand account it is mostly support chatter,
+    so this stays opt-in per handle rather than becoming the default.
+    """
     users = await get(http, creds, f"{API}/users/by",
                       {"usernames": ",".join(handles)})
     found = {u["username"].lower(): u for u in users.get("data", [])}
@@ -118,14 +141,20 @@ async def recent_posts(http, creds, handles: list[str], per_account: int,
             continue
         data = await get(http, creds, f"{API}/users/{user['id']}/tweets", {
             "max_results": str(max(5, per_account)),
-            "exclude": "replies,retweets",
+            "exclude": ("retweets" if handle.lower() in with_replies
+                        else "replies,retweets"),
             "start_time": since,
-            "tweet.fields": "created_at,public_metrics,note_tweet",
+            "tweet.fields":
+                "created_at,public_metrics,note_tweet,referenced_tweets",
         })
         for post in data.get("data", [])[:per_account]:
             reads += 1
             text = (post.get("note_tweet") or {}).get("text") or post["text"]
+            kind = ("reply" if any(r["type"] == "replied_to" for r
+                                   in (post.get("referenced_tweets") or []))
+                    else "post")
             posts.append({"handle": user["username"], "id": post["id"],
+                          "kind": kind,
                           "text": " ".join(text.split()),
                           "likes": post["public_metrics"]["like_count"],
                           "replies": post["public_metrics"]["reply_count"],
@@ -148,6 +177,8 @@ async def main() -> int:
                     help="just these handles")
     ap.add_argument("--per-account", type=int, default=3)
     ap.add_argument("--hours", type=float, default=36)
+    ap.add_argument("--no-replies", action="store_true",
+                    help="skip the hosts' replies, posts only")
     ap.add_argument("--min-score", type=float, default=0.55,
                     help="rerank score below which a moment is not shown")
     args = ap.parse_args()
@@ -156,7 +187,8 @@ async def main() -> int:
     creds = credentials()
     async with httpx.AsyncClient(timeout=30) as http:
         posts, missing, reads = await recent_posts(
-            http, creds, handles, args.per_account, args.hours)
+            http, creds, handles, args.per_account, args.hours,
+            frozenset() if args.no_replies else WITH_REPLIES)
 
     indexes = {"podcast": PodcastIndex(), "elon": PodcastIndex(namespace="elon")}
     shortlist = []
@@ -174,8 +206,9 @@ async def main() -> int:
 
     shortlist.sort(key=lambda row: -row[0])
     for score, post, hit, corpus in shortlist:
+        tag = "  [reply]" if post.get("kind") == "reply" else ""
         print(f"\n  {score:.2f}  @{post['handle']}  ♥{post['likes']} "
-              f"💬{post['replies']}  {post['at'][:16]}")
+              f"💬{post['replies']}  {post['at'][:16]}{tag}")
         print(f"        {post['text'][:200]}")
         print(f"        https://x.com/{post['handle']}/status/{post['id']}")
         print(f"     -> {corpus}: {hit.title[:70]} ({hit.published_at or '?'})"
