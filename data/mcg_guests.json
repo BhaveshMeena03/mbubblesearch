@@ -7277,5 +7277,23 @@
     "role": ""
    }
   ]
+ },
+ "glsPdwlpG1M": {
+  "title": "$DREGG on MCG!",
+  "url": "https://www.youtube.com/watch?v=glsPdwlpG1M",
+  "guests": [
+   {
+    "at_seconds": 76,
+    "evidence": "let's pull up Ember and talk a little bit about drag. Ember, welcome to MCG. Welcome back to MCG, I should say.",
+    "name": "Ember",
+    "project": "Drag",
+    "role": "Co-founder"
+   }
+  ]
+ },
+ "N0q17BVEOtQ": {
+  "title": "\ud83d\udd34 LIVE: HOOD Summit Approaches | Robinhood vs Solana | Market Update + Interviews",
+  "url": "https://www.youtube.com/watch?v=N0q17BVEOtQ",
+  "guests": []
  }
 }
