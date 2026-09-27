@@ -11,7 +11,13 @@ moment they said it, down to the second.">
 <meta property="og:image" content="https://search.lexthedev.com/demo/og-finance.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://search.lexthedev.com/finance?v=2">
+<!-- The version has to move in lockstep with the URL that gets posted.
+     X scrapes a link the moment it is typed into the compose box, not when
+     it is sent, so ?v=2 was scraped and cached while the redirect was still
+     dropping the query and this tag still said bare /finance. Posting ?v=3
+     against an og:url of ?v=2 would canonicalise straight back onto that
+     poisoned entry, so both move together. -->
+<meta property="og:url" content="https://search.lexthedev.com/finance?v=3">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="The Record">
 <meta name="twitter:card" content="summary_large_image">
