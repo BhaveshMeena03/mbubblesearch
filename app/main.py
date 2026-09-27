@@ -728,9 +728,16 @@ _DEFAULT_LANDING = "/demo/podcast.html"
 #
 # 301, because these are permanent and that is what lets X and anything
 # else cache the canonical address.
+# The query string rides along. It was dropped, which broke the one tool
+# there is for a stale social card: X keys its card cache on the URL, so a
+# fresh ?v= is how you force a re-scrape, and /finance?v=2 was arriving at
+# the page as plain /demo/finance.html. The card stayed stale and there was
+# no way to shift it.
 def _shortcut(path: str, target: str) -> None:
-    async def go() -> RedirectResponse:
-        return RedirectResponse(url=target, status_code=301)
+    async def go(request: Request) -> RedirectResponse:
+        query = request.url.query
+        return RedirectResponse(url=f"{target}?{query}" if query else target,
+                                status_code=301)
     app.get(path, include_in_schema=False)(go)
 
 
