@@ -246,7 +246,7 @@ class TestTradingQuestionsDeclineInCode:
     def test_an_answer_that_already_declines_is_left_alone(self):
         from app.podcast import already_declines
         assert already_declines("I can't tell you what to buy. Here is what was said.")
-        assert already_declines("I couldn't find that in the episodes I've indexed.")
+        assert already_declines("I couldn't find that in the archive.")
         # Only the opening counts: a caveat at the end arrives after the
         # reader has already read the recommendation.
         assert not already_declines(

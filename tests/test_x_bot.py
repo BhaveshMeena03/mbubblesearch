@@ -633,7 +633,11 @@ def test_a_miss_is_one_sentence():
                 "about a specific topic, feel free to ask about something "
                 "else from these episodes and I will do my best to help.")
     reply = format_reply(rambling, [FakeHit()])
-    assert reply == NOT_FOUND_ANSWER + "."
+    # One of the phrasings, not a particular one. The variant is chosen by
+    # hashing the answer, so pinning one here made a reworded refusal look
+    # like a broken reply formatter.
+    from app.x_bot import _MISS_PHRASINGS
+    assert reply in _MISS_PHRASINGS
     assert "…" not in reply and "feel free" not in reply
 
 
@@ -2017,7 +2021,7 @@ def test_a_deflection_is_never_posted(answer):
 @pytest.mark.parametrize("answer", [
     "Around 7:02 TJR called attention the best currency nowadays.",
     "Luca bought Pudgy Penguins for 750 ETH during NFT mania, at 1:41:22.",
-    "I couldn't find that in the episodes I've indexed.",
+    "I couldn't find that in the archive.",
     "Ansem argued Ethereum got outcompeted — around 26:56 — and that its "
     "tokenomics were mishandled.",
 ])
@@ -2341,7 +2345,7 @@ async def test_praise_gets_a_fact_rather_than_a_dead_end(tmp_path):
 ])
 def test_questions_about_the_account_get_a_fixed_answer(asked):
     """Asked what it was, the bot searched the transcripts, found nothing,
-    and said "I couldn't find that in the episodes I've indexed" — the one
+    and said "I couldn't find that in the archive" — the one
     reply guaranteed to look broken to someone deciding whether it works."""
     from app.x_bot import about_answer
 
@@ -2609,19 +2613,19 @@ def test_fit_still_prefers_a_sentence_boundary():
 # Captured from live runs of the question that failed in public: a quoted
 # tweet of Ansem's that the archive does not contain verbatim.
 _REAL_PARTIAL = (
-    "I couldn't find that in the episodes I've indexed. The excerpts discuss "
+    "I couldn't find that in the archive. The excerpts discuss "
     "how traders building public brands have real influence, and how finance "
     "content is undervalued. What is there: around 1:20:47 in the August 13 "
     "episode, someone mentions people retiring from tailing trades publicly.")
 
 _REAL_PARTIAL_BEHIND_A_CAVEAT = (
-    "I couldn't find that in the episodes I've indexed. The excerpts don't "
+    "I couldn't find that in the archive. The excerpts don't "
     "contain Ansem making a prediction about entertainment finance going "
     "100x. What I do have is a discussion around 2:13:18 of how the power of "
     "a personal brand in crypto is enormous and attention is priceless.")
 
 _REAL_EMPTY_MISS = (
-    "I couldn't find that in the episodes I've indexed. If you're looking "
+    "I couldn't find that in the archive. If you're looking "
     "for information about a specific topic, feel free to ask about "
     "something else from these episodes and I will do my best to help.")
 
@@ -2638,7 +2642,7 @@ def test_the_useful_half_of_an_admitted_miss_survives():
 
     kept = salvage(_REAL_PARTIAL)
     assert kept and "1:20:47" in kept
-    assert "couldn't find that in the episodes" not in kept.lower()
+    assert "couldn't find that in the archive" not in kept.lower()
 
 
 def test_substance_hiding_behind_a_second_disclaimer_is_still_found():
@@ -2654,7 +2658,7 @@ def test_an_offer_to_ask_something_else_is_not_substance():
     from app.x_bot import salvage
 
     assert salvage(_REAL_EMPTY_MISS) is None
-    assert salvage("I couldn't find that in the episodes I've indexed.") is None
+    assert salvage("I couldn't find that in the archive.") is None
 
 
 def test_a_salvaged_answer_is_posted_instead_of_the_bare_miss():
