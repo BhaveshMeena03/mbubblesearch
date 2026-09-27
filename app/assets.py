@@ -108,7 +108,20 @@ CONFIDENCE_RANK = {"low": 0, "medium": 1, "high": 2}
 # the mangling alone.
 ARCHIVE_ALIASES = {
     "podcast": {"gto": "JITO"},
-    "mcg": {"gto": "JTVO", "gtvo": "JTVO", "jatevo": "JTVO"},
+    "mcg": {
+        "gto": "JTVO", "gtvo": "JTVO", "jatevo": "JTVO",
+        # MCG types its episode titles and Whisper hears the transcript,
+        # so where the two disagree the title wins. Each of these was
+        # checked against the extracted note, not just against a string
+        # distance: the note for "Clute" says "discusses Clute as a
+        # token" in an episode titled "$CLUDE", and Clude carries twenty
+        # mentions against Clute's one.
+        "clute": "CLUDE",          # $CLUDE: AI Persistent Memory Layer
+        "btc10": "BIT10",          # BIT10: Top 10 Crypto Index Funds
+        "drive": "DERIVE",         # Derive: Options On-chain for Pro Traders
+        "hbz": "HUBZZ",            # $HUBZZ: Mainstream metaverse
+        "senjo": "SINJOH",         # Sinjoh: The Programmable Capital Layer
+    },
 }
 
 
