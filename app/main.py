@@ -555,14 +555,16 @@ async def podcast_page(request: Request):
         # The question, as the title. Escaped because it lands inside an
         # HTML attribute and arrives from a URL anybody can craft.
         shown = html_escape(asked[:110], quote=True)
-        page = page.replace(
-            '<meta property="og:title" content="Market Bubble Search '
-            '— ask the broadcast anything">',
-            f'<meta property="og:title" content="&#8220;{shown}&#8221;">')
-        page = page.replace(
-            '<meta name="twitter:title" content="Market Bubble Search '
-            '— ask the broadcast anything">',
-            f'<meta name="twitter:title" content="&#8220;{shown}&#8221;">')
+        # Matched by tag rather than by the page's exact title text. The
+        # literal version silently stopped firing the moment the title was
+        # copy-edited, and a share card that quietly reverts to the generic
+        # title is the kind of break nobody notices for a week.
+        for tag_name in ("og:title", "twitter:title"):
+            prefix = "property" if tag_name.startswith("og:") else "name"
+            page = re.sub(
+                rf'<meta {prefix}="{tag_name}" content="[^"]*">',
+                f'<meta {prefix}="{tag_name}" content="&#8220;{shown}&#8221;">',
+                page, count=1)
         # The card is drawn per question too, so the image and the title
         # stop showing two different ones.
         card = f"{canonical.split('?')[0].rsplit('/demo/', 1)[0]}/og/search.png?q={quote_plus(asked[:180])}"
