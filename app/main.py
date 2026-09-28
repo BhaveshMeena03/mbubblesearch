@@ -790,6 +790,60 @@ async def healthz() -> dict:
     return {"status": "ok"}
 
 
+# The mint, and the one number Jupiter's verification wants to be able to
+# poll. Manual entry was the alternative and it is wrong the moment it is
+# typed: 15% of the creator fee buys $MBS back and burns it on every claim,
+# so supply falls continuously and a figure keyed in today misprices the
+# token everywhere Jupiter's data is consumed.
+#
+# Circulating is the on-chain supply, unadjusted. Burned tokens are already
+# gone from it, there is no vesting schedule and no treasury allocation to
+# subtract: the dev wallet holds 0.16%. Anything more elaborate would be a
+# judgement call presented as a fact.
+_MBS_MINT = "8VjFid8BVGcTPpUzf4PAWsA5nHJ5h2GQNXPEjyr2mF7t"
+_SOLANA_RPC = os.environ.get("SOLANA_RPC", "https://api.mainnet-beta.solana.com")
+_SUPPLY_TTL = 300.0
+_supply_cache: dict[str, float] = {}
+
+
+@app.get("/v1/token/circulating-supply")
+async def circulating_supply() -> dict:
+    """Live circulating supply, in the shape Jupiter's verifier expects.
+
+    Cached for five minutes: this is polled by other people's
+    infrastructure, and a public RPC that gets hammered starts refusing.
+
+    On an RPC failure the last good value is served rather than an error.
+    A supply endpoint that 500s reads as a broken project to whatever is
+    polling it, and a five-minute-old number is true to eight decimal
+    places for a token that only burns.
+    """
+    import httpx
+
+    now = time.time()
+    cached = _supply_cache.get("value")
+    if cached is not None and now - _supply_cache.get("at", 0.0) < _SUPPLY_TTL:
+        return {"circulatingSupply": cached}
+
+    body = {"jsonrpc": "2.0", "id": 1, "method": "getTokenSupply",
+            "params": [_MBS_MINT]}
+    try:
+        async with httpx.AsyncClient(timeout=10) as http:
+            response = await http.post(_SOLANA_RPC, json=body)
+        response.raise_for_status()
+        amount = response.json()["result"]["value"]["uiAmount"]
+        if amount is None:
+            raise ValueError("no uiAmount in the RPC response")
+        _supply_cache.update(value=float(amount), at=now)
+        return {"circulatingSupply": float(amount)}
+    except Exception as exc:                                   # noqa: BLE001
+        logger.warning("circulating supply read failed: %s", str(exc)[:120])
+        if cached is not None:
+            return {"circulatingSupply": cached}
+        raise HTTPException(status_code=503,
+                            detail="supply unavailable") from exc
+
+
 @app.get("/x-bot/status")
 async def x_bot_status(request: Request) -> dict:
     """Whether the mention bot is alive, and which build is running.
