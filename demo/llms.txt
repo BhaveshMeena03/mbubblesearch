@@ -1,0 +1,91 @@
+# Market Bubble Search
+
+> A search engine over 1,187 hours of crypto podcasts, live broadcasts and
+> long-form interviews. Ask a question in plain English and it answers only
+> from the transcripts, quoting the speaker and citing the exact second it
+> was said. If the archive does not contain the answer, it says so instead
+> of inventing one.
+
+Built and run by one person. Live, free, no login, at
+https://search.lexthedev.com
+
+An AnsemHack Clawrena entry. Token $MBS on ClawPump, mint
+8VjFid8BVGcTPpUzf4PAWsA5nHJ5h2GQNXPEjyr2mF7t
+
+## What is indexed
+
+Four archives, kept in separate namespaces so an answer about one show can
+never be sourced from another.
+
+- Market Bubble: 21 shows, 73.4 hours. The live X broadcast with Ansem
+  (@blknoiz06) and FaZe Banks. About a quarter of each live show never
+  reaches the YouTube upload, so for those minutes this is the only
+  searchable copy that exists.
+- MCG Live: 651 episodes, 1,039.9 hours, one project per episode, current
+  to 26 September 2026. 388 episodes carry named guests, 614 people.
+- Elon Musk: 14 long-form interviews, 37.8 hours, 2018 to 2026. Rogan, Lex
+  Fridman, the Economist, and the 2024 X space with Trump.
+- The Record: 30 finance recordings, 36 hours, 2014 to 2026. Larry Fink,
+  Ray Dalio, Jerome Powell, Jamie Dimon, Cathie Wood, Stephen Schwarzman,
+  Michael Saylor, Raoul Pal.
+
+Total: 716 recordings, 1,187 hours.
+
+Also indexed: 2,853 vectors of Ansem's own posts, and asset indexes of
+every token, stock and index the shows discussed, ranked by how deeply
+each was covered and linked to the moment it came up. 2,121 assets across
+MCG, 374 across Market Bubble.
+
+## Inference
+
+Every model call runs through UsePod. /v1/stats reports
+inference.proxy_share, which reads 1.0 on 0 direct calls. Answering is
+claude-haiku-4-5 behind voyage-3.5 embeddings and rerank-2.5-lite, chosen
+because retrieval does the work and answers are short. Model choice is one
+setting per job, which is how the whole service moved onto UsePod without
+touching the pipeline.
+
+This is the AnsemHack Inference Markets track entry: the inference is not
+a line item, it is what answers a stranger's question in public, for free,
+with a citation.
+
+## How an episode becomes searchable
+
+1. Transcribe with Whisper, locally on MLX or hosted on Groq. Works on X
+   broadcasts, which carry no captions at all.
+2. Chunk into roughly 2,400-character passages that keep their timestamps,
+   and embed each one.
+3. Search by meaning, rerank, and answer only from the passages returned.
+4. Fingerprint voices so the answer knows who said it, and refuse to
+   attribute a line rather than guess.
+5. Verify: the last step asks the live index about the new episode. It is
+   not considered ingested until it can be found.
+
+## Pages
+
+- https://search.lexthedev.com/ : Market Bubble, the broadcast
+- https://search.lexthedev.com/mcg : MCG Live
+- https://search.lexthedev.com/elon : the Musk interviews
+- https://search.lexthedev.com/finance : The Record, finance on tape
+- https://search.lexthedev.com/mcg/assets : every asset MCG discussed
+- https://search.lexthedev.com/demo/assets.html : every asset Market Bubble discussed
+
+## API
+
+All POST, JSON body {"query": "..."}, no key required.
+
+- https://search.lexthedev.com/v1/podcast/search
+- https://search.lexthedev.com/v1/mcg/search
+- https://search.lexthedev.com/v1/elon/search
+- https://search.lexthedev.com/v1/finance/search
+
+Archive summaries, GET: /v1/podcast/archive, /v1/mcg/archive,
+/v1/elon/archive, /v1/finance/archive
+Service health, GET: /x-bot/status and /v1/stats
+
+## Distribution
+
+@mbubbleSearch on X answers questions in public, under other people's
+posts, citing the archive with a timestamp. Ansem has reposted it
+unprompted and has replied to it directly. Every reply is checked against
+the transcript, and the speaker confirmed on camera, before it goes out.

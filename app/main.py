@@ -601,6 +601,14 @@ for _suffix, _type in ((".webp", "image/webp"), (".webm", "video/webm"),
                        (".avif", "image/avif"), (".woff2", "font/woff2")):
     mimetypes.add_type(_type, _suffix)
 
+# llms.txt at the root, where the convention puts it and where anything
+# reading it will look. The file lives in demo/ with the pages it
+# describes so there is one place to update when the archive grows.
+@app.get("/llms.txt", include_in_schema=False)
+async def llms_txt() -> FileResponse:
+    return FileResponse(_ROOT / "demo" / "llms.txt", media_type="text/plain")
+
+
 app.mount("/widget", StaticFiles(directory=_ROOT / "widget"), name="widget")
 app.mount("/demo", StaticFiles(directory=_ROOT / "demo", html=True), name="demo")
 
