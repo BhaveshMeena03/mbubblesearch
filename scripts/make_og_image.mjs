@@ -29,7 +29,15 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 
 const browser = await chromium.launch({ executablePath: CHROME });
-const page = await browser.newPage({ viewport: { width: 1200, height: 630 } });
+// 2x. The card is 1200x630 in CSS pixels because that is the size every
+// social scraper expects, but capturing it at 1x produces exactly 1200
+// device pixels, which is soft on any retina screen and softer again
+// after a platform re-encodes it. Rendering at deviceScaleFactor 2 keeps
+// the layout identical and hands over 2400x1260 of actual detail.
+const page = await browser.newPage({
+  viewport: { width: 1200, height: 630 },
+  deviceScaleFactor: 2,
+});
 await page.goto("file://" + join(root, "demo", card.html));
 await page.waitForTimeout(400);
 await page.screenshot({ path: join(root, "demo", card.png) });
