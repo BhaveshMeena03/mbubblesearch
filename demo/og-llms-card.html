@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!-- Source for og-llms.png, the image attached to a post about llms.txt.
+     Re-render after edits:
+       node scripts/make_og_image.mjs llms
+
+     /llms.txt is served as text/plain, so it can never carry an og:image
+     of its own and a link to it renders bare. This is the picture that
+     goes in the post instead, and it is deliberately the file itself
+     rather than a marketing panel: the whole point of llms.txt is that it
+     is plain and readable, so a screenshot of it is the honest advert. -->
+<html><head><meta charset="utf-8"><style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{width:1200px;height:630px;background:#0b0e11;color:#e6e8ea;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    padding:40px 48px;position:relative;overflow:hidden}
+  .glow{position:absolute;right:-200px;top:-200px;width:600px;height:600px;
+    border-radius:50%;background:radial-gradient(circle,#16c78422,transparent 70%)}
+  .bar{display:flex;align-items:center;gap:10px;margin-bottom:22px}
+  .dot{width:11px;height:11px;border-radius:50%;background:#2a3038}
+  .path{margin-left:10px;font-size:17px;color:#8a939e}
+  .path b{color:#16c784;font-weight:600}
+  pre{font-size:17.5px;line-height:1.55;white-space:pre-wrap;color:#c9ced6}
+  pre .h{color:#16c784;font-weight:700}
+  pre .q{color:#8a939e}
+  pre b{color:#e6e8ea;font-weight:700}
+</style></head><body>
+  <div class="glow"></div>
+  <div class="bar">
+    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    <span class="path">search.lexthedev.com<b>/llms.txt</b></span>
+  </div>
+<pre><span class="h"># Market Bubble Search</span>
+
+<span class="q">&gt; A search engine over <b>1,187 hours</b> of crypto podcasts, live
+&gt; broadcasts and long-form interviews. Ask a question in plain
+&gt; English and it answers only from the transcripts, quoting the
+&gt; speaker and citing the exact second it was said.</span>
+
+<span class="h">## What is indexed</span>
+Market Bubble   21 shows      73.4h
+MCG Live        651 episodes  1,039.9h
+Elon Musk       14 interviews 37.8h
+The Record      30 recordings 36.0h
+                <b>716 recordings, 1,187 hours</b>
+
+<span class="h">## Inference</span>
+Every model call runs through UsePod. /v1/stats reports
+inference.proxy_share, which reads <b>1.0</b> on <b>0</b> direct calls.</pre>
+</body></html>
