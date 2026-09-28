@@ -52,8 +52,9 @@ from app.clipper import (  # noqa: E402
 # when this was written and stayed out, so every Musk post went up without
 # a clip while the broadcast got one -- for no reason beyond a filename.
 #
-# MCG is deliberately absent: data/mcg_index.json is a shelf, not
-# transcripts, and captions come from segments this machine does not hold.
+# MCG is not in this list because data/mcg_index.json is a shelf, not
+# transcripts. Its captions come from YouTube's track, and where there is
+# no track, from the index itself (see mcg_segments below).
 EPISODES = [ROOT / "data" / "episodes.json",
             ROOT / "data" / "elon_episodes.json",
             ROOT / "data" / "tradfi_episodes.json"]
@@ -70,6 +71,45 @@ SEARCH = "https://search.lexthedev.com"
 # Not as good as the archive's Whisper text -- auto-subs punctuate badly
 # and mishear names -- but a clip with slightly rough captions beats the
 # 458 episodes that currently cannot be clipped at all.
+def mcg_segments(video_id: str) -> list[dict]:
+    """An MCG episode's lines, reassembled out of its own vectors.
+
+    The fallback for the videos YouTube has no caption track for, which is
+    not a rare case: the one explaining the AnsemHack prize pool has none,
+    and without this there is no way to clip it at all.
+
+    app.mcg_transcript.rebuild already does this for the asset extractor,
+    and the lines it returns are the ~8 second blocks build_captions is
+    written against, so nothing here needs to re-time anything. These are
+    the archive's own Whisper lines rather than auto-subs, so they are the
+    better captions of the two when both exist.
+    """
+    from pinecone import Pinecone
+
+    from app.config import get_settings
+    from app.mcg_transcript import rebuild
+
+    settings = get_settings()
+    index = Pinecone(api_key=settings.pinecone_api_key).Index(
+        settings.mcg_pinecone_index)
+    return rebuild(index, settings.mcg_namespace,
+                   settings.embedding_dimension, video_id)
+
+
+def captions_for(url: str, video_id: str) -> list[dict]:
+    """YouTube's track if it has one, otherwise our own index."""
+    try:
+        return youtube_segments(url)
+    except SystemExit:
+        segments = mcg_segments(video_id)
+        if not segments:
+            raise SystemExit("  no youtube captions and nothing in the "
+                             "index for that video")
+        print(f"  no youtube captions; rebuilt {len(segments)} lines "
+              "from the archive")
+        return segments
+
+
 def youtube_title(url: str) -> str:
     """The video's own title, for the label burned into the clip."""
     try:
@@ -239,7 +279,7 @@ def main() -> None:
                      or "YouTube",
             "url": f"https://www.youtube.com/watch?v={episode_id}",
             "platform": "youtube",
-            "segments": youtube_segments(args.youtube),
+            "segments": captions_for(args.youtube, episode_id),
         }
         args.episode = episode_id
 
