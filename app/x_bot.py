@@ -4076,6 +4076,22 @@ class MentionBot:
         if not question:
             logger.info("%s is a bare tag — skipping", mention.id)
             return None
+        # A question under one of OUR OWN posts is about this account, not
+        # about the archive. Someone asked where the rest of the $MBS fee
+        # goes, under the post that announced it; retrieval had no idea the
+        # question was about us, searched the broadcast, and answered with
+        # a Stockbroker NFT fee and tokenized stocks on Robinhood chain.
+        # Accurate about the archive, and nonsense as an answer.
+        #
+        # Rooted at our own post is the tell. Replies under somebody else's
+        # post still answer normally, including follow-ups to our own reply
+        # there, which is the case that has actually worked: Ansem's
+        # "thanks bot!" sits in a thread he started, not one we did.
+        own = getattr(self._client, "own_threads", set()) or set()
+        if str(mention.conversation_id or "") in own:
+            logger.info("%s is under our own post — not an archive "
+                        "question, skipping", mention.id)
+            return None
         # Named mid-sentence in a post aimed at somebody else, asking
         # nothing and wanting nothing: they are describing this account,
         # not using it. Answering reads as the tool interrupting its own

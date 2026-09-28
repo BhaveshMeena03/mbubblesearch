@@ -418,6 +418,13 @@ class XClient:
         self.answered_conversations = {
             post["conversation_id"] for post in posts
             if post.get("conversation_id")}
+        # Threads this account STARTED, which is a different thing from
+        # threads it answered in. A post whose conversation_id is its own
+        # id is a root, and a root we wrote is an announcement, not a
+        # question about the archive. Free: same response, same read.
+        self.own_threads = {
+            post["id"] for post in posts
+            if post.get("conversation_id") == post.get("id")}
         return {ref["id"]
                 for post in posts
                 for ref in (post.get("referenced_tweets") or [])
