@@ -49,6 +49,32 @@ This is the AnsemHack Inference Markets track entry: the inference is not
 a line item, it is what answers a stranger's question in public, for free,
 with a citation.
 
+## What it refuses to do
+
+Measured on a 181-question bank: 165 answered correctly. The number that
+matters more is the refusals. It declines 19 of the 21 questions the
+archive does not cover, and 28 of 28 attempts to bait it into inventing
+an answer. When the archive does not contain something it says "I
+couldn't find that in the archive" rather than citing an unrelated
+timestamp, because search always returns its top matches whether or not
+the answer is in them.
+
+Attribution follows the same rule. Voices are fingerprinted per segment,
+and when a question asks what one person said, only that person's lines
+are passed to the model, so it cannot attribute a line it never saw. An
+unlabelled line is marked as unattributed rather than assigned to
+whoever else is in the passage.
+
+Answers carry no financial advice, and every claim carries the second it
+was said so it can be checked against the recording.
+
+## Clips
+
+Any moment can be cut and captioned from the archive, at the source
+resolution, with captions taken from the same Whisper transcript the
+search runs on rather than from auto-generated subtitles, so project
+names and tickers survive.
+
 ## How an episode becomes searchable
 
 1. Transcribe with Whisper, locally on MLX or hosted on Groq. Works on X
