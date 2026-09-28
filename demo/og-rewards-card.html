@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!-- Source for og-rewards.png. Re-render after edits:
+       node scripts/make_og_image.mjs rewards
+
+     Replaces what fee-routing-card.html and mbs-rewards-card.html say,
+     both of which describe the settings as they were: 15% of the creator
+     share, one wallet per round, equal odds, paid in SOL. Live now it is
+     35%, every holder, in proportion to holdings, paid in $ANSEM. A card
+     with a source is one that can be re-rendered when the split moves. -->
+<html><head><meta charset="utf-8"><style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{width:1200px;height:630px;background:#0b0e11;color:#e6e8ea;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    padding:46px 56px;position:relative;overflow:hidden;display:flex;
+    flex-direction:column}
+  .glow{position:absolute;right:-190px;top:-190px;width:580px;height:580px;
+    border-radius:50%;background:radial-gradient(circle,#16c78426,transparent 70%)}
+  .brand{font-weight:800;font-size:15px;letter-spacing:1.6px;
+    text-transform:uppercase;color:#8a939e;margin-bottom:16px}
+  .brand span{color:#16c784}
+  h1{font-size:54px;font-weight:800;line-height:1.08;letter-spacing:-1px;
+    margin-bottom:12px}
+  h1 em{color:#16c784;font-style:normal}
+  .sub{font-size:21px;color:#8a939e;line-height:1.4;margin-bottom:30px}
+  .steps{display:flex;gap:14px;flex:1}
+  .step{flex:1;background:#12161c;border:1px solid #1e242c;border-radius:14px;
+    padding:20px 20px 18px;display:flex;flex-direction:column}
+  .n{font-size:12px;font-weight:800;letter-spacing:1.4px;color:#16c784;
+    margin-bottom:10px}
+  .big{font-size:34px;font-weight:800;line-height:1.05;margin-bottom:8px;
+    font-variant-numeric:tabular-nums}
+  .txt{font-size:16.5px;color:#a8b0ba;line-height:1.38}
+  .txt b{color:#e6e8ea;font-weight:700}
+  .foot{display:flex;justify-content:space-between;align-items:center;
+    margin-top:24px;font-size:15px;color:#8a939e}
+  .foot b{color:#16c784}
+</style></head><body>
+  <div class="glow"></div>
+  <div class="brand">Market Bubble <span>Search</span></div>
+  <h1>Hold $MBS. Get paid in <em>$ANSEM</em>.</h1>
+  <div class="sub">Not an airdrop. Every trade burns $MBS and buys $ANSEM for
+  holders, every round, for as long as you hold.</div>
+  <div class="steps">
+    <div class="step">
+      <div class="n">01 &middot; THE FEE</div>
+      <div class="big">75%</div>
+      <div class="txt">Every trade of $MBS pays a creator fee. ClawPump
+      keeps 25%. The rest is ours to route.</div>
+    </div>
+    <div class="step">
+      <div class="n">02 &middot; BUY &amp; BURN</div>
+      <div class="big">15%</div>
+      <div class="txt">buys <b>$MBS</b> back on the open market and
+      <b>destroys it</b>. Supply only goes down.</div>
+    </div>
+    <div class="step">
+      <div class="n">03 &middot; PAID TO HOLDERS</div>
+      <div class="big">35%</div>
+      <div class="txt">buys <b>$ANSEM</b> and splits it across every holder,
+      <b>in proportion to what you hold</b>.</div>
+    </div>
+    <div class="step">
+      <div class="n">04 &middot; THE CATCH</div>
+      <div class="big">Sell and it stops</div>
+      <div class="txt">No snapshot to farm, nothing minted. You are paid
+      each round for holding, or you are not.</div>
+    </div>
+  </div>
+  <div class="foot">
+    <div>search.lexthedev.com</div>
+    <div>$MBS &middot; <b>the search engine runs either way</b></div>
+  </div>
+</body></html>
