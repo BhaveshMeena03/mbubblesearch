@@ -577,6 +577,26 @@ def _sectioned(hit: PodcastHit, with_source: bool,
     return out
 
 
+# Whisper mishears "$ANSEM" as a small set of non-words, and the model
+# quotes what it is handed, so an answer about the AnsemHack prize pool
+# came back saying "62,500 Anom" where the speaker had said $ANSEM. The
+# ticker index has mapped these for a while (assets.ARCHIVE_ALIASES); the
+# answering path never did, so the tickers were right and the prose was
+# wrong.
+#
+# Only strings that are not English words, on word boundaries. "answer" is
+# the other way $ANSEM comes through and is deliberately NOT here: it is a
+# real word that appears constantly, and mapping it would rewrite the
+# archive into nonsense. A wrong correction is worse than an uncorrected
+# one, which is the same rule the per-archive ticker aliases follow.
+_MISHEARD_ANSEM = re.compile(r"\b(?:anom|anoom|ansom|ansum|anim)\b", re.I)
+
+
+def mend_misheard(text: str) -> str:
+    """Put $ANSEM back where the transcription lost it."""
+    return _MISHEARD_ANSEM.sub("$ANSEM", text)
+
+
 def _body(hit: PodcastHit, with_source: bool) -> str:
     """The passage text, optionally with the recording on every line.
 
@@ -586,7 +606,7 @@ def _body(hit: PodcastHit, with_source: bool) -> str:
     above the text was not enough to stop "2019 Lex Fridman #49" being
     reported as "the 2021 Joe Rogan conversation".
     """
-    text = hit.text_ts or hit.text or ""
+    text = mend_misheard(hit.text_ts or hit.text or "")
     if not with_source or not hit.text_ts:
         return text
     label = source_label(hit.title, hit.published_at)
