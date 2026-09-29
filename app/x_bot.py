@@ -1346,6 +1346,36 @@ _ABOUT_ORIGIN = ("Built for the AnsemHack Clawrena, and for the Market "
 #
 # The trigger is who is being asked, not the topic. "what did ansem say
 # about buybacks" is a real question about the show and must still work.
+# Asked of the person, not the archive. "what made you start this?" was
+# answered with why ANSEM and BANKS started Market Bubble, under a thread
+# where Lex had just introduced himself. _ABOUT_US catches it only when the
+# word "project" happens to appear.
+#
+# These get silence rather than a description: somebody asking Lex why he
+# built it is asking Lex, and this account cannot answer for him.
+#
+# Past-tense origin verbs with "you" as the subject. Impersonal "you" is
+# present tense and stays out: "how do you buy hyperliquid" is a real
+# question about the archive and must still work.
+_ASKS_THE_OPERATOR = re.compile(
+    r"""(?ix)
+    (?: what\s+(?:made|got)\s+(?:you|u)\b
+      | (?:why|how|when)\s+did\s+(?:you|u)\s+
+        (?:start|build|make|create|begin|launch|decide|get\s+into|come\s+up)
+      | how\s+(?:long\s+)?have\s+(?:you|u)\s+been\s+
+        (?:building|working|doing|running)
+      | what(?:'?s| is)\s+(?:your|ur)\s+(?:story|background|
+                                            motivation|inspiration)
+      | (?:why|what)\s+(?:did|made)\s+(?:you|u)\s+(?:do|make|build)\s+
+        (?:this|it|that)
+    )""")
+
+
+def asks_the_operator(text: str) -> bool:
+    """A question for the person who built this, not for the archive."""
+    return bool(_ASKS_THE_OPERATOR.search(text or ""))
+
+
 _ABOUT_US = re.compile(
     r"""(?ix)
     (?: \b(?:your|ur|yours|you)\b [^.?!]{0,40}
@@ -4138,6 +4168,13 @@ class MentionBot:
         # "here you go Kelly" asks nothing. Answering it searched for the
         # only proper noun in the sentence, which was the name of somebody
         # already in the thread.
+        # Asked of Lex, not of the archive. This account cannot answer
+        # for him, and trying produced why Ansem and Banks started the
+        # show under a thread where Lex had just introduced himself.
+        if asks_the_operator(asked):
+            logger.info("%s is for the operator, not the archive — skipping",
+                        mention.id)
+            return None
         if (is_a_handoff(asked) and not asks_something(asked)
                 and not has_a_known_intent(asked)):
             logger.info("%s is a handoff, not a question — skipping", mention.id)
