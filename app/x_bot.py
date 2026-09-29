@@ -1013,6 +1013,24 @@ _ASKS_WHAT_THIS_IS = re.compile(
       # rather than appear to dodge it.
       | how\ far\ back\ (?:does|do)\ (?:your|the|this)
       | do\ (?:you|u)\ have\ (?:the\ )?(?:live|broadcasts?|streams?)
+      # "where do you send someone who wants to try it" went to retrieval,
+      # which searched the podcast for where to find a front door and
+      # answered with the SHOW's discord at 3:45:54. Somebody asking where
+      # to try this is asking for a link, and about_answer already ends
+      # with one.
+      #
+      # The object has to be a pronoun. An early version accepted a bare
+      # "where can i find", which swallowed "where can i find the ethena
+      # clip" -- a real archive question, and exactly the kind this is
+      # supposed to leave alone.
+      | where\s+(?:do|can|should)\s+(?:i|we|you|u|someone|somebody|people)\s+
+        (?:send|try|go|start|sign\ up)\b
+      | where\s+(?:do|can|should)\s+(?:i|we|you|u|someone|somebody|people)\s+
+        (?:find|use|access|test)\s+(?:it|this|you|u|that)\b
+      | where(?:\ is|'?s)\s+(?:the\ )?(?:link|site|demo|app)\b
+      | (?:how|where)\s+(?:do|can)\s+(?:i|we|someone|people)\s+
+        (?:try|use|access)\s+(?:it|this|you)\b
+      | ^(?:link|demo)\s*\?$
     )""")
 
 
