@@ -3124,6 +3124,36 @@ def fingerprint(text: str) -> str:
     return " ".join(sorted(set(words))[:12])
 
 
+# Handing the account to somebody else is not a question. "here you go
+# Kelly" was searched as though "Kelly" were the subject, found an MCG
+# project called Kelly Claude, and answered a thread about this search
+# engine with a pitch for an autonomous "blackbox money printer".
+#
+# asks_something() already returned False for it. The guard above it fires
+# only when mentions_rather_than_asks() ALSO matches, and that is about
+# being described in the third person, which this is not: it is addressed
+# to the account and asks it nothing.
+#
+# Matched on the phrase rather than on the absence of a question mark,
+# because plenty of real questions arrive without one.
+_IS_A_HANDOFF = re.compile(
+    r"""(?ix)
+    ^\W*
+    (?: (?:here|there)\s+(?:you|u|ya)\s+go
+      | here\s+it\s+is
+      | (?:this|that)\s+is\s+(?:the\s+one|it)
+      | (?:check|take\ a\ look\ at|look\ at)\s+(?:this|it|that)
+      | for\s+(?:you|u|ya)
+      | try\s+(?:this|it)
+      | found\s+it
+    )\b""")
+
+
+def is_a_handoff(text: str) -> bool:
+    """Somebody pointing a third party at this account, not asking it anything."""
+    return bool(_IS_A_HANDOFF.search(question_from(text or "")))
+
+
 def has_a_known_intent(text: str) -> bool:
     """Whether a handler already recognises this, however short it is.
 
@@ -4105,6 +4135,13 @@ class MentionBot:
         # post still answer normally, including follow-ups to our own reply
         # there, which is the case that has actually worked: Ansem's
         # "thanks bot!" sits in a thread he started, not one we did.
+        # "here you go Kelly" asks nothing. Answering it searched for the
+        # only proper noun in the sentence, which was the name of somebody
+        # already in the thread.
+        if (is_a_handoff(asked) and not asks_something(asked)
+                and not has_a_known_intent(asked)):
+            logger.info("%s is a handoff, not a question — skipping", mention.id)
+            return None
         own = getattr(self._client, "own_threads", set()) or set()
         if str(mention.conversation_id or "") in own:
             logger.info("%s is under our own post — not an archive "
