@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ThreadGuy, on the record: every stream, searchable to the second</title>
-<meta name="description" content="Every ThreadGuy stream and interview, transcribed and searchable by meaning. Ask what was said and get the second it was said.">
+<title>ThreadGuy, on the record: his interviews and streams, searchable to the second</title>
+<meta name="description" content="ThreadGuy's interviews and market-open streams, transcribed and searchable by meaning. Ask what was said and get the second it was said.">
 <meta property="og:title" content="ThreadGuy, on the record">
-<meta property="og:description" content="Every ThreadGuy stream and interview, transcribed and searchable by meaning. Ask what was said and get the second it was said.">
+<meta property="og:description" content="ThreadGuy's interviews and market-open streams, transcribed and searchable by meaning. Ask what was said and get the second it was said.">
 <meta property="og:url" content="https://search.lexthedev.com/threadguy">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Market Bubble Search">
-<meta property="og:image" content="https://search.lexthedev.com/demo/og-threadguy.png">
+<meta property="og:image" content="https://search.lexthedev.com/demo/og-threadguy.png?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://search.lexthedev.com/demo/og-threadguy.png">
-<meta name="twitter:image:alt" content="ThreadGuy, on the record: every stream and interview, searchable to the second">
+<meta name="twitter:image" content="https://search.lexthedev.com/demo/og-threadguy.png?v=2">
+<meta name="twitter:image:alt" content="ThreadGuy, on the record: his interviews and market-open streams, searchable to the second">
 <meta name="twitter:title" content="ThreadGuy, on the record">
-<meta name="twitter:description" content="Every ThreadGuy stream and interview, searchable to the second.">
+<meta name="twitter:description" content="ThreadGuy's interviews and market-open streams, searchable to the second.">
 
 <!--
   The fifth room, and the first one where the date is the point.
@@ -302,8 +302,8 @@
 
   <section class="hero">
     <div>
-      <h1 class="rise" style="animation-delay:.09s">Every market open,<br><em>on the record</em>.</h1>
-      <p class="lede rise" style="animation-delay:.13s">Every ThreadGuy stream and interview,
+      <h1 class="rise" style="animation-delay:.09s">ThreadGuy,<br><em>on the record</em>.</h1>
+      <p class="lede rise" style="animation-delay:.13s">His interviews and market-open streams,
         transcribed. Ask what was said, and get the second it was said.</p>
       <form id="f" autocomplete="off" class="rise" style="animation-delay:.17s">
         <input id="q" type="search" aria-label="Ask the ThreadGuy archive"
@@ -328,7 +328,7 @@
   </section>
 
   <section class="sect rise" style="animation-delay:.32s">
-    <h2>every stream</h2>
+    <h2>on the shelf</h2>
     <p class="note">Newest first, grouped by month. Pick one to watch it here.</p>
     <div id="shelf"><div class="empty">Loading the shelf.</div></div>
   </section>
@@ -450,7 +450,7 @@
     if (typing) { clearInterval(typing); typing = null; }
     stopPlaying();
     $("out").style.display = "block";
-    $("verdict").textContent = "searching every stream";
+    $("verdict").textContent = "searching the archive";
     $("answer").textContent = ""; $("hits").innerHTML = "";
     $("out").classList.toggle("instant", document.hidden);
     void $("out").offsetHeight;
