@@ -1,9 +1,10 @@
 """Pydantic models shared across the API, retriever, and agent layers."""
 
+import re
 from enum import StrEnum
 from typing import Literal
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, computed_field, field_validator
 
 # Ceiling on a replayed conversation, summed across turns. See the validator
 # on ChatRequest.history for why the per-turn limits were not enough.
@@ -137,6 +138,30 @@ class PodcastHit(BaseModel):
     # answer rather than drop the hit.
     published_at: str | None = None
     score: float
+
+    @computed_field
+    @property
+    def end_seconds(self) -> float | None:
+        """Where the passage's last line starts, from its per-line stamps.
+
+        The page links a time inside an answer only when a returned passage
+        covers it, which is the same rule the bot follows. start_seconds
+        alone cannot say that: a passage runs minutes, and a time a little
+        after one passage starts can belong to a different recording that
+        happens to be at the same point. None when the vector predates
+        per-line stamps, so the page can fall back to a nearness check.
+        """
+        stamps = _STAMP.findall(self.text_ts or "")
+        if not stamps:
+            return None
+        total = 0
+        for part in stamps[-1].split(":"):
+            total = total * 60 + int(part)
+        return float(total)
+
+
+# One per transcript line, "[16:16]" or "[1:07:24]".
+_STAMP = re.compile(r"\[(\d{1,2}:\d{2}(?::\d{2})?)\]")
 
 
 class PodcastSearchRequest(BaseModel):

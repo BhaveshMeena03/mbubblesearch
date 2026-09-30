@@ -63,7 +63,10 @@ def test_nothing_waits_on_a_background_tab():
     """Transitions and timers are throttled in a hidden tab, so the reveal
     and the streamed answer both have a path that does not depend on them."""
     assert 'classList.toggle("instant", document.hidden)' in PAGE
-    assert "if (document.hidden) { el.textContent = text; return; }" in PAGE
+    # The answer is written by cite.js, which gets it whole when hidden.
+    assert "}, document.hidden);" in PAGE
+    cite = (ROOT / "demo" / "cite.js").read_text()
+    assert "if (instant) {" in cite
     assert "requestAnimationFrame(" not in PAGE
 
 
@@ -75,7 +78,9 @@ def test_everything_clickable_is_reachable_without_a_mouse():
 
 def test_one_recording_plays_at_a_time_and_can_go_fullscreen():
     assert "function stopPlaying()" in PAGE
-    assert "f.allowFullscreen = true" in PAGE
+    # every player on the page can go fullscreen
+    assert PAGE.count("'<iframe allowfullscreen '") == 3  # shelf, stage, answer
+    assert PAGE.count('allow="autoplay; encrypted-media; fullscreen; picture-in-picture"') >= 2
 
 
 def test_show_more_does_not_repeat_a_month():
@@ -151,9 +156,22 @@ def test_a_shelf_row_plays_at_the_size_everything_else_does():
     """Inside the row at 820px it hung left of a wide empty gap and read as
     a lesser player than the stages. It opens into the same video and rail
     layout, and closing it removes the wrapper, not only the frame."""
-    assert ".ep .pw{" in PAGE and "minmax(0,980px)" in PAGE.split(".ep .pw{")[1][:200]
+    assert "  .pw{" in PAGE and "minmax(0,980px)" in PAGE.split("  .pw{")[1][:200]
+    assert ".ep .pw{grid-column:1/-1}" in PAGE
     assert 'pw.className = "pw"' in PAGE
     assert 'playing.querySelector(".pw")' in PAGE
+
+
+def test_the_answer_and_its_player_run_the_full_width_of_the_page():
+    """The answer stopped at 900px and its player at 820px, halfway across
+    a page whose recordings column runs to 1320px. A cited passage now
+    plays in the same video and rail layout as the shelf."""
+    out = PAGE.split("  #out{")[1].split("}")[0]
+    answer = PAGE.split("  .answer{")[1].split("}")[0]
+    assert "max-width" not in out and "max-width" not in answer
+    assert "max-width:820px" not in PAGE
+    play = PAGE.split("  function play(host, h, vid, sec){")[1].split("\n  }\n")[0]
+    assert 'pw.className = "pw"' in play
 
 
 def test_the_answer_sits_on_the_pages_left_edge():
