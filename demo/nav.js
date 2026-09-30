@@ -22,7 +22,8 @@
     { href: "/",        name: "Market Bubble", note: "the broadcast" },
     { href: "/mcg",     name: "MCG Live",      note: "one project per episode" },
     { href: "/elon",    name: "Elon Musk",     note: "long-form interviews" },
-    { href: "/finance", name: "The Record",    note: "finance, on tape" }
+    { href: "/finance", name: "The Record",    note: "finance, on tape" },
+    { href: "/threadguy", name: "ThreadGuy",   note: "the morning show" }
   ];
 
   var TOOLS = [
@@ -36,6 +37,7 @@
     if (href === "/finance") return /finance/.test(path);
     if (href === "/elon") return /elon|musk/.test(path);
     if (href === "/mcg") return path === "/mcg" || /\/mcg\.html$/.test(path);
+    if (href === "/threadguy") return /threadguy/.test(path);
     return path === href;
   }
 

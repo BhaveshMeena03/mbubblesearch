@@ -262,3 +262,20 @@ def test_nothing_that_must_be_seen_waits_on_an_animation():
     whose visibility depends on one arrives stuck at its start value."""
     assert "#out.instant{transition:none}" in PAGE
     assert 'classList.toggle("instant", document.hidden)' in PAGE
+
+
+def test_a_question_card_plays_underneath_rather_than_inside():
+    """Inside its card the video was a third of the row wide, and the
+    grid stretched the other two cards to its height, so two of three
+    became tall empty boxes."""
+    assert 'id="askstage"' in PAGE
+    cards = PAGE.split("MOMENTS.forEach")[1].split("RANKS")[0]
+    assert "play(el, m.vid, m.at)" not in cards
+    assert 'getElementById("askstage")' in cards
+
+
+def test_the_page_counts_the_archives_it_searches():
+    """Five channels, five rooms in the fan out, and the copy said four."""
+    assert "all five archives" in PAGE
+    assert "<b>5</b><span>archives</span>" in PAGE
+    assert "all four archives" not in PAGE

@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Market Bubble Search: four archives, one question</title>
-<meta name="description" content="1,187 hours of crypto podcasts, live broadcasts and long-form interviews. Ask in plain English, get the sentence and the second it was said.">
-<meta property="og:title" content="Market Bubble Search: four archives, one question">
-<meta property="og:description" content="1,187 hours across Market Bubble, MCG Live, every long-form Elon Musk interview and finance. Ask once, and the archive with the answer gives it.">
+<title>Market Bubble Search: five archives, one question</title>
+<meta name="description" content="1,722 hours of crypto podcasts, live broadcasts and long-form interviews. Ask in plain English, get the sentence and the second it was said.">
+<meta property="og:title" content="Market Bubble Search: five archives, one question">
+<meta property="og:description" content="Market Bubble, MCG Live, ThreadGuy, every long-form Elon Musk interview and finance. Ask once, and the archive with the answer gives it.">
 <meta property="og:image" content="https://search.lexthedev.com/demo/og-home.png">
 <meta property="og:url" content="https://search.lexthedev.com/home?v=3">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://search.lexthedev.com/demo/og-home.png">
-<meta name="twitter:title" content="Market Bubble Search: four archives, one question">
-<meta name="twitter:description" content="1,187 hours across four archives. Ask once, and the archive with the answer gives it.">
+<meta name="twitter:title" content="Market Bubble Search: five archives, one question">
+<meta name="twitter:description" content="Five archives of crypto and finance on tape. Ask once, and the archive with the answer gives it.">
 
 <!-- The front door.
      Concept: an instrument, not a landing page. Everything this thing does
@@ -38,7 +38,7 @@
     --ink:#f2f4f8; --ink-2:#aab3c2; --ink-3:#7e8799;
     --signal:#ffa23a;                 /* the parent. none of the four own it */
     --podcast:#16c784; --mcg:#6ecf9e; --elon:#d93a4f; --tradfi:#d8cfc0;
-    --threadguy:#8a7fd4;
+    --threadguy:#6aa9ff;
     --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
     --ease:cubic-bezier(.22,.78,.24,1); --quick:.22s; --slow:.55s;
   }
@@ -219,8 +219,24 @@
   .moment .where{margin-top:5px;font-family:var(--mono);font-size:11.5px;
     color:var(--ink-3);display:flex;gap:9px;flex-wrap:wrap;align-items:center}
   .moment .where em{color:var(--signal);font-style:normal}
-  .moment .player{margin-top:14px;width:100%;aspect-ratio:16/9;border:0;
-    border-radius:2px}
+  /* Played inside its card the video was a third of the row wide, and
+     the grid stretched the other two cards to its height, so two of the
+     three turned into tall empty boxes. It plays underneath at a size
+     worth watching, and the row stays the row. */
+  .moment.on{border-color:var(--c);background:#10131a}
+  .moment.on::before{opacity:1}
+  .askstage{margin-top:18px;display:grid;
+    grid-template-columns:minmax(0,980px) minmax(220px,300px);gap:30px;
+    align-items:start;opacity:0;transition:opacity .3s var(--ease)}
+  .askstage.on{opacity:1}
+  .askstage iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:3px;
+    background:#000;display:block}
+  .askstage .cap .qq{font-size:15px;font-weight:600;color:var(--ink);line-height:1.4}
+  .askstage .cap .by{margin-top:14px;font-size:13.5px;font-weight:600;color:var(--ink-2)}
+  .askstage .cap .at{margin-top:5px;font-family:var(--mono);font-size:11.5px;
+    color:var(--ink-3)}
+  .askstage .cap .at em{color:var(--signal);font-style:normal}
+  @media(max-width:900px){.askstage{grid-template-columns:1fr;gap:16px}}
   .ranks{display:grid;gap:2px}
   .rank{display:grid;grid-template-columns:26px 150px 1fr 74px;gap:4px 16px;
     align-items:center;padding:12px 16px;border-radius:3px;cursor:pointer;
@@ -375,8 +391,8 @@
 
   <section class="hero">
     <h1 class="rise" style="animation-delay:.06s">Ask what somebody<br><em>actually said</em>.</h1>
-    <p class="lede rise" style="animation-delay:.11s">One question goes to all four archives at once.
-      The one with the answer gives it, and you see what the other three scored.</p>
+    <p class="lede rise" style="animation-delay:.11s">One question goes to all five archives at once.
+      The one with the answer gives it, and you see what the other four scored.</p>
 
     <form id="f" autocomplete="off" class="rise" style="animation-delay:.16s">
       <input id="q" type="search" aria-label="Ask the archives"
@@ -386,9 +402,9 @@
     <div class="tries rise" id="tries" style="animation-delay:.21s"></div>
 
     <div class="scale rise" style="animation-delay:.26s">
-      <div class="lead"><b>1,187</b><span>hours of tape</span></div>
-      <div><b>716</b><span>recordings</span></div>
-      <div><b>4</b><span>archives</span></div>
+      <div class="lead"><b>1,722</b><span>hours of tape</span></div>
+      <div><b>1,237</b><span>recordings</span></div>
+      <div><b>5</b><span>archives</span></div>
       <div><b>2014</b><span>earliest</span></div>
       <div><b>2026</b><span>latest</span></div>
     </div>
@@ -405,6 +421,7 @@
     <p class="note">What the archive gives back, read off the transcript at
       the second it was said. Pick one to hear it.</p>
     <div class="moments" id="moments"></div>
+    <div class="askstage" id="askstage" hidden></div>
   </section>
 
   <section class="sect" id="archive-sect">
@@ -465,8 +482,8 @@
      meta:"14 long-form interviews, 2018 to 2026. Rogan, Lex Fridman, the Economist, the Trump space."},
     {k:"tradfi", name:"The Record", href:"/finance", size:"39",
      meta:"35 recordings from the people who run the money. Fink, Dalio, Powell, Dimon, Wood, Saylor, CZ."},
-    {k:"threadguy", name:"ThreadGuy", href:"/threadguy", size:"456",
-     meta:"488 streams and interviews, still indexing. The chat lives in this one."}
+    {k:"threadguy", name:"ThreadGuy", href:"/threadguy", size:"531",
+     meta:"516 streams and interviews, still indexing. The daily market open, and the guests he has on."}
   ];
   var TRIES = [
     {k:"tradfi",  q:"When did Fink change his mind on Bitcoin?"},
@@ -548,6 +565,12 @@
   // first still playing underneath it.
   var playing = null;
   function stopPlaying(){
+    var as = document.getElementById("askstage");
+    if (as && !as.hidden) {
+      as.hidden = true; as.innerHTML = "";
+      document.querySelectorAll(".moment.on").forEach(function(o){
+        o.classList.remove("on"); });
+    }
     if (!playing) return;
     var f = playing.querySelector("iframe");
     if (f) f.remove();
@@ -595,7 +618,7 @@
   var busy = false;
   // What the visitor is told when nothing comes back. A rate limit used
   // to fall through to render(), which found no archive on the payload
-  // and reported that nothing in 1,187 hours matched. Being throttled and
+  // and reported that nothing in the whole archive matched. Being throttled and
   // being unanswered are not the same thing and must not read the same.
   var TROUBLE = {
     429: "That is a lot of questions at once. Give it a minute and ask again.",
@@ -608,7 +631,7 @@
     busy = true; $("go").disabled = true; $("go").textContent = "\u2026";
     $("out").style.display = "block";
     if (typing) { clearInterval(typing); typing = null; }
-    $("verdict").textContent = "searching all four archives";
+    $("verdict").textContent = "searching all five archives";
     $("out").classList.toggle("instant", document.hidden);
     void $("out").offsetHeight;
     $("out").classList.add("shown");
@@ -759,7 +782,31 @@
     w[0].textContent = m.where;
     el.querySelector(".where em").textContent = stamp(m.at);
     w[1].textContent = m.when;
-    function open_(){ play(el, m.vid, m.at); }
+    function open_(){
+      stopPlaying();
+      document.querySelectorAll(".moment.on").forEach(function(o){
+        o.classList.remove("on"); });
+      el.classList.add("on");
+      var st = document.getElementById("askstage");
+      st.innerHTML = '<iframe allowfullscreen '
+        + 'allow="autoplay; encrypted-media; fullscreen; picture-in-picture" '
+        + 'title="Playback from the cited moment"></iframe>'
+        + '<div class="cap"><div class="qq"></div><div class="by"></div>'
+        + '<div class="at"><span></span> <em></em></div></div>';
+      st.querySelector("iframe").src = "https://www.youtube.com/embed/"
+        + m.vid + "?start=" + m.at + "&autoplay=1";
+      st.querySelector(".qq").textContent = m.q;
+      st.querySelector(".by").textContent = m.who;
+      st.querySelector(".at span").textContent = m.where + " \u00b7";
+      st.querySelector(".at em").textContent = stamp(m.at);
+      st.hidden = false;
+      st.classList.remove("on");
+      void st.offsetHeight;
+      st.classList.add("on");
+      var box = st.getBoundingClientRect();
+      var over = box.bottom - window.innerHeight + 24;
+      if (over > 0) window.scrollBy({top: over, behavior: "smooth"});
+    }
     el.onclick = open_;
     el.onkeydown = function(e){
       if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open_(); }

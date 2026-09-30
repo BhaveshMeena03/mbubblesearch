@@ -2203,8 +2203,10 @@ async def threadguy_search(
         raise HTTPException(status_code=503, detail="The archive is not loaded.")
 
     # Surface-keyed like the others, so no two archives can serve each
-    # other's cached answers.
-    key = make_key(body.query, surface="threadguy", top_k=body.top_k)
+    # other's cached answers. Versioned because the answers changed: the
+    # first ones were written under the Market Bubble prompt, and a key
+    # that only moves with the question would go on serving them.
+    key = make_key(body.query, surface="threadguy-v2", top_k=body.top_k)
     cached = answers.get(key)
     if cached is not None:
         per_client_daily.refund(request)
