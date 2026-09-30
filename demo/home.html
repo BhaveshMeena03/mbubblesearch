@@ -38,6 +38,7 @@
     --ink:#f2f4f8; --ink-2:#aab3c2; --ink-3:#7e8799;
     --signal:#ffa23a;                 /* the parent. none of the four own it */
     --podcast:#16c784; --mcg:#6ecf9e; --elon:#d93a4f; --tradfi:#d8cfc0;
+    --threadguy:#8a7fd4;
     --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
     --ease:cubic-bezier(.22,.78,.24,1); --quick:.22s; --slow:.55s;
   }
@@ -285,9 +286,11 @@
   /* ── answer ───────────────────────────────────────────────────────── */
   /* The answer was the one thing on the page that arrived by snapping
      into place. It now rises the same way the rest of it does. */
-  #out{display:none;margin:0 0 54px;opacity:0;transform:translateY(10px);
+  #out{display:none;margin:0 auto 54px;max-width:900px;
+    opacity:0;transform:translateY(10px);
     transition:opacity .4s var(--ease),transform .4s var(--ease)}
   #out.shown{opacity:1;transform:none}
+  #out.instant{transition:none}
   .hit{animation:rise .5s var(--ease) both}
   .verdict{display:flex;align-items:center;gap:11px;font-family:var(--mono);
     font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
@@ -297,8 +300,8 @@
   @keyframes beat{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
   .verdict{flex-wrap:wrap}
   .verdict b{color:var(--ink);letter-spacing:.06em;overflow-wrap:anywhere}
-  .answer{font-size:19px;line-height:1.62;margin:18px 0 0;white-space:pre-wrap;
-    max-width:72ch;overflow-wrap:anywhere}
+  .answer{font-size:16.5px;line-height:1.65;margin:16px 0 0;white-space:pre-wrap;
+    max-width:74ch;overflow-wrap:anywhere}
   .hits{margin:30px 0 0;display:grid;gap:1px;background:var(--edge);
     border:1px solid var(--edge);border-radius:2px}
   .hit{background:var(--deck);padding:16px 18px;
@@ -451,7 +454,8 @@
 <script>
 (function(){
   "use strict";
-  var VAR = {podcast:"--podcast", mcg:"--mcg", elon:"--elon", tradfi:"--tradfi"};
+  var VAR = {podcast:"--podcast", mcg:"--mcg", elon:"--elon",
+             tradfi:"--tradfi", threadguy:"--threadguy"};
   var CHANS = [
     {k:"podcast", name:"Market Bubble", href:"/", size:"73",
      meta:"21 live shows with Ansem and FaZe Banks. About a quarter of each one never reaches the YouTube upload."},
@@ -459,8 +463,10 @@
      meta:"651 episodes, one project per episode, with the founder on the call."},
     {k:"elon", name:"Elon Musk", href:"/elon", size:"38",
      meta:"14 long-form interviews, 2018 to 2026. Rogan, Lex Fridman, the Economist, the Trump space."},
-    {k:"tradfi", name:"The Record", href:"/finance", size:"36",
-     meta:"30 recordings from the people who run the money. Fink, Dalio, Powell, Dimon, Wood, Saylor."}
+    {k:"tradfi", name:"The Record", href:"/finance", size:"39",
+     meta:"35 recordings from the people who run the money. Fink, Dalio, Powell, Dimon, Wood, Saylor, CZ."},
+    {k:"threadguy", name:"ThreadGuy", href:"/threadguy", size:"456",
+     meta:"488 streams and interviews, still indexing. The chat lives in this one."}
   ];
   var TRIES = [
     {k:"tradfi",  q:"When did Fink change his mind on Bitcoin?"},
@@ -560,6 +566,32 @@
     el.appendChild(f); playing = el;
   }
 
+  // Bring the answer into view only when it is actually out of it, and
+  // only by as much as that takes.
+  function nudge(){
+    var box = $("out").getBoundingClientRect();
+    var under = box.top - window.innerHeight + 90;
+    if (under > 0) window.scrollBy({top: under, behavior: "smooth"});
+  }
+
+  // The answer arrived as one block of finished text. It reads better
+  // arriving, so the words are revealed on a timer. A hidden tab gets
+  // the whole thing at once: browsers throttle timers in the background
+  // and a half written answer would be waiting when somebody came back.
+  var typing = null;
+  function typeOut(el, text){
+    if (typing) { clearInterval(typing); typing = null; }
+    if (!text) { el.textContent = ""; return; }
+    if (document.hidden) { el.textContent = text; return; }
+    var words = text.split(/(\s+)/), i = 0;
+    el.textContent = "";
+    typing = setInterval(function(){
+      el.textContent += words.slice(i, i + 6).join("");
+      i += 6;
+      if (i >= words.length) { clearInterval(typing); typing = null; }
+    }, 16);
+  }
+
   var busy = false;
   // What the visitor is told when nothing comes back. A rate limit used
   // to fall through to render(), which found no archive on the payload
@@ -575,11 +607,16 @@
     if (busy || !question) return;
     busy = true; $("go").disabled = true; $("go").textContent = "\u2026";
     $("out").style.display = "block";
+    if (typing) { clearInterval(typing); typing = null; }
     $("verdict").textContent = "searching all four archives";
+    $("out").classList.toggle("instant", document.hidden);
     void $("out").offsetHeight;
     $("out").classList.add("shown");
     $("out").classList.add("working");
-    $("out").scrollIntoView({behavior:"smooth", block:"start"});
+    // No scroll here. The block is right under the search box, and
+    // pulling it to the top of the window threw the hero off screen and
+    // filled the view with the sections below it.
+    nudge();
     $("answer").textContent = ""; $("hits").innerHTML = "";
     stopPlaying();
     CHANS.forEach(function(c){
@@ -597,6 +634,7 @@
 
     function trouble(msg){
       $("out").classList.remove("working");
+      if (typing) { clearInterval(typing); typing = null; }
       $("verdict").textContent = msg;
       $("answer").textContent = ""; $("hits").innerHTML = "";
       $("out").classList.add("shown");
@@ -638,7 +676,7 @@
       b.style.color = css(VAR[room.key]) || "";
       $("verdict").appendChild(b);
     }
-    $("answer").textContent = d.answer || "";
+    typeOut($("answer"), d.answer || "");
 
     (d.hits||[]).slice(0,6).forEach(function(h){
       var el = document.createElement("div");
@@ -761,7 +799,12 @@
         });
         el.classList.add("playing");
         var st = document.getElementById("stage");
-        var fresh = st.hidden;
+        // Rebuild when the frame is missing, not only when the stage has
+        // never been opened. Starting a search calls stopPlaying(), which
+        // removes the frame while leaving the stage mounted, so every row
+        // clicked after a search was setting src on nothing and silently
+        // doing nothing at all.
+        var fresh = st.hidden || !st.querySelector("iframe");
         if (fresh) {
           st.innerHTML = '<iframe allowfullscreen '
             + 'allow="autoplay; encrypted-media; fullscreen; picture-in-picture" '
@@ -775,7 +818,13 @@
         // moving between rows does not flash the whole block away.
         st.classList.remove("on");
         setTimeout(function(){
-          st.querySelector("iframe").src = "https://www.youtube.com/embed/"
+          // The fade defers this by 140ms, and anything that clears the
+          // player in that window leaves nothing to write to. Starting a
+          // search does exactly that, so the frame is checked again here
+          // rather than assumed to have survived the wait.
+          var frame = st.querySelector("iframe");
+          if (!frame) { st.hidden = true; return; }
+          frame.src = "https://www.youtube.com/embed/"
             + r.vid + "?start=" + r.at + "&autoplay=1";
           st.querySelector(".sym").textContent = r.sym + " \u00b7 " + r.name;
           st.querySelector("h3").textContent = r.title;
