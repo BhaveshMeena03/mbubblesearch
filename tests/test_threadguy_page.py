@@ -117,3 +117,12 @@ def test_a_latest_tile_plays_on_the_stage_not_in_the_tile():
 
 def test_the_column_says_recordings_because_not_all_are_streams():
     assert "latest recordings" in PAGE and "latest streams" not in PAGE
+
+
+def test_a_link_to_the_archive_shares_with_a_picture():
+    """It shipped with no og:image and a summary card, so a link to
+    /threadguy rendered as a bare line of text in anybody's timeline."""
+    assert 'property="og:image" content="https://search.lexthedev.com/demo/og-threadguy.png"' in PAGE
+    assert 'name="twitter:card" content="summary_large_image"' in PAGE
+    assert (ROOT / "demo" / "og-threadguy.png").exists()
+    assert (ROOT / "demo" / "og-threadguy-card.html").exists()
