@@ -52,8 +52,36 @@ from app.schemas import Episode  # noqa: E402
 # run of this script put thirteen vectors somewhere nothing reads: the app
 # builds its MCG index with index_name=mcg_pinecone_index, and anything
 # that forgets that writes into the concierge's index instead.
-SHELF = ROOT / "data" / "mcg_index.json"
-AUDIO_DIR = Path("/tmp/mcg_audio")
+# One pipeline, more than one channel. Threadguy is the same shape of
+# source as MCG -- a daily long stream plus shorter uploads, on two tabs,
+# no transcripts worth keeping in the repo -- so it gets the same code
+# rather than a fork that drifts. --archive picks the set; the default is
+# mcg, so every existing invocation and the scheduled job are unchanged.
+ARCHIVES = {
+    "mcg": {
+        "shelf": ROOT / "data" / "mcg_index.json",
+        "audio": Path("/tmp/mcg_audio"),
+        "handle": "@MCG_live",
+        "namespace": lambda s: s.mcg_namespace,
+        "index": lambda s: s.mcg_pinecone_index,
+    },
+    "threadguy": {
+        "shelf": ROOT / "data" / "threadguy_index.json",
+        "audio": Path("/tmp/threadguy_audio"),
+        "handle": "@notthreadguy",
+        # Its own namespace in the default index rather than an index of
+        # its own. The 181 vectors already sitting there were built from
+        # YouTube's auto-captions, and the page on threadguy.lexthedev.com
+        # reads them, so writing Whisper passages into the same place
+        # upgrades that page instead of orphaning it.
+        "namespace": lambda s: "threadguy",
+        "index": lambda s: s.pinecone_index,
+    },
+}
+ARCHIVE = "mcg"
+
+SHELF = ARCHIVES["mcg"]["shelf"]
+AUDIO_DIR = ARCHIVES["mcg"]["audio"]
 YTDLP = next((str(p) for p in (ROOT / ".venv" / "bin" / "yt-dlp",)
               if p.is_file()), shutil.which("yt-dlp") or "yt-dlp")
 
@@ -61,6 +89,18 @@ YTDLP = next((str(p) for p in (ROOT / ".venv" / "bin" / "yt-dlp",)
 # on them, so they are not ours to rename.
 TABS = [("interview", "https://www.youtube.com/@MCG_live/videos"),
         ("stream", "https://www.youtube.com/@MCG_live/streams")]
+
+
+def use(archive: str) -> dict:
+    """Point the module at one channel. Called once, before any work."""
+    global SHELF, AUDIO_DIR, TABS, ARCHIVE
+    spec = ARCHIVES[archive]
+    ARCHIVE = archive
+    SHELF = spec["shelf"]
+    AUDIO_DIR = spec["audio"]
+    TABS = [("interview", f"https://www.youtube.com/{spec['handle']}/videos"),
+            ("stream", f"https://www.youtube.com/{spec['handle']}/streams")]
+    return spec
 
 # A show is hours; a trailer is seconds. The shortest real episode in the
 # shelf is around twelve minutes, so this only drops clips and shorts.
@@ -88,6 +128,14 @@ def proxy_args() -> list[str]:
 
 
 def shelf() -> list[dict]:
+    """Rows already ingested, or nothing on the first run of an archive.
+
+    MCG's shelf has existed since before this script did, so the missing
+    file was never a case until a second archive was added and --list
+    crashed on it.
+    """
+    if not SHELF.exists():
+        return []
     return json.loads(SHELF.read_text())
 
 
@@ -291,6 +339,8 @@ def add_to_shelf(row: dict) -> None:
 
 async def main() -> int:
     ap = argparse.ArgumentParser()
+    ap.add_argument("--archive", default="mcg", choices=sorted(ARCHIVES),
+                    help="which channel to bring up to date")
     ap.add_argument("--list", action="store_true", help="show what is missing")
     ap.add_argument("--only", help="one video id")
     ap.add_argument("--limit", type=int, default=60,
@@ -303,6 +353,7 @@ async def main() -> int:
     ap.add_argument("--max-new", type=int, default=0,
                     help="at most N new episodes this run (0 = no cap)")
     args = ap.parse_args()
+    spec = use(args.archive)
 
     todo = pending(args.limit)
     if args.only:
@@ -323,10 +374,9 @@ async def main() -> int:
         return 0
 
     settings = get_settings()
-    index = PodcastIndex(namespace=settings.mcg_namespace,
-                         index_name=settings.mcg_pinecone_index)
-    print(f"  writing to index {settings.mcg_pinecone_index!r}, "
-          f"namespace {settings.mcg_namespace!r}")
+    ns, ix = spec["namespace"](settings), spec["index"](settings)
+    index = PodcastIndex(namespace=ns, index_name=ix)
+    print(f"  writing to index {ix!r}, namespace {ns!r}")
     failures: list[str] = []
     added = 0
     for n, item in enumerate(todo, 1):
