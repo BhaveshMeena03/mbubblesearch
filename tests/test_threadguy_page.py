@@ -152,12 +152,15 @@ def test_the_page_claims_only_what_the_archive_holds():
     assert "Every market open" not in card and "Every ThreadGuy stream" not in card
 
 
-def test_a_shelf_row_plays_at_the_size_everything_else_does():
-    """Inside the row at 820px it hung left of a wide empty gap and read as
-    a lesser player than the stages. It opens into the same video and rail
-    layout, and closing it removes the wrapper, not only the frame."""
-    assert "  .pw{" in PAGE and "minmax(0,980px)" in PAGE.split("  .pw{")[1][:200]
-    assert ".ep .pw{grid-column:1/-1}" in PAGE
+def test_a_shelf_row_plays_full_width_like_a_cited_moment():
+    """A row opened a 980px video with a caption rail beside it, while a
+    time cited in the answer plays the full width. They now match: the
+    row already carries the title, date and runtime the rail repeated.
+    Closing it removes the wrapper, not only the frame."""
+    pw = PAGE.split("  .pw{")[1].split("}")[0]
+    assert "grid-template-columns" not in pw
+    assert ".pw iframe{width:100%" in PAGE
+    assert '<div class="cap">' not in PAGE.split("function row(e){")[1].split("return el;")[0]
     assert 'pw.className = "pw"' in PAGE
     assert 'playing.querySelector(".pw")' in PAGE
 
