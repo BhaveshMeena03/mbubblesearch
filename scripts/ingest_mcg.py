@@ -29,6 +29,7 @@ anything already in the shelf is skipped.
 from __future__ import annotations
 
 import argparse
+import concurrent.futures as cf
 import asyncio
 import json
 import os
@@ -228,6 +229,12 @@ def fetch_audio(video_id: str) -> Path:
 GROQ_URL = "https://api.groq.com/openai/v1/audio/transcriptions"
 GROQ_MODEL = "whisper-large-v3-turbo"
 CHUNK_SECONDS = 15 * 60
+# How many chunks of one episode are in flight at once, and which
+# transcriber to use. Both are set from the command line; the defaults
+# keep every existing invocation, including the scheduled sync, on
+# exactly the path it was on before.
+CHUNK_WORKERS = 1
+TRANSCRIBER = "auto"
 
 
 def to_chunks(path: Path, work: Path) -> list[tuple[float, Path]]:
@@ -256,46 +263,63 @@ def transcribe_via_groq(path: Path, api_key: str) -> list[dict]:
     """
     import httpx
 
+    def one(offset: float, chunk: Path) -> list[dict]:
+        """One chunk, with its own retries, already on the episode clock."""
+        out: list[dict] = []
+        for attempt in range(6):
+            try:
+                with open(chunk, "rb") as fh:
+                    r = httpx.post(
+                        GROQ_URL, timeout=600.0,
+                        headers={"Authorization": f"Bearer {api_key}"},
+                        files={"file": (chunk.name, fh, "audio/mpeg")},
+                        data={"model": GROQ_MODEL,
+                              "response_format": "verbose_json",
+                              "timestamp_granularities[]": "segment",
+                              "language": "en", "temperature": "0"})
+                # The free tier's hourly allowance is smaller than a day
+                # of this show. A batch job can wait; it is the only
+                # caller that can.
+                if r.status_code == 429:
+                    wait = float(r.headers.get("retry-after") or 30)
+                    print(f"     rate limited, waiting {wait:.0f}s",
+                          flush=True)
+                    time.sleep(min(wait, 120))
+                    continue
+                r.raise_for_status()
+                body = r.json() or {}
+            except Exception as exc:                        # noqa: BLE001
+                if attempt == 5:
+                    raise RuntimeError(f"transcribe failed: {exc}") from exc
+                time.sleep(5 * (attempt + 1))
+                continue
+            for seg in body.get("segments", []):
+                said = (seg.get("text") or "").strip()
+                if said:
+                    out.append({"t": round(offset + float(
+                        seg.get("start") or 0.0), 2), "text": said})
+            return out
+        return out
+
     segments: list[dict] = []
     with tempfile.TemporaryDirectory() as tmp:
         chunks = to_chunks(path, Path(tmp))
-        print(f"     {len(chunks)} chunk(s) to transcribe", flush=True)
-        for offset, chunk in chunks:
-            for attempt in range(6):
-                try:
-                    with open(chunk, "rb") as fh:
-                        r = httpx.post(
-                            GROQ_URL, timeout=600.0,
-                            headers={"Authorization": f"Bearer {api_key}"},
-                            files={"file": (chunk.name, fh, "audio/mpeg")},
-                            data={"model": GROQ_MODEL,
-                                  "response_format": "verbose_json",
-                                  "timestamp_granularities[]": "segment",
-                                  "language": "en", "temperature": "0"})
-                    # The free tier's hourly allowance is smaller than a
-                    # day of this show. A batch job can wait; it is the
-                    # only caller that can.
-                    if r.status_code == 429:
-                        wait = float(r.headers.get("retry-after") or 30)
-                        print(f"     rate limited, waiting {wait:.0f}s",
-                              flush=True)
-                        time.sleep(min(wait, 120))
-                        continue
-                    r.raise_for_status()
-                    body = r.json() or {}
-                except Exception as exc:                    # noqa: BLE001
-                    if attempt == 5:
-                        raise RuntimeError(f"transcribe failed: {exc}") from exc
-                    time.sleep(5 * (attempt + 1))
-                    continue
-                for seg in body.get("segments", []):
-                    said = (seg.get("text") or "").strip()
-                    if said:
-                        segments.append({"t": round(offset + float(
-                            seg.get("start") or 0.0), 2), "text": said})
-                break
+        print(f"     {len(chunks)} chunk(s) to transcribe"
+              + (f", {CHUNK_WORKERS} at a time" if CHUNK_WORKERS > 1 else ""),
+              flush=True)
+        # Each chunk carries its own offset, so they may come back in any
+        # order without putting a citation in the wrong minute. The sort
+        # below is what makes the order irrelevant.
+        if CHUNK_WORKERS > 1 and len(chunks) > 1:
+            with cf.ThreadPoolExecutor(max_workers=CHUNK_WORKERS) as pool:
+                for got in pool.map(lambda c: one(*c), chunks):
+                    segments.extend(got)
+        else:
+            for offset, chunk in chunks:
+                segments.extend(one(offset, chunk))
     segments.sort(key=lambda s: s["t"])
     return segments
+
 
 
 def transcribe(path: Path) -> list[dict]:
@@ -304,7 +328,18 @@ def transcribe(path: Path) -> list[dict]:
     The laptop keeps using MLX -- it is free and already downloaded. A
     runner has no MLX and a GROQ_API_KEY instead, and takes the other road
     without the caller knowing which one it got.
+
+    --transcriber groq overrides that. MLX transcribes one episode at a
+    time on one GPU, which is free but fixes the rate at roughly half an
+    episode a minute: fine for the nightly handful, twenty hours for a
+    channel arriving all at once. Groq runs the same model family over
+    HTTP, so the chunks of an episode can be in flight together.
     """
+    if TRANSCRIBER == "groq":
+        key = os.environ.get("GROQ_API_KEY", "").strip()
+        if not key:
+            raise RuntimeError("--transcriber groq needs GROQ_API_KEY")
+        return transcribe_via_groq(path, key)
     try:
         import mlx_whisper
     except ImportError:
@@ -345,6 +380,15 @@ async def main() -> int:
     ap.add_argument("--only", help="one video id")
     ap.add_argument("--limit", type=int, default=60,
                     help="how deep to read each tab")
+    ap.add_argument("--transcriber", default="auto",
+                    choices=("auto", "groq", "local"),
+                    help="auto uses MLX here and Groq on a runner; groq "
+                         "forces the hosted path, which is the only one "
+                         "that can do more than one thing at a time")
+    ap.add_argument("--chunk-workers", type=int, default=1,
+                    help="chunks of one episode in flight at once (groq)")
+    ap.add_argument("--workers", type=int, default=1,
+                    help="episodes downloaded and transcribed at once")
     # A cap on WORK, which --limit is not: that one says how far back to
     # look, and a sync that has not run for a week would happily find
     # twenty episodes and try to transcribe all of them. On a runner with
@@ -353,6 +397,11 @@ async def main() -> int:
     ap.add_argument("--max-new", type=int, default=0,
                     help="at most N new episodes this run (0 = no cap)")
     args = ap.parse_args()
+    global CHUNK_WORKERS, TRANSCRIBER
+    CHUNK_WORKERS = max(1, args.chunk_workers)
+    TRANSCRIBER = args.transcriber
+    if TRANSCRIBER == "local":
+        TRANSCRIBER = "auto"
     spec = use(args.archive)
 
     todo = pending(args.limit)
@@ -379,36 +428,75 @@ async def main() -> int:
     print(f"  writing to index {ix!r}, namespace {ns!r}")
     failures: list[str] = []
     added = 0
-    for n, item in enumerate(todo, 1):
-        print(f"\n  [{n}/{len(todo)}] {item['id']}  {item['title'][:54]}",
-              flush=True)
+    # Downloading and transcribing is network and CPU and belongs off the
+    # event loop; writing to the index and to the shelf stays on it, one
+    # episode at a time. Two writers on that JSON file would silently
+    # drop whichever row lost, and a lost row is an episode that is in
+    # the index but that nothing will ever list.
+    def prepare(item: dict) -> tuple[dict, list[dict], str]:
+        audio = fetch_audio(item["id"])
+        print(f"     {item['id']}: {audio.stat().st_size // 1_000_000} MB, "
+              f"transcribing…", flush=True)
         try:
-            audio = fetch_audio(item["id"])
-            print(f"     {audio.stat().st_size // 1_000_000} MB, "
-                  f"transcribing…", flush=True)
             segments = transcribe(audio)
-        except Exception as exc:                            # noqa: BLE001
-            print(f"     failed: {exc}")
-            failures.append(f"{item['id']}: {str(exc)[:120]}")
-            continue
+        finally:
+            audio.unlink(missing_ok=True)
         kept, dropped = drop_hallucinated(segments)
         if dropped:
-            print(f"     dropped hallucinated: {', '.join(dropped)}")
-        date = published(item["id"])
-        episode = Episode(
-            episode_id=item["id"], title=item["title"],
-            url=f"https://www.youtube.com/watch?v={item['id']}",
-            platform="youtube", published_at=date or None,
-            segments=kept,
-        )
-        windows = await index.ingest([episode])
-        print(f"     {len(kept)} segments -> {windows} searchable passages",
-              flush=True)
-        add_to_shelf({"id": item["id"], "title": item["title"],
-                      "url": episode.url, "published_at": date,
-                      "seconds": item["seconds"], "format": item["format"]})
-        added += 1
-        audio.unlink(missing_ok=True)
+            print(f"     {item['id']}: dropped hallucinated: "
+                  f"{', '.join(dropped)}")
+        return item, kept, published(item["id"])
+
+    workers = max(1, args.workers)
+    loop = asyncio.get_running_loop()
+    pool = cf.ThreadPoolExecutor(max_workers=workers)
+    gate = asyncio.Semaphore(workers)
+
+    async def ready(item: dict):
+        async with gate:
+            return await loop.run_in_executor(pool, prepare, item)
+
+    jobs = [asyncio.ensure_future(ready(t)) for t in todo]
+    n = 0
+    try:
+        for job in asyncio.as_completed(jobs):
+            n += 1
+            try:
+                item, kept, date = await job
+            except Exception as exc:                        # noqa: BLE001
+                print(f"  [{n}/{len(todo)}] failed: {exc}")
+                failures.append(str(exc)[:120])
+                continue
+            episode = Episode(
+                episode_id=item["id"], title=item["title"],
+                url=f"https://www.youtube.com/watch?v={item['id']}",
+                platform="youtube", published_at=date or None,
+                segments=kept,
+            )
+            # Embedding is a network call and it was the only step in the
+            # loop that could not fail politely. One transient
+            # APIConnectionError from Voyage took down a 607 episode run
+            # at 394, discarding every episode still in flight. A blip
+            # now costs the one episode, which is not shelved and so is
+            # picked up by the next run.
+            try:
+                windows = await index.ingest([episode])
+            except Exception as exc:                        # noqa: BLE001
+                print(f"  [{n}/{len(todo)}] {item['id']} embed failed: "
+                      f"{str(exc)[:90]}", flush=True)
+                failures.append(f"{item['id']}: embed {str(exc)[:90]}")
+                continue
+            print(f"  [{n}/{len(todo)}] {item['id']}  "
+                  f"{item['title'][:44]}  {len(kept)} segments -> "
+                  f"{windows} passages", flush=True)
+            add_to_shelf({"id": item["id"], "title": item["title"],
+                          "url": episode.url, "published_at": date,
+                          "seconds": item["seconds"], "format": item["format"]})
+            added += 1
+    finally:
+        for job in jobs:
+            job.cancel()
+        pool.shutdown(wait=False)
 
     rows = shelf()
     print(f"\n  shelf: {len(rows)} episodes, "
