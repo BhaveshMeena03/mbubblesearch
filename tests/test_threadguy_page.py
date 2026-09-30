@@ -145,3 +145,18 @@ def test_the_page_claims_only_what_the_archive_holds():
         assert claim not in PAGE, claim
     card = (ROOT / "demo" / "og-threadguy-card.html").read_text()
     assert "Every market open" not in card and "Every ThreadGuy stream" not in card
+
+
+def test_a_shelf_row_plays_at_the_size_everything_else_does():
+    """Inside the row at 820px it hung left of a wide empty gap and read as
+    a lesser player than the stages. It opens into the same video and rail
+    layout, and closing it removes the wrapper, not only the frame."""
+    assert ".ep .pw{" in PAGE and "minmax(0,980px)" in PAGE.split(".ep .pw{")[1][:200]
+    assert 'pw.className = "pw"' in PAGE
+    assert 'playing.querySelector(".pw")' in PAGE
+
+
+def test_the_answer_sits_on_the_pages_left_edge():
+    """Centred, it floated in the middle under a left aligned page."""
+    out = PAGE.split("  #out{")[1].split("}")[0]
+    assert "margin:48px 0 0" in out and "auto" not in out

@@ -174,7 +174,10 @@
     font-size:11.5px;color:var(--ink-3)}
 
   /* ── the answer ───────────────────────────────────────────────── */
-  #out{display:none;margin:48px auto 0;max-width:900px;opacity:0;
+  /* Left, on the same edge as the headline and the search box. It was
+     centred, which suited the front door's centred hero and not this one:
+     here it floated in the middle under a left aligned page. */
+  #out{display:none;margin:48px 0 0;max-width:900px;opacity:0;
     transform:translateY(10px);
     transition:opacity .4s var(--ease),transform .4s var(--ease)}
   #out.shown{opacity:1;transform:none}
@@ -231,7 +234,23 @@
     white-space:nowrap}
   .ep .r{font-family:var(--mono);font-size:12px;color:var(--ink-3);text-align:right;
     font-variant-numeric:tabular-nums}
-  .ep .player{grid-column:1/-1;margin-top:10px}
+  /* A played row opens into the same layout as every other player on the
+     site: the video as large as the stages play it, with its details in a
+     rail beside it. Inside the row at 820px it hung left of a wide empty
+     gap and read as a smaller, lesser player than the rest. */
+  .ep .pw{grid-column:1/-1;display:grid;margin-top:12px;
+    grid-template-columns:minmax(0,980px) minmax(220px,300px);gap:28px;
+    align-items:start;cursor:default}
+  .ep .pw iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:3px;
+    background:#000;display:block}
+  .ep .pw .cap b{display:block;font-size:15px;font-weight:600;line-height:1.4;
+    color:var(--ink);white-space:normal}
+  .ep .pw .cap span{display:block;margin-top:8px;font-family:var(--mono);
+    font-size:11.5px;color:var(--ink-3)}
+  .ep .pw .cap a{display:inline-block;margin-top:16px;font-family:var(--mono);
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sky);
+    text-decoration:none}
+  @media(max-width:980px){.ep .pw{grid-template-columns:1fr;gap:14px}}
   .more{margin:24px 0 0;background:transparent;color:var(--ink-2);
     border:1px solid var(--edge-2);border-radius:99px;padding:10px 18px;
     font:inherit;font-size:13.5px;cursor:pointer;
@@ -390,6 +409,10 @@
       document.querySelectorAll(".day.on").forEach(function(o){ o.classList.remove("on"); });
     }
     if (!playing) return;
+    // A shelf row carries its player in a wrapper; a citation carries a
+    // bare frame. Either way, nothing of the last recording stays behind.
+    var w = playing.querySelector(".pw");
+    if (w) w.remove();
     var f = playing.querySelector("iframe");
     if (f) f.remove();
     playing.classList.remove("playing");
@@ -578,8 +601,31 @@
     el.querySelector(".r").textContent = e.seconds ? stamp(e.seconds) : "";
     var vid = ytId(e.url);
     pressable(el, "Play " + (e.title || "this stream"), function(){
-      if (vid) play(el, vid, 0);
-      else if (e.url) window.open(e.url, "_blank", "noopener");
+      if (!vid) { if (e.url) window.open(e.url, "_blank", "noopener"); return; }
+      if (playing === el) return;
+      stopPlaying();
+      var pw = document.createElement("div");
+      pw.className = "pw";
+      // clicks inside the player must not re-trigger the row
+      pw.onclick = function(ev){ ev.stopPropagation(); };
+      pw.innerHTML = '<iframe allowfullscreen '
+        + 'allow="autoplay; encrypted-media; fullscreen; picture-in-picture" '
+        + 'title="Playback"></iframe>'
+        + '<div class="cap"><b></b><span></span><a target="_blank" rel="noopener">'
+        + 'Open on YouTube</a></div>';
+      pw.querySelector("iframe").src =
+        "https://www.youtube.com/embed/" + vid + "?autoplay=1";
+      pw.querySelector(".cap b").textContent = e.title || "";
+      pw.querySelector(".cap span").textContent =
+        [shortDate(e.published_at), e.format, e.seconds ? stamp(e.seconds) : ""]
+          .filter(Boolean).join(" \u00b7 ");
+      pw.querySelector(".cap a").href = e.url;
+      el.appendChild(pw);
+      el.classList.add("playing");
+      playing = el;
+      var box = pw.getBoundingClientRect();
+      var over = box.bottom - window.innerHeight + 24;
+      if (over > 0) window.scrollBy({top: over, behavior: "smooth"});
     });
     return el;
   }
