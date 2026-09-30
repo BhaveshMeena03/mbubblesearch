@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Market Bubble Search: one box, four archives</title>
+<meta name="description" content="1,187 hours of crypto podcasts, live broadcasts and long-form interviews. Ask in plain English, get the sentence and the second it was said.">
+<meta property="og:title" content="Market Bubble Search: one box, four archives">
+<meta property="og:description" content="1,187 hours across Market Bubble, MCG Live, every long-form Elon Musk interview and finance. Ask a question, get the quote and the exact second.">
+<meta property="og:image" content="https://search.lexthedev.com/demo/og-broadcast.png">
+<meta property="og:url" content="https://search.lexthedev.com/home?v=1">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://search.lexthedev.com/demo/og-broadcast.png">
+<meta name="twitter:title" content="Market Bubble Search: one box, four archives">
+<meta name="twitter:description" content="1,187 hours across four archives. Ask a question, get the quote and the exact second.">
+
+<!-- The front door.
+     Two people said the same thing two days apart: there is no single page
+     that holds the whole archive, so anyone arriving has to already know
+     which of the four to pick. The four pages are untouched; this is what
+     sends people to the right one.
+     It demonstrates rather than describes on purpose. Every post this
+     account has made ABOUT the product has underperformed the ones that
+     just showed something from it, by roughly ten to one. -->
+<style>
+  @font-face { font-family:"Instrument Serif";
+    src:url("/demo/fonts/InstrumentSerif-Regular.ttf") format("truetype");
+    font-display:swap }
+  @font-face { font-family:"InterV";
+    src:url("/demo/fonts/Inter-Variable.ttf") format("truetype");
+    font-display:swap }
+
+  :root{
+    --bg:#08090b; --panel:#0e1014; --line:#1c2027;
+    --ink:#e9ecf1; --ink-2:#9aa3b0; --ink-3:#6b7480;
+    /* Each room keeps its own colour. Named in words too, because two of
+       the four are greens and colour alone cannot tell them apart. */
+    --podcast:#16c784; --mcg:#6ecf9e; --elon:#d93a4f; --tradfi:#d9a441;
+    --accent:var(--podcast);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink)}
+  body{font-family:"InterV",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:0 16px}
+  a{color:inherit}
+
+  header{padding:26px 0 0}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .mark{font-weight:800;letter-spacing:.3px;font-size:15px}
+  .mark span{color:var(--accent);transition:color .5s}
+
+  .hero{padding:54px 0 22px;text-align:center}
+  .eyebrow{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--ink-3)}
+  h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;
+    font-size:clamp(38px,7vw,62px);line-height:1.04;letter-spacing:-.5px;
+    margin:14px 0 12px}
+  h1 em{font-style:italic;color:var(--accent);transition:color .5s}
+  .lede{color:var(--ink-2);font-size:17px;max-width:620px;margin:0 auto}
+
+  form{display:flex;gap:10px;margin:26px 0 12px}
+  input{flex:1;min-width:0;background:var(--panel);color:var(--ink);
+    border:1px solid var(--line);border-radius:11px;padding:16px 18px;
+    font:inherit;font-size:16.5px;outline:none;transition:border-color .2s}
+  input:focus{border-color:var(--accent)}
+  button{background:var(--accent);color:#07130d;border:0;border-radius:11px;
+    padding:0 26px;font:inherit;font-weight:700;font-size:16px;cursor:pointer;
+    transition:background .5s,opacity .2s}
+  button:disabled{opacity:.5;cursor:default}
+
+  .tries{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .try{background:transparent;color:var(--ink-2);border:1px solid var(--line);
+    border-radius:999px;padding:7px 13px;font-size:13px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:7px}
+  .try:hover{border-color:var(--ink-3);color:var(--ink)}
+  .dot{width:7px;height:7px;border-radius:50%;flex:none}
+
+  /* Answer */
+  #out{margin:30px 0 10px;display:none}
+  .badge{display:inline-flex;align-items:center;gap:9px;
+    border:1px solid var(--line);background:var(--panel);
+    border-radius:999px;padding:6px 13px;font-size:13px;color:var(--ink-2)}
+  .badge b{color:var(--ink)}
+  .answer{margin:16px 0 0;font-size:17.5px;white-space:pre-wrap}
+  .considered{margin-top:14px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:11.5px;color:var(--ink-3)}
+  .considered i{font-style:normal;color:var(--ink-2)}
+
+  .hits{margin:22px 0 0;display:grid;gap:10px}
+  .hit{border:1px solid var(--line);background:var(--panel);border-radius:11px;
+    padding:13px 15px}
+  .hit .meta{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;
+    font-size:12.5px;color:var(--ink-3)}
+  .hit .meta b{color:var(--ink-2);font-weight:600}
+  .hit .t{color:var(--accent);cursor:pointer;font-family:ui-monospace,monospace}
+  .hit p{margin:8px 0 0;color:var(--ink-2);font-size:14.5px}
+  .player{margin-top:11px;width:100%;aspect-ratio:16/9;border:0;border-radius:8px}
+
+  /* Rooms: this is the "what does it cover" the page was missing */
+  .rooms{margin:44px 0 10px}
+  .rooms h2{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--ink-3);font-weight:600;margin:0 0 12px}
+  .grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(196px,1fr))}
+  .room{display:block;text-decoration:none;border:1px solid var(--line);
+    background:var(--panel);border-radius:12px;padding:15px 16px;
+    transition:border-color .2s,transform .2s}
+  .room:hover{transform:translateY(-2px)}
+  .room .n{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px}
+  .room .c{margin-top:5px;font-family:ui-monospace,monospace;font-size:12px;
+    color:var(--ink-3)}
+  .room .d{margin-top:7px;font-size:13.5px;color:var(--ink-2)}
+
+  .how{margin:40px 0 0;border-top:1px solid var(--line);padding-top:22px;
+    display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .how h3{margin:0 0 5px;font-size:14.5px}
+  .how p{margin:0;color:var(--ink-2);font-size:13.5px}
+
+  footer{margin:46px 0 40px;border-top:1px solid var(--line);padding-top:16px;
+    color:var(--ink-3);font-size:12.5px;display:flex;justify-content:space-between;
+    gap:14px;flex-wrap:wrap}
+  @media(max-width:560px){ form{flex-direction:column} button{padding:14px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="top">
+      <div class="mark">Market Bubble <span>Search</span></div>
+      <div data-archives></div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="eyebrow">716 recordings &middot; 1,187 hours &middot; four archives</div>
+    <h1>Ask it what somebody <em>actually said</em>.</h1>
+    <p class="lede">One box. It searches every archive, answers from the one
+    that knows, and gives you the second it was said so you can check it.</p>
+
+    <form id="f" autocomplete="off">
+      <input id="q" type="search" placeholder="when did fink change his mind on bitcoin"
+             aria-label="Ask the archives">
+      <button id="go" type="submit">Ask</button>
+    </form>
+
+    <div class="tries" id="tries"></div>
+  </section>
+
+  <section id="out" aria-live="polite">
+    <div class="badge" id="badge"></div>
+    <div class="answer" id="answer"></div>
+    <div class="considered" id="considered"></div>
+    <div class="hits" id="hits"></div>
+  </section>
+
+  <section class="rooms">
+    <h2>what is in it</h2>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="how">
+    <div><h3>It answers only from the transcripts</h3>
+      <p>Every claim carries the recording and the second. If the archive
+      does not have it, it says so instead of guessing.</p></div>
+    <div><h3>Search by meaning, not keywords</h3>
+      <p>You do not need the words anyone used. "eth is finished" finds
+      "ethereum is done".</p></div>
+    <div><h3>The archives never mix</h3>
+      <p>One question is answered by one archive. A claim about the
+      broadcast can never come from a Tesla interview.</p></div>
+  </section>
+
+  <footer>
+    <div>Free, no login. Informational only, not financial advice.</div>
+    <div>An independent project, not affiliated with any show.</div>
+  </footer>
+</div>
+
+<script src="/demo/nav.js"></script>
+<script>
+(function(){
+  "use strict";
+  var COLOUR = {podcast:"--podcast", mcg:"--mcg", elon:"--elon", tradfi:"--tradfi"};
+  var ROOMS = [
+    {k:"podcast", name:"Market Bubble", href:"/",        c:"21 shows · 73.4 hours",
+     d:"The live broadcast. A quarter of it never reaches YouTube."},
+    {k:"mcg",     name:"MCG Live",      href:"/mcg",     c:"651 episodes · 1,040 hours",
+     d:"One project per episode, with the founder on."},
+    {k:"elon",    name:"Elon Musk",     href:"/elon",    c:"14 interviews · 37.8 hours",
+     d:"Long-form, 2018 to 2026. Rogan, Lex, the Economist."},
+    {k:"tradfi",  name:"The Record",    href:"/finance", c:"30 recordings · 36 hours",
+     d:"Fink, Dalio, Powell, Dimon, Wood, Saylor and more."}
+  ];
+  var TRIES = [
+    {k:"mcg",     q:"who is building encrypted mesh networks"},
+    {k:"tradfi",  q:"when did fink change his mind on bitcoin"},
+    {k:"elon",    q:"what did elon say about heat shield tiles"},
+    {k:"podcast", q:"why does ansem think ethereum is done"}
+  ];
+  var $ = function(id){ return document.getElementById(id); };
+
+  ROOMS.forEach(function(r){
+    var a = document.createElement("a");
+    a.className = "room"; a.href = r.href;
+    a.innerHTML = '<div class="n"><span class="dot"></span><span></span></div>'
+                + '<div class="c"></div><div class="d"></div>';
+    a.querySelector(".dot").style.background = "var(" + COLOUR[r.k] + ")";
+    a.querySelectorAll("span")[1].textContent = r.name;
+    a.querySelector(".c").textContent = r.c;
+    a.querySelector(".d").textContent = r.d;
+    $("grid").appendChild(a);
+  });
+
+  // Deliberately one per archive, so the range is visible before anyone
+  // types. "Someone new just drops into the tool" was the other half of
+  // the feedback this page answers.
+  TRIES.forEach(function(t){
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "try";
+    b.innerHTML = '<span class="dot"></span><span></span>';
+    b.querySelector(".dot").style.background = "var(" + COLOUR[t.k] + ")";
+    b.querySelectorAll("span")[1].textContent = t.q;
+    b.onclick = function(){ $("q").value = t.q; ask(t.q); };
+    $("tries").appendChild(b);
+  });
+
+  function stamp(s){
+    s = Math.max(0, Math.floor(s || 0));
+    var h = Math.floor(s/3600), m = Math.floor((s%3600)/60), x = s%60;
+    var mm = h ? String(m).padStart(2,"0") : String(m);
+    return (h ? h + ":" : "") + mm + ":" + String(x).padStart(2,"0");
+  }
+  function youtubeId(url){
+    var m = /(?:v=|youtu\.be\/)([A-Za-z0-9_-]{6,})/.exec(url || "");
+    return m ? m[1] : null;
+  }
+  function seekable(url, sec){
+    if (!url) return null;
+    return url + (url.indexOf("?") >= 0 ? "&" : "?") + "t=" + Math.floor(sec || 0);
+  }
+
+  var busy = false;
+  function ask(question){
+    if (busy || !question) return;
+    busy = true; $("go").disabled = true;
+    $("out").style.display = "block";
+    $("badge").textContent = "searching all four archives…";
+    $("answer").textContent = ""; $("considered").textContent = "";
+    $("hits").innerHTML = "";
+
+    fetch("/v1/search", {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({query: question})
+    }).then(function(r){ return r.json(); }).then(render)
+      .catch(function(){
+        $("badge").textContent = "something went wrong, try again";
+      })
+      .then(function(){ busy = false; $("go").disabled = false; });
+  }
+
+  function render(d){
+    var room = d.archive;
+    if (room && COLOUR[room.key]) {
+      document.documentElement.style.setProperty(
+        "--accent", getComputedStyle(document.documentElement)
+                      .getPropertyValue(COLOUR[room.key]).trim());
+    }
+    $("badge").innerHTML = "";
+    var dot = document.createElement("span");
+    dot.className = "dot";
+    dot.style.background = room ? "var(" + COLOUR[room.key] + ")" : "var(--ink-3)";
+    $("badge").appendChild(dot);
+    var txt = document.createElement("span");
+    if (room) {
+      txt.innerHTML = 'answered by <b></b>';
+      txt.querySelector("b").textContent = room.name || room.label;
+    } else {
+      txt.textContent = "no archive had this";
+    }
+    $("badge").appendChild(txt);
+    $("answer").textContent = d.answer || "";
+
+    // The scores of the ones that did not win. The routing is a judgement,
+    // and showing the runners-up is how somebody can tell it was close.
+    var others = (d.considered || []).filter(function(c){
+      return !room || c.key !== room.key; });
+    if (others.length) {
+      var parts = others.map(function(c){
+        return c.label + " " + (c.score || 0).toFixed(2); });
+      $("considered").innerHTML = "also checked: <i></i>";
+      $("considered").querySelector("i").textContent = parts.join("   ");
+    }
+
+    (d.hits || []).slice(0, 6).forEach(function(h){
+      var el = document.createElement("div");
+      el.className = "hit";
+      el.innerHTML = '<div class="meta"><b></b><span class="t"></span>'
+                   + '<span class="d"></span></div><p></p>';
+      el.querySelector("b").textContent = h.title || "";
+      var sec = h.start_seconds || 0;
+      var t = el.querySelector(".t");
+      t.textContent = h.timestamp || stamp(sec);
+      var link = seekable(h.url, sec);
+      var vid = youtubeId(h.url);
+      t.onclick = function(){
+        if (vid) {
+          if (el.querySelector("iframe")) return;
+          var f = document.createElement("iframe");
+          f.className = "player"; f.allow = "autoplay; encrypted-media";
+          f.src = "https://www.youtube.com/embed/" + vid
+                + "?start=" + Math.floor(sec) + "&autoplay=1";
+          el.appendChild(f);
+        } else if (link) {
+          window.open(link, "_blank", "noopener");
+        }
+      };
+      el.querySelector(".d").textContent = h.published_at || "";
+      el.querySelector("p").textContent =
+        (h.text || "").split("\n").slice(0, 3).join(" ").slice(0, 260);
+      $("hits").appendChild(el);
+    });
+  }
+
+  $("f").onsubmit = function(e){ e.preventDefault(); ask($("q").value.trim()); };
+})();
+</script>
+</body>
+</html>
