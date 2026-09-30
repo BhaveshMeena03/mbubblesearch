@@ -29,7 +29,7 @@ never be sourced from another.
   Ray Dalio, Jerome Powell, Jamie Dimon, Cathie Wood, Stephen Schwarzman,
   Michael Saylor, Raoul Pal, and five long-form interviews with CZ
   (Changpeng Zhao) from 2026.
-- ThreadGuy: every stream and interview from @notthreadguy's channel, the
+- ThreadGuy: the full-length videos on @notthreadguy's YouTube channel, the
   daily live market open and the guests he has on. Answers say whose view
   it was and on which day, because the market moves between streams.
 
@@ -97,7 +97,7 @@ names and tickers survive.
 - https://search.lexthedev.com/mcg : MCG Live
 - https://search.lexthedev.com/elon : the Musk interviews
 - https://search.lexthedev.com/finance : The Record, finance on tape
-- https://search.lexthedev.com/threadguy : ThreadGuy, every stream
+- https://search.lexthedev.com/threadguy : ThreadGuy, interviews and streams
 - https://search.lexthedev.com/mcg/assets : every asset MCG discussed
 - https://search.lexthedev.com/demo/assets.html : every asset Market Bubble discussed
 

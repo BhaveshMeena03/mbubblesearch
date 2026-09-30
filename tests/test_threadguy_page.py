@@ -122,7 +122,7 @@ def test_the_column_says_recordings_because_not_all_are_streams():
 def test_a_link_to_the_archive_shares_with_a_picture():
     """It shipped with no og:image and a summary card, so a link to
     /threadguy rendered as a bare line of text in anybody's timeline."""
-    assert 'property="og:image" content="https://search.lexthedev.com/demo/og-threadguy.png"' in PAGE
+    assert 'property="og:image" content="https://search.lexthedev.com/demo/og-threadguy.png?v=2"' in PAGE
     assert 'name="twitter:card" content="summary_large_image"' in PAGE
     assert (ROOT / "demo" / "og-threadguy.png").exists()
     assert (ROOT / "demo" / "og-threadguy-card.html").exists()
@@ -135,3 +135,13 @@ def test_llms_txt_knows_about_threadguy():
     assert "Five archives" in llms
     assert "https://search.lexthedev.com/threadguy" in llms
     assert "/v1/threadguy/search" in llms
+
+
+def test_the_page_claims_only_what_the_archive_holds():
+    """It said "Every market open" and "every stream". 54 of 541 recordings
+    are market opens and 435 are interviews, and most of his daily streams
+    are on Twitch and never reach YouTube, which is all this indexes."""
+    for claim in ("Every market open", "every stream", "Every ThreadGuy stream"):
+        assert claim not in PAGE, claim
+    card = (ROOT / "demo" / "og-threadguy-card.html").read_text()
+    assert "Every market open" not in card and "Every ThreadGuy stream" not in card
