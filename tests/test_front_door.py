@@ -200,3 +200,23 @@ def test_the_hero_is_built_around_the_search_box():
     assert "heroGrid" not in PAGE          # the two column version is gone
     # the figures are a line under the search, not a column beside it
     assert ".scale{display:flex;justify-content:center" in PAGE
+
+
+def test_the_demo_leads_with_the_question():
+    """Bare quotes read fine and looked flat. The question is what turns
+    three sentences somebody liked into a demonstration of the thing the
+    page does, so it leads the card and the answer follows it."""
+    assert 'id="moments"' in PAGE
+    assert "var MOMENTS = [" in PAGE
+    for field in ('q:"', 'said:"', 'who:"', 'vid:"', "at:"):
+        assert PAGE.count(field) >= 3, f"a card is missing {field}"
+    assert '.moment .q{' in PAGE
+
+
+def test_the_sections_are_numbered_in_the_order_they_appear():
+    """Inserting the demo above the ranking left two sections numbered
+    01 for a while, which is the sort of thing only a reader notices."""
+    for n, sel in (("01", "#asked-sect"), ("02", "#archive-sect"),
+                   ("03", ".board"), ("04", "#behaves")):
+        assert f'{sel} h2::before{{content:"{n}"}}' in PAGE \
+            or f'{sel} h2::before{{content:"{n}"}} ' in PAGE, f"{sel} is not {n}"
