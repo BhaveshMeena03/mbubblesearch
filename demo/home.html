@@ -70,41 +70,27 @@
     text-transform:uppercase;color:var(--ink-3)}
 
   /* ── hero ─────────────────────────────────────────────────────────── */
-  .hero{padding:58px 0 0}
-  .heroGrid{display:grid;grid-template-columns:minmax(0,840px) 250px;
-    gap:clamp(40px,5vw,72px);align-items:start;max-width:1170px}
-  /* The asset is the hours. It was set in 11px mono, which undersold the
-     one number that takes a year to earn. */
-  .scale{border-left:1px solid var(--edge);padding-left:30px}
-  .scale .big{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(46px,3.6vw,60px);
-    line-height:.9;letter-spacing:-2px;color:var(--signal)}
-  .scale .unit{font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;
-    text-transform:uppercase;color:var(--ink-3);margin-top:10px}
-  /* A label pinned left and its number pinned right reads as a
-     spreadsheet and leaves a hole down the middle. Each figure keeps
-     its own label under it instead. */
-  .ledger{margin-top:24px;padding-top:20px;border-top:1px solid var(--edge);
-    display:grid;grid-template-columns:1fr 1fr;gap:20px 16px}
-  .ledger div{display:block}
-  .ledger b{display:block;font-family:"Instrument Serif",Georgia,serif;
-    font-weight:400;font-size:23px;line-height:1;color:var(--ink);
-    font-variant-numeric:tabular-nums}
-  .ledger span{display:block;margin-top:6px;font-family:var(--mono);
-    font-size:9.5px;letter-spacing:.17em;text-transform:uppercase;
-    color:var(--ink-3)}
+  /* The hero was a headline beside a rail of figures, and no width
+     made that sit right: stretched it left a hole down the middle,
+     capped it left one against the outside edge. The page is a search
+     box, so the search box is the middle of it and everything else
+     lines up on the same axis. */
+  .hero{padding:72px 0 0;max-width:820px;margin:0 auto;text-align:center}
   h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;
-    font-size:clamp(38px,4.5vw,74px);line-height:1.0;letter-spacing:-1.1px;
-    margin:16px 0 0;padding-bottom:.1em}
+    font-size:clamp(38px,4.6vw,68px);line-height:1.02;letter-spacing:-1.1px;
+    margin:0;padding-bottom:.08em}
   h1 em{font-style:italic;color:var(--signal)}
-  .lede{color:var(--ink-2);font-size:17px;max-width:54ch;margin:16px 0 0}
+  .lede{color:var(--ink-2);font-size:17.5px;max-width:52ch;
+    margin:18px auto 0}
 
-  form{display:flex;gap:0;margin:30px 0 0;max-width:100%;
+  form{display:flex;gap:0;margin:34px auto 0;width:100%;
     border:1px solid var(--edge-2);border-radius:2px;background:var(--deck);
+    text-align:left;
     transition:border-color var(--quick) var(--ease),box-shadow var(--quick) var(--ease)}
   form:focus-within{border-color:var(--signal);
     box-shadow:0 0 0 4px rgba(255,162,58,.09)}
   input{flex:1;min-width:0;background:transparent;color:var(--ink);border:0;
-    padding:19px 20px;font:inherit;font-size:16.5px;outline:none}
+    padding:19px 22px;font:inherit;font-size:16.5px;outline:none}
   input::placeholder{color:var(--ink-3)}
   #go{background:transparent;color:var(--signal);border:0;border-left:1px solid var(--edge-2);
     padding:0 26px;font-family:var(--mono);font-weight:600;font-size:12px;
@@ -113,8 +99,8 @@
   #go:hover:not(:disabled){background:rgba(255,162,58,.09)}
   #go:disabled{color:var(--ink-3);cursor:default}
 
-  .tries{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0;max-width:100%;
-    align-items:center}
+  .tries{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0;
+    align-items:center;justify-content:center}
   .tries .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;
     text-transform:uppercase;color:var(--ink-3);margin-right:4px}
   .try{background:transparent;border:1px solid var(--edge);color:var(--ink-2);
@@ -122,7 +108,20 @@
     cursor:pointer;display:inline-flex;align-items:center;gap:9px;
     transition:border-color var(--quick) var(--ease),color var(--quick) var(--ease),background var(--quick) var(--ease)}
   .try:hover{border-color:var(--edge-2);color:var(--ink);background:rgba(255,255,255,.02)}
-  .try i{width:5px;height:5px;border-radius:50%;flex:none}
+
+  /* The figures read as a line under the search rather than a column
+     beside it, so nothing has to be balanced against anything. */
+  .scale{display:flex;justify-content:center;flex-wrap:wrap;
+    gap:0 clamp(28px,4vw,56px);margin:44px 0 0;padding-top:26px;
+    border-top:1px solid var(--edge)}
+  .scale div{text-align:center;padding:4px 0}
+  .scale b{display:block;font-family:"Instrument Serif",Georgia,serif;
+    font-weight:400;font-size:34px;line-height:1;color:var(--ink);
+    font-variant-numeric:tabular-nums}
+  .scale .lead b{color:var(--signal);font-size:46px}
+  .scale span{display:block;margin-top:8px;font-family:var(--mono);
+    font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--ink-3)}
 
   /* ── channels: the instrument ─────────────────────────────────────── */
   .board{margin:54px 0 0;border-top:1px solid var(--edge);padding-top:20px}
@@ -315,9 +314,6 @@
     .chan .fill{transition:none}
   }
   @media(max-width:900px){
-    .heroGrid{grid-template-columns:1fr;gap:40px}
-    .scale{border-left:0;border-top:1px solid var(--edge);padding-left:0;padding-top:24px}
-    .scale .big{font-size:50px}
     .rules > div{border-left:0;padding-left:0;padding-bottom:22px}
   }
   @media(max-width:640px){
@@ -342,30 +338,23 @@
   </header>
 
   <section class="hero">
-    <div class="heroGrid">
-      <div>
-        <h1 class="rise" style="animation-delay:.08s">Ask what somebody<br><em>actually said</em>.</h1>
-        <p class="lede rise" style="animation-delay:.13s">One question goes to all four archives at once.
-          The one with the answer gives it, and you see what the other three scored.</p>
+    <h1 class="rise" style="animation-delay:.06s">Ask what somebody<br><em>actually said</em>.</h1>
+    <p class="lede rise" style="animation-delay:.11s">One question goes to all four archives at once.
+      The one with the answer gives it, and you see what the other three scored.</p>
 
-        <form id="f" autocomplete="off" class="rise" style="animation-delay:.2s">
-          <input id="q" type="search" aria-label="Ask the archives"
-                 placeholder="when did fink change his mind on bitcoin">
-          <button id="go" type="submit">Ask</button>
-        </form>
-        <div class="tries rise" id="tries" style="animation-delay:.26s"></div>
-      </div>
+    <form id="f" autocomplete="off" class="rise" style="animation-delay:.16s">
+      <input id="q" type="search" aria-label="Ask the archives"
+             placeholder="when did fink change his mind on bitcoin">
+      <button id="go" type="submit">Ask</button>
+    </form>
+    <div class="tries rise" id="tries" style="animation-delay:.21s"></div>
 
-      <aside class="scale rise" style="animation-delay:.24s">
-        <div class="big">1,187</div>
-        <div class="unit">hours of tape</div>
-        <div class="ledger">
-          <div><b>716</b><span>recordings</span></div>
-          <div><b>4</b><span>archives</span></div>
-          <div><b>2014</b><span>earliest</span></div>
-          <div><b>2026</b><span>latest</span></div>
-        </div>
-      </aside>
+    <div class="scale rise" style="animation-delay:.26s">
+      <div class="lead"><b>1,187</b><span>hours of tape</span></div>
+      <div><b>716</b><span>recordings</span></div>
+      <div><b>4</b><span>archives</span></div>
+      <div><b>2014</b><span>earliest</span></div>
+      <div><b>2026</b><span>latest</span></div>
     </div>
   </section>
 

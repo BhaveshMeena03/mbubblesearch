@@ -190,11 +190,13 @@ def test_every_channel_card_points_at_a_real_archive():
     assert PAGE.count('a.href = c.href') == 1
 
 
-def test_the_hero_is_a_composition_rather_than_a_stretched_row():
-    """The left column was 1fr across the whole page, so its box ran to
-    the gap while its content stopped at the search box, leaving a void
-    down the middle with the figures stranded on the far right. The hero
-    gets a width of its own; the ranking and channels still use the page."""
-    hero = PAGE.split(".heroGrid{")[1].split("}")[0]
-    assert "max-width:1170px" in hero
-    assert "minmax(0,840px) 250px" in hero
+def test_the_hero_is_built_around_the_search_box():
+    """A headline beside a rail of figures had no width that sat right:
+    stretched, it left a hole down the middle; capped, it left one
+    against the outside edge. The page is a search box, so the search
+    box is the middle of it and everything lines up on that axis."""
+    hero = PAGE.split(".hero{")[1].split("}")[0]
+    assert "margin:0 auto" in hero and "text-align:center" in hero
+    assert "heroGrid" not in PAGE          # the two column version is gone
+    # the figures are a line under the search, not a column beside it
+    assert ".scale{display:flex;justify-content:center" in PAGE
