@@ -65,7 +65,7 @@
   header{display:flex;align-items:center;justify-content:space-between;
     gap:16px;padding:26px 0 18px;border-bottom:1px solid var(--edge);
     position:relative;z-index:80}
-  .mark{display:flex;align-items:baseline;gap:10px}
+  .mark{display:flex;align-items:baseline;gap:10px;text-decoration:none;color:inherit}
   .mark .w{font-family:"Instrument Serif",Georgia,serif;font-size:21px;letter-spacing:.2px}
   .mark .s{font-family:var(--mono);font-size:10px;letter-spacing:.24em;
     text-transform:uppercase;color:var(--ink-3)}
@@ -113,6 +113,7 @@
   /* The figures read as a line under the search rather than a column
      beside it, so nothing has to be balanced against anything. */
   .scale{display:flex;justify-content:center;flex-wrap:wrap;
+    align-items:flex-end;
     gap:0 clamp(28px,4vw,56px);margin:44px 0 0;padding-top:26px;
     border-top:1px solid var(--edge)}
   .scale div{text-align:center;padding:4px 0}
@@ -381,9 +382,9 @@
 <body>
 <div class="wrap">
   <header class="rise" style="animation-delay:.02s">
-    <div class="mark">
+    <a class="mark" href="/home">
       <span class="w">Market Bubble</span><span class="s">Search</span>
-    </div>
+    </a>
     <div style="display:flex;align-items:center;gap:18px">
       <span data-archives></span>
     </div>

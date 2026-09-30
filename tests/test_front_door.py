@@ -279,3 +279,10 @@ def test_the_page_counts_the_archives_it_searches():
     assert "all five archives" in PAGE
     assert "<b>5</b><span>archives</span>" in PAGE
     assert "all four archives" not in PAGE
+
+
+def test_the_figures_share_one_baseline():
+    """The lead figure is set larger than the rest, and aligned to the top
+    its label dropped below every other label in the row."""
+    row = PAGE.split("  .scale{display:flex;")[1].split("}")[0]
+    assert "align-items:flex-end" in row

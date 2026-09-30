@@ -68,7 +68,21 @@
       ".archsw .menu .s{display:block;font-size:11.5px;opacity:.62;margin-top:1px}",
       ".archsw .menu hr{border:0;height:1px;margin:6px 4px;",
       "background:color-mix(in srgb, currentColor 16%, transparent)}",
-      "@media (max-width:520px){.archsw .menu{left:auto;right:0}}"
+      "@media (max-width:520px){.archsw .menu{left:auto;right:0}}",
+      /* The way home, on every archive. Each page's corner carries its
+         own name, so the parent sits in front of it rather than replacing
+         it, and it inherits the page's colour like the menu does. */
+      ".brandline{display:inline-flex;align-items:baseline;gap:10px;",
+      "flex-wrap:wrap;min-width:0}",
+      /* Set in the monospace every page already uses for its small
+         labels. Left to inherit, it fell through to the browser's default
+         serif on the pages whose corner is a bold sans. */
+      ".home-crumb{color:inherit;text-decoration:none;opacity:.62;",
+      "font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;",
+      "font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;",
+      "font-weight:500;white-space:nowrap;transition:opacity .2s}",
+      ".home-crumb:hover,.home-crumb:focus-visible{opacity:1}",
+      ".home-sep{opacity:.3}"
     ].join("");
     document.head.appendChild(css);
   }

@@ -93,3 +93,27 @@ def test_the_page_says_it_is_independent():
 def test_no_em_dashes():
     assert "—" not in PAGE
     assert "—" not in podcast.THREADGUY_SYSTEM_PROMPT
+
+
+def test_it_is_its_own_room_and_not_the_front_door_reskinned():
+    """The first version was the front door's centred hero in navy. The
+    archive pages share a structure instead: the room's name in the
+    corner, a readout strip, a left aligned headline, and a picture of
+    their own on the right. Here the picture is the latest recordings as
+    days, because on a daily show the date is the point."""
+    assert 'class="strip' in PAGE
+    assert 'id="days"' in PAGE and "function drawDays(" in PAGE
+    hero = PAGE.split(".hero{")[1].split("}")[0]
+    assert "grid-template-columns" in hero and "text-align:center" not in hero
+
+
+def test_a_latest_tile_plays_on_the_stage_not_in_the_tile():
+    """In a column this narrow a video inside the tile would be the width
+    of a thumbnail."""
+    days = PAGE.split("function drawDays(")[1].split("function drawTo(")[0]
+    assert '$("tgstage")' in days
+    assert "play(el" not in days
+
+
+def test_the_column_says_recordings_because_not_all_are_streams():
+    assert "latest recordings" in PAGE and "latest streams" not in PAGE
