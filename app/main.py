@@ -392,6 +392,19 @@ async def lifespan(app: FastAPI):
         logger.warning("the finance archive did not start: %s", exc)
         app.state.tradfi = None
 
+    # The fifth corpus. Same rule as the three above: built only when
+    # there is something in it, because an empty archive that answers
+    # confidently is worse than one that is plainly not there.
+    try:
+        _s_tg = get_settings()
+        app.state.threadguy = (
+            PodcastIndex(ledger=app.state.usage,
+                         namespace=_s_tg.threadguy_namespace)
+            if _threadguy_episodes() else None)
+    except Exception as exc:                                    # noqa: BLE001
+        logger.warning("the ThreadGuy archive did not start: %s", exc)
+        app.state.threadguy = None
+
     app.state.agent = ConciergeAgent(ledger=app.state.usage)
     app.state.clawpump_agent = ClawPumpAgent(ledger=app.state.usage)
     app.state.pipeline = IngestionPipeline()
@@ -757,6 +770,7 @@ for _path, _target in (("/home", "/demo/home.html"),
                        ("/mcg", "/demo/mcg.html"),
                        ("/mcg/assets", "/demo/mcg-assets.html"),
                        ("/finance", "/demo/finance.html"),
+                       ("/threadguy", "/demo/threadguy.html"),
                        ("/record", "/demo/finance.html"),
                        ("/mcg/tokens", "/demo/mcg-assets.html"),
                        ("/method", "/demo/how-it-works.html")):
@@ -811,7 +825,8 @@ async def healthz() -> dict:
 _ROOMS = [("podcast", "Market Bubble", "/"),
           ("mcg", "MCG Live", "/mcg"),
           ("elon", "Elon Musk", "/elon"),
-          ("tradfi", "The Record", "/finance")]
+          ("tradfi", "The Record", "/finance"),
+          ("threadguy", "ThreadGuy", "/threadguy")]
 
 
 @app.post("/v1/search",
@@ -1798,6 +1813,7 @@ async def podcast_episodes(
 
 ELON_NAMESPACE = "elon"
 MCG_INDEX = _ROOT / "data" / "mcg_index.json"
+THREADGUY_INDEX = _ROOT / "data" / "threadguy_index.json"
 MCG_SUMMARIES = _ROOT / "data" / "mcg_summaries.json.gz"
 _MCG_SUMMARIES_CACHE: dict | None = None
 
@@ -1822,6 +1838,29 @@ def _mcg_summaries() -> dict:
         _MCG_SUMMARIES_CACHE = {}
     return _MCG_SUMMARIES_CACHE
 _MCG_CACHE: list[dict] | None = None
+
+
+_THREADGUY_CACHE: list[dict] | None = None
+
+
+def _threadguy_episodes() -> list[dict]:
+    """The ThreadGuy episode list: titles, dates, runtimes, not transcripts.
+
+    Same shape and same reasoning as the MCG listing above. The passages
+    come back from Pinecone with their text attached, so the only thing
+    read from disk is what the page lists.
+    """
+    global _THREADGUY_CACHE
+    if _THREADGUY_CACHE is not None:
+        return _THREADGUY_CACHE
+    try:
+        rows = json.loads(THREADGUY_INDEX.read_text())
+        _THREADGUY_CACHE = rows if isinstance(rows, list) else list(rows.values())
+        logger.info("loaded %d ThreadGuy episodes", len(_THREADGUY_CACHE))
+    except Exception as exc:                                    # noqa: BLE001
+        logger.warning("could not load the ThreadGuy index: %s", exc)
+        _THREADGUY_CACHE = []
+    return _THREADGUY_CACHE
 
 
 def _mcg_episodes() -> list[dict]:
@@ -2111,6 +2150,90 @@ def _finance_payload(question: str, result) -> dict:
         # to the second the answer actually names -- about forty seconds
         # later in the Fink case, which is the difference between "cited
         # to the second" being true and being a slogan.
+        data["url"] = row.get("url", "")
+        hits.append(data)
+    return {"question": question, "answer": result.answer, "hits": hits}
+
+
+@app.get("/v1/threadguy/archive", dependencies=[Depends(public_rate_limit)])
+async def threadguy_archive() -> dict:
+    """What the ThreadGuy archive holds, for the readout the page opens
+    with. Same shape as the MCG one, because it is the same kind of
+    archive: a channel, ingested one episode at a time."""
+    episodes = _threadguy_episodes()
+    if not episodes:
+        raise HTTPException(status_code=503, detail="unavailable")
+    dates = sorted(e.get("published_at", "") for e in episodes
+                   if e.get("published_at"))
+    return {
+        "episodes": len(episodes),
+        "hours": round(sum(float(e.get("seconds") or 0)
+                           for e in episodes) / 3600, 1),
+        "first": dates[0] if dates else "",
+        "last": dates[-1] if dates else "",
+    }
+
+
+@app.get("/v1/threadguy/episodes", dependencies=[Depends(public_rate_limit)])
+async def threadguy_episodes() -> list[dict]:
+    """The shelf, newest first. Six hundred streams is a list nobody reads
+    to the end of, so the useful end is the top."""
+    return sorted(
+        ({"episode_id": e.get("id", ""), "title": e.get("title", ""),
+          "url": e.get("url", ""),
+          "published_at": e.get("published_at", ""),
+          "seconds": int(float(e.get("seconds") or 0)),
+          "format": e.get("format", "")}
+         for e in _threadguy_episodes()),
+        key=lambda e: e["published_at"], reverse=True)
+
+
+@app.post("/v1/threadguy/search",
+          dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
+                        Depends(daily_budget), Depends(per_client_daily)])
+async def threadguy_search(
+    body: PodcastSearchRequest,
+    request: Request,
+    answers: AnswerCache = Depends(get_answers),
+) -> dict:
+    """Ask the ThreadGuy archive. Same engine, fifth corpus."""
+    _track("threadguy_searches", q=body.query[:120])
+    index = getattr(request.app.state, "threadguy", None)
+    if index is None:
+        raise HTTPException(status_code=503, detail="The archive is not loaded.")
+
+    # Surface-keyed like the others, so no two archives can serve each
+    # other's cached answers.
+    key = make_key(body.query, surface="threadguy", top_k=body.top_k)
+    cached = answers.get(key)
+    if cached is not None:
+        per_client_daily.refund(request)
+        return _threadguy_payload(body.query, cached)
+
+    try:
+        result = await index.search(body.query, top_k=body.top_k)
+    except anthropic.RateLimitError as exc:
+        raise HTTPException(status_code=429,
+                            detail="Rate limited; retry shortly.") from exc
+    except anthropic.APIError as exc:
+        logger.error("Anthropic error on the ThreadGuy archive: %s",
+                     type(exc).__name__)
+        raise HTTPException(status_code=502,
+                            detail="Model provider error.") from exc
+    answers.put(key, result)
+    return _threadguy_payload(body.query, result)
+
+
+def _threadguy_payload(question: str, result) -> dict:
+    """The page's shape. The recording's own URL travels with each hit so
+    the page can build a link to the second the answer names rather than
+    to where the passage happened to start."""
+    shelf = {e.get("id", ""): e for e in _threadguy_episodes()}
+    hits = []
+    for hit in (result.hits or []):
+        data = hit.model_dump() if hasattr(hit, "model_dump") else dict(hit)
+        row = shelf.get(data.get("episode_id")) or {}
+        data["episode_seconds"] = int(float(row.get("seconds") or 0))
         data["url"] = row.get("url", "")
         hits.append(data)
     return {"question": question, "answer": result.answer, "hits": hits}

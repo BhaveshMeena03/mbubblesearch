@@ -135,6 +135,9 @@ class Settings(BaseSettings):
     # an embedding. A typo would point it at an empty namespace and the
     # bot would fall back to the broadcast, which is the safe direction.
     tradfi_namespace: str = "tradfi"
+    # The fifth archive. A namespace in the default index rather than an
+    # index of its own, which is what the ingest writes to.
+    threadguy_namespace: str = "threadguy"
     # Hard ceiling on a single Pinecone write. The SDK's HTTP client has no
     # read timeout, so a half-open socket (seen once: a write hung 2.5h with
     # the connection ESTABLISHED but dead) blocks forever. Bounding the write

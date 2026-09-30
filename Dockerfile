@@ -74,6 +74,7 @@ COPY data/tradfi_episodes.json.gz ./data/tradfi_episodes.json.gz
 # archive, because .dockerignore excludes data/ and lets a named few
 # back in.
 COPY data/mcg_index.json ./data/mcg_index.json
+COPY data/threadguy_index.json ./data/threadguy_index.json
 # 404 episode summaries, gzipped: 873KB of JSON down to a fifth.
 COPY data/mcg_summaries.json.gz ./data/mcg_summaries.json.gz
 # The exact-token index. Without it every lookup returns nothing and

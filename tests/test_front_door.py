@@ -239,3 +239,26 @@ def test_waiting_looks_like_waiting():
     # shown is added when the search starts, not only when it finishes
     ask = PAGE.split("function ask(question)")[1].split("function render")[0]
     assert 'classList.add("shown")' in ask
+
+
+def test_the_stage_rebuilds_its_player_when_one_is_missing():
+    """The frame was rebuilt only when the stage had never been opened.
+    Starting a search calls stopPlaying(), which removes the frame and
+    leaves the stage mounted, so every ranked row clicked after a search
+    set src on nothing and silently did nothing."""
+    assert 'st.hidden || !st.querySelector("iframe")' in PAGE
+
+
+def test_the_deferred_swap_cannot_write_to_a_missing_player():
+    """The fade defers the swap by 140ms. Anything that clears the player
+    inside that window, which starting a search does, left the callback
+    writing to null and throwing into the console."""
+    assert "var frame = st.querySelector(\"iframe\");" in PAGE
+    assert "if (!frame) { st.hidden = true; return; }" in PAGE
+
+
+def test_nothing_that_must_be_seen_waits_on_an_animation():
+    """A browser does not run transitions in a hidden tab, so anything
+    whose visibility depends on one arrives stuck at its start value."""
+    assert "#out.instant{transition:none}" in PAGE
+    assert 'classList.toggle("instant", document.hidden)' in PAGE
