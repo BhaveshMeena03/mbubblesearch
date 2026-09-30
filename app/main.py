@@ -749,7 +749,10 @@ def _shortcut(path: str, target: str) -> None:
     app.get(path, include_in_schema=False)(go)
 
 
-for _path, _target in (("/elon", "/demo/elon.html"),
+# /home rather than / for now: the four pages are what people have links
+# to, and the front door should be looked at before it inherits the root.
+for _path, _target in (("/home", "/demo/home.html"),
+                       ("/elon", "/demo/elon.html"),
                        ("/musk", "/demo/elon.html"),
                        ("/mcg", "/demo/mcg.html"),
                        ("/mcg/assets", "/demo/mcg-assets.html"),
@@ -788,6 +791,90 @@ async def usage_report(usage: UsageLedger = Depends(get_usage)) -> dict:
 @app.get("/healthz")
 async def healthz() -> dict:
     return {"status": "ok"}
+
+
+# ─── one door, four rooms ─────────────────────────────────────────────────
+#
+# Two people in two days said the same thing: there is no single page that
+# holds the whole archive, so someone arriving has to already know which of
+# the four to pick before they can ask anything. The four pages stay as they
+# are; this is the front door that sends people to the right one.
+#
+# Retrieval runs against all four and only the best-scoring archive is asked
+# to answer. That is the point rather than an optimisation: an answer blended
+# from four corpora would quietly undo the rule the whole project rests on,
+# which is that a citation about the broadcast can never come from a Tesla
+# interview. One question, one archive, and the page says which.
+#
+# Retrieval is embedding plus rerank with no model call, so fanning out four
+# ways costs four cheap reads and one expensive one, not four expensive ones.
+_ROOMS = [("podcast", "Market Bubble", "/"),
+          ("mcg", "MCG Live", "/mcg"),
+          ("elon", "Elon Musk", "/elon"),
+          ("tradfi", "The Record", "/finance")]
+
+
+@app.post("/v1/search",
+          dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
+                        Depends(daily_budget), Depends(per_client_daily)])
+async def search_everything(
+    body: PodcastSearchRequest,
+    request: Request,
+    answers: AnswerCache = Depends(get_answers),
+) -> dict:
+    """Ask every archive, answer from the one that knows."""
+    _track("front_door_searches", q=body.query[:120])
+    live = [(key, label, href, idx)
+            for key, label, href in _ROOMS
+            if (idx := getattr(request.app.state, key, None)) is not None]
+    if not live:
+        raise HTTPException(status_code=503, detail="No archive is loaded.")
+
+    key = make_key(body.query, surface="front-door", top_k=body.top_k)
+    cached = answers.get(key)
+    if cached is not None:
+        per_client_daily.refund(request)
+        return cached
+
+    async def probe(entry):
+        name, label, href, idx = entry
+        try:
+            hits = await idx.retrieve(body.query, top_k=body.top_k)
+        except Exception:                                     # noqa: BLE001
+            # One archive being unreachable must not take the door down.
+            return {"key": name, "label": label, "href": href,
+                    "score": 0.0, "hits": []}
+        top = max((getattr(h, "score", 0.0) or 0.0) for h in hits) if hits else 0.0
+        return {"key": name, "label": label, "href": href,
+                "score": top, "hits": hits}
+
+    probes = await asyncio.gather(*(probe(e) for e in live))
+    probes.sort(key=lambda p: -p["score"])
+    best = probes[0]
+    if not best["hits"]:
+        return {"question": body.query, "archive": None,
+                "answer": PODCAST_REFUSAL, "hits": [], "considered": [
+                    {"key": p["key"], "label": p["label"], "href": p["href"],
+                     "score": round(p["score"], 4)} for p in probes]}
+
+    index = dict((k, i) for k, _, _, i in live)[best["key"]]
+    result = await index.search(body.query, top_k=body.top_k)
+    payload = {
+        "question": body.query,
+        "archive": {"key": best["key"], "label": best["label"],
+                    "href": best["href"]},
+        "answer": result.answer,
+        "hits": [h.model_dump() if hasattr(h, "model_dump") else dict(h)
+                 for h in (result.hits or [])],
+        # What the other three scored, so the page can offer a second
+        # opinion when the winner was close rather than pretending the
+        # routing was obvious.
+        "considered": [{"key": p["key"], "label": p["label"],
+                        "href": p["href"], "score": round(p["score"], 4)}
+                       for p in probes],
+    }
+    answers.put(key, payload)
+    return payload
 
 
 # The mint, and the one number Jupiter's verification wants to be able to
