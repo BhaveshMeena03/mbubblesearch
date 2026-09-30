@@ -146,9 +146,38 @@
     });
   }
 
-  // text -> [{text}] and [{stamp, sec, hit, href}] in reading order.
+  // The model writes Markdown whether or not it is asked to, and a page
+  // that prints text as text showed "**On the product itself:**",
+  // asterisks and all. Headings and list markers become plain lines here;
+  // bold is carried through as a flag on the text (see emphasis()).
+  function unmark(text) {
+    return String(text || "")
+      .replace(/(^|\n)[ \t]*#{1,4}[ \t]+/g, "$1")
+      .replace(/(^|\n)[ \t]*[-*\u2022][ \t]+/g, "$1\u2022 ");
+  }
+
+  // "**...**" -> {text, bold: true}. Across tokens, because a bold run
+  // can have a citation inside it. An unpaired marker is just dropped.
+  function emphasis(tokens) {
+    var marks = 0;
+    tokens.forEach(function (t) {
+      if (!t.stamp) marks += t.text.split("**").length - 1;
+    });
+    var out = [], bold = false;
+    tokens.forEach(function (t) {
+      if (t.stamp) { out.push(t); return; }
+      if (marks % 2) { out.push({text: t.text.split("**").join("")}); return; }
+      t.text.split("**").forEach(function (part, i) {
+        if (i > 0) bold = !bold;
+        if (part) out.push(bold ? {text: part, bold: true} : {text: part});
+      });
+    });
+    return out;
+  }
+
+  // text -> [{text, bold?}] and [{stamp, sec, hit, href}] in reading order.
   function find(text, hits) {
-    text = String(text || "");
+    text = unmark(text);
     hits = (hits || []).filter(function (h) { return h && linkAt(h, 0); });
     var dates = datesIn(text), out = [], last = 0, m, drop = {};
 
@@ -215,7 +244,7 @@
       last = at + whole.length;
     }
     plain(text.slice(last), last);
-    return out;
+    return emphasis(out);
   }
 
   // Cited passages first, in the order the answer cites them, then the
@@ -231,7 +260,12 @@
   }
 
   function node(tok, pick) {
-    if (!tok.stamp) return document.createTextNode(tok.text);
+    if (!tok.stamp) {
+      if (!tok.bold) return document.createTextNode(tok.text);
+      var b = document.createElement("strong");
+      b.textContent = tok.text;
+      return b;
+    }
     var a = document.createElement("a");
     a.className = "cite";
     a.href = tok.href;
@@ -257,7 +291,9 @@
     var units = [];
     tokens.forEach(function (t) {
       if (t.stamp) { units.push(t); return; }
-      t.text.split(/(\s+)/).forEach(function (w) { if (w) units.push({text: w}); });
+      t.text.split(/(\s+)/).forEach(function (w) {
+        if (w) units.push(t.bold ? {text: w, bold: true} : {text: w});
+      });
     });
     if (instant) {
       units.forEach(function (u) { el.appendChild(node(u, pick)); });
