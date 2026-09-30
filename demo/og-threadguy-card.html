@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!-- Source for the 1200x630 social preview image on the ThreadGuy archive
+     (og-threadguy.png). Re-render after edits:
+       node scripts/make_og_image.mjs threadguy
+
+     The page shipped with no og:image, so a link to /threadguy rendered as
+     a bare text card. This is the page's own room in miniature: the
+     readout, the headline, and the latest recordings laid out as days,
+     because on a daily show the date is the point.
+
+     Numbers and recordings are the archive's own, as served by
+     /v1/threadguy/archive and /v1/threadguy/episodes when this was drawn.
+     They change as the ingest finishes, so the card is re-rendered then
+     rather than guessed now. -->
+<html><head><meta charset="utf-8"><style>
+  @font-face { font-family: "Instrument Serif";
+    src: url("fonts/InstrumentSerif-Regular.ttf") format("truetype"); }
+  @font-face { font-family: "InterV";
+    src: url("fonts/Inter-Variable.ttf") format("truetype"); }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{width:1200px;height:630px;background:#060c1a;color:#eef2fb;
+    font-family:"InterV",-apple-system,BlinkMacSystemFont,sans-serif;
+    padding:44px 58px;position:relative;overflow:hidden}
+  /* the channel's dusk, low and wide, as on the page */
+  .sky{position:absolute;left:50%;top:-360px;transform:translateX(-50%);
+    width:1300px;height:680px;border-radius:50%;
+    background:radial-gradient(circle,rgba(40,92,190,.42),rgba(12,28,70,.2) 46%,transparent 70%)}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  .crumb{position:relative;display:flex;align-items:baseline;gap:12px;
+    font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:#7a87a6}
+  .crumb b{font-family:"Instrument Serif",Georgia,serif;font-weight:400;
+    font-size:26px;letter-spacing:0;text-transform:none;color:#eef2fb}
+  .crumb span.s{color:#6aa9ff}
+
+  .grid{position:relative;display:grid;grid-template-columns:600px 1fr;
+    gap:52px;margin-top:34px}
+  h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;
+    font-size:74px;line-height:1.0;letter-spacing:-1.4px}
+  h1 em{font-style:italic;color:#6aa9ff}
+  .sub{margin-top:18px;font-size:20px;line-height:1.42;color:#aab5cf;max-width:560px}
+  .box{margin-top:26px;display:flex;border:1.5px solid #2a3b66;border-radius:4px;
+    background:#0b1530;overflow:hidden;width:560px}
+  .box .q{flex:1;padding:16px 20px;font-size:19px;color:#eef2fb}
+  .box .go{background:#6aa9ff;color:#06122b;font-weight:700;font-size:14px;
+    letter-spacing:.18em;padding:0 24px;display:flex;align-items:center}
+
+  .latest .h{font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    color:#7a87a6;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+  .latest .h i{width:9px;height:9px;border-radius:50%;background:#ff5566;
+    box-shadow:0 0 0 5px rgba(255,85,102,.18)}
+  .day{display:grid;grid-template-columns:58px 1fr;gap:16px;padding:13px 16px;
+    border:1.5px solid #1b2a4c;border-radius:4px;background:#0b1530;margin-bottom:9px}
+  .day .when{text-align:center;border-right:1.5px solid #1b2a4c;padding-right:12px}
+  .day .when b{display:block;font-family:"Instrument Serif",Georgia,serif;font-weight:400;
+    font-size:32px;line-height:1}
+  .day .when span{display:block;margin-top:5px;font-size:10.5px;letter-spacing:.16em;
+    text-transform:uppercase;color:#7a87a6}
+  .day .t{font-size:15px;line-height:1.36;color:#eef2fb;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .day .m{margin-top:6px;font-size:11.5px;color:#7a87a6}
+  .day .m .live{color:#ff5566}
+
+  .foot{position:absolute;left:58px;right:58px;bottom:38px;display:flex;
+    align-items:flex-end;justify-content:space-between;
+    border-top:1.5px solid #1b2a4c;padding-top:18px}
+  .stats{display:flex;gap:46px}
+  .stats b{display:block;font-family:"Instrument Serif",Georgia,serif;font-weight:400;
+    font-size:38px;line-height:1}
+  .stats .lead b{color:#6aa9ff}
+  .stats span{display:block;margin-top:8px;font-size:11px;letter-spacing:.18em;
+    text-transform:uppercase;color:#7a87a6}
+  .site{font-size:15px;color:#aab5cf}
+</style></head><body>
+  <div class="sky"></div>
+  <div class="crumb mono">Market Bubble Search <span>/</span>
+    <b>ThreadGuy</b><span class="s">archive</span></div>
+
+  <div class="grid">
+    <div>
+      <h1>Every market open,<br><em>on the record</em>.</h1>
+      <div class="sub">Every ThreadGuy stream and interview, transcribed.
+        Ask what was said, and get the second it was said.</div>
+      <div class="box"><div class="q">what does threadguy think of hyperliquid</div>
+        <div class="go mono">ASK</div></div>
+    </div>
+
+    <div class="latest">
+      <div class="h mono"><i></i>latest recordings</div>
+      <div class="day"><div class="when"><b>30</b><span class="mono">Wed Sep</span></div>
+        <div><div class="t">MARKET OPEN: Robinhood Summit DESTROYS Onchain, SF Real Estate is MOONING, Is America an AI LAB?</div>
+        <div class="m mono"><span class="live">stream</span> &nbsp;3:07:27</div></div></div>
+      <div class="day"><div class="when"><b>30</b><span class="mono">Wed Sep</span></div>
+        <div><div class="t">kel - The Full Zcash Thesis, Building Conviction, and Going Against the Crowd</div>
+        <div class="m mono">interview &nbsp;1:00:50</div></div></div>
+      <div class="day"><div class="when"><b>29</b><span class="mono">Tue Sep</span></div>
+        <div><div class="t">MARKET OPEN: Anthropic S-1 is UHHH, Crypto is SAVED, The KEL INTERVIEW TODAY</div>
+        <div class="m mono"><span class="live">stream</span> &nbsp;2:37:36</div></div></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div class="stats">
+      <div class="lead"><b>532</b><span class="mono">hours of tape</span></div>
+      <div><b>516</b><span class="mono">streams and interviews</span></div>
+      <div><b>Dec 2023</b><span class="mono">to Sep 2026</span></div>
+    </div>
+    <div class="site mono">search.lexthedev.com/threadguy</div>
+  </div>
+</body></html>

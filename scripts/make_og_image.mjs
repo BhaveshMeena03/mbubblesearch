@@ -17,6 +17,7 @@ const CARDS = {
   llms: { html: "og-llms-card.html", png: "og-llms.png" },
   rewards: { html: "og-rewards-card.html", png: "og-rewards.png" },
   home: { html: "og-home-card.html", png: "og-home.png" },
+  threadguy: { html: "og-threadguy-card.html", png: "og-threadguy.png" },
 };
 
 const which = process.argv[2] || "default";
