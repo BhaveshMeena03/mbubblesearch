@@ -3,179 +3,418 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Market Bubble Search: one box, four archives</title>
+<title>Market Bubble Search: four archives, one question</title>
 <meta name="description" content="1,187 hours of crypto podcasts, live broadcasts and long-form interviews. Ask in plain English, get the sentence and the second it was said.">
-<meta property="og:title" content="Market Bubble Search: one box, four archives">
-<meta property="og:description" content="1,187 hours across Market Bubble, MCG Live, every long-form Elon Musk interview and finance. Ask a question, get the quote and the exact second.">
-<meta property="og:image" content="https://search.lexthedev.com/demo/og-broadcast.png">
-<meta property="og:url" content="https://search.lexthedev.com/home?v=1">
+<meta property="og:title" content="Market Bubble Search: four archives, one question">
+<meta property="og:description" content="1,187 hours across Market Bubble, MCG Live, every long-form Elon Musk interview and finance. Ask once, and the archive with the answer gives it.">
+<meta property="og:image" content="https://search.lexthedev.com/demo/og-home.png">
+<meta property="og:url" content="https://search.lexthedev.com/home?v=3">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://search.lexthedev.com/demo/og-broadcast.png">
-<meta name="twitter:title" content="Market Bubble Search: one box, four archives">
-<meta name="twitter:description" content="1,187 hours across four archives. Ask a question, get the quote and the exact second.">
+<meta name="twitter:image" content="https://search.lexthedev.com/demo/og-home.png">
+<meta name="twitter:title" content="Market Bubble Search: four archives, one question">
+<meta name="twitter:description" content="1,187 hours across four archives. Ask once, and the archive with the answer gives it.">
 
 <!-- The front door.
-     Two people said the same thing two days apart: there is no single page
-     that holds the whole archive, so anyone arriving has to already know
-     which of the four to pick. The four pages are untouched; this is what
-     sends people to the right one.
-     It demonstrates rather than describes on purpose. Every post this
-     account has made ABOUT the product has underperformed the ones that
-     just showed something from it, by roughly ten to one. -->
+     Concept: an instrument, not a landing page. Everything this thing does
+     is a coordinate in 1,187 hours of audio, so the page wears timecode,
+     channels and signal strength rather than feature cards.
+     The four archives are four channels. Asking drives their meters to the
+     real retrieval scores, the winner lights, and the rest stay visible.
+     That turns the honest part (routing is a judgement and sometimes close)
+     into the thing you watch, instead of a footnote nobody reads.
+     Parent colour is signal amber, which none of the four rooms own. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
-  @font-face { font-family:"Instrument Serif";
-    src:url("/demo/fonts/InstrumentSerif-Regular.ttf") format("truetype");
-    font-display:swap }
-  @font-face { font-family:"InterV";
-    src:url("/demo/fonts/Inter-Variable.ttf") format("truetype");
-    font-display:swap }
+  @font-face{font-family:"Instrument Serif";
+    src:url("/demo/fonts/InstrumentSerif-Regular.ttf") format("truetype");font-display:swap}
+  @font-face{font-family:"InterV";
+    src:url("/demo/fonts/Inter-Variable.ttf") format("truetype");font-display:swap}
 
   :root{
-    --bg:#08090b; --panel:#0e1014; --line:#1c2027;
-    --ink:#e9ecf1; --ink-2:#9aa3b0; --ink-3:#6b7480;
-    /* Each room keeps its own colour. Named in words too, because two of
-       the four are greens and colour alone cannot tell them apart. */
-    --podcast:#16c784; --mcg:#6ecf9e; --elon:#d93a4f; --tradfi:#d9a441;
-    --accent:var(--podcast);
+    --void:#06070a; --deck:#0c0e13; --edge:#1a1e27; --edge-2:#262c38;
+    --ink:#f2f4f8; --ink-2:#aab3c2; --ink-3:#7e8799;
+    --signal:#ffa23a;                 /* the parent. none of the four own it */
+    --podcast:#16c784; --mcg:#6ecf9e; --elon:#d93a4f; --tradfi:#d8cfc0;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --ease:cubic-bezier(.22,.78,.24,1); --quick:.22s; --slow:.55s;
   }
   *{box-sizing:border-box}
-  html,body{margin:0;background:var(--bg);color:var(--ink)}
-  body{font-family:"InterV",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-    line-height:1.5;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:860px;margin:0 auto;padding:0 16px}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--void);color:var(--ink);
+    font-family:"InterV",-apple-system,BlinkMacSystemFont,sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+  /* Atmosphere: a low horizon glow and a fine grain, no gradient mesh. */
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:radial-gradient(120% 60% at 50% -10%,
+      rgba(255,162,58,.07),transparent 62%)}
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;
+    opacity:.35;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'>\
+<filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/>\
+</filter><rect width='140' height='140' filter='url(%23n)' opacity='.5'/></svg>")}
+  .wrap{position:relative;z-index:2;max-width:1560px;margin:0 auto;padding:0 clamp(20px,3.4vw,56px)}
   a{color:inherit}
 
-  header{padding:26px 0 0}
-  .top{display:flex;align-items:center;justify-content:space-between;gap:16px}
-  .mark{font-weight:800;letter-spacing:.3px;font-size:15px}
-  .mark span{color:var(--accent);transition:color .5s}
+  /* ── rail ─────────────────────────────────────────────────────────── */
+  header{display:flex;align-items:center;justify-content:space-between;
+    gap:16px;padding:26px 0 18px;border-bottom:1px solid var(--edge);
+    position:relative;z-index:80}
+  .mark{display:flex;align-items:baseline;gap:10px}
+  .mark .w{font-family:"Instrument Serif",Georgia,serif;font-size:21px;letter-spacing:.2px}
+  .mark .s{font-family:var(--mono);font-size:10px;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--ink-3)}
 
-  .hero{padding:54px 0 22px;text-align:center}
-  .eyebrow{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-    font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
+  /* ── hero ─────────────────────────────────────────────────────────── */
+  .hero{padding:58px 0 0}
+  .heroGrid{display:grid;grid-template-columns:minmax(0,1fr) clamp(220px,18vw,290px);
+    gap:clamp(48px,6vw,110px);align-items:start}
+  /* The asset is the hours. It was set in 11px mono, which undersold the
+     one number that takes a year to earn. */
+  .scale{border-left:1px solid var(--edge);padding-left:30px}
+  .scale .big{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(46px,3.6vw,60px);
+    line-height:.9;letter-spacing:-2px;color:var(--signal)}
+  .scale .unit{font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--ink-3);margin-top:10px}
+  /* A label pinned left and its number pinned right reads as a
+     spreadsheet and leaves a hole down the middle. Each figure keeps
+     its own label under it instead. */
+  .ledger{margin-top:24px;padding-top:20px;border-top:1px solid var(--edge);
+    display:grid;grid-template-columns:1fr 1fr;gap:20px 16px}
+  .ledger div{display:block}
+  .ledger b{display:block;font-family:"Instrument Serif",Georgia,serif;
+    font-weight:400;font-size:23px;line-height:1;color:var(--ink);
+    font-variant-numeric:tabular-nums}
+  .ledger span{display:block;margin-top:6px;font-family:var(--mono);
+    font-size:9.5px;letter-spacing:.17em;text-transform:uppercase;
     color:var(--ink-3)}
   h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;
-    font-size:clamp(38px,7vw,62px);line-height:1.04;letter-spacing:-.5px;
-    margin:14px 0 12px}
-  h1 em{font-style:italic;color:var(--accent);transition:color .5s}
-  .lede{color:var(--ink-2);font-size:17px;max-width:620px;margin:0 auto}
+    font-size:clamp(38px,4.5vw,74px);line-height:1.0;letter-spacing:-1.1px;
+    margin:16px 0 0;padding-bottom:.1em}
+  h1 em{font-style:italic;color:var(--signal)}
+  .lede{color:var(--ink-2);font-size:17px;max-width:58ch;margin:16px 0 0}
 
-  form{display:flex;gap:10px;margin:26px 0 12px}
-  input{flex:1;min-width:0;background:var(--panel);color:var(--ink);
-    border:1px solid var(--line);border-radius:11px;padding:16px 18px;
-    font:inherit;font-size:16.5px;outline:none;transition:border-color .2s}
-  input:focus{border-color:var(--accent)}
-  button{background:var(--accent);color:#07130d;border:0;border-radius:11px;
-    padding:0 26px;font:inherit;font-weight:700;font-size:16px;cursor:pointer;
-    transition:background .5s,opacity .2s}
-  button:disabled{opacity:.5;cursor:default}
+  form{display:flex;gap:0;margin:32px 0 0;max-width:820px;
+    border:1px solid var(--edge-2);border-radius:2px;background:var(--deck);
+    transition:border-color var(--quick) var(--ease),box-shadow var(--quick) var(--ease)}
+  form:focus-within{border-color:var(--signal);
+    box-shadow:0 0 0 4px rgba(255,162,58,.09)}
+  input{flex:1;min-width:0;background:transparent;color:var(--ink);border:0;
+    padding:19px 20px;font:inherit;font-size:16.5px;outline:none}
+  input::placeholder{color:var(--ink-3)}
+  #go{background:transparent;color:var(--signal);border:0;border-left:1px solid var(--edge-2);
+    padding:0 26px;font-family:var(--mono);font-weight:600;font-size:12px;
+    letter-spacing:.18em;text-transform:uppercase;cursor:pointer;
+    transition:background var(--quick) var(--ease)}
+  #go:hover:not(:disabled){background:rgba(255,162,58,.09)}
+  #go:disabled{color:var(--ink-3);cursor:default}
 
-  .tries{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
-  .try{background:transparent;color:var(--ink-2);border:1px solid var(--line);
-    border-radius:999px;padding:7px 13px;font-size:13px;cursor:pointer;
-    display:inline-flex;align-items:center;gap:7px}
-  .try:hover{border-color:var(--ink-3);color:var(--ink)}
-  .dot{width:7px;height:7px;border-radius:50%;flex:none}
+  .tries{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0;max-width:900px;
+    align-items:center}
+  .tries .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--ink-3);margin-right:4px}
+  .try{background:transparent;border:1px solid var(--edge);color:var(--ink-2);
+    border-radius:99px;padding:8px 14px;font-family:inherit;font-size:13.5px;
+    cursor:pointer;display:inline-flex;align-items:center;gap:9px;
+    transition:border-color var(--quick) var(--ease),color var(--quick) var(--ease),background var(--quick) var(--ease)}
+  .try:hover{border-color:var(--edge-2);color:var(--ink);background:rgba(255,255,255,.02)}
+  .try i{width:5px;height:5px;border-radius:50%;flex:none}
 
-  /* Answer */
-  #out{margin:30px 0 10px;display:none}
-  .badge{display:inline-flex;align-items:center;gap:9px;
-    border:1px solid var(--line);background:var(--panel);
-    border-radius:999px;padding:6px 13px;font-size:13px;color:var(--ink-2)}
-  .badge b{color:var(--ink)}
-  .answer{margin:16px 0 0;font-size:17.5px;white-space:pre-wrap}
-  .considered{margin-top:14px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-    font-size:11.5px;color:var(--ink-3)}
-  .considered i{font-style:normal;color:var(--ink-2)}
+  /* ── channels: the instrument ─────────────────────────────────────── */
+  .board{margin:54px 0 0;border-top:1px solid var(--edge);padding-top:20px}
+  .board h2,.sect h2{font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--ink-3);font-weight:500;margin:0 0 20px;
+    display:flex;align-items:center;gap:12px}
+  .board h2::before,.sect h2::before{color:var(--signal);font-size:10.5px}
+  #archive-sect h2::before{content:"01"}
+  .board h2::before{content:"02"} .sect h2::before{content:"03"}
+  .chan{display:grid;grid-template-columns:1fr 128px;gap:4px 18px;
+    align-items:center;padding:18px 20px 18px 22px;margin-bottom:8px;
+    position:relative;border:1px solid var(--edge);border-radius:3px;
+    background:var(--deck);text-decoration:none;overflow:hidden;
+    transition:border-color var(--quick) var(--ease),background var(--quick) var(--ease),transform var(--quick) var(--ease)}
+  /* The spine is the archive's own colour. It is the only place each room
+     gets to be itself on a page that belongs to all four. */
+  .chan::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+    background:var(--c);opacity:.55;transition:opacity var(--quick) var(--ease)}
+  .chan:hover{border-color:var(--edge-2);background:#10131a;transform:translateY(-1px)}
+  .chan:hover::before{opacity:1}
+  .chan .nm{display:flex;align-items:center;gap:10px;font-size:17px;
+    font-weight:600;letter-spacing:-.2px;color:var(--ink)}
+  .chan .nm i{width:7px;height:7px;border-radius:50%;flex:none;
+    background:var(--c);transition:box-shadow var(--slow) var(--ease)}
+  /* The size of each archive, said once, in a number you can read. */
+  .chan .size{grid-row:1/3;grid-column:2;text-align:right;
+    font-family:"Instrument Serif",Georgia,serif;font-size:30px;line-height:1;
+    color:var(--ink-2);font-variant-numeric:tabular-nums}
+  .chan .size span{display:block;font-family:var(--mono);font-size:9.5px;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);
+    margin-top:7px}
+  .chan .meta{grid-column:1;font-size:14px;color:var(--ink-2);max-width:86ch;
+    overflow-wrap:anywhere;line-height:1.45}
+  .chan .go{font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--signal);opacity:0;transition:opacity .2s}
+  .chan:hover .go{opacity:1}
+  /* The meter only exists once there is a reading to put in it. */
+  .chan .bar{grid-column:1/-1;height:3px;background:var(--edge);
+    border-radius:2px;overflow:hidden;position:relative;margin-top:12px}
+  .chan .fill{position:absolute;inset:0 auto 0 0;width:0;border-radius:2px;
+    background:var(--c);transition:width .85s var(--ease)}
+  .chan .sc{position:absolute;right:20px;top:18px;font-family:var(--mono);
+    font-size:12px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+  #chans:not(.live) .bar{display:none}
+  #chans:not(.live) .sc{opacity:0}
+  #chans.live .size{opacity:0;pointer-events:none}
+  .chan .sc,.chan .size{transition:opacity var(--slow) var(--ease)}
+  .chan.win{border-color:#2f3440;background:#11151c}
+  .chan.win .nm i{box-shadow:0 0 14px var(--c)}
+  .chan.win .sc{color:var(--signal);font-weight:600}
+  #chans.judged .chan{opacity:.5;transition:opacity var(--slow) var(--ease)}
+  #chans.judged .chan.win{opacity:1}
+  #chans.judged .chan:hover{opacity:.85}
 
-  .hits{margin:22px 0 0;display:grid;gap:10px}
-  .hit{border:1px solid var(--line);background:var(--panel);border-radius:11px;
-    padding:13px 15px}
-  .hit .meta{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;
-    font-size:12.5px;color:var(--ink-3)}
-  .hit .meta b{color:var(--ink-2);font-weight:600}
-  .hit .t{color:var(--accent);cursor:pointer;font-family:ui-monospace,monospace}
-  .hit p{margin:8px 0 0;color:var(--ink-2);font-size:14.5px}
-  .player{margin-top:11px;width:100%;aspect-ratio:16/9;border:0;border-radius:8px}
-
-  /* Rooms: this is the "what does it cover" the page was missing */
-  .rooms{margin:44px 0 10px}
-  .rooms h2{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-    font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
-    color:var(--ink-3);font-weight:600;margin:0 0 12px}
-  .grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(196px,1fr))}
-  .room{display:block;text-decoration:none;border:1px solid var(--line);
-    background:var(--panel);border-radius:12px;padding:15px 16px;
-    transition:border-color .2s,transform .2s}
-  .room:hover{transform:translateY(-2px)}
-  .room .n{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px}
-  .room .c{margin-top:5px;font-family:ui-monospace,monospace;font-size:12px;
+  /* ── three real moments ──────────────────────────────────────────
+     A chart of publication dates was the wrong picture: a linear axis
+     from 2014 squeezed the two largest archives into the last tenth of
+     the width, and nothing on it said what a tick stood for. These are
+     three sentences that are actually in the archive, each one read off
+     the transcript with the second it was said, and each one plays. It
+     is the same claim the page makes, demonstrated instead of drawn. */
+  /* ── what they talk about ────────────────────────────────────────
+     A chart of publication dates was the wrong picture and nothing on
+     it said what a tick meant. A ranked list is the most readable chart
+     there is, and this one is counted from the shows themselves: every
+     ticker named across Market Bubble and MCG Live. Each row opens the
+     recording at a second where it actually came up, so the number is
+     never just a number. */
+  .note{color:var(--ink-2);font-size:14.5px;margin:0 0 18px;max-width:64ch}
+  .ranks{display:grid;gap:2px}
+  .rank{display:grid;grid-template-columns:26px 150px 1fr 74px;gap:4px 16px;
+    align-items:center;padding:12px 16px;border-radius:3px;cursor:pointer;
+    background:transparent;border:1px solid transparent;
+    transition:background var(--quick) var(--ease),border-color var(--quick) var(--ease)}
+  .rank:hover{background:var(--deck);border-color:var(--edge)}
+  .rank .bar u{transition:width .85s var(--ease)}
+  .rank:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+  .rank .no{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+  .rank .sym{display:flex;align-items:baseline;gap:9px;min-width:0}
+  .rank .sym b{font-family:var(--mono);font-size:14.5px;font-weight:600;
+    color:var(--ink)}
+  .rank .sym span{font-size:12.5px;color:var(--ink-3);overflow:hidden;
+    text-overflow:ellipsis;white-space:nowrap}
+  .rank .bar{height:7px;background:var(--edge);border-radius:2px;
+    overflow:hidden;position:relative}
+  .rank .bar u{position:absolute;inset:0 auto 0 0;border-radius:2px;
+    background:linear-gradient(90deg,var(--signal),#c9762a)}
+  .rank .n{font-family:var(--mono);font-size:13px;color:var(--ink-2);
+    text-align:right;font-variant-numeric:tabular-nums}
+  .rank .where{grid-column:2/-1;font-family:var(--mono);font-size:11px;
+    color:#4d5666;margin-top:6px;overflow:hidden;text-overflow:ellipsis;
+    white-space:nowrap;transition:color var(--quick) var(--ease)}
+  .rank:hover .where,.rank.playing .where{color:var(--ink-3)}
+  /* The player gets its own place. Dropped inside a row it split the
+     ranking in two and left a hole where the rest of the list was. */
+  .rank.playing{background:var(--deck);border-color:var(--edge-2)}
+  .rank.playing .no,.rank.playing .n{color:var(--signal)}
+  /* A 16:9 frame given the full 1560px is taller than half the screen
+     and leaves its caption a sliver. The frame is capped and the rail
+     beside it carries the numbers the row was showing. */
+  .stage{margin-top:24px;border-top:1px solid var(--edge);padding-top:24px;
+    display:grid;grid-template-columns:minmax(0,900px) minmax(250px,360px);
+    gap:36px;align-items:start;justify-content:start;
+    opacity:0;transition:opacity .3s var(--ease)}
+  .stage.on{opacity:1}
+  .stage iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:3px;
+    background:#000;display:block}
+  .stage .cap .sym{font-family:var(--mono);font-size:12px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--signal);font-weight:600}
+  .stage .cap h3{margin:10px 0 0;font-size:18px;font-weight:600;
+    letter-spacing:-.2px;line-height:1.3}
+  .stage .cap p{margin:8px 0 0;font-family:var(--mono);font-size:11.5px;
     color:var(--ink-3)}
-  .room .d{margin-top:7px;font-size:13.5px;color:var(--ink-2)}
+  .stage .cap .facts{margin-top:20px;padding-top:18px;
+    border-top:1px solid var(--edge)}
+  .stage .cap .facts b{display:block;font-family:"Instrument Serif",Georgia,serif;
+    font-size:36px;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+  .stage .cap .facts span{display:block;margin-top:7px;font-family:var(--mono);
+    font-size:10px;letter-spacing:.17em;text-transform:uppercase;color:var(--ink-3)}
+  .stage .cap .ask{margin-top:20px;background:transparent;color:var(--ink-2);
+    border:1px solid var(--edge-2);border-radius:99px;padding:9px 16px;
+    font:inherit;font-size:13px;cursor:pointer;
+    transition:border-color .2s,color .2s,background .2s}
+  .stage .cap .ask:hover{border-color:var(--signal);color:var(--signal);
+    background:rgba(255,162,58,.07)}
+  @media(max-width:900px){.stage{grid-template-columns:1fr;gap:18px}}
+  @media(max-width:640px){
+    .rank{grid-template-columns:22px 1fr 62px;gap:10px}
+    .rank .bar{grid-column:1/-1;order:4}
+  }
 
-  .how{margin:40px 0 0;border-top:1px solid var(--line);padding-top:22px;
-    display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
-  .how h3{margin:0 0 5px;font-size:14.5px}
-  .how p{margin:0;color:var(--ink-2);font-size:13.5px}
+  /* ── answer ───────────────────────────────────────────────────────── */
+  /* The answer was the one thing on the page that arrived by snapping
+     into place. It now rises the same way the rest of it does. */
+  #out{display:none;margin:46px 0 0;opacity:0;transform:translateY(10px);
+    transition:opacity .4s var(--ease),transform .4s var(--ease)}
+  #out.shown{opacity:1;transform:none}
+  .hit{animation:rise .5s var(--ease) both}
+  .verdict{display:flex;align-items:center;gap:11px;font-family:var(--mono);
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+  .verdict{flex-wrap:wrap}
+  .verdict b{color:var(--ink);letter-spacing:.06em;overflow-wrap:anywhere}
+  .answer{font-size:19px;line-height:1.62;margin:18px 0 0;white-space:pre-wrap;
+    max-width:72ch;overflow-wrap:anywhere}
+  .hits{margin:30px 0 0;display:grid;gap:1px;background:var(--edge);
+    border:1px solid var(--edge);border-radius:2px}
+  .hit{background:var(--deck);padding:16px 18px;
+    transition:background var(--quick) var(--ease)}
+  .hit:hover{background:#0f1218}
+  .hit .row{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;
+    font-family:var(--mono);font-size:11.5px;color:var(--ink-3);min-width:0}
+  .hit .row > *{min-width:0;overflow-wrap:anywhere}
+  .hit .ttl{color:var(--ink-2);font-family:"InterV",sans-serif;font-size:13.5px;
+    font-weight:600;max-width:52ch;overflow:hidden;text-overflow:ellipsis;
+    white-space:nowrap;min-width:0;flex:0 1 auto}
+  .hit .tc{color:var(--signal);cursor:pointer;border-bottom:1px dotted currentColor}
+  .hit .tc:hover{background:rgba(255,162,58,.08)}
+  .hit .tc:focus-visible,.try:focus-visible,#go:focus-visible,
+  .chan:focus-visible,footer nav a:focus-visible{
+    outline:2px solid var(--signal);outline-offset:3px;border-radius:2px}
+  .hit .who{color:var(--ink-2);max-width:26ch;overflow:hidden;
+    text-overflow:ellipsis;white-space:nowrap}
+  .hit p{margin:9px 0 0;color:var(--ink-2);font-size:14.5px;overflow-wrap:anywhere}
+  .player{margin-top:12px;width:100%;aspect-ratio:16/9;border:0;border-radius:2px}
 
-  footer{margin:46px 0 40px;border-top:1px solid var(--line);padding-top:16px;
-    color:var(--ink-3);font-size:12.5px;display:flex;justify-content:space-between;
-    gap:14px;flex-wrap:wrap}
-  @media(max-width:560px){ form{flex-direction:column} button{padding:14px} }
+  .sect{margin:54px 0 0;border-top:1px solid var(--edge);padding-top:20px}
+  .rules{display:grid;gap:0;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .rules > div{padding:4px 30px 4px 0;border-left:1px solid var(--edge);
+    padding-left:26px}
+  .rules > div:first-child{border-left:0;padding-left:0}
+  .rules .n{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;
+    color:var(--signal);display:block;margin-bottom:11px}
+  .rules h3{margin:0 0 8px;font-size:16px;letter-spacing:-.1px}
+  .rules p{margin:0;color:var(--ink-2);font-size:15px;max-width:38ch}
+  footer{margin:58px 0 46px;border-top:1px solid var(--edge);padding-top:22px;
+    display:grid;grid-template-columns:1fr auto;gap:20px;align-items:end;
+    font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+  footer .fine{max-width:52ch;line-height:1.7}
+  footer .mint{word-break:break-all;color:var(--ink-3);opacity:.7}
+  footer nav{display:flex;gap:18px;flex-wrap:wrap}
+  footer nav a{text-decoration:none;color:var(--ink-2);transition:color .2s}
+  footer nav a:hover{color:var(--signal)}
+
+  /* one orchestrated load, staggered */
+  .rise{opacity:0;transform:translateY(14px);animation:rise .7s var(--ease) forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){
+    .rise,.hit{animation:none;opacity:1;transform:none}
+    #out{transition:none;opacity:1;transform:none}
+    .chan .fill{transition:none}
+  }
+  @media(max-width:900px){
+    .heroGrid{grid-template-columns:1fr;gap:40px}
+    .scale{border-left:0;border-top:1px solid var(--edge);padding-left:0;padding-top:24px}
+    .scale .big{font-size:50px}
+    .rules > div{border-left:0;padding-left:0;padding-bottom:22px}
+  }
+  @media(max-width:640px){
+    .wrap{padding:0 20px}
+    header{flex-wrap:wrap;row-gap:10px}
+    .mark{width:100%}
+    .chan{grid-template-columns:1fr 46px;row-gap:7px}
+    .chan .bar{grid-column:1/-1;order:3}
+    form{flex-direction:column} #go{border-left:0;border-top:1px solid var(--edge-2);padding:15px}
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header>
-    <div class="top">
-      <div class="mark">Market Bubble <span>Search</span></div>
-      <div data-archives></div>
+  <header class="rise" style="animation-delay:.02s">
+    <div class="mark">
+      <span class="w">Market Bubble</span><span class="s">Search</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:18px">
+      <span data-archives></span>
     </div>
   </header>
 
   <section class="hero">
-    <div class="eyebrow">716 recordings &middot; 1,187 hours &middot; four archives</div>
-    <h1>Ask it what somebody <em>actually said</em>.</h1>
-    <p class="lede">One box. It searches every archive, answers from the one
-    that knows, and gives you the second it was said so you can check it.</p>
+    <div class="heroGrid">
+      <div>
+        <h1 class="rise" style="animation-delay:.08s">Ask what somebody<br><em>actually said</em>.</h1>
+        <p class="lede rise" style="animation-delay:.13s">One question goes to all four archives at once.
+          The one with the answer gives it, and you see what the other three scored.</p>
 
-    <form id="f" autocomplete="off">
-      <input id="q" type="search" placeholder="when did fink change his mind on bitcoin"
-             aria-label="Ask the archives">
-      <button id="go" type="submit">Ask</button>
-    </form>
+        <form id="f" autocomplete="off" class="rise" style="animation-delay:.2s">
+          <input id="q" type="search" aria-label="Ask the archives"
+                 placeholder="when did fink change his mind on bitcoin">
+          <button id="go" type="submit">Ask</button>
+        </form>
+        <div class="tries rise" id="tries" style="animation-delay:.26s"></div>
+      </div>
 
-    <div class="tries" id="tries"></div>
+      <aside class="scale rise" style="animation-delay:.24s">
+        <div class="big">1,187</div>
+        <div class="unit">hours of tape</div>
+        <div class="ledger">
+          <div><b>716</b><span>recordings</span></div>
+          <div><b>4</b><span>archives</span></div>
+          <div><b>2014</b><span>earliest</span></div>
+          <div><b>2026</b><span>latest</span></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="sect" id="archive-sect">
+    <h2>what they actually talk about</h2>
+    <p class="note">Every ticker the shows named, counted across Market Bubble
+      and MCG Live. Pick one to hear it being discussed.</p>
+    <div class="ranks" id="ranks"></div>
+    <div class="stage" id="stage" hidden></div>
+  </section>
+
+  <section class="board rise" style="animation-delay:.38s">
+    <h2>channels</h2>
+    <div id="chans"></div>
   </section>
 
   <section id="out" aria-live="polite">
-    <div class="badge" id="badge"></div>
+    <div class="verdict" id="verdict"></div>
     <div class="answer" id="answer"></div>
-    <div class="considered" id="considered"></div>
     <div class="hits" id="hits"></div>
   </section>
 
-  <section class="rooms">
-    <h2>what is in it</h2>
-    <div class="grid" id="grid"></div>
-  </section>
-
-  <section class="how">
-    <div><h3>It answers only from the transcripts</h3>
-      <p>Every claim carries the recording and the second. If the archive
-      does not have it, it says so instead of guessing.</p></div>
-    <div><h3>Search by meaning, not keywords</h3>
-      <p>You do not need the words anyone used. "eth is finished" finds
-      "ethereum is done".</p></div>
-    <div><h3>The archives never mix</h3>
-      <p>One question is answered by one archive. A claim about the
-      broadcast can never come from a Tesla interview.</p></div>
+  <section class="sect">
+    <h2>how it behaves</h2>
+    <div class="rules">
+      <div><span class="n">01</span><h3>It answers only from the transcripts</h3>
+        <p>Every claim carries the recording and the second it was said. If the
+        archive does not have it, it says so rather than guessing.</p></div>
+      <div><span class="n">02</span><h3>Meaning, not keywords</h3>
+        <p>You do not need the words anyone used. "eth is finished" finds
+        "ethereum is done".</p></div>
+      <div><span class="n">03</span><h3>The archives never mix</h3>
+        <p>One question is answered by one archive. A claim about the broadcast
+        can never come from a Tesla interview.</p></div>
+    </div>
   </section>
 
   <footer>
-    <div>Free, no login. Informational only, not financial advice.</div>
-    <div>An independent project, not affiliated with any show.</div>
+    <div class="fine">
+      Free, no login. Informational only, and not financial advice.
+      An independent project, not affiliated with any show or its hosts.
+      <div class="mint" style="margin-top:8px">$MBS &middot;
+        8VjFid8BVGcTPpUzf4PAWsA5nHJ5h2GQNXPEjyr2mF7t</div>
+    </div>
+    <nav>
+      <a href="/">Market Bubble</a><a href="/mcg">MCG Live</a>
+      <a href="/elon">Elon Musk</a><a href="/finance">The Record</a>
+      <a href="/llms.txt">llms.txt</a>
+    </nav>
   </footer>
 </div>
 
@@ -183,146 +422,317 @@
 <script>
 (function(){
   "use strict";
-  var COLOUR = {podcast:"--podcast", mcg:"--mcg", elon:"--elon", tradfi:"--tradfi"};
-  var ROOMS = [
-    {k:"podcast", name:"Market Bubble", href:"/",        c:"21 shows · 73.4 hours",
-     d:"The live broadcast. A quarter of it never reaches YouTube."},
-    {k:"mcg",     name:"MCG Live",      href:"/mcg",     c:"651 episodes · 1,040 hours",
-     d:"One project per episode, with the founder on."},
-    {k:"elon",    name:"Elon Musk",     href:"/elon",    c:"14 interviews · 37.8 hours",
-     d:"Long-form, 2018 to 2026. Rogan, Lex, the Economist."},
-    {k:"tradfi",  name:"The Record",    href:"/finance", c:"30 recordings · 36 hours",
-     d:"Fink, Dalio, Powell, Dimon, Wood, Saylor and more."}
+  var VAR = {podcast:"--podcast", mcg:"--mcg", elon:"--elon", tradfi:"--tradfi"};
+  var CHANS = [
+    {k:"podcast", name:"Market Bubble", href:"/", size:"73",
+     meta:"21 live shows with Ansem and FaZe Banks. About a quarter of each one never reaches the YouTube upload."},
+    {k:"mcg", name:"MCG Live", href:"/mcg", size:"1,040",
+     meta:"651 episodes, one project per episode, with the founder on the call."},
+    {k:"elon", name:"Elon Musk", href:"/elon", size:"38",
+     meta:"14 long-form interviews, 2018 to 2026. Rogan, Lex Fridman, the Economist, the Trump space."},
+    {k:"tradfi", name:"The Record", href:"/finance", size:"36",
+     meta:"30 recordings from the people who run the money. Fink, Dalio, Powell, Dimon, Wood, Saylor."}
   ];
   var TRIES = [
-    {k:"mcg",     q:"who is building encrypted mesh networks"},
-    {k:"tradfi",  q:"when did fink change his mind on bitcoin"},
-    {k:"elon",    q:"what did elon say about heat shield tiles"},
-    {k:"podcast", q:"why does ansem think ethereum is done"}
+    {k:"tradfi",  q:"When did Fink change his mind on Bitcoin?"},
+    {k:"podcast", q:"Why does Ansem think Ethereum is done?"},
+    {k:"elon",    q:"What did Elon say about heat shield tiles?"},
+    {k:"mcg",     q:"Who is building encrypted mesh networks?"}
   ];
-  var $ = function(id){ return document.getElementById(id); };
+  var $ = function(i){ return document.getElementById(i); };
+  var css = function(v){ return getComputedStyle(document.documentElement)
+                                 .getPropertyValue(v).trim(); };
 
-  ROOMS.forEach(function(r){
+  CHANS.forEach(function(c){
     var a = document.createElement("a");
-    a.className = "room"; a.href = r.href;
-    a.innerHTML = '<div class="n"><span class="dot"></span><span></span></div>'
-                + '<div class="c"></div><div class="d"></div>';
-    a.querySelector(".dot").style.background = "var(" + COLOUR[r.k] + ")";
-    a.querySelectorAll("span")[1].textContent = r.name;
-    a.querySelector(".c").textContent = r.c;
-    a.querySelector(".d").textContent = r.d;
-    $("grid").appendChild(a);
+    a.className = "chan"; a.href = c.href; a.id = "ch-" + c.k;
+    a.innerHTML = '<span class="nm"><i></i><span></span><span class="go">open</span></span>'
+                + '<span class="meta"></span>'
+                + '<span class="size"></span><span class="sc"></span>'
+                + '<span class="bar"><span class="fill"></span></span>';
+    a.style.setProperty("--c", css(VAR[c.k]));
+    a.querySelectorAll(".nm span")[0].textContent = c.name;
+    a.querySelector(".meta").textContent = c.meta;
+    a.querySelector(".size").innerHTML = "";
+    a.querySelector(".size").append(c.size,
+      Object.assign(document.createElement("span"), {textContent: "hours"}));
+    $("chans").appendChild(a);
   });
 
-  // Deliberately one per archive, so the range is visible before anyone
-  // types. "Someone new just drops into the tool" was the other half of
-  // the feedback this page answers.
+  var lbl = document.createElement("span");
+  lbl.className = "lbl"; lbl.textContent = "Try";
+  $("tries").appendChild(lbl);
+
   TRIES.forEach(function(t){
     var b = document.createElement("button");
     b.type = "button"; b.className = "try";
-    b.innerHTML = '<span class="dot"></span><span></span>';
-    b.querySelector(".dot").style.background = "var(" + COLOUR[t.k] + ")";
-    b.querySelectorAll("span")[1].textContent = t.q;
+    b.innerHTML = '<i></i><span></span>';
+    b.querySelector("i").style.background = css(VAR[t.k]);
+    b.querySelector("span").textContent = t.q;
     b.onclick = function(){ $("q").value = t.q; ask(t.q); };
     $("tries").appendChild(b);
   });
 
   function stamp(s){
-    s = Math.max(0, Math.floor(s || 0));
+    s = Math.max(0, Math.floor(s||0));
     var h = Math.floor(s/3600), m = Math.floor((s%3600)/60), x = s%60;
-    var mm = h ? String(m).padStart(2,"0") : String(m);
-    return (h ? h + ":" : "") + mm + ":" + String(x).padStart(2,"0");
+    return (h ? h + ":" + String(m).padStart(2,"0") : String(m))
+           + ":" + String(x).padStart(2,"0");
   }
-  function youtubeId(url){
-    var m = /(?:v=|youtu\.be\/)([A-Za-z0-9_-]{6,})/.exec(url || "");
-    return m ? m[1] : null;
+  function ytId(u){ var m=/(?:v=|youtu\.be\/)([A-Za-z0-9_-]{6,})/.exec(u||""); return m?m[1]:null; }
+
+  function meters(considered, winner){
+    CHANS.forEach(function(c){
+      var row = $("ch-" + c.k);
+      var hit = (considered||[]).filter(function(x){ return x.key === c.k; })[0];
+      var sc = hit ? hit.score : 0;
+      row.classList.toggle("win", !!winner && winner.key === c.k);
+      row.querySelector(".fill").style.width = Math.max(2, Math.min(100, sc*100)) + "%";
+      row.querySelector(".sc").textContent = hit ? sc.toFixed(2) : "idle";
+    });
+    // Only dim the board once there is a verdict to dim it in favour of.
+    // Dimming on an error left the whole instrument greyed out with no
+    // winner lit, which reads as broken rather than as an error.
+    $("chans").classList.toggle("judged", !!winner);
   }
-  function seekable(url, sec){
-    if (!url) return null;
-    return url + (url.indexOf("?") >= 0 ? "&" : "?") + "t=" + Math.floor(sec || 0);
+
+  // Back to the resting state: the archives say how big they are again,
+  // and nothing on the page claims a reading that was never taken.
+  function idle(){
+    CHANS.forEach(function(c){
+      var row = $("ch-" + c.k);
+      row.classList.remove("win");
+      row.querySelector(".sc").textContent = "";
+      row.querySelector(".fill").style.width = "0%";
+    });
+    $("chans").classList.remove("judged");
+    $("chans").classList.remove("live");
+  }
+
+  // One player at a time. Opening a second timestamp used to leave the
+  // first still playing underneath it.
+  var playing = null;
+  function stopPlaying(){
+    if (!playing) return;
+    var f = playing.querySelector("iframe");
+    if (f) f.remove();
+    playing = null;
+  }
+  function play(el, vid, sec){
+    if (playing !== el) stopPlaying();
+    if (el.querySelector("iframe")) return;
+    var f = document.createElement("iframe");
+    f.className = "player";
+    f.allow = "autoplay; encrypted-media; fullscreen; picture-in-picture";
+    f.allowFullscreen = true;
+    f.title = "Playback from the cited moment";
+    f.src = "https://www.youtube.com/embed/" + vid
+          + "?start=" + Math.floor(sec) + "&autoplay=1";
+    el.appendChild(f); playing = el;
   }
 
   var busy = false;
+  // What the visitor is told when nothing comes back. A rate limit used
+  // to fall through to render(), which found no archive on the payload
+  // and reported that nothing in 1,187 hours matched. Being throttled and
+  // being unanswered are not the same thing and must not read the same.
+  var TROUBLE = {
+    429: "That is a lot of questions at once. Give it a minute and ask again.",
+    503: "The archives are reloading. Try again in a moment.",
+    504: "That one took too long to come back. Try again."
+  };
+
   function ask(question){
     if (busy || !question) return;
-    busy = true; $("go").disabled = true;
+    busy = true; $("go").disabled = true; $("go").textContent = "\u2026";
     $("out").style.display = "block";
-    $("badge").textContent = "searching all four archives…";
-    $("answer").textContent = ""; $("considered").textContent = "";
-    $("hits").innerHTML = "";
+    $("out").classList.remove("shown");
+    $("verdict").textContent = "querying four archives";
+    $("answer").textContent = ""; $("hits").innerHTML = "";
+    stopPlaying();
+    CHANS.forEach(function(c){
+      $("ch-"+c.k).classList.remove("win");
+      $("ch-"+c.k).querySelector(".sc").textContent = "\u00b7\u00b7\u00b7";
+      $("ch-"+c.k).querySelector(".fill").style.width = "0%";
+    });
+    $("chans").classList.remove("judged");
+    $("chans").classList.add("live");
 
-    fetch("/v1/search", {
-      method:"POST", headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({query: question})
-    }).then(function(r){ return r.json(); }).then(render)
-      .catch(function(){
-        $("badge").textContent = "something went wrong, try again";
+    // Four archives and then a written answer. Without a ceiling the
+    // button sits on an ellipsis for as long as a stalled model call takes.
+    var stop = new AbortController();
+    var bell = setTimeout(function(){ stop.abort(); }, 45000);
+
+    function trouble(msg){
+      $("verdict").textContent = msg;
+      $("answer").textContent = ""; $("hits").innerHTML = "";
+      $("out").classList.add("shown");
+      idle();
+    }
+
+    fetch("/v1/search", {method:"POST", signal:stop.signal,
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({query:question})})
+      .then(function(r){
+        if (!r.ok) {
+          trouble(TROUBLE[r.status] || "Something went wrong. Try again.");
+          return null;
+        }
+        return r.json();
       })
-      .then(function(){ busy = false; $("go").disabled = false; });
+      .then(function(d){ if (d) render(d); })
+      .catch(function(err){
+        trouble(err && err.name === "AbortError"
+                ? "That took too long to come back. Try again."
+                : "Could not reach the archives. Check your connection.");
+      })
+      .then(function(){
+        clearTimeout(bell);
+        busy=false; $("go").disabled=false; $("go").textContent="Ask";
+      });
   }
 
   function render(d){
     var room = d.archive;
-    if (room && COLOUR[room.key]) {
-      document.documentElement.style.setProperty(
-        "--accent", getComputedStyle(document.documentElement)
-                      .getPropertyValue(COLOUR[room.key]).trim());
-    }
-    $("badge").innerHTML = "";
-    var dot = document.createElement("span");
-    dot.className = "dot";
-    dot.style.background = room ? "var(" + COLOUR[room.key] + ")" : "var(--ink-3)";
-    $("badge").appendChild(dot);
-    var txt = document.createElement("span");
+    meters(d.considered, room);
+    $("verdict").innerHTML = "";
+    var lead = document.createElement("span");
+    lead.textContent = room ? "answered by" : "no archive had this";
+    $("verdict").appendChild(lead);
     if (room) {
-      txt.innerHTML = 'answered by <b></b>';
-      txt.querySelector("b").textContent = room.name || room.label;
-    } else {
-      txt.textContent = "no archive had this";
+      var b = document.createElement("b");
+      b.textContent = room.label || room.name;
+      b.style.color = css(VAR[room.key]) || "";
+      $("verdict").appendChild(b);
     }
-    $("badge").appendChild(txt);
     $("answer").textContent = d.answer || "";
 
-    // The scores of the ones that did not win. The routing is a judgement,
-    // and showing the runners-up is how somebody can tell it was close.
-    var others = (d.considered || []).filter(function(c){
-      return !room || c.key !== room.key; });
-    if (others.length) {
-      var parts = others.map(function(c){
-        return c.label + " " + (c.score || 0).toFixed(2); });
-      $("considered").innerHTML = "also checked: <i></i>";
-      $("considered").querySelector("i").textContent = parts.join("   ");
-    }
-
-    (d.hits || []).slice(0, 6).forEach(function(h){
+    (d.hits||[]).slice(0,6).forEach(function(h){
       var el = document.createElement("div");
       el.className = "hit";
-      el.innerHTML = '<div class="meta"><b></b><span class="t"></span>'
-                   + '<span class="d"></span></div><p></p>';
-      el.querySelector("b").textContent = h.title || "";
-      var sec = h.start_seconds || 0;
-      var t = el.querySelector(".t");
-      t.textContent = h.timestamp || stamp(sec);
-      var link = seekable(h.url, sec);
-      var vid = youtubeId(h.url);
-      t.onclick = function(){
-        if (vid) {
-          if (el.querySelector("iframe")) return;
-          var f = document.createElement("iframe");
-          f.className = "player"; f.allow = "autoplay; encrypted-media";
-          f.src = "https://www.youtube.com/embed/" + vid
-                + "?start=" + Math.floor(sec) + "&autoplay=1";
-          el.appendChild(f);
-        } else if (link) {
-          window.open(link, "_blank", "noopener");
-        }
-      };
-      el.querySelector(".d").textContent = h.published_at || "";
+      el.innerHTML = '<div class="row"><span class="ttl"></span>'
+                   + '<span class="tc"></span><span class="who"></span><span class="dt"></span></div><p></p>';
+      el.querySelector(".ttl").textContent = h.title || "";
+      var sec = Number(h.start_seconds) || 0;
+      var tc = el.querySelector(".tc");
+      tc.textContent = h.timestamp || stamp(sec);
+      el.querySelector(".who").textContent =
+        (h.speakers && h.speakers.length) ? h.speakers.join(", ") : "";
+      el.querySelector(".dt").textContent = h.published_at || "";
       el.querySelector("p").textContent =
-        (h.text || "").split("\n").slice(0, 3).join(" ").slice(0, 260);
+        (h.text||"").split("\n").slice(0,3).join(" ").slice(0,250);
+      var link = h.deep_link || "";
+      var vid = ytId(link);
+      // A timestamp is the only control on a result, so it has to be
+      // reachable without a mouse. A bare span with an onclick is not.
+      tc.setAttribute("role", "button");
+      tc.setAttribute("tabindex", "0");
+      tc.setAttribute("aria-label",
+        (vid ? "Play from " : "Open at ") + tc.textContent
+        + (h.title ? ", " + h.title : ""));
+      function open_(){
+        if (vid) play(el, vid, sec);
+        else if (link) window.open(link, "_blank", "noopener");
+      }
+      tc.onclick = open_;
+      tc.onkeydown = function(e){
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open_(); }
+      };
+      el.style.animationDelay = (0.05 * $("hits").children.length) + "s";
       $("hits").appendChild(el);
     });
+    // Force layout so the transition has a start, then rise. This used
+    // to wait on requestAnimationFrame, which a browser does not run in
+    // a background tab: switching away mid-search meant coming back to
+    // an answer that had arrived and would never be shown.
+    void $("out").offsetHeight;
+    $("out").classList.add("shown");
+    $("out").scrollIntoView({behavior:"smooth", block:"nearest"});
   }
+
+
+  // Counted from the shows themselves, not from anything we decided was
+  // interesting. Each row carries a recording and a second where that
+  // ticker actually came up, so the count is always checkable.
+  var RANKS = [{"sym":"SOL","name":"Solana","n":2925,"vid":"1Mh-UH8bRPg","at":843,"title":"Mizkif gave his chat $400,000 to trade..","room":"podcast"},{"sym":"BTC","name":"Bitcoin","n":1639,"vid":"2GfdXFiTJ-A","at":2220,"title":"Easy Reveals the AI Sleeper Stock Nobody Saw Coming","room":"podcast"},{"sym":"ETH","name":"Ethereum","n":1036,"vid":"2uOI23N1yXY","at":63,"title":"The Best Day Crypto Has Had In Months | Market Bubble #16","room":"podcast"},{"sym":"HYPE","name":"Hyperliquid","n":546,"vid":"2xjkXeXeymU","at":953,"title":"Hunter Biden\u2019s Crypto Launch Was a Disaster","room":"podcast"},{"sym":"USDC","name":"USD Coin","n":489,"vid":"47AACkIhtG8","at":6590,"title":"\"He Turned $500 Into $40,000,000\" | Market Bubble #13","room":"podcast"},{"sym":"PUMP","name":"Pump.fun","n":457,"vid":"FFFnEnXzgEY","at":2207,"title":"\"I Don't Think Intelligence Matters Anymore\" - Tushar Jain  | Market Bubble #14","room":"podcast"},{"sym":"ZEC","name":"Zcash","n":293,"vid":"5mXHC5Hu9Wc","at":794,"title":"Why AI Is Beating Crypto Right Now | Market Bubble #2","room":"podcast"},{"sym":"HOOD","name":"Robinhood","n":271,"vid":"G4gMRER22O8","at":1519,"title":"\"The Next Battle Isn't Attention, It's Agency\" - GPT  | Market Bubble #10","room":"podcast"}];
+  (function(){
+    var host = document.getElementById("ranks");
+    if (!host || !RANKS.length) return;
+    var top = RANKS[0].n;
+    RANKS.forEach(function(r, i){
+      var el = document.createElement("div");
+      el.className = "rank";
+      el.tabIndex = 0;
+      el.setAttribute("role", "button");
+      el.setAttribute("aria-label",
+        r.name + ", " + r.n + " mentions. Play where it came up.");
+      el.innerHTML = '<span class="no"></span>'
+        + '<span class="sym"><b></b><span></span></span>'
+        + '<span class="bar"><u></u></span><span class="n"></span>'
+        + '<span class="where"></span>';
+      el.querySelector(".no").textContent = String(i + 1).padStart(2, "0");
+      el.querySelector(".sym b").textContent = r.sym;
+      el.querySelectorAll(".sym span")[0].textContent = r.name;
+      el.querySelector(".bar u").style.width = (100 * r.n / top) + "%";
+      el.querySelector(".n").textContent = r.n.toLocaleString();
+      el.querySelector(".where").textContent =
+        "\u25b6 " + stamp(r.at) + "  " + r.title;
+      function open_(){
+        host.querySelectorAll(".rank").forEach(function(o){
+          o.classList.remove("playing");
+        });
+        el.classList.add("playing");
+        var st = document.getElementById("stage");
+        var fresh = st.hidden;
+        if (fresh) {
+          st.innerHTML = '<iframe allowfullscreen '
+            + 'allow="autoplay; encrypted-media; fullscreen; picture-in-picture" '
+            + 'title="Playback from the cited moment"></iframe>'
+            + '<div class="cap"><div class="sym"></div><h3></h3><p></p>'
+            + '<div class="facts"><b></b><span></span></div>'
+            + '<button type="button" class="ask"></button></div>';
+          st.hidden = false;
+        }
+        // Fade the caption and frame rather than rebuilding them, so
+        // moving between rows does not flash the whole block away.
+        st.classList.remove("on");
+        setTimeout(function(){
+          st.querySelector("iframe").src = "https://www.youtube.com/embed/"
+            + r.vid + "?start=" + r.at + "&autoplay=1";
+          st.querySelector(".sym").textContent = r.sym + " \u00b7 " + r.name;
+          st.querySelector("h3").textContent = r.title;
+          st.querySelector(".cap p").textContent =
+            "playing from " + stamp(r.at) + " \u00b7 "
+            + (r.room === "mcg" ? "MCG Live" : "Market Bubble");
+          st.querySelector(".facts b").textContent = r.n.toLocaleString();
+          st.querySelector(".facts span").textContent =
+            "times named across Market Bubble and MCG Live";
+          var btn = st.querySelector(".ask");
+          btn.textContent = "Ask the archive about " + r.name;
+          btn.onclick = function(ev){
+            ev.stopPropagation();
+            $("q").value = "what do they say about " + r.name + "?";
+            $("q").focus();
+            $("q").scrollIntoView({behavior:"smooth", block:"center"});
+          };
+          st.classList.add("on");
+          // Enough of the page that the player and its caption are both
+          // in view, rather than the least that counts as visible.
+          var box = st.getBoundingClientRect();
+          var over = box.bottom - window.innerHeight + 24;
+          if (over > 0 || box.top < 0) {
+            window.scrollBy({top: box.top < 0 ? box.top - 24 : over,
+                             behavior: "smooth"});
+          }
+        }, fresh ? 0 : 140);
+      }
+      el.onclick = open_;
+      el.onkeydown = function(e){
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open_(); }
+      };
+      host.appendChild(el);
+    });
+  })();
 
   $("f").onsubmit = function(e){ e.preventDefault(); ask($("q").value.trim()); };
 })();
