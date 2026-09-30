@@ -184,3 +184,35 @@ def test_a_citation_whose_title_has_brackets_loses_its_own_brackets():
     assert [l[0] for l in got["links"]] == ["15:33"]
     assert got["text"] == ('he said 15:33, "This FOMC Changes Everything... '
                            '[Stream Recap]", May 20, 2026 that it was over.')
+
+
+def render(answer, hits):
+    """What write() would put on the page, as (kind, text) pairs."""
+    script = (
+        "const C=require(process.argv[1]);"
+        "const [a,h]=JSON.parse(require('fs').readFileSync(0,'utf8'));"
+        "console.log(JSON.stringify(C.find(a,h).map(t=>"
+        "[t.stamp?'link':(t.bold?'bold':'text'),t.stamp||t.text])))")
+    out = subprocess.run([NODE, "-e", script, str(CITE)],
+                         input=json.dumps([answer, hits]),
+                         capture_output=True, text=True, check=True)
+    return json.loads(out.stdout)
+
+
+@needs_node
+def test_markdown_in_an_answer_renders_instead_of_printing_asterisks():
+    # Verbatim shape from a live ThreadGuy answer.
+    answer = ("Here's what he thinks:\n\n**On the product itself:** he calls it "
+              "the best exchange at [23:41].\n\n- a list item\n## A heading")
+    got = render(answer, [hit("3TtLaaHnfTY", 1401.3, "2026-05-30", end=1500)])
+    flat = "".join(t for _, t in got)
+    assert "**" not in flat and "## " not in flat
+    assert ["bold", "On the product itself:"] in got
+    assert ["link", "23:41"] in got
+    assert "\n\u2022 a list item\nA heading" in flat
+
+
+@needs_node
+def test_an_unpaired_bold_marker_is_dropped_not_left_dangling():
+    got = render("he said **it was over.", [])
+    assert got == [["text", "he said it was over."]]
