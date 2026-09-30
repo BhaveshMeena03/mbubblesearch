@@ -318,7 +318,18 @@
   .verdict{flex-wrap:wrap}
   .verdict b{color:var(--ink);letter-spacing:.06em;overflow-wrap:anywhere}
   .answer{font-size:16.5px;line-height:1.65;margin:16px 0 0;white-space:pre-wrap;
-    max-width:74ch;overflow-wrap:anywhere}
+    overflow-wrap:anywhere}
+  /* A time the answer cites, when a passage below covers it (cite.js). */
+  .answer .cite{color:var(--signal);text-decoration:none;white-space:nowrap;
+    font-family:var(--mono);font-size:.88em;padding:1px 6px 1px 5px;
+    border:1px solid rgba(255,162,58,.35);border-radius:3px;
+    background:rgba(255,162,58,.07);
+    transition:background var(--quick) var(--ease),border-color var(--quick) var(--ease)}
+  .answer .cite::before{content:"\25B6";font-size:.7em;margin-right:5px;
+    position:relative;top:-1px}
+  .answer .cite:hover{background:rgba(255,162,58,.16);border-color:var(--signal)}
+  .answer .cite:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+  .citeplay .player{margin-top:22px}
   .hits{margin:30px 0 0;display:grid;gap:1px;background:var(--edge);
     border:1px solid var(--edge);border-radius:2px}
   .hit{background:var(--deck);padding:16px 18px;
@@ -414,6 +425,7 @@
   <section id="out" aria-live="polite">
     <div class="verdict" id="verdict"></div>
     <div class="answer" id="answer"></div>
+    <div class="citeplay" id="citeplay"></div>
     <div class="hits" id="hits"></div>
   </section>
 
@@ -469,6 +481,7 @@
 </div>
 
 <script src="/demo/nav.js"></script>
+<script src="/demo/cite.js"></script>
 <script>
 (function(){
   "use strict";
@@ -579,16 +592,29 @@
     playing = null;
   }
   function play(el, vid, sec){
-    if (playing !== el) stopPlaying();
-    if (el.querySelector("iframe")) return;
+    var src = "https://www.youtube.com/embed/" + vid
+            + "?start=" + Math.floor(sec) + "&autoplay=1";
+    var on = playing === el && el.querySelector("iframe");
+    // A second time in the same recording, from the answer, moves the
+    // playhead instead of doing nothing.
+    if (on) { if (on.getAttribute("src") !== src) on.src = src; return; }
+    stopPlaying();
     var f = document.createElement("iframe");
     f.className = "player";
     f.allow = "autoplay; encrypted-media; fullscreen; picture-in-picture";
     f.allowFullscreen = true;
     f.title = "Playback from the cited moment";
-    f.src = "https://www.youtube.com/embed/" + vid
-          + "?start=" + Math.floor(sec) + "&autoplay=1";
+    f.src = src;
     el.appendChild(f); playing = el;
+  }
+
+  // Scroll only as far as it takes to bring the player into view.
+  function reveal(el){
+    var box = el.getBoundingClientRect();
+    var over = box.bottom - window.innerHeight + 24;
+    var under = box.top - 16;
+    if (under < 0) window.scrollBy({top: under, behavior: "smooth"});
+    else if (over > 0) window.scrollBy({top: Math.min(over, under), behavior: "smooth"});
   }
 
   // Bring the answer into view only when it is actually out of it, and
@@ -599,23 +625,9 @@
     if (under > 0) window.scrollBy({top: under, behavior: "smooth"});
   }
 
-  // The answer arrived as one block of finished text. It reads better
-  // arriving, so the words are revealed on a timer. A hidden tab gets
-  // the whole thing at once: browsers throttle timers in the background
-  // and a half written answer would be waiting when somebody came back.
+  // The answer is typed out by cite.js, with its citations as links.
   var typing = null;
-  function typeOut(el, text){
-    if (typing) { clearInterval(typing); typing = null; }
-    if (!text) { el.textContent = ""; return; }
-    if (document.hidden) { el.textContent = text; return; }
-    var words = text.split(/(\s+)/), i = 0;
-    el.textContent = "";
-    typing = setInterval(function(){
-      el.textContent += words.slice(i, i + 6).join("");
-      i += 6;
-      if (i >= words.length) { clearInterval(typing); typing = null; }
-    }, 16);
-  }
+
 
   var busy = false;
   // What the visitor is told when nothing comes back. A rate limit used
@@ -701,9 +713,24 @@
       b.style.color = css(VAR[room.key]) || "";
       $("verdict").appendChild(b);
     }
-    typeOut($("answer"), d.answer || "");
+    var hits = Array.isArray(d.hits) ? d.hits : [];
+    var cites = Cite.find(d.answer || "", hits);
+    // The passages the answer cites come first, so the card a citation
+    // plays in is always on the page.
+    var shown = Cite.order(hits, cites);
+    shown = shown.slice(0, Math.max(6, Cite.order([], cites).length));
+    if (typing) { clearInterval(typing); typing = null; }
+    // A cited moment plays right under the answer, full width, as the
+    // Market Bubble page does. X broadcasts cannot be embedded, so those
+    // open at the cited second in a new tab.
+    typing = Cite.write($("answer"), cites, function(t){
+      var vid = ytId(t.hit.deep_link || "");
+      if (!vid) { window.open(t.href, "_blank", "noopener"); return; }
+      play($("citeplay"), vid, t.sec);
+      reveal($("citeplay"));
+    }, document.hidden);
 
-    (d.hits||[]).slice(0,6).forEach(function(h){
+    shown.forEach(function(h){
       var el = document.createElement("div");
       el.className = "hit";
       el.innerHTML = '<div class="row"><span class="ttl"></span>'
