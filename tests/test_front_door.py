@@ -220,3 +220,22 @@ def test_the_sections_are_numbered_in_the_order_they_appear():
                    ("03", ".board"), ("04", "#behaves")):
         assert f'{sel} h2::before{{content:"{n}"}}' in PAGE \
             or f'{sel} h2::before{{content:"{n}"}} ' in PAGE, f"{sel} is not {n}"
+
+
+def test_the_answer_appears_under_the_question():
+    """#out sat after the channels, so asking something rendered the
+    answer down by the footer with nothing to say it had happened."""
+    body = PAGE.split("<body>")[1]
+    assert body.index('id="out"') < body.index('id="asked-sect"')
+    assert body.index('id="out"') < body.index('id="ranks"')
+
+
+def test_waiting_looks_like_waiting():
+    """#out starts at opacity 0 and rises when the answer lands, so the
+    loading line was being rendered invisibly: you asked, and until the
+    answer came back nothing on the page changed at all."""
+    assert 'classList.add("working")' in PAGE
+    assert "#out.working .verdict::before" in PAGE
+    # shown is added when the search starts, not only when it finishes
+    ask = PAGE.split("function ask(question)")[1].split("function render")[0]
+    assert 'classList.add("shown")' in ask
