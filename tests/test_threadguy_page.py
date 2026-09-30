@@ -126,3 +126,12 @@ def test_a_link_to_the_archive_shares_with_a_picture():
     assert 'name="twitter:card" content="summary_large_image"' in PAGE
     assert (ROOT / "demo" / "og-threadguy.png").exists()
     assert (ROOT / "demo" / "og-threadguy-card.html").exists()
+
+
+def test_llms_txt_knows_about_threadguy():
+    """It had no mention of ThreadGuy at all, and it is the file an agent,
+    or a judge, reads first."""
+    llms = (ROOT / "demo" / "llms.txt").read_text()
+    assert "Five archives" in llms
+    assert "https://search.lexthedev.com/threadguy" in llms
+    assert "/v1/threadguy/search" in llms

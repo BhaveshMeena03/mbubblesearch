@@ -286,3 +286,31 @@ def test_the_figures_share_one_baseline():
     its label dropped below every other label in the row."""
     row = PAGE.split("  .scale{display:flex;")[1].split("}")[0]
     assert "align-items:flex-end" in row
+
+
+def test_threadguy_is_everywhere_the_other_archives_are():
+    """ThreadGuy went in as a channel card and nowhere else: not in the
+    example questions, not among the question cards, not in the footer,
+    not in the description and not on the share card, whose channel list
+    stopped at four while the page said five."""
+    assert 'k:"threadguy", q:' in PAGE                      # an example question
+    assert 'vid:"2tMMfjBqgvo", at:563' in PAGE              # a question card
+    assert 'href="/threadguy">ThreadGuy</a>' in PAGE         # the footer
+    assert "ThreadGuy" in PAGE.split('name="description" content="')[1].split('"')[0]
+    card = (ROOT / "demo" / "og-home-card.html").read_text()
+    assert ">ThreadGuy</div>" in card and "all five archives" in card
+
+
+def test_a_redrawn_card_gets_a_new_url():
+    """X caches a card image by its URL, so a new picture under the old
+    name is the old picture to anybody who has already shared the page."""
+    assert "og-home.png?v=4" in PAGE and "home?v=4" in PAGE
+
+
+def test_the_threadguy_example_actually_routes_to_threadguy():
+    """Picked on the live fan out. The Hyperliquid question also lands on
+    ThreadGuy, but by 0.025 over Market Bubble, which is a coin toss, so
+    it is not the one on the page."""
+    tries = PAGE.split("var TRIES = [")[1].split("];")[0]
+    assert "Sweetgreen chud wrap" in tries
+    assert "ThreadGuy think of Hyperliquid" not in tries
