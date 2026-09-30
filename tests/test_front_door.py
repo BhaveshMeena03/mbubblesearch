@@ -188,3 +188,13 @@ def test_every_channel_card_points_at_a_real_archive():
     for key, label, href in _ROOMS:
         assert f'href:"{href}"' in PAGE
     assert PAGE.count('a.href = c.href') == 1
+
+
+def test_the_hero_is_a_composition_rather_than_a_stretched_row():
+    """The left column was 1fr across the whole page, so its box ran to
+    the gap while its content stopped at the search box, leaving a void
+    down the middle with the figures stranded on the far right. The hero
+    gets a width of its own; the ranking and channels still use the page."""
+    hero = PAGE.split(".heroGrid{")[1].split("}")[0]
+    assert "max-width:1170px" in hero
+    assert "minmax(0,840px) 250px" in hero
