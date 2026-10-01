@@ -116,6 +116,16 @@ done
 echo "-- threadguy notes"
 .venv/bin/python -u scripts/summarize_threadguy.py --latest 10 || status=1
 
+# Tokens from the newest uploads of both channels, into each dashboard's
+# store. Episodes already extracted are cached and skipped; two at a time,
+# because the proxy is shared with the live site and the bot, and a run
+# that floods it gets rate limited and slows them down.
+for archive in threadguy mcg; do
+  echo "-- $archive tokens"
+  EXTRACT_CONCURRENCY=4 .venv/bin/python -u scripts/extract_mcg_assets.py \
+    --archive "$archive" --episodes 10 --store --workers 2 || status=1
+done
+
 # Sundays: the exact-word indexes, read back off Pinecone. Weekly, not
 # daily, because each rebuild commits a few megabytes and a daily one would
 # add a gigabyte a year to the repo. Until then a new episode is still
