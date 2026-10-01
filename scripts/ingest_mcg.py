@@ -152,13 +152,30 @@ def enumerate_tab(url: str, limit: int) -> list[dict]:
 
 
 def published(video_id: str) -> str:
-    """YYYY-MM-DD, fetched per video because a flat listing has no date."""
+    """YYYY-MM-DD the episode went out, fetched per video because a flat
+    listing has no date.
+
+    The air date, not the upload date. For a past live stream YouTube's
+    upload_date is when the recording finished processing, which for a
+    market open that ends in the US afternoon is often the next day in
+    UTC: ThreadGuy's Robinhood Summit stream aired 30 Sep and came back
+    as 1 Oct. release_date is when it aired. An ordinary upload has none,
+    or the same day, so it falls back to upload_date.
+    """
     done = subprocess.run(
-        [YTDLP, "--no-warnings", *proxy_args(), "--print", "%(upload_date)s",
+        [YTDLP, "--no-warnings", *proxy_args(), "--print",
+         "%(release_date)s %(upload_date)s",
          f"https://www.youtube.com/watch?v={video_id}"],
         capture_output=True, text=True, timeout=300)
-    raw = (done.stdout or "").strip()
-    return f"{raw[:4]}-{raw[4:6]}-{raw[6:8]}" if len(raw) == 8 else ""
+    return air_date(done.stdout or "")
+
+
+def air_date(printed: str) -> str:
+    """The first real YYYYMMDD in "release upload", as YYYY-MM-DD."""
+    for raw in printed.split():
+        if len(raw) == 8 and raw.isdigit():
+            return f"{raw[:4]}-{raw[4:6]}-{raw[6:8]}"
+    return ""
 
 
 def pending(limit: int) -> list[dict]:
@@ -253,6 +270,15 @@ def to_chunks(path: Path, work: Path) -> list[tuple[float, Path]]:
             for n, f in enumerate(sorted(work.glob("chunk*.mp3")))]
 
 
+class RateLimitedError(RuntimeError):
+    """Groq kept saying come back later, for longer than a run should wait."""
+
+
+# Waits of up to five minutes each: about an hour of patience per chunk,
+# which is how long the free tier's hourly allowance takes to come back.
+MAX_REFUSALS = 12
+
+
 def transcribe_via_groq(path: Path, api_key: str) -> list[dict]:
     """Segments with real timestamps, stitched back across the chunks.
 
@@ -264,9 +290,15 @@ def transcribe_via_groq(path: Path, api_key: str) -> list[dict]:
     import httpx
 
     def one(offset: float, chunk: Path) -> list[dict]:
-        """One chunk, with its own retries, already on the episode clock."""
-        out: list[dict] = []
-        for attempt in range(6):
+        """One chunk, with its own retries, already on the episode clock.
+
+        Raises rather than returning nothing. It used to fall out of the
+        retry loop with an empty list once Groq had refused it six times,
+        and the episode was shelved with that hole in it: fourteen
+        ThreadGuy streams went up with minutes, or nothing, transcribed.
+        """
+        errors = refusals = 0
+        while True:
             try:
                 with open(chunk, "rb") as fh:
                     r = httpx.post(
@@ -279,27 +311,35 @@ def transcribe_via_groq(path: Path, api_key: str) -> list[dict]:
                               "language": "en", "temperature": "0"})
                 # The free tier's hourly allowance is smaller than a day
                 # of this show. A batch job can wait; it is the only
-                # caller that can.
+                # caller that can. Refusals get their own, longer budget:
+                # they say when to come back, an error does not.
                 if r.status_code == 429:
+                    refusals += 1
+                    if refusals > MAX_REFUSALS:
+                        raise RateLimitedError(
+                            f"still rate limited after {MAX_REFUSALS} waits")
                     wait = float(r.headers.get("retry-after") or 30)
-                    print(f"     rate limited, waiting {wait:.0f}s",
+                    print(f"     rate limited, waiting {min(wait, 300):.0f}s",
                           flush=True)
-                    time.sleep(min(wait, 120))
+                    time.sleep(min(wait, 300))
                     continue
                 r.raise_for_status()
                 body = r.json() or {}
+            except RateLimitedError:
+                raise
             except Exception as exc:                        # noqa: BLE001
-                if attempt == 5:
+                errors += 1
+                if errors >= 6:
                     raise RuntimeError(f"transcribe failed: {exc}") from exc
-                time.sleep(5 * (attempt + 1))
+                time.sleep(5 * errors)
                 continue
+            out: list[dict] = []
             for seg in body.get("segments", []):
                 said = (seg.get("text") or "").strip()
                 if said:
                     out.append({"t": round(offset + float(
                         seg.get("start") or 0.0), 2), "text": said})
             return out
-        return out
 
     segments: list[dict] = []
     with tempfile.TemporaryDirectory() as tmp:
@@ -322,6 +362,17 @@ def transcribe_via_groq(path: Path, api_key: str) -> list[dict]:
 
 
 
+def groq_key() -> str:
+    """The environment's key, else the one in .env, like every other key.
+
+    Reading only the environment meant the 09:00 job, which launchd starts
+    with an empty one, could never transcribe: it would have failed every
+    morning from its first real run.
+    """
+    return (os.environ.get("GROQ_API_KEY", "").strip()
+            or (get_settings().groq_api_key or "").strip())
+
+
 def transcribe(path: Path) -> list[dict]:
     """Locally when this machine can, hosted when it cannot.
 
@@ -336,14 +387,14 @@ def transcribe(path: Path) -> list[dict]:
     HTTP, so the chunks of an episode can be in flight together.
     """
     if TRANSCRIBER == "groq":
-        key = os.environ.get("GROQ_API_KEY", "").strip()
+        key = groq_key()
         if not key:
             raise RuntimeError("--transcriber groq needs GROQ_API_KEY")
         return transcribe_via_groq(path, key)
     try:
         import mlx_whisper
     except ImportError:
-        key = os.environ.get("GROQ_API_KEY", "").strip()
+        key = groq_key()
         if not key:
             raise RuntimeError(
                 "no transcriber: mlx_whisper will not import here and "
@@ -355,6 +406,49 @@ def transcribe(path: Path) -> list[dict]:
         language="en", verbose=False)
     return [{"t": round(s["start"], 2), "text": s["text"].strip()}
             for s in result.get("segments", []) if s.get("text", "").strip()]
+
+
+def shortfall(segments: list[dict], seconds: float) -> str | None:
+    """Why a transcript is too short to shelve, or None if it is whole.
+
+    Missing more than ten minutes AND more than a fifth of the recording.
+    Either alone is normal: a stream can end on a quiet minute, and a short
+    clip can end ten seconds early.
+    """
+    if not segments:
+        return "no transcript"
+    if not seconds:
+        return None
+    missing = float(seconds) - float(segments[-1]["t"])
+    if missing > 600 and missing > 0.2 * float(seconds):
+        return (f"transcript stops at {segments[-1]['t'] / 60:.0f} of "
+                f"{float(seconds) / 60:.0f} minutes")
+    return None
+
+
+def forget(video_id: str) -> int:
+    """Take an episode off the shelf and out of the index, so it is done
+    again from scratch. Returns how many passages were removed.
+
+    The passages go by id, read back with a filter on the episode: a
+    re-transcription windows differently, so leaving the old ones would
+    keep fragments of the broken copy beside the new one.
+    """
+    settings = get_settings()
+    spec = ARCHIVES[ARCHIVE]
+    ns = spec["namespace"](settings)
+    index = PodcastIndex(namespace=ns, index_name=spec["index"](settings)).index
+    probe = [0.0] * settings.embedding_dimension
+    probe[0] = 1.0
+    found = index.query(vector=probe, top_k=1000, namespace=ns,
+                        include_metadata=False,
+                        filter={"episode_id": {"$eq": video_id}})
+    ids = [m["id"] for m in found.get("matches", [])]
+    for at in range(0, len(ids), 100):
+        index.delete(ids=ids[at:at + 100], namespace=ns)
+    rows = [r for r in shelf() if r.get("id") != video_id]
+    SHELF.write_text(json.dumps(rows, indent=1))
+    return len(ids)
 
 
 def add_to_shelf(row: dict) -> None:
@@ -378,6 +472,9 @@ async def main() -> int:
                     help="which channel to bring up to date")
     ap.add_argument("--list", action="store_true", help="show what is missing")
     ap.add_argument("--only", help="one video id")
+    ap.add_argument("--redo", action="append", default=[], metavar="ID",
+                    help="delete an episode's passages and shelf row, then "
+                         "ingest it again (repeatable)")
     ap.add_argument("--limit", type=int, default=60,
                     help="how deep to read each tab")
     ap.add_argument("--transcriber", default="auto",
@@ -404,7 +501,28 @@ async def main() -> int:
         TRANSCRIBER = "auto"
     spec = use(args.archive)
 
-    todo = pending(args.limit)
+    # A redo comes from the shelf row, not the channel listing: the
+    # broken episodes are the old ones as often as the new, further back
+    # than --limit reads, and the row already has everything needed.
+    if args.redo:
+        rows = {r["id"]: r for r in shelf()}
+        missing = [v for v in args.redo if v not in rows]
+        if missing:
+            print(f"  not on the shelf: {', '.join(missing)}")
+            return 1
+        todo = [{"id": v, "title": rows[v]["title"],
+                 "seconds": int(rows[v]["seconds"]),
+                 "format": rows[v]["format"]} for v in args.redo]
+        if args.list:
+            for t in todo:
+                print(f"  would redo {t['id']}  {t['seconds'] // 60}m  "
+                      f"{t['title'][:52]}")
+            return 0
+        for t in todo:
+            print(f"  {t['id']}: removed {forget(t['id'])} old passages "
+                  f"and its shelf row", flush=True)
+    else:
+        todo = pending(args.limit)
     if args.only:
         todo = [t for t in todo if t["id"] == args.only]
     capped = 0
@@ -466,6 +584,16 @@ async def main() -> int:
             except Exception as exc:                        # noqa: BLE001
                 print(f"  [{n}/{len(todo)}] failed: {exc}")
                 failures.append(str(exc)[:120])
+                continue
+            # A transcript that stops well short of the recording is not
+            # an episode, whatever caused it: chunks lost to rate limits,
+            # or a stream fetched while YouTube was still processing it.
+            # Fourteen were shelved like that, eleven with nothing at all.
+            short = shortfall(kept, item["seconds"])
+            if short:
+                print(f"  [{n}/{len(todo)}] {item['id']} {short}; not shelved",
+                      flush=True)
+                failures.append(f"{item['id']}: {short}")
                 continue
             episode = Episode(
                 episode_id=item["id"], title=item["title"],

@@ -14,7 +14,8 @@ def test_it_covers_both_channels_and_transcribes_with_groq():
 
 def test_it_commits_only_the_two_shelves():
     """It runs in a checkout that may have someone's work in it."""
-    assert 'shelves=(data/threadguy_index.json data/mcg_index.json "${terms[@]}")' in SCRIPT
+    assert 'shelves=(data/threadguy_index.json data/mcg_index.json\n' \
+           '         data/threadguy_summaries.json.gz "${terms[@]}")' in SCRIPT
     assert "terms=(data/terms_threadguy.json.gz data/terms_mcg.json.gz)" in SCRIPT
 
 
@@ -32,3 +33,17 @@ def test_it_never_bills_anthropic_directly_and_never_runs_twice():
 
 def test_github_warns_when_threadguy_is_behind():
     assert "--archive threadguy --list" in WORKFLOW
+
+
+def test_new_threadguy_uploads_get_notes_through_the_proxy():
+    """After the ingest, so the newest episodes are on the shelf, and
+    after the unset, so the model call cannot go to Anthropic directly."""
+    notes = SCRIPT.index("scripts/summarize_threadguy.py --latest 10")
+    assert SCRIPT.index("unset ANTHROPIC_BASE_URL") < notes
+    assert SCRIPT.index("for archive in threadguy mcg") < notes
+
+
+def test_the_groq_key_is_found_without_the_shell():
+    """launchd gives the job an empty environment; the key is in .env."""
+    ingest = (ROOT / "scripts" / "ingest_mcg.py").read_text()
+    assert "get_settings().groq_api_key" in ingest
