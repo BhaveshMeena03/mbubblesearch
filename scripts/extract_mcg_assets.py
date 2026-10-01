@@ -3,6 +3,11 @@ from transcripts.
 
     .venv/bin/python scripts/extract_mcg_assets.py --episodes 2
     .venv/bin/python scripts/extract_mcg_assets.py --all --store
+    .venv/bin/python scripts/extract_mcg_assets.py --archive threadguy --all --store
+
+ThreadGuy is the same kind of archive, with no transcripts on disk either,
+so it runs through here with its own shelf, index and namespaces rather
+than a copy of this file.
 
 Same extractor, same prompt, same model as the Market Bubble pass -- the
 difference is where the words come from. That archive keeps its transcripts
@@ -58,21 +63,39 @@ from scripts.extract_assets import USAGE, extract_episode  # noqa: E402
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 logger = logging.getLogger("mcg-assets")
 
-SHELF = ROOT / "data" / "mcg_index.json"
-OUT = ROOT / "data" / "mcg_assets.json"
-
-# The namespace assets live in inside the MCG index. Its passages are in
-# "mcg"; these are beside them, not among them.
-ASSET_NAMESPACE = "assets"
+# Where each archive's passages are read from and its assets written to.
+# The assets go in a namespace of their own beside the passages, never
+# among them: MCG's in "assets" inside the MCG index, ThreadGuy's in
+# "threadguy_assets" inside the default one, because "assets" there is
+# already Market Bubble's.
+ARCHIVES = {
+    "mcg": {
+        "shelf": ROOT / "data" / "mcg_index.json",
+        "out": ROOT / "data" / "mcg_assets.json",
+        "index": lambda s: s.mcg_pinecone_index,
+        "passages": lambda s: s.mcg_namespace,
+        "assets": "assets",
+    },
+    "threadguy": {
+        "shelf": ROOT / "data" / "threadguy_index.json",
+        "out": ROOT / "data" / "threadguy_assets.json",
+        "index": lambda s: s.pinecone_index,
+        "passages": lambda s: s.threadguy_namespace,
+        "assets": "threadguy_assets",
+    },
+}
 
 async def main() -> int:
     ap = argparse.ArgumentParser()
+    ap.add_argument("--archive", default="mcg", choices=sorted(ARCHIVES))
     ap.add_argument("--episodes", type=int, default=0,
                     help="only the first N, newest first (pilot)")
     ap.add_argument("--all", action="store_true")
     ap.add_argument("--force", action="store_true", help="ignore the cache")
     ap.add_argument("--store", action="store_true",
                     help="upsert to Pinecone, so the deployed page sees it")
+    ap.add_argument("--workers", type=int, default=1,
+                    help="episodes extracted at once")
     ap.add_argument("--min-confidence", default="medium",
                     choices=["low", "medium", "high"])
     args = ap.parse_args()
@@ -80,40 +103,66 @@ async def main() -> int:
         ap.error("pass --episodes N for a pilot, or --all")
 
     settings = get_settings()
-    shelf = json.loads(SHELF.read_text())
+    spec = ARCHIVES[args.archive]
+    index_name = spec["index"](settings)
+    passages = spec["passages"](settings)
+    shelf = json.loads(spec["shelf"].read_text())
+    # Newest first, whatever order the shelf happens to be in, so a pilot
+    # of N is the N an audience is most likely to ask about.
+    shelf.sort(key=lambda r: r.get("published_at") or "", reverse=True)
     todo = shelf if args.all else shelf[:args.episodes]
 
     from pinecone import Pinecone
-    index = Pinecone(api_key=settings.pinecone_api_key).Index(
-        settings.mcg_pinecone_index)
+    index = Pinecone(api_key=settings.pinecone_api_key).Index(index_name)
 
     client = AsyncAnthropic(**anthropic_client_kwargs(settings))
     model = os.environ.get("EXTRACT_MODEL", "claude-haiku-4-5")
-    store = AssetStore(index_name=settings.mcg_pinecone_index,
-                       namespace=ASSET_NAMESPACE) if args.store else None
+    store = AssetStore(index_name=index_name,
+                       namespace=spec["assets"]) if args.store else None
 
-    logger.info("%d episodes, model %s", len(todo), model)
+    logger.info("%d episodes, model %s, %d at a time", len(todo), model,
+                args.workers)
     every: list[dict] = []
-    for n, row in enumerate(todo, 1):
-        segments = rebuild(index, settings.mcg_namespace,
-                           settings.embedding_dimension, row["id"])
-        if not segments:
-            logger.warning("  %s: no passages in the index — skipped", row["id"])
-            continue
-        episode = {"episode_id": row["id"], "title": row["title"],
-                   "url": row["url"], "segments": segments}
-        logger.info("[%d/%d] %s", n, len(todo), row["title"][:56])
-        hits = await extract_episode(client, model, episode, args.force)
-        every.extend(hits)
-        if store is not None and hits:
-            await store.store(row["id"], row["title"], hits)
+    failed: list[str] = []
+    gate = asyncio.Semaphore(max(1, args.workers))
+
+    # Episodes side by side, each with its own windows in flight. One
+    # at a time was five hours for ThreadGuy's 607, almost all of it
+    # waiting on responses. A failed episode is reported and left out of
+    # the cache, so a rerun picks up exactly the ones that failed; it no
+    # longer takes the run, and every episode still in flight, with it.
+    async def one(n: int, row: dict) -> None:
+        async with gate:
+            segments = await asyncio.to_thread(
+                rebuild, index, passages, settings.embedding_dimension,
+                row["id"])
+            if not segments:
+                logger.warning("  %s: no passages in the index, skipped",
+                               row["id"])
+                return
+            episode = {"episode_id": row["id"], "title": row["title"],
+                       "url": row["url"], "segments": segments}
+            logger.info("[%d/%d] %s", n, len(todo), row["title"][:56])
+            try:
+                hits = await extract_episode(client, model, episode,
+                                             args.force)
+                if store is not None and hits:
+                    await store.store(row["id"], row["title"], hits)
+            except Exception as exc:                        # noqa: BLE001
+                failed.append(row["id"])
+                logger.warning("  %s failed: %s", row["id"], str(exc)[:160])
+                return
+            every.extend(hits)
+
+    await asyncio.gather(*(one(n, row) for n, row in enumerate(todo, 1)))
 
     report = aggregate(every, min_confidence=args.min_confidence,
-                       archive="mcg")
-    OUT.write_text(json.dumps(report, indent=1))
+                       archive=args.archive)
+    out = spec["out"]
+    out.write_text(json.dumps(report, indent=1))
     logger.info("\n  %d assets from %d hits -> %s",
                 len(report.get("assets", [])), report.get("total_hits", 0),
-                OUT.relative_to(ROOT))
+                out.relative_to(ROOT))
 
     if USAGE["calls"]:
         logger.info("  spent: %d calls, %s input tokens, %s output tokens",
@@ -122,6 +171,10 @@ async def main() -> int:
         logger.info("  per episode: %.0f calls, %.0f input tokens",
                     USAGE["calls"] / max(1, len(todo)),
                     USAGE["input_tokens"] / max(1, len(todo)))
+    if failed:
+        logger.warning("\n  %d failed, rerun to retry them: %s",
+                       len(failed), " ".join(failed))
+        return 1
     return 0
 
 

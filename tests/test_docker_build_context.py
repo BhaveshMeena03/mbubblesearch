@@ -142,6 +142,7 @@ _NOT_SHIPPED = {
     # empty in production rather than showing a partial pilot as if it
     # were the archive.
     "mcg_assets.json": "fallback only; the live asset store is read first",
+    "threadguy_assets.json": "fallback only; the live asset store is read first",
     "episodes.json": "shipped gzipped as episodes.json.gz",
     "elon_episodes.json": "shipped gzipped as elon_episodes.json.gz",
     "tradfi_episodes.json": "shipped gzipped as tradfi_episodes.json.gz",

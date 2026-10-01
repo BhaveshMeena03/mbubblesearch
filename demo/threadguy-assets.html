@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ThreadGuy · every token on the stream</title>
+<meta name="description" content="Every token, stock and index discussed across ThreadGuy's market opens and interviews, ranked by how deeply it was covered, dated, with the exact moment playable on the page.">
+<meta property="og:title" content="Every token on ThreadGuy's stream">
+<meta property="og:description" content="Every token, stock and index ThreadGuy's streams have covered, dated and ranked by real coverage. Jump to the exact moment.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Market Bubble Search">
+<meta property="og:url" content="https://search.lexthedev.com/threadguy/tokens">
+<meta property="og:image" content="https://search.lexthedev.com/demo/og-threadguy.png?v=4">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Every token on ThreadGuy's stream">
+<meta name="twitter:description" content="Dated, ranked by real coverage, with the exact moment playable.">
+<meta name="twitter:image" content="https://search.lexthedev.com/demo/og-threadguy.png?v=4">
+<link rel="stylesheet" href="/demo/ui.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<!--
+  The ThreadGuy archive's token dashboard. Built from the MCG one, with the
+  one difference a daily show needs: every moment carries its date, the
+  list reads newest first, and "this week" is its own view. A take on ZEC
+  from May is not his take in September, and a dashboard that mixed the
+  two without saying so would put words in his mouth.
+
+  Times play here, under the moment, like every other time on the site.
+-->
+<style>
+  @font-face{font-family:"Instrument Serif";
+    src:url("/demo/fonts/InstrumentSerif-Regular.ttf") format("truetype");font-display:swap}
+  @font-face{font-family:"InterV";
+    src:url("/demo/fonts/Inter-Variable.ttf") format("truetype");font-display:swap}
+  :root{
+    --void:#060c1a; --deck:#0b1530; --deck-2:#0f1c3d;
+    --edge:#1b2a4c; --edge-2:#2a3b66;
+    --ink:#eef2fb; --ink-2:#aab5cf; --ink-3:#7a87a6;
+    --sky:#6aa9ff; --live:#ff5566; --up:#3ccf8e; --down:#ff6b7a;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --ease:cubic-bezier(.22,.78,.24,1); --quick:.22s;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--void);color:var(--ink);
+    font-family:"InterV",-apple-system,BlinkMacSystemFont,sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:radial-gradient(120% 65% at 50% -22%,
+      rgba(40,92,190,.34),rgba(12,28,70,.22) 42%,transparent 72%)}
+  .wrap{position:relative;z-index:2;max-width:1120px;margin:0 auto;
+    padding:0 clamp(20px,3.4vw,52px) 80px}
+  a{color:inherit}
+
+  header{display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding:26px 0 18px;border-bottom:1px solid var(--edge);position:relative;z-index:80}
+  .mark{display:flex;align-items:baseline;gap:11px;text-decoration:none;color:inherit}
+  .mark b{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:22px}
+  .mark span{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--sky)}
+  header nav{display:flex;align-items:center;gap:20px;font-family:var(--mono);
+    font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+  header nav > a{color:var(--ink-2);text-decoration:none}
+  header nav > a:hover{color:var(--ink)}
+
+  h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;
+    font-size:clamp(38px,5vw,62px);line-height:1.02;letter-spacing:-1px;
+    margin:48px 0 0;padding-bottom:.06em}
+  h1 em{font-style:italic;color:var(--sky);padding-right:.06em}
+  .lede{color:var(--ink-2);font-size:16.5px;max-width:62ch;margin:16px 0 0}
+  .caveat{margin:22px 0 0;max-width:78ch;color:var(--ink-3);font-size:13px;
+    border-left:2px solid var(--edge-2);padding:2px 0 2px 14px}
+
+  .strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+    border-top:1px solid var(--edge);border-bottom:1px solid var(--edge);margin:32px 0 0}
+  .strip div{padding:15px 0 17px 18px;border-left:1px solid var(--edge)}
+  .strip div:first-child{border-left:0;padding-left:0}
+  .strip span{display:block;font-family:var(--mono);font-size:10px;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3)}
+  .strip b{display:block;margin-top:8px;font-family:"Instrument Serif",Georgia,serif;
+    font-weight:400;font-size:30px;line-height:1;font-variant-numeric:tabular-nums}
+
+  .charts{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:28px 0 0}
+  .chart{background:var(--deck);border:1px solid var(--edge);border-radius:3px;
+    padding:16px 18px 12px}
+  .chart h2{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--ink-3);font-weight:500;margin:0 0 4px;
+    display:flex;align-items:center;gap:9px}
+  .chart h2 i{width:7px;height:7px;border-radius:50%;background:var(--live)}
+  .chart p{margin:0 0 12px;color:var(--ink-3);font-size:12.5px}
+  .bar{display:grid;grid-template-columns:64px minmax(0,1fr) 34px;gap:10px;
+    align-items:center;height:24px;cursor:pointer;border-radius:2px}
+  .bar:hover .fill{filter:brightness(1.2)}
+  .bar b{font-family:var(--mono);font-size:12.5px;font-weight:600;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .bar .track{height:12px}
+  .bar .fill{height:12px;border-radius:0 3px 3px 0;background:var(--sky)}
+  .bar span{font-family:var(--mono);font-size:12px;color:var(--ink-3);
+    font-variant-numeric:tabular-nums}
+
+  .controls{display:flex;gap:10px;margin:34px 0 14px;flex-wrap:wrap;align-items:center}
+  #q{flex:1;min-width:200px;background:var(--deck);border:1px solid var(--edge-2);
+    border-radius:3px;color:var(--ink);padding:12px 14px;font:inherit;font-size:15px;outline:none}
+  #q:focus{border-color:var(--sky);box-shadow:0 0 0 4px rgba(106,169,255,.12)}
+  #q::placeholder{color:var(--ink-3)}
+  .chip{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    background:transparent;color:var(--ink-2);border:1px solid var(--edge-2);
+    border-radius:99px;padding:8px 14px;cursor:pointer;
+    transition:border-color var(--quick) var(--ease),color var(--quick) var(--ease)}
+  .chip:hover{border-color:var(--sky);color:var(--ink)}
+  .chip.on{background:rgba(106,169,255,.12);border-color:var(--sky);color:var(--sky)}
+
+  .row{border:1px solid var(--edge);border-radius:3px;background:var(--deck);
+    margin-bottom:6px;overflow:hidden}
+  .head{display:grid;grid-template-columns:14px 74px minmax(0,1fr) auto auto auto;
+    gap:14px;align-items:center;padding:12px 16px;cursor:pointer}
+  .head:hover{background:var(--deck-2)}
+  .head:focus-visible{outline:2px solid var(--sky);outline-offset:-2px}
+  .caret{color:var(--sky);font-size:10px;transition:transform var(--quick) var(--ease)}
+  .row.open .caret{transform:rotate(90deg)}
+  .sym{font-family:var(--mono);font-weight:600;font-size:14px}
+  .nm{color:var(--ink-2);font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .cls{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-3);border:1px solid var(--edge-2);border-radius:99px;padding:2px 8px}
+  .num{font-family:var(--mono);font-size:12px;color:var(--ink-3);white-space:nowrap;
+    font-variant-numeric:tabular-nums}
+  .num b{color:var(--sky);font-size:14px;font-weight:600}
+  .last{font-family:var(--mono);font-size:11px;color:var(--ink-3);white-space:nowrap}
+
+  .body{display:none;border-top:1px solid var(--edge)}
+  .row.open .body{display:block}
+  .moments{padding:4px 16px 12px}
+  .mo{display:grid;grid-template-columns:62px 64px minmax(0,1fr);gap:12px;
+    padding:10px 0;border-bottom:1px solid var(--edge);align-items:baseline}
+  .mo:last-of-type{border-bottom:0}
+  .mo .dt{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);white-space:nowrap}
+  .mo .ts{font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--sky);
+    background:transparent;border:0;padding:0;cursor:pointer;text-align:left;
+    font-variant-numeric:tabular-nums}
+  .mo .ts:hover,.mo .ts:focus-visible{text-decoration:underline}
+  .mo .note{font-size:14px;color:var(--ink)}
+  .mo .ep{display:block;color:var(--ink-3);font-size:12px;margin-top:3px;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+    border-radius:99px;padding:1px 7px;margin-left:8px;vertical-align:1px;white-space:nowrap}
+  .tag.analysis{background:rgba(106,169,255,.14);color:var(--sky)}
+  .tag.mention{background:var(--deck-2);color:var(--ink-3)}
+  /* The player opens under the moment, the full width of the row, as a
+     time in an answer does. */
+  .mo .pw{grid-column:1/-1;margin-top:10px}
+  .mo .pw iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:3px;
+    background:#000;display:block}
+  .more{color:var(--ink-3);font-size:12.5px;padding:10px 0 2px}
+  .more a{color:var(--sky)}
+
+  /* The live market strip, the same one the other dashboards carry. */
+  .mkbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    padding:11px 16px;border-bottom:1px solid var(--edge);background:var(--deck-2)}
+  .sk{display:block;height:13px;border-radius:3px;
+    background:linear-gradient(90deg,#14204a 25%,#1d2b5a 37%,#14204a 63%);
+    background-size:400% 100%;animation:skpulse 1.3s ease-in-out infinite}
+  .sk-px{width:74px;height:16px}.sk-ch{width:44px}.sk-liq{width:104px}
+  .sk-go{width:132px;height:28px}
+  @keyframes skpulse{0%{background-position:100% 0}100%{background-position:0 0}}
+  @media (prefers-reduced-motion:reduce){ .sk{animation:none} }
+  .mkin{animation:mkfade .18s ease-out}
+  @keyframes mkfade{from{opacity:0}to{opacity:1}}
+  .mkpx{font-family:var(--mono);font-weight:600;font-size:14px}
+  .mkch{font-family:var(--mono);font-size:12.5px;font-weight:600}
+  .mkch.up{color:var(--up)} .mkch.down{color:var(--down)}
+  .mkliq{font-size:12px;color:var(--ink-3)}
+  .mktok{font-family:var(--mono);font-size:10.5px;color:var(--ink-2);
+    border:1px solid var(--edge-2);border-radius:3px;padding:2px 6px}
+  .mkoff{font-size:12px;color:var(--ink-3);border:1px dashed var(--edge-2);
+    border-radius:3px;padding:4px 10px}
+  .mkgo{display:inline-flex;align-items:center;gap:6px;background:rgba(106,169,255,.12);
+    border:1px solid rgba(106,169,255,.45);color:var(--sky);border-radius:3px;
+    padding:5px 11px;font-size:12px;font-weight:600;text-decoration:none}
+  .mkgo:hover{background:rgba(106,169,255,.2)}
+  .mknfa{font-size:11px;color:var(--ink-3);margin-left:auto}
+
+  .empty{color:var(--ink-3);padding:20px 0;font-size:14px}
+  footer{margin:56px 0 0;border-top:1px solid var(--edge);padding-top:20px;
+    display:flex;gap:18px;justify-content:space-between;flex-wrap:wrap;
+    font-family:var(--mono);font-size:11.5px;color:var(--ink-3);line-height:1.6}
+  footer span{max-width:620px}
+  footer a{color:var(--ink-2)}
+
+  @media (max-width:820px){
+    .charts{grid-template-columns:1fr}
+  }
+  @media (max-width:640px){
+    header{flex-wrap:wrap}
+    .strip{grid-template-columns:1fr 1fr}
+    .strip div:nth-child(3){border-left:0;padding-left:0}
+    .strip div:nth-child(n+3){border-top:1px solid var(--edge)}
+    .head{grid-template-columns:12px 64px minmax(0,1fr) auto;gap:10px;padding:12px}
+    .head .cls,.head .last{display:none}
+    .nm{display:none}
+    .mo{grid-template-columns:54px minmax(0,1fr);gap:4px 12px}
+    .mo .dt{grid-column:1}
+    .mo .ts{grid-column:2;grid-row:1}
+    .mo > div{grid-column:1/-1}
+    .mknfa{margin-left:0;width:100%}
+  }
+</style>
+<script src="/demo/nav.js" defer></script>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="brandline"><a class="home-crumb" href="/home">Market Bubble Search</a><span class="home-sep" aria-hidden="true">/</span>
+      <a class="mark" href="/threadguy"><b>ThreadGuy</b><span>tokens</span></a>
+    </span>
+    <nav>
+      <a href="/threadguy">&larr; Search</a>
+      <span data-archives></span>
+    </nav>
+  </header>
+
+  <h1>Every token on the stream, <em>by the day</em>.</h1>
+  <p class="lede">Pulled from every ThreadGuy market open and interview. Ranked by how much the
+    show really dug in, not how often a name got dropped. Every moment carries its date and
+    plays right here.</p>
+  <p class="caveat">Built from machine transcripts, which sometimes mis-hear a ticker, so counts
+    are approximate. This is what was said on the stream on the day, not what anyone thinks
+    now, and not financial advice or a signal of any kind. The transcripts have no speaker
+    labels, so a row says what was said and when.</p>
+
+  <div class="strip" id="strip"></div>
+
+  <div class="charts">
+    <div class="chart"><h2><i></i>This week</h2><p id="weeklbl">The last seven days of streams.</p><div id="weekbars"></div></div>
+    <div class="chart"><h2>All time</h2><p>Most analyzed across the whole archive.</p><div id="allbars"></div></div>
+  </div>
+
+  <div class="controls">
+    <input id="q" placeholder="Filter by ticker or name" autocomplete="off" aria-label="Filter tokens">
+    <button class="chip on" id="all" type="button">All time</button>
+    <button class="chip" id="week" type="button">This week</button>
+    <button class="chip" id="tail" type="button" title="Tokens mentioned once across every episode, mostly transcription errors">+ single mentions</button>
+  </div>
+
+  <div id="list"><p class="empty">Loading the tokens.</p></div>
+
+  <footer>
+    <span>Extracted from the transcripts by a language model, then normalized: mis-heard names
+      merged, platforms and categories filtered out, low-confidence hits dropped. Trust the top
+      of the list more than the tail.</span>
+    <span><a href="/threadguy">Ask ThreadGuy's archive anything</a> &middot;
+      built by <a href="https://x.com/Lexx_eth">@Lexx_eth</a></span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var CLASSES = ["crypto", "stock", "index"];
+  var MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  var DATA = [], DATES = {}, CUTOFF = "", NEWEST = "";
+  var MODE = "all", SHOW_TAIL = false, playing = null;
+  function $(id){ return document.getElementById(id); }
+  function esc(s){ return String(s == null ? "" : s)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;").replace(/'/g,"&#39;"); }
+  function safeUrl(u){
+    try { var p = new URL(u, location.href);
+          return (p.protocol === "http:" || p.protocol === "https:") ? p.href : ""; }
+    catch(e){ return ""; }
+  }
+  function ytId(u){ var m = /(?:v=|youtu\.be\/)([A-Za-z0-9_-]{6,})/.exec(u || ""); return m ? m[1] : null; }
+  function day(iso){
+    var m = parseInt((iso || "").slice(5,7), 10), d = parseInt((iso || "").slice(8,10), 10);
+    if (!(m >= 1 && m <= 12 && d)) return "";
+    var y = (iso || "").slice(0,4);
+    return MONTHS[m-1] + " " + d + (y !== NEWEST.slice(0,4) ? " " + y : "");
+  }
+  // Seven days back from the newest stream, not from today: a morning the
+  // sync has not run yet should still show last week, not an empty one.
+  function minusDays(iso, n){
+    var t = Date.parse(iso + "T12:00:00Z");
+    if (isNaN(t)) return "";
+    return new Date(t - n * 86400000).toISOString().slice(0,10);
+  }
+  function dated(m){ return DATES[m.episode_id] || ""; }
+  function inWeek(m){ var d = dated(m); return !!d && d > CUTOFF; }
+
+  // Every asset with its moments dated and newest first, and its counts
+  // for this week beside its counts for all time.
+  function prepare(assets){
+    return assets.map(function(a){
+      var ms = (a.moments || []).slice().sort(function(x, y){
+        var dx = dated(x), dy = dated(y);
+        if (dx !== dy) return dx < dy ? 1 : -1;
+        if (x.kind !== y.kind) return x.kind === "analysis" ? -1 : 1;
+        return (x.start_seconds || 0) - (y.start_seconds || 0);
+      });
+      var wk = ms.filter(inWeek);
+      return {symbol: a.symbol, name: a.name, asset_class: a.asset_class,
+              analysis: a.analysis || 0, mentions: a.mentions || 0,
+              single: !!a.single_reference, moments: ms, week: wk,
+              wkAnalysis: wk.filter(function(m){ return m.kind === "analysis"; }).length,
+              last: ms.length ? dated(ms[0]) : ""};
+    });
+  }
+
+  function strip(rows, episodes){
+    var solid = rows.filter(function(a){ return !a.single; });
+    var week = solid.filter(function(a){ return a.week.length; }).length;
+    var analysis = solid.reduce(function(n, a){ return n + a.analysis; }, 0);
+    var cells = [[solid.length, "tokens discussed"], [analysis, "analysis segments"],
+                 [episodes, "episodes covered"], [week, "this week"]];
+    $("strip").innerHTML = cells.map(function(c){
+      return "<div><span>" + esc(c[1]) + "</span><b>" + esc(c[0].toLocaleString("en-US")) + "</b></div>";
+    }).join("");
+  }
+
+  function bars(host, rows, value){
+    var top = rows.filter(function(a){ return value(a) > 0; }).slice(0, 10);
+    if (!top.length){ host.innerHTML = '<p class="empty">Nothing yet.</p>'; return; }
+    var max = Math.max.apply(null, top.map(value)) || 1;
+    host.innerHTML = top.map(function(a){
+      var w = Math.max(2, Math.round(value(a) / max * 100));
+      return '<div class="bar" role="button" tabindex="0" data-sym="' + esc(a.symbol) + '">'
+        + "<b>" + esc(a.symbol) + '</b><div class="track"><div class="fill" style="width:'
+        + w + '%"></div></div><span>' + esc(value(a)) + "</span></div>";
+    }).join("");
+  }
+
+  function ranked(){
+    var term = $("q").value.trim().toLowerCase();
+    var rows = DATA.filter(function(a){
+      if (!SHOW_TAIL && a.single) return false;
+      if (MODE === "week" && !a.week.length) return false;
+      return !term || (a.symbol + " " + a.name).toLowerCase().indexOf(term) !== -1;
+    });
+    if (MODE === "week") rows.sort(function(x, y){
+      return (y.wkAnalysis - x.wkAnalysis) || (y.week.length - x.week.length);
+    });
+    return rows;
+  }
+
+  function render(){
+    stop();
+    var rows = ranked();
+    if (!rows.length){
+      $("list").innerHTML = '<p class="empty">Nothing matches that.</p>';
+      return;
+    }
+    $("list").innerHTML = rows.map(function(a){
+      var wk = MODE === "week";
+      return '<div class="row" data-sym="' + esc(a.symbol) + '">'
+        + '<div class="head" role="button" tabindex="0" aria-expanded="false">'
+        + '<span class="caret">▶</span>'
+        + '<span class="sym">' + esc(a.symbol) + "</span>"
+        + '<span class="nm">' + esc(a.name) + "</span>"
+        + '<span class="cls">' + esc(a.asset_class) + "</span>"
+        + '<span class="num"><b>' + esc(wk ? a.wkAnalysis : a.analysis) + "</b> analysis &middot; "
+        + esc(wk ? a.week.length : a.mentions) + " refs</span>"
+        + '<span class="last">' + esc(a.last ? "last " + day(a.last) : "") + "</span>"
+        + "</div>"
+        + '<div class="body"><div class="mk"></div><div class="moments"></div></div>'
+        + "</div>";
+    }).join("");
+  }
+
+  // Moments are drawn when a row opens, not up front: the top rows have
+  // hundreds, and six hundred rows of them is a page nobody can scroll.
+  var CAP = 15;
+  function open(row){
+    var a = DATA.filter(function(x){ return x.symbol === row.getAttribute("data-sym"); })[0];
+    if (!a) return;
+    var list = MODE === "week" ? a.week : a.moments;
+    var shown = list.slice(0, CAP), hidden = list.length - shown.length;
+    var host = row.querySelector(".moments");
+    host.innerHTML = shown.map(function(m, i){
+      return '<div class="mo" data-i="' + i + '">'
+        + '<span class="dt">' + esc(day(dated(m))) + "</span>"
+        + '<button class="ts" type="button" aria-label="Play from ' + esc(m.timestamp) + '">'
+        + esc(m.timestamp) + "</button>"
+        + '<div><span class="note">' + esc(m.note)
+        + '<span class="tag ' + (m.kind === "analysis" ? "analysis" : "mention") + '">'
+        + esc(m.kind) + "</span></span>"
+        + '<span class="ep">' + esc(m.episode_title) + "</span></div></div>";
+    }).join("") + (hidden > 0
+      ? '<p class="more">' + hidden + " more, older. Ask about it on the "
+        + '<a href="/threadguy">search page</a> for the rest.</p>' : "");
+    host.querySelectorAll(".ts").forEach(function(b){
+      b.onclick = function(){
+        var mo = b.closest(".mo");
+        play(mo, shown[+mo.getAttribute("data-i")]);
+      };
+    });
+    loadMarket(row, a.symbol);
+  }
+
+  function stop(){
+    if (!playing) return;
+    var pw = playing.querySelector(".pw");
+    if (pw) pw.remove();
+    playing = null;
+  }
+  // One video at a time; a second time in the same moment does nothing,
+  // anywhere else stops the first.
+  function play(mo, m){
+    var vid = ytId(m.deep_link), sec = Math.max(0, Math.floor(m.start_seconds || 0));
+    if (!vid){
+      var url = safeUrl(m.deep_link);
+      if (url) window.open(url, "_blank", "noopener");
+      return;
+    }
+    if (playing === mo) return;
+    stop();
+    var pw = document.createElement("div");
+    pw.className = "pw";
+    var f = document.createElement("iframe");
+    f.setAttribute("allowfullscreen", "");
+    f.setAttribute("allow", "autoplay; encrypted-media; fullscreen; picture-in-picture");
+    f.title = "Playing " + (m.episode_title || "this moment");
+    f.src = "https://www.youtube.com/embed/" + vid + "?start=" + sec + "&autoplay=1";
+    pw.appendChild(f);
+    mo.appendChild(pw);
+    playing = mo;
+    var box = pw.getBoundingClientRect();
+    var over = box.bottom - window.innerHeight + 24;
+    if (over > 0) window.scrollBy({top: over, behavior: "smooth"});
+  }
+
+  function toggle(row){
+    var on = !row.classList.contains("open");
+    if (!on && playing && row.contains(playing)) stop();
+    row.classList.toggle("open", on);
+    row.querySelector(".head").setAttribute("aria-expanded", on ? "true" : "false");
+    if (on) open(row);
+  }
+  $("list").addEventListener("click", function(ev){
+    var head = ev.target.closest(".head");
+    if (head) toggle(head.parentNode);
+  });
+  $("list").addEventListener("keydown", function(ev){
+    var head = ev.target.closest(".head");
+    if (head && (ev.key === "Enter" || ev.key === " ")){ ev.preventDefault(); toggle(head.parentNode); }
+  });
+  // A bar is a shortcut to its row, in the view the bar came from.
+  function jump(ev){
+    var bar = ev.target.closest(".bar");
+    if (!bar || (ev.type === "keydown" && ev.key !== "Enter")) return;
+    setMode(bar.closest("#weekbars") ? "week" : "all");
+    $("q").value = "";
+    render();
+    var row = document.querySelector('.row[data-sym="' + CSS.escape(bar.getAttribute("data-sym")) + '"]');
+    if (row){ toggle(row); row.scrollIntoView({behavior: "smooth", block: "start"}); }
+  }
+  ["click", "keydown"].forEach(function(t){
+    $("weekbars").addEventListener(t, jump);
+    $("allbars").addEventListener(t, jump);
+  });
+
+  function setMode(m){
+    MODE = m;
+    $("all").classList.toggle("on", m === "all");
+    $("week").classList.toggle("on", m === "week");
+  }
+  $("q").addEventListener("input", render);
+  $("all").onclick = function(){ setMode("all"); render(); };
+  $("week").onclick = function(){ setMode("week"); render(); };
+  $("tail").onclick = function(){
+    SHOW_TAIL = !SHOW_TAIL;
+    this.classList.toggle("on", SHOW_TAIL);
+    render();
+  };
+
+  // ---- live market strip, fetched on first open ---------------------
+  function loadMarket(row, sym){
+    var box = row.querySelector(".mk");
+    if (!box || box.dataset.loaded) return;
+    box.dataset.loaded = "1";
+    box.innerHTML = '<div class="mkbar"><span class="sk sk-px"></span><span class="sk sk-ch"></span>'
+      + '<span class="sk sk-liq"></span><span class="sk sk-go"></span></div>';
+    fetch("/v1/threadguy/assets/" + encodeURIComponent(sym))
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(d){
+        box.innerHTML = marketHtml(d && d.market);
+        var bar = box.querySelector(".mkbar");
+        if (bar) bar.classList.add("mkin");
+      })
+      .catch(function(){ box.innerHTML = ""; });
+  }
+  function money(n){
+    if (typeof n !== "number" || !isFinite(n)) return "";
+    if (n >= 1e9) return "$" + (n/1e9).toFixed(2) + "B";
+    if (n >= 1e6) return "$" + (n/1e6).toFixed(1) + "M";
+    if (n >= 1e3) return "$" + Math.round(n/1e3) + "K";
+    return "$" + n.toFixed(2);
+  }
+  function price(n){
+    if (typeof n !== "number" || !isFinite(n)) return "";
+    if (n >= 1) return "$" + n.toLocaleString("en-US", {minimumFractionDigits:2, maximumFractionDigits:2});
+    if (n >= 0.01) return "$" + n.toFixed(4);
+    return "$" + n.toPrecision(3);
+  }
+  // Price and tradeability are separate answers. A stock routes through a
+  // tokenized share and the strip names it: NVDAx is not NVDA.
+  function marketHtml(m){
+    if (!m || typeof m.price_usd !== "number") return "";
+    var ch = typeof m.change_24h_pct === "number" ? m.change_24h_pct : null;
+    var t = m.trade, url = t ? safeUrl(t.swap_url) : "";
+    var tok = typeof m.tokenized_as === "string" ? m.tokenized_as : "";
+    return '<div class="mkbar">'
+      + '<span class="mkpx">' + esc(price(m.price_usd)) + "</span>"
+      + (ch === null ? "" : '<span class="mkch ' + (ch >= 0 ? "up" : "down") + '">'
+          + (ch >= 0 ? "+" : "") + esc(ch.toFixed(1)) + "%</span>")
+      + (tok ? '<span class="mktok">as ' + esc(tok) + "</span>" : "")
+      + (t && typeof t.liquidity_usd === "number"
+          ? '<span class="mkliq">' + esc(money(t.liquidity_usd)) + " liquidity</span>" : "")
+      + (url ? '<a class="mkgo" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer nofollow">Trade '
+               + (tok ? esc(tok) + " " : "") + "on Jupiter ↗</a>"
+             : '<span class="mkoff">Price only, not tradeable on Solana</span>')
+      + '<span class="mknfa">Live price' + (m.source ? " via " + esc(m.source) : "")
+      + (tok ? ". Tokenized share, not the listed stock" : "") + ". Not advice.</span>"
+      + "</div>";
+  }
+
+  // The dates come from the shelf: the report knows which episode a
+  // moment is in, the shelf knows which day that episode went out.
+  Promise.all([
+    fetch("/v1/threadguy/assets").then(function(r){ return r.ok ? r.json() : null; }),
+    fetch("/v1/threadguy/episodes").then(function(r){ return r.ok ? r.json() : []; })
+      .catch(function(){ return []; })
+  ]).then(function(got){
+    var report = got[0], eps = Array.isArray(got[1]) ? got[1] : [];
+    eps.forEach(function(e){ if (e.episode_id) DATES[e.episode_id] = e.published_at || ""; });
+    NEWEST = eps.reduce(function(n, e){ return (e.published_at || "") > n ? e.published_at : n; }, "");
+    CUTOFF = minusDays(NEWEST, 7);
+    if (NEWEST) $("weeklbl").textContent = "The seven days of streams up to " + day(NEWEST) + ".";
+    var assets = ((report && report.assets) || []).filter(function(a){
+      return CLASSES.indexOf(a.asset_class) !== -1; });
+    if (!assets.length){
+      $("list").innerHTML = '<p class="empty">No token data yet.</p>';
+      return;
+    }
+    DATA = prepare(assets);
+    var solid = DATA.filter(function(a){ return !a.single; });
+    strip(DATA, (report && report.episodes_processed) || 0);
+    bars($("weekbars"), solid.slice().sort(function(x, y){
+      return (y.wkAnalysis - x.wkAnalysis) || (y.week.length - x.week.length); }),
+      function(a){ return a.wkAnalysis; });
+    bars($("allbars"), solid, function(a){ return a.analysis; });
+    render();
+  }).catch(function(){
+    $("list").innerHTML = '<p class="empty">Could not load the tokens. Try again shortly.</p>';
+  });
+})();
+</script>
+</body>
+</html>
