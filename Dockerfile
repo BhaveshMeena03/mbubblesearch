@@ -80,6 +80,11 @@ COPY data/mcg_summaries.json.gz ./data/mcg_summaries.json.gz
 # The exact-token index. Without it every lookup returns nothing and
 # search silently loses the names and numbers it was built for.
 COPY data/term_index.json ./data/term_index.json
+# The same for every other archive, read off Pinecone and gzipped.
+COPY data/terms_threadguy.json.gz ./data/terms_threadguy.json.gz
+COPY data/terms_mcg.json.gz ./data/terms_mcg.json.gz
+COPY data/terms_elon.json.gz ./data/terms_elon.json.gz
+COPY data/terms_tradfi.json.gz ./data/terms_tradfi.json.gz
 # Which broadcast player each X citation points at. Without it every
 # broadcast falls back to its status url, which X renders as a card that
 # cannot seek — the deploy succeeds and the timestamps quietly stop working.

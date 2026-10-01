@@ -110,8 +110,12 @@ class TestCitationSafety:
         from app.podcast import PodcastIndex
         source = Path(PodcastIndex.__module__.replace(".", "/") + ".py")
         text = (ROOT / source).read_text()
-        assert "return _prefer_seekable(hits)[:keep]" in text, (
+        assert "final = _prefer_seekable(hits)[:keep]" in text, (
             "the union must not be truncated back to top_k on the way out")
+        # Passages kept because they say a rare word from the question are
+        # appended to that same list, so the model reads them and the
+        # response returns them: a citation into one still resolves.
+        assert "return final + self._said_it(query, exact, final)" in text
 
 
 @pytest.mark.parametrize("narrow,expected", [(0, False), (12, True)])
