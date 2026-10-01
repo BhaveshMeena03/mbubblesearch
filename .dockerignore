@@ -34,6 +34,7 @@ data/
 # the passages come back from Pinecone, only the shelf ships.
 !data/threadguy_index.json
 !data/mcg_summaries.json.gz
+!data/threadguy_summaries.json.gz
 # Which broadcast player each X episode's citations should point at. Read
 # when a deep link is BUILT, so without it in the image every broadcast
 # citation silently falls back to the status url — which is the link that

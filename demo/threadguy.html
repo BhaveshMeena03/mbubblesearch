@@ -79,6 +79,12 @@
     position:relative;z-index:80}
   .mark{display:flex;align-items:baseline;gap:10px;text-decoration:none}
   .mark .w{font-family:"Instrument Serif",Georgia,serif;font-size:21px}
+  /* The way to the token dashboard, beside the archive switcher, in the
+     switcher's own type so the two read as one set of controls. */
+  .hdr-r{display:flex;align-items:center;gap:20px}
+  .hdr-r .tokens{font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-2);text-decoration:none}
+  .hdr-r .tokens:hover{color:var(--ink)}
   .mark .s{font-family:var(--mono);font-size:10px;letter-spacing:.24em;
     text-transform:uppercase;color:var(--ink-3)}
 
@@ -287,12 +293,35 @@
   .ep .pw{grid-column:1/-1}
   .pw iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:3px;
     background:#000;display:block}
+  /* Notes: a summary and the moments an episode covers, under whichever
+     player is showing it. Each time moves that player rather than opening
+     a second one, so the notes work as chapters. A row that has them
+     carries a dot before its title, the only sign before it is opened. */
+  .ep.noted .t::before{content:"";display:inline-block;width:6px;height:6px;
+    border-radius:50%;background:var(--sky);margin-right:10px;vertical-align:2px}
+  .notes{margin:16px 0 4px;cursor:default}
+  .notes .tldr{margin:0 0 14px;color:var(--ink);font-size:15px;line-height:1.6;
+    max-width:78ch}
+  .notes ol{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+  .notes li{display:grid;grid-template-columns:76px minmax(0,1fr);gap:14px;
+    align-items:baseline;padding:6px 8px;margin:0 -8px;border-radius:3px}
+  .notes li.on{background:var(--deck-2)}
+  .notes button{background:transparent;border:0;padding:0;text-align:left;
+    color:var(--sky);font-family:var(--mono);font-size:12.5px;cursor:pointer;
+    font-variant-numeric:tabular-nums;white-space:nowrap}
+  .notes button:hover,.notes button:focus-visible{text-decoration:underline}
+  .notes li span{color:var(--ink-2);font-size:14.5px;line-height:1.55}
+  @media (max-width:560px){
+    .notes li{grid-template-columns:62px minmax(0,1fr);gap:10px}
+  }
   .more{margin:24px 0 0;background:transparent;color:var(--ink-2);
     border:1px solid var(--edge-2);border-radius:99px;padding:10px 18px;
     font:inherit;font-size:13.5px;cursor:pointer;
     transition:border-color var(--quick) var(--ease),color var(--quick) var(--ease)}
   .more:hover{border-color:var(--sky);color:var(--sky)}
   .empty{color:var(--ink-3);font-size:14px;padding:18px 0}
+  .dotkey{display:inline-block;width:6px;height:6px;border-radius:50%;
+    background:var(--sky);vertical-align:2px;margin:0 2px}
 
 
   footer{margin:64px 0 46px;border-top:1px solid var(--edge);padding-top:22px;
@@ -345,7 +374,7 @@
     <span class="brandline"><a class="home-crumb" href="/home">Market Bubble Search</a><span class="home-sep" aria-hidden="true">/</span>
       <a class="mark" href="/threadguy"><b>ThreadGuy</b><span>archive</span></a>
     </span>
-    <span data-archives></span>
+    <span class="hdr-r"><a class="tokens" href="/threadguy/tokens">Tokens</a><span data-archives></span></span>
   </header>
 
   <div class="strip rise" id="strip" style="animation-delay:.05s">
@@ -385,7 +414,7 @@
 
   <section class="sect rise" style="animation-delay:.32s">
     <h2>on the shelf</h2>
-    <p class="note">Newest first, grouped by month. Pick one to watch it here.</p>
+    <p class="note">Newest first, grouped by month. Pick one to watch it here. A <span class="dotkey"></span> means it has notes: what it covers, with a time on every topic that jumps the video there.</p>
     <div id="shelf"><div class="empty">Loading the shelf.</div></div>
   </section>
 
@@ -395,6 +424,7 @@
       An independent project, not affiliated with ThreadGuy or his show.
     </div>
     <nav>
+      <a href="/threadguy/tokens">Tokens</a>
       <a href="/home">All archives</a><a href="/">Market Bubble</a>
       <a href="/mcg">MCG Live</a><a href="/elon">Elon Musk</a>
       <a href="/finance">The Record</a>
@@ -829,10 +859,49 @@
   // Six hundred rows is more than anybody scrolls, and building them all
   // up front costs a moment on a phone. The first stretch renders, the
   // rest arrive on request.
-  var SHOW = 40, eps = [], shown = 0;
+  var SHOW = 40, eps = [], shown = 0, NOTES = {};
+  // The notes for one recording, playing in the frame it is given. Built
+  // from text nodes only: the summaries are model output, and nothing a
+  // model wrote goes into the page as markup.
+  function notes(e, frame){
+    var sm = NOTES[e.episode_id];
+    if (!sm || !sm.topics || !sm.topics.length) return null;
+    var vid = ytId(e.url);
+    var box = document.createElement("div");
+    box.className = "notes";
+    box.onclick = function(ev){ ev.stopPropagation(); };
+    var p = document.createElement("p");
+    p.className = "tldr";
+    p.textContent = sm.tldr || "";
+    box.appendChild(p);
+    var ol = document.createElement("ol");
+    sm.topics.forEach(function(t){
+      var sec = Math.max(0, Math.floor(Number(t.t) || 0));
+      var li = document.createElement("li");
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = stamp(sec);
+      b.setAttribute("aria-label", "Play from " + stamp(sec));
+      b.onclick = function(){
+        var f = frame();
+        if (!f || !vid) return;
+        f.src = "https://www.youtube.com/embed/" + vid + "?start=" + sec + "&autoplay=1";
+        ol.querySelectorAll("li.on").forEach(function(o){ o.classList.remove("on"); });
+        li.classList.add("on");
+        var box2 = f.getBoundingClientRect();
+        if (box2.top < 0) f.scrollIntoView({behavior: "smooth", block: "start"});
+      };
+      var span = document.createElement("span");
+      span.textContent = t.text || "";
+      li.appendChild(b); li.appendChild(span);
+      ol.appendChild(li);
+    });
+    box.appendChild(ol);
+    return box;
+  }
   function row(e){
     var el = document.createElement("div");
-    el.className = "ep";
+    el.className = "ep" + (NOTES[e.episode_id] ? " noted" : "");
     el.innerHTML = '<span class="d"></span><span class="f"></span>'
                  + '<span class="t"></span><span class="r"></span>';
     el.querySelector(".d").textContent = shortDate(e.published_at);
@@ -856,6 +925,8 @@
       pw.querySelector("iframe").src =
         "https://www.youtube.com/embed/" + vid + "?autoplay=1";
       pw.querySelector("iframe").title = "Playing " + (e.title || "this recording");
+      var n = notes(e, function(){ return pw.querySelector("iframe"); });
+      if (n) pw.appendChild(n);
       el.appendChild(pw);
       el.classList.add("playing");
       playing = el;
@@ -899,6 +970,8 @@
           + 'title="Playback"></iframe>';
         st.querySelector("iframe").src = "https://www.youtube.com/embed/" + vid + "?autoplay=1";
         st.querySelector("iframe").title = "Playing " + (e.title || "this recording");
+        var n = notes(e, function(){ return st.querySelector("iframe"); });
+        if (n) st.appendChild(n);
         st.classList.add("on");
         var box = st.getBoundingClientRect();
         var over = box.bottom - window.innerHeight + 24;
@@ -943,8 +1016,14 @@
       host.appendChild(b);
     }
   }
+  // Notes are extra: if they fail to load, the shelf draws without them.
+  var notesReady = fetch("/v1/threadguy/summaries")
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(d){ NOTES = (d && d.summaries) || {}; })
+    .catch(function(){});
   fetch("/v1/threadguy/episodes")
     .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(list){ return notesReady.then(function(){ return list; }); })
     .then(function(list){
       if (!Array.isArray(list) || !list.length) {
         $("shelf").innerHTML = '<div class="empty">The shelf could not be loaded. The search above still works.</div>';
