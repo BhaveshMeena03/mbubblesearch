@@ -34,7 +34,7 @@ from .schemas import (
     PodcastSearchResponse,
     TranscriptSegment,
 )
-from .terms import TermIndex
+from .terms import TermIndex, path_for, words
 
 logger = logging.getLogger(__name__)
 
@@ -1035,7 +1035,7 @@ class PodcastIndex:
         self._index = None
         # Loaded once. Absent or unreadable means every lookup returns
         # nothing and search behaves exactly as it did before.
-        self._terms = TermIndex()
+        self._terms = TermIndex(path_for(self._namespace))
 
     def _llm(self):
         """The client to try, its route for the counter, and whether a
@@ -1208,7 +1208,10 @@ class PodcastIndex:
 
         records = getattr(fetched, "vectors", None) or {}
         added = 0
-        for record in records.values():
+        # In the term index's order, which is its ranking. A fetch hands
+        # records back keyed by id, in no particular order.
+        for vector_id in wanted:
+            record = records.get(vector_id)
             md = getattr(record, "metadata", None) or {}
             if not md.get("text"):
                 continue
@@ -1343,7 +1346,9 @@ class PodcastIndex:
         # literally contains it can rank below passages merely about the same
         # subject: "who made 54 million on the drop" missed a line reading
         # "54 million dollars on the drop".
+        before = len(hits)
         hits = await self._add_exact_matches(query, hits)
+        exact = hits[before:]
 
         # Rerank by actual relevance (falls back to vector order on failure).
         keep = top_k
@@ -1393,7 +1398,46 @@ class PodcastIndex:
                         # The union is pointless if the caller's slice
                         # throws it away again.
                         keep = len(deep) + len(extra)
-        return _prefer_seekable(hits)[:keep]
+        final = _prefer_seekable(hits)[:keep]
+        return final + self._said_it(query, exact, final)
+
+    # How many passages that literally say a rare word from the question are
+    # kept even when the reranker would cut them. Two: enough for the line
+    # and its neighbour, too few to crowd out what the reranker chose.
+    _SAID_IT_SLOTS = 2
+
+    def _said_it(self, query: str, exact: list[PodcastHit],
+                 final: list[PodcastHit]) -> list[PodcastHit]:
+        """Exact matches the reranker cut, when they say the asked-for word.
+
+        The reranker reads each passage with its episode title in front,
+        which is right for finding an episode by name and wrong inside one
+        whose title matches the question. Asked "what did ThreadGuy say
+        about the Anthropic S-1", it scored "Malcolm, you think I wasn't
+        going to notice?" at 0.805, because that minute is short and sits
+        under the title "Anthropic S-1 is UHHH", and cut the minute where
+        he reads the leaked filing's numbers out (0.656). The term index
+        had found that minute; the cut threw it away.
+
+        Only added, never swapped in: everything the reranker chose stays,
+        in its order. Only passages whose words, not their title, hold a
+        rare token from the question, in the term index's own ranking.
+        """
+        wanted = set(self._terms.terms_in(query))
+        if not wanted or not exact:
+            return []
+        kept = {(h.episode_id, h.start_seconds) for h in final}
+
+        def times_said(hit: PodcastHit) -> int:
+            return sum(1 for w in words(hit.text or "") if w in wanted)
+
+        # Most mentions first, the index's ranking breaking ties: inside
+        # the S-1 stream twenty minutes say "S1" once in passing, and the
+        # one reading the filing out says it five times.
+        said = [h for h in exact
+                if (h.episode_id, h.start_seconds) not in kept and times_said(h)]
+        said.sort(key=times_said, reverse=True)
+        return said[:self._SAID_IT_SLOTS]
 
     @staticmethod
     def _format(hits: list[PodcastHit], *,

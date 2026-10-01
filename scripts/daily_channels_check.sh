@@ -109,8 +109,20 @@ for archive in threadguy mcg; do
     --limit 20 --max-new 8 || status=1
 done
 
-# Only the two shelf files, whatever else is uncommitted in this checkout.
-shelves=(data/threadguy_index.json data/mcg_index.json)
+# Sundays: the exact-word indexes, read back off Pinecone. Weekly, not
+# daily, because each rebuild commits a few megabytes and a daily one would
+# add a gigabyte a year to the repo. Until then a new episode is still
+# found by meaning, just not yet by an exact rare word.
+terms=(data/terms_threadguy.json.gz data/terms_mcg.json.gz)
+if [ "$(date +%u)" = "7" ]; then
+  for archive in threadguy mcg; do
+    echo "-- exact-word index: $archive"
+    .venv/bin/python -u scripts/build_term_index.py --archive "$archive" || status=1
+  done
+fi
+
+# Only the shelves and the indexes, whatever else is uncommitted here.
+shelves=(data/threadguy_index.json data/mcg_index.json "${terms[@]}")
 if git diff --quiet -- "${shelves[@]}"; then
   echo "  no new episodes"
   exit $status

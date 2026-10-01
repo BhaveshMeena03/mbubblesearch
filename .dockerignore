@@ -14,6 +14,13 @@ data/
 # can tell. tests/test_docker_build_context.py checks the two files agree.
 !data/highlights.json
 !data/term_index.json
+# Every other archive's exact-word index, built from Pinecone by
+# scripts/build_term_index.py --archive <name>. Without these an archive
+# still answers, but loses the exact-word matches the embeddings miss.
+!data/terms_threadguy.json.gz
+!data/terms_mcg.json.gz
+!data/terms_elon.json.gz
+!data/terms_tradfi.json.gz
 !data/mcg_guests.json
 # The clipper's source of the media URL and the per-second segments.
 # Gzipped because the raw file is 7.6MB and every ingest rewrites it.

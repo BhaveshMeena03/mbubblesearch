@@ -14,7 +14,13 @@ def test_it_covers_both_channels_and_transcribes_with_groq():
 
 def test_it_commits_only_the_two_shelves():
     """It runs in a checkout that may have someone's work in it."""
-    assert "shelves=(data/threadguy_index.json data/mcg_index.json)" in SCRIPT
+    assert 'shelves=(data/threadguy_index.json data/mcg_index.json "${terms[@]}")' in SCRIPT
+    assert "terms=(data/terms_threadguy.json.gz data/terms_mcg.json.gz)" in SCRIPT
+
+
+def test_the_exact_word_indexes_are_rebuilt_weekly():
+    assert '[ "$(date +%u)" = "7" ]' in SCRIPT
+    assert 'scripts/build_term_index.py --archive "$archive"' in SCRIPT
     assert '-- "${shelves[@]}"' in SCRIPT
     assert "git add" not in SCRIPT
 

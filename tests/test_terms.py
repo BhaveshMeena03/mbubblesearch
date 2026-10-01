@@ -95,3 +95,101 @@ def test_rarest_terms_come_first():
     picked = terms.lookup("what did andre say about trading", limit=3)
     andre_ids = {raw["ids"][i] for i in raw["terms"]["andre"]}
     assert picked and picked[0] in andre_ids
+
+
+# ---- every archive, ranked lookups -------------------------------------
+# Every archive used to load Market Bubble's index, so ThreadGuy, MCG,
+# Elon and The Record had no exact matching at all. Two questions missed
+# on ThreadGuy because of it: "what did blurr say about bucket shops" and
+# "what did threadguy say about the anthropic s-1".
+
+import gzip  # noqa: E402
+
+from app.podcast import PodcastIndex  # noqa: E402
+from app.schemas import PodcastHit  # noqa: E402
+from app.terms import path_for, words, worth_indexing  # noqa: E402
+
+
+def test_hyphens_are_optional_so_s1_and_s_1_are_one_word():
+    """The title said "S-1", the transcript "S1", the question "S-1"."""
+    assert words("the Anthropic S-1 leaked") == ["the", "anthropic", "s1", "leaked"]
+    assert words("Anthropic S1") == ["anthropic", "s1"]
+
+
+def test_two_characters_count_when_they_mix_letters_and_digits():
+    assert worth_indexing("s1") and worth_indexing("q3")
+    assert not worth_indexing("is") and not worth_indexing("ok")
+    assert not worth_indexing("10")
+
+
+def test_each_archive_reads_its_own_index():
+    assert path_for("podcast") == INDEX
+    assert path_for("threadguy").name == "terms_threadguy.json.gz"
+    for name in ("threadguy", "mcg", "elon", "tradfi"):
+        assert len(TermIndex(path_for(name))) > 1000, name
+
+
+def test_the_threadguy_index_holds_the_words_that_missed():
+    raw = json.loads(gzip.decompress(path_for("threadguy").read_bytes()))
+    assert raw["terms"].get("s1"), "said as 'S1' in the S-1 stream"
+    assert raw["terms"].get("bucket"), "Blurr's 'bucket shop'"
+
+
+def _index(tmp_path, terms, title_terms=None, n=10, gz=True):
+    body = {"ids": [f"id{i}" for i in range(n)], "terms": terms}
+    if title_terms is not None:
+        body["title_terms"] = title_terms
+    path = tmp_path / ("t.json.gz" if gz else "t.json")
+    data = json.dumps(body).encode()
+    path.write_bytes(gzip.compress(data) if gz else data)
+    return TermIndex(path)
+
+
+def test_a_window_with_two_of_the_words_beats_one_with_either(tmp_path):
+    terms = _index(tmp_path, {"blurr": [1, 2, 3], "bucket": [3, 7]})
+    assert terms.lookup("blurr bucket", limit=1) == ["id3"]
+
+
+def test_saying_the_word_beats_only_having_it_in_the_title(tmp_path):
+    terms = _index(tmp_path, {"s1": [6]}, {"s1": [1, 2, 3, 6]})
+    picked = terms.lookup("anthropic s1", limit=2)
+    assert picked[0] == "id6", "said AND under the title comes first"
+    assert picked[1] == "id1", "title-only windows follow, in storage order"
+
+
+def test_saying_it_more_often_ranks_higher(tmp_path):
+    terms = _index(tmp_path, {"s1": [2, 5, 5, 5, 8]})
+    assert terms.lookup("s1", limit=1) == ["id5"]
+
+
+def test_an_index_from_before_title_terms_still_works(tmp_path):
+    terms = _index(tmp_path, {"andre": [4]}, gz=False)
+    assert terms.lookup("what did andre say") == ["id4"]
+
+
+def _hit(start, text, episode="e"):
+    return PodcastHit(episode_id=episode, title="Anthropic S-1 is UHHH",
+                      start_seconds=start, timestamp="0:00", deep_link="x",
+                      text=text, score=0.0)
+
+
+def test_passages_that_say_the_word_are_added_never_swapped_in(tmp_path):
+    """The reranker scored 'Malcolm, you think I wasn't going to notice?'
+    above the minute reading the leaked S-1 out, because both sit under
+    the title 'Anthropic S-1 is UHHH'. The minute that says it is kept;
+    nothing the reranker chose is removed or reordered."""
+    index = PodcastIndex.__new__(PodcastIndex)
+    index._terms = _index(tmp_path, {"s1": [0, 1, 2]})
+    chosen = [_hit(10, "Malcolm, you think I wasn't going to notice?")]
+    exact = [_hit(20, "S1 once"), _hit(30, "the S1 leaked, the S1 numbers, S1"),
+             _hit(40, "nothing about it"), _hit(10, "already chosen S1")]
+    added = index._said_it("what did he say about the anthropic s-1", exact, chosen)
+    assert [h.start_seconds for h in added] == [30, 20], \
+        "most mentions first, only ones that say it, never a repeat"
+    assert len(added) <= PodcastIndex._SAID_IT_SLOTS
+
+
+def test_nothing_is_added_when_the_question_has_no_rare_word(tmp_path):
+    index = PodcastIndex.__new__(PodcastIndex)
+    index._terms = _index(tmp_path, {"s1": [0]})
+    assert index._said_it("what did he say", [_hit(20, "S1")], []) == []
