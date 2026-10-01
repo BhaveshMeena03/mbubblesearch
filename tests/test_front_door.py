@@ -304,7 +304,7 @@ def test_threadguy_is_everywhere_the_other_archives_are():
 def test_a_redrawn_card_gets_a_new_url():
     """X caches a card image by its URL, so a new picture under the old
     name is the old picture to anybody who has already shared the page."""
-    assert "og-home.png?v=4" in PAGE and "home?v=4" in PAGE
+    assert "og-home.png?v=5" in PAGE and "home?v=5" in PAGE
 
 
 def test_the_threadguy_example_actually_routes_to_threadguy():
