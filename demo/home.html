@@ -121,6 +121,7 @@
     font-weight:400;font-size:34px;line-height:1;color:var(--ink);
     font-variant-numeric:tabular-nums}
   .scale .lead b{color:var(--signal);font-size:46px}
+  .scale .years{display:none}
   .scale span{display:block;margin-top:8px;font-family:var(--mono);
     font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
     color:var(--ink-3)}
@@ -198,7 +199,7 @@
      looked flat; the question is what turns them into a demonstration
      of the thing rather than three sentences somebody liked. */
   .moments{display:grid;gap:16px;margin:0 0 6px;
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+    grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr))}
   .moment{position:relative;border:1px solid var(--edge);border-radius:3px;
     background:var(--deck);padding:22px 24px 20px;cursor:pointer;
     display:flex;flex-direction:column;
@@ -382,12 +383,23 @@
   }
   @media(max-width:640px){
     .wrap{padding:0 20px}
-    header{flex-wrap:wrap;row-gap:10px}
-    .mark{width:100%}
+    /* One row: the header stays pinned on a phone (nav.js), and two rows
+       of it would hold a sixth of the screen. */
+    header{flex-wrap:nowrap}
+    /* Five numbers left the fifth alone on a line. Two by two, with the
+       years as one span. */
+    .scale{display:grid;grid-template-columns:1fr 1fr;gap:24px 12px}
+    .scale .yr{display:none}
+    .scale .years{display:block}
+    .scale .years b{font-size:28px}
+    /* The fine print had a column one or two words wide. */
+    footer{grid-template-columns:1fr;gap:22px}
+    footer .fine{max-width:none}
     .chan{grid-template-columns:1fr 46px;row-gap:7px}
     .chan .bar{grid-column:1/-1;order:3}
     form{flex-direction:column} #go{border-left:0;border-top:1px solid var(--edge-2);padding:15px}
   }
+  @media(max-width:380px){.mark .s{display:none}}
 </style>
 </head>
 <body>
@@ -417,8 +429,9 @@
       <div class="lead"><b>1,967</b><span>hours of tape</span></div>
       <div><b>1,328</b><span>recordings</span></div>
       <div><b>5</b><span>archives</span></div>
-      <div><b>2014</b><span>earliest</span></div>
-      <div><b>2026</b><span>latest</span></div>
+      <div class="yr"><b>2014</b><span>earliest</span></div>
+      <div class="yr"><b>2026</b><span>latest</span></div>
+      <div class="years"><b>2014 to 2026</b><span>span</span></div>
     </div>
   </section>
 
