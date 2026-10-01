@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!-- One social card for every page, 1200x630. Render with:
+       node scripts/make_og_image.mjs <page>
+     where <page> is home, podcast, mcg, elon, finance or threadguy.
+
+     Deliberately nothing on it that changes: no hour counts, no episode
+     counts, no "latest recordings". Every card that carried a number went
+     stale within days (The Record's said 30 recordings with 35 live, the
+     Musk card 11 with 14), and an archive that grows every morning cannot
+     redraw a card every morning. What a page is, how it answers, and one
+     question it answers well: that stays true. -->
+<html><head><meta charset="utf-8"><style>
+  @font-face { font-family: "Instrument Serif";
+    src: url("fonts/InstrumentSerif-Regular.ttf") format("truetype"); }
+  @font-face { font-family: "InterV";
+    src: url("fonts/Inter-Variable.ttf") format("truetype"); }
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#0b0d10;--ink:#eef0f3;--ink2:#a7adb8;--ink3:#6e7582;--edge:#232833;
+        --box:#12151b;--accent:#ffa23a;--on:#141414;--glow:rgba(255,162,58,.16)}
+  body{width:1200px;height:630px;background:var(--bg);color:var(--ink);
+    font-family:"InterV",-apple-system,BlinkMacSystemFont,sans-serif;
+    padding:58px 72px 54px;position:relative;overflow:hidden;
+    display:flex;flex-direction:column}
+  .glow{position:absolute;right:-260px;top:-300px;width:900px;height:900px;border-radius:50%;
+    background:radial-gradient(circle,var(--glow),transparent 62%)}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  .crumb{position:relative;display:flex;align-items:baseline;gap:14px;
+    font-size:14px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink3)}
+  .crumb b{color:var(--accent);font-weight:600}
+  /* The middle block sits centred between the crumb and the footer, so a
+     one-line headline and a two-line one both look placed, not dropped. */
+  .main{position:relative;flex:1;display:flex;flex-direction:column;justify-content:center}
+  h1{font-family:"Instrument Serif",Georgia,serif;
+    font-weight:400;font-size:100px;line-height:.96;letter-spacing:-1.8px;max-width:1040px;
+    text-wrap:balance}
+  /* The slant is synthesised and leans into the next word without this. */
+  h1 em{font-style:italic;color:var(--accent);padding-right:.08em}
+  .sub{margin-top:24px;font-size:24px;line-height:1.42;color:var(--ink2);max-width:920px}
+  .box{margin-top:34px;display:flex;align-items:stretch;width:820px;
+    border:1.5px solid var(--edge);border-radius:4px;background:var(--box);overflow:hidden}
+  .box .q{flex:1;padding:19px 24px;font-size:22px;color:var(--ink)}
+  .box .go{background:var(--accent);color:var(--on);font-weight:700;font-size:14px;
+    letter-spacing:.2em;padding:0 30px;display:flex;align-items:center}
+  .foot{position:relative;margin-top:auto;display:flex;align-items:center;
+    justify-content:space-between;border-top:1.5px solid var(--edge);padding-top:20px}
+  .promises{display:flex;gap:26px;font-size:13px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--ink3)}
+  .promises span::before{content:"";display:inline-block;width:7px;height:7px;
+    border-radius:50%;background:var(--accent);margin-right:10px;vertical-align:1px}
+  .site{font-size:17px;color:var(--ink2)}
+
+  /* The Record is the one light room. */
+  body.paper{--bg:#f4f1ea;--ink:#1d1a16;--ink2:#4c463d;--ink3:#8a8276;--edge:#d8d1c4;
+    --box:#fbfaf6;--on:#fff;--glow:rgba(124,33,40,.08)}
+</style></head><body>
+  <div class="glow"></div>
+  <div class="crumb mono">Market Bubble Search <span>/</span> <b id="room"></b></div>
+  <div class="main">
+    <h1 id="head"></h1>
+    <div class="sub" id="sub"></div>
+    <div class="box"><div class="q" id="q"></div><div class="go mono">ASK</div></div>
+  </div>
+  <div class="foot">
+    <div class="promises mono"><span>cited to the second</span><span>no login</span><span>free</span></div>
+    <div class="site mono" id="site"></div>
+  </div>
+<script>
+  // Each page's own colours, words and one question it answers well.
+  var PAGES = {
+    home: {room: "every archive", accent: "#ffa23a", path: "",
+      head: "Ask what somebody <em>actually said</em>.",
+      sub: "Crypto shows and long-form interviews, transcribed. One question goes to every archive, and the one that knows answers with the second it was said.",
+      q: "when did fink change his mind on bitcoin"},
+    podcast: {room: "Market Bubble", accent: "#16c784", path: "",
+      head: "Ask the broadcast <em>anything</em>.",
+      sub: "Every Market Bubble show with Ansem and FaZe Banks, searchable by meaning, including the parts that never reach the YouTube upload.",
+      q: "how did he turn $500 into $40 million"},
+    mcg: {room: "MCG Live", accent: "#6ecf9e", path: "/mcg",
+      head: "Ask MCG Live <em>anything</em>.",
+      sub: "Every interview and every live stream, one project per episode, with the founder on the call.",
+      q: "who is building encrypted mesh networks"},
+    elon: {room: "Elon Musk", accent: "#e0485c", path: "/elon",
+      head: "Every answer he has given, <em>to the second</em>.",
+      sub: "Elon Musk's long-form interviews, transcribed. Rogan, Lex Fridman, the Economist, the Trump space.",
+      q: "what did elon say about heat shield tiles"},
+    finance: {room: "The Record", accent: "#7c2128", path: "/finance", paper: true,
+      head: "What they <em>actually</em> said.",
+      sub: "Long-form interviews with the people who run the money. Fink, Dalio, Powell, Dimon, Wood, Saylor, CZ.",
+      q: "when did fink change his mind on bitcoin"},
+    threadguy: {room: "ThreadGuy", accent: "#6aa9ff", path: "/threadguy",
+      head: "ThreadGuy, <em>on the record</em>.",
+      sub: "His market-open streams and interviews, transcribed. Ask what was said, and get the day and the second it was said.",
+      q: "what does threadguy think of hyperliquid"}
+  };
+  var key = new URLSearchParams(location.search).get("p") || "home";
+  var p = PAGES[key] || PAGES.home;
+  var root = document.documentElement.style;
+  root.setProperty("--accent", p.accent);
+  if (!p.paper) root.setProperty("--glow", p.accent + "29");
+  if (p.paper) document.body.classList.add("paper");
+  document.getElementById("room").textContent = p.room;
+  document.getElementById("head").innerHTML = p.head;
+  document.getElementById("sub").textContent = p.sub;
+  document.getElementById("q").textContent = p.q;
+  document.getElementById("site").textContent = "search.lexthedev.com" + p.path;
+</script>
+</body></html>

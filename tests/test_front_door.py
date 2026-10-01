@@ -297,14 +297,14 @@ def test_threadguy_is_everywhere_the_other_archives_are():
     assert 'vid:"2tMMfjBqgvo", at:563' in PAGE              # a question card
     assert 'href="/threadguy">ThreadGuy</a>' in PAGE         # the footer
     assert "ThreadGuy" in PAGE.split('name="description" content="')[1].split('"')[0]
-    card = (ROOT / "demo" / "og-home-card.html").read_text()
-    assert ">ThreadGuy</div>" in card and "all five archives" in card
+    # The share card is the universal one now and names no archives, so
+    # adding one never leaves it out of date. See test_universal_cards.
 
 
 def test_a_redrawn_card_gets_a_new_url():
     """X caches a card image by its URL, so a new picture under the old
     name is the old picture to anybody who has already shared the page."""
-    assert "og-home.png?v=5" in PAGE and "home?v=5" in PAGE
+    assert "og-home.png?v=6" in PAGE and "home?v=6" in PAGE
 
 
 def test_the_threadguy_example_actually_routes_to_threadguy():
