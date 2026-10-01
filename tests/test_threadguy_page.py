@@ -63,10 +63,11 @@ def test_nothing_waits_on_a_background_tab():
     """Transitions and timers are throttled in a hidden tab, so the reveal
     and the streamed answer both have a path that does not depend on them."""
     assert 'classList.toggle("instant", document.hidden)' in PAGE
-    # The answer is written by cite.js, which gets it whole when hidden.
-    assert "}, document.hidden);" in PAGE
-    cite = (ROOT / "demo" / "cite.js").read_text()
-    assert "if (instant) {" in cite
+    # A hidden tab throttles the redraw timer, so the final draw of a
+    # streamed answer is called directly when the stream ends, not timed.
+    final = PAGE.split("function finish(list, text, cut){")[1].split("\n  }\n")[0]
+    assert 'Cite.paint($("answer"), text, list' in final
+    assert "setTimeout" not in final
     assert "requestAnimationFrame(" not in PAGE
 
 
