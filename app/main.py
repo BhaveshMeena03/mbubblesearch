@@ -242,6 +242,9 @@ async def _run_x_bot(app: FastAPI, settings) -> None:
         # episode index -- and the broadcast still wins every tie, so
         # "what did ansem say about clawpump" stays on the show.
         mcg_index=getattr(app.state, "mcg", None),
+        # ThreadGuy's streams and interviews. Routed when a mention names
+        # him, or asks in one of his threads without naming anything else.
+        threadguy_index=getattr(app.state, "threadguy", None),
         daily_reply_cap=settings.x_bot_daily_reply_cap,
         per_thread_cap=settings.x_bot_per_thread_cap,
         include_links=settings.x_bot_include_links,

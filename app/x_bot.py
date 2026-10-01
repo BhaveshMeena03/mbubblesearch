@@ -3505,6 +3505,31 @@ _TRADFI_VENUE = re.compile(
     r"(?i)\b(blackrock|black\s*rock|ibit|milken|davos)\b")
 
 
+# ThreadGuy, by name or by handle. Not "counterparty", the network his
+# show runs on: "counterparty risk" is ordinary finance and would take
+# questions off the broadcast. That handle is used as a thread hint
+# instead (see threadguy_thread).
+_OF_THREADGUY = re.compile(r"(?i)\b(?:not)?thread\s?guy\b")
+
+# The handles X puts at the front of a reply in his threads: under his
+# posts, or under ours that tag him, as the Papertrade post did.
+_THREADGUY_HANDLES = re.compile(r"(?i)@(?:notthreadguy|counterpartytv)\b")
+
+
+def threadguy_thread(mention_text: str) -> bool:
+    """Is this mention a reply in one of ThreadGuy's threads?
+
+    Read off the LEADING handles, the part X writes, which corpus_for
+    deliberately ignores. A question under our ThreadGuy post that names
+    nothing ("what did he say about hyperliquid") arrives as
+    "@mbubbleSearch @blurr @notthreadguy @counterpartytv what did he
+    say...", and the only thing saying whose show is meant is up front.
+    Used only when the question itself names no archive.
+    """
+    lead = _LEADING_HANDLES.match(mention_text or "")
+    return bool(lead and _THREADGUY_HANDLES.search(lead.group(0)))
+
+
 def corpus_for(question: str) -> str:
     """"podcast" or "elon" — which archive should answer this.
 
@@ -3522,7 +3547,14 @@ def corpus_for(question: str) -> str:
     # before anything is matched -- otherwise "@mbubbleSearch" would be a
     # vote for the broadcast on literally every question asked.
     text = _OWN_HANDLE.sub(" ", question or "")
-    if _OF_THE_SHOW.search(text):
+    # ThreadGuy ahead of the show only when he is named first: "what did
+    # threadguy say about ansem" wants his view, "what did ansem say about
+    # threadguy" wants Ansem's, and the speaker comes first in both.
+    threadguy = _OF_THREADGUY.search(text)
+    show = _OF_THE_SHOW.search(text)
+    if threadguy and (not show or threadguy.start() < show.start()):
+        return "threadguy"
+    if show:
         return "podcast"
     if _TRADFI_PERSON is not None and _TRADFI_PERSON.search(text):
         return "tradfi"
@@ -3552,7 +3584,8 @@ def routed_on_evidence(question: str) -> bool:
     text = _OWN_HANDLE.sub(" ", question or "")
     return bool(_OF_THE_SHOW.search(text)
                 or _OF_THE_MUSK_ARCHIVE.search(text)
-                or _OF_THE_MCG_ARCHIVE.search(text))
+                or _OF_THE_MCG_ARCHIVE.search(text)
+                or _OF_THREADGUY.search(text))
 
 
 class MentionBot:
@@ -3585,6 +3618,7 @@ class MentionBot:
                  search_model: str | None = None,
                  mcg_index=None,
                  tradfi_index=None,
+                 threadguy_index=None,
                  state_path: Path = STATE_PATH) -> None:
         self._client = client
         self._index = index
@@ -3601,6 +3635,8 @@ class MentionBot:
         # two: a deploy without it answers from the broadcast
         # rather than raising inside the reply loop.
         self._tradfi_index = tradfi_index
+        # ThreadGuy's streams and interviews. Optional like the rest.
+        self._threadguy_index = threadguy_index
         self.cap = daily_reply_cap
         self.include_links = include_links
         self._min_question = min_question_chars
@@ -4474,10 +4510,17 @@ class MentionBot:
         # typed mid-sentence stays.
         routed_on = _LEADING_HANDLES.sub(" ", mention.text or "")
         corpus = corpus_for(routed_on)
+        # Asked in one of ThreadGuy's threads and naming nothing: his
+        # archive first. A miss still goes on to the others below, the
+        # broadcast included, because nothing in the question chose this.
+        if (corpus == "podcast" and not routed_on_evidence(routed_on)
+                and threadguy_thread(mention.text)):
+            corpus = "threadguy"
         # An archive that is not wired answers nothing; the question falls
         # back to the broadcast rather than to an index that is None.
         available = {"elon": self._elon_index, "mcg": self._mcg_index,
-                     "tradfi": self._tradfi_index}
+                     "tradfi": self._tradfi_index,
+                     "threadguy": self._threadguy_index}
         if corpus != "podcast" and not available.get(corpus):
             corpus = "podcast"
         index = available.get(corpus) or self._index
@@ -4494,14 +4537,20 @@ class MentionBot:
         # A miss is the reply people screenshot as proof it does not work, so
         # it is worth $0.008 to be sure, and only when retrieval actually
         # found something to work with.
-        if (is_a_miss(result.answer) and not salvage(result.answer)
+        # An empty answer counts as a miss here. DeepSeek, which the bot
+        # answers with, occasionally returns nothing at all for a question
+        # it answers fine on the next call, and nothing reads as a
+        # deflection to the gates below, so the bot went quiet: one of
+        # three asks of "what did threadguy say about hyperliquid".
+        empty = not (result.answer or "").strip()
+        if ((empty or (is_a_miss(result.answer) and not salvage(result.answer)))
                 and len(result.hits) >= 3):
-            logger.info("%s missed on the first pass — asking again",
-                        mention.id)
+            logger.info("%s %s on the first pass — asking again", mention.id,
+                        "came back empty" if empty else "missed")
             retry = await index.search(
                 asked, instruction=reply_style(self._post_limit),
                 model=self._search_model)
-            if not is_a_miss(retry.answer):
+            if (retry.answer or "").strip() and not is_a_miss(retry.answer):
                 result = retry
 
         # Still nothing, and nothing in the question chose this archive.
@@ -4526,11 +4575,14 @@ class MentionBot:
         # Costs one retrieval per rescued question, on misses only.
         if (is_a_miss(result.answer) and not salvage(result.answer)
                 and not routed_on_evidence(routed_on)):
-            for name, other in available.items():
+            # The broadcast too, when it was not the first shelf tried: a
+            # question routed to ThreadGuy by its thread alone can still
+            # be one the show answers.
+            for name, other in {"podcast": self._index, **available}.items():
                 if other is None or other is index:
                     continue
-                logger.info("%s: nothing in the broadcast — trying %s",
-                            mention.id, name)
+                logger.info("%s: nothing in the %s archive — trying %s",
+                            mention.id, corpus, name)
                 elsewhere = await other.search(
                     asked, instruction=reply_style(self._post_limit),
                     model=self._search_model)
