@@ -1,90 +1,58 @@
 <!DOCTYPE html>
-<!-- Source for the @mbubbleSearch X header (1500x500).
-     Re-render after edits: node scripts/make_x_banner.mjs
+<!-- The @mbubbleSearch header image, 1500x500 (rendered at 3x). Render with:
+       node scripts/make_x_banner.mjs
 
-     Two things constrain the layout more than taste does:
+     Same rule as the share cards: nothing that goes stale. The last banner
+     said "Three archives, 1,111 hours" and carried episode counts for three
+     shows, all of it wrong within weeks. What the account does, and which
+     archives it answers from, stays true until an archive is added.
 
-     The avatar sits over the bottom-left corner, roughly 250px square and
-     hanging below the banner, so nothing important goes there. Everything
-     lives in the middle 1000px.
-
-     X crops the banner shorter on narrow viewports, taking it off the top
-     and bottom. So the block is vertically centred and the bottom 90px is
-     left empty rather than filled.
-
-     The old header named one archive. There are three now, and the count
-     is the thing worth saying, because "searchable" without a size is a
-     claim anyone can make. -->
+     The bottom-left corner is left empty: on a profile the avatar sits over
+     it, roughly the first 380px across and the last 170px down. And X crops
+     the banner shorter on narrow screens, off the top and bottom, so the
+     block is centred with the bottom 90px left empty. -->
 <html><head><meta charset="utf-8"><style>
-  @font-face{font-family:Inter;src:url("fonts/Inter-Variable.ttf");
-    font-weight:100 900}
+  @font-face { font-family: "Instrument Serif";
+    src: url("fonts/InstrumentSerif-Regular.ttf") format("truetype"); }
+  @font-face { font-family: "InterV";
+    src: url("fonts/Inter-Variable.ttf") format("truetype"); }
   *{margin:0;padding:0;box-sizing:border-box}
-  body{width:1500px;height:500px;background:#0b0e11;color:#e6e8ea;
-    font-family:Inter,-apple-system,sans-serif;position:relative;
-    overflow:hidden;display:flex;align-items:center;justify-content:center}
-
-  /* Same green pool as the site, placed high so the crop keeps it. */
-  .glow{position:absolute;left:50%;top:-260px;width:1100px;height:620px;
-    transform:translateX(-50%);border-radius:50%;
-    background:radial-gradient(circle,#16c78426,transparent 70%)}
-  .glow.b{left:88%;top:-180px;width:600px;height:480px;
-    background:radial-gradient(circle,#16c7841a,transparent 70%)}
-
-  .col{position:relative;width:1120px;text-align:center;padding-bottom:150px}
-
-  .eyebrow{font-size:15px;font-weight:600;letter-spacing:.34em;
-    text-transform:uppercase;color:#16c784;margin-bottom:18px}
-
-  /* One line. It wraps at 62 and the orphaned word looks like a mistake. */
-  h1{font-size:54px;font-weight:800;letter-spacing:-.02em;line-height:1.04;
-    margin-bottom:12px;white-space:nowrap}
-  h1 em{color:#16c784;font-style:normal}
-
-  .sub{font-size:21px;color:#8a939e;margin-bottom:30px}
-
-  /* The site's readout strip, same idea: a number, then what it counts.
-     Counts rather than hours across all three, because the only honest
-     hours figure for the broadcast would have to explain that the live
-     capture and the YouTube cut of one show overlap. A banner is not the
-     place for a footnote.
-
-     Narrower than the headline and centred, so the left cell clears the
-     avatar. The avatar reaches about x=394 and y=335 on a 1500x500 frame;
-     measured off the live profile, not guessed. */
-  .readout{display:grid;grid-template-columns:repeat(3,1fr);
-    width:880px;margin:0 auto;
-    border-top:1px solid #232a33;padding-top:20px}
-  .cell{border-right:1px solid #232a33}
-  .cell:last-child{border-right:0}
-  .n{font-size:36px;font-weight:800;font-variant-numeric:tabular-nums;
-    line-height:1;margin-bottom:8px}
-  .n span{font-size:19px;font-weight:600;color:#8a939e;margin-left:6px}
-  .who{font-size:13px;font-weight:600;letter-spacing:.2em;
-    text-transform:uppercase;color:#16c784;margin-bottom:6px}
-  .note{font-size:14px;color:#5d6771}
+  :root{--bg:#0b0e11;--ink:#eef0f3;--ink2:#a7adb8;--ink3:#6e7582;--edge:#232833;
+        --green:#16c784}
+  body{width:1500px;height:500px;background:var(--bg);color:var(--ink);overflow:hidden;
+    font-family:"InterV",-apple-system,BlinkMacSystemFont,sans-serif;position:relative;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding-bottom:90px}
+  .glow{position:absolute;left:50%;top:-420px;transform:translateX(-50%);
+    width:1500px;height:820px;border-radius:50%;
+    background:radial-gradient(circle,rgba(22,199,132,.20),rgba(22,199,132,.05) 45%,transparent 68%)}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  .eyebrow{position:relative;font-size:15px;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--green);font-weight:600}
+  .eyebrow span{color:var(--ink3);margin:0 12px}
+  h1{position:relative;margin-top:22px;font-family:"Instrument Serif",Georgia,serif;
+    font-weight:400;font-size:92px;line-height:1;letter-spacing:-1.6px;text-align:center}
+  h1 em{font-style:italic;color:var(--green);padding-right:.06em}
+  .sub{position:relative;margin-top:22px;font-size:23px;color:var(--ink2)}
+  .rooms{position:relative;display:flex;gap:14px;margin-top:34px}
+  .rooms span{display:flex;align-items:center;gap:11px;padding:11px 20px;
+    border:1.5px solid var(--edge);border-radius:99px;background:rgba(255,255,255,.025);
+    font-size:18px;color:var(--ink)}
+  .rooms i{width:10px;height:10px;border-radius:50%;background:var(--c)}
+  .ask{position:relative;margin-top:30px;font-size:15px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--ink3)}
+  .ask b{color:var(--ink2);font-weight:500;letter-spacing:.08em;text-transform:none;font-size:17px}
 </style></head><body>
   <div class="glow"></div>
-  <div class="glow b"></div>
-  <div class="col">
-    <div class="eyebrow">Market Bubble &middot; Search</div>
-    <h1>Ask anything. Jump to the <em>exact second.</em></h1>
-    <div class="sub">Three archives, 1,111 hours, transcribed and searchable by meaning.</div>
-    <div class="readout">
-      <div class="cell">
-        <div class="n">20 <span>episodes</span></div>
-        <div class="who">Market Bubble</div>
-        <div class="note">72 hours &middot; every show, live and cut</div>
-      </div>
-      <div class="cell">
-        <div class="n">14 <span>recordings</span></div>
-        <div class="who">Elon Musk</div>
-        <div class="note">2018&ndash;2026 &middot; 37.8 hours</div>
-      </div>
-      <div class="cell">
-        <div class="n">634 <span>episodes</span></div>
-        <div class="who">MCG Live</div>
-        <div class="note">1,002 hours &middot; one project each</div>
-      </div>
-    </div>
+  <div class="eyebrow mono">Market Bubble<span>&middot;</span>Search</div>
+  <h1>Ask anything. Jump to <em>the exact second</em>.</h1>
+  <div class="sub">Crypto shows and long-form interviews, transcribed and searchable by meaning.</div>
+  <div class="rooms">
+    <span style="--c:#16c784"><i></i>Market Bubble</span>
+    <span style="--c:#6ecf9e"><i></i>MCG Live</span>
+    <span style="--c:#6aa9ff"><i></i>ThreadGuy</span>
+    <span style="--c:#e0485c"><i></i>Elon Musk</span>
+    <span style="--c:#d8b48a"><i></i>The Record</span>
   </div>
+  <div class="ask mono">tag <b>@mbubbleSearch</b> with a question</div>
 </body></html>
