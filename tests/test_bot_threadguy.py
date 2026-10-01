@@ -168,3 +168,14 @@ async def test_an_empty_answer_is_asked_again_instead_of_going_quiet(tmp_path):
     await build(tmp_path, show, tg).compose(
         mention("@mbubbleSearch what did threadguy say about hyperliquid"))
     assert tg.calls == 2
+
+
+def test_deepseek_gets_room_to_reason_before_it_writes():
+    """It spent the whole 1,024 tokens reasoning and returned no text, and
+    an empty answer makes the bot stay quiet: two of three questions under
+    a Tulip King post went unanswered. Haiku, which answers the site, does
+    not reason first and keeps the smaller budget."""
+    from app.podcast import _answer_budget
+    assert _answer_budget("deepseek-v4-1-flash", 1024) == 4096
+    assert _answer_budget("claude-haiku-4-5", 1024) == 1024
+    assert _answer_budget("deepseek-v4-1-flash", 8000) == 8000
