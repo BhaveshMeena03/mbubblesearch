@@ -27,8 +27,9 @@
 #
 # What it does: transcribes with Groq, embeds, adds each finished episode
 # to its shelf (written only after the vectors are in, see ingest_mcg.py),
-# then commits and pushes the two shelf files and nothing else, so the
-# site lists what can be searched. It never posts anywhere. The headline
+# writes notes for ThreadGuy's newest, then commits and pushes the two
+# shelf files and the notes and nothing else, so the site lists what can
+# be searched. It never posts anywhere. The headline
 # totals on the front door and the link cards are not touched; those are
 # redrawn by hand.
 
@@ -109,6 +110,12 @@ for archive in threadguy mcg; do
     --limit 20 --max-new 8 || status=1
 done
 
+# Notes for ThreadGuy's newest uploads. Already-written ones are skipped,
+# so a morning pays for what arrived overnight and nothing else: one model
+# call per episode, through the proxy in .env.
+echo "-- threadguy notes"
+.venv/bin/python -u scripts/summarize_threadguy.py --latest 10 || status=1
+
 # Sundays: the exact-word indexes, read back off Pinecone. Weekly, not
 # daily, because each rebuild commits a few megabytes and a daily one would
 # add a gigabyte a year to the repo. Until then a new episode is still
@@ -122,7 +129,8 @@ if [ "$(date +%u)" = "7" ]; then
 fi
 
 # Only the shelves and the indexes, whatever else is uncommitted here.
-shelves=(data/threadguy_index.json data/mcg_index.json "${terms[@]}")
+shelves=(data/threadguy_index.json data/mcg_index.json
+         data/threadguy_summaries.json.gz "${terms[@]}")
 if git diff --quiet -- "${shelves[@]}"; then
   echo "  no new episodes"
   exit $status
