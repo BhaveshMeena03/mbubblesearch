@@ -137,6 +137,8 @@ STATS: dict = {
     "asset_detail_views": 0,
     "mcg_asset_dashboard_views": 0,
     "mcg_asset_detail_views": 0,
+    "threadguy_asset_dashboard_views": 0,
+    "threadguy_asset_detail_views": 0,
     "mcg_clips_requested": 0,
     "unanswered_chats": 0,
     "refusals": 0,
@@ -421,17 +423,24 @@ async def lifespan(app: FastAPI):
     # committed data/mcg_assets.json rather than failing.
     app.state.mcg_assets = AssetStore(index_name=_s.mcg_pinecone_index,
                                       namespace="assets")
+    # ThreadGuy's sit in the default index, where "assets" is already
+    # Market Bubble's, so they get a namespace named after the archive.
+    app.state.threadguy_assets = AssetStore(index_name=_s.pinecone_index,
+                                            namespace="threadguy_assets")
     # Build both asset reports now, in the background, so the first person
     # to open a dashboard is not the one who pays for it. Each takes about
     # eight seconds against a full archive and neither blocks startup: the
     # page falls back to its committed file where one exists (Market
     # Bubble's) until the warm lands, and a failure here is logged
     # rather than fatal.
-    for _slot, _store, _file in (
-            ("_assets_cache", app.state.assets, _ROOT / "data" / "assets.json"),
+    for _slot, _store, _file, _archive in (
+            ("_assets_cache", app.state.assets,
+             _ROOT / "data" / "assets.json", "podcast"),
             ("_mcg_assets_cache", app.state.mcg_assets,
-             _ROOT / "data" / "mcg_assets.json")):
-        asyncio.create_task(_refresh_report(_store, _file, _slot))
+             _ROOT / "data" / "mcg_assets.json", "mcg"),
+            ("_threadguy_assets_cache", app.state.threadguy_assets,
+             _ROOT / "data" / "threadguy_assets.json", "threadguy")):
+        asyncio.create_task(_refresh_report(_store, _file, _slot, _archive))
     # One cache, shared by every surface. The key carries the surface name,
     # so sharing the store cannot leak an answer between knowledge bases.
     app.state.answers = AnswerCache(
@@ -774,6 +783,8 @@ for _path, _target in (("/home", "/demo/home.html"),
                        ("/mcg/assets", "/demo/mcg-assets.html"),
                        ("/finance", "/demo/finance.html"),
                        ("/threadguy", "/demo/threadguy.html"),
+                       ("/threadguy/tokens", "/demo/threadguy-assets.html"),
+                       ("/threadguy/assets", "/demo/threadguy-assets.html"),
                        ("/record", "/demo/finance.html"),
                        ("/mcg/tokens", "/demo/mcg-assets.html"),
                        ("/method", "/demo/how-it-works.html")):
@@ -1524,8 +1535,15 @@ _REPORT_TTL = 1800
 _refreshing: set[str] = set()
 
 
-async def _build_report(store, fallback: Path, slot: str) -> dict:
-    """Fetch, aggregate and cache one archive's report. Slow by nature."""
+async def _build_report(store, fallback: Path, slot: str,
+                        archive: str | None = None) -> dict:
+    """Fetch, aggregate and cache one archive's report. Slow by nature.
+
+    The archive name matters: it is what applies that archive's own alias
+    fixes. Without it the live MCG dashboard listed GTO beside JTVO, CLUTE
+    beside CLUDE and DRIVE beside DERIVE, one project split in two, because
+    only the committed fallback file had ever been aggregated with them.
+    """
     hits = []
     if store is not None:
         try:
@@ -1535,7 +1553,7 @@ async def _build_report(store, fallback: Path, slot: str) -> dict:
             hits = []
 
     if hits:
-        report = aggregate_assets(hits)
+        report = aggregate_assets(hits, archive=archive)
         shows = _show_of()
         report["episodes_processed"] = len(
             {shows.get(h.get("episode_id"), h.get("episode_id")) for h in hits})
@@ -1548,10 +1566,11 @@ async def _build_report(store, fallback: Path, slot: str) -> dict:
     return report
 
 
-async def _refresh_report(store, fallback: Path, slot: str) -> None:
+async def _refresh_report(store, fallback: Path, slot: str,
+                          archive: str | None = None) -> None:
     """Rebuild behind a served response. Never raises into a request."""
     try:
-        await _build_report(store, fallback, slot)
+        await _build_report(store, fallback, slot, archive)
     except Exception as exc:  # noqa: BLE001
         logger.warning("could not refresh %s (%s); keeping the old one",
                        slot, exc)
@@ -1559,7 +1578,8 @@ async def _refresh_report(store, fallback: Path, slot: str) -> None:
         _refreshing.discard(slot)
 
 
-async def _report_for(store, fallback: Path, slot: str) -> dict:
+async def _report_for(store, fallback: Path, slot: str,
+                      archive: str | None = None) -> dict:
     """One archive's aggregated asset report, served from cache.
 
     Takes the store and its committed fallback rather than reading either
@@ -1584,22 +1604,32 @@ async def _report_for(store, fallback: Path, slot: str) -> dict:
         age = asyncio.get_event_loop().time() - cached[0]
         if age >= _REPORT_TTL and slot not in _refreshing:
             _refreshing.add(slot)
-            asyncio.create_task(_refresh_report(store, fallback, slot))
+            asyncio.create_task(_refresh_report(store, fallback, slot, archive))
         return cached[1]
-    return await _build_report(store, fallback, slot)
+    return await _build_report(store, fallback, slot, archive)
 
 
 async def _assets_report(request: Request) -> dict:
     """The Market Bubble asset report. Shared by the list and detail views."""
     return await _report_for(request.app.state.assets,
-                             _ROOT / "data" / "assets.json", "_assets_cache")
+                             _ROOT / "data" / "assets.json", "_assets_cache",
+                             "podcast")
 
 
 async def _mcg_assets_report(request: Request) -> dict:
     """The same, for the MCG archive."""
     return await _report_for(getattr(request.app.state, "mcg_assets", None),
                              _ROOT / "data" / "mcg_assets.json",
-                             "_mcg_assets_cache")
+                             "_mcg_assets_cache", "mcg")
+
+
+async def _threadguy_assets_report(request: Request) -> dict:
+    """And for ThreadGuy, whose assets sit beside its passages in the
+    default index, under a namespace of their own."""
+    return await _report_for(
+        getattr(request.app.state, "threadguy_assets", None),
+        _ROOT / "data" / "threadguy_assets.json",
+        "_threadguy_assets_cache", "threadguy")
 
 
 @app.get("/v1/assets", dependencies=[Depends(public_rate_limit)])
@@ -1684,6 +1714,42 @@ async def mcg_asset_detail(symbol: str, request: Request) -> dict:
         "moments": row.get("moments", []),
         "market": await _market_for(ticker, row.get("asset_class")),
         "disclaimer": "What was said on MCG Live, with timestamps. "
+                      "Not advice, not a recommendation, not a price forecast.",
+    }
+
+
+@app.get("/v1/threadguy/assets", dependencies=[Depends(public_rate_limit)])
+async def threadguy_assets(request: Request) -> dict:
+    """Assets discussed across the ThreadGuy archive, its own report for
+    the same reason MCG has one: a row's moments link into one show."""
+    _track("threadguy_asset_dashboard_views")
+    return await _threadguy_assets_report(request)
+
+
+@app.get("/v1/threadguy/assets/{symbol}",
+         dependencies=[Depends(public_rate_limit)])
+async def threadguy_asset_detail(symbol: str, request: Request) -> dict:
+    """One asset, as ThreadGuy's streams discussed it."""
+    ticker = market.clean_symbol(symbol)
+    if ticker is None:
+        raise HTTPException(status_code=404, detail="Unknown asset.")
+
+    report = await _threadguy_assets_report(request)
+    row = next((a for a in report.get("assets", [])
+                if str(a.get("symbol", "")).upper() == ticker), None)
+    if row is None:
+        raise HTTPException(status_code=404, detail="Unknown asset.")
+
+    _track("threadguy_asset_detail_views")
+    return {
+        "symbol": row.get("symbol"),
+        "name": row.get("name"),
+        "asset_class": row.get("asset_class"),
+        "mentions": row.get("mentions"),
+        "analysis": row.get("analysis"),
+        "moments": row.get("moments", []),
+        "market": await _market_for(ticker, row.get("asset_class")),
+        "disclaimer": "What was said on ThreadGuy's streams, with timestamps. "
                       "Not advice, not a recommendation, not a price forecast.",
     }
 
@@ -1935,6 +2001,31 @@ def _mcg_summaries() -> dict:
         logger.warning("could not load the MCG summaries: %s", exc)
         _MCG_SUMMARIES_CACHE = {}
     return _MCG_SUMMARIES_CACHE
+THREADGUY_SUMMARIES = _ROOT / "data" / "threadguy_summaries.json.gz"
+_THREADGUY_SUMMARIES_CACHE: dict | None = None
+
+
+def _threadguy_summaries() -> dict:
+    """The same TL;DR and timed topics, for the newest ThreadGuy episodes.
+
+    Written by scripts/summarize_threadguy.py and read once, like MCG's. A
+    missing file is an empty shelf of notes, not a failed page: the
+    episodes still play without them.
+    """
+    global _THREADGUY_SUMMARIES_CACHE
+    if _THREADGUY_SUMMARIES_CACHE is not None:
+        return _THREADGUY_SUMMARIES_CACHE
+    try:
+        with gzip.open(THREADGUY_SUMMARIES, "rt", encoding="utf-8") as fh:
+            _THREADGUY_SUMMARIES_CACHE = json.load(fh)
+    except FileNotFoundError:
+        _THREADGUY_SUMMARIES_CACHE = {}
+    except Exception as exc:                                    # noqa: BLE001
+        logger.warning("could not load the ThreadGuy summaries: %s", exc)
+        _THREADGUY_SUMMARIES_CACHE = {}
+    return _THREADGUY_SUMMARIES_CACHE
+
+
 _MCG_CACHE: list[dict] | None = None
 
 
@@ -2284,6 +2375,18 @@ async def threadguy_episodes() -> list[dict]:
           "format": e.get("format", "")}
          for e in _threadguy_episodes()),
         key=lambda e: e["published_at"], reverse=True)
+
+
+@app.get("/v1/threadguy/summaries", dependencies=[Depends(public_rate_limit)])
+async def threadguy_summaries() -> dict:
+    """The newest episodes condensed, with the second each topic starts."""
+    notes = _threadguy_summaries()
+    # Only what the page draws. The store also keeps the model and title it
+    # was written with, which are for whoever reruns the script.
+    return {"count": len(notes),
+            "summaries": {vid: {"tldr": n.get("tldr", ""),
+                                "topics": n.get("topics", [])}
+                          for vid, n in notes.items()}}
 
 
 @app.post("/v1/threadguy/search",

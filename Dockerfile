@@ -77,6 +77,8 @@ COPY data/mcg_index.json ./data/mcg_index.json
 COPY data/threadguy_index.json ./data/threadguy_index.json
 # 404 episode summaries, gzipped: 873KB of JSON down to a fifth.
 COPY data/mcg_summaries.json.gz ./data/mcg_summaries.json.gz
+# ThreadGuy's, for the newest episodes; the page draws them as notes.
+COPY data/threadguy_summaries.json.gz ./data/threadguy_summaries.json.gz
 # The exact-token index. Without it every lookup returns nothing and
 # search silently loses the names and numbers it was built for.
 COPY data/term_index.json ./data/term_index.json
