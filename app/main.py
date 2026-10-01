@@ -2729,6 +2729,12 @@ async def podcast_clip_status(job_id: str, request: Request) -> dict:
 
 @app.get("/v1/podcast/clip/{job_id}/file")
 async def podcast_clip_file(job_id: str, request: Request):
+    return _clip_file(job_id, request, "market-bubble")
+
+
+def _clip_file(job_id: str, request: Request, name: str):
+    """A finished clip, downloaded under its archive's name. Not a route:
+    the name is fixed by the route that calls it, never by the caller."""
     service = getattr(request.app.state, "clips", None)
     job = service.get(job_id) if service else None
     if job is None or job.status != "done" or not job.path:
@@ -2739,7 +2745,7 @@ async def podcast_clip_file(job_id: str, request: Request):
         raise HTTPException(status_code=410, detail="That clip has expired.")
     _track("clips_downloaded")
     return FileResponse(job.path, media_type="video/mp4",
-                        filename=f"market-bubble-{job.id}.mp4")
+                        filename=f"{name}-{job.id}.mp4")
 
 
 # An MCG episode assembled for the clipper, kept briefly.
@@ -2750,21 +2756,26 @@ async def podcast_clip_file(job_id: str, request: Request):
 # episode, cached because a viewer who clips a moment usually clips the one
 # beside it next.
 _MCG_CLIP_TTL = 900
-_mcg_clip_episodes: dict[str, tuple[float, dict]] = {}
+_mcg_clip_episodes: dict[tuple[str, str], tuple[float, dict]] = {}
 
 
-async def _mcg_clip_episode(request: Request, episode_id: str) -> dict | None:
-    """The episode a clip needs: url, title, and captions with seconds."""
-    row = next((e for e in _mcg_episodes() if e.get("id") == episode_id), None)
+async def _vector_clip_episode(request: Request, archive: str, shelf: list,
+                               namespace: str, episode_id: str) -> dict | None:
+    """The episode a clip needs: url, title, and captions with seconds.
+
+    For an archive that keeps no transcripts on disk, MCG and ThreadGuy:
+    the captions are rebuilt from the episode's own vectors.
+    """
+    row = next((e for e in shelf if e.get("id") == episode_id), None)
     if row is None:
         return None
 
     now = asyncio.get_event_loop().time()
-    hit = _mcg_clip_episodes.get(episode_id)
+    hit = _mcg_clip_episodes.get((archive, episode_id))
     if hit and now - hit[0] < _MCG_CLIP_TTL:
         return hit[1]
 
-    index = getattr(request.app.state, "mcg", None)
+    index = getattr(request.app.state, archive, None)
     if index is None:
         return None
     settings = get_settings()
@@ -2772,11 +2783,11 @@ async def _mcg_clip_episode(request: Request, episode_id: str) -> dict | None:
         # Blocking client on a single-worker server, same reason the render
         # itself is threaded off.
         segments = await asyncio.to_thread(
-            mcg_transcript.rebuild, index.index, settings.mcg_namespace,
+            mcg_transcript.rebuild, index.index, namespace,
             settings.embedding_dimension, episode_id)
     except Exception as exc:  # noqa: BLE001 — a clip is not worth a 500
-        logger.warning("MCG transcript rebuild failed for %s: %s",
-                       episode_id, exc)
+        logger.warning("%s transcript rebuild failed for %s: %s",
+                       archive, episode_id, exc)
         return None
     if not segments:
         return None
@@ -2786,8 +2797,43 @@ async def _mcg_clip_episode(request: Request, episode_id: str) -> dict | None:
                "segments": segments}
     if len(_mcg_clip_episodes) >= 32:
         _mcg_clip_episodes.clear()
-    _mcg_clip_episodes[episode_id] = (now, episode)
+    _mcg_clip_episodes[(archive, episode_id)] = (now, episode)
     return episode
+
+
+async def _mcg_clip_episode(request: Request, episode_id: str) -> dict | None:
+    return await _vector_clip_episode(request, "mcg", _mcg_episodes(),
+                                      get_settings().mcg_namespace, episode_id)
+
+
+def _queue_clip(request: Request, episode: dict | None, start: float,
+                end: float, counter: str) -> dict:
+    """Validate and queue a clip. Shared so every archive refuses the same
+    things in the same words."""
+    service = getattr(request.app.state, "clips", None)
+    if service is None or not ffmpeg_available():
+        raise HTTPException(
+            status_code=503,
+            detail="Clipping is not available on this server.")
+    if episode is None:
+        raise HTTPException(status_code=404, detail="No such episode.")
+    length = float(end) - float(start)
+    if length < MIN_CLIP_SECONDS or length > MAX_CLIP_SECONDS:
+        raise HTTPException(
+            status_code=400,
+            detail=f"A clip has to be between {MIN_CLIP_SECONDS} and "
+                   f"{MAX_CLIP_SECONDS} seconds — that one is "
+                   f"{length:.0f}.")
+    if service.queued_count() >= 4:
+        raise HTTPException(
+            status_code=429,
+            detail="A few clips are already rendering — try again shortly.",
+            headers={"Retry-After": "120"})
+    job = service.submit(episode, float(start), float(end))
+    _track(counter)
+    return {"job_id": job.id, "status": job.status,
+            "seconds": round(length, 1),
+            "queue_position": service.queued_count()}
 
 
 @app.post("/v1/mcg/clip", dependencies=[Depends(clip_rate_limit)])
@@ -2804,30 +2850,9 @@ async def mcg_clip(req: ClipRequest, request: Request) -> dict:
         raise HTTPException(
             status_code=503,
             detail="Clipping is not available on this server.")
-
     episode = await _mcg_clip_episode(request, req.episode_id)
-    if episode is None:
-        raise HTTPException(status_code=404, detail="No such episode.")
-
-    start, end = float(req.start), float(req.end)
-    length = end - start
-    if length < MIN_CLIP_SECONDS or length > MAX_CLIP_SECONDS:
-        raise HTTPException(
-            status_code=400,
-            detail=f"A clip has to be between {MIN_CLIP_SECONDS} and "
-                   f"{MAX_CLIP_SECONDS} seconds — that one is "
-                   f"{length:.0f}.")
-    if service.queued_count() >= 4:
-        raise HTTPException(
-            status_code=429,
-            detail="A few clips are already rendering — try again shortly.",
-            headers={"Retry-After": "120"})
-
-    job = service.submit(episode, start, end)
-    _track("mcg_clips_requested")
-    return {"job_id": job.id, "status": job.status,
-            "seconds": round(length, 1),
-            "queue_position": service.queued_count()}
+    return _queue_clip(request, episode, req.start, req.end,
+                       "mcg_clips_requested")
 
 
 @app.get("/v1/mcg/clip/{job_id}")
@@ -2842,6 +2867,36 @@ async def mcg_clip_status(job_id: str, request: Request) -> dict:
 
 @app.get("/v1/mcg/clip/{job_id}/file")
 async def mcg_clip_file(job_id: str, request: Request):
-    return await podcast_clip_file(job_id, request)
+    return _clip_file(job_id, request, "mcg-live")
+
+
+@app.post("/v1/threadguy/clip", dependencies=[Depends(clip_rate_limit)])
+async def threadguy_clip(req: ClipRequest, request: Request) -> dict:
+    """Queue a clip from the ThreadGuy archive. Same queue, same renderer
+    as MCG, captions rebuilt from the vectors the same way. YouTube, so it
+    goes through CLIP_PROXY like MCG does."""
+    service = getattr(request.app.state, "clips", None)
+    if service is None or not ffmpeg_available():
+        raise HTTPException(
+            status_code=503,
+            detail="Clipping is not available on this server.")
+    episode = await _vector_clip_episode(
+        request, "threadguy", _threadguy_episodes(),
+        get_settings().threadguy_namespace, req.episode_id)
+    return _queue_clip(request, episode, req.start, req.end,
+                       "threadguy_clips_requested")
+
+
+@app.get("/v1/threadguy/clip/{job_id}")
+async def threadguy_clip_status(job_id: str, request: Request) -> dict:
+    body = await podcast_clip_status(job_id, request)
+    if body.get("url"):
+        body["url"] = f"/v1/threadguy/clip/{job_id}/file"
+    return body
+
+
+@app.get("/v1/threadguy/clip/{job_id}/file")
+async def threadguy_clip_file(job_id: str, request: Request):
+    return _clip_file(job_id, request, "threadguy")
 
 
