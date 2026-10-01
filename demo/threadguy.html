@@ -220,6 +220,35 @@
   .hit .tc{color:var(--sky);cursor:pointer;border-bottom:1px dotted currentColor}
   .hit .tc:hover{background:rgba(106,169,255,.1)}
   .hit p{margin:9px 0 0;color:var(--ink-2);font-size:14.5px;overflow-wrap:anywhere}
+  /* The clip picker, the same control as on the Market Bubble and MCG
+     pages: same renderer, same queue, only the archive differs. */
+  .clipbtn{margin-left:auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--ink-3);background:transparent;cursor:pointer;
+    border:1px solid var(--edge-2);border-radius:99px;padding:3px 10px;
+    transition:color var(--quick) var(--ease),border-color var(--quick) var(--ease)}
+  .clipbtn:hover{color:var(--sky);border-color:var(--sky)}
+  .clipbtn:disabled{opacity:.5;cursor:default}
+  .clipbox:empty{display:none}
+  .clipbox{margin-top:12px;padding:14px 16px;border:1px solid var(--edge);border-radius:3px;
+    background:rgba(255,255,255,.02)}
+  .clip-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+  .clip-row label{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--ink-3);min-width:56px}
+  .clip-row input[type=range]{flex:1;min-width:0;accent-color:var(--sky)}
+  .c-lab{font-family:var(--mono);font-size:12px;color:var(--ink-2);min-width:190px;
+    text-align:right;font-variant-numeric:tabular-nums}
+  .c-hint{font-size:12.5px;color:var(--ink-3);margin:0 0 10px}
+  .c-hint:empty{display:none}
+  .clip-go{display:flex;align-items:center;gap:12px}
+  .clip-go .clipbtn{margin-left:0}
+  .c-status{font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+  .c-out:not(:empty){margin-top:12px}
+  .c-out video{width:100%;border-radius:3px;display:block;background:#000}
+  .c-dl{display:inline-block;margin-top:10px;text-decoration:none}
+  @media(max-width:620px){
+    .clip-row{flex-wrap:wrap}
+    .c-lab{min-width:0;text-align:left;width:100%}
+  }
 
   /* ── the shelf ────────────────────────────────────────────────── */
   .sect{margin:64px 0 0;border-top:1px solid var(--edge);padding-top:22px}
@@ -600,7 +629,9 @@
     var el = document.createElement("div");
     el.className = "hit";
     el.innerHTML = '<div class="row"><span class="ttl"></span>'
-                 + '<span class="tc"></span><span class="dt"></span></div><p></p>';
+                 + '<span class="tc"></span><span class="dt"></span>'
+                 + '<button type="button" class="clipbtn">make clip</button></div>'
+                 + '<p></p><div class="clipbox"></div>';
     var sec = Number(h.start_seconds) || 0;
     el.querySelector(".ttl").textContent = h.title || "";
     var tc = el.querySelector(".tc");
@@ -616,6 +647,10 @@
         if (vid) { play(el, h, vid, sec); reveal(el); }
         else if (link) window.open(link, "_blank", "noopener");
       });
+    var cb = el.querySelector(".clipbtn");
+    cb.setAttribute("aria-label", "Make a clip from " + tc.textContent
+                    + (h.title ? ", " + h.title : ""));
+    cb.onclick = function(){ clipPicker(h, el, cb); };
     cards.push({hit: h, el: el});
     return el;
   }
@@ -631,6 +666,106 @@
       var listed = list.some(function(h){ return cardFor(h) === el; });
       if (!listed && el !== playing) el.remove();
     });
+  }
+
+  // ---- clips ---------------------------------------------------------
+  // The picker from the Market Bubble and MCG pages: same defaults, same
+  // wait estimate, same queue on the server. Captions come back from the
+  // episode's own vectors, because this archive keeps no transcripts.
+  var CLIP_MIN = 5, CLIP_MAX = 120, RENDER_RATE = 4.5;
+
+  function clipPicker(h, card, btn){
+    var box = card.querySelector(".clipbox");
+    if (box.firstChild){ box.innerHTML = ""; btn.textContent = "make clip"; return; }
+    document.querySelectorAll(".hit .clipbox").forEach(function(o){ o.innerHTML = ""; });
+    document.querySelectorAll(".hit .row .clipbtn").forEach(
+      function(o){ o.textContent = "make clip"; });
+    btn.textContent = "close";
+
+    // Three seconds of run-up by default, so it does not open mid-word.
+    box.innerHTML =
+      '<div class="clip-row"><label>begin</label>'
+      + '<input type="range" class="c-start" min="-30" max="15" step="1" value="-3"'
+      + ' aria-label="Seconds before or after the passage">'
+      + '<span class="c-lab c-slab"></span></div>'
+      + '<div class="clip-row"><label>length</label>'
+      + '<input type="range" class="c-len" min="' + CLIP_MIN + '" max="' + CLIP_MAX
+      + '" step="1" value="30" aria-label="Clip length in seconds">'
+      + '<span class="c-lab c-llab"></span></div>'
+      + '<div class="c-hint"></div>'
+      + '<div class="clip-go"><button type="button" class="clipbtn c-render">render</button>'
+      + '<span class="c-status" role="status"></span></div>'
+      + '<div class="c-out"></div>';
+
+    var st0 = box.querySelector(".c-start"), len = box.querySelector(".c-len"),
+        sl = box.querySelector(".c-slab"), ll = box.querySelector(".c-llab"),
+        go = box.querySelector(".c-render"), st = box.querySelector(".c-status"),
+        hint = box.querySelector(".c-hint"), out = box.querySelector(".c-out");
+
+    function begin(){
+      return Math.max(0, Math.floor(Number(h.start_seconds) || 0) + parseInt(st0.value, 10));
+    }
+    function label(){
+      var n = parseInt(len.value, 10), off = parseInt(st0.value, 10);
+      var rel = off === 0 ? "at the passage"
+              : off < 0 ? (-off + "s before") : (off + "s after");
+      sl.textContent = rel + " \u00b7 " + stamp(begin());
+      ll.textContent = n + "s \u00b7 ends " + stamp(begin() + n);
+      var mins = n * RENDER_RATE / 60;
+      hint.textContent = n > 30 ? (mins < 1.5 ? "about a minute"
+                                  : "about " + Math.ceil(mins) + " minutes") + " to render" : "";
+    }
+    st0.addEventListener("input", label);
+    len.addEventListener("input", label);
+    label();
+
+    go.addEventListener("click", function(){
+      go.disabled = true; out.innerHTML = ""; st.textContent = "queued\u2026";
+      fetch("/v1/threadguy/clip", {
+        method: "POST", headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({episode_id: h.episode_id, start: begin(),
+                              end: begin() + parseInt(len.value, 10)})
+      }).then(function(r){
+        return r.json().catch(function(){ return {}; }).then(function(d){
+          if (!r.ok) throw new Error(typeof d.detail === "string" ? d.detail
+                                     : "That clip could not be started.");
+          return d;
+        });
+      }).then(function(d){ poll(d.job_id); })
+        .catch(function(e){ st.textContent = e.message; go.disabled = false; });
+    });
+
+    function poll(id){
+      var began = Date.now();
+      (function tick(){
+        if (!box.isConnected) return;          // card closed or replaced
+        fetch("/v1/threadguy/clip/" + encodeURIComponent(id))
+          .then(function(r){ return r.json(); })
+          .then(function(d){
+            var secs = Math.round((Date.now() - began) / 1000);
+            if (d.status === "done" && d.url){
+              st.textContent = "done in " + secs + "s";
+              var v = document.createElement("video");
+              v.controls = true; v.preload = "metadata"; v.src = d.url;
+              var a = document.createElement("a");
+              a.className = "clipbtn c-dl"; a.href = d.url; a.textContent = "download";
+              a.setAttribute("download", "");
+              out.innerHTML = ""; out.appendChild(v); out.appendChild(a);
+              go.disabled = false; return;
+            }
+            if (d.status === "failed"){
+              st.textContent = (typeof d.error === "string" && d.error)
+                               || "That clip could not be made.";
+              go.disabled = false; return;
+            }
+            st.textContent = (d.status === "working" ? "rendering" : "queued")
+                             + "\u2026 " + secs + "s";
+            setTimeout(tick, 2000);
+          })
+          .catch(function(){ st.textContent = "Lost track of that render. Try again.";
+                             go.disabled = false; });
+      })();
+    }
   }
 
   function showHits(list){
