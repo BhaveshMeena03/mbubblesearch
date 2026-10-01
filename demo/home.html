@@ -633,8 +633,8 @@
     if (under > 0) window.scrollBy({top: under, behavior: "smooth"});
   }
 
-  // The answer is typed out by cite.js, with its citations as links.
-  var typing = null;
+  // Pending redraw of an answer that is still arriving.
+  var tick = null;
 
 
   var busy = false;
@@ -648,11 +648,15 @@
     504: "That one took too long to come back. Try again."
   };
 
+  // Streams: what every archive scored arrives first, then the winner's
+  // passages, then its answer as it is written, times already playable.
+  // It used to wait for the whole answer, about five seconds of
+  // "searching", and searched the winning archive twice to get it.
   function ask(question){
     if (busy || !question) return;
-    busy = true; $("go").disabled = true; $("go").textContent = "\u2026";
+    busy = true; $("go").disabled = true; $("go").textContent = "…";
     $("out").style.display = "block";
-    if (typing) { clearInterval(typing); typing = null; }
+    if (tick) { clearTimeout(tick); tick = null; }
     $("verdict").textContent = "searching all five archives";
     $("out").classList.toggle("instant", document.hidden);
     void $("out").offsetHeight;
@@ -666,37 +670,67 @@
     stopPlaying();
     CHANS.forEach(function(c){
       $("ch-"+c.k).classList.remove("win");
-      $("ch-"+c.k).querySelector(".sc").textContent = "\u00b7\u00b7\u00b7";
+      $("ch-"+c.k).querySelector(".sc").textContent = "···";
       $("ch-"+c.k).querySelector(".fill").style.width = "0%";
     });
     $("chans").classList.remove("judged");
     $("chans").classList.add("live");
 
-    // Four archives and then a written answer. Without a ceiling the
+    // Five archives and then a written answer. Without a ceiling the
     // button sits on an ellipsis for as long as a stalled model call takes.
     var stop = new AbortController();
     var bell = setTimeout(function(){ stop.abort(); }, 45000);
+    var hits = [], said = "", drew = false;
 
     function trouble(msg){
       $("out").classList.remove("working");
-      if (typing) { clearInterval(typing); typing = null; }
+      if (tick) { clearTimeout(tick); tick = null; }
       $("verdict").textContent = msg;
       $("answer").textContent = ""; $("hits").innerHTML = "";
       $("out").classList.add("shown");
       idle();
     }
+    function draw(){ tick = null; Cite.paint($("answer"), said, hits, pickCite); }
+    function plain(){
+      // The stream could not start: ask the endpoint that answers whole.
+      return fetch("/v1/search", {method:"POST", signal:stop.signal,
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({query:question})})
+        .then(function(r){
+          if (!r.ok) { trouble(TROUBLE[r.status] || "Something went wrong. Try again."); return; }
+          return r.json().then(render);
+        });
+    }
 
-    fetch("/v1/search", {method:"POST", signal:stop.signal,
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({query:question})})
-      .then(function(r){
-        if (!r.ok) {
-          trouble(TROUBLE[r.status] || "Something went wrong. Try again.");
-          return null;
+    Cite.stream("/v1/search/stream", {query:question}, stop.signal,
+      function(ev, p){
+        if (ev === "rooms") {
+          rooms(p || {});
+          drew = true;
+        } else if (ev === "hits") {
+          hits = Array.isArray(p) ? p : [];
+          showHits(hits);
+        } else if (ev === "refusal") {
+          said = (p && p.text) || "";
+        } else if (ev === "error") {
+          throw new Error("stream failed");
+        } else if (ev === "message" && p && typeof p.text === "string") {
+          if (!said) $("out").classList.remove("working");
+          said += p.text;
+          if (!tick) tick = setTimeout(draw, 40);
         }
-        return r.json();
       })
-      .then(function(d){ if (d) render(d); })
+      .then(function(){ finish(hits, said, false); })
+      .catch(function(err){
+        if (err && err.name === "AbortError") {
+          return trouble("That took too long to come back. Try again.");
+        }
+        if (err && err.status) {
+          return trouble(TROUBLE[err.status] || "Something went wrong. Try again.");
+        }
+        if (drew && said) return finish(hits, said, true);
+        return plain();
+      })
       .catch(function(err){
         trouble(err && err.name === "AbortError"
                 ? "That took too long to come back. Try again."
@@ -708,7 +742,18 @@
       });
   }
 
-  function render(d){
+  // A cited moment plays right under the answer, full width, as the
+  // Market Bubble page does. X broadcasts cannot be embedded, so those
+  // open at the cited second in a new tab.
+  function pickCite(t){
+    var vid = ytId(t.hit.deep_link || "");
+    if (!vid) { window.open(t.href, "_blank", "noopener"); return; }
+    play($("citeplay"), vid, t.sec);
+    reveal($("citeplay"));
+  }
+
+  // Who scored what, and which archive is answering.
+  function rooms(d){
     var room = d.archive;
     meters(d.considered, room);
     $("verdict").innerHTML = "";
@@ -721,57 +766,77 @@
       b.style.color = css(VAR[room.key]) || "";
       $("verdict").appendChild(b);
     }
-    var hits = Array.isArray(d.hits) ? d.hits : [];
-    var cites = Cite.find(d.answer || "", hits);
-    // The passages the answer cites come first, so the card a citation
-    // plays in is always on the page.
-    var shown = Cite.order(hits, cites);
-    shown = shown.slice(0, Math.max(6, Cite.order([], cites).length));
-    if (typing) { clearInterval(typing); typing = null; }
-    // A cited moment plays right under the answer, full width, as the
-    // Market Bubble page does. X broadcasts cannot be embedded, so those
-    // open at the cited second in a new tab.
-    typing = Cite.write($("answer"), cites, function(t){
-      var vid = ytId(t.hit.deep_link || "");
-      if (!vid) { window.open(t.href, "_blank", "noopener"); return; }
-      play($("citeplay"), vid, t.sec);
-      reveal($("citeplay"));
-    }, document.hidden);
+  }
 
-    shown.forEach(function(h){
-      var el = document.createElement("div");
-      el.className = "hit";
-      el.innerHTML = '<div class="row"><span class="ttl"></span>'
-                   + '<span class="tc"></span><span class="who"></span><span class="dt"></span></div><p></p>';
-      el.querySelector(".ttl").textContent = h.title || "";
-      var sec = Number(h.start_seconds) || 0;
-      var tc = el.querySelector(".tc");
-      tc.textContent = h.timestamp || stamp(sec);
-      el.querySelector(".who").textContent =
-        (h.speakers && h.speakers.length) ? h.speakers.join(", ") : "";
-      el.querySelector(".dt").textContent = h.published_at || "";
-      el.querySelector("p").textContent =
-        (h.text||"").split("\n").slice(0,3).join(" ").slice(0,250);
-      var link = h.deep_link || "";
-      var vid = ytId(link);
-      // A timestamp is the only control on a result, so it has to be
-      // reachable without a mouse. A bare span with an onclick is not.
-      tc.setAttribute("role", "button");
-      tc.setAttribute("tabindex", "0");
-      tc.setAttribute("aria-label",
-        (vid ? "Play from " : "Open at ") + tc.textContent
-        + (h.title ? ", " + h.title : ""));
-      function open_(){
-        if (vid) play(el, vid, sec);
-        else if (link) window.open(link, "_blank", "noopener");
-      }
-      tc.onclick = open_;
-      tc.onkeydown = function(e){
-        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open_(); }
-      };
-      el.style.animationDelay = (0.05 * $("hits").children.length) + "s";
-      $("hits").appendChild(el);
+  // One card per passage, kept so the final order can move them without
+  // rebuilding one that is playing.
+  var cards = [];
+  function cardFor(h){
+    for (var i = 0; i < cards.length; i++) if (cards[i].hit === h) return cards[i].el;
+    var el = document.createElement("div");
+    el.className = "hit";
+    el.innerHTML = '<div class="row"><span class="ttl"></span>'
+                 + '<span class="tc"></span><span class="who"></span><span class="dt"></span></div><p></p>';
+    el.querySelector(".ttl").textContent = h.title || "";
+    var sec = Number(h.start_seconds) || 0;
+    var tc = el.querySelector(".tc");
+    tc.textContent = h.timestamp || stamp(sec);
+    el.querySelector(".who").textContent =
+      (h.speakers && h.speakers.length) ? h.speakers.join(", ") : "";
+    el.querySelector(".dt").textContent = h.published_at || "";
+    el.querySelector("p").textContent =
+      (h.text||"").split("\n").slice(0,3).join(" ").slice(0,250);
+    var link = h.deep_link || "";
+    var vid = ytId(link);
+    // A timestamp is the only control on a result, so it has to be
+    // reachable without a mouse. A bare span with an onclick is not.
+    tc.setAttribute("role", "button");
+    tc.setAttribute("tabindex", "0");
+    tc.setAttribute("aria-label",
+      (vid ? "Play from " : "Open at ") + tc.textContent
+      + (h.title ? ", " + h.title : ""));
+    function open_(){
+      if (vid) play(el, vid, sec);
+      else if (link) window.open(link, "_blank", "noopener");
+    }
+    tc.onclick = open_;
+    tc.onkeydown = function(e){
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open_(); }
+    };
+    cards.push({hit: h, el: el});
+    return el;
+  }
+  function lay(list){
+    var host = $("hits");
+    list.forEach(function(h, n){
+      var el = cardFor(h);
+      if (!el.parentNode) el.style.animationDelay = (0.05 * n) + "s";
+      host.appendChild(el);
     });
+    // Anything no longer listed goes, unless it is the one playing.
+    Array.prototype.slice.call(host.children).forEach(function(el){
+      var listed = list.some(function(h){ return cardFor(h) === el; });
+      if (!listed && el !== playing) el.remove();
+    });
+  }
+  function showHits(list){
+    cards = [];
+    $("hits").innerHTML = "";
+    lay(list.slice(0, 6));
+  }
+
+  function finish(list, text, cut){
+    if (tick) { clearTimeout(tick); tick = null; }
+    var cites = Cite.paint($("answer"), text, list, pickCite, true);
+    // The passages the answer cites come first, so the card a citation
+    // points at is always on the page.
+    var cited = Cite.order([], cites).length;
+    lay(Cite.order(list, cites).slice(0, Math.max(6, cited)));
+    if (cut) {
+      var note = document.createElement("span");
+      note.textContent = " · the answer was cut short";
+      $("verdict").appendChild(note);
+    }
     // Force layout so the transition has a start, then rise. This used
     // to wait on requestAnimationFrame, which a browser does not run in
     // a background tab: switching away mid-search meant coming back to
@@ -779,6 +844,14 @@
     void $("out").offsetHeight;
     $("out").classList.add("shown");
     $("out").classList.remove("working");
+  }
+
+  // The whole answer at once, from the plain endpoint.
+  function render(d){
+    rooms(d);
+    var hits = Array.isArray(d.hits) ? d.hits : [];
+    showHits(hits);
+    finish(hits, d.answer || "", false);
   }
 
 

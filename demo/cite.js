@@ -156,19 +156,30 @@
       .replace(/(^|\n)[ \t]*[-*\u2022][ \t]+/g, "$1\u2022 ");
   }
 
+  // A "**" between two letters is not formatting. Episode titles bleep
+  // swearing that way ("Korean Stocks Are F**KED"), the model quotes the
+  // title, and read as a marker it turned the rest of the answer bold.
+  // Swapped for a same-length placeholder while markers are counted, so
+  // positions still line up, and put back after.
+  var IN_WORD = /([A-Za-z0-9])\*\*(?=[A-Za-z0-9])/g, HELD = "\u0001\u0001";
+  function shield(s) { return s.replace(IN_WORD, "$1" + HELD); }
+  function unshield(s) { return s.split(HELD).join("**"); }
+
   // "**...**" -> {text, bold: true}. Across tokens, because a bold run
   // can have a citation inside it. An unpaired marker is just dropped.
   function emphasis(tokens) {
     var marks = 0;
     tokens.forEach(function (t) {
-      if (!t.stamp) marks += t.text.split("**").length - 1;
+      if (!t.stamp) marks += shield(t.text).split("**").length - 1;
     });
     var out = [], bold = false;
     tokens.forEach(function (t) {
       if (t.stamp) { out.push(t); return; }
-      if (marks % 2) { out.push({text: t.text.split("**").join("")}); return; }
-      t.text.split("**").forEach(function (part, i) {
+      var text = shield(t.text);
+      if (marks % 2) { out.push({text: unshield(text.split("**").join(""))}); return; }
+      text.split("**").forEach(function (part, i) {
         if (i > 0) bold = !bold;
+        part = unshield(part);
         if (part) out.push(bold ? {text: part, bold: true} : {text: part});
       });
     });
@@ -308,8 +319,79 @@
     return timer;
   }
 
-  var api = {find: find, order: order, write: write, ytId: ytId,
-             seconds: seconds, linkAt: linkAt};
+  // Draws an answer. While it is still arriving (`done` false), an
+  // opening "**" whose closing one has not come yet would make every bold
+  // marker in the answer look unpaired, so what follows it is drawn bold
+  // until the pair completes. A finished answer gets no such allowance:
+  // an unpaired marker there is dropped. Returns the tokens drawn.
+  function paint(el, text, hits, pick, done) {
+    var tokens = tokensFor(text, hits, done);
+    write(el, tokens, pick, true);
+    return tokens;
+  }
+
+  // POSTs `body` and calls on(event, payload) for each server-sent event.
+  // Resolves when the stream ends. Rejects with .status on a refused
+  // request, so the page can say "too many questions" rather than
+  // "could not reach the archive", and with no status when the browser
+  // cannot read a stream at all, so the page can fall back to the plain
+  // endpoint. A throw inside on() ends the stream the same way.
+  function stream(url, body, signal, on) {
+    return fetch(url, {method: "POST", signal: signal,
+                       headers: {"Content-Type": "application/json"},
+                       body: JSON.stringify(body)})
+      .then(function (res) {
+        if (!res.ok) {
+          var refused = new Error("status " + res.status);
+          refused.status = res.status;
+          throw refused;
+        }
+        if (!res.body || !res.body.getReader) throw new Error("no stream");
+        var reader = res.body.getReader(), dec = new TextDecoder(), buf = "";
+        function frame(chunk) {
+          var event = "message", data = "";
+          chunk.split("\n").forEach(function (line) {
+            if (line.indexOf("event:") === 0) event = line.slice(6).trim();
+            else if (line.indexOf("data:") === 0) data += line.slice(5).trim();
+          });
+          var payload = null;
+          if (data) { try { payload = JSON.parse(data); } catch (e) { return; } }
+          on(event, payload);
+        }
+        function pump() {
+          return reader.read().then(function (step) {
+            if (step.done) {
+              if (buf.trim()) frame(buf);
+              return;
+            }
+            buf += dec.decode(step.value, {stream: true});
+            var parts = buf.split("\n\n");
+            buf = parts.pop();
+            parts.forEach(frame);
+            return pump();
+          });
+        }
+        return pump();
+      });
+  }
+
+  // What paint() draws, without a page to draw it on.
+  function tokensFor(text, hits, done) {
+    text = String(text || "");
+    var tail = "", held = shield(text);
+    if (!done && (held.split("**").length - 1) % 2) {
+      var at = held.lastIndexOf("**");
+      tail = unshield(held.slice(at + 2));
+      text = unshield(held.slice(0, at));
+    }
+    var tokens = find(text, hits);
+    if (tail) tokens.push({text: tail, bold: true});
+    return tokens;
+  }
+
+  var api = {find: find, order: order, write: write, paint: paint,
+             tokensFor: tokensFor,
+             stream: stream, ytId: ytId, seconds: seconds, linkAt: linkAt};
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.Cite = api;
 })(typeof window !== "undefined" ? window : this);

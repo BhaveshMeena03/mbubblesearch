@@ -832,6 +832,29 @@ _ROOMS = [("podcast", "Market Bubble", "/"),
           ("threadguy", "ThreadGuy", "/threadguy")]
 
 
+async def _probe_rooms(live: list, query: str, top_k) -> list[dict]:
+    """Every archive searched at once, best score first."""
+    async def probe(entry):
+        name, label, href, idx = entry
+        try:
+            hits = await idx.retrieve(query, top_k=top_k)
+        except Exception:                                     # noqa: BLE001
+            # One archive being unreachable must not take the door down.
+            return {"key": name, "label": label, "href": href,
+                    "score": 0.0, "hits": []}
+        top = max((getattr(h, "score", 0.0) or 0.0) for h in hits) if hits else 0.0
+        return {"key": name, "label": label, "href": href,
+                "score": top, "hits": hits}
+
+    probes = await asyncio.gather(*(probe(e) for e in live))
+    return sorted(probes, key=lambda p: -p["score"])
+
+
+def _considered(probes: list[dict]) -> list[dict]:
+    return [{"key": p["key"], "label": p["label"], "href": p["href"],
+             "score": round(p["score"], 4)} for p in probes]
+
+
 @app.post("/v1/search",
           dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
                         Depends(daily_budget), Depends(per_client_daily)])
@@ -854,26 +877,12 @@ async def search_everything(
         per_client_daily.refund(request)
         return cached
 
-    async def probe(entry):
-        name, label, href, idx = entry
-        try:
-            hits = await idx.retrieve(body.query, top_k=body.top_k)
-        except Exception:                                     # noqa: BLE001
-            # One archive being unreachable must not take the door down.
-            return {"key": name, "label": label, "href": href,
-                    "score": 0.0, "hits": []}
-        top = max((getattr(h, "score", 0.0) or 0.0) for h in hits) if hits else 0.0
-        return {"key": name, "label": label, "href": href,
-                "score": top, "hits": hits}
-
-    probes = await asyncio.gather(*(probe(e) for e in live))
-    probes.sort(key=lambda p: -p["score"])
+    probes = await _probe_rooms(live, body.query, body.top_k)
     best = probes[0]
     if not best["hits"]:
         return {"question": body.query, "archive": None,
-                "answer": PODCAST_REFUSAL, "hits": [], "considered": [
-                    {"key": p["key"], "label": p["label"], "href": p["href"],
-                     "score": round(p["score"], 4)} for p in probes]}
+                "answer": PODCAST_REFUSAL, "hits": [],
+                "considered": _considered(probes)}
 
     index = dict((k, i) for k, _, _, i in live)[best["key"]]
     result = await index.search(body.query, top_k=body.top_k)
@@ -884,15 +893,101 @@ async def search_everything(
         "answer": result.answer,
         "hits": [h.model_dump() if hasattr(h, "model_dump") else dict(h)
                  for h in (result.hits or [])],
-        # What the other three scored, so the page can offer a second
-        # opinion when the winner was close rather than pretending the
-        # routing was obvious.
-        "considered": [{"key": p["key"], "label": p["label"],
-                        "href": p["href"], "score": round(p["score"], 4)}
-                       for p in probes],
+        # What the others scored, so the page can offer a second opinion
+        # when the winner was close rather than pretending the routing
+        # was obvious.
+        "considered": _considered(probes),
     }
     answers.put(key, payload)
     return payload
+
+
+def _frame(data, event: str | None = None) -> str:
+    """One server-sent event: an optional name and a JSON payload."""
+    return (f"event: {event}\n" if event else "") + f"data: {json.dumps(data)}\n\n"
+
+
+@app.post("/v1/search/stream",
+          dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
+                        Depends(daily_budget), Depends(per_client_daily)])
+async def search_everything_stream(
+    body: PodcastSearchRequest,
+    request: Request,
+    answers: AnswerCache = Depends(get_answers),
+) -> StreamingResponse:
+    """The front door, streamed: what every archive scored, then the
+    winner's passages, then its answer as it is written.
+
+    The page used to wait for the whole answer before showing a word, so
+    a question sat on "searching" for five seconds. And the winner was
+    searched twice, once to score it and again inside search(); its
+    passages from the first search are what the answer is written from.
+    """
+    _track("front_door_searches", q=body.query[:120], stream=True)
+    live = [(key, label, href, idx)
+            for key, label, href in _ROOMS
+            if (idx := getattr(request.app.state, key, None)) is not None]
+    if not live:
+        raise HTTPException(status_code=503, detail="No archive is loaded.")
+    key = make_key(body.query, surface="front-door-stream", top_k=body.top_k)
+    cached = answers.get(key) if answers.enabled else None
+
+    async def event_source():
+        if cached:
+            yield _frame({"archive": cached["archive"],
+                        "considered": cached["considered"]}, "rooms")
+            yield _frame(cached["hits"], "hits")
+            yield _frame({"text": cached["answer"]})
+            yield _frame({}, "done")
+            return
+        try:
+            probes = await _probe_rooms(live, body.query, body.top_k)
+        except asyncio.CancelledError:
+            raise
+        except Exception as exc:                              # noqa: BLE001
+            logger.exception("front door probe failed: %s", exc)
+            yield _frame({"detail": "stream failed"}, "error")
+            return
+        considered = _considered(probes)
+        best = probes[0]
+        if not best["hits"]:
+            yield _frame({"archive": None, "considered": considered}, "rooms")
+            yield _frame({"text": PODCAST_REFUSAL})
+            yield _frame({}, "done")
+            return
+        archive = {"key": best["key"], "label": best["label"],
+                   "href": best["href"]}
+        yield _frame({"archive": archive, "considered": considered}, "rooms")
+        hits = best["hits"]
+        enriched = [h.model_dump() if hasattr(h, "model_dump") else dict(h)
+                    for h in hits]
+        yield _frame(enriched, "hits")
+        index = dict((k, i) for k, _, _, i in live)[best["key"]]
+        whole = []
+        try:
+            async for delta in index.answer_stream(body.query, hits):
+                if delta == "\x00REFUSAL\x00":
+                    yield _frame({"text": PODCAST_REFUSAL}, "refusal")
+                    return
+                whole.append(delta)
+                yield _frame({"text": delta})
+            # Complete answers only: a stream that died halfway would be
+            # replayed instantly, forever, to everyone who asks it again.
+            if whole and answers.enabled:
+                answers.put(key, {"archive": archive, "considered": considered,
+                                  "hits": enriched, "answer": "".join(whole)})
+            yield _frame({}, "done")
+        except asyncio.CancelledError:
+            raise
+        except Exception as exc:                              # noqa: BLE001
+            logger.exception("front door stream failure: %s", exc)
+            yield _frame({"detail": "stream failed"}, "error")
+
+    return StreamingResponse(
+        event_source(),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+    )
 
 
 # The mint, and the one number Jupiter's verification wants to be able to
@@ -2229,6 +2324,25 @@ async def threadguy_search(
     return _threadguy_payload(body.query, result)
 
 
+@app.post("/v1/threadguy/search/stream",
+          dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
+                        Depends(daily_budget), Depends(per_client_daily)])
+async def threadguy_search_stream(
+    body: PodcastSearchRequest, request: Request,
+    answers: AnswerCache = Depends(get_answers),
+) -> StreamingResponse:
+    """SSE variant of the ThreadGuy search: passages first, answer after."""
+    _track("threadguy_searches", q=body.query[:120], stream=True)
+    index = getattr(request.app.state, "threadguy", None)
+    if index is None:
+        raise HTTPException(status_code=503, detail="The archive is not loaded.")
+    shelf = _threadguy_episodes()
+    lengths = {e.get("id"): int(float(e.get("seconds") or 0)) for e in shelf}
+    urls = {e.get("id"): e.get("url", "") for e in shelf}
+    return _archive_stream(index, body.query, body.top_k, lengths, answers,
+                           surface="threadguy-stream", urls=urls)
+
+
 def _threadguy_payload(question: str, result) -> dict:
     """The page's shape. The recording's own URL travels with each hit so
     the page can build a link to the second the answer names rather than
@@ -2360,7 +2474,8 @@ def _mcg_payload(question: str, result) -> dict:
 # question on these two pages pays again; the blocking endpoints still
 # serve the cache, and the fallback path below still reaches them.
 def _archive_stream(index, query: str, top_k, lengths: dict,
-                    answers=None, surface: str = "archive"):
+                    answers=None, surface: str = "archive",
+                    urls: dict | None = None):
     """Passages first, then the answer — replayed from cache on a repeat.
 
     The non-streaming endpoints have been cached since the cache existed;
@@ -2385,6 +2500,8 @@ def _archive_stream(index, query: str, top_k, lengths: dict,
         for hit in (hits or []):
             data = hit.model_dump() if hasattr(hit, "model_dump") else dict(hit)
             data["episode_seconds"] = lengths.get(data.get("episode_id"), 0)
+            if urls is not None:
+                data["url"] = urls.get(data.get("episode_id"), "")
             enriched.append(data)
         yield f"event: hits\ndata: {json.dumps(enriched)}\n\n"
         whole = []

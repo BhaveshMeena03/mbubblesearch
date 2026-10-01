@@ -138,8 +138,8 @@ def test_hits_tell_the_page_where_each_passage_ends():
 def test_both_answer_pages_load_the_resolver_and_use_it(page):
     html = (ROOT / "demo" / page).read_text()
     assert '<script src="/demo/cite.js"></script>' in html
-    assert html.index("/demo/cite.js") < html.index("Cite.find(")
-    assert "Cite.write(" in html and "Cite.order(" in html
+    assert html.index("/demo/cite.js") < html.index("Cite.paint(")
+    assert "Cite.stream(" in html and "Cite.order(" in html
     assert "function typeOut" not in html
 
 
@@ -161,8 +161,8 @@ def test_a_cited_moment_plays_full_width_right_under_the_answer(page):
     html = (ROOT / "demo" / page).read_text()
     body = html.split("<body")[1]
     assert body.index('id="answer"') < body.index('id="citeplay"') < body.index('id="hits"')
-    write = html.split("Cite.write(")[1].split("}, document.hidden);")[0]
-    assert "citeplay" in write or "playCite(" in write
+    assert ("playCite(t.hit, t.sec)" in html
+            or ('function pickCite(t){' in html and 'play($("citeplay")' in html))
 
 
 @needs_node
@@ -237,3 +237,29 @@ def test_the_ticker_player_is_under_the_one_video_rule():
     stop = home.split("function stopPlaying(keepTicker){")[1].split("\n  }\n")[0]
     assert 'getElementById("stage")' in stop and "!keepTicker" in stop
     assert "stopPlaying(true);" in home
+
+
+def drawn(answer, done):
+    script = (
+        "const C=require(process.argv[1]);"
+        "const [a,d]=JSON.parse(require('fs').readFileSync(0,'utf8'));"
+        "console.log(JSON.stringify(C.tokensFor(a,[],d).map("
+        "t=>[t.bold?'bold':'text',t.text])))")
+    out = subprocess.run([NODE, "-e", script, str(CITE)],
+                         input=json.dumps([answer, done]),
+                         capture_output=True, text=True, check=True)
+    return json.loads(out.stdout)
+
+
+@needs_node
+def test_a_bleeped_title_is_not_bold_formatting():
+    """'Korean Stocks Are F**KED' turned 173 words of an answer bold."""
+    got = drawn('the "Korean Stocks Are F**KED!!!" episode, he said it', True)
+    assert got == [["text", 'the "Korean Stocks Are F**KED!!!" episode, he said it']]
+
+
+@needs_node
+def test_bold_still_arriving_is_drawn_bold_but_a_finished_answer_drops_it():
+    assert drawn("**On the tok", False) == [["bold", "On the tok"]]
+    assert drawn("he said **it was over.", True) == [["text", "he said it was over."]]
+    assert ["bold", "On the token:"] in drawn("**On the token:** big", True)

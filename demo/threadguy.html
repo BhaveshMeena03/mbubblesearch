@@ -493,7 +493,7 @@
   }
 
   // ---- the answer ----------------------------------------------------
-  var typing = null;
+  var tick = null;
 
   function nudge(){
     var box = $("out").getBoundingClientRect();
@@ -508,10 +508,12 @@
   };
   var busy = false;
 
+  // The answer streams: the passages arrive first and show as cards, then
+  // the answer is drawn as it is written, its times already playable. It
+  // used to wait for the whole answer, about five seconds of "searching".
   function ask(question){
     if (busy || !question) return;
     busy = true; $("go").disabled = true; $("go").textContent = "…";
-    if (typing) { clearInterval(typing); typing = null; }
     stopPlaying();
     $("out").style.display = "block";
     $("verdict").textContent = "searching the archive";
@@ -524,24 +526,61 @@
 
     var stop = new AbortController();
     var bell = setTimeout(function(){ stop.abort(); }, 45000);
+    var hits = [], said = "", drew = false;
+    if (tick) { clearTimeout(tick); tick = null; }
+    var pick = function(t){ playCite(t.hit, t.sec); };
+    function draw(){ tick = null; Cite.paint($("answer"), said, hits, pick); }
     function trouble(msg){
-      if (typing) { clearInterval(typing); typing = null; }
+      if (tick) { clearTimeout(tick); tick = null; }
       $("out").classList.remove("working");
       $("verdict").textContent = msg;
       $("answer").textContent = ""; $("hits").innerHTML = "";
     }
+    function plain(){
+      // The stream could not start (an old browser, a proxy that buffers
+      // it): ask the endpoint that answers in one piece.
+      return fetch("/v1/threadguy/search", {method:"POST", signal:stop.signal,
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({query:question})})
+        .then(function(r){
+          if (!r.ok) { trouble(TROUBLE[r.status] || "Something went wrong. Try again."); return; }
+          return r.json().then(function(d){
+            hits = Array.isArray(d.hits) ? d.hits : [];
+            said = typeof d.answer === "string" ? d.answer : "";
+            showHits(hits);
+            finish(hits, said, false);
+          });
+        });
+    }
 
-    fetch("/v1/threadguy/search", {method:"POST", signal:stop.signal,
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({query:question})})
-      .then(function(r){
-        if (!r.ok) {
-          trouble(TROUBLE[r.status] || "Something went wrong. Try again.");
-          return null;
+    Cite.stream("/v1/threadguy/search/stream", {query:question}, stop.signal,
+      function(ev, p){
+        if (ev === "hits") {
+          hits = Array.isArray(p) ? p : [];
+          showHits(hits);
+          drew = true;
+        } else if (ev === "refusal") {
+          said = (p && p.text) || ""; drew = true;
+        } else if (ev === "error") {
+          throw new Error("stream failed");
+        } else if (ev === "message" && p && typeof p.text === "string") {
+          if (!said) $("out").classList.remove("working");
+          said += p.text; drew = true;
+          // Drawn a few times a second, not once per fragment.
+          if (!tick) tick = setTimeout(draw, 40);
         }
-        return r.json();
       })
-      .then(function(d){ if (d) render(d); })
+      .then(function(){ finish(hits, said, false); })
+      .catch(function(err){
+        if (err && err.name === "AbortError") {
+          return trouble("That took too long to come back. Try again.");
+        }
+        if (err && err.status) {
+          return trouble(TROUBLE[err.status] || "Something went wrong. Try again.");
+        }
+        if (drew) return finish(hits, said, true);
+        return plain();
+      })
       .catch(function(err){
         trouble(err && err.name === "AbortError"
                 ? "That took too long to come back. Try again."
@@ -553,48 +592,69 @@
       });
   }
 
-  function render(d){
-    $("out").classList.remove("working");
-    var hits = Array.isArray(d.hits) ? d.hits : [];
-    $("verdict").textContent = hits.length ? "from the archive"
-                                           : "nothing in the archive on that";
-    var said = typeof d.answer === "string" ? d.answer : "";
-    var cites = Cite.find(said, hits);
-    // The passages the answer cites come first, so the card a citation
-    // plays in is always on the page.
-    var shown = Cite.order(hits, cites);
-    var cited = Cite.order([], cites).length;
-    shown = shown.slice(0, Math.max(6, cited));
-    if (typing) { clearInterval(typing); typing = null; }
-    typing = Cite.write($("answer"), cites, function(t){
-      playCite(t.hit, t.sec);
-    }, document.hidden);
-    shown.forEach(function(h, n){
-      var el = document.createElement("div");
-      el.className = "hit";
-      el.style.animationDelay = (0.05 * n) + "s";
-      el.innerHTML = '<div class="row"><span class="ttl"></span>'
-                   + '<span class="tc"></span><span class="dt"></span></div><p></p>';
-      var sec = Number(h.start_seconds) || 0;
-      el.querySelector(".ttl").textContent = h.title || "";
-      var tc = el.querySelector(".tc");
-      tc.textContent = h.timestamp || stamp(sec);
-      el.querySelector(".dt").textContent = shortDate(h.published_at);
-      el.querySelector("p").textContent =
-        String(h.text || "").split("\n").slice(0,3).join(" ").slice(0,250);
-      var link = h.deep_link || h.url || "";
-      var vid = ytId(link);
-      pressable(tc, (vid ? "Play from " : "Open at ") + tc.textContent
-                  + (h.title ? ", " + h.title : ""),
-        function(){
-          if (vid) { play(el, h, vid, sec); reveal(el); }
-          else if (link) window.open(link, "_blank", "noopener");
-        });
-      $("hits").appendChild(el);
+  // One card per passage, kept so the final order can move them without
+  // rebuilding one that is playing.
+  var cards = [];
+  function cardFor(h){
+    for (var i = 0; i < cards.length; i++) if (cards[i].hit === h) return cards[i].el;
+    var el = document.createElement("div");
+    el.className = "hit";
+    el.innerHTML = '<div class="row"><span class="ttl"></span>'
+                 + '<span class="tc"></span><span class="dt"></span></div><p></p>';
+    var sec = Number(h.start_seconds) || 0;
+    el.querySelector(".ttl").textContent = h.title || "";
+    var tc = el.querySelector(".tc");
+    tc.textContent = h.timestamp || stamp(sec);
+    el.querySelector(".dt").textContent = shortDate(h.published_at);
+    el.querySelector("p").textContent =
+      String(h.text || "").split("\n").slice(0,3).join(" ").slice(0,250);
+    var link = h.deep_link || h.url || "";
+    var vid = ytId(link);
+    pressable(tc, (vid ? "Play from " : "Open at ") + tc.textContent
+                + (h.title ? ", " + h.title : ""),
+      function(){
+        if (vid) { play(el, h, vid, sec); reveal(el); }
+        else if (link) window.open(link, "_blank", "noopener");
+      });
+    cards.push({hit: h, el: el});
+    return el;
+  }
+  function lay(list){
+    var host = $("hits");
+    list.forEach(function(h, n){
+      var el = cardFor(h);
+      if (!el.parentNode) el.style.animationDelay = (0.05 * n) + "s";
+      host.appendChild(el);
     });
-    $("out").classList.toggle("instant", document.hidden);
-    void $("out").offsetHeight;
-    $("out").classList.add("shown");
+    // Anything no longer listed goes, unless it is the one playing.
+    Array.prototype.slice.call(host.children).forEach(function(el){
+      var listed = list.some(function(h){ return cardFor(h) === el; });
+      if (!listed && el !== playing) el.remove();
+    });
+  }
+
+  function showHits(list){
+    cards = [];
+    $("hits").innerHTML = "";
+    var n = list.length;
+    $("verdict").textContent = n
+      ? "reading " + n + " passage" + (n === 1 ? "" : "s") + "…"
+      : "searching the archive";
+    lay(list.slice(0, 6));
+  }
+
+  function finish(list, text, cut){
+    if (tick) { clearTimeout(tick); tick = null; }
+    $("out").classList.remove("working");
+    $("verdict").textContent = !list.length ? "nothing in the archive on that"
+      : cut ? "from the archive · the answer was cut short"
+      : "from the archive";
+    var cites = Cite.paint($("answer"), text, list,
+                           function(t){ playCite(t.hit, t.sec); }, true);
+    // The passages the answer cites come first, so the card a citation
+    // points at is always on the page.
+    var cited = Cite.order([], cites).length;
+    lay(Cite.order(list, cites).slice(0, Math.max(6, cited)));
   }
 
   TRIES.forEach(function(q){
