@@ -226,18 +226,12 @@
      worth watching, and the row stays the row. */
   .moment.on{border-color:var(--c);background:#10131a}
   .moment.on::before{opacity:1}
-  .askstage{margin-top:18px;display:grid;
-    grid-template-columns:minmax(0,980px) minmax(220px,300px);gap:30px;
-    align-items:start;opacity:0;transition:opacity .3s var(--ease)}
+  /* Full width, like an answer's player. The card it was opened from
+     stays lit and already carries the question, the speaker and the time. */
+  .askstage{margin-top:18px;opacity:0;transition:opacity .3s var(--ease)}
   .askstage.on{opacity:1}
   .askstage iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:3px;
     background:#000;display:block}
-  .askstage .cap .qq{font-size:15px;font-weight:600;color:var(--ink);line-height:1.4}
-  .askstage .cap .by{margin-top:14px;font-size:13.5px;font-weight:600;color:var(--ink-2)}
-  .askstage .cap .at{margin-top:5px;font-family:var(--mono);font-size:11.5px;
-    color:var(--ink-3)}
-  .askstage .cap .at em{color:var(--signal);font-style:normal}
-  @media(max-width:900px){.askstage{grid-template-columns:1fr;gap:16px}}
   .ranks{display:grid;gap:2px}
   .rank{display:grid;grid-template-columns:26px 150px 1fr 74px;gap:4px 16px;
     align-items:center;padding:12px 16px;border-radius:3px;cursor:pointer;
@@ -266,13 +260,13 @@
      ranking in two and left a hole where the rest of the list was. */
   .rank.playing{background:var(--deck);border-color:var(--edge-2)}
   .rank.playing .no,.rank.playing .n{color:var(--signal)}
-  /* A 16:9 frame given the full 1560px is taller than half the screen
-     and leaves its caption a sliver. The frame is capped and the rail
-     beside it carries the numbers the row was showing. */
+  /* The video runs the full width, like every other player on the site,
+     and what the row was showing sits in a strip under it: the episode,
+     the count, and the way into the archive for that name. */
   .stage{margin-top:24px;border-top:1px solid var(--edge);padding-top:24px;
-    display:grid;grid-template-columns:minmax(0,900px) minmax(250px,360px);
-    gap:36px;align-items:start;justify-content:start;
     opacity:0;transition:opacity .3s var(--ease)}
+  .stage .cap{display:grid;grid-template-columns:minmax(0,1fr) auto auto;
+    gap:18px 40px;align-items:end;margin-top:18px}
   .stage.on{opacity:1}
   .stage iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:3px;
     background:#000;display:block}
@@ -282,19 +276,22 @@
     letter-spacing:-.2px;line-height:1.3}
   .stage .cap p{margin:8px 0 0;font-family:var(--mono);font-size:11.5px;
     color:var(--ink-3)}
-  .stage .cap .facts{margin-top:20px;padding-top:18px;
-    border-top:1px solid var(--edge)}
+  .stage .cap .facts{text-align:right}
   .stage .cap .facts b{display:block;font-family:"Instrument Serif",Georgia,serif;
     font-size:36px;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
   .stage .cap .facts span{display:block;margin-top:7px;font-family:var(--mono);
     font-size:10px;letter-spacing:.17em;text-transform:uppercase;color:var(--ink-3)}
-  .stage .cap .ask{margin-top:20px;background:transparent;color:var(--ink-2);
+  .stage .cap .ask{background:transparent;color:var(--ink-2);white-space:nowrap;
     border:1px solid var(--edge-2);border-radius:99px;padding:9px 16px;
     font:inherit;font-size:13px;cursor:pointer;
     transition:border-color .2s,color .2s,background .2s}
   .stage .cap .ask:hover{border-color:var(--signal);color:var(--signal);
     background:rgba(255,162,58,.07)}
-  @media(max-width:900px){.stage{grid-template-columns:1fr;gap:18px}}
+  @media(max-width:900px){
+    .stage .cap{grid-template-columns:1fr;gap:14px}
+    .stage .cap .facts{text-align:left}
+    .stage .cap .ask{justify-self:start}
+  }
   @media(max-width:640px){
     .rank{grid-template-columns:22px 1fr 62px;gap:10px}
     .rank .bar{grid-column:1/-1;order:4}
@@ -579,7 +576,15 @@
   // One player at a time. Opening a second timestamp used to leave the
   // first still playing underneath it.
   var playing = null;
-  function stopPlaying(){
+  // keepTicker: moving between ranked rows reuses the ticker's frame, so
+  // the row handler stops everything else but leaves its own stage.
+  function stopPlaying(keepTicker){
+    var tk = document.getElementById("stage");
+    if (!keepTicker && tk && !tk.hidden) {
+      tk.hidden = true; tk.innerHTML = "";
+      document.querySelectorAll(".rank.playing").forEach(function(o){
+        o.classList.remove("playing"); });
+    }
     var as = document.getElementById("askstage");
     if (as && !as.hidden) {
       as.hidden = true; as.innerHTML = "";
@@ -823,15 +828,10 @@
       var st = document.getElementById("askstage");
       st.innerHTML = '<iframe allowfullscreen '
         + 'allow="autoplay; encrypted-media; fullscreen; picture-in-picture" '
-        + 'title="Playback from the cited moment"></iframe>'
-        + '<div class="cap"><div class="qq"></div><div class="by"></div>'
-        + '<div class="at"><span></span> <em></em></div></div>';
+        + 'title="Playback from the cited moment"></iframe>';
       st.querySelector("iframe").src = "https://www.youtube.com/embed/"
         + m.vid + "?start=" + m.at + "&autoplay=1";
-      st.querySelector(".qq").textContent = m.q;
-      st.querySelector(".by").textContent = m.who;
-      st.querySelector(".at span").textContent = m.where + " \u00b7";
-      st.querySelector(".at em").textContent = stamp(m.at);
+      st.querySelector("iframe").title = m.who + ", " + m.where + ", from " + stamp(m.at);
       st.hidden = false;
       st.classList.remove("on");
       void st.offsetHeight;
@@ -874,6 +874,10 @@
       el.querySelector(".where").textContent =
         "\u25b6 " + stamp(r.at) + "  " + r.title;
       function open_(){
+        // One video on the page at a time, the question cards' and the
+        // answer's included. The ticker was outside that rule, and opening
+        // a row left another video playing above it.
+        stopPlaying(true);
         host.querySelectorAll(".rank").forEach(function(o){
           o.classList.remove("playing");
         });
@@ -889,7 +893,7 @@
           st.innerHTML = '<iframe allowfullscreen '
             + 'allow="autoplay; encrypted-media; fullscreen; picture-in-picture" '
             + 'title="Playback from the cited moment"></iframe>'
-            + '<div class="cap"><div class="sym"></div><h3></h3><p></p>'
+            + '<div class="cap"><div class="ep"><div class="sym"></div><h3></h3><p></p></div>'
             + '<div class="facts"><b></b><span></span></div>'
             + '<button type="button" class="ask"></button></div>';
           st.hidden = false;

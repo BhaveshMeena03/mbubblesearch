@@ -216,3 +216,24 @@ def test_markdown_in_an_answer_renders_instead_of_printing_asterisks():
 def test_an_unpaired_bold_marker_is_dropped_not_left_dangling():
     got = render("he said **it was over.", [])
     assert got == [["text", "he said it was over."]]
+
+
+def test_every_player_runs_full_width_with_no_side_rail():
+    """Tapping a time in an answer opens a full-width player, and the
+    stages, shelf rows and question cards opened smaller ones with a
+    caption rail beside them. They all match now."""
+    tg = (ROOT / "demo" / "threadguy.html").read_text()
+    home = (ROOT / "demo" / "home.html").read_text()
+    for css, sel in ((tg, "  .tgstage{"), (tg, "  .pw{"),
+                     (home, "  .askstage{"), (home, "  .stage{")):
+        rule = css.split(sel)[1].split("}")[0]
+        assert "grid-template-columns" not in rule, sel
+    assert '<div class="cap">' not in tg
+    assert '<div class="cap"><div class="qq">' not in home
+
+
+def test_the_ticker_player_is_under_the_one_video_rule():
+    home = (ROOT / "demo" / "home.html").read_text()
+    stop = home.split("function stopPlaying(keepTicker){")[1].split("\n  }\n")[0]
+    assert 'getElementById("stage")' in stop and "!keepTicker" in stop
+    assert "stopPlaying(true);" in home
