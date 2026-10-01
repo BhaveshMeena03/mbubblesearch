@@ -371,7 +371,7 @@ function moments(ms){
   var more = hidden > 0
     ? '<p class="empty" style="padding:10px 0 2px;font-size:12.5px">+ ' +
       hidden + ' more reference' + (hidden === 1 ? '' : 's') +
-      ' — search the full transcript on the <a href="/demo/mcg.html" ' +
+      '. Search the full transcript on the <a href="/demo/mcg.html" ' +
       'style="color:#16c784">search page</a>.</p>'
     : '';
   return shown.map(function(m){
@@ -492,7 +492,7 @@ fetch(API + "/v1/mcg/assets")
     });
     if(!DATA.length){
       document.getElementById("list").innerHTML =
-        '<p class="empty">No asset data yet — run scripts/extract_assets.py.</p>';
+        '<p class="empty">No asset data yet.</p>';
       return;
     }
     var solid = DATA.filter(function(a){ return !a.single_reference; });
