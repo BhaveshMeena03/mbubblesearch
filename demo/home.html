@@ -300,7 +300,10 @@
   /* ── answer ───────────────────────────────────────────────────────── */
   /* The answer was the one thing on the page that arrived by snapping
      into place. It now rises the same way the rest of it does. */
-  #out{display:none;margin:0 auto 54px;max-width:900px;
+  /* On the page's left edge and the full width, like the sections below
+     it and the ThreadGuy page. Centred at 900px it hung 40px outside the
+     search column on both sides and sat on the stats row with no gap. */
+  #out{display:none;margin:64px 0 54px;
     opacity:0;transform:translateY(10px);
     transition:opacity .4s var(--ease),transform .4s var(--ease)}
   #out.shown{opacity:1;transform:none}
