@@ -100,11 +100,11 @@ def captions_for(url: str, video_id: str) -> list[dict]:
     """YouTube's track if it has one, otherwise our own index."""
     try:
         return youtube_segments(url)
-    except SystemExit:
+    except SystemExit as no_captions:
         segments = mcg_segments(video_id)
         if not segments:
             raise SystemExit("  no youtube captions and nothing in the "
-                             "index for that video")
+                             "index for that video") from no_captions
         print(f"  no youtube captions; rebuilt {len(segments)} lines "
               "from the archive")
         return segments

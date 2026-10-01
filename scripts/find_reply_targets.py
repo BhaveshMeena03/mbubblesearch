@@ -82,11 +82,21 @@ WATCHLIST = [
     # it: their words ARE the corpus, so a receipt under their post is
     # sourced from the show they were speaking on.
     "blknoiz06", "rasmr_eth",
+    # Added 2026-10-01 with the ThreadGuy archive. Counterparty is the
+    # network his show runs on.
+    "counterpartytv",
 ]
 # Answered from the Musk archive instead. Kept apart for the same reason
 # the namespaces are: a reply to Elon sourced from a Market Bubble episode
 # would say the account cannot tell its archives apart.
 ELON = {"elonmusk"}
+# Answered from the ThreadGuy archive only, by the same rule: under his own
+# post, the receipt is him on his own stream, never another show.
+THREADGUY = {"notthreadguy", "counterpartytv"}
+# Everyone else is searched in both of these, and the stronger moment wins.
+# A Hyperliquid or Zcash post is as likely to have its best line on a
+# ThreadGuy market open as on Market Bubble.
+SHARED = ("podcast", "threadguy")
 
 # Handles whose replies are read as well as their posts. The hosts only: a
 # reply from Ansem or rasmr is usually a compressed version of something
@@ -99,6 +109,16 @@ WITH_REPLIES = frozenset({"blknoiz06", "rasmr_eth"})
 READ_COST = 0.005
 
 _LINE = re.compile(r"^\[(\d[\d:]*)\]\s*(.*)$", re.M)
+
+
+def corpora_for(handle: str) -> tuple[str, ...]:
+    """Which archives a post from this account is searched in."""
+    handle = handle.lower()
+    if handle in ELON:
+        return ("elon",)
+    if handle in THREADGUY:
+        return ("threadguy",)
+    return SHARED
 
 
 def credentials() -> XCredentials:
@@ -190,19 +210,34 @@ async def main() -> int:
             http, creds, handles, args.per_account, args.hours,
             frozenset() if args.no_replies else WITH_REPLIES)
 
-    indexes = {"podcast": PodcastIndex(), "elon": PodcastIndex(namespace="elon")}
-    shortlist = []
-    for post in posts:
-        if len(post["text"]) < 8:
-            continue                      # a bare link or an emoji
-        corpus = "elon" if post["handle"].lower() in ELON else "podcast"
-        try:
-            hits = await indexes[corpus].retrieve(post["text"], top_k=3)
-        except Exception as exc:                            # noqa: BLE001
-            print(f"  search failed for @{post['handle']}: {type(exc).__name__}")
-            continue
-        if hits and hits[0].score >= args.min_score:
-            shortlist.append((hits[0].score, post, hits[0], corpus))
+    indexes = {"podcast": PodcastIndex(),
+               "elon": PodcastIndex(namespace="elon"),
+               "threadguy": PodcastIndex(namespace="threadguy")}
+    # One search is about 2.5s, almost all of it waiting on the embedding
+    # and rerank services. Run one at a time across ~80 posts and two
+    # archives it took over ten minutes; a few at once keeps it to a couple
+    # without leaning on either service's rate limit.
+    gate = asyncio.Semaphore(6)
+
+    async def search(post: dict, corpus: str):
+        async with gate:
+            try:
+                hits = await indexes[corpus].retrieve(post["text"], top_k=3)
+            except Exception as exc:                        # noqa: BLE001
+                print(f"  {corpus} search failed for @{post['handle']}: "
+                      f"{type(exc).__name__}")
+                return None
+        return (hits[0].score, post, hits[0], corpus) if hits else None
+
+    async def best_for(post: dict):
+        found = await asyncio.gather(*(search(post, c)
+                                       for c in corpora_for(post["handle"])))
+        found = [f for f in found if f]
+        return max(found, key=lambda row: row[0]) if found else None
+
+    readable = [p for p in posts if len(p["text"]) >= 8]   # not a bare link
+    results = await asyncio.gather(*(best_for(p) for p in readable))
+    shortlist = [r for r in results if r and r[0] >= args.min_score]
 
     shortlist.sort(key=lambda row: -row[0])
     for score, post, hit, corpus in shortlist:
