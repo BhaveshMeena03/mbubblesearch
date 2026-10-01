@@ -29,7 +29,7 @@ PAGE = (ROOT / "demo" / "home.html").read_text()
 
 
 def test_the_page_draws_a_meter_for_every_room_the_endpoint_serves():
-    for key, label, href in _ROOMS:
+    for key, _label, href in _ROOMS:
         assert f'k:"{key}"' in PAGE, f"no channel for {key}"
         assert f'href:"{href}"' in PAGE, f"{key} does not link to {href}"
 
@@ -185,7 +185,7 @@ def test_hovering_a_ranked_row_does_not_move_the_rows_below_it():
 def test_every_channel_card_points_at_a_real_archive():
     """They are the only way off this page, and a card that goes nowhere
     looks like a broken page rather than a missing route."""
-    for key, label, href in _ROOMS:
+    for _key, _label, href in _ROOMS:
         assert f'href:"{href}"' in PAGE
     assert PAGE.count('a.href = c.href') == 1
 

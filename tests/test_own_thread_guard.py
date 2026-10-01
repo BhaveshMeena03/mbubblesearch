@@ -1,6 +1,11 @@
-import sys; sys.path.insert(0,".")
-import asyncio, types, pytest
+import asyncio
+import sys
+import types
+
+sys.path.insert(0, ".")
+
 from app.x_bot import MentionBot
+
 
 def test_skips_questions_under_our_own_posts(monkeypatch):
     """A reply under an announcement we posted is about us, not the archive."""

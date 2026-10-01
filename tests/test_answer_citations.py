@@ -63,7 +63,7 @@ def test_the_named_date_decides_between_two_recordings_at_the_same_time():
     answer = ("though he acknowledges it faces regulatory hurdles that could "
               "create volatility [2026-05-23 at 8:16].")
     got = resolve(answer, [HOT_SEAT, SWEETGREEN])
-    assert [l[:3] for l in got["links"]] == [["8:16", "QH2d-awq0No", 496]]
+    assert [link[:3] for link in got["links"]] == [["8:16", "QH2d-awq0No", 496]]
     # the brackets go, and the date reads as a date
     assert got["text"].endswith("volatility May 23, 2026 at 8:16.")
 
@@ -73,7 +73,7 @@ def test_a_date_written_earlier_in_the_sentence_carries_to_the_time():
     answer = ("At [29:23] to [29:25] in the December 13, 2024 episode, he calls "
               "himself a degenerate.\n\nMore recently [8:16] he said more.")
     got = resolve(answer, [HOT_SEAT, SWEETGREEN, HYPE])
-    assert [l[:2] for l in got["links"]][:2] == [["29:23", "JR4M9v9_2zE"],
+    assert [link[:2] for link in got["links"]][:2] == [["29:23", "JR4M9v9_2zE"],
                                                  ["29:25", "JR4M9v9_2zE"]]
     assert got["text"].startswith("At 29:23 to 29:25 in the December 13")
 
@@ -108,7 +108,7 @@ def test_clock_times_prices_and_ratios_are_not_citations():
 def test_without_per_line_stamps_a_time_far_past_the_start_is_not_linked():
     old = dict(SWEETGREEN, end_seconds=None)
     got = resolve("at 7:30 and at 30:00", [old])
-    assert [l[0] for l in got["links"]] == ["7:30"]
+    assert [link[0] for link in got["links"]] == ["7:30"]
 
 
 @needs_node
@@ -150,7 +150,7 @@ def test_a_long_bracketed_citation_loses_its_brackets_too():
               'episode, Dec 13, 2024], he explains why.')
     early = hit("JR4M9v9_2zE", 1601.12, "2024-12-13", end=1700, title="Hyperliquid")
     got = resolve(answer, [early])
-    assert [l[0] for l in got["links"]] == ["27:50", "28:03"]
+    assert [link[0] for link in got["links"]] == ["27:50", "28:03"]
     assert "[" not in got["text"] and "]" not in got["text"]
 
 
@@ -181,7 +181,7 @@ def test_a_citation_whose_title_has_brackets_loses_its_own_brackets():
     fomc = hit("FOMCFOMCFOM", 746.25, "2026-05-20", end=907,
                title="This FOMC Changes Everything... [Stream Recap]")
     got = resolve(answer, [fomc])
-    assert [l[0] for l in got["links"]] == ["15:33"]
+    assert [link[0] for link in got["links"]] == ["15:33"]
     assert got["text"] == ('he said 15:33, "This FOMC Changes Everything... '
                            '[Stream Recap]", May 20, 2026 that it was over.')
 
