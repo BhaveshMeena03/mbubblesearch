@@ -94,6 +94,20 @@ ANTHROPIC_DIRECT_URL = "https://api.anthropic.com"
 
 NAMESPACE = "podcast"
 
+# DeepSeek reasons before it writes, whether or not thinking is asked for,
+# and none of the reasoning comes back. On a question with a dozen passages
+# it spent the bot's whole 1,024 tokens reasoning and returned nothing: two
+# of three ThreadGuy questions went unanswered, and an empty answer makes
+# the bot stay quiet. Measured with room to finish, it used 800 to 1,000.
+_REASONS_FIRST = ("deepseek",)
+_REASONING_BUDGET = 4096
+
+
+def _answer_budget(model: str, default: int) -> int:
+    if str(model or "").lower().startswith(_REASONS_FIRST):
+        return max(default, _REASONING_BUDGET)
+    return default
+
 # End of the first sentence, which is as much as the stream needs before it
 # can tell a denial from an answer.
 _SENTENCE_BREAK = re.compile(r"[.!?]\s")
@@ -1494,7 +1508,7 @@ class PodcastIndex:
         model = model or self._settings.search_model
         request: dict = {
             "model": model,
-            "max_tokens": self._settings.search_max_tokens,
+            "max_tokens": _answer_budget(model, self._settings.search_max_tokens),
             "system": [
                 {"type": "text",
                  "text": getattr(self, "_system_prompt", SYSTEM_PROMPT),
@@ -1589,6 +1603,15 @@ class PodcastIndex:
             ).beta.messages.create(**request)
             _served("fallback")
         self._record(response.model, response.usage)
+        if response.stop_reason == "max_tokens" and not any(
+                getattr(b, "type", "") == "text" and getattr(b, "text", "")
+                for b in (response.content or [])):
+            # Reasoned to the limit and wrote nothing. Said out loud,
+            # because downstream it is just an empty answer, and the bot
+            # reads an empty answer as nothing to say and goes quiet.
+            logger.warning("%s ran out of tokens before writing a word "
+                           "(%d used)", response.model,
+                           getattr(response.usage, "output_tokens", 0))
         if response.stop_reason == "refusal":
             return PodcastSearchResponse(
                 answer=self.REFUSAL_ANSWER, hits=[],
