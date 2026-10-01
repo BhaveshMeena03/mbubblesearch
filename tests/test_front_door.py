@@ -101,7 +101,7 @@ def test_a_timestamp_is_reachable_without_a_mouse():
 
 
 def test_only_one_recording_plays_at_a_time():
-    assert "function stopPlaying()" in PAGE
+    assert "function stopPlaying(keepTicker){" in PAGE
 
 
 def test_the_board_is_not_an_empty_instrument_at_rest():
