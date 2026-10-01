@@ -1,6 +1,6 @@
 # Market Bubble Search
 
-> A search engine over 1,722 hours of crypto podcasts, live broadcasts and
+> A search engine over 1,832 hours of crypto podcasts, live broadcasts and
 > long-form interviews. Ask a question in plain English and it answers only
 > from the transcripts, quoting the speaker and citing the exact second it
 > was said. If the archive does not contain the answer, it says so instead
@@ -29,11 +29,12 @@ never be sourced from another.
   Ray Dalio, Jerome Powell, Jamie Dimon, Cathie Wood, Stephen Schwarzman,
   Michael Saylor, Raoul Pal, and five long-form interviews with CZ
   (Changpeng Zhao) from 2026.
-- ThreadGuy: the full-length videos on @notthreadguy's YouTube channel, the
-  daily live market open and the guests he has on. Answers say whose view
+- ThreadGuy: 555 recordings, 641.2 hours, December 2023 to September 2026,
+  still indexing. The full-length videos on @notthreadguy's YouTube channel,
+  the daily live market open and the guests he has on. Answers say whose view
   it was and on which day, because the market moves between streams.
 
-Total: 1,237 recordings, 1,722 hours.
+Total: 1,276 recordings, 1,832 hours.
 
 Also indexed: 2,853 vectors of Ansem's own posts, and asset indexes of
 every token, stock and index the shows discussed, ranked by how deeply
