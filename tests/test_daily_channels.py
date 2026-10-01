@@ -47,3 +47,11 @@ def test_the_groq_key_is_found_without_the_shell():
     """launchd gives the job an empty environment; the key is in .env."""
     ingest = (ROOT / "scripts" / "ingest_mcg.py").read_text()
     assert "get_settings().groq_api_key" in ingest
+
+
+def test_new_uploads_reach_the_token_dashboards_gently():
+    """The proxy is shared with the site and the bot: 60 calls in flight
+    got rate limited, which slows real visitors."""
+    assert "for archive in threadguy mcg; do\n  echo \"-- $archive tokens\"" in SCRIPT
+    assert '--archive "$archive" --episodes 10 --store --workers 2' in SCRIPT
+    assert "EXTRACT_CONCURRENCY=4" in SCRIPT
