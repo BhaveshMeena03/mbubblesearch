@@ -72,11 +72,16 @@ SEARCH = "https://search.lexthedev.com"
 # and mishear names -- but a clip with slightly rough captions beats the
 # 458 episodes that currently cannot be clipped at all.
 def mcg_segments(video_id: str) -> list[dict]:
-    """An MCG episode's lines, reassembled out of its own vectors.
+    """An episode's lines, reassembled out of its own vectors.
 
     The fallback for the videos YouTube has no caption track for, which is
     not a rare case: the one explaining the AnsemHack prize pool has none,
     and without this there is no way to clip it at all.
+
+    MCG keeps its passages in an index of its own; ThreadGuy's sit in the
+    default index under "threadguy". Which one a video is in comes from the
+    shelves. Reading only MCG's made every ThreadGuy interview without auto
+    captions unclippable, Koolkrypto's included.
 
     app.mcg_transcript.rebuild already does this for the asset extractor,
     and the lines it returns are the ~8 second blocks build_captions is
@@ -90,10 +95,18 @@ def mcg_segments(video_id: str) -> list[dict]:
     from app.mcg_transcript import rebuild
 
     settings = get_settings()
-    index = Pinecone(api_key=settings.pinecone_api_key).Index(
-        settings.mcg_pinecone_index)
-    return rebuild(index, settings.mcg_namespace,
-                   settings.embedding_dimension, video_id)
+    index_name, namespace = where_is(video_id, settings)
+    index = Pinecone(api_key=settings.pinecone_api_key).Index(index_name)
+    return rebuild(index, namespace, settings.embedding_dimension, video_id)
+
+
+def where_is(video_id: str, settings) -> tuple[str, str]:
+    """(index, namespace) holding a vector-only episode's passages."""
+    shelf = ROOT / "data" / "threadguy_index.json"
+    if shelf.exists() and any(r.get("id") == video_id
+                              for r in json.loads(shelf.read_text())):
+        return settings.pinecone_index, settings.threadguy_namespace
+    return settings.mcg_pinecone_index, settings.mcg_namespace
 
 
 def captions_for(url: str, video_id: str) -> list[dict]:
