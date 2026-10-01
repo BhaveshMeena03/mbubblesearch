@@ -275,7 +275,13 @@ moment they said it, down to the second.">
     display: flex; align-items: baseline; justify-content: space-between;
     gap: 16px; padding: 18px 0 0;
   }
-  .topline nav.back { font-size: 14px; color: var(--ink-2); }
+  .topline nav.back { font-size: 14px; color: var(--ink-2); flex: none; }
+  .topline .brandline { min-width: 0; }
+  /* Pinned on a phone (nav.js): the stats line goes once the page is
+     scrolled, so the bar holds the way home and the switcher, no more. */
+  @media (max-width: 760px) {
+    .topline.stuck #stat { display: none; }
+  }
   .topline nav.back a { color: inherit; text-decoration: none; }
   /* The browser's own focus ring is a blue rounded box that belongs to
      no palette on this site. */

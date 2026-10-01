@@ -380,7 +380,10 @@
     bottom:0;height:1px;background:var(--green);transition:right .2s ease}
   .site-nav a:hover{color:var(--text)}
   .site-nav a:hover::after{right:0}
-  @media (max-width:560px){ .site-nav{display:none} }
+  /* On a phone only the archive switcher stays. Hiding the whole nav,
+     as this did, hid the switcher with it: a phone on this page had no
+     way to reach any other archive. */
+  @media (max-width:560px){ .site-nav > a{display:none} }
 
   /* ---- depth -----------------------------------------------------------
      A flat near-black rectangle reads as a terminal. One soft pool of light

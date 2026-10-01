@@ -55,7 +55,7 @@
       "transform:rotate(45deg);opacity:.6}",
       ".archsw[open]>summary::after{transform:rotate(225deg);opacity:1}",
       ".archsw .menu{position:absolute;z-index:60;top:calc(100% + 9px);left:0;",
-      "min-width:236px;padding:6px;border-radius:8px;",
+      "min-width:236px;max-width:calc(100vw - 16px);padding:6px;border-radius:8px;",
       "background:var(--card,var(--paper,#14161a));",
       "border:1px solid color-mix(in srgb, currentColor 22%, transparent);",
       "box-shadow:0 14px 34px rgba(0,0,0,.28)}",
@@ -68,7 +68,6 @@
       ".archsw .menu .s{display:block;font-size:11.5px;opacity:.62;margin-top:1px}",
       ".archsw .menu hr{border:0;height:1px;margin:6px 4px;",
       "background:color-mix(in srgb, currentColor 16%, transparent)}",
-      "@media (max-width:520px){.archsw .menu{left:auto;right:0}}",
       /* The way home, on every archive. Each page's corner carries its
          own name, so the parent sits in front of it rather than replacing
          it, and it inherits the page's colour like the menu does. */
@@ -82,7 +81,19 @@
       "font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;",
       "font-weight:500;white-space:nowrap;transition:opacity .2s}",
       ".home-crumb:hover,.home-crumb:focus-visible{opacity:1}",
-      ".home-sep{opacity:.3}"
+      ".home-sep{opacity:.3}",
+      /* On a phone the header stays: scrolled past the top there was no
+         way to switch archives at all. The page's own background runs
+         edge to edge behind it, and it slims once the page is scrolled. */
+      "@media (max-width:760px){",
+      ".navbar{position:sticky;top:0;z-index:50;transition:padding .2s ease}",
+      /* A layer the width of the screen behind the bar. Not a shadow
+         spread and a clip, which also clipped the open menu to the bar. */
+      ".navbar::before{content:'';position:absolute;top:0;bottom:0;",
+      "left:var(--navx,0);width:100vw;background:var(--navbg);z-index:-1}",
+      ".archsw>summary{white-space:nowrap}",
+      ".navbar.stuck{padding-top:12px!important;padding-bottom:12px!important}",
+      "}"
     ].join("");
     document.head.appendChild(css);
   }
@@ -122,15 +133,20 @@
     // Measured on open rather than guessed from a breakpoint, because
     // it depends on where this nav happens to be, not how wide the
     // screen is.
+    // On a narrow phone neither edge fits: the menu is wider than the
+    // room on either side of the button, and it opened off screen with
+    // nothing in it reachable. So it is moved by exactly as much as it
+    // overhangs, whichever side that is.
     d.addEventListener("toggle", function () {
       if (!d.open) return;
       menu.style.left = "0";
       menu.style.right = "auto";
       var box = menu.getBoundingClientRect();
-      if (box.right > document.documentElement.clientWidth - 8) {
-        menu.style.left = "auto";
-        menu.style.right = "0";
-      }
+      var room = document.documentElement.clientWidth - 8;
+      var shift = 0;
+      if (box.right > room) shift = room - box.right;
+      if (box.left + shift < 8) shift = 8 - box.left;
+      menu.style.left = shift + "px";
     });
 
     document.addEventListener("keydown", function (e) {
@@ -144,12 +160,53 @@
     return d;
   }
 
+  // The bar a phone keeps on screen: the page's header, or failing that
+  // the block the menu sits in.
+  function pin(host) {
+    // The page's header, or on a page without one around the menu (The
+    // Record keeps it in a small nav at the end of its top line) the
+    // first block that spans the page, so the whole row stays rather
+    // than a button floating at the right.
+    var bar = host.closest("header");
+    if (!bar) {
+      bar = host.parentElement;
+      while (bar && bar.parentElement && bar.parentElement !== document.body &&
+             bar.getBoundingClientRect().width < 0.7 * window.innerWidth) {
+        bar = bar.parentElement;
+      }
+    }
+    if (!bar) return;
+    var bg = getComputedStyle(document.body).backgroundColor;
+    if (!bg || bg === "rgba(0, 0, 0, 0)" || bg === "transparent") {
+      bg = getComputedStyle(document.documentElement).backgroundColor;
+    }
+    bar.style.setProperty("--navbg", bg);
+    bar.classList.add("navbar");
+    // The background layer starts at the screen's left edge, wherever
+    // the bar sits in its column.
+    function place() {
+      bar.style.setProperty("--navx", -bar.getBoundingClientRect().left + "px");
+    }
+    place();
+    window.addEventListener("resize", place);
+    var ticking = false;
+    function check() {
+      ticking = false;
+      bar.classList.toggle("stuck", window.scrollY > 24);
+    }
+    window.addEventListener("scroll", function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(check); }
+    }, {passive: true});
+    check();
+  }
+
   function mount() {
     var host = document.querySelector("[data-archives]");
     if (!host) return;
     style();
     host.innerHTML = "";
     host.appendChild(build());
+    pin(host);
   }
 
   if (document.readyState === "loading") {
