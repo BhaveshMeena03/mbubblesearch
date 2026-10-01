@@ -314,3 +314,11 @@ def test_the_threadguy_example_actually_routes_to_threadguy():
     tries = PAGE.split("var TRIES = [")[1].split("];")[0]
     assert "Sweetgreen chud wrap" in tries
     assert "ThreadGuy think of Hyperliquid" not in tries
+
+
+def test_the_answer_starts_on_the_pages_left_edge():
+    """Centred at 900px it hung 40px outside the search column on both
+    sides and sat on the stats row with no gap."""
+    out = PAGE.split("  #out{")[1].split("}")[0]
+    assert "max-width" not in out and "auto" not in out
+    assert "margin:64px 0 54px" in out
