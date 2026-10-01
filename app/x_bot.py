@@ -27,6 +27,7 @@ it twice.
 from __future__ import annotations
 
 import asyncio
+import gzip
 import hashlib
 import json
 import logging
@@ -3453,10 +3454,28 @@ _OF_THE_MCG_ARCHIVE = re.compile(
 # not scale. So the names are read off the shelf, exactly the way MCG
 # reads project names off its index -- a subject indexed tonight is
 # routable in the morning without touching this file.
-def _tradfi_subjects() -> set[str]:
-    path = Path(__file__).resolve().parent.parent / "data" / "tradfi_episodes.json"
+_TRADFI_SHELF = Path(__file__).resolve().parent.parent / "data" / "tradfi_episodes.json"
+
+# What people type for a subject whose name the length rule below would
+# drop, or whose handle is how they are tagged. "cz" is two letters, and
+# the five CZ interviews were unroutable by name: "what did cz say about
+# the super cycle" went to Market Bubble.
+_SUBJECT_ALIASES = {
+    "cz": {"cz", "changpeng zhao", "changpeng", "cz_binance"},
+}
+
+
+def _tradfi_subjects(path: Path = _TRADFI_SHELF) -> set[str]:
+    # The image ships the gzipped shelf only (the plain one is 3MB and
+    # rewritten on every ingest), so read whichever exists. Reading only
+    # the plain file left this set empty on the server: every finance
+    # name routed on a laptop and none of them routed in production.
     try:
-        rows = json.loads(path.read_text())
+        if path.exists():
+            rows = json.loads(path.read_text())
+        else:
+            rows = json.loads(gzip.decompress(
+                path.with_name(path.name + ".gz").read_bytes()))
     except Exception:                                   # noqa: BLE001
         return set()
     rows = rows if isinstance(rows, list) else list(rows.values())
@@ -3469,8 +3488,12 @@ def _tradfi_subjects() -> set[str]:
         parts = subject.split()
         if len(parts) > 1:
             candidates.add(parts[-1])          # the surname people type
+        # Aliases are chosen by hand, so they skip the length rule but not
+        # the guard below.
+        aliases = _SUBJECT_ALIASES.get(subject, set())
+        candidates |= aliases
         for name in candidates:
-            if len(name) < 4 or name in _TOO_ORDINARY:
+            if (len(name) < 4 and name not in aliases) or name in _TOO_ORDINARY:
                 continue
             # The guard that matters. A subject whose name the broadcast
             # or the Musk archive already says belongs to them, not here:
