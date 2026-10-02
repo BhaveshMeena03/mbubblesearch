@@ -80,6 +80,7 @@ from .security import (
     require_admin,
 )
 from .summaries import SummaryStore
+from .traffic import Traffic
 from .usage import UsageLedger, writable_path
 from .youtube_map import summary_moments, youtube_first
 
@@ -145,8 +146,15 @@ STATS: dict = {
 }
 
 
+# The same events, kept per day across deploys (see app/traffic.py). Built
+# here so _track can reach it from anywhere; connected to Pinecone at
+# startup, and a no-op until then.
+TRAFFIC = Traffic()
+
+
 def _track(kind: str, **fields) -> None:
     STATS[kind] = STATS.get(kind, 0) + 1
+    TRAFFIC.event(kind)
     logger.info("ANALYTICS %s", json.dumps({"event": kind, **fields}))
 
 
@@ -483,9 +491,23 @@ async def lifespan(app: FastAPI):
         logger.info("  highlights : %d loaded", len(load_highlights()))
         logger.info("  priority   : %d account(s)",
                     len(_s.priority_author_ids))
+    # Usage history: read what earlier deploys stored, then write every few
+    # minutes. Both in the background; neither may hold up startup.
+    def _traffic_index():
+        from pinecone import Pinecone
+        return Pinecone(api_key=_s.pinecone_api_key).Index(_s.pinecone_index)
+    traffic_tasks = []
+    if _s.traffic_enabled:
+        TRAFFIC.connect(_traffic_index, salt=_s.admin_token or _s.pinecone_index,
+                        dimension=_s.embedding_dimension)
+        traffic_tasks = [asyncio.create_task(TRAFFIC.load()),
+                         asyncio.create_task(TRAFFIC.run())]
     try:
         yield
     finally:
+        for t in traffic_tasks:
+            t.cancel()
+        await TRAFFIC.close()
         task = app.state.x_bot_task
         if task:
             task.cancel()
@@ -650,6 +672,11 @@ app.mount("/demo", StaticFiles(directory=_ROOT / "demo", html=True), name="demo"
 async def cache_headers(request: Request, call_next):
     response = await call_next(request)
     path = request.url.path
+    # 2xx only: /home answers with a redirect to /demo/home.html, and
+    # counting both made every visit to the front door two page views.
+    if request.method == "GET" and 200 <= response.status_code < 300:
+        TRAFFIC.page(path, RateLimiter._client_ip(request),
+                     request.headers.get("user-agent"), request.headers.get("referer"))
     if path.endswith((".html", "/")) or path.startswith("/demo") and "." not in path.rsplit("/", 1)[-1]:
         response.headers.setdefault("Cache-Control", "no-cache")
     elif path.endswith((".png", ".jpg", ".jpeg", ".svg", ".webp", ".ico")):
@@ -1455,7 +1482,12 @@ async def stats() -> dict:
     visible without reading logs — a cap you can't see is one you only find
     out about when it starts refusing people.
     """
-    return {**STATS, "daily_budget": daily_budget.state(),
+    return {**STATS,
+            # Per day, kept across deploys. STATS above restarts at zero on
+            # every push; these do not.
+            "totals": TRAFFIC.totals(),
+            "history": TRAFFIC.history(days=14),
+            "daily_budget": daily_budget.state(),
             "per_client": per_client_daily.state(),
             "answer_cache": app.state.answers.state(),
             # Which endpoint served the answers, so "this runs on usepod"
