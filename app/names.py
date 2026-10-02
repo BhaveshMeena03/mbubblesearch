@@ -68,6 +68,32 @@ _ALIASES: dict[str, str] = {
     "vibu": "Vibhu",
 }
 
+# Manglings that are only manglings in context. Whisper writes ZEC as
+# "Zeke", and "Zeke" is also what Banks calls Ansem: "I'll let Zeke
+# introduce him", "Zeke gave you quite an intro". Of the 18 lines in the
+# Market Bubble transcripts, 15 are the coin and 3 are the man, so a plain
+# alias would put a ticker in place of a host's name. These fire only when
+# the word sits next to market language, and leave the nickname alone.
+#
+# The cost of not doing this, 2026-10-02: asked "did ansem say zcash could
+# go to 10,000", the site answered that he did not, with the line "isn't it
+# like Zeke to 10,000, Hype to 1,000, Pump to 20 billion?" -- "that is
+# exactly what I'm saying" -- among its own hits, the day after the account
+# posted that exact moment.
+_COIN_WORDS = r"(?:USD|USDT|BTC|price|chart|bags?|holders?|position|treasury|ETF)"
+_CONTEXTUAL: list[tuple[re.Pattern, str]] = [
+    # "Zeke to 10,000", "Zeke BTC", "Zeke price"
+    (re.compile(rf"\bZeke(?=\s+(?:to\s+\$?\d|{_COIN_WORDS}\b))", re.IGNORECASE), "ZEC"),
+    # "some Zeke", "a position in Zeke", "the narrative around Zeke"
+    (re.compile(r"\b(some|in|around|bought|buying|long|short|shorting|sold|selling)"
+                r"\s+Zeke\b(?!')", re.IGNORECASE), r"\1 ZEC"),
+    # "BTC and Zeke", "Hype or Zeke"
+    (re.compile(r"\b(BTC|Bitcoin|ETH|Ethereum|Hype|SOL|Solana)\s+(and|or|vs\.?|versus)"
+                r"\s+Zeke\b", re.IGNORECASE), r"\1 \2 ZEC"),
+]
+# What a search for the coin should also look for in the exact-token index.
+_EXPAND_ALSO = {"zec": ["zeke"], "zcash": ["zeke"]}
+
 _ALTERNATION = "|".join(
     re.escape(k) for k in sorted(_ALIASES, key=len, reverse=True))
 _PATTERN = re.compile(rf"\b(?:{_ALTERNATION})\b", re.IGNORECASE)
@@ -97,7 +123,14 @@ def fix(text: str) -> tuple[str, list[str]]:
             changed.append(f"{was!r}->{right!r}")
         return right
 
-    return _PATTERN.sub(swap, text), changed
+    text = _PATTERN.sub(swap, text)
+    for pattern, replacement in _CONTEXTUAL:
+        def contextual(found: re.Match, replacement: str = replacement) -> str:
+            right = found.expand(replacement)
+            changed.append(f"{found.group(0)!r}->{right!r}")
+            return right
+        text = pattern.sub(contextual, text)
+    return text, changed
 
 
 def expand(query: str) -> list[str]:
@@ -113,4 +146,8 @@ def expand(query: str) -> list[str]:
         if correct.lower() in lower and mangled not in lower:
             out.append(re.sub(re.escape(correct), mangled, query,
                               flags=re.IGNORECASE))
+    for word, spellings in _EXPAND_ALSO.items():
+        if re.search(rf"\b{word}\b", lower):
+            out.extend(re.sub(rf"\b{word}\b", s, query, flags=re.IGNORECASE)
+                       for s in spellings if s not in lower)
     return out

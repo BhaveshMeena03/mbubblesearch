@@ -427,6 +427,13 @@ talking to: quote it if you attribute it to the name on its own line, \
 and never as the person the question asked about. If an excerpt has only \
 <context>, that passage contains nothing they said.
 
+5b-iii. An <asked by="X" answered-at="T"> element is a question X put \
+to the person, and their line at T inside <said-by> is the reply. Report \
+it as an exchange: X asked, they answered. When the reply agrees ("yeah", \
+"that's exactly what I'm saying"), they agreed to what X asked: say what \
+they agreed to, quote X's question as X's words and the reply as theirs. \
+Never quote X's words as the person's own.
+
 5b-ii. When the question asks what ONE person said, build the answer from \
 the lines carrying THAT person's prefix. A retrieved passage is a stretch \
 of conversation, so it contains the people they were talking to as well; a \
@@ -587,6 +594,43 @@ def _split_by_speaker(text: str, speaker: str) -> tuple[list[str], list[str]]:
     return theirs, rest
 
 
+_STAMP_OF = re.compile(r"^\[([^\]]{1,40})\]")
+
+
+def _questions_answered(text: str, speaker: str) -> list[tuple[str, str, list[str]]]:
+    """Questions somebody else put to `speaker`, which `speaker` answered.
+
+    (asker, the time of the answer, the asker's lines), for each place
+    where `speaker`'s line comes straight after a run of up to three lines
+    by one other named person, the last of them a question. Unlabelled
+    lines never count: an unidentified voice cannot be cited as anyone.
+    """
+    wanted = speaker.strip().lower()
+    lines = text.splitlines()
+    found = []
+    for i, line in enumerate(lines):
+        m = _ATTRIBUTED.match(line)
+        if not m or m.group(1).strip().lower() != wanted:
+            continue
+        run: list[str] = []
+        asker = None
+        j = i - 1
+        while j >= 0 and len(run) < 3:
+            prev = _ATTRIBUTED.match(lines[j])
+            if not prev:
+                break
+            who = prev.group(1).strip()
+            if who.lower() == wanted or (asker and who != asker):
+                break
+            asker = who
+            run.insert(0, lines[j])
+            j -= 1
+        stamp = _STAMP_OF.match(line)
+        if run and run[-1].rstrip().endswith("?") and stamp:
+            found.append((asker, stamp.group(1), run))
+    return found
+
+
 def _sectioned(hit: PodcastHit, with_source: bool,
                about: str | None) -> str:
     """The passage body, split by speaker when the question named one.
@@ -607,6 +651,19 @@ def _sectioned(hit: PodcastHit, with_source: bool,
         return escape(text)
     theirs, rest = _split_by_speaker(text, about)
     if theirs:
+        # The one exception to "only their lines": a question they were
+        # answering, in its own element and tied to the answer's time.
+        # Without it "that's exactly what I'm saying" arrived alone, and
+        # asked whether Ansem said Zcash could reach 10,000, the answer
+        # was that he had not -- he had, agreeing on air to rasmr's "ZEC
+        # to 10,000, Hype to 1,000, Pump to 20 billion".
+        asked = "".join(
+            f"<asked by={quoteattr(who)} answered-at={quoteattr(at)}>\n"
+            + escape("\n".join(q)) + "\n</asked>\n"
+            for who, at, q in _questions_answered(text, about))
+        if asked:
+            return (asked + f"<said-by name={quoteattr(about)}>\n"
+                    + escape("\n".join(theirs)) + "\n</said-by>")
         # Only their lines. Marking the others and instructing the model
         # not to attribute them was not enough: across repeated runs it
         # still reported "[1:37:39] rasmr says realized pnl matters
@@ -1372,7 +1429,10 @@ class PodcastIndex:
             # used, so an episode found *because* of its title gets
             # demoted by the stage meant to improve the ordering.
             candidates = hits
-            docs = [f"{h.title}\n\n{h.text}" for h in candidates]
+            # Spelled right for the reranker too. It scores words, so
+            # "Zeke to 10,000" ranked nowhere for "zec 10k" even after the
+            # exact-word index had put that passage in the pool.
+            docs = [f"{h.title}\n\n{names.fix(h.text)[0]}" for h in candidates]
             order = await rerank_order(
                 self._voyage, query, docs,
                 top_k=top_k, model=self._settings.rerank_model,
@@ -1487,7 +1547,12 @@ class PodcastIndex:
             # Prefer the per-line timestamped copy so the model can cite the
             # line it used. Falls back to the plain text for anything
             # indexed before that field existed.
-            + f">\n{_sectioned(h, stamp_lines_with_source, about)}\n</excerpt>"
+            # Spelled right before the model reads it, not only after it
+            # answers: it cannot connect "Zeke to 10,000" to a question about
+            # Zcash, and it quotes "Salana" under a host's name. The bot also
+            # fixes its finished reply; the site never did.
+            + f">\n{names.fix(_sectioned(h, stamp_lines_with_source, about))[0]}"
+            + "\n</excerpt>"
             for h in hits
         ]
         return "<excerpts>\n" + "\n\n".join(blocks) + "\n</excerpts>"

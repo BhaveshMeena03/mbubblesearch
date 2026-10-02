@@ -870,8 +870,39 @@ _ROOMS = [("podcast", "Market Bubble", "/"),
           ("threadguy", "ThreadGuy", "/threadguy")]
 
 
+# Whose show is whose. A question that names a host is asking about that
+# show, and the raw score should not overrule it on a near-tie: "what is
+# ansem's price target for zcash" went to ThreadGuy, which talks about
+# Zcash more, 0.535 to Market Bubble's 0.502, and came back with nothing,
+# while Market Bubble had his own answer.
+_HOSTS = {
+    "podcast": re.compile(r"\b(?:ansem|banks|faze banks)\b", re.I),
+    "threadguy": re.compile(r"\b(?:threadguy|thread guy)\b", re.I),
+    "elon": re.compile(r"\b(?:elon|musk)\b", re.I),
+}
+# How far behind the leader the named show may be and still answer. A wide
+# gap means the named show really does not have it.
+HOST_MARGIN = 0.15
+HOST_FLOOR = 0.30
+
+
+def _prefer_named(probes: list[dict], query: str) -> list[dict]:
+    """The named host's archive first, when it is close enough to the
+    best. Unchanged when no host is named, or hosts of two archives are."""
+    named = [k for k, rx in _HOSTS.items() if rx.search(query or "")]
+    if len(named) != 1 or not probes:
+        return probes
+    best = probes[0]["score"]
+    pick = next((p for p in probes if p["key"] == named[0]), None)
+    if (pick is None or pick is probes[0] or not pick["hits"]
+            or pick["score"] < HOST_FLOOR or best - pick["score"] > HOST_MARGIN):
+        return probes
+    return [pick] + [p for p in probes if p is not pick]
+
+
 async def _probe_rooms(live: list, query: str, top_k) -> list[dict]:
-    """Every archive searched at once, best score first."""
+    """Every archive searched at once, best score first, the named host's
+    show first on a near-tie."""
     async def probe(entry):
         name, label, href, idx = entry
         try:
@@ -885,7 +916,7 @@ async def _probe_rooms(live: list, query: str, top_k) -> list[dict]:
                 "score": top, "hits": hits}
 
     probes = await asyncio.gather(*(probe(e) for e in live))
-    return sorted(probes, key=lambda p: -p["score"])
+    return _prefer_named(sorted(probes, key=lambda p: -p["score"]), query)
 
 
 def _considered(probes: list[dict]) -> list[dict]:

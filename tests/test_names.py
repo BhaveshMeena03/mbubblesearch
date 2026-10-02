@@ -213,3 +213,48 @@ class TestItRunsInBothPaths:
         crashed."""
         source = (ROOT / "app" / "podcast.py").read_text()
         assert "exact-match lookup failed" in source
+
+
+# --- "Zeke": the coin, or what Banks calls Ansem ---------------------------
+#
+# 15 of the 18 lines in the Market Bubble transcripts are ZEC; 3 are the
+# host's nickname. Asked whether Ansem said Zcash could reach 10,000, the
+# site said he had not, with "isn't it like Zeke to 10,000" in its own hits.
+
+@pytest.mark.parametrize("line, fixed", [
+    ("like Zeke to 10,000, Hype to 1,000", "like ZEC to 10,000, Hype to 1,000"),
+    ("and picked up some Zeke as well", "and picked up some ZEC as well"),
+    ("the privacy narrative around Zeke", "the privacy narrative around ZEC"),
+    ("on Zeke USD and Zeke BTC", "on ZEC USD and ZEC BTC"),
+    ("a minor position in Zeke relative to Bitcoin", "a minor position in ZEC relative to Bitcoin"),
+    ("bullish for both BTC and Zeke.", "bullish for both BTC and ZEC."),
+])
+def test_zeke_the_coin_becomes_zec(line, fixed):
+    assert fix(line)[0] == fixed
+
+
+@pytest.mark.parametrize("line", [
+    "Zeke gave you quite an intro",
+    "I'll let Zeke introduce him.",
+    "Zeke can't hear him.",
+    "we were at Zeke's place",
+])
+def test_zeke_the_host_is_left_alone(line):
+    assert fix(line) == (line, [])
+
+
+def test_a_zcash_search_also_reads_the_zeke_lines():
+    assert "did ansem say zeke could go to 10,000" in \
+        expand("did ansem say zcash could go to 10,000")
+    assert any("zeke" in q for q in expand("ZEC price"))
+
+
+def test_the_model_reads_the_corrected_spelling():
+    from app.podcast import PodcastIndex
+    from app.schemas import PodcastHit
+    hit = PodcastHit(episode_id="e", title="t", start_seconds=1568, timestamp="26:08",
+                     deep_link="https://x.com/i/status/1?t=1568", score=0.9,
+                     text="isn't it like Zeke to 10,000, Salana too")
+    body = PodcastIndex._format([hit])
+    assert "ZEC to 10,000" in body and "Solana" in body
+    assert "Zeke" not in body and "Salana" not in body
