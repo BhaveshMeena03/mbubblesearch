@@ -30,6 +30,8 @@ os.environ.setdefault("PINECONE_API_KEY", "test-key")
 # unset token waved everything through, which is the behaviour that made an
 # environment missing this variable silently publish /v1/ingest.
 os.environ.setdefault("ADMIN_TOKEN", "test-admin-token")
+# Usage history lives in Pinecone; a test app must neither read nor write it.
+os.environ["TRAFFIC_ENABLED"] = "false"
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 

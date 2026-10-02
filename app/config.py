@@ -315,6 +315,10 @@ class Settings(BaseSettings):
     # reply, so it should never start just because credentials happen to be
     # present in the environment.
     x_bot_enabled: bool = False
+    # Daily usage written to Pinecone (app/traffic.py). Off in the test
+    # suite, which otherwise reaches for Pinecone every time a test app
+    # shuts down.
+    traffic_enabled: bool = True
     # A reply is $0.015 and an answer is about $0.008, so 100 replies is
     # roughly $2.30 a day. The cap is a spend guard: it bounds what a bug, or
     # a raid, can cost before anyone notices.
