@@ -55,3 +55,10 @@ def test_new_uploads_reach_the_token_dashboards_gently():
     assert "for archive in threadguy mcg; do\n  echo \"-- $archive tokens\"" in SCRIPT
     assert '--archive "$archive" --episodes 10 --store --workers 2' in SCRIPT
     assert "EXTRACT_CONCURRENCY=4" in SCRIPT
+
+
+def test_the_jobs_can_find_ffmpeg_under_launchd():
+    """launchd's PATH has no Homebrew; every download failed on 2026-10-02."""
+    for name in ("daily_channels_check.sh", "daily_broadcast_check.sh"):
+        script = (ROOT / "scripts" / name).read_text()
+        assert 'export PATH="/opt/homebrew/bin:' in script, name

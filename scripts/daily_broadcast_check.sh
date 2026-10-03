@@ -36,6 +36,11 @@
 # the pipeline.
 
 set -euo pipefail
+# launchd starts this with a bare PATH (/usr/bin:/bin:/usr/sbin:/sbin), so
+# Homebrew's ffmpeg and ffprobe were invisible to yt-dlp. On 2026-10-02 the
+# morning run found 3 ThreadGuy and 6 MCG episodes and downloaded none of
+# them: "ffprobe and ffmpeg not found". It had never worked from launchd.
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 LABEL="com.mbubblesearch.broadcastwatch"
