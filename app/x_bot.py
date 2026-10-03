@@ -3590,6 +3590,15 @@ def corpus_for(question: str) -> str:
     return "podcast"
 
 
+# What a question about this account, not the archive, sounds like. Under
+# our own posts these stay unanswered even when they name a host: "does
+# ansem get the $mbs fees" is about the token, and the archive has no
+# answer to it.
+_ABOUT_THE_ACCOUNT = re.compile(
+    r"\$?\bmbs\b|\bfees?\b|\bbuybacks?\b|\bholders?\b|\brewards?\b|\bairdrops?\b"
+    r"|\bcontract\b|\bca\b|\bclawpump\b|\bthis (?:bot|account|project)\b", re.I)
+
+
 def routed_on_evidence(question: str) -> bool:
     """Did anything in the question actually choose an archive?
 
@@ -4238,8 +4247,13 @@ class MentionBot:
                 and not has_a_known_intent(asked)):
             logger.info("%s is a handoff, not a question — skipping", mention.id)
             return None
+        # Unless it plainly is one: it names a host, a show or an archive,
+        # and says nothing about the account. Skipping everything here
+        # meant a judge replying "what did ansem say about zcash" under the
+        # pinned demo post, mid-stream, would have got silence.
         own = getattr(self._client, "own_threads", set()) or set()
-        if str(mention.conversation_id or "") in own:
+        if str(mention.conversation_id or "") in own and (
+                not routed_on_evidence(asked) or _ABOUT_THE_ACCOUNT.search(asked)):
             logger.info("%s is under our own post — not an archive "
                         "question, skipping", mention.id)
             return None
