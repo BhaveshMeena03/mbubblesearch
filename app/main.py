@@ -876,7 +876,12 @@ _ROOMS = [("podcast", "Market Bubble", "/"),
 # Zcash more, 0.535 to Market Bubble's 0.502, and came back with nothing,
 # while Market Bubble had his own answer.
 _HOSTS = {
-    "podcast": re.compile(r"\b(?:ansem|banks|faze banks)\b", re.I),
+    # Ansem the person, not $ANSEM the coin or AnsemHack the hackathon:
+    # "what is the ansem hackathon prize pool, in the MCG archive" was
+    # sent to Market Bubble by this rule, which refused, while MCG had the
+    # answer on air at 6:48. That was the hackathon demo.
+    "podcast": re.compile(r"(?<!\$)\b(?:ansem(?!\s*(?:hack|coin|token))|banks|faze banks)\b",
+                          re.I),
     "threadguy": re.compile(r"\b(?:threadguy|thread guy)\b", re.I),
     "elon": re.compile(r"\b(?:elon|musk)\b", re.I),
 }
@@ -886,9 +891,26 @@ HOST_MARGIN = 0.15
 HOST_FLOOR = 0.30
 
 
+# Saying which archive outranks everything else. The front door's own
+# example of how to pick one is to name it.
+_ARCHIVE_NAMES = {
+    "podcast": re.compile(r"\bmarket bubble\b", re.I),
+    "mcg": re.compile(r"\bmcg\b", re.I),
+    "threadguy": re.compile(r"\bthread ?guy'?s? (?:archive|stream|show)", re.I),
+    "tradfi": re.compile(r"\bthe record\b", re.I),
+    "elon": re.compile(r"\belon (?:archive|interviews?)\b", re.I),
+}
+
+
 def _prefer_named(probes: list[dict], query: str) -> list[dict]:
-    """The named host's archive first, when it is close enough to the
-    best. Unchanged when no host is named, or hosts of two archives are."""
+    """The archive the question names first, if it has anything. Failing
+    that, the named host's archive first, when it is close enough to the
+    best. Unchanged when nothing is named, or two archives are."""
+    asked = [k for k, rx in _ARCHIVE_NAMES.items() if rx.search(query or "")]
+    if len(asked) == 1:
+        pick = next((p for p in probes if p["key"] == asked[0] and p["hits"]), None)
+        if pick is not None:
+            return [pick] + [p for p in probes if p is not pick]
     named = [k for k, rx in _HOSTS.items() if rx.search(query or "")]
     if len(named) != 1 or not probes:
         return probes
