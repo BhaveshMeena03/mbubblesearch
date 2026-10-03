@@ -75,3 +75,24 @@ def test_two_hosts_named_leaves_the_order_alone():
 def test_no_host_named_leaves_the_order_alone():
     probes = [probe("threadguy", 0.55), probe("podcast", 0.54)]
     assert _prefer_named(probes, "who is bullish on zcash") == probes
+
+
+def test_an_archive_named_in_the_question_wins_outright():
+    """The hackathon demo: MCG had it at 6:48, the host rule sent it to
+    Market Bubble because the question contains "ansem"."""
+    probes = [probe("podcast", 0.62), probe("mcg", 0.48)]
+    q = "what is the ansem hackathon prize pool and how is it split, in the MCG archive"
+    assert _prefer_named(probes, q)[0]["key"] == "mcg"
+
+
+def test_the_coin_and_the_hackathon_are_not_the_host():
+    probes = [probe("mcg", 0.55), probe("podcast", 0.50)]
+    for q in ("what is the ansem hackathon prize pool", "who is buying $ansem",
+              "ansemhack judging dates", "ansem coin buybacks"):
+        assert _prefer_named(probes, q)[0]["key"] == "mcg", q
+
+
+def test_an_archive_with_nothing_does_not_win_by_being_named():
+    empty = {"key": "mcg", "label": "mcg", "href": "/", "score": 0.0, "hits": []}
+    probes = [probe("podcast", 0.6), empty]
+    assert _prefer_named(probes, "anything on mcg about this")[0]["key"] == "podcast"
