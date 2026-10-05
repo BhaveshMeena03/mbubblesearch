@@ -489,7 +489,7 @@
   // rather than doing nothing.
   function play(host, h, vid, sec){
     sec = Math.max(0, Math.floor(Number(sec) || 0));
-    var src = "https://www.youtube.com/embed/" + vid + "?start=" + sec + "&autoplay=1";
+    var src = "https://www.youtube-nocookie.com/embed/" + vid + "?start=" + sec + "&autoplay=1";
     var pw = host.querySelector(".pw");
     if (playing === host && pw) {
       var old = pw.querySelector("iframe");
@@ -514,7 +514,7 @@
     var vid = ytId(h.deep_link || h.url || "");
     if (!vid) { window.open(Cite.linkAt(h, sec), "_blank", "noopener"); return; }
     var host = $("citeplay");
-    var src = "https://www.youtube.com/embed/" + vid + "?start=" + sec + "&autoplay=1";
+    var src = "https://www.youtube-nocookie.com/embed/" + vid + "?start=" + sec + "&autoplay=1";
     var f = host.querySelector("iframe");
     if (playing === host && f) {
       if (f.getAttribute("src") !== src) f.src = src;
@@ -885,7 +885,7 @@
       b.onclick = function(){
         var f = frame();
         if (!f || !vid) return;
-        f.src = "https://www.youtube.com/embed/" + vid + "?start=" + sec + "&autoplay=1";
+        f.src = "https://www.youtube-nocookie.com/embed/" + vid + "?start=" + sec + "&autoplay=1";
         ol.querySelectorAll("li.on").forEach(function(o){ o.classList.remove("on"); });
         li.classList.add("on");
         var box2 = f.getBoundingClientRect();
@@ -923,7 +923,7 @@
         + 'allow="autoplay; encrypted-media; fullscreen; picture-in-picture" '
         + 'title="Playback"></iframe>';
       pw.querySelector("iframe").src =
-        "https://www.youtube.com/embed/" + vid + "?autoplay=1";
+        "https://www.youtube-nocookie.com/embed/" + vid + "?autoplay=1";
       pw.querySelector("iframe").title = "Playing " + (e.title || "this recording");
       var n = notes(e, function(){ return pw.querySelector("iframe"); });
       if (n) pw.appendChild(n);
@@ -968,7 +968,7 @@
         st.innerHTML = '<iframe allowfullscreen '
           + 'allow="autoplay; encrypted-media; fullscreen; picture-in-picture" '
           + 'title="Playback"></iframe>';
-        st.querySelector("iframe").src = "https://www.youtube.com/embed/" + vid + "?autoplay=1";
+        st.querySelector("iframe").src = "https://www.youtube-nocookie.com/embed/" + vid + "?autoplay=1";
         st.querySelector("iframe").title = "Playing " + (e.title || "this recording");
         var n = notes(e, function(){ return st.querySelector("iframe"); });
         if (n) st.appendChild(n);

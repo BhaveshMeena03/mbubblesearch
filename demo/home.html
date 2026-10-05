@@ -613,7 +613,7 @@
     playing = null;
   }
   function play(el, vid, sec){
-    var src = "https://www.youtube.com/embed/" + vid
+    var src = "https://www.youtube-nocookie.com/embed/" + vid
             + "?start=" + Math.floor(sec) + "&autoplay=1";
     var on = playing === el && el.querySelector("iframe");
     // A second time in the same recording, from the answer, moves the
@@ -918,7 +918,7 @@
       st.innerHTML = '<iframe allowfullscreen '
         + 'allow="autoplay; encrypted-media; fullscreen; picture-in-picture" '
         + 'title="Playback from the cited moment"></iframe>';
-      st.querySelector("iframe").src = "https://www.youtube.com/embed/"
+      st.querySelector("iframe").src = "https://www.youtube-nocookie.com/embed/"
         + m.vid + "?start=" + m.at + "&autoplay=1";
       st.querySelector("iframe").title = m.who + ", " + m.where + ", from " + stamp(m.at);
       st.hidden = false;
@@ -997,7 +997,7 @@
           // rather than assumed to have survived the wait.
           var frame = st.querySelector("iframe");
           if (!frame) { st.hidden = true; return; }
-          frame.src = "https://www.youtube.com/embed/"
+          frame.src = "https://www.youtube-nocookie.com/embed/"
             + r.vid + "?start=" + r.at + "&autoplay=1";
           st.querySelector(".sym").textContent = r.sym + " \u00b7 " + r.name;
           st.querySelector("h3").textContent = r.title;
