@@ -45,7 +45,21 @@ def test_answers_written_under_the_wrong_prompt_are_not_served():
     """The cache key moves with the question, not the prompt, so the
     answers written under the Market Bubble prompt had to be orphaned
     explicitly or they would have gone on being served for a day."""
-    assert 'surface="threadguy-v2"' in MAIN
+    assert 'surface="threadguy-v3"' in MAIN
+    assert 'surface="threadguy-stream-v2"' in MAIN
+
+
+def test_a_guest_named_in_the_title_keeps_their_own_words():
+    """2026-10-05: asked what ThreadGuy thinks of Hyperliquid, the answer
+    gave him Flood's "biggest position of all time" and Flood's company,
+    from an episode titled "w/ Flood & FrankDeGods"."""
+    prompt = podcast.THREADGUY_SYSTEM_PROMPT
+    assert "from an interview with" in prompt
+    assert "Never hand a guest's position" in prompt
+
+
+def test_each_episode_is_named_once():
+    assert "naming each episode once" in podcast.THREADGUY_SYSTEM_PROMPT
 
 
 def test_it_is_a_room_in_the_fan_out():
@@ -182,3 +196,60 @@ def test_the_answer_sits_on_the_pages_left_edge():
     """Centred, it floated in the middle under a left aligned page."""
     out = PAGE.split("  #out{")[1].split("}")[0]
     assert "margin:48px 0 0" in out and "auto" not in out
+
+
+def test_guests_are_read_off_interview_titles():
+    from app.podcast import title_guests
+    assert title_guests("How Hyperliquid Revolutionized Crypto... w/ Flood & FrankDeGods") \
+        == ["Flood", "FrankDeGods"]
+    assert title_guests("I Met The Founder of Jupiter Exchange... (weremeow)") == ["weremeow"]
+    assert title_guests("Brandon Hong: $25M+ Trades, Crypto Market Future, and More | TG Podcast") \
+        == ["Brandon Hong"]
+    assert title_guests("\"He's In TROUBLE!\" ThreadGuy and Rasmr's CRYPTO HOT SEAT #1 | 9/26/25") \
+        == ["Rasmr"]
+    assert title_guests("Bitcoin is about to PUMP...? (LIVE) - Interview w/ @HadickM at 4:45PM EST") \
+        == ["HadickM"]
+
+
+def test_his_own_streams_name_nobody():
+    """A wrong name would move ThreadGuy's own words onto someone else."""
+    from app.podcast import title_guests
+    for title in ("MARKET OPEN: Pokémon Cards have TOPPED, Bitcoin BREAKOUT?",
+                  "The Sweetgreen \"Chud Wrap\" Thesis... [Stream Recap]",
+                  "This is KILLING Crypto... (rant)",
+                  "the market will forever crave memecoins (philosophical deepdive)",
+                  "Back From Vacation: The Anti Bitcoin Cycle & AI Stocks",
+                  "Why Tokens With Equity Don't Work, and You're Not Getting AI"):
+        assert title_guests(title) == [], title
+
+
+def _hit(title):
+    from app.schemas import PodcastHit
+    return PodcastHit(episode_id="x", title=title, start_seconds=0.0,
+                      timestamp="0:00", deep_link="", text="", score=0.5)
+
+
+def test_his_view_is_built_from_his_own_recordings():
+    """2026-10-05: three phrasings of the question gave him Flood's
+    position and Flood's company, and then rasmr's "biggest position of all
+    time", until the interviews were left out of what the model reads."""
+    from app.podcast import host_view_only
+    hits = [_hit("How Hyperliquid Revolutionized Crypto... w/ Flood & FrankDeGods"),
+            _hit("MARKET OPEN: one"), _hit("LIVE: two"), _hit("three [Stream Recap]")]
+    kept = host_view_only("What does ThreadGuy think of Hyperliquid?", hits)
+    assert [h.title for h in kept] == ["MARKET OPEN: one", "LIVE: two", "three [Stream Recap]"]
+
+
+def test_a_question_about_a_guest_still_sees_the_interview():
+    from app.podcast import host_view_only
+    hits = [_hit("How Hyperliquid Revolutionized Crypto... w/ Flood & FrankDeGods"),
+            _hit("MARKET OPEN: one"), _hit("LIVE: two"), _hit("three [Stream Recap]")]
+    for q in ("what did flood say about hyperliquid on threadguy",
+              "who did threadguy interview about hyperliquid"):
+        assert len(host_view_only(q, hits)) == 4, q
+
+
+def test_too_little_of_his_own_keeps_the_interviews():
+    from app.podcast import host_view_only
+    hits = [_hit("Something w/ Flood"), _hit("Other w/ Mert"), _hit("MARKET OPEN: one")]
+    assert len(host_view_only("what does threadguy think of x", hits)) == 3

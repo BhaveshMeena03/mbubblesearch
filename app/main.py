@@ -2492,7 +2492,7 @@ async def threadguy_search(
     # other's cached answers. Versioned because the answers changed: the
     # first ones were written under the Market Bubble prompt, and a key
     # that only moves with the question would go on serving them.
-    key = make_key(body.query, surface="threadguy-v2", top_k=body.top_k)
+    key = make_key(body.query, surface="threadguy-v3", top_k=body.top_k)
     cached = answers.get(key)
     if cached is not None:
         per_client_daily.refund(request)
@@ -2528,7 +2528,7 @@ async def threadguy_search_stream(
     lengths = {e.get("id"): int(float(e.get("seconds") or 0)) for e in shelf}
     urls = {e.get("id"): e.get("url", "") for e in shelf}
     return _archive_stream(index, body.query, body.top_k, lengths, answers,
-                           surface="threadguy-stream", urls=urls)
+                           surface="threadguy-stream-v2", urls=urls)
 
 
 def _threadguy_payload(question: str, result) -> dict:
