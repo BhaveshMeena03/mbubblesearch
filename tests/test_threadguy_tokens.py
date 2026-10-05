@@ -87,7 +87,19 @@ def test_this_week_counts_back_from_the_newest_stream_not_today():
 
 
 def test_times_play_on_the_page():
-    assert "https://www.youtube.com/embed/" in PAGE
+    assert "https://www.youtube-nocookie.com/embed/" in PAGE
+
+
+def test_every_player_plays_signed_out():
+    # The plain youtube.com player runs as whoever is signed in to YouTube,
+    # so it is paused by "too many devices streaming on your plan" when the
+    # viewer's account is playing elsewhere. That hit the ThreadGuy page on
+    # 2026-10-05, and on stream it would stop the demo. The privacy player
+    # plays signed out, as the Market Bubble and MCG pages already did.
+    for name in ("home.html", "threadguy.html", "threadguy-assets.html",
+                 "podcast.html", "mcg.html"):
+        page = (Path(__file__).resolve().parent.parent / "demo" / name).read_text()
+        assert "www.youtube.com/embed/" not in page, name
     assert 'target="_blank" rel="noopener">\' +\n        esc(m.timestamp)' not in PAGE
 
 
