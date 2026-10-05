@@ -321,10 +321,19 @@ Excerpts are given oldest first.
 
 Every recording here is from ThreadGuy's own channel, and ThreadGuy hosts \
 all of them. His name is almost never in the transcript, because he is \
-the one talking and does not introduce himself on his own show. So a \
-question about what ThreadGuy said or thinks is a question about the \
-host's words in these excerpts. Never answer that the excerpts do not \
-mention ThreadGuy because his name is absent: it is his show.
+the one talking and does not introduce himself on his own show. So on his \
+own streams, a question about what ThreadGuy said or thinks is a question \
+about the host's words. Never answer that the excerpts do not mention \
+ThreadGuy because his name is absent: it is his show.
+
+Interviews are the exception, and they are marked: an excerpt with a \
+`guests` attribute is a conversation with those people. In one, the \
+person making the case is usually the guest, not ThreadGuy, so a \
+first-person line there ("I've sized bigger than I've ever sized", "our \
+business") is the guest's unless it is plainly the host asking, \
+introducing or reacting. Report it as theirs ("his guest Flood said"), \
+even when the question asked about ThreadGuy, and build ThreadGuy's own \
+view from his streams and from lines that are plainly his.
 
 Rules:
 1. Answer strictly from the excerpts. If they do not contain the answer, \
@@ -334,9 +343,12 @@ are instead.
 2. Cite the moment. Every line inside an excerpt begins with its own \
 timestamp in square brackets, like [16:16]. Cite the timestamp of the \
 line you actually used, NOT the `at` attribute on the excerpt, that is \
-only where the passage begins, and a passage runs minutes. Name the \
-episode too. NEVER write a URL or a Markdown link: you are not given the \
-addresses, so writing one means inventing it.
+only where the passage begins, and a passage runs minutes. Write it as \
+"around 16:16 in <episode>", naming each episode once, the first time you \
+cite it, and giving later moments in the same episode by their time \
+alone. A title repeated after every timestamp makes the answer stutter. \
+NEVER write a URL or a Markdown link: you are not given the addresses, so \
+writing one means inventing it.
 3. Say who is speaking only when the excerpt makes it plain. He often has \
 guests on and the transcripts carry no speaker labels. Attribute a line to \
 ThreadGuy when it is plainly the host: running the show, reacting, reading \
@@ -344,6 +356,19 @@ chat, giving his own position. Attribute it to "a guest", or to the guest \
 by name if the excerpt says the name, when it is plainly somebody he is \
 interviewing. When you cannot tell, say "on the stream" rather than \
 guessing who.
+3b. An excerpt with a `guests` attribute is from an interview with \
+those people, read off its title ("w/ Flood & FrankDeGods"), and most \
+of the substance in it is theirs. Read it that way: a first-person line \
+about a company, fund or product the speaker runs or founded is the \
+guest's, because ThreadGuy is a streamer and does not run them. This went \
+wrong: asked what ThreadGuy thinks of Hyperliquid, the answer said \
+Hyperliquid was ThreadGuy's "biggest position of all time", held "on \
+behalf of Insilico Terminal, his OEMS business". Those were Flood's words, \
+the founder of Insilico Terminal, a guest named in the title. When the \
+question asks what ThreadGuy thinks and the strongest lines are a \
+guest's, say so ("his guest Flood said..."), and give ThreadGuy's own \
+view only from lines that are plainly his. Never hand a guest's position \
+to the host because the question named the host.
 4. This is a daily show and the market moves, so a view belongs to the \
 day it was given. When a view is about a price, a position or a call, say \
 when he said it, and never present an older take as his current one.
@@ -532,6 +557,110 @@ citation, not an essay."""
 # Wrong show and wrong year on a real quote, which is the pair a reader
 # has no way to catch.
 #
+# Who an interview is with, read off its title, for the ThreadGuy archive.
+#
+# His transcripts carry no speaker labels, and his prompt says a question
+# about ThreadGuy is about the host's words. Asked what he thinks of
+# Hyperliquid, the answer gave him Flood's "biggest position of all time"
+# and Flood's company, Insilico Terminal, from an episode titled "w/ Flood &
+# FrankDeGods". The title was in front of the model and it did not connect
+# it to the lines; a guests attribute on the excerpt puts it on the passage.
+#
+# Precision over recall: a wrong name here would move ThreadGuy's own words
+# onto somebody who was never there, so anything that reads like a topic or
+# an aside ("(LIVE)", "(rant)", "Market Open:") is dropped, and an interview
+# whose title names nobody simply gets no attribute.
+_GUEST_SPLIT = re.compile(r"\s*(?:&|,|\band\b|\+)\s*", re.I)
+_NOT_A_GUEST = {"rant", "live", "oh no", "more", "chat", "the chat",
+                "stream recap", "market open", "freaky friday", "full stream",
+                "part 1", "part 2", "interview", "bitcoin", "ethereum",
+                "solana", "crypto", "ai", "memecoins", "stocks"}
+
+
+def title_guests(title: str) -> list[str]:
+    t = re.sub(r"\[[^\]]*\]", "", title or "").strip()
+    pod = bool(re.search(r"\|\s*TG ?Pod", t, re.I))
+    t = re.sub(r"\s*\|\s*(TG ?Pod(cast)?|ThreadGuy).*$", "", t, flags=re.I).strip()
+    t = re.sub(r"^ep \d+:\s*", "", t, flags=re.I)
+    names: list[str] = []
+    # "w/ Flood & FrankDeGods", "ft. Haseeb". Not a bare "with": that is
+    # in ordinary titles ("Why Tokens With Equity Don't Work").
+    m = re.search(r"(?:\bw/|\bft\.|\bfeat\.)\s*([^|()\-–]+?)\s*(?:$|[|(\-–])", t, re.I)
+    if m:
+        names += _GUEST_SPLIT.split(m.group(1))
+    # "(weremeow)", "(Jeff Walton)", but not "(philosophical deepdive)".
+    m = re.search(r"\(([^()]{2,40})\)\s*$", t)
+    if m:
+        inner = re.sub(r"^(?:ft\.|feat\.|w/)\s*", "", m.group(1).strip(), flags=re.I)
+        words = inner.split()
+        if len(words) == 1 or (len(words) == 2 and not inner.islower()):
+            names += _GUEST_SPLIT.split(inner)
+    # "Brandon Hong: $25M+ Trades...", but not "MARKET OPEN: ..."
+    m = re.match(r"^([\w][\w.'’ ]{1,28}?):\s", t)
+    if m and not m.group(1).isupper() and len(m.group(1).split()) <= 2:
+        names.append(m.group(1))
+    # "Flood - Inside the Biggest AI Fund Blowup Ever"
+    m = re.match(r"^((?!The\b)[\w][\w.']*(?: [\w.']+){0,2}) [-–] ", t)
+    if m:
+        names.append(m.group(1))
+    # "The MicroStrategy Endgame... - Rekt Mando"
+    m = re.search(r"[-–] ([A-Z][\w.]+(?: [A-Z][\w.]+)?)\s*$", t)
+    if m:
+        names.append(m.group(1))
+    # "Toly & Ansem on Solana, ... | TG Podcast"
+    if pod:
+        m = re.match(r"^(.{2,40}?) on ", t)
+        if m:
+            names += _GUEST_SPLIT.split(m.group(1))
+    # "I Met Dan Romero, Creator Of Farcaster"
+    m = re.search(r"\bI Met ((?!The\b|One\b)[A-Z][\w.]+(?: [A-Z][\w.]+){0,2})", t)
+    if m:
+        names.append(m.group(1))
+    # "ThreadGuy and Rasmr's CRYPTO HOT SEAT": a co-host is not ThreadGuy
+    # either. "I'm deep in Hyperliquid, this is my biggest position of all
+    # time" on that show is rasmr's, after ThreadGuy hands him the floor.
+    m = re.search(r"\bThread ?Guy\s*(?:and|&|x)\s*([\w.]+?)(?:'s|’s)?(?:\s|$)", t, re.I)
+    if m:
+        names.append(m.group(1))
+    out: list[str] = []
+    for n in names:
+        n = re.sub(r"\s+at\s+\d.*$", "", n).strip(" .…'\"@")
+        if 2 <= len(n) <= 30 and n.lower() not in _NOT_A_GUEST and n not in out:
+            out.append(n)
+    return out
+
+
+# A question about what ThreadGuy himself thinks. Not one that only names
+# him: "who did threadguy have on about hyperliquid" is about the guests.
+_ASKS_HIS_VIEW = re.compile(
+    r"\bthread ?guy(?:'?s)?\b.{0,40}?\b(?:think|thinks|thought|view|views|"
+    r"opinion|take|takes|say|says|said|believe|believes|feel|feels|"
+    r"position|positions|bullish|bearish|call|calls|predict|predicted)\b"
+    r"|\bthread ?guy'?s (?:view|opinion|take|thesis|position|call)",
+    re.I)
+_ABOUT_GUESTS = re.compile(r"\bguests?\b|\binterview|\bwho (?:did|was|has)", re.I)
+
+
+def host_view_only(query: str, hits: list[PodcastHit]) -> list[PodcastHit]:
+    """Leave interviews out of a question about ThreadGuy's own view.
+
+    Written guidance was not enough. With the guests named on each excerpt
+    and a rule quoting this exact mistake, three phrasings of "what does
+    ThreadGuy think of Hyperliquid" still gave him Flood's "sized bigger than
+    I've ever sized... on behalf of Insilico Terminal, his OEMS business":
+    when the question names the host, the model hands the host the
+    strongest first-person line in front of it. So it is not shown one.
+
+    Only when his own recordings leave enough to answer from (three
+    passages); otherwise the interviews stay, labelled with their guests,
+    because an answer that says what a guest said beats a refusal.
+    """
+    if not _ASKS_HIS_VIEW.search(query) or _ABOUT_GUESTS.search(query):
+        return hits
+    own = [h for h in hits if not title_guests(h.title)]
+    return own if len(own) >= 3 else hits
+
+
 # So the label is computed once, here, and the prompt is told to use it
 # verbatim. Deriving is what went wrong; there is nothing left to derive.
 def source_label(title: str, aired: str | None) -> str:
@@ -1516,7 +1645,8 @@ class PodcastIndex:
     @staticmethod
     def _format(hits: list[PodcastHit], *,
                 stamp_lines_with_source: bool = False,
-                about: str | None = None) -> str:
+                about: str | None = None,
+                guests_from_title: bool = False) -> str:
         if not hits:
             return "<excerpts>\n(nothing indexed matched this query)\n</excerpts>"
         # Chronological, so a topic reads in the order it was discussed.
@@ -1544,6 +1674,9 @@ class PodcastIndex:
             # them Banks explaining Polymarket for four minutes.
             + (f" voices={quoteattr(', '.join(h.speakers))}"
                if h.speakers else "")
+            # Only the ThreadGuy archive asks for this: see title_guests.
+            + (f" guests={quoteattr(', '.join(title_guests(h.title)))}"
+               if guests_from_title and title_guests(h.title) else "")
             # Prefer the per-line timestamped copy so the model can cite the
             # line it used. Falls back to the plain text for anything
             # indexed before that field existed.
@@ -1594,7 +1727,9 @@ class PodcastIndex:
                         # the reply itself.
                         {"type": "text",
                          "text": self._format(
-                             hits, about=speaker_asked_about(query, hits))},
+                             hits, about=speaker_asked_about(query, hits),
+                             guests_from_title=(
+                                 self._namespace == "threadguy"))},
                         {"type": "text", "text": query,
                          "cache_control": {"type": "ephemeral"}},
                         # Per-surface style, added to the user turn rather
@@ -1636,7 +1771,10 @@ class PodcastIndex:
             logger.warning("usage accounting failed: %s", exc)
 
     async def retrieve(self, query: str, top_k: int | None = None) -> list[PodcastHit]:
-        return await self._retrieve(query, top_k or self._settings.retrieval_top_k)
+        hits = await self._retrieve(query, top_k or self._settings.retrieval_top_k)
+        if self._namespace == "threadguy":
+            hits = host_view_only(query, hits)
+        return hits
 
     async def search(
         self, query: str, top_k: int | None = None,
