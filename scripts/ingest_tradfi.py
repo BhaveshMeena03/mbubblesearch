@@ -13,6 +13,16 @@ and the good material is whoever posted the full session.
 
     python scripts/ingest_tradfi.py --list
     python scripts/ingest_tradfi.py https://youtu.be/XXXX --subject "Larry Fink"
+    python scripts/ingest_tradfi.py --redo DLFXUkOc_7I --subject "Kevin Warsh"
+
+--redo puts a recording in again from the transcript already on the shelf,
+under the name given. It exists because one was filed under the wrong
+person: the 29 July 2026 FOMC press conference went in as Jerome Powell's,
+on the assumption that the Fed chair was still Jerome Powell. It opens "My
+second FOMC committee meeting as chairman" and the room says "Chairman
+Warsh". Forty-five minutes of one man's words were cited as another's for
+ten weeks. The subject of a recording is read off the recording, not off
+who usually gives it.
 
 Transcription is local, the same path MCG uses, so a run costs time and
 no money.
@@ -33,7 +43,7 @@ sys.path.insert(0, str(ROOT))
 from app import episode_store  # noqa: E402
 from app.config import get_settings  # noqa: E402
 from app.podcast import PodcastIndex  # noqa: E402
-from app.provenance import drop_hallucinated  # noqa: E402
+from app.provenance import drop_hallucinated, strip_speaker_labels  # noqa: E402
 from app.schemas import Episode  # noqa: E402
 from scripts.ingest_mcg import (  # noqa: E402
     YTDLP,
@@ -79,6 +89,73 @@ def shelf() -> list[dict]:
     return episode_store.load(SHELF)
 
 
+def retitled(title: str, was: str, now: str) -> str:
+    """The title under a corrected subject: the old name's prefix comes
+    off and the new one goes on, unless the title already carries it."""
+    if was and title.lower().startswith(f"{was.lower()}: "):
+        title = title[len(was) + 2:]
+    if now and now.lower() not in title.lower():
+        title = f"{now}: {title}"
+    return title
+
+
+def forget(index, namespace: str, vid: str, dimension: int) -> int:
+    """Take a recording's passages out, so none of the old ones are left
+    beside the new: a cleaned transcript windows differently."""
+    probe = [0.0] * dimension
+    probe[0] = 1.0
+    # A set, because a delete takes a moment to show: the next query can
+    # hand back ids that are already gone, and counting them again said
+    # 48 passages had come out of a recording that only ever had 24.
+    removed: set[str] = set()
+    for _ in range(5):
+        found = index.query(vector=probe, top_k=1000, namespace=namespace,
+                            include_metadata=False,
+                            filter={"episode_id": {"$eq": vid}})
+        ids = [m["id"] for m in found.get("matches", [])]
+        if not ids:
+            break
+        for at in range(0, len(ids), 100):
+            index.delete(ids=ids[at:at + 100], namespace=namespace)
+        removed.update(ids)
+    return len(removed)
+
+
+async def redo(vid: str, subject: str) -> int:
+    rows = shelf()
+    row = next((r for r in rows if r["episode_id"] == vid), None)
+    if row is None:
+        print(f"  {vid} is not on the shelf")
+        return 1
+    settings = get_settings()
+    namespace = settings.tradfi_namespace
+    if namespace in FORBIDDEN:
+        raise SystemExit(f"refusing to run: namespace {namespace!r} is "
+                         f"another archive.")
+    kept, dropped = drop_hallucinated(row["segments"])
+    kept, labels = strip_speaker_labels(kept)
+    for note in dropped + labels:
+        print(f"     removed: {note}")
+    was = row.get("subject", "")
+    subject = subject or was
+    title = retitled(row["title"], was, subject)
+    if title != row["title"]:
+        print(f"     {row['title']!r}\n  -> {title!r}")
+    index = PodcastIndex(namespace=namespace)
+    gone = forget(index.index, namespace, vid, settings.embedding_dimension)
+    episode = Episode(episode_id=vid, title=title, url=row["url"],
+                      platform="youtube",
+                      published_at=row.get("published_at"), segments=kept)
+    windows = await index.ingest([episode])
+    print(f"     {gone} passages out, {windows} in")
+    episode_store.merge([{**row, "title": title, "subject": subject,
+                          "seconds": int(max(s["t"] for s in kept)),
+                          "segments": kept}], path=SHELF)
+    print("  repack for the image:  python scripts/pack_episodes.py "
+          "data/tradfi_episodes.json")
+    return 0
+
+
 async def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("urls", nargs="*", help="YouTube URLs to add")
@@ -87,7 +164,13 @@ async def main() -> int:
                          "the shelf so the archive can grow past one person")
     ap.add_argument("--list", action="store_true",
                     help="show what is already indexed and stop")
+    ap.add_argument("--redo", metavar="VIDEO_ID",
+                    help="index a shelved recording again from its own "
+                         "transcript, cleaned, under --subject if given")
     args = ap.parse_args()
+
+    if args.redo:
+        return await redo(args.redo, args.subject)
 
     rows = shelf()
     if args.list or not args.urls:
@@ -125,6 +208,9 @@ async def main() -> int:
         kept, dropped = drop_hallucinated(segments)
         if dropped:
             print(f"     dropped hallucinated: {', '.join(dropped)}")
+        kept, labels = strip_speaker_labels(kept)
+        if labels:
+            print(f"     removed speaker labels nobody said: {', '.join(labels)}")
         if not kept:
             print("     nothing transcribed — skipping rather than "
                   "shelving an empty recording")

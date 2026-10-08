@@ -1,8 +1,8 @@
-"""Two guards on what is allowed to become a citation.
+"""Guards on what is allowed to become a citation.
 
 The product's whole claim is "he said this, at this second". A citation is
 only worth anything if the words were said and the person said them, so
-these check the two ways that goes wrong in practice. Both were found by
+these check the ways that goes wrong in practice. Each was found by
 running the pipeline over real material rather than reasoned about in
 advance.
 
@@ -11,6 +11,11 @@ advance.
                         twenty-nine times across eight and a half minutes
                         of hold music -- nine minutes of speech nobody
                         said, timestamped as confidently as the rest.
+
+  a name nobody said    Whisper has read the Fed's transcripts and writes
+                        their speaker labels over the audio from memory:
+                        "CHAIRMAN BERNANKE." twelve times in a Powell
+                        press conference.
 
   the wrong recording   A search for one Lex Fridman episode returned the
                         original and a channel called "Game Time" hosting
@@ -65,6 +70,45 @@ def drop_hallucinated(segments: list[dict]) -> tuple[list[dict], list[str]]:
     }
     kept = [s for s in segments if s.get("text", "").strip() not in banned]
     notes = [f"{text!r} x{counts[text]}" for text in sorted(banned)]
+    return kept, notes
+
+
+# A speaker label nobody spoke: two to four words in capitals, a full stop.
+# Every word four letters or more (bar a title), so "U.S. GDP.", "IBIT
+# ETF." and "OH MY GOD." are left alone.
+_LABEL_WORD = r"(?:(?:MR|MS|MRS|DR)\.|[A-Z][A-Z'\-]{3,})"
+_SPEAKER_LABEL = re.compile(rf"^{_LABEL_WORD}(?:\s{_LABEL_WORD}){{1,3}}\.(?:\s+|$)")
+
+
+def strip_speaker_labels(segments: list[dict]) -> tuple[list[dict], list[str]]:
+    """(kept, what was removed) -- names Whisper wrote in front of speech.
+
+    The Fed publishes its press conferences as transcripts, "CHAIR POWELL."
+    before each answer, and Whisper has read them. Given the audio it
+    writes the labels back in from memory, not from the room: the
+    29 October 2025 conference, which is Jerome Powell from start to
+    finish, came out with "CHAIRMAN BERNANKE." twelve times and "CHAIR
+    YELLEN." six, and the June 2020 one has an answer of Powell's
+    beginning "MICHAEL MCKEE.", who asked the question. Another opens
+    "SECRETARY KERRY." Nobody said any of it, and each is a name sitting
+    directly in front of words that are somebody else's.
+
+    A line that is only a label goes. A line that starts with one keeps
+    the rest. For Whisper transcripts, which do not write in capitals:
+    captions do, for emphasis, and are not put through this.
+    """
+    kept, removed = [], collections.Counter()
+    for segment in segments:
+        text = segment.get("text", "").strip()
+        found = _SPEAKER_LABEL.match(text)
+        if not found:
+            kept.append(segment)
+            continue
+        removed[found.group(0).strip()] += 1
+        rest = text[found.end():].strip()
+        if rest:
+            kept.append({**segment, "text": rest})
+    notes = [f"{label!r} x{n}" for label, n in sorted(removed.items())]
     return kept, notes
 
 
