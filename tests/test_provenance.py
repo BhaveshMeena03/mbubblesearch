@@ -137,3 +137,59 @@ def test_a_missing_archive_file_does_not_take_the_service_down():
         assert m._elon_episodes() == []
     finally:
         m._ELON_FILE, m._ELON_CACHE = original, None
+
+
+# --- a name nobody said ------------------------------------------------------
+#
+# Whisper has read the Fed's published transcripts, which put "CHAIR
+# POWELL." before each answer, and writes those labels over the audio from
+# memory. Every line below is from the archive as it was indexed.
+
+from app.provenance import strip_speaker_labels  # noqa: E402
+
+
+def lines(*texts: str) -> list[dict]:
+    return [{"t": float(n), "text": text} for n, text in enumerate(texts)]
+
+
+def test_a_label_for_somebody_who_was_not_in_the_room_goes():
+    """Twelve of these in the 29 October 2025 conference, which is Jerome
+    Powell from start to finish."""
+    kept, removed = strip_speaker_labels(lines(
+        "CHAIRMAN BERNANKE.", "So I would say that the labor market is cooling.",
+        "CHAIR YELLEN.", "SECRETARY KERRY."))
+    assert [s["text"] for s in kept] == ["So I would say that the labor market is cooling."]
+    assert removed == ["'CHAIR YELLEN.' x1", "'CHAIRMAN BERNANKE.' x1",
+                       "'SECRETARY KERRY.' x1"]
+
+
+def test_the_words_after_a_label_are_kept_and_keep_their_second():
+    """Powell's answer, labelled with the name of the reporter who asked."""
+    kept, _ = strip_speaker_labels([{
+        "t": 3292.0, "text": "MICHAEL MCKEE. What we've targeted is broader "
+                             "financial conditions."}])
+    assert kept == [{"t": 3292.0, "text": "What we've targeted is broader "
+                                          "financial conditions."}]
+
+
+def test_a_title_makes_a_label_of_a_short_name():
+    kept, _ = strip_speaker_labels(lines("MS. LONG. Thank you, Chair."))
+    assert kept[0]["text"] == "Thank you, Chair."
+
+
+def test_ordinary_speech_is_not_a_label():
+    said = ["Good afternoon. My colleagues and I remain squarely focused.",
+            "U.S. GDP. It grew at two percent.",
+            "IBIT ETF. That one took in ten billion.",
+            "AI. AI is the story.",
+            "Chair Powell, thank you for taking the question.",
+            "OH MY GOD. THAT'S INSANE."]
+    kept, removed = strip_speaker_labels(lines(*said))
+    assert [s["text"] for s in kept] == said
+    assert removed == []
+
+
+def test_the_original_lines_are_not_changed_in_place():
+    given = [{"t": 1.0, "text": "MICHELLE SMITH. Thank you."}]
+    strip_speaker_labels(given)
+    assert given[0]["text"] == "MICHELLE SMITH. Thank you."
