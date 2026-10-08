@@ -66,6 +66,14 @@ _ALIASES: dict[str, str] = {
     # an earlier post -- so the archive contradicted itself in public over
     # a caption error nobody had corrected.
     "vibu": "Vibhu",
+    # The hackathon this project is entered in. On MCG's 6 October stream
+    # Bunny of ClawPump says the judges will take longer to announce the
+    # winner, and the transcript has him saying "the results of Anthem
+    # Hack" and, a line later, "answer hack it's over now". Asked when the
+    # AnsemHack winner would be announced, the archive answered from an
+    # August episode and said nobody had given a date.
+    "anthem hack": "AnsemHack",
+    "answer hack": "AnsemHack",
 }
 
 # Manglings that are only manglings in context. Whisper writes ZEC as
@@ -92,7 +100,10 @@ _CONTEXTUAL: list[tuple[re.Pattern, str]] = [
                 r"\s+Zeke\b", re.IGNORECASE), r"\1 \2 ZEC"),
 ]
 # What a search for the coin should also look for in the exact-token index.
-_EXPAND_ALSO = {"zec": ["zeke"], "zcash": ["zeke"]}
+_EXPAND_ALSO = {"zec": ["zeke"], "zcash": ["zeke"],
+                # People type it as two words as often as one.
+                "ansem hackathon": ["anthem hack", "answer hack"],
+                "ansemhack": ["ansem hack", "ansem hackathon"]}
 
 _ALTERNATION = "|".join(
     re.escape(k) for k in sorted(_ALIASES, key=len, reverse=True))

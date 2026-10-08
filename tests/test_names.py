@@ -258,3 +258,24 @@ def test_the_model_reads_the_corrected_spelling():
     body = PodcastIndex._format([hit])
     assert "ZEC to 10,000" in body and "Solana" in body
     assert "Zeke" not in body and "Salana" not in body
+
+
+def test_the_hackathon_is_found_under_what_whisper_heard():
+    """2026-10-08: on MCG's 6 October stream Bunny says the judges will
+    take longer to announce the winner. The transcript has "the results of
+    Anthem Hack" and "answer hack it's over now", and a question about the
+    AnsemHack winner was answered from August."""
+    from app import names
+    assert names.fix("the results of Anthem Hack")[0] == "the results of AnsemHack"
+    assert names.fix("you know I answer hack it's over now")[0] == \
+        "you know I AnsemHack it's over now"
+    assert "when will the anthem hack winner be announced" in \
+        names.expand("when will the ansemhack winner be announced")
+    assert "who won the anthem hack" in names.expand("who won the ansem hackathon")
+
+
+def test_the_coin_and_an_anthem_are_left_alone():
+    from app import names
+    for text in ("the national anthem hacked", "the $ANSEM hackathon prize",
+                 "the Ansem Hackathon we're gonna ask about"):
+        assert names.fix(text)[0] == text, text
