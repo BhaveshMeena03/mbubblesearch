@@ -93,6 +93,21 @@ esac
 cd "$ROOT"
 echo "== $(date "+%Y-%m-%d %H:%M %Z") =="
 
+# Wait for the network. launchd starts this the moment the Mac wakes for
+# 09:00, and Wi-Fi is not back yet: on 7 and 8 October every step failed
+# with "nodename nor servname provided", nothing was indexed, and the
+# archive sat two days behind with nobody told. Up to ten minutes, then
+# give up loudly rather than run a whole morning against no network.
+online=0
+for _ in $(seq 1 30); do
+  if curl -s -m 8 -o /dev/null https://www.youtube.com; then online=1; break; fi
+  sleep 20
+done
+if [[ $online -eq 0 ]]; then
+  echo "  no network after ten minutes; nothing indexed today"
+  exit 1
+fi
+
 # One writer per shelf. A long backfill started by hand and this job would
 # both append to the same file and both transcribe the same episode.
 if pgrep -f "scripts/ingest_mcg.py" >/dev/null; then
@@ -114,6 +129,13 @@ for archive in threadguy mcg; do
     --archive "$archive" --transcriber groq --chunk-workers 4 --workers 2 \
     --limit 20 --max-new 8 || status=1
 done
+
+# The X broadcast of each MCG Live show, so a citation can open on X at
+# the same second. MCG streams to both at once; this finds which broadcast
+# is which show and measures how far apart the two clocks are. One search
+# on X, about half a cent a morning, and three minutes of audio per show.
+echo "-- mcg on x"
+.venv/bin/python -u scripts/pair_mcg_broadcasts.py || status=1
 
 # Notes for ThreadGuy's newest uploads. Already-written ones are skipped,
 # so a morning pays for what arrived overnight and nothing else: one model
@@ -146,6 +168,11 @@ fi
 # Only the shelves and the indexes, whatever else is uncommitted here.
 shelves=(data/threadguy_index.json data/mcg_index.json
          data/threadguy_summaries.json.gz "${terms[@]}")
+# Only once it is in the repo: git will not commit a path it has never
+# seen, and the refusal would take the shelves down with it.
+if git ls-files --error-unmatch data/mcg_broadcast_links.json >/dev/null 2>&1; then
+  shelves+=(data/mcg_broadcast_links.json)
+fi
 if git diff --quiet -- "${shelves[@]}"; then
   echo "  no new episodes"
   exit $status
