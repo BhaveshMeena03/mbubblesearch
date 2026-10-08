@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from app.provenance import strip_speaker_labels  # noqa: E402
-from scripts.ingest_tradfi import retitled  # noqa: E402
+from scripts.ingest_tradfi import retitled, someone_else  # noqa: E402
 
 SHELF = json.loads(gzip.decompress(
     (ROOT / "data" / "tradfi_episodes.json.gz").read_bytes()))
@@ -36,13 +36,15 @@ def test_the_july_2026_press_conference_is_the_new_chairs():
     assert "Chairman Warsh" in said
 
 
-def test_no_recording_filed_under_powell_is_addressed_to_somebody_else():
-    for row in SHELF:
-        if row.get("subject") != "Jerome Powell":
-            continue
-        said = " ".join(s["text"] for s in row["segments"])
-        assert "Chairman Warsh" not in said, row["title"]
-        assert "Chair Warsh" not in said, row["title"]
+def test_the_handover_is_filed_by_what_each_man_says():
+    """April 2026 is Powell's, in his words, though a reporter asks about
+    "incoming Chairman Warsh" in it. June is the first of Warsh's."""
+    april = " ".join(s["text"] for s in BY_ID["UR2yFg--1jY"]["segments"])
+    assert BY_ID["UR2yFg--1jY"]["subject"] == "Jerome Powell"
+    assert "my last press conference as chair" in april
+    june = " ".join(s["text"] for s in BY_ID["fR7oZvlk_eY"]["segments"])
+    assert BY_ID["fR7oZvlk_eY"]["subject"] == "Kevin Warsh"
+    assert "to be back at the Federal Reserve" in june
 
 
 def test_nothing_on_the_shelf_is_a_speaker_label_nobody_said():
@@ -64,3 +66,27 @@ def test_a_title_that_already_names_the_person_is_left_alone():
     assert retitled(title, "Larry Fink", "Larry Fink") == title
     kept = "Jerome Powell: FOMC Press Conference, October 29, 2025"
     assert retitled(kept, "Jerome Powell", "Jerome Powell") == kept
+
+
+# --- who the room says is speaking -------------------------------------------
+
+
+
+def test_the_room_naming_another_chair_stops_the_ingest():
+    """The real one: shelved as Powell's, and the words say otherwise."""
+    row = BY_ID["DLFXUkOc_7I"]
+    assert someone_else(row["segments"], "Jerome Powell").startswith("Warsh")
+    assert someone_else(row["segments"], "Kevin Warsh") is None
+
+
+def test_no_recording_on_the_shelf_is_addressed_to_somebody_else():
+    """Every one, so the next office to change hands is caught by the
+    shelf's own test and not by a reader."""
+    for row in SHELF:
+        assert someone_else(row["segments"], row["subject"]) is None, row["title"]
+
+
+def test_one_passing_mention_is_not_the_room_addressing_somebody():
+    said = [{"t": 0.0, "text": "I spoke to Chair Powell about this last week."},
+            {"t": 8.0, "text": "And the chairman and CEO of the bank agreed."}]
+    assert someone_else(said, "Jamie Dimon") is None
