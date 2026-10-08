@@ -4835,3 +4835,43 @@ class TestAHostAsksWhatHeHimselfSaid:
         """The name substituted has to match the archive's label exactly."""
         assert as_speaker("when did i call zcash", "FaZe Banks") == (
             "when did FaZe Banks call zcash")
+
+
+# --- a statement replying to something we posted ------------------------------
+#
+# The room is ours whether or not the reply count remembers it: that count
+# is rebuilt from the last hundred posts after a deploy, and a reply posted
+# by hand under somebody else's thread can be older than that.
+
+def _reply_to_us(mid, text, replied_to="900", conversation="555"):
+    return Mention(id=mid, text=text, author_id="someone",
+                   conversation_id=conversation, in_reply_to_user_id="bot",
+                   replied_to_id=replied_to)
+
+
+@pytest.mark.anyio
+async def test_a_statement_replying_to_our_post_gets_no_answer(tmp_path):
+    index = FakeIndex()
+    client = FakeClient([
+        [mention("1")],                                  # cold start, skipped
+        [_reply_to_us("2", "@mbubbleSearch That's why we chose to work with "
+                           "them. Great work, eco for the win!")],
+    ])
+    bot = MentionBot(client, index, state_path=tmp_path / "s.json")
+    await bot.tick("2026-10-08")
+    assert await bot.tick("2026-10-08") == 0
+    assert not client.posted
+    assert index.asked == [], "a comment is not something to search for"
+
+
+@pytest.mark.anyio
+async def test_a_question_replying_to_our_post_is_still_answered(tmp_path):
+    index = FakeIndex()
+    client = FakeClient([
+        [mention("1")],
+        [_reply_to_us("2", "@mbubbleSearch what did ansem say about zcash?")],
+    ])
+    bot = MentionBot(client, index, state_path=tmp_path / "s.json")
+    await bot.tick("2026-10-08")
+    await bot.tick("2026-10-08")
+    assert index.asked == ["what did ansem say about zcash?"]

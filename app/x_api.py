@@ -285,6 +285,13 @@ class Mention:
     # on an ephemeral disk, and "skip everything pending" would then drop a
     # question asked a minute earlier.
     created_at: str = ""
+    # Who and what this post is a reply to, when it is one. Both come in
+    # the same read as the text. They are how a comment left under this
+    # account's own post is told from somebody summoning it: the list of
+    # threads it started is only as fresh as the last time its timeline
+    # was read, and a post written six minutes ago is not on it.
+    in_reply_to_user_id: str = ""
+    replied_to_id: str = ""
 
 
 class XCredentials:
@@ -440,7 +447,8 @@ class XClient:
         url = f"{API}/users/{self.bot_user_id}/mentions"
         params = {
             "max_results": str(max(5, min(limit, 100))),
-            "tweet.fields": "author_id,conversation_id,created_at",
+            "tweet.fields": ("author_id,conversation_id,created_at,"
+                             "in_reply_to_user_id,referenced_tweets"),
             # The author comes back in the same response rather than needing
             # a lookup per mention. Repeat askers are deduplicated within the
             # UTC day like everything else, so a regular costs nothing after
@@ -475,6 +483,10 @@ class XClient:
                 author_id=m.get("author_id", ""),
                 conversation_id=m.get("conversation_id", m["id"]),
                 created_at=m.get("created_at", ""),
+                in_reply_to_user_id=m.get("in_reply_to_user_id", "") or "",
+                replied_to_id=next(
+                    (ref.get("id", "") for ref in m.get("referenced_tweets") or []
+                     if ref.get("type") == "replied_to"), ""),
                 author_verified=bool(
                     authors.get(m.get("author_id", ""), {}).get("verified")),
                 author_verified_type=(
