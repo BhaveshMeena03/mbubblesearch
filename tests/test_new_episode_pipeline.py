@@ -117,3 +117,42 @@ class TestTheSyncLabelsSpeakers:
         here is wrapped the same way."""
         assert "speaker {what} FAILED" in self.source
         assert "return None" in self.source
+
+
+# --- the captions of what was said, not a translation of them ---------------
+#
+# The upload of the 24 September show was indexed from a caption track
+# YouTube had translated into English out of one of the dubs. Nothing
+# failed: it was searchable, it had a summary, and its lines were not
+# things anybody on the show said.
+
+from scripts.fetch_episodes import spoken_track  # noqa: E402
+
+FETCHER = (ROOT / "scripts" / "fetch_episodes.py").read_text()
+
+
+def test_the_original_track_is_taken_over_the_translated_one():
+    both = [Path("WlWIrbhF_HQ.en.vtt"), Path("WlWIrbhF_HQ.en-orig.vtt")]
+    assert spoken_track(both).name == "WlWIrbhF_HQ.en-orig.vtt"
+    assert spoken_track(both[::-1]).name == "WlWIrbhF_HQ.en-orig.vtt"
+
+
+def test_a_video_with_only_an_english_track_still_fetches():
+    assert spoken_track([Path("abc.en.vtt")]).name == "abc.en.vtt"
+
+
+def test_a_translation_is_not_the_fallback_for_a_refused_original():
+    """The original was offered and the download was refused. What is left
+    is the track that caused this, so the attempt fails and is retried."""
+    refused = ("ERROR: Unable to download video subtitles for 'en-orig': "
+               "HTTP Error 429: Too Many Requests")
+    assert spoken_track([Path("abc.en.vtt")], refused) is None
+
+
+def test_no_captions_is_still_no_captions():
+    assert spoken_track([]) is None
+
+
+def test_the_fetch_asks_for_the_original_track():
+    assert '"--sub-lang", "en-orig,en"' in FETCHER
+    assert "spoken_track(list(tmp_path.glob" in FETCHER

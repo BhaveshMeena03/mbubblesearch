@@ -110,6 +110,34 @@ def _diagnose(stderr: str) -> str:
     return tail
 
 
+def spoken_track(vtts: list[Path], stderr: str = "") -> Path | None:
+    """The captions of what was said, not a translation of them.
+
+    The channel turned on dubbed audio in September, and a dubbed upload
+    has a caption track per dub. On those, "en" is whatever YouTube
+    translates into English, and it does not always start from the English:
+    the upload of the 24 September show came back as "The reason why all
+    original developers and crypto- The shniks were captured. in such an
+    offside", which nobody said. It was indexed that way for thirteen days
+    under the hosts' names, with a summary written from it, and nothing
+    failed -- the only sign was that the upload shared 15% of its words
+    with the broadcast it was cut from, where the shows either side of it
+    share 77% and 79%.
+
+    "en-orig" is the track made from the English audio, and the uploads
+    checked all have one, dubbed or not. So it is taken when it is there. When it was
+    asked for and refused, the "en" beside it is not a fallback: that is
+    the case above, and a failed fetch is retried while a translation is
+    kept for good.
+    """
+    for path in vtts:
+        if path.name.endswith(".en-orig.vtt"):
+            return path
+    if "en-orig" in (stderr or ""):
+        return None
+    return vtts[0] if vtts else None
+
+
 def fetch(
     video_id: str, cookies_browser: str | None = None, attempts: int = 3
 ) -> dict | None:
@@ -137,7 +165,9 @@ def fetch(
             # only hit YouTube once per episode (two calls trips rate limits).
             proc = subprocess.run(
                 [YTDLP, "--skip-download", "--write-auto-sub", "--write-sub",
-                 "--sub-lang", "en", "--sub-format", "vtt", *common,
+                 # Both, in one call, and spoken_track() picks: "en" alone
+                 # is not always what was said.
+                 "--sub-lang", "en-orig,en", "--sub-format", "vtt", *common,
                  # --print alone implies simulate (nothing downloads!);
                  # --no-simulate makes it print the title AND write files.
                  # Title and airdate on one line. The date is what lets an
@@ -155,10 +185,10 @@ def fetch(
             published_at = (f"{raw_date[:4]}-{raw_date[4:6]}-{raw_date[6:]}"
                             if len(raw_date) == 8 and raw_date.isdigit()
                             else None)
-            vtts = list(tmp_path.glob("*.vtt"))
-            if vtts:
+            vtt = spoken_track(list(tmp_path.glob("*.vtt")), proc.stderr)
+            if vtt:
                 segments = coalesce(
-                    parse_vtt(vtts[0].read_text(encoding="utf-8", errors="ignore"))
+                    parse_vtt(vtt.read_text(encoding="utf-8", errors="ignore"))
                 )
                 if segments:
                     print(f"  ✓ {video_id}: {len(segments)} segments — {title}")
