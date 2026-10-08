@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#06070a">
 <title>Market Bubble Search: five archives, one question</title>
-<meta name="description" content="1,967 hours of crypto podcasts, live broadcasts and long-form interviews, including ThreadGuy's interviews and streams. Ask in plain English, get the sentence and the second it was said.">
+<meta name="description" content="More than 2,000 hours of crypto podcasts, live broadcasts and long-form interviews, including ThreadGuy's interviews and streams. Ask in plain English, get the sentence and the second it was said.">
 <meta property="og:title" content="Market Bubble Search: five archives, one question">
 <meta property="og:description" content="Market Bubble, MCG Live, ThreadGuy, every long-form Elon Musk interview and finance. Ask once, and the archive with the answer gives it.">
 <meta property="og:image" content="https://search.lexthedev.com/demo/og-home.png?v=6">
@@ -436,12 +436,15 @@
     <div class="tries rise" id="tries" style="animation-delay:.21s"></div>
 
     <div class="scale rise" style="animation-delay:.26s">
-      <div class="lead"><b>1,967</b><span>hours of tape</span></div>
-      <div><b>1,328</b><span>recordings</span></div>
-      <div><b>5</b><span>archives</span></div>
-      <div class="yr"><b>2014</b><span>earliest</span></div>
-      <div class="yr"><b>2026</b><span>latest</span></div>
-      <div class="years"><b>2014 to 2026</b><span>span</span></div>
+      <!-- Counted on 9 October 2026 and replaced by /v1/archives when the
+           page loads. Two of the five grow every morning, and the figures
+           typed here before were a month and seventy hours behind. -->
+      <div class="lead"><b id="sc-hours">2,040</b><span>hours of tape</span></div>
+      <div><b id="sc-recs">1,377</b><span>recordings</span></div>
+      <div><b id="sc-count">5</b><span>archives</span></div>
+      <div class="yr"><b id="sc-first">2014</b><span>earliest</span></div>
+      <div class="yr"><b id="sc-last">2026</b><span>latest</span></div>
+      <div class="years"><b id="sc-span">2014 to 2026</b><span>span</span></div>
     </div>
   </section>
 
@@ -510,18 +513,28 @@
   "use strict";
   var VAR = {podcast:"--podcast", mcg:"--mcg", elon:"--elon",
              tradfi:"--tradfi", threadguy:"--threadguy"};
+  // n and size are what each archive held when this was written; {n} in
+  // the sentence and the hours beside it are replaced by what it holds now.
   var CHANS = [
-    {k:"podcast", name:"Market Bubble", href:"/", size:"73",
-     meta:"21 live shows with Ansem and FaZe Banks. About a quarter of each one never reaches the YouTube upload."},
-    {k:"mcg", name:"MCG Live", href:"/mcg", size:"1,040",
-     meta:"651 episodes, one project per episode, with the founder on the call."},
-    {k:"elon", name:"Elon Musk", href:"/elon", size:"38",
-     meta:"14 long-form interviews, 2018 to 2026. Rogan, Lex Fridman, the Economist, the Trump space."},
-    {k:"tradfi", name:"The Record", href:"/finance", size:"39",
-     meta:"35 recordings from the people who run the money. Fink, Dalio, Powell, Dimon, Wood, Saylor, CZ."},
-    {k:"threadguy", name:"ThreadGuy", href:"/threadguy", size:"777",
-     meta:"607 streams and interviews. The daily market open, and the guests he has on."}
+    {k:"podcast", name:"Market Bubble", href:"/", size:73, n:21,
+     meta:"{n} live shows with Ansem and FaZe Banks. About a quarter of each one never reaches the YouTube upload."},
+    {k:"mcg", name:"MCG Live", href:"/mcg", size:1075, n:667,
+     meta:"{n} episodes, one project per episode, with the founder on the call."},
+    {k:"elon", name:"Elon Musk", href:"/elon", size:52, n:24,
+     meta:"{n} long-form interviews, 2018 to 2026. Rogan, Lex Fridman, Dwarkesh Patel, All-In, the Economist."},
+    {k:"tradfi", name:"The Record", href:"/finance", size:48, n:45,
+     meta:"{n} recordings from the people who run the money. Fink, Dalio, Powell, Warsh, Dimon, Wood, Saylor, CZ."},
+    {k:"threadguy", name:"ThreadGuy", href:"/threadguy", size:793, n:620,
+     meta:"{n} streams and interviews. The daily market open, and the guests he has on."}
   ];
+  var count = function(n){ return Math.round(n).toLocaleString("en-US"); };
+  // One archive's card: how many, and how many hours.
+  function sized(row, c, n, hours){
+    row.querySelector(".meta").textContent = c.meta.replace("{n}", count(n));
+    row.querySelector(".size").innerHTML = "";
+    row.querySelector(".size").append(count(hours),
+      Object.assign(document.createElement("span"), {textContent: "hours"}));
+  }
   var TRIES = [
     {k:"tradfi",  q:"When did Fink change his mind on Bitcoin?"},
     {k:"podcast", q:"Why does Ansem think Ethereum is done?"},
@@ -542,12 +555,28 @@
                 + '<span class="bar"><span class="fill"></span></span>';
     a.style.setProperty("--c", css(VAR[c.k]));
     a.querySelectorAll(".nm span")[0].textContent = c.name;
-    a.querySelector(".meta").textContent = c.meta;
-    a.querySelector(".size").innerHTML = "";
-    a.querySelector(".size").append(c.size,
-      Object.assign(document.createElement("span"), {textContent: "hours"}));
+    sized(a, c, c.n, c.size);
     $("chans").appendChild(a);
   });
+
+  // What the archives hold today. If this fails the page keeps the
+  // figures it was written with, which were right the day it was written.
+  fetch("/v1/archives").then(function(r){ return r.ok ? r.json() : null; })
+  .then(function(a){
+    if (!a || !a.by) return;
+    CHANS.forEach(function(c){
+      var one = a.by[c.k];
+      if (one && one.count && one.hours) sized($("ch-" + c.k), c, one.count, one.hours);
+    });
+    if (a.hours) $("sc-hours").textContent = count(a.hours);
+    if (a.recordings) $("sc-recs").textContent = count(a.recordings);
+    if (a.archives) $("sc-count").textContent = a.archives;
+    if (a.first && a.last) {
+      $("sc-first").textContent = a.first;
+      $("sc-last").textContent = a.last;
+      $("sc-span").textContent = a.first + " to " + a.last;
+    }
+  }).catch(function(){});
 
   var lbl = document.createElement("span");
   lbl.className = "lbl"; lbl.textContent = "Try";

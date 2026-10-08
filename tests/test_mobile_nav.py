@@ -46,7 +46,7 @@ def test_the_market_bubble_page_keeps_its_switcher_on_a_phone():
 
 
 def test_the_front_door_reads_on_a_phone():
-    assert '<div class="years"><b>2014 to 2026</b><span>span</span></div>' in HOME
+    assert '<div class="years"><b id="sc-span">2014 to 2026</b><span>span</span></div>' in HOME
     assert ".scale{display:grid;grid-template-columns:1fr 1fr" in HOME
     assert "footer{grid-template-columns:1fr;gap:22px}" in HOME
     assert "minmax(min(320px,100%),1fr)" in HOME

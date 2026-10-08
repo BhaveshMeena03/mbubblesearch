@@ -277,7 +277,7 @@ def test_a_question_card_plays_underneath_rather_than_inside():
 def test_the_page_counts_the_archives_it_searches():
     """Five channels, five rooms in the fan out, and the copy said four."""
     assert "all five archives" in PAGE
-    assert "<b>5</b><span>archives</span>" in PAGE
+    assert '<b id="sc-count">5</b><span>archives</span>' in PAGE
     assert "all four archives" not in PAGE
 
 
