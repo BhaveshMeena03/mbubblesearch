@@ -3184,6 +3184,20 @@ _IS_A_HANDOFF = re.compile(
     )\b""")
 
 
+def replies_to_us(mention, our_id: str) -> bool:
+    """Whether this post is a reply to one this account wrote."""
+    return bool(our_id) and str(
+        getattr(mention, "in_reply_to_user_id", "") or "") == str(our_id)
+
+
+def replies_to_our_root(mention, our_id: str) -> bool:
+    """A reply straight to a post of ours that opened its own thread: an
+    announcement or a clip, not an answer given in somebody else's."""
+    replied = str(getattr(mention, "replied_to_id", "") or "")
+    return (replies_to_us(mention, our_id) and bool(replied)
+            and replied == str(getattr(mention, "conversation_id", "") or ""))
+
+
 def is_a_handoff(text: str) -> bool:
     """Somebody pointing a third party at this account, not asking it anything."""
     return bool(_IS_A_HANDOFF.search(question_from(text or "")))
@@ -4261,6 +4275,18 @@ class MentionBot:
         # meant a judge replying "what did ansem say about zcash" under the
         # pinned demo post, mid-stream, would have got silence.
         own = getattr(self._client, "own_threads", set()) or set()
+        # Or it says so itself. The set above is read off this account's
+        # timeline at a cold start, so a post written since is not in it:
+        # on 8 October a post went up at 20:14, somebody replied "That's
+        # why we chose to work with them. Great work" at 20:20, and at
+        # 20:21 this account answered the word "why" with Ansem asking a
+        # Robinhood guest about Arbitrum. A reply straight to the post that
+        # opened the thread, written by us, is under our own post whatever
+        # the set remembers, and the thread is ours from then on.
+        if replies_to_our_root(mention, getattr(self._client, "bot_user_id", "")):
+            own = own | {str(mention.conversation_id)}
+            if isinstance(getattr(self._client, "own_threads", None), set):
+                self._client.own_threads.add(str(mention.conversation_id))
         if str(mention.conversation_id or "") in own and (
                 not routed_on_evidence(asked) or _ABOUT_THE_ACCOUNT.search(asked)):
             logger.info("%s is under our own post — not an archive "
@@ -4483,7 +4509,12 @@ class MentionBot:
         # deliberately. In a thread already answered the default flips:
         # ask for a real question shape, and say nothing otherwise.
         conversation = str(mention.conversation_id or mention.id)
-        if (self.state.conversation_replies.get(conversation, 0) > 0
+        # A reply to something this account posted is the same room, even
+        # when the count below does not know it: the count is rebuilt from
+        # the last hundred posts after a deploy, and a reply written by
+        # hand under somebody else's post may be older than that.
+        to_us = replies_to_us(mention, getattr(self._client, "bot_user_id", ""))
+        if ((self.state.conversation_replies.get(conversation, 0) > 0 or to_us)
                 and not asks_something(asked)
                 and summary_request(asked) is None
                 and not asks_for_the_latest(asked)):
