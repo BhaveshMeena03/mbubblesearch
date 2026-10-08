@@ -31,6 +31,7 @@ from fastapi.responses import (
     FileResponse,
     HTMLResponse,
     JSONResponse,
+    PlainTextResponse,
     RedirectResponse,
     Response,
     StreamingResponse,
@@ -651,9 +652,106 @@ for _suffix, _type in ((".webp", "image/webp"), (".webm", "video/webm"),
 # llms.txt at the root, where the convention puts it and where anything
 # reading it will look. The file lives in demo/ with the pages it
 # describes so there is one place to update when the archive grows.
+#
+# The figures in it are written {{mcg.count|667}}: what to look up, and
+# what to say if that fails. It used to be a plain file, corrected by hand,
+# and it said 14 Musk interviews and 1,328 recordings while the archives
+# held 24 and 1,377. Two channels are indexed every morning; a number
+# typed into a file is wrong by lunch.
+_LLMS_FIGURE = re.compile(r"\{\{([a-z_.]+)\|([^}]*)\}\}")
+
+
+def _long_date(iso: str) -> str:
+    """2026-10-08 as "8 October 2026", the way the file writes dates."""
+    try:
+        when = datetime.fromisoformat(iso[:10])
+    except (TypeError, ValueError):
+        return ""
+    return f"{when.day} {when.strftime('%B %Y')}"
+
+
+def render_llms(text: str, sizes: dict | None) -> str:
+    """llms.txt with its figures filled in from the archives.
+
+    Whatever cannot be looked up keeps the figure the file was last
+    written with, so the worst this serves is what it used to serve.
+    """
+    def figure(found: re.Match) -> str:
+        path, fallback = found.group(1), found.group(2)
+        value: object = sizes
+        for part in path.split("."):
+            value = value.get(part) if isinstance(value, dict) else None
+        if value in (None, ""):
+            return fallback
+        if path.endswith(".last") or path.endswith(".first"):
+            return _long_date(str(value)) or fallback
+        if isinstance(value, float) and not value.is_integer():
+            return f"{value:,.1f}"
+        return f"{int(value):,}" if isinstance(value, (int, float)) else str(value)
+
+    return _LLMS_FIGURE.sub(figure, text)
+
+
+def total_sizes(by: dict[str, dict]) -> dict:
+    """The front door's totals, from each archive's own count of itself."""
+    firsts = [a["first"][:4] for a in by.values() if a.get("first")]
+    lasts = [a["last"][:4] for a in by.values() if a.get("last")]
+    return {
+        "hours": round(sum(a["hours"] for a in by.values())),
+        "recordings": sum(a["count"] for a in by.values()),
+        "archives": len(by),
+        "first": min(firsts) if firsts else "",
+        "last": max(lasts) if lasts else "",
+        "by": by,
+    }
+
+
+_SIZES_FOR = 600.0      # seconds a count is reused before it is taken again
+
+
+async def _archive_sizes(request: Request) -> dict | None:
+    """Every archive's size, each from the route its own page uses, so
+    the front door cannot disagree with the page it links to.
+
+    All five or nothing: a total that leaves an archive out is a wrong
+    number, and the page already holds a recent right one to fall back on.
+    """
+    held = getattr(request.app.state, "archive_sizes", None)
+    if held and time.monotonic() - held[0] < _SIZES_FOR:
+        return held[1]
+    try:
+        show = await podcast_archive(get_summaries(request))
+        counted = {"mcg": await mcg_archive(),
+                   "elon": await elon_archive(),
+                   "tradfi": await finance_archive(),
+                   "threadguy": await threadguy_archive()}
+    except Exception as exc:                                    # noqa: BLE001
+        logger.warning("could not size the archives: %s", exc)
+        return held[1] if held else None
+    by = {"podcast": {"count": show["shows"], "hours": show["hours"]}}
+    for name, a in counted.items():
+        by[name] = {"count": a.get("episodes", a.get("recordings")),
+                    "hours": a["hours"],
+                    "first": a.get("first", ""), "last": a.get("last", "")}
+    sizes = total_sizes(by)
+    request.app.state.archive_sizes = (time.monotonic(), sizes)
+    return sizes
+
+
+@app.get("/v1/archives", dependencies=[Depends(public_rate_limit)])
+async def archives(request: Request) -> dict:
+    """How much there is, across everything, for the front door."""
+    sizes = await _archive_sizes(request)
+    if not sizes:
+        # The page keeps the figures already written into its markup.
+        raise HTTPException(status_code=503, detail="unavailable")
+    return sizes
+
+
 @app.get("/llms.txt", include_in_schema=False)
-async def llms_txt() -> FileResponse:
-    return FileResponse(_ROOT / "demo" / "llms.txt", media_type="text/plain")
+async def llms_txt(request: Request) -> PlainTextResponse:
+    text = (_ROOT / "demo" / "llms.txt").read_text(encoding="utf-8")
+    return PlainTextResponse(render_llms(text, await _archive_sizes(request)))
 
 
 app.mount("/widget", StaticFiles(directory=_ROOT / "widget"), name="widget")

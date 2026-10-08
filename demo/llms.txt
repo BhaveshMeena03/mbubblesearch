@@ -1,6 +1,6 @@
 # Market Bubble Search
 
-> A search engine over 1,967 hours of crypto podcasts, live broadcasts and
+> A search engine over {{hours|2,040}} hours of crypto podcasts, live broadcasts and
 > long-form interviews. Ask a question in plain English and it answers only
 > from the transcripts, quoting the speaker and citing the exact second it
 > was said. If the archive does not contain the answer, it says so instead
@@ -17,24 +17,27 @@ An AnsemHack Clawrena entry. Token $MBS on ClawPump, mint
 Five archives, kept in separate namespaces so an answer about one show can
 never be sourced from another.
 
-- Market Bubble: 21 shows, 73.4 hours. The live X broadcast with Ansem
+- Market Bubble: {{by.podcast.count|21}} shows, {{by.podcast.hours|73}} hours. The live X broadcast with Ansem
   (@blknoiz06) and FaZe Banks. About a quarter of each live show never
   reaches the YouTube upload, so for those minutes this is the only
   searchable copy that exists.
-- MCG Live: 651 episodes, 1,039.9 hours, one project per episode, current
-  to 26 September 2026. 388 episodes carry named guests, 614 people.
-- Elon Musk: 14 long-form interviews, 37.8 hours, 2018 to 2026. Rogan, Lex
-  Fridman, the Economist, and the 2024 X space with Trump.
-- The Record: 35 finance recordings, 39.3 hours, 2014 to 2026. Larry Fink,
-  Ray Dalio, Jerome Powell, Jamie Dimon, Cathie Wood, Stephen Schwarzman,
-  Michael Saylor, Raoul Pal, and five long-form interviews with CZ
-  (Changpeng Zhao) from 2026.
-- ThreadGuy: 607 recordings, 776.8 hours, December 2023 to September 2026.
+- MCG Live: {{by.mcg.count|667}} episodes, {{by.mcg.hours|1,074.6}} hours, one project per episode, current
+  to {{by.mcg.last|8 October 2026}}. Most episodes carry named guests: 614 people as of
+  September 2026.
+- Elon Musk: {{by.elon.count|24}} long-form interviews, {{by.elon.hours|51.6}} hours, 2018 to 2026. Rogan, Lex
+  Fridman, Dwarkesh Patel, All-In, Peter Diamandis, the Economist, Davos,
+  and the 2024 X space with Trump. Newest: {{by.elon.last|15 September 2026}}.
+- The Record: {{by.tradfi.count|45}} finance recordings, {{by.tradfi.hours|47.9}} hours, 2014 to 2026. Larry Fink,
+  Ray Dalio, Jerome Powell, Kevin Warsh, Jamie Dimon, Cathie Wood, Stephen
+  Schwarzman, Michael Saylor, Raoul Pal, and five long-form interviews
+  with CZ (Changpeng Zhao) from 2026. Includes every Fed press conference
+  from September 2025 on, each filed under the chair who gave it.
+- ThreadGuy: {{by.threadguy.count|620}} recordings, {{by.threadguy.hours|793.1}} hours, December 2023 to {{by.threadguy.last|8 October 2026}}.
   The full-length videos on @notthreadguy's YouTube channel, the daily
   live market open and the guests he has on. Answers say whose view
   it was and on which day, because the market moves between streams.
 
-Total: 1,328 recordings, 1,967 hours.
+Total: {{recordings|1,377}} recordings, {{hours|2,040}} hours.
 
 Also indexed: 2,853 vectors of Ansem's own posts, and asset indexes of
 every token, stock and index the shows discussed, ranked by how deeply
