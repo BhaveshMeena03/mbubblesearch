@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080b09">
 <title>MCG Live · every token they've covered</title>
 <meta name="description" content="Every token, stock and index discussed across 649 MCG Live episodes, ranked by how deeply it was covered, with links to the exact moment.">
 <meta property="og:title" content="Every token covered on MCG Live">
@@ -206,10 +207,14 @@
   .foot{color:var(--muted);font-size:12.5px;margin-top:28px;line-height:1.7}
   .empty{color:var(--muted);padding:20px 0}
   @media(max-width:620px){
-    h1{font-size:32px}
+    /* Room under the header: the headline sat against its rule. */
+    h1{font-size:32px;margin-top:26px}
     .nm{display:none}
     .sym{min-width:62px}
   }
+  /* 16px on a phone, where it was 15: iOS Safari zooms the whole page in
+     when a field with smaller text takes focus, and does not zoom back. */
+  @media (max-width:760px){ #q{font-size:16px} }
 </style>
   <script src="/demo/nav.js" defer></script>
 </head>

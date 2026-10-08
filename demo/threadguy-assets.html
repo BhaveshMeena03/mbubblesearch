@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#060c1a">
 <title>ThreadGuy · every token on the stream</title>
 <meta name="description" content="Every token, stock and index discussed across ThreadGuy's market opens and interviews, ranked by how deeply it was covered, dated, with the exact moment playable on the page.">
 <meta property="og:title" content="Every token on ThreadGuy's stream">
@@ -205,6 +206,9 @@
     .mo > div{grid-column:1/-1}
     .mknfa{margin-left:0;width:100%}
   }
+  /* 16px on a phone, where it was 15: iOS Safari zooms the whole page in
+     when a field with smaller text takes focus, and does not zoom back. */
+  @media (max-width:760px){ #q{font-size:16px} }
 </style>
 <script src="/demo/nav.js" defer></script>
 </head>

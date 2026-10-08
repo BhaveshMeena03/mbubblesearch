@@ -94,6 +94,36 @@
       "left:var(--navx,0);width:100vw;background:var(--navbg);z-index:-1}",
       ".archsw>summary{white-space:nowrap}",
       ".navbar.stuck{padding-top:12px!important;padding-bottom:12px!important}",
+      /* One phone header for every page with a crumb. Each page wrapped
+         its own way: MCG broke its title over two lines with "archive"
+         floating beside it, the Musk page left the "/" alone on a line of
+         its own and stacked its title three deep, The Record ended its
+         top line on a dangling "/". Now it is two rows everywhere: the
+         way home on the left and the switcher on the right, then the
+         page's name on one line. The brandline's children are laid out
+         by the bar itself, which is what lets the nav sit between them. */
+      ".navbar.crumbed{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;",
+      "justify-content:space-between;column-gap:14px;row-gap:10px}",
+      ".navbar.crumbed .brandline{display:contents}",
+      ".navbar.crumbed .home-sep{display:none}",
+      ".navbar.crumbed .home-crumb{order:1}",
+      ".navbar.crumbed>nav,.navbar.crumbed>.hdr-r{order:2;margin:0}",
+      ".navbar.crumbed .mark,.navbar.crumbed .brandline>.eyebrow{order:3;",
+      "flex:0 0 100%;min-width:0;margin:0}",
+      ".navbar.crumbed .mark{flex-wrap:nowrap}",
+      ".navbar.crumbed .mark b{white-space:nowrap}",
+      /* "Search" under the page you are already searching is a tab with
+         nowhere to go, and it is what pushed the nav onto a second row. */
+      ".navbar.crumbed a.here{display:none}",
+      /* A nav too wide to share the first row (the token pages carry a
+         way back as well as the switcher) goes under the name instead of
+         between the crumb and the name. Set by measuring, in pin(). */
+      ".navbar.crumbed.nav-wrapped .mark{order:2}",
+      ".navbar.crumbed.nav-wrapped>nav,.navbar.crumbed.nav-wrapped>.hdr-r{",
+      "order:3;flex:0 0 100%;justify-content:flex-start}",
+      /* Scrolled, the bar is one row: the way home and the switcher. */
+      ".navbar.crumbed.stuck .mark,.navbar.crumbed.stuck .brandline>.eyebrow{",
+      "display:none}",
       "}"
     ].join("");
     document.head.appendChild(css);
@@ -183,13 +213,28 @@
     }
     bar.style.setProperty("--navbg", bg);
     bar.classList.add("navbar");
+    var crumb = bar.querySelector(".home-crumb");
+    var nav = bar.querySelector("nav, .hdr-r");
+    if (crumb && bar.querySelector(".brandline")) bar.classList.add("crumbed");
     // The background layer starts at the screen's left edge, wherever
     // the bar sits in its column.
     function place() {
       bar.style.setProperty("--navx", -bar.getBoundingClientRect().left + "px");
+      // Did the nav fit beside the crumb, or wrap under it? Measured,
+      // because it depends on the page's own type and how many links its
+      // nav carries, not on a breakpoint.
+      if (!crumb || !nav) return;
+      bar.classList.remove("nav-wrapped");
+      if (nav.getBoundingClientRect().top >
+          crumb.getBoundingClientRect().bottom - 2) {
+        bar.classList.add("nav-wrapped");
+      }
     }
     place();
     window.addEventListener("resize", place);
+    // Again once the page's own type has arrived: the fallback face is
+    // narrower, and a nav that fits in it can wrap in the real one.
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
     var ticking = false;
     function check() {
       ticking = false;
@@ -200,6 +245,24 @@
     }, {passive: true});
     check();
   }
+
+  // On a phone the answer starts below the fold: the search box sits
+  // under a header, a row of figures and a headline, and what comes back
+  // lands under all of it. Nothing on screen changed when a question was
+  // asked, so it read as though nothing had happened. This brings the
+  // result up to just under the pinned bar. Pages call it when they start
+  // working, so the first thing in view is "searching", then the answer.
+  // Desktop is left alone: the result is already in view beside the box.
+  window.revealOnPhone = function (el) {
+    if (!el || !window.matchMedia("(max-width:760px)").matches) return false;
+    var top = el.getBoundingClientRect().top;
+    if (top < window.innerHeight * 0.4) return true;      // already in view
+    var bar = document.querySelector(".navbar");
+    var clear = (bar ? bar.getBoundingClientRect().bottom : 0) + 14;
+    var calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollBy({top: top - clear, behavior: calm ? "auto" : "smooth"});
+    return true;
+  };
 
   function mount() {
     var host = document.querySelector("[data-archives]");
