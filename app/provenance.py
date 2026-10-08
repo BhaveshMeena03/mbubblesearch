@@ -128,6 +128,12 @@ PUBLISHERS = frozenset({
     # is the channel it posts the stage recordings on, so it is the
     # original publisher by the same test as a podcast's own feed.
     "New York Times Events",
+    # Each recorded the conversation it posts: the forum's own stage at
+    # Davos, a host's own show, and the investment conference Ron Baron
+    # runs and interviews at. Checked by channel on 9 October 2026, when
+    # the same searches also returned re-uploads of every one of them.
+    "World Economic Forum", "Peter H. Diamandis", "Katie Miller Pod",
+    "Baron Capital",
 })
 
 

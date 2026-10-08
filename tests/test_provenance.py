@@ -51,6 +51,17 @@ def test_a_short_interjection_survives_even_when_very_repeated():
     ("Common Sense Skeptic", False),
     ("Brighter with Herbert", False),
     ("", False),
+    # 9 October 2026: the channels that recorded the newer conversations,
+    # and the ones the same searches returned carrying copies of them.
+    ("World Economic Forum", True),
+    ("Peter H. Diamandis", True),
+    ("Katie Miller Pod", True),
+    ("Baron Capital", True),
+    ("DRM News", False),             # "FULL INTERVIEW" of the Davos session
+    ("IDEA TV", False),
+    ("Rotella Streams", False),      # the Katie Miller episode, re-posted
+    ("Heller House", False),         # the Baron conference, re-posted
+    ("Space SPAN", False),           # the xAI all-hands, not xAI's upload
 ])
 def test_only_the_original_publisher_is_admissible(channel, expected):
     assert is_original_publisher(channel) is expected
@@ -193,3 +204,27 @@ def test_the_original_lines_are_not_changed_in_place():
     given = [{"t": 1.0, "text": "MICHELLE SMITH. Thank you."}]
     strip_speaker_labels(given)
     assert given[0]["text"] == "MICHELLE SMITH. Thank you."
+
+
+# --- knowing what is already in the archive ----------------------------------
+
+def test_the_embed_step_does_not_ask_with_a_vector_of_zeros():
+    """It asked Pinecone for each recording's passages with a vector that
+    is similar to nothing, got nothing, and concluded every recording was
+    new. Adding ten embedded all twenty-four."""
+    from pathlib import Path
+
+    source = (Path(__file__).resolve().parent.parent
+              / "scripts" / "embed_elon.py").read_text()
+    assert "vector=[0.0] * 1024" not in source
+    assert "probe[0] = 1.0" in source
+
+
+def test_every_source_listed_for_the_musk_archive_is_admissible():
+    """The list is checked by hand; this checks the hand."""
+    from scripts.ingest_elon import SOURCES
+
+    for vid, channel, _date, title in SOURCES:
+        if len(vid) != 11:          # an X Space, admissible by construction
+            continue
+        assert admissible(channel, title) == (True, ""), (vid, channel)
