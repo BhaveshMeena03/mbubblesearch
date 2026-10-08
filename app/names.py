@@ -103,6 +103,7 @@ _CONTEXTUAL: list[tuple[re.Pattern, str]] = [
 _EXPAND_ALSO = {"zec": ["zeke"], "zcash": ["zeke"],
                 # People type it as two words as often as one.
                 "ansem hackathon": ["anthem hack", "answer hack"],
+                "ansem hack": ["anthem hack", "answer hack"],
                 "ansemhack": ["ansem hack", "ansem hackathon"]}
 
 _ALTERNATION = "|".join(
@@ -142,6 +143,21 @@ def fix(text: str) -> tuple[str, list[str]]:
             return right
         text = pattern.sub(contextual, text)
     return text, changed
+
+
+def phrases() -> list[str]:
+    """Every spelling here that is more than one word.
+
+    For the exact-token index, which keeps words and so cannot tell these
+    apart from their halves. "Anthem" is in 65 windows of the MCG archive,
+    most of them $ANSEM misheard, and "hack" is in too many to be kept at
+    all. The window that says "Anthem Hack" was one of the 65, and a lookup
+    that takes eight took eight others.
+    """
+    found = [m for m in _ALIASES if " " in m]
+    found += [s for spellings in _EXPAND_ALSO.values()
+              for s in spellings if " " in s]
+    return list(dict.fromkeys(found))
 
 
 def expand(query: str) -> list[str]:
