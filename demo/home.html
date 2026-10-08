@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#06070a">
 <title>Market Bubble Search: five archives, one question</title>
 <meta name="description" content="1,967 hours of crypto podcasts, live broadcasts and long-form interviews, including ThreadGuy's interviews and streams. Ask in plain English, get the sentence and the second it was said.">
 <meta property="og:title" content="Market Bubble Search: five archives, one question">
@@ -331,9 +332,14 @@
   .answer .cite:hover{background:rgba(255,162,58,.16);border-color:var(--signal)}
   .answer .cite:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
   .citeplay .player{margin-top:22px}
-  .hits{margin:30px 0 0;display:grid;gap:1px;background:var(--edge);
+  /* minmax(0,1fr) and min-width:0: a grid item will not shrink below its
+     widest unbreakable content, and a card's title is one unbroken line.
+     Without these every card grew as wide as its title, past the edge of
+     a phone, and the passage under it was cut off mid-sentence. */
+  .hits{margin:30px 0 0;display:grid;grid-template-columns:minmax(0,1fr);
+    gap:1px;background:var(--edge);
     border:1px solid var(--edge);border-radius:2px}
-  .hit{background:var(--deck);padding:16px 18px;
+  .hit{min-width:0;background:var(--deck);padding:16px 18px;
     transition:background var(--quick) var(--ease)}
   .hit:hover{background:#0f1218}
   .hit .row{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;
@@ -398,6 +404,10 @@
     .chan{grid-template-columns:1fr 46px;row-gap:7px}
     .chan .bar{grid-column:1/-1;order:3}
     form{flex-direction:column} #go{border-left:0;border-top:1px solid var(--edge-2);padding:15px}
+    /* Once something has been asked, the answer comes straight after the
+       box. The examples and the four figures sat between them, a full
+       screen of a phone to scroll past before the first word of it. */
+    body.asked .hero .tries,body.asked .hero .scale{display:none}
   }
   @media(max-width:380px){.mark .s{display:none}}
 </style>
@@ -641,6 +651,7 @@
   // Bring the answer into view only when it is actually out of it, and
   // only by as much as that takes.
   function nudge(){
+    if (window.revealOnPhone && revealOnPhone($("out"))) return;
     var box = $("out").getBoundingClientRect();
     var under = box.top - window.innerHeight + 90;
     if (under > 0) window.scrollBy({top: under, behavior: "smooth"});
@@ -673,7 +684,7 @@
     $("verdict").textContent = "searching all five archives";
     $("out").classList.toggle("instant", document.hidden);
     void $("out").offsetHeight;
-    $("out").classList.add("shown");
+    $("out").classList.add("shown"); document.body.classList.add("asked");
     $("out").classList.add("working");
     // No scroll here. The block is right under the search box, and
     // pulling it to the top of the window threw the hero off screen and
@@ -700,7 +711,7 @@
       if (tick) { clearTimeout(tick); tick = null; }
       $("verdict").textContent = msg;
       $("answer").textContent = ""; $("hits").innerHTML = "";
-      $("out").classList.add("shown");
+      $("out").classList.add("shown"); document.body.classList.add("asked");
       idle();
     }
     function draw(){ tick = null; Cite.paint($("answer"), said, hits, pickCite); }
@@ -855,7 +866,7 @@
     // a background tab: switching away mid-search meant coming back to
     // an answer that had arrived and would never be shown.
     void $("out").offsetHeight;
-    $("out").classList.add("shown");
+    $("out").classList.add("shown"); document.body.classList.add("asked");
     $("out").classList.remove("working");
   }
 

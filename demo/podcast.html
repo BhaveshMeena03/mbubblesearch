@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b0e11">
 <title>Market Bubble Search: ask the broadcast anything</title>
 <meta name="description" content="Search every Market Bubble episode by meaning and jump to the exact moment on YouTube. Free, no login, open source.">
 <!-- Social preview (X/Discord/Telegram unfurl) -->
@@ -219,10 +220,18 @@
      well under the 44px Apple asks for. Most of the traffic to this page
      arrives from a link in a timeline, so the touch size is the size that
      matters, not the desktop one. */
+  /* Four equal buttons across, then the link out on a line of its own.
+     As a flex row with 16px of padding each, the five of them were wider
+     than a phone: every label broke onto three lines, "watch on YouTube"
+     ran off the edge, and the whole page scrolled sideways. */
   @media (max-width:640px){
-    .hit-actions{gap:10px;padding:10px 4px 2px}
-    .hit-actions .share{font-size:12.5px;padding:0 16px;min-height:40px;
-      display:inline-flex;align-items:center}
+    .hit-actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:8px;padding:10px 0 2px}
+    .hit-actions .share{font-size:12px;padding:0 4px;min-height:40px;
+      display:inline-flex;align-items:center;justify-content:center;
+      white-space:nowrap}
+    .hit-actions .watch{grid-column:1/-1;justify-self:end;margin-left:0;
+      padding:4px 2px}
   }
   .hit-top{display:flex;align-items:center;gap:10px;margin-bottom:6px;
     flex-wrap:wrap}
@@ -416,7 +425,28 @@
     font-weight:600;letter-spacing:.14em;text-transform:uppercase;
     color:#6b7480}
   .eyebrow + h1{margin-top:14px}
-  @media (max-width:560px){ .eyebrow{margin-top:30px} }
+  /* Smaller on a phone so the line stays one line: at desktop size it
+     wrapped and left "HOURS" on a row of its own. */
+  @media (max-width:560px){ .eyebrow{margin-top:26px;font-size:10.5px;
+    letter-spacing:.09em} }
+  /* The bar stays at the top of a phone screen (nav.js), with the page's
+     colour painted behind it. The column's own top padding sat above
+     that, so the page opened on an empty band over the header. */
+  @media (max-width:560px){
+    .wrap{padding-top:0}
+    header.site{padding-top:16px;padding-bottom:12px}
+    /* A phone paints its status bar in the page's flat colour, and the
+       pinned header is that colour too. The pool of light reached the top
+       edge, so the page opened on three strips: a dark status bar, a
+       green band, a dark header. Faded out over the first screen-inch,
+       all three are one colour and the light starts under the header. */
+    body::before{background:
+      linear-gradient(to bottom,var(--bg) 0,var(--bg) 60px,transparent 170px),
+      radial-gradient(720px 420px at 50% 18%,
+        color-mix(in srgb,var(--green) 9%,transparent), transparent 68%),
+      radial-gradient(900px 500px at 50% 0%,
+        rgba(255,255,255,.028), transparent 70%)}
+  }
 
   /* ---- one control -----------------------------------------------------
      The field and the button were two rectangles side by side with a gap
@@ -1502,6 +1532,7 @@ function airedLabel(iso){
     var myToken=++runToken, mySignal=inflight.signal;
     var stale=function(){ return myToken!==runToken; };
     go.disabled=true; spin.classList.add("show");
+    if (window.revealOnPhone) revealOnPhone(spin);
     answer.classList.remove("show"); hits.innerHTML="";
 
     fetch(API+"/v1/podcast/search/stream",{

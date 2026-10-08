@@ -2,6 +2,7 @@
 <meta charset="utf-8">
 <title>The MCG Index: ask MCG Live anything</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080b09">
 <meta name="description" content="Every MCG interview and live stream, transcribed
 and searchable by meaning. 651 episodes, 1,040 hours. Ask a question, get the
 moment.">
@@ -259,6 +260,11 @@ moment.">
 
   @media(max-width:720px){
     .readout{grid-template-columns:repeat(3,1fr)}
+    /* Three across on a phone leaves each figure about ninety pixels,
+       and the span broke as "2025 -" over "2026". */
+    .cell + .cell{padding-left:14px}
+    .cell dd{font-size:19px;white-space:nowrap}
+    .cell dd em{font-size:11px;margin-left:3px}
     .rec{grid-template-columns:1fr auto}
     .rec .date{display:none}
     form{flex-wrap:wrap}
@@ -391,6 +397,9 @@ moment.">
     details.rec > summary .date,.rec.plain .date{display:none}
   }
 
+  /* 16px on a phone, where it was 15: iOS Safari zooms the whole page in
+     when a field with smaller text takes focus, and does not zoom back. */
+  @media (max-width:760px){ #q{font-size:16px} }
 </style>
 
 <div class="wrap">
@@ -733,6 +742,7 @@ moment.">
     $("working").classList.add("on");
     $("answer").classList.remove("on");
     $("go").disabled = true;
+    if (window.revealOnPhone) revealOnPhone($("working"));
 
     var acc = "", hits = [], drew = false;
     var done = function(){
