@@ -193,3 +193,99 @@ def test_nothing_is_added_when_the_question_has_no_rare_word(tmp_path):
     index = PodcastIndex.__new__(PodcastIndex)
     index._terms = _index(tmp_path, {"s1": [0]})
     assert index._said_it("what did he say", [_hit(20, "S1")], []) == []
+
+
+# --- a name the captions broke in two ---------------------------------------
+#
+# Bunny said the AnsemHack judges would take longer, on MCG's 6 October
+# stream, and the transcript has "Anthem Hack". The alias was added and the
+# question still answered from August: "anthem" alone is in 65 windows, and
+# the lookup took the first eight.
+
+from app.terms import said_phrases, words  # noqa: E402
+
+
+def broken_name_index(tmp_path) -> TermIndex:
+    """Twelve windows say "anthem"; the last of them says "anthem hack"."""
+    path = tmp_path / "terms.json"
+    path.write_text(json.dumps({
+        "ids": [f"w{n}" for n in range(12)],
+        "terms": {"anthem": list(range(12)), "anthem hack": [11]},
+        "title_terms": {},
+    }))
+    return TermIndex(path)
+
+
+def test_the_window_that_says_the_whole_name_comes_first(tmp_path):
+    terms = broken_name_index(tmp_path)
+    found = terms.lookup("when will the anthem hack winner be announced")
+    assert found[0] == "w11"
+    assert len(found) == 8
+
+
+def test_half_the_name_is_still_only_half(tmp_path):
+    """Without the phrase the order is storage order, as it always was."""
+    terms = broken_name_index(tmp_path)
+    assert terms.lookup("the national anthem") == [f"w{n}" for n in range(8)]
+
+
+def test_an_index_built_before_this_behaves_as_it_did(tmp_path):
+    path = tmp_path / "old.json"
+    path.write_text(json.dumps({"ids": [f"w{n}" for n in range(12)],
+                                "terms": {"anthem": list(range(12))}}))
+    found = TermIndex(path).lookup("when will the anthem hack winner be announced")
+    assert found == [f"w{n}" for n in range(8)]
+
+
+def test_the_builder_and_the_query_read_a_broken_name_the_same_way():
+    heard = words("Just keep posted to hear the results of Anthem Hack. I think")
+    assert said_phrases(heard) == ["anthem hack"]
+    assert said_phrases(words("you know, answer hack is over")) == ["answer hack"]
+    # The words apart, or as part of something longer, are not the name.
+    assert said_phrases(words("the national anthem, and then a hack")) == []
+    assert said_phrases(words("the ansem hackathon is open")) == ["ansem hackathon"]
+
+
+def test_a_mangling_whose_first_half_is_one_letter_is_not_a_phrase():
+    """words() drops the lone "z" of "Z cash", so there is no phrase to
+    write and none to look for; the two sides must agree on that."""
+    assert said_phrases(words("he was buying z cash all week")) == []
+
+
+# --- a rebuild survives one dropped read ------------------------------------
+
+from types import SimpleNamespace  # noqa: E402
+
+import pytest  # noqa: E402
+
+from scripts import build_term_index  # noqa: E402
+
+
+class DropsOnce:
+    """An index whose first answer is cut off mid-body, as Pinecone's was."""
+
+    def __init__(self, failures: int = 1) -> None:
+        self.failures, self.calls = failures, 0
+
+    def fetch(self, ids, namespace):
+        self.calls += 1
+        if self.calls <= self.failures:
+            raise ConnectionError("peer closed connection without sending "
+                                  "complete message body")
+        return SimpleNamespace(vectors={i: "record" for i in ids})
+
+
+def test_a_dropped_read_is_asked_for_again(monkeypatch):
+    monkeypatch.setattr(build_term_index.time, "sleep", lambda s: None)
+    index = DropsOnce()
+    assert build_term_index._fetch(index, ["a", "b"], "mcg") == {"a": "record",
+                                                                 "b": "record"}
+    assert index.calls == 2
+
+
+def test_an_index_that_never_answers_still_fails_loudly(monkeypatch):
+    """Giving up has to stop the build: an index written from the batches
+    that did arrive would be missing passages and look complete."""
+    monkeypatch.setattr(build_term_index.time, "sleep", lambda s: None)
+    with pytest.raises(ConnectionError):
+        build_term_index._fetch(DropsOnce(failures=99), ["a"], "mcg")

@@ -88,6 +88,26 @@ def words(text: str) -> list[str]:
     return [w.strip(".-'").replace("-", "") for w in _TOKEN.findall(text.lower())]
 
 
+def said_phrases(said: list[str]) -> list[str]:
+    """The known caption manglings of more than one word in these words.
+
+    Shared with the builder for the same reason words() is: a phrase the
+    index wrote one way and the query read another is a match that never
+    happens, silently. `said` is the output of words(), and the phrases go
+    through it too, so "Z cash" is just "cash" on both sides and is not a
+    phrase at all.
+    """
+    from app import names
+
+    joined = f" {' '.join(said)} "
+    found = []
+    for phrase in names.phrases():
+        normal = " ".join(words(phrase))
+        if " " in normal and f" {normal} " in joined:
+            found.append(normal)
+    return list(dict.fromkeys(found))
+
+
 def worth_indexing(word: str) -> bool:
     """Three characters or more, or two that mix letters and digits.
 
@@ -161,6 +181,10 @@ class TermIndex:
                 phrase = f"{first} {second}"
                 if self._known(phrase):
                     found.append(phrase)
+        # And a mangling of more than one word, which is rare where each
+        # of its words is not: the window that says it then outranks the
+        # ones that only say half of it.
+        found += [p for p in said_phrases(said) if self._known(p)]
         return list(dict.fromkeys(found))
 
     def lookup(self, query: str, limit: int = 8) -> list[str]:

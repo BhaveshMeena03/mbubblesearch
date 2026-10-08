@@ -279,3 +279,11 @@ def test_the_coin_and_an_anthem_are_left_alone():
     for text in ("the national anthem hacked", "the $ANSEM hackathon prize",
                  "the Ansem Hackathon we're gonna ask about"):
         assert names.fix(text)[0] == text, text
+
+
+def test_the_hackathon_typed_as_two_words_is_found_too():
+    """"when are the ansem hack results" went to August: the two-word
+    spelling was one of the expansions and not one of the things expanded."""
+    spellings = expand("when are the ansem hack results")
+    assert "when are the anthem hack results" in spellings
+    assert "when are the answer hack results" in spellings

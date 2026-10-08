@@ -37,6 +37,7 @@ import gzip
 import hashlib
 import json
 import sys
+import time
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -46,7 +47,7 @@ sys.path.insert(0, str(ROOT))
 from app.config import get_settings  # noqa: E402
 from app.podcast import _windows  # noqa: E402
 from app.schemas import Episode  # noqa: E402
-from app.terms import path_for, words, worth_indexing  # noqa: E402
+from app.terms import path_for, said_phrases, words, worth_indexing  # noqa: E402
 
 EPISODES = ROOT / "data" / "episodes.json"
 
@@ -122,6 +123,26 @@ def from_episodes(settings) -> tuple[list[str], list[tuple[str, str]]]:
     return ids, docs
 
 
+def _fetch(index, batch: list[str], namespace: str, tries: int = 5) -> dict:
+    """One batch of records, asked for again if the connection drops.
+
+    A rebuild of MCG is 114 of these over half an hour, and one of them
+    ending early ("peer closed connection without sending complete message
+    body") threw the other 113 away. Nothing was written, which is right,
+    and nothing was rebuilt either, on the Sunday job as much as by hand.
+    """
+    for attempt in range(1, tries + 1):
+        try:
+            return index.fetch(ids=batch, namespace=namespace).vectors or {}
+        except Exception as exc:  # noqa: BLE001
+            if attempt == tries:
+                raise
+            print(f"\n  a read failed ({type(exc).__name__}), "
+                  f"trying again in {5 * attempt}s", flush=True)
+            time.sleep(5 * attempt)
+    return {}
+
+
 def from_pinecone(namespace: str) -> tuple[list[str], list[tuple[str, str]]]:
     """Any archive whose transcripts live only in Pinecone.
 
@@ -141,7 +162,7 @@ def from_pinecone(namespace: str) -> tuple[list[str], list[tuple[str, str]]]:
     ids, docs = [], []
     for at in range(0, len(every), FETCH_BATCH):
         batch = every[at:at + FETCH_BATCH]
-        records = index.fetch(ids=batch, namespace=namespace).vectors or {}
+        records = _fetch(index, batch, namespace)
         for vector_id in batch:
             record = records.get(vector_id)
             md = getattr(record, "metadata", None) or {}
@@ -188,6 +209,9 @@ def main() -> int:
         counts = Counter(w for w in words(text)
                          if worth_indexing(w) and w not in STOP)
         counts.update(phrases(text))
+        # A name the captions broke in two, kept whole. Neither half finds
+        # it: one is too common to keep and the other is in sixty windows.
+        counts.update(said_phrases(words(text)))
         for token, n in counts.items():
             said_in[token].extend([position] * min(n, MAX_REPEATS))
         # Every window of the episode, said or not: a minute that says
