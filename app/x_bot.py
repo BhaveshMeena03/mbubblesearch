@@ -40,6 +40,7 @@ from datetime import datetime
 from pathlib import Path
 
 from app import attribution, clipmatch, clipread, episode_store, hedging, names, sources
+from app.mcg_on_x import on_x
 from app.podcast import NOT_FOUND_ANSWER, _broadcast_players
 from app.x_api import (
     _URL_SHAPED,
@@ -2801,6 +2802,9 @@ def format_reply(answer: str, hits: list, include_links: bool | str = False,
             moment = top.timestamp
         link = (_relink(top.deep_link, _seconds(moment))
                 if supported and seekable else top.deep_link)
+        # An MCG Live show that also went out on X: link that copy, at the
+        # same second. The reply is on X, and so is the reader.
+        link = on_x(link)
         # Fitted first, because whether the tail should carry a timestamp
         # depends on whether the trimmed answer already has one — and the
         # tail's own length depends on that answer. Two passes, cheaply.
