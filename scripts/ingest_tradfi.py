@@ -32,6 +32,7 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import collections
 import re
 import subprocess
 import sys
@@ -87,6 +88,29 @@ def title_of(video_id: str) -> str:
 
 def shelf() -> list[dict]:
     return episode_store.load(SHELF)
+
+
+_ADDRESSED = re.compile(r"\bChair(?:man|woman)?\s+([A-Z][a-z]{2,})\b")
+
+
+def someone_else(segments: list[dict], subject: str) -> str | None:
+    """The name the room uses for the chair, when it is not the subject's.
+
+    An office outlives the person in it. "Chairman Warsh" is said twice in
+    the conference that was shelved as Jerome Powell's, and nothing else
+    in the pipeline reads the words for who is speaking them. Twice is
+    the bar because twice is all there was.
+
+    It can stop a recording that is fine: an interview that mentions
+    "Chair Powell" in passing is still the interviewee's. That costs a
+    second look and --subject-checked; the other mistake cost ten weeks.
+    """
+    said = " ".join(s.get("text", "") for s in segments)
+    names = collections.Counter(_ADDRESSED.findall(said))
+    for name, count in names.most_common():
+        if count >= 2 and name.lower() not in subject.lower():
+            return f"{name} ({count} times)"
+    return None
 
 
 def retitled(title: str, was: str, now: str) -> str:
@@ -164,6 +188,15 @@ async def main() -> int:
                          "the shelf so the archive can grow past one person")
     ap.add_argument("--list", action="store_true",
                     help="show what is already indexed and stop")
+    ap.add_argument("--subject-checked", action="store_true",
+                    help="shelve under --subject although the transcript "
+                         "addresses somebody else as chair; for when a "
+                         "person has looked and the subject is right")
+    ap.add_argument("--transcriber", choices=("auto", "groq"), default="auto",
+                    help="auto transcribes on this machine when it can; "
+                         "groq sends the audio out, which is minutes "
+                         "instead of an hour and does not need the lid "
+                         "open on battery")
     ap.add_argument("--redo", metavar="VIDEO_ID",
                     help="index a shelved recording again from its own "
                          "transcript, cleaned, under --subject if given")
@@ -171,6 +204,9 @@ async def main() -> int:
 
     if args.redo:
         return await redo(args.redo, args.subject)
+    if args.transcriber == "groq":
+        from scripts import ingest_mcg
+        ingest_mcg.TRANSCRIBER = "groq"
 
     rows = shelf()
     if args.list or not args.urls:
@@ -214,6 +250,13 @@ async def main() -> int:
         if not kept:
             print("     nothing transcribed — skipping rather than "
                   "shelving an empty recording")
+            continue
+        other = someone_else(kept, args.subject)
+        if other and not args.subject_checked:
+            print(f"     NOT SHELVED under {args.subject!r}: the room "
+                  f"addresses Chair {other}. Check who is speaking, then "
+                  f"run again with the right --subject, or with "
+                  f"--subject-checked if this one is right.")
             continue
 
         title = title_of(vid) or vid
