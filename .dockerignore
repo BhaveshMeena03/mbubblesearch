@@ -47,6 +47,9 @@ data/
 # speaker map (clips lost their names). tests/test_docker_build_context.py
 # now checks every data file the app opens is here.
 !data/youtube_map.json
+# Which X broadcast each MCG Live show is. Without it every MCG citation
+# in a reply stays a YouTube link: works, and sends the reader off X.
+!data/mcg_broadcast_links.json
 !data/guest_windows.json
 !data/speaker_map.json
 redteam_report.md
