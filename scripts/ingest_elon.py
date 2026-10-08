@@ -116,6 +116,43 @@ SOURCES = [
      "The full-length interview with Elon Musk | The Economist"),
     ("1nAKEpNkLwoxL", "Donald J. Trump", "2024-08-12",
      "Donald Trump and Elon Musk on X Spaces"),
+
+    # September 2025 to September 2026, added 9 October 2026. Each is on
+    # the channel that recorded it, with the upload date YouTube gives.
+    #
+    # Not all of them are the two-person shape. All-In is four hosts, the
+    # September 2026 one has Gwynne Shotwell beside him, and Dwarkesh and
+    # Diamandis each bring a second interviewer. The titles say who is in
+    # the room, which is what the answer has to go on: nothing here labels
+    # a voice, so a question about one of these is the place to check that
+    # a line is his before it is posted as his.
+    ("qeZqZBRA-6Q", "All-In Podcast", "2025-09-10",
+     "Elon Musk on DOGE, Optimus, Starlink Smartphones, Evolving with AI, "
+     "Why the West is Imploding"),
+    ("j6_VfR-CyuM", "All-In Podcast", "2025-10-31",
+     "Elon Musk: OpenAI Betrayal, His Future at Tesla, and the Next Big "
+     "Thing — Grokipedia"),
+    ("Sxtk_LoBu4E", "Baron Capital", "2025-11-20",
+     "Ron Baron and Elon Musk Discuss the Future"),
+    ("Rni7Fz7208c", "Nikhil Kamath", "2025-11-30",
+     "Elon Musk: A Different Conversation w/ Nikhil Kamath | Full Episode "
+     "| People by WTF Ep. 16"),
+    ("bz5Hjk40FD4", "Katie Miller Pod", "2025-12-09",
+     "Elon Musk on DOGE, AI, & Are we in a Simulation? | KMP Ep.18"),
+    ("RSNuB9pj9P8", "Peter H. Diamandis", "2026-01-06",
+     "Elon Musk on AGI Timeline, US vs China, Job Markets, Clean Energy & "
+     "Humanoid Robots | 220"),
+    ("IgifEgm1-e0", "World Economic Forum", "2026-01-22",
+     "Conversation with Elon Musk | World Economic Forum Annual Meeting "
+     "2026"),
+    ("BYXbuik3dgA", "Dwarkesh Patel", "2026-02-05",
+     "Elon Musk – \"In 36 months, the cheapest place to put AI will be "
+     "space\""),
+    ("N5KCm_55xeQ", "Peter H. Diamandis", "2026-03-12",
+     "Elon Musk: The Economy Will Be 10x the Size in 10 Years | #239"),
+    ("iwBOQeFPAwg", "All-In Podcast", "2026-09-15",
+     "Elon Musk & Gwynne Shotwell on AI Risks and Peer Review, Starship, "
+     "Terafab, SpaceX/Tesla Merger"),
 ]
 
 
@@ -183,7 +220,19 @@ def fetch_audio(video_id: str) -> Path:
     raise RuntimeError(f"download failed: {last[:160]}")
 
 
+# "local" is this machine's GPU, free and an hour per long interview.
+# "groq" sends the audio out: the same model family, minutes per interview,
+# and it does not need a laptop on battery to stay awake for an afternoon.
+TRANSCRIBER = "local"
+
+
 def transcribe(path: Path) -> list[dict]:
+    if TRANSCRIBER == "groq":
+        from scripts.ingest_mcg import groq_key, transcribe_via_groq
+        key = groq_key()
+        if not key:
+            raise RuntimeError("--transcriber groq needs GROQ_API_KEY")
+        return transcribe_via_groq(path, key)
     import mlx_whisper
     result = mlx_whisper.transcribe(
         str(path), path_or_hf_repo="mlx-community/whisper-turbo",
@@ -196,7 +245,10 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--only", help="one video id")
     ap.add_argument("--list", action="store_true")
+    ap.add_argument("--transcriber", choices=("local", "groq"), default="local")
     args = ap.parse_args()
+    global TRANSCRIBER
+    TRANSCRIBER = args.transcriber
 
     have = {e["episode_id"] for e in load()}
     todo = [s for s in SOURCES

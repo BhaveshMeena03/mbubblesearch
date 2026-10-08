@@ -77,9 +77,17 @@ async def main() -> int:
 
     # Already in? Appending the same windows twice doubles every passage
     # and there is no way to tell the copies apart later.
+    # Not a vector of zeros. Cosine similarity against nothing is nothing,
+    # so that query matched no passage whatever the filter said, every
+    # recording looked new, and adding ten on 9 October 2026 embedded all
+    # twenty-four. The ids are derived from the episode and the second, so
+    # the fourteen were overwritten in place and nothing doubled; it paid
+    # for them twice and proved the check had never once skipped anything.
+    probe = [0.0] * 1024
+    probe[0] = 1.0
     for episode in rows:
         existing = index.index.query(
-            vector=[0.0] * 1024, top_k=1, namespace=NAMESPACE,
+            vector=probe, top_k=1, namespace=NAMESPACE,
             include_metadata=False,
             filter={"episode_id": {"$eq": episode["episode_id"]}})
         if getattr(existing, "matches", []):

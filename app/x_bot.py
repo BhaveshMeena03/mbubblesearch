@@ -3414,6 +3414,11 @@ _TOO_ORDINARY = {
     'stake',
     'sunrise',
     'swap',
+    # Said by Musk to Peter Diamandis in January 2026 ("Dyson Swarms",
+    # "at the synapse"), which the check over the transcripts caught the
+    # day that conversation was added.
+    'swarms',
+    'synapse',
     'token',
     'trade',
     'trojan',
