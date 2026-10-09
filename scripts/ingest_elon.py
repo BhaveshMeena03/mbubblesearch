@@ -217,6 +217,22 @@ def fetch_audio(video_id: str) -> Path:
             return path
         last = ((done.stderr or "").strip().splitlines() or ["?"])[-1]
         path.unlink(missing_ok=True)
+    # Refused under every client: after a couple of dozen downloads in a
+    # night YouTube answers "Sign in to confirm you're not a bot" whichever
+    # one asks, and an age-restricted episode says it from the first. The
+    # browser is signed in and the solver clears the challenge, which is
+    # how fetch_episodes has always fetched. Last, because it reads the
+    # browser's cookies and nothing above needs to.
+    done = subprocess.run(
+        [YTDLP, "--no-warnings", "--remote-components", "ejs:github",
+         "--cookies-from-browser", "chrome",
+         "-f", "bestaudio[ext=m4a]/bestaudio/best",
+         "--extract-audio", "--audio-format", "m4a", "-o", str(path),
+         f"https://www.youtube.com/watch?v={video_id}"],
+        capture_output=True, text=True, timeout=3600)
+    if done.returncode == 0 and path.exists():
+        return path
+    path.unlink(missing_ok=True)
     raise RuntimeError(f"download failed: {last[:160]}")
 
 
