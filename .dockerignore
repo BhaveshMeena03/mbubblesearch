@@ -52,5 +52,6 @@ data/
 !data/mcg_broadcast_links.json
 !data/guest_windows.json
 !data/speaker_map.json
+!data/elon_speaker_map.json
 redteam_report.md
 PITCH_PREP.md

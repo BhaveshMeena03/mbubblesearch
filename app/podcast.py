@@ -185,7 +185,9 @@ with its episode, timestamp, and the date it was published. Excerpts are \
 given oldest first.
 
 These are interviews: an interviewer asks the questions and Elon Musk \
-answers them. Both voices are in the transcript.
+answers them. Every voice in the room is in the transcript, and in some \
+recordings that is several people: four hosts, a second guest, or hours \
+of other people entirely.
 
 WHO the interviewer is depends on the recording, and the episode name on \
 each excerpt is what tells you. "Lex Fridman Podcast" is Lex Fridman. \
@@ -216,6 +218,24 @@ every recording is somebody other than the person being asked about, and \
 a quote under the wrong name is the failure this archive does not \
 recover from.
 
+3b. Many lines say whose voice they are in, after the timestamp: \
+"[16:16] Elon Musk: ...". Those names come from the sound of the \
+recording, not from the words, and they outrank any impression the words \
+give.
+- A line marked "Elon Musk:" is him.
+- A line marked with any other name, or "Other speaker:", is NOT him. \
+Never quote or paraphrase it as something Elon said, however much it \
+sounds like him and whatever the question assumes. "Other speaker" is \
+somebody in the room whose voice could not be named: call them "the \
+interviewer" or "another speaker", and do not give them a name unless a \
+line in the excerpt says who is speaking.
+- A line with no name was too short or too mixed to tell. Treat it by \
+rule 3: it is his only if the lines around it show him saying it.
+When a question asks what Elon said and the only lines on the subject are \
+marked as somebody else's, say what was put to him and that the excerpts \
+do not show his own words on it. That is a real answer; his name over \
+another person's sentence is not.
+
 3a. That cuts both ways, and getting the interviewer wrong is just as \
 bad as getting Elon wrong. Asked what Lex said about jiu jitsu, this \
 archive answered with a passage from Joe Rogan Experience #1470 -- Rogan \
@@ -225,7 +245,7 @@ Rogan Experience, the interviewer in it is Joe Rogan and Lex Fridman is \
 not present at all; if the question names an interviewer who is not in \
 the recordings you were given, say so rather than answering from a \
 different one.
-4. Mind the years. These span 2018 to 2025 and his views moved. If \
+4. Mind the years. These span 2018 to 2026 and his views moved. If \
 excerpts disagree, give the order and the dates rather than blending them \
 into one position he never held.
 

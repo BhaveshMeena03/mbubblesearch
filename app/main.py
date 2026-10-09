@@ -2368,7 +2368,10 @@ async def elon_search(
     # Keyed by surface as well as query, so the two archives cannot serve
     # each other's cached answers -- which would be the same failure as
     # sharing a namespace, arriving by a different road.
-    key = make_key(body.query, surface="elon", top_k=body.top_k)
+    # v2: lines now carry whose voice they are in, and the rules for
+    # reading them changed with it. An answer written before that could
+    # hold an interviewer's sentence under his name.
+    key = make_key(body.query, surface="elon-v2", top_k=body.top_k)
     cached = answers.get(key)
     if cached is not None:
         per_client_daily.refund(request)
@@ -2847,7 +2850,7 @@ async def elon_search_stream(
         raise HTTPException(status_code=503, detail="The archive is not loaded.")
     lengths = {e["episode_id"]: int(_runtime(e)) for e in _elon_episodes()}
     return _archive_stream(index, body.query, body.top_k, lengths,
-                           answers, surface="elon-stream")
+                           answers, surface="elon-stream-v2")
 
 
 @app.post("/v1/mcg/search/stream",
@@ -2928,16 +2931,27 @@ _SPEAKERS_CACHE: dict | None = None
 
 
 def _speaker_labels() -> dict:
-    """data/speaker_map.json, parsed once. Absent is fine — no names then."""
+    """Who said each line, for every archive that knows: the broadcast's
+    map and the Musk archive's, parsed once. Absent is fine, no names
+    then.
+
+    Two files because they are made differently, by ear for the hosts
+    and by recurrence for Musk, and episode ids never collide across
+    them. Either one failing to load costs its own names and not the
+    other's.
+    """
     global _SPEAKERS_CACHE
     if _SPEAKERS_CACHE is not None:
         return _SPEAKERS_CACHE
-    path = _ROOT / "data" / "speaker_map.json"
-    try:
-        _SPEAKERS_CACHE = json.loads(path.read_text()) if path.exists() else {}
-    except Exception as exc:  # noqa: BLE001
-        logger.warning("could not load speaker labels: %s", exc)
-        _SPEAKERS_CACHE = {}
+    labels: dict = {}
+    for name in ("speaker_map.json", "elon_speaker_map.json"):
+        path = _ROOT / "data" / name
+        try:
+            if path.exists():
+                labels.update(json.loads(path.read_text()))
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("could not load %s: %s", name, exc)
+    _SPEAKERS_CACHE = labels
     return _SPEAKERS_CACHE
 
 
