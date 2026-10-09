@@ -44,7 +44,7 @@ sys.path.insert(0, str(ROOT))
 
 from anthropic import AsyncAnthropic  # noqa: E402
 
-from app.config import get_settings  # noqa: E402
+from app.config import anthropic_client_kwargs, get_settings  # noqa: E402
 from app.schemas import Episode  # noqa: E402
 from app.summaries import SummaryStore  # noqa: E402
 from app.x_bot import _seconds, episode_number  # noqa: E402
@@ -108,7 +108,11 @@ async def main() -> int:
     args = ap.parse_args()
 
     settings = get_settings()
-    client = AsyncAnthropic(api_key=settings.anthropic_api_key)
+    # Through the proxy, like every other model call here. This built a
+    # direct client with the proxy's key, which Anthropic refuses: the
+    # step printed a 401 and add_broadcast carried on, so no broadcast
+    # added since the move to the proxy had this done to it.
+    client = AsyncAnthropic(**anthropic_client_kwargs(settings))
     gate = asyncio.Semaphore(args.concurrency)
     episodes = {e["episode_id"]: e for e in json.loads(EPISODES.read_text())}
 
