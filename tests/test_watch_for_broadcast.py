@@ -91,3 +91,41 @@ def test_a_whole_thursday_night():
         "did not notice the first time the number stopped moving")
     # 4h at 15-minute polls: found within a quarter hour of the real end.
     assert states.index(READY) == len(growing)
+
+
+# --- a short show is still a show ---------------------------------------------
+
+def test_a_short_show_linked_from_the_player_is_finished_when_it_stops():
+    """9 October 2026, 74 minutes. The watcher said "still short" for nine
+    hours over a recording that had ended before its first poll."""
+    from scripts.watch_for_broadcast import floor_for
+
+    show = 4_447_000                                    # milliseconds, measured
+    live = floor_for(True, 2.5)
+    assert verdict(show, None, live) == WAIT_FIRST
+    assert verdict(show, show, live) == READY
+    assert verdict(show + 60_000, show, live) == WAIT_GROWING
+
+
+def test_an_attached_video_keeps_the_floor_that_stops_a_cut_down():
+    from scripts.watch_for_broadcast import floor_for
+
+    assert floor_for(False, 2.5) == 2.5
+    assert verdict(74 * 60_000, 74 * 60_000, floor_for(False, 2.5)) == WAIT_SHORT
+
+
+def test_a_manifest_that_could_not_be_read_is_not_a_finished_show():
+    """replay_ms returns 0 when the read fails, twice in a row as easily
+    as once, and two equal zeros must not start an index."""
+    from scripts.watch_for_broadcast import floor_for
+
+    assert verdict(0, 0, floor_for(True, 2.5)) == WAIT_SHORT
+    assert verdict(5 * 60_000, 5 * 60_000, floor_for(True, 2.5)) == WAIT_SHORT
+
+
+def test_the_watcher_knows_which_kind_of_post_it_found():
+    source = (Path(__file__).resolve().parent.parent
+              / "scripts" / "watch_for_broadcast.py").read_text()
+    assert 'return post["id"], replay_ms(link), True' in source
+    assert 'return post["id"], longest, False' in source
+    assert "floor_for(live, args.min_hours)" in source

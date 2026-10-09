@@ -67,6 +67,23 @@ WAIT_GROWING = "growing"   # the number went up, so the stream is live
 READY = "ready"            # past a plausible length and no longer moving
 
 
+# A post that links the broadcast player IS the show: nobody links the
+# player to a cut-down, those are uploaded as videos. So the floor that
+# keeps a 45-minute cut-down from ever looking finished does not apply to
+# it, only enough of one to be sure the manifest was really read.
+#
+# On 9 October 2026 the show ran 74 minutes, "BULL RUN IS OVER?", linked
+# from the account the way episode 19 was. The watcher read 1.2 hours,
+# said "still short, waiting" every fifteen minutes for nine hours, and
+# gave up on a recording that had ended before its first poll.
+LIVE_MIN_HOURS = 0.33
+
+
+def floor_for(live: bool, min_hours: float) -> float:
+    """How long a recording must be before standing still means finished."""
+    return min(min_hours, LIVE_MIN_HOURS) if live else min_hours
+
+
 def verdict(duration_ms: int, previous: int | None,
             min_hours: float = 2.5) -> str:
     if duration_ms < min_hours * 3_600_000:
@@ -122,8 +139,10 @@ def replay_ms(url: str) -> int:
 
 
 async def candidate(http: httpx.AsyncClient, cred: XCredentials,
-                    user_id: str) -> tuple[str, int] | None:
-    """The newest un-indexed broadcast post, and its reported length.
+                    user_id: str) -> tuple[str, int, bool] | None:
+    """The newest un-indexed broadcast post, its reported length, and
+    whether it links the live player (the show) or attaches a video (which
+    may be a cut-down).
 
     Reads 40 posts with replies excluded, not the newest 10 of everything.
     Ten was enough for an account that posts a few times a day, and
@@ -186,10 +205,10 @@ async def candidate(http: httpx.AsyncClient, cred: XCredentials,
             not_an_episode += 1
             continue
         if link:
-            return post["id"], replay_ms(link)
+            return post["id"], replay_ms(link), True
         longest = max((media.get(k, {}).get("duration_ms") or 0
                        for k in keys), default=0)
-        return post["id"], longest
+        return post["id"], longest, False
 
     say(f"nothing un-indexed yet — scanned {len(posts)} posts: "
         f"{already} already indexed, {no_video} without video, "
@@ -274,12 +293,13 @@ async def main() -> int:
             if not found:
                 pass  # candidate() already said why, in detail.
             else:
-                post_id, duration = found
+                post_id, duration, live = found
                 hours = duration / 3_600_000
                 before = seen.get(post_id)
                 seen[post_id] = duration
 
-                state = verdict(duration, before, args.min_hours)
+                state = verdict(duration, before,
+                                floor_for(live, args.min_hours))
                 if state == WAIT_SHORT:
                     say(f"{post_id}: {hours:.1f}h — still short, waiting")
                 elif state == WAIT_FIRST:
