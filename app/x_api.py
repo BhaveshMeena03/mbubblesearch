@@ -292,6 +292,34 @@ class Mention:
     # was read, and a post written six minutes ago is not on it.
     in_reply_to_user_id: str = ""
     replied_to_id: str = ""
+    # Whether this account's handle is only in the run of handles X puts
+    # in front of a reply, which nobody typed. See only_carried().
+    carried: bool = False
+
+
+def only_carried(post: dict, our_id: str) -> bool:
+    """Whether a post reaches this account only by inheriting its handle.
+
+    X starts every reply with the handles of everyone the post above it
+    named, and counts each as a mention. The person replying typed none of
+    them. `display_text_range` is where their own words begin, so a
+    mention that ends before it was carried in, and one inside it was
+    written.
+
+    On 10 October 2026 somebody posted that it was their birthday and
+    tagged ten accounts, this one among them. A friend replied "happy
+    birthday brother, what are you doing today", and this account answered
+    him: a line about what it is, and a clip of a cake on the show.
+
+    False when X sends no range or the post does not name us at all:
+    unknown is treated the way everything was before this existed.
+    """
+    span = post.get("display_text_range") or []
+    if len(span) != 2 or not our_id:
+        return False
+    ours = [m for m in (post.get("entities") or {}).get("mentions") or []
+            if str(m.get("id", "")) == str(our_id)]
+    return bool(ours) and all(int(m.get("end", 0)) <= int(span[0]) for m in ours)
 
 
 class XCredentials:
@@ -448,7 +476,8 @@ class XClient:
         params = {
             "max_results": str(max(5, min(limit, 100))),
             "tweet.fields": ("author_id,conversation_id,created_at,"
-                             "in_reply_to_user_id,referenced_tweets"),
+                             "in_reply_to_user_id,referenced_tweets,"
+                             "display_text_range,entities"),
             # The author comes back in the same response rather than needing
             # a lookup per mention. Repeat askers are deduplicated within the
             # UTC day like everything else, so a regular costs nothing after
@@ -487,6 +516,7 @@ class XClient:
                 replied_to_id=next(
                     (ref.get("id", "") for ref in m.get("referenced_tweets") or []
                      if ref.get("type") == "replied_to"), ""),
+                carried=only_carried(m, self.bot_user_id),
                 author_verified=bool(
                     authors.get(m.get("author_id", ""), {}).get("verified")),
                 author_verified_type=(

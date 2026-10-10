@@ -3190,6 +3190,19 @@ def replies_to_us(mention, our_id: str) -> bool:
         getattr(mention, "in_reply_to_user_id", "") or "") == str(our_id)
 
 
+def carried_into_somebody_elses_reply(mention, our_id: str) -> bool:
+    """A reply to a person who is not us, naming us only because the
+    thread already did.
+
+    A reply to one of our own posts carries our handle the same way and
+    is plainly for us, which is why who it answers is asked as well as
+    how the handle got there.
+    """
+    to = str(getattr(mention, "in_reply_to_user_id", "") or "")
+    return (bool(getattr(mention, "carried", False)) and bool(to)
+            and bool(our_id) and to != str(our_id))
+
+
 def replies_to_our_root(mention, our_id: str) -> bool:
     """A reply straight to a post of ours that opened its own thread: an
     announcement or a clip, not an answer given in somebody else's."""
@@ -4244,6 +4257,15 @@ class MentionBot:
         # silencing "lfg" and "gm" before the highlight path was reached.
         if not question:
             logger.info("%s is a bare tag — skipping", mention.id)
+            return None
+        # Said to somebody else, in a thread where a post further up tagged
+        # us. Nobody typed this account's name, so nothing in it is ours to
+        # answer, question mark or not: "what are you doing today" was a
+        # friend asking the birthday boy.
+        if carried_into_somebody_elses_reply(
+                mention, getattr(self._client, "bot_user_id", "")):
+            logger.info("%s is a reply to somebody else that only inherited "
+                        "our handle — staying quiet", mention.id)
             return None
         # A question under one of OUR OWN posts is about this account, not
         # about the archive. Someone asked where the rest of the $MBS fee
