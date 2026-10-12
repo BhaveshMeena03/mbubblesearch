@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0e11">
+<!-- Not for search engines until it has been looked over and linked. -->
+<meta name="robots" content="noindex">
+<title>Market Bubble · what they called, and what it did</title>
+<meta name="description" content="Every time Ansem or FaZe Banks said on air that he owned something, named a pick or put a number on it. Quoted word for word, linked to the second, priced from that night to today.">
+<meta property="og:title" content="What they called on Market Bubble, and what it did">
+<meta property="og:description" content="Every on-air call by Ansem and Banks. Quoted word for word, linked to the second, priced from that night to today. The misses are here too.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://search.lexthedev.com/calls">
+<meta property="og:image" content="https://search.lexthedev.com/demo/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What they called on Market Bubble, and what it did">
+<meta name="twitter:description" content="Every on-air call by Ansem and Banks. Quoted word for word, linked to the second, priced from that night to today.">
+<meta name="twitter:image" content="https://search.lexthedev.com/demo/og-image.png">
+<link rel="stylesheet" href="/demo/ui.css">
+<style>
+  :root{
+    --bg:#0b0e11;--panel:#12161c;--line:#232a33;--text:#e6e8ea;
+    --muted:#8a939e;--green:#16c784;--red:#e5605e;--amber:#e8c157;
+    --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);min-height:100vh;
+    font:15px/1.55 var(--sans);font-feature-settings:"tnum" 1;
+    padding:28px 20px 60px}
+  .wrap{max-width:940px;margin:0 auto}
+  .topbar{display:flex;align-items:center;justify-content:space-between;
+    gap:14px;margin-bottom:26px;flex-wrap:wrap}
+  .brand{font-weight:700;letter-spacing:.5px;font-size:14px}
+  .brand span{color:var(--green)}
+  h1{font-family:var(--display);font-weight:400;font-size:46px;
+    line-height:1.08;letter-spacing:-.01em;margin-bottom:12px}
+  h1 em{color:var(--green);font-style:normal}
+  .sub{color:var(--muted);margin-bottom:22px;max-width:660px}
+  .sub b{color:var(--text);font-weight:500}
+
+  /* The line above the board. One row of figures on a rule, like the top
+     of a statement, because that is what this page is. */
+  .tally{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    margin-bottom:22px}
+  .tally div{padding:14px 14px 13px 0;min-width:0}
+  .tally div + div{padding-left:14px;border-left:1px solid var(--line)}
+  .tally b{display:block;font:400 30px/1.1 var(--display);letter-spacing:-.01em}
+  .tally span{color:var(--muted);font-size:11px;text-transform:uppercase;
+    letter-spacing:.7px}
+  .tally .up{color:var(--green)} .tally .down{color:var(--red)}
+
+  .controls{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;align-items:center}
+  .controls .gap{flex:1}
+  .chip{font:inherit;font-size:13px;background:transparent;color:var(--muted);
+    border:1px solid var(--line);border-radius:16px;padding:6px 13px;cursor:pointer}
+  .chip:hover{border-color:var(--green);color:var(--green)}
+  .chip[aria-pressed="true"]{background:#16c78418;border-color:#16c78455;color:var(--green)}
+  .chip:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+  .showing{color:var(--muted);font-size:12.5px;margin:0 0 14px;min-height:19px}
+
+  /* One call. The number it comes to sits on the right, where a ledger
+     keeps its balance, and everything that backs it up is on the left. */
+  .call{display:grid;grid-template-columns:minmax(0,1fr) 148px;gap:6px 22px;
+    padding:18px 0 17px;border-top:1px solid var(--line);scroll-margin-top:16px}
+  .call:last-child{border-bottom:1px solid var(--line)}
+  /* The call a link pointed at: a hairline down its edge and a wash. */
+  .call.lit{background:linear-gradient(90deg,#16c78414,transparent 60%);
+    box-shadow:inset 2px 0 0 var(--green);padding-left:14px}
+  .who{grid-column:1;color:var(--muted);font-size:12.5px;display:flex;
+    gap:8px;flex-wrap:wrap;align-items:baseline}
+  .who b{color:var(--text);font-weight:600}
+  .what{grid-column:1;display:flex;gap:6px 9px;flex-wrap:wrap;align-items:baseline;
+    margin-top:1px;min-width:0}
+  .sym{font:600 17px/1.2 var(--sans);letter-spacing:.2px}
+  .nm{color:var(--muted);font-size:14px}
+  .tag{font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;
+    border:1px solid var(--line);color:var(--muted);border-radius:9px;
+    padding:1px 7px;white-space:nowrap}
+  .tag.short{border-color:#e5605e66;color:var(--red)}
+  /* A target is in his own words and can run long. It wraps; every other
+     tag is two or three words and stays on one line. */
+  .tag.target{border-color:#e8c15755;color:var(--amber);white-space:normal;
+    max-width:100%;line-height:1.5}
+  .quote{grid-column:1;font:400 20px/1.34 var(--display);color:#d9dde1;
+    margin-top:6px;overflow-wrap:anywhere}
+  .quote::before{content:"\201C"} .quote::after{content:"\201D"}
+  .acts{grid-column:1;display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;
+    font-size:12.5px;align-items:center}
+  .watch{color:var(--green);font-weight:600;text-decoration:none;
+    display:inline-flex;gap:6px;align-items:center}
+  .watch:hover{text-decoration:underline}
+  .watch svg{width:11px;height:11px}
+  .ep{color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+    max-width:100%}
+  .share{color:var(--muted);text-decoration:none;border-bottom:1px dotted var(--line)}
+  .share:hover{color:var(--text)}
+
+  .result{grid-column:2;grid-row:1 / span 4;text-align:right;align-self:start;
+    padding-top:2px}
+  .move{font:400 34px/1 var(--display);letter-spacing:-.01em}
+  .move.up{color:var(--green)} .move.down{color:var(--red)}
+  .move.none{color:var(--muted);font-size:22px}
+  .px{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:7px;
+    line-height:1.55}
+  .px b{color:var(--text);font-weight:500}
+
+  .note{border:1px solid var(--line);color:var(--muted);border-radius:12px;
+    padding:13px 16px;font-size:12.5px;margin-bottom:24px}
+  .note b{color:var(--text);font-weight:500}
+  .foot{color:var(--muted);font-size:12.5px;margin-top:26px;line-height:1.7;
+    max-width:700px}
+  .foot a{color:var(--text)}
+  .empty{color:var(--muted);padding:22px 0}
+
+  @media(max-width:700px){
+    h1{font-size:34px}
+    .topbar{flex-direction:column;align-items:flex-start;gap:10px}
+    /* Three figures over two, each row the full width, so the rule
+       between them runs edge to edge. */
+    .tally{grid-template-columns:repeat(6,minmax(0,1fr))}
+    .tally div{grid-column:span 2}
+    .tally div:nth-child(n+4){grid-column:span 3;border-top:1px solid var(--line)}
+    .tally div:nth-child(4){border-left:0;padding-left:0}
+    .tally b{font-size:25px}
+    /* The number goes under the quote it belongs to, on one line. */
+    .call{grid-template-columns:minmax(0,1fr);gap:5px}
+    .result{grid-column:1;grid-row:auto;text-align:left;display:flex;
+      gap:12px;align-items:baseline;flex-wrap:wrap;margin-top:8px}
+    .move{font-size:28px} .px{margin-top:0}
+    .quote{font-size:18px}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .call{animation:rise .28s ease-out both}
+    @keyframes rise{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <a class="brand" href="/home" style="text-decoration:none;color:inherit">MARKET <span>BUBBLE</span> · calls</a>
+    <span style="display:inline-flex;gap:10px;flex-wrap:wrap">
+    <a class="btn btn-primary btn-back" href="/demo/podcast.html"><span class="arw">←</span><svg class="ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.75" stroke="currentColor" stroke-width="1.7"/><path d="M10.6 10.6 14 14" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M6 5.3l3 1.7-3 1.7z" fill="currentColor"/></svg>Search every episode</a>
+    <a class="btn btn-ghost" href="/demo/assets.html">Every token they analyzed</a>
+    </span>
+  </div>
+
+  <h1>What they called, <em>and what it did</em>.</h1>
+  <p class="sub">Every time Ansem or FaZe Banks said on air that he owned
+    something, named a pick or put a number on it. <b>Quoted word for word,
+    linked to the second he said it, priced from that night to today.</b>
+    The misses are here too.</p>
+
+  <div class="note">
+    This is a record of what was said on the show. It is <b>not advice and not
+    a track record of anybody's trading</b>: a host naming a coin says nothing
+    about what he bought, how much, or when he sold. The number on each row is
+    only what the price has done since the broadcast.
+  </div>
+
+  <div class="tally" id="tally" aria-live="polite"></div>
+
+  <div class="controls" id="controls">
+    <button class="chip" data-k="who" data-v="" aria-pressed="true">Both hosts</button>
+    <button class="chip" data-k="who" data-v="Ansem" aria-pressed="false">Ansem</button>
+    <button class="chip" data-k="who" data-v="FaZe Banks" aria-pressed="false">FaZe Banks</button>
+    <span class="gap"></span>
+    <button class="chip" data-k="sort" data-v="new" aria-pressed="true">Newest</button>
+    <button class="chip" data-k="sort" data-v="best" aria-pressed="false">Best</button>
+    <button class="chip" data-k="sort" data-v="worst" aria-pressed="false">Worst</button>
+  </div>
+  <p class="showing" id="showing"></p>
+
+  <div id="list"><p class="empty">Loading the board…</p></div>
+
+  <p class="foot" id="foot">
+    How a row gets here: a model reads each live show and proposes calls. Its
+    quote has to be in the transcript word for word, on a line that carries
+    that host's voice label, or it is thrown out. A person then reads every
+    one that is left, and only the ones marked keep are shown. Tokens are
+    priced at the midnight UTC nearest the broadcast and stocks at that day's
+    close, from the exact listing, never from a ticker alone. Guests are not
+    on the board because their voices are not labelled.
+    <a href="/method">How the archive is built</a>.
+  </p>
+</div>
+
+<script>
+var API = "";
+var BOARD = null, WHO = "", SORT = "new";
+
+function esc(s){ return String(s == null ? "" : s)
+  .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;").replace(/'/g,"&#39;"); }
+
+/* Only ever emit http(s) links, never javascript: or data: from data. */
+function safeUrl(u){
+  try{ var p = new URL(u, location.href);
+       return (p.protocol === "http:" || p.protocol === "https:") ? p.href : "";
+  }catch(e){ return ""; }
+}
+
+function money(v){
+  if (typeof v !== "number" || !(v > 0)) return "n/a";
+  return v >= 1000 ? "$" + Math.round(v).toLocaleString("en-US") : "$" + v.toFixed(2);
+}
+/* A coin at a fraction of a cent keeps three figures that mean something,
+   however many zeros come first. */
+function small(v){
+  if (typeof v !== "number" || !(v > 0)) return "n/a";
+  if (v >= 1) return money(v);
+  var digits = Math.min(10, Math.max(2, 2 - Math.floor(Math.log10(v))));
+  return "$" + v.toFixed(digits);
+}
+function pct(v){
+  if (typeof v !== "number") return "";
+  var a = Math.abs(v);
+  return (v > 0 ? "+" : v < 0 ? "−" : "") +
+         (a >= 1000 ? Math.round(a).toLocaleString("en-US") : a.toFixed(1)) + "%";
+}
+function day(iso){
+  var p = String(iso || "").slice(0, 10).split("-");
+  if (p.length !== 3) return "";
+  var m = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][+p[1] - 1];
+  return m ? (m + " " + (+p[2]) + ", " + p[0]) : "";
+}
+function anchor(id){ return "c-" + String(id).replace(/[^A-Za-z0-9]+/g, "-"); }
+
+/* What he did, in the words a row can carry. A short is a different
+   sentence, not the same one with a warning next to it. */
+var KIND = {
+  long:  {pick: "named it", holding: "said he holds it",
+          target: "put a number on it", exit: "said he sold"},
+  short: {pick: "named it as a short", holding: "said he is short",
+          target: "put a number on it, down", exit: "said he covered"}
+};
+
+function median(xs){
+  if (!xs.length) return null;
+  var s = xs.slice().sort(function(a, b){ return a - b; }), n = s.length;
+  return n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2;
+}
+
+function tally(rows){
+  var scored = rows.map(function(r){ return r.moved_pct; })
+                   .filter(function(v){ return typeof v === "number"; });
+  var up = scored.filter(function(v){ return v > 0; }).length;
+  var down = scored.filter(function(v){ return v < 0; }).length;
+  var mid = median(scored);
+  var cls = mid == null ? "" : mid > 0 ? "up" : mid < 0 ? "down" : "";
+  var seen = {}, shows = 0;
+  rows.forEach(function(r){ if (!seen[r.episode_id]){ seen[r.episode_id] = 1; shows++; } });
+  document.getElementById("tally").innerHTML =
+    "<div><b>" + rows.length + "</b><span>calls</span></div>" +
+    "<div><b class='up'>" + up + "</b><span>up since</span></div>" +
+    "<div><b class='down'>" + down + "</b><span>down since</span></div>" +
+    "<div><b class='" + cls + "'>" + (mid == null ? "n/a" : pct(mid)) + "</b><span>median move</span></div>" +
+    "<div><b>" + shows + "</b><span>" + (shows === 1 ? "show" : "shows") + "</span></div>";
+}
+
+function shareUrl(r){
+  var page = "https://search.lexthedev.com/calls#" + anchor(r.id);
+  var line = r.speaker.toLowerCase() + " on " + r.asset.toLowerCase() + ", " +
+             day(r.date).toLowerCase() + (typeof r.moved_pct === "number"
+               ? ": " + pct(r.moved_pct).replace("−", "-") + " since." : ".");
+  return "https://x.com/intent/post?text=" + encodeURIComponent(line + "\n\n" + page);
+}
+
+function row(r, i){
+  var cls = typeof r.moved_pct !== "number" ? "none" : r.moved_pct > 0 ? "up" : r.moved_pct < 0 ? "down" : "";
+  var href = safeUrl(r.link);
+  var said = (KIND[r.stance] || KIND.long)[r.kind] || r.kind;
+  var tags = "<span class='tag" + (r.stance === "short" ? " short" : "") + "'>" + esc(said) + "</span>" +
+    (r.target ? "<span class='tag target'>target: " + esc(r.target) + "</span>" : "");
+  var then = "<b>" + small(r.price_then) + "</b> " + esc(day(r.then_at).replace(/, \d{4}$/, ""));
+  var now = "<b>" + small(r.price_now) + "</b> " + (r.now_at ? esc(day(r.now_at).replace(/, \d{4}$/, "")) : "now");
+  return "<article class='call' id='" + anchor(r.id) + "' style='animation-delay:" + Math.min(i, 12) * 22 + "ms'>" +
+    "<div class='who'><b>" + esc(r.speaker) + "</b><span>" + esc(day(r.date)) + "</span></div>" +
+    "<div class='what'><span class='sym'>" + esc(r.symbol) + "</span><span class='nm'>" + esc(r.asset) + "</span>" + tags + "</div>" +
+    "<p class='quote'>" + esc(r.quote) + "</p>" +
+    "<div class='acts'>" +
+      (href ? "<a class='watch' href='" + esc(href) + "' target='_blank' rel='noopener'>" +
+        "<svg viewBox='0 0 12 12' aria-hidden='true'><path d='M2 1.2l8.5 4.8L2 10.8z' fill='currentColor'/></svg>" +
+        "Watch at " + esc(r.timestamp) + "</a>" : "") +
+      "<span class='ep'>" + esc(r.show) + "</span>" +
+      "<a class='share' href='" + esc(shareUrl(r)) + "' target='_blank' rel='noopener'>Post this</a>" +
+    "</div>" +
+    "<div class='result'>" +
+      "<div class='move " + cls + "'>" + (cls === "none" ? (r.kind === "exit" ? "sold" : "no price") : pct(r.moved_pct)) + "</div>" +
+      "<div class='px'>" + then + "<br>" + now + "</div>" +
+    "</div></article>";
+}
+
+function render(){
+  var rows = BOARD.calls.filter(function(r){ return !WHO || r.speaker === WHO; });
+  var none = function(r){ return typeof r.moved_pct !== "number"; };
+  if (SORT === "best") rows.sort(function(a, b){ return none(a) - none(b) || b.moved_pct - a.moved_pct; });
+  else if (SORT === "worst") rows.sort(function(a, b){ return none(a) - none(b) || a.moved_pct - b.moved_pct; });
+  tally(rows);
+  var when = BOARD.priced_at ? day(BOARD.priced_at) : "";
+  document.getElementById("showing").textContent = rows.length + (rows.length === 1 ? " call" : " calls") +
+    (WHO ? " by " + WHO : "") + (when ? ". Prices as of " + when + (BOARD.live ? "." : ", when the board was last built.") : ".");
+  document.getElementById("list").innerHTML = rows.length
+    ? rows.map(row).join("") : "<p class='empty'>Nothing on the board for that yet.</p>";
+  lit();
+}
+
+/* A link to one call opens on it. */
+function lit(){
+  var id = decodeURIComponent(location.hash.slice(1));
+  if (!/^c-[A-Za-z0-9-]+$/.test(id)) return false;
+  var el = document.getElementById(id);
+  if (!el) return false;
+  Array.prototype.forEach.call(document.querySelectorAll(".call.lit"),
+    function(c){ c.classList.remove("lit"); });
+  el.classList.add("lit");
+  el.scrollIntoView({block: "center"});
+  return true;
+}
+
+function press(k, v){
+  Array.prototype.forEach.call(document.querySelectorAll(".chip[data-k='" + k + "']"),
+    function(c){ c.setAttribute("aria-pressed", c.dataset.v === v ? "true" : "false"); });
+}
+
+/* Followed while the board is filtered to the other host, the call it
+   points at is not on screen. Everything is shown again so it is. */
+window.addEventListener("hashchange", function(){
+  if (!BOARD || lit()) return;
+  WHO = ""; SORT = "new"; press("who", ""); press("sort", "new");
+  render();
+});
+
+document.getElementById("controls").addEventListener("click", function(e){
+  var b = e.target.closest(".chip"); if (!b || !BOARD) return;
+  if (b.dataset.k === "who") WHO = b.dataset.v; else SORT = b.dataset.v;
+  press(b.dataset.k, b.dataset.v);
+  if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+  render();
+});
+
+fetch(API + "/v1/calls").then(function(r){
+  if (!r.ok) throw new Error(r.status);
+  return r.json();
+}).then(function(d){
+  if (!d || !Array.isArray(d.calls)) throw new Error("shape");
+  BOARD = d; render();
+}).catch(function(){
+  document.getElementById("list").innerHTML =
+    "<p class='empty'>The board could not be loaded. Try again in a minute.</p>";
+});
+</script>
+</body>
+</html>

@@ -53,5 +53,7 @@ data/
 !data/guest_windows.json
 !data/speaker_map.json
 !data/elon_speaker_map.json
+# The calls board, served by /v1/calls.
+!data/calls.json
 redteam_report.md
 PITCH_PREP.md

@@ -9,6 +9,8 @@ data/episodes.json
 
 deploy/*.log
 data/.asset_cache/
+# What the model proposed for the calls board, per show. Regenerable.
+data/.calls_cache/
 
 # Raw eval answers — regenerable, and large. REPORT.md is the artifact.
 evals/results.jsonl

@@ -96,6 +96,10 @@ COPY data/mcg_broadcast_links.json ./data/mcg_broadcast_links.json
 COPY data/guest_windows.json ./data/guest_windows.json
 COPY data/speaker_map.json ./data/speaker_map.json
 COPY data/elon_speaker_map.json ./data/elon_speaker_map.json
+# The calls board: what the hosts called on air, read row by row by a
+# person, with the prices it was built with. Without it /v1/calls
+# answers 503 and the page at /calls says it could not load.
+COPY data/calls.json ./data/calls.json
 # Who was on each MCG episode. Read at runtime by /v1/mcg/episodes, so it
 # has to be in the image or every episode deploys with an empty guest list
 # and nothing anywhere says why.

@@ -25,6 +25,7 @@ from pathlib import Path
 from urllib.parse import quote_plus
 
 import anthropic
+import httpx
 from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import (
@@ -39,7 +40,17 @@ from fastapi.responses import (
 from fastapi.staticfiles import StaticFiles
 from voyageai import error as voyage_error
 
-from . import attribution, market, mcg_transcript, og_card, quotes, recency, sources
+from . import (
+    attribution,
+    call_prices,
+    market,
+    mcg_transcript,
+    og_card,
+    quotes,
+    recency,
+    sources,
+)
+from . import calls as on_air_calls
 from . import mcg_guests as mcg_guest_index
 from .agent import REFUSAL_MESSAGE, ConciergeAgent
 from .answer_cache import AnswerCache, make_key
@@ -811,6 +822,68 @@ async def archives(request: Request) -> dict:
     return sizes
 
 
+# --- the calls board -----------------------------------------------------------
+#
+# What the hosts called on air and what it did since. The rows and the
+# prices they were built with come from data/calls.json, which
+# scripts/build_calls.py writes after a person has read every row. Fresh
+# prices are laid over that when the source answers, and when it does not
+# the board is still whole.
+_CALLS_FILE = _ROOT / "data" / "calls.json"
+_CALLS_READ: tuple[float, dict] = (0.0, {})
+_CALL_PRICES: tuple[float, dict[str, float], str | None] = (0.0, {}, None)
+_CALL_PRICES_FOR = 600.0    # seconds a set of fresh prices is reused
+
+
+def _calls_file() -> dict:
+    """The built board, read again only when the file changes."""
+    global _CALLS_READ
+    try:
+        changed = _CALLS_FILE.stat().st_mtime
+    except OSError:
+        return {}
+    if changed != _CALLS_READ[0]:
+        try:
+            _CALLS_READ = (changed, json.loads(_CALLS_FILE.read_text(encoding="utf-8")))
+        except Exception as exc:                                # noqa: BLE001
+            logger.warning("could not read the calls board: %s", exc)
+            _CALLS_READ = (changed, {})
+    return _CALLS_READ[1]
+
+
+async def _call_prices_now(listings: list[str]) -> tuple[dict[str, float], str | None]:
+    """Fresh prices, at most once every ten minutes. Whatever was last
+    fetched is handed back while the source is down: an hour-old price
+    still beats the one from the morning the board was built."""
+    global _CALL_PRICES
+    at, prices, day = _CALL_PRICES
+    if prices and time.monotonic() - at < _CALL_PRICES_FOR:
+        return prices, day
+    try:
+        async with httpx.AsyncClient(timeout=8.0) as http:
+            found = await call_prices.now(listings, client=http)
+    except Exception as exc:                                    # noqa: BLE001
+        logger.warning("fresh call prices failed: %s", type(exc).__name__)
+        found = {}
+    if found:
+        prices, day = found, datetime.now(UTC).date().isoformat()
+    # Stamped either way, so a source that is down is asked again in ten
+    # minutes and not on every page view.
+    _CALL_PRICES = (time.monotonic(), prices, day)
+    return prices, day
+
+
+@app.get("/v1/calls", dependencies=[Depends(public_rate_limit)])
+async def calls_board() -> dict:
+    """Calls the hosts made on air, quoted, linked and priced since."""
+    shipped = _calls_file()
+    if not shipped.get("calls"):
+        raise HTTPException(status_code=503, detail="unavailable")
+    live, day = await _call_prices_now(
+        [str(r.get("listing") or "") for r in shipped["calls"]])
+    return on_air_calls.board(shipped, live, day)
+
+
 @app.get("/llms.txt", include_in_schema=False)
 async def llms_txt(request: Request) -> PlainTextResponse:
     text = (_ROOT / "demo" / "llms.txt").read_text(encoding="utf-8")
@@ -975,6 +1048,7 @@ for _path, _target in (("/home", "/demo/home.html"),
                        ("/threadguy/assets", "/demo/threadguy-assets.html"),
                        ("/record", "/demo/finance.html"),
                        ("/mcg/tokens", "/demo/mcg-assets.html"),
+                       ("/calls", "/demo/calls.html"),
                        ("/method", "/demo/how-it-works.html")):
     _shortcut(_path, _target)
 

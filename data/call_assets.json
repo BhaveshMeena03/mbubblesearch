@@ -1,0 +1,142 @@
+{
+ "BTC": {
+  "name": "Bitcoin",
+  "class": "crypto",
+  "yahoo": "BTC-USD",
+  "answers_to": "Bitcoin"
+ },
+ "ETH": {
+  "name": "Ethereum",
+  "class": "crypto",
+  "yahoo": "ETH-USD",
+  "answers_to": "Ethereum"
+ },
+ "SOL": {
+  "name": "Solana",
+  "class": "crypto",
+  "yahoo": "SOL-USD",
+  "answers_to": "Solana"
+ },
+ "XRP": {
+  "name": "XRP",
+  "class": "crypto",
+  "yahoo": "XRP-USD",
+  "answers_to": "XRP"
+ },
+ "ZEC": {
+  "name": "Zcash",
+  "class": "crypto",
+  "yahoo": "ZEC-USD",
+  "answers_to": "Zcash"
+ },
+ "HYPE": {
+  "name": "Hyperliquid",
+  "class": "crypto",
+  "yahoo": "HYPE32196-USD",
+  "answers_to": "Hyperliquid"
+ },
+ "VVV": {
+  "name": "Venice",
+  "class": "crypto",
+  "yahoo": "VVV35509-USD",
+  "answers_to": "Venice Token"
+ },
+ "NEAR": {
+  "name": "NEAR Protocol",
+  "class": "crypto",
+  "yahoo": "NEAR-USD",
+  "answers_to": "NEAR Protocol"
+ },
+ "PUMP": {
+  "name": "Pump.fun",
+  "class": "crypto",
+  "yahoo": "PUMP36507-USD",
+  "answers_to": "Pump.fun"
+ },
+ "STRK": {
+  "name": "Starknet",
+  "class": "crypto",
+  "yahoo": "STRK22691-USD",
+  "answers_to": "Starknet"
+ },
+ "JTO": {
+  "name": "Jito",
+  "class": "crypto",
+  "yahoo": "JTO-USD",
+  "answers_to": "Jito"
+ },
+ "LIT": {
+  "name": "Lighter",
+  "class": "crypto",
+  "yahoo": "LIT39125-USD",
+  "answers_to": "Lighter"
+ },
+ "ANSEM": {
+  "name": "The Black Bull",
+  "class": "crypto",
+  "yahoo": "ANSEM-USD",
+  "answers_to": "The Black Bull"
+ },
+ "ETN": {
+  "name": "Eaton",
+  "class": "stock",
+  "yahoo": "ETN",
+  "answers_to": "Eaton Corporation"
+ },
+ "TTWO": {
+  "name": "Take-Two Interactive",
+  "class": "stock",
+  "yahoo": "TTWO",
+  "answers_to": "Take-Two Interactive"
+ },
+ "MP": {
+  "name": "MP Materials",
+  "class": "stock",
+  "yahoo": "MP",
+  "answers_to": "MP Materials"
+ },
+ "INTC": {
+  "name": "Intel",
+  "class": "stock",
+  "yahoo": "INTC",
+  "answers_to": "Intel"
+ },
+ "GOOGL": {
+  "name": "Alphabet (Google)",
+  "class": "stock",
+  "yahoo": "GOOGL",
+  "answers_to": "Alphabet"
+ },
+ "AAPL": {
+  "name": "Apple",
+  "class": "stock",
+  "yahoo": "AAPL",
+  "answers_to": "Apple"
+ },
+ "HOOD": {
+  "name": "Robinhood",
+  "class": "stock",
+  "yahoo": "HOOD",
+  "answers_to": "Robinhood Markets"
+ },
+ "SPCX": {
+  "name": "SpaceX",
+  "class": "stock",
+  "yahoo": "SPCX",
+  "answers_to": "Space Exploration"
+ },
+ "GOLD": {
+  "name": "Gold",
+  "class": "commodity",
+  "yahoo": "GC=F",
+  "answers_to": "Gold",
+  "ticker": "GOLD"
+ },
+ "SILVER": {
+  "name": "Silver",
+  "class": "commodity",
+  "yahoo": "SI=F",
+  "answers_to": "Silver",
+  "ticker": "SILVER"
+ }
+}
