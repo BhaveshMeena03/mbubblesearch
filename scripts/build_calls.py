@@ -131,6 +131,11 @@ def kept_calls(candidates: dict, verdicts: dict) -> list[dict]:
             raise SystemExit(f"{ident}: stance/kind is not one the board knows")
         if row["speaker"] not in calls.HOSTS:
             raise SystemExit(f"{ident}: {row['speaker']!r} is not a host")
+        if row["stance"] == "short" and not str(verdict.get("why") or "").strip():
+            # Nearly every short said on air is a hedge or a trade. One
+            # that is a standing view has to have that written down.
+            raise SystemExit(f"{ident}: a short needs a \"why\" saying it is a "
+                             "view he holds and not a hedge or a trade")
         row["symbol"] = str(row.get("symbol") or "").upper()
         rows.append(row)
     return rows
@@ -151,6 +156,8 @@ def placed(row: dict, episode: dict, labels: dict[str, str]) -> dict | None:
     if not row.get("recut") and span.first != row["line"]:
         return None
     if calls.voice(labels, span.first, span.last) != row["speaker"]:
+        return None
+    if calls.tactical(calls.cut(segments, span)):
         return None
     return dict(row, line=span.first, last_line=span.last,
                 quote=calls.cut(segments, span),
@@ -195,7 +202,8 @@ async def main() -> int:
             ident = row["id"]
             row = placed(row, episode, labels.get(row["episode_id"], {}))
             if row is None:
-                problems.append(f"{ident}: the quote is not on that line in that voice")
+                problems.append(f"{ident}: the quote is not on that line in that voice, "
+                                "or it describes a hedge or a trade")
                 continue
             asset = assets.get(row["symbol"])
             if not asset or not asset.get("yahoo") or not asset.get("name"):

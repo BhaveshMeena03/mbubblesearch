@@ -26,6 +26,17 @@ what lets a test hold every shipped row against the transcript it claims
 to quote.
 
 Losing calls stay on the board. A record of the good ones is an advert.
+
+What does not belong on it is a trade. The first board had Ansem "short
+Solana, down 64%" from a sentence in which he said he had hedged his spot
+bags with shorts on the majors, twelve minutes before saying he was
+bullish on Solana long term. A hedge is meant to lose when the holdings
+win, and a perp position taken off the chart is closed within days. Held
+against a price four months later, either one says something he never
+said. So the board is for views a host would be expected to stand behind:
+what he holds, what he would buy, where he thinks it goes. Hedges, setups
+with a stop and a target, and ideas for the next thirty days are left off,
+whichever way they went.
 """
 
 from __future__ import annotations
@@ -50,6 +61,31 @@ MIN_WORDS, MAX_WORDS = 6, 60
 SLACK, REACH = 3, 8
 
 _WORD = re.compile(r"[a-z0-9]+(?:'[a-z]+)?", re.I)
+
+# Words that mark a trade and not a view, with the reason a row is refused.
+# "head short" is how the captions hear "hedge short".
+_TACTICAL = (
+    (re.compile(r"\bhedg(?:e|ed|es|ing)\b|\bhead(?:ge)? short\b", re.I),
+     "a hedge is not a call"),
+    (re.compile(r"\bshort[- ]term trade\b|\bscalp(?:ed|ing)?\b|\bday trad", re.I),
+     "a short-term trade is not a call"),
+    (re.compile(r"\bstop (?:beneath|below|under|at|is|would)\b|\bmy stop\b"
+                r"|\bstop[- ]?(?:loss|out)\b", re.I),
+     "a setup with a stop is a trade, not a call"),
+)
+
+
+def tactical(quote: str) -> str | None:
+    """Why a quote is a trade and not a view, or None.
+
+    Reads only the words, so it catches the ones that say what they are.
+    The rest is the job of whoever reads the candidates, and a short of
+    any kind needs their reason on file before it is built.
+    """
+    for pattern, why in _TACTICAL:
+        if pattern.search(quote or ""):
+            return why
+    return None
 
 
 def _spoken(text: str) -> list[tuple[str, int, int]]:
@@ -192,6 +228,9 @@ def accept(raw: dict, episode: dict, labels: dict[str, str]) -> tuple[Call | Non
     if span is None:
         return None, "quote is not in the transcript"
     first, last = span.first, span.last
+    trade = tactical(cut(segments, span))
+    if trade:
+        return None, trade
     who = voice(labels, first, last)
     if who is None:
         return None, "voice not known"

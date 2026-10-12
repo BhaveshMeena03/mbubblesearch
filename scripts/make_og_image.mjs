@@ -23,6 +23,7 @@ const PAGES = {
   elon: universal("elon", "og-musk.png"),
   finance: universal("finance", "og-finance.png"),
   threadguy: universal("threadguy", "og-threadguy.png"),
+  calls: universal("calls", "og-calls.png"),
 };
 const CARDS = {
   default: { html: "og-card.html", png: "og-image.png" },
@@ -31,7 +32,7 @@ const CARDS = {
   ...PAGES,
 };
 
-//   node scripts/make_og_image.mjs pages   -> all six archive pages at once
+//   node scripts/make_og_image.mjs pages   -> every page's card at once
 const which = process.argv[2] || "default";
 const todo = which === "pages" ? Object.values(PAGES) : [CARDS[which]];
 if (!todo[0]) {

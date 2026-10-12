@@ -45,7 +45,8 @@
   "target": ""
  },
  "x-2052486417154969659:2415:MP": {
-  "keep": true
+  "keep": false,
+  "why": "An idea for a 30 day trading challenge, asked for as that. Was on the first board."
  },
  "x-2052486417154969659:2470:LLY": {
   "keep": false
@@ -209,8 +210,8 @@
   "keep": false
  },
  "x-2062633295792271762:450:SOL": {
-  "keep": true,
-  "quote": "Like I have been bearish, Bitcoin, Ethan, Sol. Like I think it's a lot difficult to manage shorts, but I've been like head short those in addition to the spot bags that I hold."
+  "keep": false,
+  "why": "A hedge. He says he is hedged short the majors in addition to the spot bags he holds, and twelve minutes later that he is bullish on Solana long term. Was on the first board as a short, wrongly."
  },
  "x-2062633295792271762:457:bbv": {
   "keep": true,
@@ -249,30 +250,6 @@
  },
  "x-2062633295792271762:970:META": {
   "keep": false
- },
- "x-2062633295792271762:hand:450:BTC": {
-  "keep": true,
-  "by_hand": true,
-  "episode_id": "x-2062633295792271762",
-  "line": 450,
-  "speaker": "Ansem",
-  "symbol": "BTC",
-  "stance": "short",
-  "kind": "holding",
-  "quote": "Like I have been bearish, Bitcoin, Ethan, Sol. Like I think it's a lot difficult to manage shorts, but I've been like head short those in addition to the spot bags that I hold.",
-  "target": ""
- },
- "x-2062633295792271762:hand:450:ETH": {
-  "keep": true,
-  "by_hand": true,
-  "episode_id": "x-2062633295792271762",
-  "line": 450,
-  "speaker": "Ansem",
-  "symbol": "ETH",
-  "stance": "short",
-  "kind": "holding",
-  "quote": "Like I have been bearish, Bitcoin, Ethan, Sol. Like I think it's a lot difficult to manage shorts, but I've been like head short those in addition to the spot bags that I hold.",
-  "target": ""
  },
  "x-2062633295792271762:hand:455:ZEC": {
   "keep": true,
@@ -332,12 +309,12 @@
   "keep": false
  },
  "x-2065170470186651823:924:ETH": {
-  "keep": true,
-  "quote": "i'm fucking short eth and i'm short xrp right now"
+  "keep": false,
+  "why": "A perp position in his trading account, taken off the chart. A trade, not a view. Was on the first board."
  },
  "x-2065170470186651823:924:XRP": {
-  "keep": true,
-  "quote": "i'm fucking short eth and i'm short xrp right now"
+  "keep": false,
+  "why": "A perp position in his trading account, taken off the chart. A trade, not a view. Was on the first board."
  },
  "x-2065170470186651823:hand:1233:HYPE": {
   "keep": true,
@@ -388,10 +365,8 @@
   "keep": false
  },
  "x-2067707414028382656:46:SPACEX": {
-  "keep": true,
-  "symbol": "SPCX",
-  "kind": "pick",
-  "quote": "i still think it's a good long i still think it's a good setup right now i think it's at like 180 185"
+  "keep": false,
+  "why": "A leveraged trade setup on the week of the listing, in the middle of describing where his stop was. Was on the first board."
  },
  "x-2067707414028382656:4805:GOOGL": {
   "keep": true,
@@ -416,10 +391,12 @@
  },
  "x-2067707414028382656:97:HYPE": {
   "keep": true,
+  "kind": "pick",
   "quote": "that's why i like things like hyper liquid i like things like take two this is a place where i feel confident that i can park my money in over a long enough period of time and do well"
  },
  "x-2067707414028382656:97:TTWO": {
   "keep": true,
+  "kind": "pick",
   "quote": "that's why i like things like hyper liquid i like things like take two this is a place where i feel confident that i can park my money in over a long enough period of time and do well"
  },
  "x-2070244072342827487:1315:ZEC": {
@@ -561,13 +538,11 @@
  },
  "x-2075316750439338088:4582:SOL": {
   "keep": true,
-  "target": "150 during Q3"
+  "target": "150 during Q3 (not reached, the quarter's high was about 125)"
  },
  "x-2075316750439338088:4642:HYPE": {
-  "keep": true,
-  "target": "77, the all time high",
-  "line": 4641,
-  "quote": "I probably try to get long at the 65. Stop beneath like 62 and I'll be targeting like all time highs at 77."
+  "keep": false,
+  "why": "A short-term trade plan with an entry, a stop and a target, and he says he is not in it. Was on the first board."
  },
  "x-2075316750439338088:4705:LIGHTER": {
   "keep": true,
@@ -850,7 +825,7 @@
  },
  "x-2090537938899845434:5677:SOL": {
   "keep": true,
-  "target": "150 in Q3"
+  "target": "150 in Q3 (not reached, the quarter's high was about 125)"
  },
  "x-2090537938899845434:5768:GLD": {
   "keep": true,
@@ -946,7 +921,7 @@
  },
  "x-2093074127011909791:371:SOL": {
   "keep": true,
-  "target": "150 in Q3, 600 by the end of this cycle",
+  "target": "150 in Q3 (not reached, the high was about 125), 600 by the end of this cycle",
   "quote": "I think it's going to hit 150 in Q3. I still think Solana is going to go back to 600 by the end of this cycle."
  },
  "x-2093074127011909791:384:artificial": {

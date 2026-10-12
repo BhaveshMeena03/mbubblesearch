@@ -529,7 +529,90 @@ def test_the_misses_are_on_the_board():
     """A board of only the good ones would be an advert."""
     served = calls.board(json.loads((DATA / "calls.json").read_text()))
     assert served["summary"]["down"] >= 5
-    assert served["summary"]["worst_pct"] < -20
+    assert served["summary"]["worst_pct"] < 0
+
+
+# --- a trade is not a call ------------------------------------------------------
+#
+# The first board said Ansem was short Solana and down 64%. What he said was
+# that he had hedged his spot bags, and twelve minutes later that he was
+# bullish on Solana long term. Lex read the row and said it was not true.
+
+HEDGE = {"episode_id": "x-2062633295792271762", "segments": [
+    {"t": 1285.0, "text": "Like I have been bearish, Bitcoin, Ethan, Sol."},
+    {"t": 1287.0, "text": "Like I think it's a lot difficult to manage shorts, but I've been like head short those"},
+    {"t": 1293.0, "text": "in addition to the spot bags that I hold."}]}
+
+
+def test_a_hedge_is_refused_however_clearly_he_says_he_is_short():
+    claim = dict(CLAIM, line=0, symbol="SOL", asset="Solana", stance="short", kind="holding",
+                 quote="Like I have been bearish, Bitcoin, Ethan, Sol. Like I think it's a lot difficult to "
+                       "manage shorts, but I've been like head short those in addition to the spot bags that I hold.")
+    voices = {"0": "Ansem", "1": "Ansem", "2": "Ansem"}
+    assert calls.accept(claim, HEDGE, voices) == (None, "a hedge is not a call")
+
+
+@pytest.mark.parametrize("said,why", [
+    ("but I've been like head short those in addition to the spot bags", "a hedge is not a call"),
+    ("i'm hedged short the majors against my spot", "a hedge is not a call"),
+    ("this is just a hedge on the alts i hold", "a hedge is not a call"),
+    ("I was looking at like short term trade on this", "a short-term trade is not a call"),
+    ("Stop beneath like 62 and I'll be targeting like all time highs at 77",
+     "a setup with a stop is a trade, not a call"),
+    ("i think it's gonna go to 190 but i had my stop there", "a setup with a stop is a trade, not a call"),
+])
+def test_the_words_that_mark_a_trade(said, why):
+    assert calls.tactical(said) == why
+
+
+@pytest.mark.parametrize("said", [
+    "my highest conviction spot right now is starkware",
+    "I own a fuck ton of Bitcoin. I own a fuck ton of Hyperliquid",
+    "I'm expecting Solana to go to 150 during Q3",
+    "people need to stop sleeping on this, i think pump looks really good",
+    "the head of the fed said so and i'm still long",
+    "",
+])
+def test_a_view_is_not_mistaken_for_a_trade(said):
+    assert calls.tactical(said) is None
+
+
+def test_no_trade_is_on_the_board():
+    for row in shipped_board():
+        assert calls.tactical(row["quote"]) is None, row["id"]
+
+
+def test_a_short_is_not_built_without_a_reason_on_file():
+    """Nearly every short said on air is a hedge or a trade. The build
+    stops at one unless whoever kept it wrote down why it is neither."""
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import build_calls
+
+    row = {"id": "e:1:ETH", "episode_id": "e", "line": 1, "last_line": 1, "start_seconds": 1.0,
+           "speaker": "Ansem", "asset": "Ethereum", "symbol": "ETH", "asset_class": "crypto",
+           "stance": "short", "kind": "holding", "quote": "q", "target": ""}
+    found = {"shows": {"e": {"candidates": [row]}}}
+    with pytest.raises(SystemExit, match="a short needs"):
+        build_calls.kept_calls(found, {"e:1:ETH": {"keep": True}})
+    with pytest.raises(SystemExit, match="a short needs"):
+        build_calls.kept_calls(found, {"e:1:ETH": {"keep": True, "why": "  "}})
+    kept = build_calls.kept_calls(found, {"e:1:ETH": {
+        "keep": True, "why": "Says the cycle top is in for it and that he is short it until it halves."}})
+    assert [r["id"] for r in kept] == ["e:1:ETH"]
+    # A long needs no such note.
+    assert build_calls.kept_calls({"shows": {"e": {"candidates": [dict(row, stance="long")]}}},
+                                  {"e:1:ETH": {"keep": True}})
+
+
+def test_what_came_off_the_first_board_has_its_reason_on_file():
+    verdicts = json.loads((DATA / "calls_verdicts.json").read_text())
+    came_off = [v for v in verdicts.values() if "first board" in str(v.get("why") or "")]
+    assert len(came_off) == 6 and not any(v["keep"] for v in came_off)
+    assert not [r for r in shipped_board() if r["stance"] == "short"]
+
+
+def test_the_page_says_trades_are_left_off():
+    assert "Hedges and short-term" in PAGE and "whichever way they went" in PAGE
 
 
 # --- the route and the page -----------------------------------------------------

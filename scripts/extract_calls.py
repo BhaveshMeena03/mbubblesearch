@@ -53,8 +53,11 @@ WINDOW_CHARS = int(os.environ.get("CALLS_WINDOW_CHARS", "7000"))
 OVERLAP_LINES = 6
 # The proxy is shared with the live site and the bot.
 MAX_CONCURRENCY = int(os.environ.get("CALLS_CONCURRENCY", "4"))
-# Bump when the instructions change: a cached reply is only as good as the
-# question it answered.
+# Bump when the instructions change and every show should be read again: a
+# cached reply is only as good as the question it answered. Not bumped for
+# the 12 October 2026 line about hedges and trades, because every candidate
+# from before it had already been read by a person with that rule in hand,
+# and reading 23 shows again costs what it cost the first time.
 PROMPT_VERSION = 1
 
 TOOL = {
@@ -117,6 +120,10 @@ a call from a "?" line, however sure you are who is talking.
 - He is speaking for himself, now. Not describing what someone else owns \
 or thinks, not a question, not a joke, not a hypothetical, not a story \
 about a trade from years ago.
+- It is a view he would stand behind, not a trade. Not a hedge ("I'm \
+hedged short the majors against my spot"), not a position taken off the \
+chart for a few days, not a setup with an entry, a stop and a target, not \
+an idea for a 30 day challenge.
 - It is one named asset: a token, a stock, a commodity. Not a category \
 ("alts", "AI stocks", "memes"), not a prediction-market bet, not a sponsor.
 - The quote is 8 to 40 consecutive words copied EXACTLY as written in the \
