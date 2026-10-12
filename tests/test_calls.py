@@ -611,6 +611,17 @@ def test_what_came_off_the_first_board_has_its_reason_on_file():
     assert not [r for r in shipped_board() if r["stance"] == "short"]
 
 
+def test_a_correction_reaches_a_tab_that_was_already_open():
+    """Rows came off the board for being wrong, and a tab opened before
+    that went on showing 81 calls with them in it."""
+    assert 'fetch(API + "/v1/calls", {cache: "no-store"})' in PAGE
+    assert 'document.addEventListener("visibilitychange"' in PAGE
+    assert "load(false)" in PAGE
+    # The refresh does not scroll the reader back to a linked row, and a
+    # failed one does not blank a board that is on screen.
+    assert "if (!quiet) lit();" in PAGE and "if (!first) return;" in PAGE
+
+
 def test_the_page_says_trades_are_left_off():
     assert "Hedges and short-term" in PAGE and "whichever way they went" in PAGE
 
@@ -629,6 +640,7 @@ def test_the_route_serves_the_board_and_survives_the_price_source_being_down(mon
     with TestClient(main.app) as client:
         reply = client.get("/v1/calls")
         assert reply.status_code == 200
+        assert reply.headers["cache-control"] == "no-store"
         body = reply.json()
         assert len(body["calls"]) == len(shipped_board())
         assert body["live"] is False and body["priced_at"]
@@ -683,7 +695,7 @@ def test_the_page_carries_no_figure_that_can_go_stale():
     visible = re.sub(r"<(script|style)\b.*?</\1>", "", PAGE, flags=re.S)
     visible = re.sub(r"<[^>]+>", " ", visible)
     assert not re.search(r"\b\d{2,}\s*(calls|shows|%)", visible)
-    assert 'fetch(API + "/v1/calls")' in PAGE
+    assert 'fetch(API + "/v1/calls"' in PAGE
 
 
 def test_the_page_says_what_the_number_is_and_is_not():

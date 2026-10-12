@@ -298,7 +298,7 @@ function row(r, i){
     "</div></article>";
 }
 
-function render(){
+function render(quiet){
   var rows = BOARD.calls.filter(function(r){ return !WHO || r.speaker === WHO; });
   var none = function(r){ return typeof r.moved_pct !== "number"; };
   if (SORT === "best") rows.sort(function(a, b){ return none(a) - none(b) || b.moved_pct - a.moved_pct; });
@@ -309,7 +309,8 @@ function render(){
     (WHO ? " by " + WHO : "") + (when ? ". Prices as of " + when + (BOARD.live ? "." : ", when the board was last built.") : ".");
   document.getElementById("list").innerHTML = rows.length
     ? rows.map(row).join("") : "<p class='empty'>Nothing on the board for that yet.</p>";
-  lit();
+  /* A refresh in the background does not move the page under the reader. */
+  if (!quiet) lit();
 }
 
 /* A link to one call opens on it. */
@@ -346,15 +347,27 @@ document.getElementById("controls").addEventListener("click", function(e){
   render();
 });
 
-fetch(API + "/v1/calls").then(function(r){
-  if (!r.ok) throw new Error(r.status);
-  return r.json();
-}).then(function(d){
-  if (!d || !Array.isArray(d.calls)) throw new Error("shape");
-  BOARD = d; render();
-}).catch(function(){
-  document.getElementById("list").innerHTML =
-    "<p class='empty'>The board could not be loaded. Try again in a minute.</p>";
+/* Asked for fresh every time, and again when somebody comes back to a tab
+   they left open. A row was taken off this board for being wrong, and a
+   tab opened before that went on showing it. */
+var LOADED = 0;
+function load(first){
+  return fetch(API + "/v1/calls", {cache: "no-store"}).then(function(r){
+    if (!r.ok) throw new Error(r.status);
+    return r.json();
+  }).then(function(d){
+    if (!d || !Array.isArray(d.calls)) throw new Error("shape");
+    BOARD = d; LOADED = Date.now(); render(!first);
+  }).catch(function(){
+    /* A refresh that fails leaves the board that is already on screen. */
+    if (!first) return;
+    document.getElementById("list").innerHTML =
+      "<p class='empty'>The board could not be loaded. Try again in a minute.</p>";
+  });
+}
+load(true);
+document.addEventListener("visibilitychange", function(){
+  if (document.visibilityState === "visible" && BOARD && Date.now() - LOADED > 60000) load(false);
 });
 </script>
 </body>

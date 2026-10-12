@@ -874,14 +874,18 @@ async def _call_prices_now(listings: list[str]) -> tuple[dict[str, float], str |
 
 
 @app.get("/v1/calls", dependencies=[Depends(public_rate_limit)])
-async def calls_board() -> dict:
+async def calls_board() -> JSONResponse:
     """Calls the hosts made on air, quoted, linked and priced since."""
     shipped = _calls_file()
     if not shipped.get("calls"):
         raise HTTPException(status_code=503, detail="unavailable")
     live, day = await _call_prices_now(
         [str(r.get("listing") or "") for r in shipped["calls"]])
-    return on_air_calls.board(shipped, live, day)
+    # Never kept by a browser or anything in between. A row that turns out
+    # to be wrong is taken off, and it has to be gone for everybody the
+    # next time they look, not whenever a cache lets go of it.
+    return JSONResponse(on_air_calls.board(shipped, live, day),
+                        headers={"Cache-Control": "no-store"})
 
 
 @app.get("/llms.txt", include_in_schema=False)
