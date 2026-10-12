@@ -12,11 +12,13 @@ plumbing as the rest of the app.
 
 import asyncio
 import contextlib
+import contextvars
 import hashlib
 import json
 import logging
 import re
 import time
+from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
 from xml.sax.saxutils import escape, quoteattr
@@ -25,9 +27,9 @@ import voyageai
 from anthropic import AsyncAnthropic
 from pinecone import Pinecone
 
-from . import hedging, names
+from . import hedging, names, recency
 from .config import anthropic_client_kwargs, get_settings, redact
-from .embeddings import embed_query, embed_texts, rerank_order
+from .embeddings import embed_query, embed_texts, rerank_order, rerank_scores
 from .schemas import (
     Episode,
     PodcastHit,
@@ -661,6 +663,39 @@ _ASKS_HIS_VIEW = re.compile(
 _ABOUT_GUESTS = re.compile(r"\bguests?\b|\binterview|\bwho (?:did|was|has)", re.I)
 
 
+# What the search that just ran found out about "now", for the request that
+# is built from its results. A context variable because one index answers
+# many people at once and each of them is in a task of their own.
+_ABOUT_NOW: contextvars.ContextVar[recency.Recent | None] = (
+    contextvars.ContextVar("about_now", default=None))
+
+
+@dataclass(frozen=True)
+class _Now:
+    """What a question about the present is searched with."""
+
+    window: recency.Recent      # the newest recordings
+    rows: list[dict]            # the shelf they were picked from
+    days: int                   # how far back the question reaches
+    scope: tuple[str, ...]      # every recording of a named person, or ()
+
+
+def _recent_note(hits: list[PodcastHit]) -> str | None:
+    """The line telling the model its excerpts are the newest ones.
+
+    Only when they are. The dates are remembered from the last search in
+    this task, and a caller may hand over passages from somewhere else,
+    so every passage is checked against them before anything is claimed.
+    """
+    fresh = _ABOUT_NOW.get()
+    if not fresh or not hits:
+        return None
+    current = set(fresh.ids)
+    if any(h.episode_id not in current for h in hits):
+        return None
+    return fresh.note()
+
+
 def host_view_only(query: str, hits: list[PodcastHit]) -> list[PodcastHit]:
     """Leave interviews out of a question about ThreadGuy's own view.
 
@@ -1256,6 +1291,137 @@ class PodcastIndex:
         # Loaded once. Absent or unreadable means every lookup returns
         # nothing and search behaves exactly as it did before.
         self._terms = TermIndex(path_for(self._namespace))
+        # What this archive holds and when each recording is from, for
+        # questions about now. None until follow() is called, and then
+        # those questions are searched the way they always were.
+        self._shelf = None
+
+    def follow(self, shelf) -> None:
+        """Tell the index where its list of recordings is.
+
+        `shelf` is an async callable returning rows with an id, a date and
+        a title. Asked for at question time and not copied here, because
+        the list grows every morning and a copy taken at startup would
+        make "the latest episode" mean the latest one at the last deploy.
+        """
+        self._shelf = shelf
+
+    async def _about_now(self, query: str) -> "_Now | None":
+        """Where to look first, if the question is about the present."""
+        days = recency.window_days(query)
+        if days is None or self._shelf is None:
+            return None
+        try:
+            shelf = await self._shelf()
+        except Exception as exc:                                # noqa: BLE001
+            # The question still gets searched, across everything.
+            logger.warning("could not read the shelf for %r (%s) — "
+                           "searching the whole archive", self._namespace, exc)
+            return None
+        rows = recency.named(shelf, query)
+        window = recency.recent(rows, days)
+        if window is None:
+            return None
+        # Everything by the person the question names, when it names one
+        # this archive files recordings under. Empty means the whole archive.
+        scope = (tuple(dict.fromkeys(
+                     str(r.get("episode_id") or r.get("id") or "") for r in rows))
+                 if len(rows) < len(shelf) else ())
+        return _Now(window=window, rows=rows, days=days, scope=scope)
+
+    # How many of the best passages the reranker reads when it is asked
+    # whether the newest recordings are about a question: from the newest
+    # recordings, and from the whole archive. More of the second, because
+    # that list is also where the most recent recording on the subject is
+    # looked for, and a subject ten recordings share spreads thin.
+    _JUDGED_NEW, _JUDGED_ALL = 25, 40
+    # Seconds one of those searches may take. A read is normally a tenth
+    # of a second; the ordinary search keeps its own, longer, limit.
+    _NOW_WITHIN = 8.0
+
+    async def _newest_on(self, query: str, speaker: str | None, ask,
+                         now: "_Now"):
+        """What a question about now is answered from, and what was found.
+
+        Three outcomes. The newest recordings, when they are about the
+        question. The most recent recordings that are, when the newest are
+        not: asked for the latest on the Anthropic S-1 nine days after
+        ThreadGuy last discussed it, that is the stream from nine days
+        ago and not a shrug about the last two. Or (None, None): nothing
+        could be placed, and the caller searches as it always did.
+
+        Whether the newest recordings are about it is judged on every
+        passage, whoever is speaking, and only then is a named host's
+        voice asked for. Judged on his labelled passages alone, the week
+        Ansem named Starkware lost to July, because the best passage of
+        that week sat in the upload that has no voice labels yet.
+
+        Costs one more search than a question about the past, run at the
+        same time as the first, and one reranker call.
+        """
+        floor = self._settings.retrieval_min_score
+        # These searches are extra. If one hangs, the question falls back
+        # to the ordinary search, and it should get there while somebody
+        # is still waiting for the answer.
+        soon = self._NOW_WITHIN
+
+        def good(found) -> list:
+            return [m for m in (getattr(found, "matches", []) or [])
+                    if m.score >= floor]
+
+        async def in_his_voice(ids: tuple[str, ...], whoever):
+            """Those recordings again, where the named host speaks. When
+            too little of them carries his label, everything in them."""
+            if not speaker:
+                return whoever if whoever is not None else await ask(None, ids, soon)
+            his = await ask(speaker, ids, soon)
+            if len(good(his)) >= 3:
+                return his
+            return whoever if whoever is not None else await ask(None, ids, soon)
+
+        here, everywhere = await asyncio.gather(
+            ask(None, now.window.ids, soon), ask(None, now.scope, soon))
+        near, far = good(here), good(everywhere)
+        if not far:
+            return None, None
+
+        near, far = near[:self._JUDGED_NEW], far[:self._JUDGED_ALL]
+        read = None
+        if self._settings.rerank_model:
+            read = await rerank_scores(
+                self._voyage, query,
+                [f"{(m.metadata or {}).get('title', '')}\n\n"
+                 f"{names.fix((m.metadata or {}).get('text', ''))[0]}"
+                 for m in near + far],
+                model=self._settings.rerank_model)
+        near_read = max(read[:len(near)], default=0.0) if read else None
+        far_read = max(read[len(near):], default=0.0) if read else None
+
+        if near and recency.is_here(near[0].score, far[0].score,
+                                    near_read, far_read):
+            return now.window, await in_his_voice(now.window.ids, here)
+        if not read:
+            # The newest recordings are not it, and without the reranker
+            # there is no telling which older one is.
+            logger.info("the newest recordings of %r are not about %r — "
+                        "searching the whole archive",
+                        self._namespace, query[:60])
+            return None, None
+        then = recency.last_on(
+            [(str((m.metadata or {}).get("episode_id", "")), score)
+             for m, score in zip(near + far, read, strict=False)],
+            now.rows, now.days, now.window)
+        if then is None:
+            return None, None
+        if then is now.window:
+            return now.window, await in_his_voice(now.window.ids, here)
+        found = await in_his_voice(then.ids, None)
+        if not good(found):
+            return None, None
+        logger.info("nothing in the newest recordings of %r for %r — "
+                    "answering from %s", self._namespace, query[:60],
+                    then.newest)
+        return then, found
 
     def _llm(self):
         """The client to try, its route for the counter, and whether a
@@ -1479,6 +1645,10 @@ class PodcastIndex:
         # untouched and the same vector search runs, over the subset of
         # passages where that person speaks.
         speaker = host_named_in(query)
+        # And if it is about now, search now. Cleared first, so a question
+        # that is not about now never inherits the last one's dates.
+        _ABOUT_NOW.set(None)
+        now = await self._about_now(query)
         # Cached, retry-on-rate-limit query embedding — repeat queries are
         # free and a rate-limited one backs off instead of hard-failing.
         vector = await embed_query(
@@ -1496,35 +1666,67 @@ class PodcastIndex:
             else top_k
         )
 
-        def _query(restrict: str | None):
+        def _query(restrict: str | None, only: tuple[str, ...] = ()):
             kwargs = {
                 "vector": vector,
                 "top_k": fetch_k,
                 "namespace": self._namespace,
                 "include_metadata": True,
             }
+            narrowed: dict = {}
             if restrict:
-                kwargs["filter"] = {"speakers": {"$in": [restrict]}}
+                narrowed["speakers"] = {"$in": [restrict]}
+            if only:
+                narrowed["episode_id"] = {"$in": list(only)}
+            if narrowed:
+                kwargs["filter"] = narrowed
             return self.index.query(**kwargs)
 
-        # Bounded like the upsert above, and for the same half-open-socket
-        # reason. A read is the more dangerous case: it is on the request path
-        # and holds a thread from the bounded to_thread pool while it hangs.
-        response = await asyncio.wait_for(
-            asyncio.to_thread(_query, speaker),
-            timeout=self._settings.pinecone_read_timeout_seconds,
-        )
-        # Ask again unfiltered when the filter found nothing worth having.
-        # Only half the archive carries speaker labels, so a question about
-        # a host whose passages are all unlabelled would otherwise return
-        # nothing at all — worse than the topic-ranked answer it replaces.
-        if speaker and len(getattr(response, "matches", []) or []) < 3:
-            logger.info("speaker filter for %r returned too little — "
-                        "falling back to the whole archive", speaker)
-            response = await asyncio.wait_for(
-                asyncio.to_thread(_query, None),
-                timeout=self._settings.pinecone_read_timeout_seconds,
+        async def ask(restrict: str | None, only: tuple[str, ...] = (),
+                      within: float | None = None):
+            # Bounded like the upsert above, and for the same
+            # half-open-socket reason. A read is the more dangerous case:
+            # it is on the request path and holds a thread from the bounded
+            # to_thread pool while it hangs.
+            limit = self._settings.pinecone_read_timeout_seconds
+            return await asyncio.wait_for(
+                asyncio.to_thread(_query, restrict, only),
+                timeout=min(within, limit) if within else limit,
             )
+
+        fresh, response = None, None
+        if now:
+            # The newest recordings first. The same search in a smaller
+            # place: asked what Ansem picked "this week", the passage from
+            # that week's show was in the results and five older ones
+            # outranked it.
+            try:
+                fresh, response = await self._newest_on(query, speaker, ask, now)
+            except Exception as exc:                            # noqa: BLE001
+                # Looking in the newest recordings first makes an answer
+                # better. It must never be the reason there is none: one
+                # of its searches hung on a dead socket and the question
+                # came back as an error, when the search below would have
+                # answered it.
+                logger.warning("could not look in the newest recordings of "
+                               "%r first (%s) — searching the whole archive",
+                               self._namespace, type(exc).__name__)
+                fresh, response = None, None
+        if response is None:
+            # Not about now, or nothing recent could be placed. Searched
+            # across everything, as before, and nothing tells the model
+            # the excerpts are recent, because they are not.
+            fresh = None
+            response = await ask(speaker)
+            # Ask again unfiltered when the filter found nothing worth
+            # having. Only half the archive carries speaker labels, so a
+            # question about a host whose passages are all unlabelled
+            # would otherwise return nothing at all — worse than the
+            # topic-ranked answer it replaces.
+            if speaker and len(getattr(response, "matches", []) or []) < 3:
+                logger.info("speaker filter for %r returned too little — "
+                            "falling back to the whole archive", speaker)
+                response = await ask(None)
         hits: list[PodcastHit] = []
         for match in response.matches:
             if match.score < self._settings.retrieval_min_score:
@@ -1568,6 +1770,14 @@ class PodcastIndex:
         # "54 million dollars on the drop".
         before = len(hits)
         hits = await self._add_exact_matches(query, hits)
+        if fresh:
+            # The word index knows nothing about dates. A rare word from
+            # the question, said in May, does not belong in an answer
+            # about this week.
+            current = set(fresh.ids)
+            hits = hits[:before] + [h for h in hits[before:]
+                                    if h.episode_id in current]
+            _ABOUT_NOW.set(fresh)
         exact = hits[before:]
 
         # Rerank by actual relevance (falls back to vector order on failure).
@@ -1758,6 +1968,11 @@ class PodcastIndex:
                         # across every caller.
                         *([{"type": "text", "text": instruction}]
                           if instruction else []),
+                        # Last, and only when these very excerpts are the
+                        # recent ones: the note says they are, and it is
+                        # read off the search that produced them.
+                        *([{"type": "text", "text": note}]
+                          if (note := _recent_note(hits)) else []),
                     ],
                 }
             ],

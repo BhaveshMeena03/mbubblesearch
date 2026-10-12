@@ -49,6 +49,35 @@ async def rerank_order(
         return None
 
 
+async def rerank_scores(
+    client: voyageai.AsyncClient,
+    query: str,
+    documents: list[str],
+    *,
+    model: str,
+) -> list[float] | None:
+    """How relevant the reranker finds each document, in the order given.
+
+    For comparing passages rather than ordering them: rerank_order says
+    which is best, this says by how much. None on any failure, and the
+    caller decides without it.
+    """
+    if not documents:
+        return []
+    try:
+        result = await client.rerank(
+            query=query, documents=documents, model=model,
+            top_k=len(documents),
+        )
+        scores = [0.0] * len(documents)
+        for r in result.results:
+            scores[r.index] = float(r.relevance_score)
+        return scores
+    except Exception as exc:  # noqa: BLE001 — quality upgrade, never fatal
+        logger.warning("rerank scores skipped (%s): %s", type(exc).__name__, exc)
+        return None
+
+
 async def embed_query(
     client: voyageai.AsyncClient,
     text: str,

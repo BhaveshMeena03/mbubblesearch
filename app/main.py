@@ -39,7 +39,7 @@ from fastapi.responses import (
 from fastapi.staticfiles import StaticFiles
 from voyageai import error as voyage_error
 
-from . import attribution, market, mcg_transcript, og_card, quotes, sources
+from . import attribution, market, mcg_transcript, og_card, quotes, recency, sources
 from . import mcg_guests as mcg_guest_index
 from .agent import REFUSAL_MESSAGE, ConciergeAgent
 from .answer_cache import AnswerCache, make_key
@@ -424,6 +424,19 @@ async def lifespan(app: FastAPI):
     app.state.pipeline = IngestionPipeline()
     app.state.podcast = PodcastIndex(ledger=app.state.usage)
     app.state.summaries = SummaryStore()
+    # Each archive is told where its list of recordings is, so "the latest
+    # episode" and "this week" are searched in the newest ones.
+    #
+    # Asked for by name: a stand-in index, in a test or a future archive
+    # built some other way, simply is not told, and searches as before.
+    for _name, _shelf in (("podcast", _podcast_shelf),
+                          ("elon", _shelf_of(_elon_episodes)),
+                          ("mcg", _shelf_of(_mcg_episodes)),
+                          ("tradfi", _shelf_of(_tradfi_episodes)),
+                          ("threadguy", _shelf_of(_threadguy_episodes))):
+        _follow = getattr(getattr(app.state, _name, None), "follow", None)
+        if _follow is not None:
+            _follow(_shelf)
     app.state.assets = AssetStore()
     _s = get_settings()
     # The MCG archive keeps its assets beside its passages, in its own
@@ -704,6 +717,56 @@ def total_sizes(by: dict[str, dict]) -> dict:
         "last": max(lasts) if lasts else "",
         "by": by,
     }
+
+
+def _shelf_of(load):
+    """An archive's list of recordings, in the shape its index asks for."""
+    async def rows() -> list[dict]:
+        return load()
+    return rows
+
+
+_SHOWS_SINCE: tuple[float, list[dict]] = (0.0, [])
+
+
+async def _podcast_shelf() -> list[dict]:
+    """Market Bubble's recordings: what shipped, and what aired since.
+
+    The transcripts in the image are as old as the last deploy. A show
+    indexed overnight is in the index and in the summaries within the
+    hour, and "what did he say last night" is asked that morning, so the
+    summaries are read as well, ten minutes at a time. If that read fails
+    the shipped list still answers.
+    """
+    global _SHOWS_SINCE
+    rows = [{"episode_id": e.get("episode_id"), "title": e.get("title"),
+             "published_at": e.get("published_at")}
+            for e in _episodes_by_id().values()]
+    at, since = _SHOWS_SINCE
+    if time.monotonic() - at > _SIZES_FOR:
+        try:
+            since = [{"episode_id": r.get("episode_id"),
+                      "title": r.get("title"),
+                      "published_at": r.get("published_at")}
+                     for r in await app.state.summaries.list_all()
+                     if r.get("episode_id")]
+        except Exception as exc:                                # noqa: BLE001
+            logger.warning("could not read what aired since the deploy: %s",
+                           exc)
+        _SHOWS_SINCE = (time.monotonic(), since)
+    return rows + since
+
+
+def _timed(query: str) -> str:
+    """The question as the answer cache should remember it.
+
+    An answer is kept for a day, and for most questions a day changes
+    nothing. "What did he say this week" is right until the next recording
+    lands, so those are remembered only for the hour they were asked in.
+    """
+    if recency.window_days(query) is None:
+        return query
+    return f"{query} @{datetime.now(UTC):%Y-%m-%dT%H}"
 
 
 _SIZES_FOR = 600.0      # seconds a count is reused before it is taken again
@@ -1060,7 +1123,7 @@ async def search_everything(
     if not live:
         raise HTTPException(status_code=503, detail="No archive is loaded.")
 
-    key = make_key(body.query, surface="front-door", top_k=body.top_k)
+    key = make_key(_timed(body.query), surface="front-door", top_k=body.top_k)
     cached = answers.get(key)
     if cached is not None:
         per_client_daily.refund(request)
@@ -1118,7 +1181,7 @@ async def search_everything_stream(
             if (idx := getattr(request.app.state, key, None)) is not None]
     if not live:
         raise HTTPException(status_code=503, detail="No archive is loaded.")
-    key = make_key(body.query, surface="front-door-stream", top_k=body.top_k)
+    key = make_key(_timed(body.query), surface="front-door-stream", top_k=body.top_k)
     cached = answers.get(key) if answers.enabled else None
 
     async def event_source():
@@ -1460,7 +1523,7 @@ async def podcast_search(
     # The highest-traffic surface, and the most repetitive: the page ships
     # example chips, and a link that gets shared sends everyone who clicks
     # it to the same query.
-    key = make_key(body.query, surface="podcast", top_k=body.top_k)
+    key = make_key(_timed(body.query), surface="podcast", top_k=body.top_k)
     cached = answers.get(key)
     if cached is not None:
         usage.record("market-bubble-search", cached.model, None, cached=True)
@@ -1523,7 +1586,7 @@ async def podcast_search_stream(
     pretends to be thinking.
     """
     _track("podcast_searches", q=body.query[:120], stream=True)
-    key = make_key(body.query, surface="podcast-stream", top_k=body.top_k)
+    key = make_key(_timed(body.query), surface="podcast-stream", top_k=body.top_k)
     cached = answers.get(key) if answers.enabled else None
     hits = ([PodcastHit(**h) for h in cached["hits"]] if cached
             else await podcast.retrieve(body.query, body.top_k))
@@ -2371,7 +2434,7 @@ async def elon_search(
     # v2: lines now carry whose voice they are in, and the rules for
     # reading them changed with it. An answer written before that could
     # hold an interviewer's sentence under his name.
-    key = make_key(body.query, surface="elon-v2", top_k=body.top_k)
+    key = make_key(_timed(body.query), surface="elon-v2", top_k=body.top_k)
     cached = answers.get(key)
     if cached is not None:
         per_client_daily.refund(request)
@@ -2478,7 +2541,7 @@ async def finance_search(
 
     # Surface-keyed like the others, so no two archives can serve each
     # other's cached answers.
-    key = make_key(body.query, surface="finance", top_k=body.top_k)
+    key = make_key(_timed(body.query), surface="finance", top_k=body.top_k)
     cached = answers.get(key)
     if cached is not None:
         per_client_daily.refund(request)
@@ -2593,7 +2656,7 @@ async def threadguy_search(
     # other's cached answers. Versioned because the answers changed: the
     # first ones were written under the Market Bubble prompt, and a key
     # that only moves with the question would go on serving them.
-    key = make_key(body.query, surface="threadguy-v3", top_k=body.top_k)
+    key = make_key(_timed(body.query), surface="threadguy-v3", top_k=body.top_k)
     cached = answers.get(key)
     if cached is not None:
         per_client_daily.refund(request)
@@ -2704,7 +2767,7 @@ async def mcg_search(
 
     # Keyed by surface, like the others. Three archives sharing one cache
     # would be the namespace failure arriving by a different road.
-    key = make_key(body.query, surface="mcg", top_k=body.top_k)
+    key = make_key(_timed(body.query), surface="mcg", top_k=body.top_k)
     cached = answers.get(key)
     if cached is not None:
         per_client_daily.refund(request)
@@ -2773,7 +2836,7 @@ def _archive_stream(index, query: str, top_k, lengths: dict,
     the same words asked of the Musk recordings and of MCG are different
     questions with different answers.
     """
-    key = make_key(query, surface=surface, top_k=top_k) if answers else None
+    key = make_key(_timed(query), surface=surface, top_k=top_k) if answers else None
     cached = answers.get(key) if (answers and answers.enabled) else None
 
     async def event_source():
