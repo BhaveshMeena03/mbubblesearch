@@ -622,6 +622,11 @@ def test_a_correction_reaches_a_tab_that_was_already_open():
     assert "if (!quiet) lit();" in PAGE and "if (!first) return;" in PAGE
 
 
+def test_the_finder_is_gentle_with_the_proxy_it_shares_by_default():
+    source = (ROOT / "scripts" / "extract_calls.py").read_text()
+    assert 'os.environ.get("CALLS_CONCURRENCY", "2")' in source
+
+
 def test_the_page_says_trades_are_left_off():
     assert "Hedges and short-term" in PAGE and "whichever way they went" in PAGE
 

@@ -51,8 +51,10 @@ OUT = ROOT / "data" / "calls_candidates.json"
 # one so a call that straddles the cut is whole in one of them.
 WINDOW_CHARS = int(os.environ.get("CALLS_WINDOW_CHARS", "7000"))
 OVERLAP_LINES = 6
-# The proxy is shared with the live site and the bot.
-MAX_CONCURRENCY = int(os.environ.get("CALLS_CONCURRENCY", "4"))
+# The proxy is shared with the live site and the bot. Two, because four
+# drew "429 Too Many Requests" on the first full run and a site question
+# asked at the same moment waited a minute for its answer.
+MAX_CONCURRENCY = int(os.environ.get("CALLS_CONCURRENCY", "2"))
 # Bump when the instructions change and every show should be read again: a
 # cached reply is only as good as the question it answered. Not bumped for
 # the 12 October 2026 line about hedges and trades, because every candidate
