@@ -20,6 +20,7 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import label_elon_voices as voices  # noqa: E402
+
 from app.podcast import ELON_SYSTEM_PROMPT  # noqa: E402
 
 ELON, ROGAN, GUEST = np.eye(8)[0], np.eye(8)[1], np.eye(8)[2]

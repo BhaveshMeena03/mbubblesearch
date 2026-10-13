@@ -202,7 +202,7 @@ def test_nothing_is_added_when_the_question_has_no_rare_word(tmp_path):
 # question still answered from August: "anthem" alone is in 65 windows, and
 # the lookup took the first eight.
 
-from app.terms import said_phrases, words  # noqa: E402
+from app.terms import said_phrases  # noqa: E402
 
 
 def broken_name_index(tmp_path) -> TermIndex:
