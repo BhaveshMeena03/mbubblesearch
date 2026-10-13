@@ -24,6 +24,7 @@ const PAGES = {
   finance: universal("finance", "og-finance.png"),
   threadguy: universal("threadguy", "og-threadguy.png"),
   calls: universal("calls", "og-calls.png"),
+  posts: universal("posts", "og-posts.png"),
 };
 const CARDS = {
   default: { html: "og-card.html", png: "og-image.png" },

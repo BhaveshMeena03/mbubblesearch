@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- One social card for every page, 1200x630. Render with:
        node scripts/make_og_image.mjs <page>
-     where <page> is home, podcast, mcg, elon, finance, threadguy or calls.
+     where <page> is home, podcast, mcg, elon, finance, threadguy, calls or posts.
 
      Deliberately nothing on it that changes: no hour counts, no episode
      counts, no "latest recordings". Every card that carried a number went
@@ -97,7 +97,11 @@
     calls: {room: "calls", accent: "#16c784", path: "/calls",
       head: "What they called, <em>and what it did</em>.",
       sub: "Every time Ansem or FaZe Banks said on air that he owned something, named a pick or put a number on it. Quoted word for word, priced from that night to today.",
-      q: "the quote, the second he said it, the price since", go: "WATCH"}
+      q: "the quote, the second he said it, the price since", go: "WATCH"},
+    posts: {room: "Ansem's posts", accent: "#16c784", path: "/posts",
+      head: "What Ansem wrote, <em>not what he said</em>.",
+      sub: "His own posts on X, searchable. Every answer is quoted as he wrote it, with its date and a link to the post.",
+      q: "when did he say solana goes to six hundred"}
   };
   var key = new URLSearchParams(location.search).get("p") || "home";
   var p = PAGES[key] || PAGES.home;

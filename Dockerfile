@@ -100,6 +100,10 @@ COPY data/elon_speaker_map.json ./data/elon_speaker_map.json
 # person, with the prices it was built with. Without it /v1/calls
 # answers 503 and the page at /calls says it could not load.
 COPY data/calls.json ./data/calls.json
+# How many of Ansem's posts are searchable and between which days. The
+# posts themselves are in the index; without this file the posts page
+# is not started at all and /v1/posts/search answers 503.
+COPY data/posts_index.json ./data/posts_index.json
 # Who was on each MCG episode. Read at runtime by /v1/mcg/episodes, so it
 # has to be in the image or every episode deploys with an empty guest list
 # and nothing anywhere says why.

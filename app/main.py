@@ -52,6 +52,7 @@ from . import (
 )
 from . import calls as on_air_calls
 from . import mcg_guests as mcg_guest_index
+from . import posts as posts_page
 from .agent import REFUSAL_MESSAGE, ConciergeAgent
 from .answer_cache import AnswerCache, make_key
 from .assets import aggregate as aggregate_assets
@@ -69,6 +70,7 @@ from .dedupe import canonical_episode_ids, episode_number, group_by_show
 from .ingest import IngestionPipeline
 from .podcast import REFUSAL_ANSWER as PODCAST_REFUSAL
 from .podcast import PodcastIndex, inference_routes
+from .posts import PostsIndex
 from .questions import QuestionLog
 from .retriever import Retriever
 from .schemas import (
@@ -429,6 +431,16 @@ async def lifespan(app: FastAPI):
     except Exception as exc:                                    # noqa: BLE001
         logger.warning("the ThreadGuy archive did not start: %s", exc)
         app.state.threadguy = None
+
+    # What Ansem wrote on X, as a source of its own. Built only when the
+    # index has been filled, which the coverage file is the record of.
+    # Not given to the front door or to the bot: see app/posts.py.
+    try:
+        app.state.posts = (PostsIndex(ledger=app.state.usage)
+                           if posts_page.coverage().get("count") else None)
+    except Exception as exc:                                    # noqa: BLE001
+        logger.warning("the posts index did not start: %s", exc)
+        app.state.posts = None
 
     app.state.agent = ConciergeAgent(ledger=app.state.usage)
     app.state.clawpump_agent = ClawPumpAgent(ledger=app.state.usage)
@@ -1053,6 +1065,7 @@ for _path, _target in (("/home", "/demo/home.html"),
                        ("/record", "/demo/finance.html"),
                        ("/mcg/tokens", "/demo/mcg-assets.html"),
                        ("/calls", "/demo/calls.html"),
+                       ("/posts", "/demo/posts.html"),
                        ("/method", "/demo/how-it-works.html")):
     _shortcut(_path, _target)
 
@@ -2559,6 +2572,71 @@ def _elon_payload(question: str, result) -> dict:
         data["episode_seconds"] = lengths.get(data.get("episode_id"), 0)
         hits.append(data)
     return {"question": question, "answer": result.answer, "hits": hits}
+
+
+# --- his posts -----------------------------------------------------------------
+#
+# Search over what Ansem wrote on X. A source of its own with a page of its
+# own: the front door does not ask it and the bot does not answer from it,
+# because "he said it on the show" and "he posted it" are different claims.
+
+def _posts_coverage() -> dict:
+    found = posts_page.coverage()
+    return {key: found.get(key) for key in
+            ("author", "handle", "count", "first", "last", "kinds")}
+
+
+@app.get("/v1/posts/archive", dependencies=[Depends(public_rate_limit)])
+async def posts_archive(request: Request) -> dict:
+    """Whose posts are searchable, how many, and between which days."""
+    found = _posts_coverage()
+    if not found.get("count") or getattr(request.app.state, "posts", None) is None:
+        raise HTTPException(status_code=503, detail="unavailable")
+    return found
+
+
+@app.post("/v1/posts/search",
+          dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
+                        Depends(daily_budget), Depends(per_client_daily)])
+async def posts_search(
+    body: PodcastSearchRequest,
+    request: Request,
+    answers: AnswerCache = Depends(get_answers),
+) -> dict:
+    """Ask what he wrote. Same engine as the archives, different rules."""
+    _track("posts_searches", q=body.query[:120])
+    index = getattr(request.app.state, "posts", None)
+    if index is None:
+        raise HTTPException(status_code=503, detail="The posts are not loaded.")
+
+    # Its own surface, so an answer about a post can never be served to
+    # somebody who asked an archive the same words, or the other way round.
+    key = make_key(_timed(body.query), surface="posts", top_k=body.top_k)
+    cached = answers.get(key)
+    if cached is not None:
+        per_client_daily.refund(request)
+        return _posts_payload(body.query, cached)
+
+    try:
+        result = await index.search(body.query, top_k=body.top_k)
+    except anthropic.RateLimitError as exc:
+        raise HTTPException(status_code=429,
+                            detail="Rate limited; retry shortly.") from exc
+    except anthropic.APIError as exc:
+        logger.error("Anthropic error on the posts index: %s",
+                     type(exc).__name__)
+        raise HTTPException(status_code=502,
+                            detail="Model provider error.") from exc
+    answers.put(key, result)
+    return _posts_payload(body.query, result)
+
+
+def _posts_payload(question: str, result) -> dict:
+    """What the page renders: the answer, and every post it was written
+    from with its date, its kind and where it lives."""
+    return {"question": question, "answer": result.answer,
+            "posts": [posts_page.as_post(hit) for hit in (result.hits or [])],
+            "coverage": _posts_coverage()}
 
 
 @app.get("/v1/finance/archive", dependencies=[Depends(public_rate_limit)])

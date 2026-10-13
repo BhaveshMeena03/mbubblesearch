@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0e11">
+<!-- Not for search engines until it has been looked over and linked. -->
+<meta name="robots" content="noindex">
+<title>Market Bubble · what Ansem wrote</title>
+<meta name="description" content="Search Ansem's own posts on X. Every answer is taken from the posts themselves, quoted as he wrote them, dated and linked.">
+<meta property="og:title" content="What Ansem wrote, searchable">
+<meta property="og:description" content="Search Ansem's own posts on X. Quoted as he wrote them, dated and linked.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://search.lexthedev.com/posts">
+<meta property="og:image" content="https://search.lexthedev.com/demo/og-posts.png?v=1">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1260">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What Ansem wrote, searchable">
+<meta name="twitter:description" content="Search Ansem's own posts on X. Quoted as he wrote them, dated and linked.">
+<meta name="twitter:image" content="https://search.lexthedev.com/demo/og-posts.png?v=1">
+<link rel="stylesheet" href="/demo/ui.css">
+<style>
+  :root{
+    --bg:#0b0e11;--panel:#12161c;--line:#232a33;--text:#e6e8ea;
+    --muted:#8a939e;--green:#16c784;--amber:#e8c157;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);min-height:100vh;
+    font:15px/1.55 var(--sans);font-feature-settings:"tnum" 1;
+    padding:28px 20px 60px}
+  .wrap{max-width:780px;margin:0 auto}
+  .topbar{display:flex;align-items:center;justify-content:space-between;
+    gap:14px;margin-bottom:26px;flex-wrap:wrap}
+  .brand{font-weight:700;letter-spacing:.5px;font-size:14px}
+  .brand span{color:var(--green)}
+  h1{font-family:var(--display);font-weight:400;font-size:46px;
+    line-height:1.08;letter-spacing:-.01em;margin-bottom:12px}
+  h1 em{color:var(--green);font-style:normal}
+  .sub{color:var(--muted);margin-bottom:8px;max-width:640px}
+  .covers{color:var(--muted);font-size:12.5px;margin-bottom:20px;min-height:19px}
+  .covers b{color:var(--text);font-weight:500}
+
+  form{display:flex;gap:10px;margin-bottom:12px}
+  #q{flex:1;min-width:0;background:var(--panel);border:1px solid var(--line);
+    border-radius:12px;color:var(--text);padding:13px 15px;font:inherit;
+    font-size:15.5px;outline:none}
+  #q:focus{border-color:var(--green)}
+  #go{font:inherit;font-weight:650;font-size:14.5px;background:var(--green);
+    color:#06140d;border:0;border-radius:12px;padding:0 20px;cursor:pointer;
+    white-space:nowrap}
+  #go:disabled{opacity:.55;cursor:default}
+  #go:focus-visible,.chip:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+  .tries{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+  .chip{font:inherit;font-size:13px;background:transparent;color:var(--muted);
+    border:1px solid var(--line);border-radius:16px;padding:6px 13px;cursor:pointer;
+    text-align:left}
+  .chip:hover{border-color:var(--green);color:var(--green)}
+
+  .answer{display:none;border-top:1px solid var(--line);padding:20px 0 6px}
+  .answer.on{display:block}
+  .asked{color:var(--muted);font-size:12.5px;margin-bottom:8px;overflow-wrap:anywhere}
+  .said{font:400 21px/1.42 var(--display);color:#dfe3e6;overflow-wrap:anywhere}
+  .said p + p{margin-top:12px}
+  .wait{color:var(--muted)}
+
+  .from{display:none;color:var(--muted);font-size:11px;text-transform:uppercase;
+    letter-spacing:.7px;margin:26px 0 2px}
+  .from.on{display:block}
+  /* One post. His words in the reading face, the date and what kind of
+     post it was above them, the way out to X below. */
+  .post{display:grid;grid-template-columns:minmax(0,1fr);gap:5px;
+    padding:15px 0 14px;border-top:1px solid var(--line)}
+  .post:last-child{border-bottom:1px solid var(--line)}
+  .meta{display:flex;gap:9px;align-items:baseline;flex-wrap:wrap;
+    color:var(--muted);font-size:12.5px}
+  .meta b{color:var(--text);font-weight:600}
+  .tag{font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;
+    border:1px solid var(--line);color:var(--muted);border-radius:9px;
+    padding:1px 7px;white-space:nowrap}
+  .tag.half{border-color:#e8c15755;color:var(--amber)}
+  .words{font-size:15.5px;line-height:1.55;color:#d4d8dc;overflow-wrap:anywhere;
+    white-space:pre-wrap}
+  .open{color:var(--green);font-weight:600;font-size:12.5px;text-decoration:none;
+    justify-self:start}
+  .open:hover{text-decoration:underline}
+
+  .note{border:1px solid var(--line);color:var(--muted);border-radius:12px;
+    padding:13px 16px;font-size:12.5px;margin-top:30px}
+  .note b{color:var(--text);font-weight:500}
+
+  @media(max-width:700px){
+    h1{font-size:34px}
+    .topbar{flex-direction:column;align-items:flex-start;gap:10px}
+    .said{font-size:19px}
+  }
+  /* 16px on a phone: iOS Safari zooms the page when a field with smaller
+     text takes focus, and does not zoom back. */
+  @media (max-width:760px){ #q{font-size:16px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <a class="brand" href="/home" style="text-decoration:none;color:inherit">MARKET <span>BUBBLE</span> · his posts</a>
+    <span style="display:inline-flex;gap:10px;flex-wrap:wrap">
+    <a class="btn btn-primary btn-back" href="/demo/podcast.html"><span class="arw">←</span><svg class="ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.75" stroke="currentColor" stroke-width="1.7"/><path d="M10.6 10.6 14 14" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M6 5.3l3 1.7-3 1.7z" fill="currentColor"/></svg>Search every episode</a>
+    <a class="btn btn-ghost" href="/calls">What they called</a>
+    </span>
+  </div>
+
+  <h1>What Ansem wrote, <em>not what he said</em>.</h1>
+  <p class="sub">The show is what he says out loud. This is what he posted on
+    X. Ask anything and the answer is taken from the posts themselves, quoted
+    as he wrote them, each with its date and a link to it.</p>
+  <p class="covers" id="covers"></p>
+
+  <form id="ask" autocomplete="off">
+    <input id="q" name="q" placeholder="what did he write about zcash" maxlength="300" aria-label="Ask about his posts">
+    <button id="go" type="submit">Ask</button>
+  </form>
+  <div class="tries" id="tries">
+    <button class="chip" type="button">what did he write about zcash</button>
+    <button class="chip" type="button">when did he say solana goes to 600</button>
+    <button class="chip" type="button">what has he posted about hyperliquid</button>
+  </div>
+
+  <section class="answer" id="answer" aria-live="polite">
+    <p class="asked" id="asked"></p>
+    <div class="said" id="said"></div>
+  </section>
+  <p class="from" id="from">The posts this was written from</p>
+  <div id="posts"></div>
+
+  <p class="note">
+    These are <b>his posts, not the show</b>, and they are his view on the day
+    he wrote each one. A reply or a quote is shown <b>without the post it
+    answered</b>, because only his half is kept. Nothing here is advice.
+  </p>
+</div>
+
+<script>
+var API = "";
+var BUSY = false;
+
+function esc(s){ return String(s == null ? "" : s)
+  .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;").replace(/'/g,"&#39;"); }
+
+/* Only ever a link to a post on x.com. Anything else from the data is not
+   somewhere a visitor is sent. */
+function postUrl(u){
+  try{ var p = new URL(u);
+       return (p.protocol === "https:" && p.hostname === "x.com" &&
+               /^\/[A-Za-z0-9_]{1,15}\/status\/\d+$/.test(p.pathname)) ? p.href : "";
+  }catch(e){ return ""; }
+}
+function day(iso){
+  var p = String(iso || "").slice(0, 10).split("-");
+  if (p.length !== 3) return "";
+  var m = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][+p[1] - 1];
+  return m ? (m + " " + (+p[2]) + ", " + p[0]) : "";
+}
+
+var KIND = {reply: "a reply", quote: "above a post he quoted"};
+
+function card(p){
+  var href = postUrl(p.url), kind = KIND[p.kind];
+  return "<article class='post'>" +
+    "<div class='meta'><b>" + esc(day(p.date)) + "</b>" +
+      (kind ? "<span class='tag half'>" + esc(kind) + "</span>" : "") + "</div>" +
+    "<p class='words'>" + esc(p.text) + "</p>" +
+    (href ? "<a class='open' href='" + esc(href) + "' target='_blank' rel='noopener'>Open on X</a>" : "") +
+    "</article>";
+}
+
+function covers(c){
+  if (!c || !c.count || !c.first || !c.last) return;
+  document.getElementById("covers").innerHTML =
+    "<b>" + Number(c.count).toLocaleString("en-US") + "</b> of his posts, from <b>" +
+    esc(day(c.first)) + "</b> to <b>" + esc(day(c.last)) + "</b>.";
+}
+
+function show(question, html, posts){
+  document.getElementById("asked").textContent = question;
+  document.getElementById("said").innerHTML = html;
+  document.getElementById("answer").classList.add("on");
+  document.getElementById("from").classList.toggle("on", posts.length > 0);
+  document.getElementById("posts").innerHTML = posts.map(card).join("");
+}
+
+function ask(question){
+  question = String(question || "").trim();
+  if (!question || BUSY) return;
+  BUSY = true;
+  document.getElementById("go").disabled = true;
+  document.getElementById("q").value = question;
+  show(question, "<p class='wait'>Reading his posts…</p>", []);
+  fetch(API + "/v1/posts/search", {
+    method: "POST", headers: {"content-type": "application/json"},
+    body: JSON.stringify({query: question})
+  }).then(function(r){
+    if (r.status === 429) throw new Error("busy");
+    if (!r.ok) throw new Error("down");
+    return r.json();
+  }).then(function(d){
+    var paragraphs = String(d.answer || "").split(/\n{2,}/).filter(function(x){ return x.trim(); });
+    show(question, paragraphs.map(function(x){ return "<p>" + esc(x.trim()) + "</p>"; }).join(""),
+         Array.isArray(d.posts) ? d.posts : []);
+    covers(d.coverage);
+  }).catch(function(e){
+    show(question, "<p class='wait'>" + (e.message === "busy"
+      ? "Too many questions right now. Try again in a minute."
+      : "That did not go through. Try again in a minute.") + "</p>", []);
+  }).then(function(){
+    BUSY = false;
+    document.getElementById("go").disabled = false;
+  });
+}
+
+document.getElementById("ask").addEventListener("submit", function(e){
+  e.preventDefault(); ask(document.getElementById("q").value);
+});
+document.getElementById("tries").addEventListener("click", function(e){
+  var b = e.target.closest(".chip"); if (b) ask(b.textContent);
+});
+
+fetch(API + "/v1/posts/archive").then(function(r){ return r.ok ? r.json() : null; })
+  .then(covers).catch(function(){});
+
+/* A shared link can carry its question. */
+var asked = new URLSearchParams(location.search).get("q");
+if (asked) ask(asked.slice(0, 300));
+</script>
+</body>
+</html>
