@@ -47,7 +47,7 @@ MAX_VISITOR_HASHES = 2_000
 
 # Pages a person opens. API calls are counted by what they do, through
 # _track, not here.
-PAGES = re.compile(r"^/(?:home|mcg|elon|musk|finance|record|threadguy|method"
+PAGES = re.compile(r"^/(?:home|mcg|elon|musk|finance|record|threadguy|rasmr|method"
                    r"|threadguy/(?:tokens|assets)|mcg/(?:assets|tokens)"
                    r"|demo/[\w-]+\.html)?/?$")
 # Link previews fetch the page too. Counting X's card fetcher as a visitor

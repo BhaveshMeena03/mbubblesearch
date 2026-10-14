@@ -30,22 +30,25 @@ BY = {
                "first": "2014-11-26", "last": "2026-09-25"},
     "threadguy": {"count": 621, "hours": 795.0,
                   "first": "2023-12-16", "last": "2026-10-09"},
+    "rasmr": {"count": 122, "hours": 161.6,
+              "first": "2024-12-16", "last": "2026-10-13"},
 }
 
 
 def test_the_total_is_the_sum_of_what_each_archive_says_it_holds():
     sizes = total_sizes(BY)
-    assert sizes["recordings"] == 21 + 668 + 24 + 45 + 621
-    assert sizes["hours"] == round(73 + 1077.2 + 51.6 + 47.9 + 795.0)
-    assert (sizes["archives"], sizes["first"], sizes["last"]) == (5, "2014", "2026")
+    assert sizes["recordings"] == 21 + 668 + 24 + 45 + 621 + 122
+    assert sizes["hours"] == round(73 + 1077.2 + 51.6 + 47.9 + 795.0 + 161.6)
+    assert (sizes["archives"], sizes["first"], sizes["last"]) == (6, "2014", "2026")
 
 
 def test_llms_txt_is_filled_in_from_the_archives():
     out = render_llms(LLMS, total_sizes(BY))
-    assert "Total: 1,379 recordings, 2,045 hours." in out
+    assert "Total: 1,501 recordings, 2,206 hours." in out
     assert "- MCG Live: 668 episodes, 1,077.2 hours" in out
     assert "to 9 October 2026." in out
     assert "- ThreadGuy: 621 recordings, 795 hours" in out
+    assert "- rasmr: 122 recordings, 161.6 hours, December 2024 to 13 October 2026." in out
     assert "{{" not in out and "}}" not in out
 
 
@@ -71,7 +74,7 @@ def test_every_figure_llms_txt_asks_for_is_one_the_archives_report():
 def test_no_total_in_llms_txt_is_typed_in():
     for line in LLMS.splitlines():
         if line.startswith(("Total:", "> A search engine over", "- MCG Live:",
-                            "- ThreadGuy:", "- Elon Musk:", "- The Record:",
+                            "- ThreadGuy:", "- rasmr:", "- Elon Musk:", "- The Record:",
                             "- Market Bubble:")):
             assert "{{" in line, line
 
@@ -82,4 +85,4 @@ def test_the_front_door_asks_the_archives_how_big_they_are():
     for key in ("sc-hours", "sc-recs", "sc-span"):
         assert f'id="{key}"' in HOME
     # Each card's sentence takes its count from the same answer.
-    assert HOME.count('meta:"{n} ') == 5
+    assert HOME.count('meta:"{n} ') == 6

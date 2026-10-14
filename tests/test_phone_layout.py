@@ -9,7 +9,7 @@ one rule whose absence caused the fault it names.
 from pathlib import Path
 
 DEMO = Path(__file__).resolve().parent.parent / "demo"
-PAGES = ["podcast", "home", "mcg", "elon", "finance", "threadguy",
+PAGES = ["podcast", "home", "mcg", "elon", "finance", "threadguy", "rasmr",
          "assets", "mcg-assets", "threadguy-assets"]
 
 
@@ -41,7 +41,7 @@ def test_scrolled_the_phone_header_is_one_row():
 def test_asking_on_a_phone_brings_the_answer_into_view():
     """The answer landed below the fold and nothing on screen changed."""
     assert "window.revealOnPhone = function" in NAV
-    for name in ("podcast", "mcg", "elon", "finance", "threadguy", "home"):
+    for name in ("podcast", "mcg", "elon", "finance", "threadguy", "rasmr", "home"):
         assert "revealOnPhone(" in page(name), name
 
 
@@ -53,7 +53,7 @@ def test_no_search_box_makes_an_iphone_zoom():
 
 def test_passage_cards_cannot_grow_wider_than_the_screen():
     """A grid item will not shrink below its one-line title."""
-    for name in ("home", "threadguy"):
+    for name in ("home", "threadguy", "rasmr"):
         html = page(name)
         assert "grid-template-columns:minmax(0,1fr)" in html, name
         assert ".hit{min-width:0;" in html, name

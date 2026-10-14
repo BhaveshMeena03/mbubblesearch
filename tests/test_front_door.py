@@ -276,10 +276,13 @@ def test_a_question_card_plays_underneath_rather_than_inside():
 
 
 def test_the_page_counts_the_archives_it_searches():
-    """Five channels, five rooms in the fan out, and the copy said four."""
-    assert "all five archives" in PAGE
-    assert '<b id="sc-count">5</b><span>archives</span>' in PAGE
-    assert "all four archives" not in PAGE
+    """Five channels, five rooms in the fan out, and the copy said four.
+    Six now, with rasmr, and the copy has to move with them."""
+    assert len(_ROOMS) == 6
+    assert "all six archives" in PAGE
+    assert '<b id="sc-count">6</b><span>archives</span>' in PAGE
+    assert "all four archives" not in PAGE and "all five archives" not in PAGE
+    assert "six archives, one question" in PAGE.split("</title>")[0]
 
 
 def test_the_figures_share_one_baseline():
@@ -300,6 +303,30 @@ def test_threadguy_is_everywhere_the_other_archives_are():
     assert "ThreadGuy" in PAGE.split('name="description" content="')[1].split('"')[0]
     # The share card is the universal one now and names no archives, so
     # adding one never leaves it out of date. See test_universal_cards.
+
+
+def test_rasmr_is_everywhere_the_other_archives_are():
+    """Everywhere ThreadGuy went in: a channel card, an example question,
+    a question card, the footer and the description, in his own colour."""
+    assert re.search(r'k:"rasmr",\s+q:', PAGE)              # an example question
+    assert 'vid:"A8Zo5iXul_8", at:39' in PAGE               # a question card
+    assert 'href="/rasmr">rasmr</a>' in PAGE                 # the footer
+    assert "rasmr" in PAGE.split('name="description" content="')[1].split('"')[0]
+    assert "--rasmr:#d6ae63" in PAGE and 'rasmr:"--rasmr"' in PAGE
+
+
+def test_five_question_cards_are_never_four_and_one():
+    """auto-fit took four 320px columns on a wide screen and left the fifth
+    alone on a row. Measured at 1500, 1024, 780 and 375 wide: five across,
+    three and two, two and two with the fifth across the row, one each."""
+    cards = re.findall(r'vid:"([\w-]{11})", at:(\d+)', PAGE)
+    assert len(cards) == 5
+    for rule in (
+            "@media(min-width:860px){.moments{grid-template-columns:repeat(3,minmax(0,1fr))}}",
+            "@media(min-width:1400px){.moments{grid-template-columns:repeat(5,minmax(0,1fr))}}",
+            "@media(max-width:859px){.moment:last-child:nth-child(odd){grid-column:1/-1}}"):
+        assert rule in PAGE, rule
+    assert "<h2>Five questions, five answers</h2>" in PAGE
 
 
 def test_a_redrawn_card_gets_a_new_url():

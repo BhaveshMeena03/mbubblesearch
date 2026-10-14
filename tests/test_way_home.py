@@ -15,7 +15,7 @@ from pathlib import Path
 DEMO = Path(__file__).resolve().parent.parent / "demo"
 
 # The pages people browse. The *-card.html files are share-card sources.
-ARCHIVES = ["podcast", "mcg", "mcg-assets", "elon", "finance", "threadguy"]
+ARCHIVES = ["podcast", "mcg", "mcg-assets", "elon", "finance", "threadguy", "rasmr"]
 
 
 def _page(name: str) -> str:
@@ -32,7 +32,7 @@ def test_the_archives_keep_their_own_name_in_the_corner():
     """The parent sits in front of each room's name rather than replacing
     it: the corner is where each archive says what it is."""
     for name, own in (("mcg", "The MCG Index"), ("elon", "THE MUSK RECORD"),
-                      ("threadguy", "ThreadGuy")):
+                      ("threadguy", "ThreadGuy"), ("rasmr", "<b>rasmr</b>")):
         page = _page(name)
         assert 'class="home-crumb" href="/home"' in page, name
         # read the corner, not the <title>, which names the room first

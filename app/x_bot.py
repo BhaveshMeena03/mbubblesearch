@@ -2839,8 +2839,9 @@ def format_reply(answer: str, hits: list, include_links: bool | str = False,
             moment = top.timestamp
         link = (_relink(top.deep_link, _seconds(moment))
                 if supported and seekable else top.deep_link)
-        # An MCG Live show that also went out on X: link that copy, at the
-        # same second. The reply is on X, and so is the reader.
+        # An MCG Live show or a rasmr stream that also went out on X: link
+        # that copy, at the same second. The reply is on X, and so is the
+        # reader.
         link = on_x(link)
         # Fitted first, because whether the tail should carry a timestamp
         # depends on whether the trimmed answer already has one — and the
@@ -3511,6 +3512,9 @@ _TOO_ORDINARY = {
     'wallet',
     'wonder',
     'yield',
+    # Said at Tesla's Roadster event, which joined the Musk archive on
+    # 16 Oct 2026; the collision test caught it when the branch merged.
+    'worm',
     # Tickers read out of the newer titles on 16 Oct 2026 (see
     # _mcg_projects). These are said on the broadcast or in the Musk
     # interviews, which the transcript check below would catch anyway:
@@ -3702,6 +3706,25 @@ def threadguy_thread(mention_text: str) -> bool:
     return bool(lead and _THREADGUY_HANDLES.search(lead.group(0)))
 
 
+# rasmr, by name or by @rasmr_eth, spelled the way app/podcast.py already
+# matches him. The transcripts hear "rasmer" and "razzmer", but a question
+# is typed, and people type it off the handle.
+_OF_RASMR = re.compile(r"(?i)\brasmr(?:_eth)?\b")
+
+# The handle X puts at the front of a reply in one of his threads.
+_RASMR_HANDLES = re.compile(r"(?i)@rasmr_eth\b")
+
+
+def rasmr_thread(mention_text: str) -> bool:
+    """Is this mention a reply in one of rasmr's threads?
+
+    Read off the leading handles, exactly as threadguy_thread is, and used
+    only when the question itself names no archive.
+    """
+    lead = _LEADING_HANDLES.match(mention_text or "")
+    return bool(lead and _RASMR_HANDLES.search(lead.group(0)))
+
+
 def corpus_for(question: str) -> str:
     """"podcast" or "elon" — which archive should answer this.
 
@@ -3724,6 +3747,17 @@ def corpus_for(question: str) -> str:
     # threadguy" wants Ansem's, and the speaker comes first in both.
     threadguy = _OF_THREADGUY.search(text)
     show = _OF_THE_SHOW.search(text)
+    # rasmr by the same rule, and named first ahead of ThreadGuy and Elon
+    # as well as the show. He was a guest on Market Bubble and co-hosts a
+    # show on ThreadGuy's channel, so all three come up beside his name:
+    # "what did rasmr say about elon" wants rasmr, "what did elon say
+    # about rasmr" wants Elon, and "what did threadguy say about rasmr"
+    # still goes to ThreadGuy below.
+    rasmr = _OF_RASMR.search(text)
+    musk = _OF_THE_MUSK_ARCHIVE.search(text)
+    if rasmr and all(other is None or rasmr.start() < other.start()
+                     for other in (threadguy, show, musk)):
+        return "rasmr"
     if threadguy and (not show or threadguy.start() < show.start()):
         return "threadguy"
     if show:
@@ -3766,7 +3800,8 @@ def routed_on_evidence(question: str) -> bool:
     return bool(_OF_THE_SHOW.search(text)
                 or _OF_THE_MUSK_ARCHIVE.search(text)
                 or _OF_THE_MCG_ARCHIVE.search(text)
-                or _OF_THREADGUY.search(text))
+                or _OF_THREADGUY.search(text)
+                or _OF_RASMR.search(text))
 
 
 class MentionBot:
@@ -3801,6 +3836,7 @@ class MentionBot:
                  mcg_index=None,
                  tradfi_index=None,
                  threadguy_index=None,
+                 rasmr_index=None,
                  state_path: Path = STATE_PATH) -> None:
         self._client = client
         self._index = index
@@ -3819,6 +3855,8 @@ class MentionBot:
         self._tradfi_index = tradfi_index
         # ThreadGuy's streams and interviews. Optional like the rest.
         self._threadguy_index = threadguy_index
+        # rasmr's streams and interviews. Optional like the rest.
+        self._rasmr_index = rasmr_index
         self.cap = daily_reply_cap
         self.include_links = include_links
         self._min_question = min_question_chars
@@ -4746,11 +4784,18 @@ class MentionBot:
         if (corpus == "podcast" and not routed_on_evidence(routed_on)
                 and threadguy_thread(mention.text)):
             corpus = "threadguy"
+        # The same for rasmr's threads. ThreadGuy's is read first: a thread
+        # that carries both of them is most likely under their hot seat,
+        # which is on ThreadGuy's channel and so in his archive.
+        elif (corpus == "podcast" and not routed_on_evidence(routed_on)
+                and rasmr_thread(mention.text)):
+            corpus = "rasmr"
         # An archive that is not wired answers nothing; the question falls
         # back to the broadcast rather than to an index that is None.
         available = {"elon": self._elon_index, "mcg": self._mcg_index,
                      "tradfi": self._tradfi_index,
-                     "threadguy": self._threadguy_index}
+                     "threadguy": self._threadguy_index,
+                     "rasmr": self._rasmr_index}
         if corpus != "podcast" and not available.get(corpus):
             corpus = "podcast"
         index = available.get(corpus) or self._index

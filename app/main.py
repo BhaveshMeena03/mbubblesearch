@@ -270,6 +270,9 @@ async def _run_x_bot(app: FastAPI, settings) -> None:
         # ThreadGuy's streams and interviews. Routed when a mention names
         # him, or asks in one of his threads without naming anything else.
         threadguy_index=getattr(app.state, "threadguy", None),
+        # rasmr's, by the same two rules: his name or @rasmr_eth, or a
+        # bare question in one of his threads.
+        rasmr_index=getattr(app.state, "rasmr", None),
         daily_reply_cap=settings.x_bot_daily_reply_cap,
         per_thread_cap=settings.x_bot_per_thread_cap,
         include_links=settings.x_bot_include_links,
@@ -434,9 +437,9 @@ async def lifespan(app: FastAPI):
         logger.warning("the ThreadGuy archive did not start: %s", exc)
         app.state.threadguy = None
 
-    # rasmr's streams and interviews. Same rule: only when there is a shelf.
-    # Not given to the front door or to the bot yet: the page is up for a
-    # look first.
+    # rasmr's streams and interviews, the sixth corpus. Same rule: only
+    # when there is a shelf. A room on the front door and an archive the
+    # bot answers from, the way ThreadGuy's is.
     try:
         app.state.rasmr = (PodcastIndex(ledger=app.state.usage, namespace="rasmr")
                            if _rasmr_episodes() else None)
@@ -812,7 +815,7 @@ async def _archive_sizes(request: Request) -> dict | None:
     """Every archive's size, each from the route its own page uses, so
     the front door cannot disagree with the page it links to.
 
-    All five or nothing: a total that leaves an archive out is a wrong
+    All six or nothing: a total that leaves an archive out is a wrong
     number, and the page already holds a recent right one to fall back on.
     """
     held = getattr(request.app.state, "archive_sizes", None)
@@ -823,7 +826,8 @@ async def _archive_sizes(request: Request) -> dict | None:
         counted = {"mcg": await mcg_archive(),
                    "elon": await elon_archive(),
                    "tradfi": await finance_archive(),
-                   "threadguy": await threadguy_archive()}
+                   "threadguy": await threadguy_archive(),
+                   "rasmr": await rasmr_archive()}
     except Exception as exc:                                    # noqa: BLE001
         logger.warning("could not size the archives: %s", exc)
         return held[1] if held else None
@@ -1251,7 +1255,8 @@ _ROOMS = [("podcast", "Market Bubble", "/"),
           ("mcg", "MCG Live", "/mcg"),
           ("elon", "Elon Musk", "/elon"),
           ("tradfi", "The Record", "/finance"),
-          ("threadguy", "ThreadGuy", "/threadguy")]
+          ("threadguy", "ThreadGuy", "/threadguy"),
+          ("rasmr", "rasmr", "/rasmr")]
 
 
 # Whose show is whose. A question that names a host is asking about that
@@ -1267,6 +1272,10 @@ _HOSTS = {
     "podcast": re.compile(r"(?<!\$)\b(?:ansem(?!\s*(?:hack|coin|token))|banks|faze banks)\b",
                           re.I),
     "threadguy": re.compile(r"\b(?:threadguy|thread guy)\b", re.I),
+    # His name and his handle, spelled the way app/podcast.py already
+    # matches him. The transcripts hear "rasmer" and "razzmer", but a
+    # question is typed, and people type it off the handle.
+    "rasmr": re.compile(r"\brasmr(?:_eth)?\b", re.I),
     "elon": re.compile(r"\b(?:elon|musk)\b", re.I),
 }
 # How far behind the leader the named show may be and still answer. A wide
@@ -1281,6 +1290,7 @@ _ARCHIVE_NAMES = {
     "podcast": re.compile(r"\bmarket bubble\b", re.I),
     "mcg": re.compile(r"\bmcg\b", re.I),
     "threadguy": re.compile(r"\bthread ?guy'?s? (?:archive|stream|show)", re.I),
+    "rasmr": re.compile(r"\brasmr'?s? (?:archive|stream|show)", re.I),
     "tradfi": re.compile(r"\bthe record\b", re.I),
     "elon": re.compile(r"\belon (?:archive|interviews?)\b", re.I),
 }

@@ -93,6 +93,9 @@ ELON = {"elonmusk"}
 # Answered from the ThreadGuy archive only, by the same rule: under his own
 # post, the receipt is him on his own stream, never another show.
 THREADGUY = {"notthreadguy", "counterpartytv"}
+# And rasmr from his, by the same rule, now that he has an archive of his
+# own. He was watched before it existed and searched like everyone else.
+RASMR = {"rasmr_eth"}
 # Everyone else is searched in both of these, and the stronger moment wins.
 # A Hyperliquid or Zcash post is as likely to have its best line on a
 # ThreadGuy market open as on Market Bubble.
@@ -118,6 +121,8 @@ def corpora_for(handle: str) -> tuple[str, ...]:
         return ("elon",)
     if handle in THREADGUY:
         return ("threadguy",)
+    if handle in RASMR:
+        return ("rasmr",)
     return SHARED
 
 
@@ -212,7 +217,8 @@ async def main() -> int:
 
     indexes = {"podcast": PodcastIndex(),
                "elon": PodcastIndex(namespace="elon"),
-               "threadguy": PodcastIndex(namespace="threadguy")}
+               "threadguy": PodcastIndex(namespace="threadguy"),
+               "rasmr": PodcastIndex(namespace="rasmr")}
     # One search is about 2.5s, almost all of it waiting on the embedding
     # and rerank services. Run one at a time across ~80 posts and two
     # archives it took over ten minutes; a few at once keeps it to a couple

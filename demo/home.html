@@ -7,17 +7,17 @@
 <link rel="apple-touch-icon" href="/demo/icon-180.png">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#06070a">
-<title>Market Bubble Search: five archives, one question</title>
-<meta name="description" content="More than 2,000 hours of crypto podcasts, live broadcasts and long-form interviews, including ThreadGuy's interviews and streams. Ask in plain English, get the sentence and the second it was said.">
-<meta property="og:title" content="Market Bubble Search: five archives, one question">
-<meta property="og:description" content="Market Bubble, MCG Live, ThreadGuy, every long-form Elon Musk interview and finance. Ask once, and the archive with the answer gives it.">
+<title>Market Bubble Search: six archives, one question</title>
+<meta name="description" content="More than 2,000 hours of crypto podcasts, live broadcasts and long-form interviews, including ThreadGuy's and rasmr's interviews and streams. Ask in plain English, get the sentence and the second it was said.">
+<meta property="og:title" content="Market Bubble Search: six archives, one question">
+<meta property="og:description" content="Market Bubble, MCG Live, ThreadGuy, rasmr, every long-form Elon Musk interview and finance. Ask once, and the archive with the answer gives it.">
 <meta property="og:image" content="https://search.lexthedev.com/demo/og-home.png?v=6">
 <meta property="og:url" content="https://search.lexthedev.com/home?v=6">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://search.lexthedev.com/demo/og-home.png?v=6">
-<meta name="twitter:title" content="Market Bubble Search: five archives, one question">
-<meta name="twitter:description" content="Five archives of crypto and finance on tape. Ask once, and the archive with the answer gives it.">
+<meta name="twitter:title" content="Market Bubble Search: six archives, one question">
+<meta name="twitter:description" content="Six archives of crypto and finance on tape. Ask once, and the archive with the answer gives it.">
 
 <!-- The front door.
      Concept: an instrument, not a landing page. Everything this thing does
@@ -43,6 +43,7 @@
     --signal:#ffa23a;                 /* the parent. none of the four own it */
     --podcast:#16c784; --mcg:#6ecf9e; --elon:#d93a4f; --tradfi:#d8cfc0;
     --threadguy:#6aa9ff;
+    --rasmr:#d6ae63;                  /* the gilt off his own page */
     --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
     --ease:cubic-bezier(.22,.78,.24,1); --quick:.22s; --slow:.55s;
   }
@@ -212,6 +213,14 @@
      of the thing rather than three sentences somebody liked. */
   .moments{display:grid;gap:16px;margin:0 0 6px;
     grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr))}
+  /* Five cards, laid out by how many there are, the way the channel
+     pages lay out theirs (demo/moments.js): five across where there is
+     room and three and two where there is not. Left to fit 320px
+     columns, a wide screen took four and left the fifth alone on a row. */
+  @media(min-width:860px){.moments{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  @media(min-width:1400px){.moments{grid-template-columns:repeat(5,minmax(0,1fr))}}
+  /* Two across, the fifth takes the whole row rather than half of one. */
+  @media(max-width:859px){.moment:last-child:nth-child(odd){grid-column:1/-1}}
   .moment{position:relative;border:1px solid var(--edge);border-radius:3px;
     background:var(--deck);padding:22px 24px 20px;cursor:pointer;
     display:flex;flex-direction:column;
@@ -548,8 +557,8 @@
 
   <section class="hero">
     <h1 class="rise" style="animation-delay:.06s">Ask what somebody<br><em>actually said</em>.</h1>
-    <p class="lede rise" style="animation-delay:.11s">One question goes to all five archives at once.
-      The one with the answer gives it, and you see what the other four scored.</p>
+    <p class="lede rise" style="animation-delay:.11s">One question goes to all six archives at once.
+      The one with the answer gives it, and you see what the other five scored.</p>
 
     <form id="f" autocomplete="off" class="rise" style="animation-delay:.16s">
       <input id="q" type="search" aria-label="Ask the archives"
@@ -559,12 +568,13 @@
     <div class="tries rise" id="tries" style="animation-delay:.21s"></div>
 
     <div class="scale rise" style="animation-delay:.26s">
-      <!-- Counted on 9 October 2026 and replaced by /v1/archives when the
-           page loads. Two of the five grow every morning, and the figures
-           typed here before were a month and seventy hours behind. -->
-      <div class="lead"><b id="sc-hours">2,040</b><span>hours of tape</span></div>
-      <div><b id="sc-recs">1,377</b><span>recordings</span></div>
-      <div><b id="sc-count">5</b><span>archives</span></div>
+      <!-- Counted on 9 October 2026, with rasmr's added on 14 October, and
+           replaced by /v1/archives when the page loads. Three of the six
+           grow every morning, and the figures typed here before were a
+           month and seventy hours behind. -->
+      <div class="lead"><b id="sc-hours">2,202</b><span>hours of tape</span></div>
+      <div><b id="sc-recs">1,499</b><span>recordings</span></div>
+      <div><b id="sc-count">6</b><span>archives</span></div>
       <div class="yr"><b id="sc-first">2014</b><span>earliest</span></div>
       <div class="yr"><b id="sc-last">2026</b><span>latest</span></div>
       <div class="years"><b id="sc-span">2014 to 2026</b><span>span</span></div>
@@ -579,7 +589,7 @@
   </section>
 
   <section class="sect" id="asked-sect">
-    <h2>Four questions, four answers</h2>
+    <h2>Five questions, five answers</h2>
     <p class="note">What the archive gives back, read off the transcript at
       the second it was said. Pick one to hear it.</p>
     <div class="moments" id="moments"></div>
@@ -679,6 +689,7 @@
     <nav>
       <a href="/">Market Bubble</a><a href="/mcg">MCG Live</a>
       <a href="/elon">Elon Musk</a><a href="/finance">The Record</a><a href="/threadguy">ThreadGuy</a>
+      <a href="/rasmr">rasmr</a>
       <a href="/calls">Calls board</a><a href="/llms.txt">llms.txt</a>
     </nav>
   </footer>
@@ -691,7 +702,7 @@
 (function(){
   "use strict";
   var VAR = {podcast:"--podcast", mcg:"--mcg", elon:"--elon",
-             tradfi:"--tradfi", threadguy:"--threadguy"};
+             tradfi:"--tradfi", threadguy:"--threadguy", rasmr:"--rasmr"};
   // n and size are what each archive held when this was written; {n} in
   // the sentence and the hours beside it are replaced by what it holds now.
   var CHANS = [
@@ -704,7 +715,9 @@
     {k:"tradfi", name:"The Record", href:"/finance", size:48, n:45,
      meta:"{n} interviews and press conferences from the people who run the money, in a collection of our own rather than one show: Fink, Dalio, Powell, Warsh, Dimon, Wood, Saylor, CZ."},
     {k:"threadguy", name:"ThreadGuy", href:"/threadguy", size:793, n:620,
-     meta:"{n} streams and interviews. The daily market open, and the guests he has on."}
+     meta:"{n} streams and interviews. The daily market open, and the guests he has on."},
+    {k:"rasmr", name:"rasmr", href:"/rasmr", size:162, n:122,
+     meta:"{n} streams and interviews. His daily streams on X and YouTube, and the guests he has on."}
   ];
   var count = function(n){ return Math.round(n).toLocaleString("en-US"); };
   // One archive's card: how many, and how many hours.
@@ -719,7 +732,8 @@
     {k:"podcast", q:"Why does Ansem think Ethereum is done?"},
     {k:"elon",    q:"What did Elon say about heat shield tiles?"},
     {k:"mcg",     q:"Who is building encrypted mesh networks?"},
-    {k:"threadguy", q:"What is the Sweetgreen chud wrap thesis?"}
+    {k:"threadguy", q:"What is the Sweetgreen chud wrap thesis?"},
+    {k:"rasmr",   q:"Why did rasmr sell all his HYPE?"}
   ];
   var $ = function(i){ return document.getElementById(i); };
   var css = function(v){ return getComputedStyle(document.documentElement)
@@ -894,7 +908,7 @@
     busy = true; $("go").disabled = true; $("go").textContent = "…";
     $("out").style.display = "block";
     stopTyping();
-    $("verdict").textContent = "searching all five archives";
+    $("verdict").textContent = "searching all six archives";
     $("out").classList.toggle("instant", document.hidden);
     void $("out").offsetHeight;
     $("out").classList.add("shown"); document.body.classList.add("asked");
@@ -913,7 +927,7 @@
     $("chans").classList.remove("judged");
     $("chans").classList.add("live");
 
-    // Five archives and then a written answer. Without a ceiling the
+    // Six archives and then a written answer. Without a ceiling the
     // button sits on an ellipsis for as long as a stalled model call takes.
     var stop = new AbortController();
     var bell = setTimeout(function(){ stop.abort(); }, 45000);
@@ -1122,7 +1136,13 @@
     {k:"threadguy", vid:"2tMMfjBqgvo", at:563,
      q:"What does Papertrade's builder think of other 1000x exchanges?",
      said:"I've yet to see a proper 1000x exchange where it wasn't just, internally, under the hood, the bucket shop.",
-     who:"Blurr", where:"ThreadGuy, Papertrade Launch", when:"29 Sep 2026"}
+     who:"Blurr", where:"ThreadGuy, Papertrade Launch", when:"29 Sep 2026"},
+    // The card his own page carries, checked against the index transcript
+    // at the second and against the frame when it was chosen.
+    {k:"rasmr", vid:"A8Zo5iXul_8", at:39,
+     q:"When does rasmr sell a memecoin?",
+     said:"The best time to sell is always after a catalyst, whether it is a positive catalyst or a negative catalyst.",
+     who:"rasmr", where:"rasmr, Memecoin guide", when:"25 Aug 2026"}
   ];
   MOMENTS.forEach(function(m){
     var el = document.createElement("div");

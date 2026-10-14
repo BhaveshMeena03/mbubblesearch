@@ -23,7 +23,8 @@
     { href: "/mcg",     name: "MCG Live",      note: "one project per episode" },
     { href: "/elon",    name: "Elon Musk",     note: "long-form interviews" },
     { href: "/finance", name: "The Record",    note: "finance, on tape" },
-    { href: "/threadguy", name: "ThreadGuy",   note: "the morning show" }
+    { href: "/threadguy", name: "ThreadGuy",   note: "the morning show" },
+    { href: "/rasmr",   name: "rasmr",         note: "streams and interviews" }
   ];
 
   var TOOLS = [
@@ -40,6 +41,7 @@
     if (href === "/elon") return /elon|musk/.test(path);
     if (href === "/mcg") return path === "/mcg" || /\/mcg\.html$/.test(path);
     if (href === "/threadguy") return /threadguy/.test(path);
+    if (href === "/rasmr") return /rasmr/.test(path);
     return path === href;
   }
 

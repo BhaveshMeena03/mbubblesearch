@@ -67,6 +67,7 @@ def test_an_archive_question_under_our_own_post_is_answered(caplog):
     """A judge replying to the pinned demo post, mid-stream."""
     assert not _skipped("@mbubbleSearch did ansem say zcash could go to 10,000?", caplog)
     assert not _skipped("@mbubbleSearch what did threadguy say about pump", caplog)
+    assert not _skipped("@mbubbleSearch what did rasmr say about selling", caplog)
 
 
 def test_questions_about_the_account_under_our_own_post_still_are_not(caplog):

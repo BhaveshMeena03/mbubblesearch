@@ -152,7 +152,7 @@ def test_llms_txt_knows_about_threadguy():
     """It had no mention of ThreadGuy at all, and it is the file an agent,
     or a judge, reads first."""
     llms = (ROOT / "demo" / "llms.txt").read_text()
-    assert "Five archives" in llms
+    assert "Six archives" in llms
     assert "https://search.lexthedev.com/threadguy" in llms
     assert "/v1/threadguy/search" in llms
 

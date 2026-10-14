@@ -7,7 +7,7 @@ it was said.
 
 **Live: https://search.lexthedev.com/home** · free, no login
 
-Over 2,000 hours across five archives, transcribed and searchable by
+Over 2,000 hours across six archives, transcribed and searchable by
 meaning:
 
 | Archive | What is in it |
@@ -15,10 +15,11 @@ meaning:
 | [Market Bubble](https://search.lexthedev.com/) | Every live X broadcast with Ansem and FaZe Banks. About a quarter of each show never reaches the YouTube upload, so for those minutes this is the only searchable copy. |
 | [MCG Live](https://search.lexthedev.com/mcg) | Every episode, one project per episode, with the founder on the call. |
 | [ThreadGuy](https://search.lexthedev.com/threadguy) | The daily market open streams and the interviews. |
+| [rasmr](https://search.lexthedev.com/rasmr) | His daily streams on X and YouTube, and his interviews. Most streams are paired with their X broadcast, so a moment opens on either at the same second. |
 | [Elon Musk](https://search.lexthedev.com/elon) | His long-form interviews, 2018 to 2026: Rogan, Lex Fridman, Dwarkesh Patel, All-In, the Economist. |
 | [The Record](https://search.lexthedev.com/finance) | Our own collection, not a show: interviews and press conferences from the people who run the money, 2014 to 2026. Fink, Dalio, Powell, Warsh, Dimon, Cathie Wood, Schwarzman, Saylor, Raoul Pal, CZ. |
 
-The front door sends one question to all five and the archive that knows
+The front door sends one question to all six and the archive that knows
 answers, with the sentence and a link that plays the recording at that
 second. The archives never mix: a claim about the broadcast can never be
 sourced from a Tesla interview.
@@ -69,7 +70,7 @@ answer says so instead of guessing.
 5. Check it landed: the last step asks the live index about the new
    recording, and it does not count as ingested until it can be found.
 
-MCG Live and ThreadGuy are picked up every morning by a scheduled job;
+MCG Live, ThreadGuy and rasmr are picked up every morning by a scheduled job;
 Market Bubble shows are added after they air.
 
 **Answering a question**
@@ -103,7 +104,7 @@ listing's own symbol.
 ```
 app/                  the backend
   main.py             routes, static pages, share cards
-  podcast.py          timestamped search over one archive (shared by all five)
+  podcast.py          timestamped search over one archive (shared by all six)
   recency.py          "this week" and "the latest" questions
   terms.py            exact-word lookup for rare tokens
   attribution.py      refuses to put one host's words in the other's mouth

@@ -27,6 +27,14 @@ def test_threadguy_and_his_network_are_answered_from_his_archive_only():
     assert frt.corpora_for("CounterPartyTV") == ("threadguy",)
 
 
+def test_rasmr_is_answered_from_his_own_archive_only():
+    """Watched before his archive existed, and searched like everyone
+    else. Under his own post the receipt is him on his own stream."""
+    assert frt.corpora_for("rasmr_eth") == ("rasmr",)
+    assert frt.corpora_for("Rasmr_ETH") == ("rasmr",)
+    assert "rasmr_eth" in {h.lower() for h in frt.WATCHLIST}
+
+
 def test_everyone_else_is_searched_in_both_the_broadcast_and_threadguy():
     assert frt.corpora_for("HyperliquidX") == ("podcast", "threadguy")
     assert frt.corpora_for("blknoiz06") == ("podcast", "threadguy")

@@ -1,6 +1,6 @@
 # Market Bubble Search
 
-> A search engine over {{hours|2,040}} hours of crypto podcasts, live broadcasts and
+> A search engine over {{hours|2,202}} hours of crypto podcasts, live broadcasts and
 > long-form interviews. Ask a question in plain English and it answers only
 > from the transcripts, quoting the speaker and citing the exact second it
 > was said. If the archive does not contain the answer, it says so instead
@@ -14,7 +14,7 @@ An AnsemHack Clawrena entry. Token $MBS on ClawPump, mint
 
 ## What is indexed
 
-Five archives, kept in separate namespaces so an answer about one show can
+Six archives, kept in separate namespaces so an answer about one show can
 never be sourced from another.
 
 - Market Bubble: {{by.podcast.count|21}} shows, {{by.podcast.hours|73}} hours. The live X broadcast with Ansem
@@ -36,8 +36,13 @@ never be sourced from another.
   The full-length videos on @notthreadguy's YouTube channel, the daily
   live market open and the guests he has on. Answers say whose view
   it was and on which day, because the market moves between streams.
+- rasmr: {{by.rasmr.count|122}} recordings, {{by.rasmr.hours|161.6}} hours, December 2024 to {{by.rasmr.last|13 October 2026}}.
+  The streams and interviews on his YouTube channel, and the streams he
+  ran only on X as @rasmr_eth. Most of his streams go out on X and
+  YouTube at once, and most of those are paired by ear, so a moment
+  opens on either at the same second.
 
-Total: {{recordings|1,377}} recordings, {{hours|2,040}} hours.
+Total: {{recordings|1,499}} recordings, {{hours|2,202}} hours.
 
 Also indexed: 2,853 vectors of Ansem's own posts, and asset indexes of
 every token, stock and index the shows discussed, ranked by how deeply
@@ -102,6 +107,7 @@ names and tickers survive.
 - https://search.lexthedev.com/elon : the Musk interviews
 - https://search.lexthedev.com/finance : The Record, finance on tape
 - https://search.lexthedev.com/threadguy : ThreadGuy, interviews and streams
+- https://search.lexthedev.com/rasmr : rasmr, streams and interviews
 - https://search.lexthedev.com/mcg/assets : every asset MCG discussed
 - https://search.lexthedev.com/demo/assets.html : every asset Market Bubble discussed
 - https://search.lexthedev.com/calls : calls Ansem and FaZe Banks made on air, and Ansem in his posts, quoted, linked to the moment and priced since
@@ -115,17 +121,19 @@ All POST, JSON body {"query": "..."}, no key required.
 - https://search.lexthedev.com/v1/elon/search
 - https://search.lexthedev.com/v1/finance/search
 - https://search.lexthedev.com/v1/threadguy/search
-- https://search.lexthedev.com/v1/search : asks all five at once, answers
+- https://search.lexthedev.com/v1/rasmr/search
+- https://search.lexthedev.com/v1/search : asks all six at once, answers
   from the best match, and returns every archive's score
 
 Streamed versions, as server-sent events: append /stream to the podcast,
-mcg, elon, threadguy and front-door routes (/v1/search/stream). Passages
+mcg, elon, threadguy, rasmr and front-door routes (/v1/search/stream). Passages
 arrive first as an "hits" event, then the answer as it is written, then
 "done". The front door sends a "rooms" event with every archive's score
 before the passages.
 
 Archive summaries, GET: /v1/podcast/archive, /v1/mcg/archive,
-/v1/elon/archive, /v1/finance/archive, /v1/threadguy/archive
+/v1/elon/archive, /v1/finance/archive, /v1/threadguy/archive,
+/v1/rasmr/archive
 Service health, GET: /x-bot/status and /v1/stats
 
 ## Distribution

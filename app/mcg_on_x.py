@@ -18,6 +18,12 @@ data/mcg_broadcast_links.json holds both, written by
 scripts/pair_mcg_broadcasts.py, which measures the gap for each show
 rather than assuming it. A show that is not in the file keeps its YouTube
 link, which also opens at the second.
+
+rasmr goes live on both at once as well, and his pairs are in
+data/rasmr_broadcast_links.json: the same shape, measured the same way by
+scripts/pair_rasmr_broadcasts.py, with the same rule that X's second is
+YouTube's plus the offset. A video id belongs to one channel, so the two
+files are read as one table.
 """
 
 from __future__ import annotations
@@ -31,21 +37,27 @@ from pathlib import Path
 logger = logging.getLogger(__name__)
 
 _PATH = Path(__file__).resolve().parent.parent / "data" / "mcg_broadcast_links.json"
+_RASMR_PATH = Path(__file__).resolve().parent.parent / "data" / "rasmr_broadcast_links.json"
 
 _YOUTUBE = re.compile(
     r"(?:youtube\.com/watch\?(?:[^ ]*&)?v=|youtu\.be/)([A-Za-z0-9_-]{11})")
 _SECONDS = re.compile(r"[?&]t=(\d+)s?\b")
 
 
-@lru_cache(maxsize=1)
-def _pairs() -> dict[str, dict]:
+def _read(path: Path) -> dict[str, dict]:
     try:
-        return json.loads(_PATH.read_text()) if _PATH.exists() else {}
+        return json.loads(path.read_text()) if path.exists() else {}
     except Exception:  # noqa: BLE001
         # A reply that links YouTube is the reply this account has always
         # sent. Better that than no reply.
-        logger.warning("could not read mcg_broadcast_links.json")
+        logger.warning("could not read %s", path.name)
         return {}
+
+
+@lru_cache(maxsize=1)
+def _pairs() -> dict[str, dict]:
+    # Each file on its own, so a broken one costs only its own links.
+    return {**_read(_RASMR_PATH), **_read(_PATH)}
 
 
 def on_x(link: str) -> str:

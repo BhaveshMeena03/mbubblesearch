@@ -562,7 +562,7 @@ def test_an_answer_about_this_week_is_not_kept_for_a_day(monkeypatch):
     assert stamped.startswith("what did ansem pick this week @20")
     source = (ROOT / "app" / "main.py").read_text()
     for surface in ("front-door", "front-door-stream", "podcast", "podcast-stream",
-                    "elon-v2", "finance", "threadguy-v3", "mcg"):
+                    "elon-v2", "finance", "threadguy-v3", "rasmr-v1", "mcg"):
         assert f'make_key(_timed(body.query), surface="{surface}"' in source, surface
     assert "make_key(_timed(query), surface=surface" in source
 
@@ -572,6 +572,7 @@ def test_every_archive_is_given_its_shelf_at_startup():
     assert '("podcast", _podcast_shelf)' in source
     for name, load in (("elon", "_elon_episodes"), ("mcg", "_mcg_episodes"),
                        ("tradfi", "_tradfi_episodes"),
-                       ("threadguy", "_threadguy_episodes")):
+                       ("threadguy", "_threadguy_episodes"),
+                       ("rasmr", "_rasmr_episodes")):
         assert f'("{name}", _shelf_of({load}))' in source, name
     assert "_follow(_shelf)" in source
