@@ -53,6 +53,20 @@
   /* The Record is the one light room. */
   body.paper{--bg:#f4f1ea;--ink:#1d1a16;--ink2:#4c463d;--ink3:#8a8276;--edge:#d8d1c4;
     --box:#fbfaf6;--on:#fff;--glow:rgba(124,33,40,.08)}
+
+  /* rasmr's room is his set: charcoal walls and red velvet curtains
+     falling in from both edges, in the colours of demo/rasmr.html, so the
+     card that unfurls under the link looks like the page it opens. Fuller
+     than the page's: at the size a feed shows a card, the page's own
+     gradients were two dark corners. */
+  body.velvet{--bg:#0f0c0b;--ink:#f3ece2;--ink2:#c4b7a6;--ink3:#988a79;--edge:#2f2723;
+    --box:#191513;--on:#1a1208}
+  body.velvet .glow{display:none}
+  body.velvet::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(34% 120% at -4% 30%,rgba(150,24,30,.46),transparent 72%),
+      radial-gradient(34% 120% at 104% 30%,rgba(150,24,30,.40),transparent 72%),
+      radial-gradient(70% 45% at 50% -12%,rgba(214,174,99,.08),transparent 70%)}
 </style></head><body>
   <div class="glow"></div>
   <div class="crumb mono">Market Bubble Search <span>/</span> <b id="room"></b></div>
@@ -107,7 +121,7 @@
       head: "Who came on, <em>and what they said</em>.",
       sub: "The guests of Market Bubble, each on a page of their own. Quoted word for word in their own voice, every line linked to the second it was said.",
       q: "the guest, the line, the second it was said", go: "WATCH"},
-    rasmr: {room: "rasmr", accent: "#d6ae63", path: "/rasmr",
+    rasmr: {room: "rasmr", accent: "#d6ae63", velvet: true, path: "/rasmr",
       head: "rasmr, <em>in his own words</em>.",
       sub: "His daily streams on X and YouTube and his interviews, transcribed. Ask what was said, and get the second it was said.",
       q: "why did rasmr sell all his hype"}
@@ -118,6 +132,7 @@
   root.setProperty("--accent", p.accent);
   if (!p.paper) root.setProperty("--glow", p.accent + "29");
   if (p.paper) document.body.classList.add("paper");
+  if (p.velvet) document.body.classList.add("velvet");
   document.getElementById("room").textContent = p.room;
   document.getElementById("head").innerHTML = p.head;
   document.getElementById("sub").textContent = p.sub;
