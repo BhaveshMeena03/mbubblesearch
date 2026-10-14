@@ -57,5 +57,7 @@ data/
 !data/calls.json
 # Coverage of the posts index, read by /v1/posts/archive.
 !data/posts_index.json
+# The guest pages, built by scripts/build_guests.py.
+!data/guests.json
 redteam_report.md
 PITCH_PREP.md

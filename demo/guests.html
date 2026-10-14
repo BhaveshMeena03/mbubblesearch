@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0e11">
+<!-- The list of guests. The server fills the rows in (app/guests.py) and
+     sends the page whole. -->
+<!-- Not for search engines until it has been looked over and linked. -->
+<meta name="robots" content="noindex">
+<title>Market Bubble · who came on, and what they said</title>
+<meta name="description" content="The guests of Market Bubble, each quoted word for word in their own voice, with every line linked to the second it was said.">
+<meta property="og:title" content="Who came on Market Bubble, and what they said">
+<meta property="og:description" content="The guests of Market Bubble, each quoted word for word in their own voice, with every line linked to the second it was said.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://search.lexthedev.com/guests">
+<meta property="og:image" content="https://search.lexthedev.com/demo/og-guests.png?v=1">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1260">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Who came on Market Bubble, and what they said">
+<meta name="twitter:description" content="The guests of Market Bubble, each quoted word for word in their own voice, linked to the second.">
+<meta name="twitter:image" content="https://search.lexthedev.com/demo/og-guests.png?v=1">
+<link rel="canonical" href="https://search.lexthedev.com/guests">
+<link rel="stylesheet" href="/demo/ui.css">
+<style>
+  :root{
+    --bg:#0b0e11;--panel:#12161c;--line:#232a33;--text:#e6e8ea;
+    --muted:#8a939e;--green:#16c784;
+    --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);min-height:100vh;
+    font:15px/1.55 var(--sans);font-feature-settings:"tnum" 1;
+    padding:28px 20px 60px}
+  .wrap{max-width:940px;margin:0 auto}
+  .topbar{display:flex;align-items:center;justify-content:space-between;
+    gap:14px;margin-bottom:26px;flex-wrap:wrap}
+  .brand{font-weight:700;letter-spacing:.5px;font-size:14px;
+    text-decoration:none;color:inherit}
+  .brand span{color:var(--green)}
+  .nav{display:inline-flex;gap:10px;flex-wrap:wrap}
+  h1{font-family:var(--display);font-weight:400;font-size:46px;
+    line-height:1.08;letter-spacing:-.01em;margin-bottom:12px}
+  h1 em{color:var(--green);font-style:normal}
+  .sub{color:var(--muted);margin-bottom:26px;max-width:660px}
+
+  /* One guest to a row: who, the line they are introduced by, the day. */
+  .list{border-bottom:1px solid var(--line)}
+  .guest{display:grid;grid-template-columns:230px minmax(0,1fr) 128px;
+    column-gap:26px;align-items:baseline;padding:20px 0 19px;
+    border-top:1px solid var(--line);text-decoration:none;color:inherit}
+  .who{display:flex;flex-direction:column;gap:3px;min-width:0}
+  .who b{font:400 27px/1.12 var(--display);letter-spacing:-.01em;
+    overflow-wrap:anywhere}
+  .who .role{color:var(--green);font-size:12.5px}
+  .line{font:400 19px/1.36 var(--display);color:#c5cad0;overflow-wrap:anywhere}
+  .line::before{content:"\201C"} .line::after{content:"\201D"}
+  .day{font-family:var(--mono);font-size:11.5px;color:var(--muted);
+    text-align:right;white-space:nowrap}
+  .guest:hover .who b{color:var(--green)}
+  .guest:hover .line{color:var(--text)}
+  .guest:focus-visible{outline:2px solid var(--green);outline-offset:4px}
+
+  .note{border:1px solid var(--line);color:var(--muted);border-radius:12px;
+    padding:13px 16px;font-size:12.5px;margin-top:30px;max-width:760px}
+  .note b{color:var(--text);font-weight:500}
+
+  @media(max-width:700px){
+    h1{font-size:34px}
+    .topbar{flex-direction:column;align-items:flex-start;gap:10px}
+    .guest{grid-template-columns:minmax(0,1fr);row-gap:7px;padding:17px 0 16px}
+    .day{text-align:left}
+    .line{font-size:18px}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .guest .who b,.guest .line{transition:color .14s ease}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <a class="brand" href="/home">MARKET <span>BUBBLE</span> · guests</a>
+    <span class="nav">
+    <a class="btn btn-primary btn-back" href="/demo/podcast.html"><span class="arw">←</span><svg class="ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.75" stroke="currentColor" stroke-width="1.7"/><path d="M10.6 10.6 14 14" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M6 5.3l3 1.7-3 1.7z" fill="currentColor"/></svg>Search every episode</a>
+    <a class="btn btn-ghost" href="/calls">What they called</a>
+    </span>
+  </div>
+
+  <h1>Who came on, <em>and what they said</em>.</h1>
+  <p class="sub">The guests of Market Bubble, each on a page of their own.
+    Every quote is word for word and in that guest's voice, and every line
+    opens the show at the second it was said.</p>
+
+  <nav class="list" aria-label="Guests">
+{{guests}}
+  </nav>
+
+  <p class="note">
+    A guest is listed here only after a person <b>matched the name on screen
+    to the one speaking</b>. Guests who have not been checked that way are
+    not listed yet, and <b>the hosts are not guests</b>: what Ansem and Banks
+    said is in the search and on the calls board.
+  </p>
+</div>
+</body>
+</html>

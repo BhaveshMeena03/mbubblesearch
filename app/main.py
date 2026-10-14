@@ -51,6 +51,7 @@ from . import (
     sources,
 )
 from . import calls as on_air_calls
+from . import guests as guest_pages
 from . import mcg_guests as mcg_guest_index
 from . import posts as posts_page
 from .agent import REFUSAL_MESSAGE, ConciergeAgent
@@ -898,6 +899,117 @@ async def calls_board() -> JSONResponse:
     # next time they look, not whenever a cache lets go of it.
     return JSONResponse(on_air_calls.board(shipped, live, day),
                         headers={"Cache-Control": "no-store"})
+
+
+# --- the guests ----------------------------------------------------------------
+#
+# What a guest said on the show, on a page under that guest's name. Who is
+# on it and which lines are theirs was settled by a person before any of
+# this runs: data/guests.json is written by scripts/build_guests.py, and
+# app/guests.py says what had to agree for a name to be there at all.
+#
+# These sit above the /demo mount because two of them answer for the
+# templates in it. A template fetched as a file is a page of empty fields.
+_GUESTS_FILE = _ROOT / "data" / "guests.json"
+_GUESTS_READ: tuple[float, dict] = (0.0, {})
+_GUEST_CARDS: dict[str, tuple[str, bytes]] = {}
+# The same reason the calls board is never kept: a quote that turns out to
+# be under the wrong name is taken off, and it has to be gone for everybody.
+_NOT_KEPT = {"Cache-Control": "no-store"}
+
+
+def _guests_file() -> dict:
+    """The built pages, read again only when the file changes."""
+    global _GUESTS_READ
+    try:
+        changed = _GUESTS_FILE.stat().st_mtime
+    except OSError:
+        return {}
+    if changed != _GUESTS_READ[0]:
+        try:
+            _GUESTS_READ = (changed, json.loads(_GUESTS_FILE.read_text(encoding="utf-8")))
+        except Exception as exc:                                # noqa: BLE001
+            logger.warning("could not read the guests: %s", exc)
+            _GUESTS_READ = (changed, {})
+    return _GUESTS_READ[1]
+
+
+def _guests_list_page(status_code: int = 200) -> HTMLResponse:
+    shipped = _guests_file()
+    if not shipped.get("guests"):
+        raise HTTPException(status_code=503, detail="unavailable")
+    template = (_ROOT / "demo" / "guests.html").read_text(encoding="utf-8")
+    return HTMLResponse(guest_pages.render_index(template, shipped),
+                        status_code=status_code, headers=_NOT_KEPT)
+
+
+@app.get("/v1/guests", dependencies=[Depends(public_rate_limit)])
+async def guests_list() -> JSONResponse:
+    """Every guest with a page, newest appearance first."""
+    shipped = _guests_file()
+    if not shipped.get("guests"):
+        raise HTTPException(status_code=503, detail="unavailable")
+    return JSONResponse(guest_pages.index(shipped), headers=_NOT_KEPT)
+
+
+@app.get("/v1/guests/{slug}", dependencies=[Depends(public_rate_limit)])
+async def guest_quotes(slug: str) -> JSONResponse:
+    """One guest: when they were on, and what they said, word for word."""
+    found = guest_pages.page(_guests_file(), slug)
+    if found is None:
+        raise HTTPException(status_code=404, detail="No guest by that name.")
+    return JSONResponse(found, headers=_NOT_KEPT)
+
+
+@app.get("/guests", include_in_schema=False)
+@app.get("/demo/guests.html", include_in_schema=False)
+async def guests_page() -> HTMLResponse:
+    return _guests_list_page()
+
+
+@app.get("/demo/guest.html", include_in_schema=False)
+async def guest_template() -> RedirectResponse:
+    return RedirectResponse(url="/guests", status_code=302)
+
+
+@app.get("/guests/{slug}", include_in_schema=False)
+async def guest_page(slug: str) -> HTMLResponse:
+    found = guest_pages.page(_guests_file(), slug)
+    if found is None:
+        # Still a 404 to anything that keeps score, and the list to a
+        # person who followed a link to somebody since taken down.
+        return _guests_list_page(status_code=404)
+    template = (_ROOT / "demo" / "guest.html").read_text(encoding="utf-8")
+    return HTMLResponse(guest_pages.render_page(template, found), headers=_NOT_KEPT)
+
+
+@app.get("/og/guest/{slug}.png", include_in_schema=False)
+async def guest_card(request: Request, slug: str):
+    """A guest's share card: the name, and the line they are introduced by.
+
+    Drawn once for each set of words and kept, since there are only as
+    many as there are guests. The etag is over the words, so a card whose
+    quote was changed is fetched again and one that was not is not.
+    """
+    found = guest_pages.page(_guests_file(), slug)
+    if found is None:
+        raise HTTPException(status_code=404, detail="No guest by that name.")
+    words = guest_pages.card_words(found)
+    # The leading word is the drawing: change it when the card's design
+    # does, and every card is fetched again.
+    tag = f'W/"{og_card.etag("guest-1|" + "|".join(words))}"'
+    headers = {"ETag": tag, "Cache-Control": "public, max-age=3600"}
+    if request.headers.get("if-none-match") == tag:
+        return Response(status_code=304, headers=headers)
+    kept = _GUEST_CARDS.get(slug)
+    if kept is None or kept[0] != tag:
+        try:
+            kept = (tag, await asyncio.to_thread(og_card.render_guest, *words))
+        except Exception:                                       # noqa: BLE001
+            logger.exception("guest card render failed")
+            return RedirectResponse("/demo/og-guests.png", status_code=302)
+        _GUEST_CARDS[slug] = kept
+    return Response(kept[1], media_type="image/png", headers=headers)
 
 
 @app.get("/llms.txt", include_in_schema=False)

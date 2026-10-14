@@ -1,0 +1,252 @@
+{
+ "mayne": {
+  "x-2057559650166559016:3666": {
+   "keep": true,
+   "about": "where crypto is in the cycle"
+  },
+  "x-2057559650166559016:3947": {
+   "keep": true,
+   "about": "building a business and selling it"
+  },
+  "x-2057559650166559016:3643": {
+   "keep": true,
+   "about": "how concentrated the stock market is"
+  },
+  "x-2057559650166559016:3923": {
+   "keep": true,
+   "about": "what the winning trades look like"
+  },
+  "x-2057559650166559016:3447": {
+   "keep": true,
+   "about": "how crypto changed",
+   "lead": true
+  },
+  "x-2057559650166559016:3256": {
+   "keep": false,
+   "why": "the transcript hears \"ThreadGuy's like\" as \"thread guys like\" and MVP as MIP, and a quote goes out exactly as transcribed"
+  }
+ },
+ "erik-voorhees": {
+  "x-2062633295792271762:1545": {
+   "keep": true,
+   "about": "what crypto is for",
+   "lead": true
+  },
+  "x-2062633295792271762:1742": {
+   "keep": true,
+   "about": "the SEC, from 2018 until Trump won again"
+  },
+  "x-2062633295792271762:1802": {
+   "keep": true,
+   "about": "who wants AI regulated"
+  },
+  "x-2062633295792271762:1704": {
+   "keep": true,
+   "about": "Venice's growth"
+  },
+  "x-2062633295792271762:1874": {
+   "keep": true,
+   "about": "who AI makes rich"
+  },
+  "x-2062633295792271762:1397": {
+   "keep": true,
+   "about": "AI that reports to the government"
+  }
+ },
+ "chris-gilbert": {
+  "x-2075316750439338088:5097": {
+   "keep": true,
+   "about": "what Claude costs"
+  },
+  "x-2075316750439338088:5115": {
+   "keep": true,
+   "about": "what UsePod saves its users"
+  },
+  "x-2075316750439338088:5145": {
+   "keep": true,
+   "about": "AI agents that build companies"
+  },
+  "x-2075316750439338088:5180": {
+   "keep": true,
+   "about": "the 2030s",
+   "lead": true
+  },
+  "x-2075316750439338088:5170": {
+   "keep": true,
+   "about": "closed labs against open models"
+  },
+  "x-2075316750439338088:4975": {
+   "keep": false,
+   "why": "the transcript hears \"did a seed\" as \"did a C\", and a quote goes out exactly as transcribed"
+  }
+ },
+ "lucas-bruder": {
+  "x-2077854740575092752:1769": {
+   "keep": true,
+   "about": "why Jito did its airdrop",
+   "lead": true
+  },
+  "x-2077854740575092752:1791": {
+   "keep": true,
+   "about": "the week of the Trump meme coin"
+  },
+  "x-2077854740575092752:1877": {
+   "keep": true,
+   "about": "stocks on chain"
+  },
+  "x-2077854740575092752:1735": {
+   "keep": true,
+   "about": "before crypto"
+  },
+  "x-2077854740575092752:1840": {
+   "keep": true,
+   "about": "why Solana"
+  }
+ },
+ "cirrus": {
+  "x-2080390322110992735:891": {
+   "keep": true,
+   "about": "the ApeCoin airdrop",
+   "lead": true
+  },
+  "x-2080390322110992735:638": {
+   "keep": true,
+   "about": "lending against NFTs"
+  },
+  "x-2080390322110992735:594": {
+   "keep": true,
+   "about": "a mispriced World Cup market"
+  },
+  "x-2080390322110992735:550": {
+   "keep": true,
+   "about": "quitting a dev job for NFTs"
+  },
+  "x-2080390322110992735:903": {
+   "keep": true,
+   "about": "the Twitter username"
+  }
+ },
+ "kendrick-perkins": {
+  "x-2080390322110992735:1425": {
+   "keep": true,
+   "about": "how the NBA career ended",
+   "lead": true
+  },
+  "x-2080390322110992735:1386": {
+   "keep": true,
+   "about": "why LeBron is the GOAT"
+  },
+  "x-2080390322110992735:1560": {
+   "keep": true,
+   "about": "First Take and Undisputed in one day"
+  },
+  "x-2080390322110992735:1675": {
+   "keep": true,
+   "about": "advice to athletes"
+  },
+  "x-2080390322110992735:1689": {
+   "keep": true,
+   "about": "Russell Westbrook and money"
+  },
+  "x-2080390322110992735:1699": {
+   "keep": true,
+   "about": "advice before investing"
+  }
+ },
+ "simple-farmer": {
+  "x-2088002434253922358:2253": {
+   "keep": true,
+   "about": "why launch a token"
+  },
+  "x-2088002434253922358:2288": {
+   "keep": true,
+   "about": "what Stonk Brokers is"
+  },
+  "x-2088002434253922358:2389": {
+   "keep": true,
+   "about": "real-world assets",
+   "lead": true
+  },
+  "x-2088002434253922358:2345": {
+   "keep": true,
+   "about": "the lesson from earlier products"
+  }
+ },
+ "poorgoat": {
+  "x-2088002434253922358:3583": {
+   "keep": true,
+   "about": "how traders get wrecked"
+  },
+  "x-2088002434253922358:3568": {
+   "keep": true,
+   "about": "how hard trading is",
+   "lead": true
+  },
+  "x-2088002434253922358:3174": {
+   "keep": true,
+   "about": "a day job in traditional finance"
+  },
+  "x-2088002434253922358:3400": {
+   "keep": true,
+   "about": "why not sell"
+  },
+  "x-2088002434253922358:3559": {
+   "keep": true,
+   "about": "who you are trading against"
+  }
+ },
+ "brett-harrison": {
+  "x-2088002434253922358:3738": {
+   "keep": true,
+   "about": "what a GPU rents for"
+  },
+  "x-2088002434253922358:3772": {
+   "keep": true,
+   "about": "how big futures markets get"
+  },
+  "x-2088002434253922358:3797": {
+   "keep": true,
+   "about": "why compute needs futures"
+  },
+  "x-2088002434253922358:3808": {
+   "keep": true,
+   "about": "the risk without them",
+   "lead": true
+  },
+  "x-2088002434253922358:3881": {
+   "keep": true,
+   "about": "how Architect differs from Hyperliquid"
+  },
+  "x-2088002434253922358:3848": {
+   "keep": true,
+   "about": "what comes after compute"
+  }
+ },
+ "andrej": {
+  "x-2090537938899845434:3590": {
+   "keep": true,
+   "about": "what Grass is"
+  },
+  "x-2090537938899845434:3617": {
+   "keep": true,
+   "about": "the web closing itself to crawlers"
+  },
+  "x-2090537938899845434:3666": {
+   "keep": true,
+   "about": "how others collected bandwidth",
+   "lead": true
+  },
+  "x-2090537938899845434:3764": {
+   "keep": true,
+   "about": "how big frontier models are"
+  },
+  "x-2090537938899845434:3928": {
+   "keep": true,
+   "about": "what ends up in an AI model"
+  },
+  "x-2090537938899845434:3678": {
+   "keep": true,
+   "about": "who got the airdrop"
+  }
+ }
+}

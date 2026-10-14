@@ -21,7 +21,8 @@ SITE = "https://search.lexthedev.com"
 PAGES = {"home.html": "og-home.png", "podcast.html": "og-broadcast.png",
          "mcg.html": "og-mcg.png", "elon.html": "og-musk.png",
          "finance.html": "og-finance.png", "threadguy.html": "og-threadguy.png",
-         "calls.html": "og-calls.png", "posts.html": "og-posts.png"}
+         "calls.html": "og-calls.png", "posts.html": "og-posts.png",
+         "guests.html": "og-guests.png"}
 
 
 def entries():
@@ -31,11 +32,11 @@ def entries():
 
 def test_every_archive_page_has_an_entry():
     assert set(entries()) == {"home", "podcast", "mcg", "elon", "finance", "threadguy",
-                              "calls", "posts"}
+                              "calls", "posts", "guests"}
 
 
 @pytest.mark.parametrize("name", ["home", "podcast", "mcg", "elon", "finance", "threadguy",
-                                  "calls", "posts"])
+                                  "calls", "posts", "guests"])
 def test_no_card_carries_a_number_that_can_go_stale(name):
     body = entries()[name]
     words = " ".join(re.findall(r'(?:room|head|sub): "([^"]*)"', body))
@@ -67,5 +68,6 @@ def test_the_renderer_draws_every_page_from_the_one_template():
     for name, png in [("home", "og-home.png"), ("podcast", "og-broadcast.png"),
                       ("mcg", "og-mcg.png"), ("elon", "og-musk.png"),
                       ("finance", "og-finance.png"), ("threadguy", "og-threadguy.png"),
-                      ("calls", "og-calls.png"), ("posts", "og-posts.png")]:
+                      ("calls", "og-calls.png"), ("posts", "og-posts.png"),
+                      ("guests", "og-guests.png")]:
         assert f'universal("{name}", "{png}")' in renderer

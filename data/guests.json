@@ -1,0 +1,609 @@
+{
+ "built_at": "2026-10-14T02:37:26+00:00",
+ "guests": [
+  {
+   "slug": "andrej",
+   "name": "Andrej",
+   "also": "",
+   "role": "Founder of Grass Protocol",
+   "episode_id": "x-2090537938899845434",
+   "show": "LIVE W/ ORANGIE, SE YONG PARK, AUSTIN FEDERA, & GRASS PROTOCOL: Market Bubble EP 16 - Presented by Polymarket",
+   "date": "2026-08-20",
+   "on_from": 10961.14,
+   "on_to": 13754.04,
+   "from_stamp": "3:02:41",
+   "to_stamp": "3:49:14",
+   "link": "https://x.com/i/broadcasts/1dJrPrkLoMAKX?t=10955",
+   "lines": 497,
+   "quotes": [
+    {
+     "id": "x-2090537938899845434:3590",
+     "quote": "Grass fundamentally is a network that millions of people joined in order to share their unused Internet bandwidth",
+     "about": "what Grass is",
+     "start_seconds": 11016.28,
+     "timestamp": "3:03:36",
+     "link": "https://x.com/i/broadcasts/1dJrPrkLoMAKX?t=11016"
+    },
+    {
+     "id": "x-2090537938899845434:3617",
+     "quote": "the rate at which it's shutting off to the public Web is also growing at an exponential pace. What I mean by that is like basically a third of the Internet right now is getting protected by Cloudflare",
+     "about": "the web closing itself to crawlers",
+     "start_seconds": 11221.54,
+     "timestamp": "3:07:01",
+     "link": "https://x.com/i/broadcasts/1dJrPrkLoMAKX?t=11221"
+    },
+    {
+     "id": "x-2090537938899845434:3666",
+     "quote": "the way that other companies were solving this problem was they were sneaking software into people's smart TVs and then using their Internet connections without telling them",
+     "about": "how others collected bandwidth",
+     "start_seconds": 11443.56,
+     "timestamp": "3:10:43",
+     "link": "https://x.com/i/broadcasts/1dJrPrkLoMAKX?t=11443",
+     "lead": true
+    },
+    {
+     "id": "x-2090537938899845434:3678",
+     "quote": "I've heard stories of some homeless guy that got an airdrop that was worth forty five thousand dollars at one point",
+     "about": "who got the airdrop",
+     "start_seconds": 11512.04,
+     "timestamp": "3:11:52",
+     "link": "https://x.com/i/broadcasts/1dJrPrkLoMAKX?t=11512"
+    },
+    {
+     "id": "x-2090537938899845434:3764",
+     "quote": "The current frontier models that are in the pre-training process right now, they range anywhere from 10 to 24 trillion parameters",
+     "about": "how big frontier models are",
+     "start_seconds": 11908.08,
+     "timestamp": "3:18:28",
+     "link": "https://x.com/i/broadcasts/1dJrPrkLoMAKX?t=11908"
+    },
+    {
+     "id": "x-2090537938899845434:3928",
+     "quote": "and you can assume that anything on the public web is going to end up in an AI model, whether it's in the training process, whether it's an agent retrieving it",
+     "about": "what ends up in an AI model",
+     "start_seconds": 12362.6,
+     "timestamp": "3:26:02",
+     "link": "https://x.com/i/broadcasts/1dJrPrkLoMAKX?t=12362"
+    }
+   ]
+  },
+  {
+   "slug": "brett-harrison",
+   "name": "Brett Harrison",
+   "also": "",
+   "role": "Founder and CEO, Architect",
+   "episode_id": "x-2088002434253922358",
+   "show": "LIVE W/ POORGOAT, MIKE DUDAS, & SIMPLE FARMER: Market Bubble Ep 15 - Presented by @Polymarket",
+   "date": "2026-08-13",
+   "on_from": 8692.16,
+   "on_to": 10747.84,
+   "from_stamp": "2:24:52",
+   "to_stamp": "2:59:07",
+   "link": "https://x.com/i/broadcasts/1kJzDPPQlqyKv?t=8686",
+   "lines": 261,
+   "quotes": [
+    {
+     "id": "x-2088002434253922358:3738",
+     "quote": "NVIDIA B300 GPUs are now going for, you know, $6 and 25 cents per hour, uh, for a one year contract over a thousand GPUs",
+     "about": "what a GPU rents for",
+     "start_seconds": 9184.96,
+     "timestamp": "2:33:04",
+     "link": "https://x.com/i/broadcasts/1kJzDPPQlqyKv?t=9184"
+    },
+    {
+     "id": "x-2088002434253922358:3772",
+     "quote": "in any commodities market, the amount of yearly volume in commodity futures is a multiple of the actual production yearly of the underlying commodity",
+     "about": "how big futures markets get",
+     "start_seconds": 9370.94,
+     "timestamp": "2:36:10",
+     "link": "https://x.com/i/broadcasts/1kJzDPPQlqyKv?t=9370"
+    },
+    {
+     "id": "x-2088002434253922358:3797",
+     "quote": "there is no instrument that lets people understand the forward curve for compute. And by that, I mean, what do people expect rental prices to be in one quarter",
+     "about": "why compute needs futures",
+     "start_seconds": 9503.56,
+     "timestamp": "2:38:23",
+     "link": "https://x.com/i/broadcasts/1kJzDPPQlqyKv?t=9503"
+    },
+    {
+     "id": "x-2088002434253922358:3808",
+     "quote": "you know, I definitely worry that without good hedging instruments, you know, you end up with like a, you know, a subprime crisis one day",
+     "about": "the risk without them",
+     "start_seconds": 9549.34,
+     "timestamp": "2:39:09",
+     "link": "https://x.com/i/broadcasts/1kJzDPPQlqyKv?t=9549",
+     "lead": true
+    },
+    {
+     "id": "x-2088002434253922358:3848",
+     "quote": "That's why we're not just stopping at compute with our exchange. We're also going to have electricity futures. We're going to have fuel futures",
+     "about": "what comes after compute",
+     "start_seconds": 9740.66,
+     "timestamp": "2:42:20",
+     "link": "https://x.com/i/broadcasts/1kJzDPPQlqyKv?t=9740"
+    },
+    {
+     "id": "x-2088002434253922358:3881",
+     "quote": "another like big difference from us and Hyperliquid is that we don't do any auto liquidation",
+     "about": "how Architect differs from Hyperliquid",
+     "start_seconds": 9896.4,
+     "timestamp": "2:44:56",
+     "link": "https://x.com/i/broadcasts/1kJzDPPQlqyKv?t=9896"
+    }
+   ]
+  },
+  {
+   "slug": "poorgoat",
+   "name": "Poorgoat",
+   "also": "",
+   "role": "",
+   "episode_id": "x-2088002434253922358",
+   "show": "LIVE W/ POORGOAT, MIKE DUDAS, & SIMPLE FARMER: Market Bubble Ep 15 - Presented by @Polymarket",
+   "date": "2026-08-13",
+   "on_from": 6840.58,
+   "on_to": 8343.46,
+   "from_stamp": "1:54:00",
+   "to_stamp": "2:19:03",
+   "link": "https://x.com/i/broadcasts/1kJzDPPQlqyKv?t=6834",
+   "lines": 132,
+   "quotes": [
+    {
+     "id": "x-2088002434253922358:3174",
+     "quote": "I have a real career in like traditional finance. So I like work every day",
+     "about": "a day job in traditional finance",
+     "start_seconds": 7007.34,
+     "timestamp": "1:56:47",
+     "link": "https://x.com/i/broadcasts/1kJzDPPQlqyKv?t=7007"
+    },
+    {
+     "id": "x-2088002434253922358:3400",
+     "quote": "i'm not gonna sell because i can't or else everyone will sell it seems like so i just was riding it",
+     "about": "why not sell",
+     "start_seconds": 7310.92,
+     "timestamp": "2:01:50",
+     "link": "https://x.com/i/broadcasts/1kJzDPPQlqyKv?t=7310"
+    },
+    {
+     "id": "x-2088002434253922358:3559",
+     "quote": "you're trading against professionals who have been in the space for three years four years five years are bundling coins doing everything in between",
+     "about": "who you are trading against",
+     "start_seconds": 8188.16,
+     "timestamp": "2:16:28",
+     "link": "https://x.com/i/broadcasts/1kJzDPPQlqyKv?t=8188"
+    },
+    {
+     "id": "x-2088002434253922358:3568",
+     "quote": "it's a hard game right like if it was easy everyone would be rich like it's it's naturally just not an easy game",
+     "about": "how hard trading is",
+     "start_seconds": 8236.38,
+     "timestamp": "2:17:16",
+     "link": "https://x.com/i/broadcasts/1kJzDPPQlqyKv?t=8236",
+     "lead": true
+    },
+    {
+     "id": "x-2088002434253922358:3583",
+     "quote": "if you're trading with money that you need to pay your bill at the end of the week and like you're gonna get pushed out of a position because like you're down 30 and you don't have the money to like pay for what you need to pay for that's how you get wrecked right",
+     "about": "how traders get wrecked",
+     "start_seconds": 8318.68,
+     "timestamp": "2:18:38",
+     "link": "https://x.com/i/broadcasts/1kJzDPPQlqyKv?t=8318"
+    }
+   ]
+  },
+  {
+   "slug": "simple-farmer",
+   "name": "Simple Farmer",
+   "also": "",
+   "role": "Founder of Stonk Brokers",
+   "episode_id": "x-2088002434253922358",
+   "show": "LIVE W/ POORGOAT, MIKE DUDAS, & SIMPLE FARMER: Market Bubble Ep 15 - Presented by @Polymarket",
+   "date": "2026-08-13",
+   "on_from": 5674.04,
+   "on_to": 6657.5,
+   "from_stamp": "1:34:34",
+   "to_stamp": "1:50:57",
+   "link": "https://x.com/i/broadcasts/1kJzDPPQlqyKv?t=5668",
+   "lines": 122,
+   "quotes": [
+    {
+     "id": "x-2088002434253922358:2253",
+     "quote": "I started getting disappointed with a lot of token launches that I was speculating on. I said, let me just do this myself",
+     "about": "why launch a token",
+     "start_seconds": 5690.18,
+     "timestamp": "1:34:50",
+     "link": "https://x.com/i/broadcasts/1kJzDPPQlqyKv?t=5690"
+    },
+    {
+     "id": "x-2088002434253922358:2288",
+     "quote": "it's a new financial primitive. It's a financial technology that's built on chain and you can hold it. And essentially it lets you slowly DCA into either regular crypto tokens or RWAs over time",
+     "about": "what Stonk Brokers is",
+     "start_seconds": 5844.82,
+     "timestamp": "1:37:24",
+     "link": "https://x.com/i/broadcasts/1kJzDPPQlqyKv?t=5844"
+    },
+    {
+     "id": "x-2088002434253922358:2345",
+     "quote": "focus on the distribution, focus on the distribution, and then continue to aggregate those people",
+     "about": "the lesson from earlier products",
+     "start_seconds": 6035.42,
+     "timestamp": "1:40:35",
+     "link": "https://x.com/i/broadcasts/1kJzDPPQlqyKv?t=6035"
+    },
+    {
+     "id": "x-2088002434253922358:2389",
+     "quote": "RWAs are the big unlock. It's like the carrot that everybody wants, and not enough people talk about",
+     "about": "real-world assets",
+     "start_seconds": 6126.12,
+     "timestamp": "1:42:06",
+     "link": "https://x.com/i/broadcasts/1kJzDPPQlqyKv?t=6126",
+     "lead": true
+    }
+   ]
+  },
+  {
+   "slug": "kendrick-perkins",
+   "name": "Kendrick Perkins",
+   "also": "",
+   "role": "NBA Champion",
+   "episode_id": "x-2080390322110992735",
+   "show": "LIVE W/ BRIAN ARMSTRONG & KENDRICK PERKINS: Market Bubble Ep 12 - Presented by @Polymarket",
+   "date": "2026-07-23",
+   "on_from": 3973.62,
+   "on_to": 6659.58,
+   "from_stamp": "1:06:13",
+   "to_stamp": "1:50:59",
+   "link": "https://x.com/i/broadcasts/1yxBeeodPoMJN?t=3967",
+   "lines": 409,
+   "quotes": [
+    {
+     "id": "x-2080390322110992735:1386",
+     "quote": "The reason that I call him the GOAT is because, one, I witnessed his journey, but, two, there's no other player in sports that had the amount of pressure like LeBron James had",
+     "about": "why LeBron is the GOAT",
+     "start_seconds": 4536.32,
+     "timestamp": "1:15:36",
+     "link": "https://x.com/i/broadcasts/1yxBeeodPoMJN?t=4536"
+    },
+    {
+     "id": "x-2080390322110992735:1425",
+     "quote": "I was one of those ones where I didn't retire from the NBA on my own terms. I was forced into retirement, meaning that damn phone stopped ringing",
+     "about": "how the NBA career ended",
+     "start_seconds": 4688.58,
+     "timestamp": "1:18:08",
+     "link": "https://x.com/i/broadcasts/1yxBeeodPoMJN?t=4688",
+     "lead": true
+    },
+    {
+     "id": "x-2080390322110992735:1560",
+     "quote": "I'm the only person ever in the history of sports media to do first take and undisputed in the same day",
+     "about": "First Take and Undisputed in one day",
+     "start_seconds": 5244.58,
+     "timestamp": "1:27:24",
+     "link": "https://x.com/i/broadcasts/1yxBeeodPoMJN?t=5244"
+    },
+    {
+     "id": "x-2080390322110992735:1675",
+     "quote": "Well, I mean, the first thing I would say is to all the athletes, make sure you watch your money",
+     "about": "advice to athletes",
+     "start_seconds": 5584.44,
+     "timestamp": "1:33:04",
+     "link": "https://x.com/i/broadcasts/1yxBeeodPoMJN?t=5584"
+    },
+    {
+     "id": "x-2080390322110992735:1689",
+     "quote": "And you better know that every first of the month, Russell Westbrook had a fucking checkbook out with envelopes, paying and writing his own bills",
+     "about": "Russell Westbrook and money",
+     "start_seconds": 5640.68,
+     "timestamp": "1:34:00",
+     "link": "https://x.com/i/broadcasts/1yxBeeodPoMJN?t=5640"
+    },
+    {
+     "id": "x-2080390322110992735:1699",
+     "quote": "before you invest, before you do something, don't just take somebody word of mouth. Go out there and actually do your research",
+     "about": "advice before investing",
+     "start_seconds": 5676.62,
+     "timestamp": "1:34:36",
+     "link": "https://x.com/i/broadcasts/1yxBeeodPoMJN?t=5676"
+    }
+   ]
+  },
+  {
+   "slug": "cirrus",
+   "name": "Cirrus",
+   "also": "",
+   "role": "The King of Arbs",
+   "episode_id": "x-2080390322110992735",
+   "show": "LIVE W/ BRIAN ARMSTRONG & KENDRICK PERKINS: Market Bubble Ep 12 - Presented by @Polymarket",
+   "date": "2026-07-23",
+   "on_from": 2091.8,
+   "on_to": 3267.18,
+   "from_stamp": "34:51",
+   "to_stamp": "54:27",
+   "link": "https://x.com/i/broadcasts/1yxBeeodPoMJN?t=2085",
+   "lines": 102,
+   "quotes": [
+    {
+     "id": "x-2080390322110992735:550",
+     "quote": "quit my job as a dev probably the dumbest thing you could do quit your job to do nfts but it worked out for me",
+     "about": "quitting a dev job for NFTs",
+     "start_seconds": 2105.14,
+     "timestamp": "35:05",
+     "link": "https://x.com/i/broadcasts/1yxBeeodPoMJN?t=2105"
+    },
+    {
+     "id": "x-2080390322110992735:594",
+     "quote": "found this market maker that was giving odds on mexico to win the group at like 64 percent even though they'd already won the group",
+     "about": "a mispriced World Cup market",
+     "start_seconds": 2348.56,
+     "timestamp": "39:08",
+     "link": "https://x.com/i/broadcasts/1yxBeeodPoMJN?t=2348"
+    },
+    {
+     "id": "x-2080390322110992735:638",
+     "quote": "Now I'm like the biggest NFT lender by, I guess, TVL is the word. So I give loans on a bunch of NFTs and capture 2% to 3% a month",
+     "about": "lending against NFTs",
+     "start_seconds": 2485.62,
+     "timestamp": "41:25",
+     "link": "https://x.com/i/broadcasts/1yxBeeodPoMJN?t=2485"
+    },
+    {
+     "id": "x-2080390322110992735:891",
+     "quote": "It was like buying a Ferrari for like half a million dollars and you open the door and there's a quarter million dollars of cash sitting on the driver's seat",
+     "about": "the ApeCoin airdrop",
+     "start_seconds": 3197.64,
+     "timestamp": "53:17",
+     "link": "https://x.com/i/broadcasts/1yxBeeodPoMJN?t=3197",
+     "lead": true
+    },
+    {
+     "id": "x-2080390322110992735:903",
+     "quote": "Like NFT on the end of my username on Twitter. That was like the biggest L of my life",
+     "about": "the Twitter username",
+     "start_seconds": 3239.16,
+     "timestamp": "53:59",
+     "link": "https://x.com/i/broadcasts/1yxBeeodPoMJN?t=3239"
+    }
+   ]
+  },
+  {
+   "slug": "lucas-bruder",
+   "name": "Lucas Bruder",
+   "also": "",
+   "role": "CEO of Jito Labs",
+   "episode_id": "x-2077854740575092752",
+   "show": "LIVE W/ JESSE POLLAK & LUCAS BRUDER: Market Bubble Ep 11 - Presented by @Polymarket",
+   "date": "2026-07-16",
+   "on_from": 6113.38,
+   "on_to": 7191.64,
+   "from_stamp": "1:41:53",
+   "to_stamp": "1:59:51",
+   "link": "https://x.com/i/broadcasts/1qxvvvaNgpwxB?t=6107",
+   "lines": 112,
+   "quotes": [
+    {
+     "id": "x-2077854740575092752:1735",
+     "quote": "i was doing self-driving construction equipment that was super sick got to uh basically like get game xbox controllers hooked up to bulldozers",
+     "about": "before crypto",
+     "start_seconds": 6120.36,
+     "timestamp": "1:42:00",
+     "link": "https://x.com/i/broadcasts/1qxvvvaNgpwxB?t=6120"
+    },
+    {
+     "id": "x-2077854740575092752:1769",
+     "quote": "we really took the approach like let's give all these like little guys a ton of money and kind of just see what happens",
+     "about": "why Jito did its airdrop",
+     "start_seconds": 6342.7,
+     "timestamp": "1:45:42",
+     "link": "https://x.com/i/broadcasts/1qxvvvaNgpwxB?t=6342",
+     "lead": true
+    },
+    {
+     "id": "x-2077854740575092752:1791",
+     "quote": "what was it january 2025 when the trump meme coin launch and melania and like shit was just going crazy there was a period where we made over a million dollars every day for a week",
+     "about": "the week of the Trump meme coin",
+     "start_seconds": 6470.0,
+     "timestamp": "1:47:50",
+     "link": "https://x.com/i/broadcasts/1qxvvvaNgpwxB?t=6470"
+    },
+    {
+     "id": "x-2077854740575092752:1840",
+     "quote": "you can really feel how good solana is it's like the transactions confirm super fast really tight quotes",
+     "about": "why Solana",
+     "start_seconds": 6775.86,
+     "timestamp": "1:52:55",
+     "link": "https://x.com/i/broadcasts/1qxvvvaNgpwxB?t=6775"
+    },
+    {
+     "id": "x-2077854740575092752:1877",
+     "quote": "i think the equities on chain is super underexplored right now there's just a lot of room for improvement on like trading stocks 24 7 365",
+     "about": "stocks on chain",
+     "start_seconds": 6996.44,
+     "timestamp": "1:56:36",
+     "link": "https://x.com/i/broadcasts/1qxvvvaNgpwxB?t=6996"
+    }
+   ]
+  },
+  {
+   "slug": "chris-gilbert",
+   "name": "Chris Gilbert",
+   "also": "",
+   "role": "",
+   "episode_id": "x-2075316750439338088",
+   "show": "LIVE W/ LUCA NETZ & GPT-LIVE: Market Bubble Ep 10 - Presented by @Polymarket",
+   "date": "2026-07-09",
+   "on_from": 14402.02,
+   "on_to": 16207.02,
+   "from_stamp": "4:00:02",
+   "to_stamp": "4:30:07",
+   "link": "https://x.com/i/broadcasts/1dKrPPqkNdqJX?t=14396",
+   "lines": 196,
+   "quotes": [
+    {
+     "id": "x-2075316750439338088:5097",
+     "quote": "I think Claude is overpriced by 80%. So I'm going to resell it at a much lower rate",
+     "about": "what Claude costs",
+     "start_seconds": 15072.56,
+     "timestamp": "4:11:12",
+     "link": "https://x.com/i/broadcasts/1dKrPPqkNdqJX?t=15072"
+    },
+    {
+     "id": "x-2075316750439338088:5115",
+     "quote": "people who are using UsePod right now, they're saving on average about 57% off of their AI bills",
+     "about": "what UsePod saves its users",
+     "start_seconds": 15180.22,
+     "timestamp": "4:13:00",
+     "link": "https://x.com/i/broadcasts/1dKrPPqkNdqJX?t=15180"
+    },
+    {
+     "id": "x-2075316750439338088:5145",
+     "quote": "I think you're going to sit back in a year and you're going to see a bunch of agentic companies, companies that are going from this is an AI agent to this is an AI agent that has now built a SaaS product, built a crypto product, and built a company around it",
+     "about": "AI agents that build companies",
+     "start_seconds": 15314.92,
+     "timestamp": "4:15:14",
+     "link": "https://x.com/i/broadcasts/1dKrPPqkNdqJX?t=15314"
+    },
+    {
+     "id": "x-2075316750439338088:5170",
+     "quote": "closed-source AI companies, Frontier Labs are going to have to figure out a value proposition that they can bring to day-to-day consumers because these open-source, open-weight models are really catching up, like, months behind, if even months",
+     "about": "closed labs against open models",
+     "start_seconds": 15431.24,
+     "timestamp": "4:17:11",
+     "link": "https://x.com/i/broadcasts/1dKrPPqkNdqJX?t=15431"
+    },
+    {
+     "id": "x-2075316750439338088:5180",
+     "quote": "Every problem in 2030s is going to be an AI problem. Every business problem, bar none, is going to be an AI problem",
+     "about": "the 2030s",
+     "start_seconds": 15518.9,
+     "timestamp": "4:18:38",
+     "link": "https://x.com/i/broadcasts/1dKrPPqkNdqJX?t=15518",
+     "lead": true
+    }
+   ]
+  },
+  {
+   "slug": "erik-voorhees",
+   "name": "Erik Voorhees",
+   "also": "",
+   "role": "",
+   "episode_id": "x-2062633295792271762",
+   "show": "LIVE W/ ERIK VOORHEES, MIKE MAJLAK, & FLOOD: Market Bubble EP 5 - Presented by @Polymarket",
+   "date": "2026-06-04",
+   "on_from": 3878.0,
+   "on_to": 6616.1,
+   "from_stamp": "1:04:38",
+   "to_stamp": "1:50:16",
+   "link": "https://x.com/i/broadcasts/1dxYllbQZELJX?t=3872",
+   "lines": 167,
+   "quotes": [
+    {
+     "id": "x-2062633295792271762:1397",
+     "quote": "But if that is the only option out there, if the only way people can use AI is to give it to one of these companies that saves it forever and ships it off to the government, then we have a problem",
+     "about": "AI that reports to the government",
+     "start_seconds": 4291.04,
+     "timestamp": "1:11:31",
+     "link": "https://x.com/i/broadcasts/1dxYllbQZELJX?t=4291"
+    },
+    {
+     "id": "x-2062633295792271762:1545",
+     "quote": "The entire premise of this stuff is that it avoids or transcends government regulation. That's the entire point",
+     "about": "what crypto is for",
+     "start_seconds": 4774.8,
+     "timestamp": "1:19:34",
+     "link": "https://x.com/i/broadcasts/1dxYllbQZELJX?t=4774",
+     "lead": true
+    },
+    {
+     "id": "x-2062633295792271762:1704",
+     "quote": "we're growing, you know, 15% a month in actual, like, revenue numbers and paying users",
+     "about": "Venice's growth",
+     "start_seconds": 5347.28,
+     "timestamp": "1:29:07",
+     "link": "https://x.com/i/broadcasts/1dxYllbQZELJX?t=5347"
+    },
+    {
+     "id": "x-2062633295792271762:1742",
+     "quote": "Except the scams, they tended to avoid, they didn't go after the scams, they tended to go after mostly legit projects and just totally crush them",
+     "about": "the SEC, from 2018 until Trump won again",
+     "start_seconds": 5479.18,
+     "timestamp": "1:31:19",
+     "link": "https://x.com/i/broadcasts/1dxYllbQZELJX?t=5479"
+    },
+    {
+     "id": "x-2062633295792271762:1802",
+     "quote": "The dangerous thing is that the centralized companies in the U.S., the closed source frontier labs, have a very strong incentive to beg for regulation to close off open source",
+     "about": "who wants AI regulated",
+     "start_seconds": 5737.08,
+     "timestamp": "1:35:37",
+     "link": "https://x.com/i/broadcasts/1dxYllbQZELJX?t=5737"
+    },
+    {
+     "id": "x-2062633295792271762:1874",
+     "quote": "there's going to be a stratification of society in which the people that learn these tools become increasingly powerful and wealthy",
+     "about": "who AI makes rich",
+     "start_seconds": 6018.44,
+     "timestamp": "1:40:18",
+     "link": "https://x.com/i/broadcasts/1dxYllbQZELJX?t=6018"
+    }
+   ]
+  },
+  {
+   "slug": "mayne",
+   "name": "Mayne",
+   "also": "TraderMayne",
+   "role": "",
+   "episode_id": "x-2057559650166559016",
+   "show": "LIVE W/ GREG OSURI & MAYNE: Market Bubble EP 4 - Presented by @Polymarket",
+   "date": "2026-05-21",
+   "on_from": 7372.32,
+   "on_to": 9753.3,
+   "from_stamp": "2:02:52",
+   "to_stamp": "2:42:33",
+   "link": "https://x.com/i/broadcasts/1OxwbldAYLDJB?t=7366",
+   "lines": 151,
+   "quotes": [
+    {
+     "id": "x-2057559650166559016:3447",
+     "quote": "there was scamming going on and shit, but it wasn't like everything got institutionalized. Even the grifting got institutionalized",
+     "about": "how crypto changed",
+     "start_seconds": 8110.22,
+     "timestamp": "2:15:10",
+     "link": "https://x.com/i/broadcasts/1OxwbldAYLDJB?t=8110",
+     "lead": true
+    },
+    {
+     "id": "x-2057559650166559016:3643",
+     "quote": "I know that this is massively overweighted to a few companies and it just kind of seems like this incestuous clusterfuck of AI data centers and chips and blah, blah, blah",
+     "about": "how concentrated the stock market is",
+     "start_seconds": 8631.24,
+     "timestamp": "2:23:51",
+     "link": "https://x.com/i/broadcasts/1OxwbldAYLDJB?t=8631"
+    },
+    {
+     "id": "x-2057559650166559016:3666",
+     "quote": "As for crypto, I think we're through the lion's share of the downside, both in time and price",
+     "about": "where crypto is in the cycle",
+     "start_seconds": 8699.54,
+     "timestamp": "2:24:59",
+     "link": "https://x.com/i/broadcasts/1OxwbldAYLDJB?t=8699"
+    },
+    {
+     "id": "x-2057559650166559016:3923",
+     "quote": "I feel like lately, my trading is very boring. I don't know if you get that vibe, but like the trades that I take that do well are not like exciting, crazy, sexy trades",
+     "about": "what the winning trades look like",
+     "start_seconds": 9315.2,
+     "timestamp": "2:35:15",
+     "link": "https://x.com/i/broadcasts/1OxwbldAYLDJB?t=9315"
+    },
+    {
+     "id": "x-2057559650166559016:3947",
+     "quote": "we launched the business when Bitcoin was at 25,000 and we sold it when it hit 125,000",
+     "about": "building a business and selling it",
+     "start_seconds": 9378.28,
+     "timestamp": "2:36:18",
+     "link": "https://x.com/i/broadcasts/1OxwbldAYLDJB?t=9378"
+    }
+   ]
+  }
+ ]
+}

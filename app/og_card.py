@@ -179,6 +179,87 @@ def render(question: str | None = None) -> bytes:
     return out.getvalue()
 
 
+def _fit(draw, text: str, face, size: int, width: int, floor: int):
+    """The largest size down to `floor` at which `text` fits on one line."""
+    while size > floor and draw.textlength(text, font=face(size)) > width:
+        size -= 2
+    return face(size)
+
+
+def _one_line(text: object) -> str:
+    """Text as one line with nothing in it a font cannot draw. Pillow
+    will not measure a string with a line break in it at all."""
+    kept = "".join(c if c.isprintable() else " " for c in str(text or ""))
+    return " ".join(kept.split())
+
+
+def render_guest(name: str, role: str, when: str, quote: str) -> bytes:
+    """A 1200x630 PNG for one guest's page: the name, what the show's
+    banner called them, the day, and the line they are introduced by."""
+    name, role, when, quote = (_one_line(v) for v in (name, role, when, quote))
+    img = Image.new("RGB", (W, H), BG)
+    glow = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    gd = ImageDraw.Draw(glow)
+    for i in range(30, 0, -1):
+        r = 90 + i * 20
+        gd.ellipse((W - 300 - r, -180 - r, W - 300 + r, -180 + r),
+                   fill=(*GREEN, 5))
+    img = Image.alpha_composite(img.convert("RGBA"), glow).convert("RGB")
+    draw = ImageDraw.Draw(img)
+
+    x, wide = 76, W - 152
+    brand = _inter(25, 800)
+    draw.text((x, 62), "MARKET", font=brand, fill=TEXT)
+    bw = draw.textlength("MARKET ", font=brand)
+    draw.text((x + bw, 62), "BUBBLE", font=brand, fill=GREEN)
+    bw += draw.textlength("BUBBLE ", font=brand)
+    draw.text((x + bw, 62), "· GUESTS", font=brand, fill=MUTED)
+
+    # A name arrives from a file a person wrote, but it is still drawn to
+    # fit: one long handle should shrink, not run off the card.
+    head = _fit(draw, name, _serif, 92, wide, 48)
+    draw.text((x, 118), _wrap(draw, name, head, wide, 1)[0] if name else "",
+              font=head, fill=TEXT)
+
+    under = _inter(25)
+    y = 232
+    if role:
+        title = _wrap(draw, role, under, wide - 360, 1)[0]
+        draw.text((x, y), title, font=under, fill=GREEN)
+        rw = draw.textlength(title + "  ", font=under)
+        draw.text((x + rw, y), f"·  {when}" if when else "", font=under, fill=MUTED)
+    elif when:
+        draw.text((x, y), f"On the show {when}", font=under, fill=MUTED)
+
+    # The line, in the reading face, behind a rule in the show's green.
+    # Set smaller before it is cut short: a guest's sentence with its end
+    # missing reads as a different sentence.
+    words = f"\u201c{quote}\u201d" if quote else ""
+    said, lines, pitch = _serif(43), [], 54
+    for size, rows, step in ((43, 4, 54), (37, 5, 47), (32, 6, 41)):
+        said, pitch = _serif(size), step
+        lines = _wrap(draw, words, said, wide - 34, rows) if words else []
+        if not lines or not lines[-1].endswith("…"):
+            break
+    top = 300
+    if lines:
+        draw.rectangle((x, top + 8, x + 4, top + len(lines) * pitch - 2), fill=GREEN)
+        for line in lines:
+            draw.text((x + 30, top), line, font=said, fill=(223, 227, 230))
+            top += pitch
+
+    foot = _inter(21, 600)
+    draw.line((x, 556, x + wide, 556), fill=LINE, width=2)
+    draw.text((x, 576), "word for word  ·  linked to the second", font=foot, fill=MUTED)
+    site = "search.lexthedev.com/guests"
+    draw.text((x + wide - draw.textlength(site, font=foot), 576), site,
+              font=foot, fill=MUTED)
+
+    out = io.BytesIO()
+    img.save(out, format="PNG", optimize=True)
+    return out.getvalue()
+
+
 def etag(question: str | None) -> str:
     """Stable per question, so a crawler that has seen it does not refetch."""
     return hashlib.sha256((question or "").encode()).hexdigest()[:16]

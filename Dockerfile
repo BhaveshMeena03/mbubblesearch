@@ -104,6 +104,9 @@ COPY data/calls.json ./data/calls.json
 # posts themselves are in the index; without this file the posts page
 # is not started at all and /v1/posts/search answers 503.
 COPY data/posts_index.json ./data/posts_index.json
+# The guest pages: who came on and what they said, each quote read by a
+# person. Without it /guests and every /guests/<name> answer 503.
+COPY data/guests.json ./data/guests.json
 # Who was on each MCG episode. Read at runtime by /v1/mcg/episodes, so it
 # has to be in the image or every episode deploys with an empty guest list
 # and nothing anywhere says why.

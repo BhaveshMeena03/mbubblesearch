@@ -1,0 +1,1399 @@
+{
+ "mayne": {
+  "episode_id": "x-2057559650166559016",
+  "proposed": 38,
+  "refused": {
+   "not in his voice": 22,
+   "too short or too long": 2,
+   "quote is not in the transcript": 4
+  },
+  "candidates": [
+   {
+    "id": "x-2057559650166559016:3174",
+    "line": 3174,
+    "last_line": 3174,
+    "start_seconds": 7432.1,
+    "quote": "1,100.67 was the all-time high in 2013, 14 cycle",
+    "about": "Bitcoin's price peak in 2013-2014"
+   },
+   {
+    "id": "x-2057559650166559016:3256",
+    "line": 3256,
+    "last_line": 3257,
+    "start_seconds": 7638.48,
+    "quote": "I think thread guys like the rookie of the year, you know, or like the MIP, you know, most improved, like he's the new up and coming, like he's the guy",
+    "about": "thread guys as rookie of the year"
+   },
+   {
+    "id": "x-2057559650166559016:3447",
+    "line": 3447,
+    "last_line": 3448,
+    "start_seconds": 8110.22,
+    "quote": "there was scamming going on and shit, but it wasn't like everything got institutionalized. Even the grifting got institutionalized",
+    "about": "Scamming and grifting became institutionalized"
+   },
+   {
+    "id": "x-2057559650166559016:3459",
+    "line": 3459,
+    "last_line": 3459,
+    "start_seconds": 8147.56,
+    "quote": "I used to do like infographics and I do all this like, I do that stuff on YouTube now",
+    "about": "moving content from Twitter to YouTube"
+   },
+   {
+    "id": "x-2057559650166559016:3643",
+    "line": 3643,
+    "last_line": 3643,
+    "start_seconds": 8631.24,
+    "quote": "I know that this is massively overweighted to a few companies and it just kind of seems like this incestuous clusterfuck of AI data centers and chips and blah, blah, blah",
+    "about": "stock market concentration in AI"
+   },
+   {
+    "id": "x-2057559650166559016:3666",
+    "line": 3666,
+    "last_line": 3666,
+    "start_seconds": 8699.54,
+    "quote": "As for crypto, I think we're through the lion's share of the downside, both in time and price",
+    "about": "crypto market bottom prediction"
+   },
+   {
+    "id": "x-2057559650166559016:3831",
+    "line": 3831,
+    "last_line": 3831,
+    "start_seconds": 9114.62,
+    "quote": "And Wemby, like both seven footers, you know, plus, so they get compared",
+    "about": "Wemby and Chet Holmgren comparison"
+   },
+   {
+    "id": "x-2057559650166559016:3923",
+    "line": 3923,
+    "last_line": 3925,
+    "start_seconds": 9315.2,
+    "quote": "I feel like lately, my trading is very boring. I don't know if you get that vibe, but like the trades that I take that do well are not like exciting, crazy, sexy trades",
+    "about": "Boring nature of profitable trading"
+   },
+   {
+    "id": "x-2057559650166559016:3947",
+    "line": 3947,
+    "last_line": 3947,
+    "start_seconds": 9378.28,
+    "quote": "we launched the business when Bitcoin was at 25,000 and we sold it when it hit 125,000",
+    "about": "Business launch and exit prices"
+   }
+  ]
+ },
+ "erik-voorhees": {
+  "episode_id": "x-2062633295792271762",
+  "proposed": 39,
+  "refused": {
+   "not in his voice": 20,
+   "too short or too long": 1
+  },
+  "candidates": [
+   {
+    "id": "x-2062633295792271762:1300",
+    "line": 1300,
+    "last_line": 1301,
+    "start_seconds": 3884.48,
+    "quote": "like to fantasize that maybe, you know, someday Bitcoin could hit like $100. And that's a stretch, but maybe some people were willing to believe it could get to $1,000",
+    "about": "early Bitcoin price predictions"
+   },
+   {
+    "id": "x-2062633295792271762:1397",
+    "line": 1397,
+    "last_line": 1397,
+    "start_seconds": 4291.04,
+    "quote": "But if that is the only option out there, if the only way people can use AI is to give it to one of these companies that saves it forever and ships it off to the government, then we have a problem",
+    "about": "single AI option problem"
+   },
+   {
+    "id": "x-2062633295792271762:1415",
+    "line": 1415,
+    "last_line": 1415,
+    "start_seconds": 4363.2,
+    "quote": "And in my opinion, it's very important for the pursuit of truth that people can interact with these machines just freely and openly",
+    "about": "freely interacting with AI machines"
+   },
+   {
+    "id": "x-2062633295792271762:1453",
+    "line": 1453,
+    "last_line": 1453,
+    "start_seconds": 4485.9,
+    "quote": "And there's a lot of things that is not known what the truth is for a period of time",
+    "about": "truth emerges through time"
+   },
+   {
+    "id": "x-2062633295792271762:1499",
+    "line": 1499,
+    "last_line": 1499,
+    "start_seconds": 4595.38,
+    "quote": "Bitcoin is the best form of money that's ever been invented",
+    "about": "Bitcoin superiority"
+   },
+   {
+    "id": "x-2062633295792271762:1524",
+    "line": 1524,
+    "last_line": 1524,
+    "start_seconds": 4699.78,
+    "quote": "He had written a letter about how the way in which he thought the regulation should unfold",
+    "about": "Sam Bankman-Fried's regulatory proposal"
+   },
+   {
+    "id": "x-2062633295792271762:1545",
+    "line": 1545,
+    "last_line": 1546,
+    "start_seconds": 4774.8,
+    "quote": "The entire premise of this stuff is that it avoids or transcends government regulation. That's the entire point",
+    "about": "crypto principle avoiding regulation"
+   },
+   {
+    "id": "x-2062633295792271762:1674",
+    "line": 1674,
+    "last_line": 1674,
+    "start_seconds": 5228.96,
+    "quote": "Or you can, like, buy this capital asset of Diem and then you get free inference after that",
+    "about": "How Diem token provides free inference"
+   },
+   {
+    "id": "x-2062633295792271762:1704",
+    "line": 1704,
+    "last_line": 1704,
+    "start_seconds": 5347.28,
+    "quote": "we're growing, you know, 15% a month in actual, like, revenue numbers and paying users",
+    "about": "Venice monthly growth rate"
+   },
+   {
+    "id": "x-2062633295792271762:1742",
+    "line": 1742,
+    "last_line": 1742,
+    "start_seconds": 5479.18,
+    "quote": "Except the scams, they tended to avoid, they didn't go after the scams, they tended to go after mostly legit projects and just totally crush them",
+    "about": "SEC avoided scams but crushed legitimate projects"
+   },
+   {
+    "id": "x-2062633295792271762:1772",
+    "line": 1772,
+    "last_line": 1772,
+    "start_seconds": 5608.06,
+    "quote": "Prices have pretty much sucked in almost every crypto asset for a while",
+    "about": "why crypto builders are not active now"
+   },
+   {
+    "id": "x-2062633295792271762:1791",
+    "line": 1791,
+    "last_line": 1791,
+    "start_seconds": 5690.2,
+    "quote": "I think the hyper competition between both the closed source providers and the open source ones is just net good for normal people",
+    "about": "competition between closed and open source AI"
+   },
+   {
+    "id": "x-2062633295792271762:1802",
+    "line": 1802,
+    "last_line": 1802,
+    "start_seconds": 5737.08,
+    "quote": "The dangerous thing is that the centralized companies in the U.S., the closed source frontier labs, have a very strong incentive to beg for regulation to close off open source",
+    "about": "closed source AI companies wanting regulation against open source"
+   },
+   {
+    "id": "x-2062633295792271762:1824",
+    "line": 1824,
+    "last_line": 1825,
+    "start_seconds": 5833.96,
+    "quote": "Man will transition into a world in which it is using these tools more or less. There's no way to, like, turn it around",
+    "about": "AI adoption is inevitable and cannot be reversed"
+   },
+   {
+    "id": "x-2062633295792271762:1835",
+    "line": 1835,
+    "last_line": 1835,
+    "start_seconds": 5874.96,
+    "quote": "once you realize it's inevitable, then the next thing you should do as a self-interested person is be like, okay, well, how can it most benefit me",
+    "about": "AI is inevitable and what to do about it"
+   },
+   {
+    "id": "x-2062633295792271762:1874",
+    "line": 1874,
+    "last_line": 1875,
+    "start_seconds": 6018.44,
+    "quote": "there's going to be a stratification of society in which the people that learn these tools become increasingly powerful and wealthy",
+    "about": "AI literacy and future wealth inequality"
+   },
+   {
+    "id": "x-2062633295792271762:2080",
+    "line": 2080,
+    "last_line": 2080,
+    "start_seconds": 6616.1,
+    "quote": "the normal app is for humans, but we have an API, which is primarily for agents",
+    "about": "API for agent transactions"
+   }
+  ]
+ },
+ "chris-gilbert": {
+  "episode_id": "x-2075316750439338088",
+  "proposed": 23,
+  "refused": {
+   "quote is not in the transcript": 1
+  },
+  "candidates": [
+   {
+    "id": "x-2075316750439338088:4961",
+    "line": 4961,
+    "last_line": 4961,
+    "start_seconds": 14411.22,
+    "quote": "I had seven engineers working on enterprise blockchain back in 2018, 2019",
+    "about": "enterprise blockchain team 2018 2019"
+   },
+   {
+    "id": "x-2075316750439338088:4975",
+    "line": 4975,
+    "last_line": 4975,
+    "start_seconds": 14455.5,
+    "quote": "We went through the whole VC thing, did a C and a Series A and a Series B, ended up hitting an $800 million valuation on that",
+    "about": "Elixir company valuation funding"
+   },
+   {
+    "id": "x-2075316750439338088:5029",
+    "line": 5029,
+    "last_line": 5030,
+    "start_seconds": 14713.46,
+    "quote": "how can we take something where you have these large frontier labs making buckets of money day in and day out, charging whatever they want for access to the models that they set",
+    "about": "large labs charging for model access"
+   },
+   {
+    "id": "x-2075316750439338088:5050",
+    "line": 5050,
+    "last_line": 5050,
+    "start_seconds": 14843.48,
+    "quote": "You have AI training, which is you take massive amounts of data, you apply some algorithms to it, and eventually the output of that work is a model",
+    "about": "how AI training works"
+   },
+   {
+    "id": "x-2075316750439338088:5092",
+    "line": 5092,
+    "last_line": 5092,
+    "start_seconds": 15033.78,
+    "quote": "I can't tell you if it's overpriced or underpriced because we don't have an efficient market yet",
+    "about": "no efficient market for inference pricing"
+   },
+   {
+    "id": "x-2075316750439338088:5097",
+    "line": 5097,
+    "last_line": 5098,
+    "start_seconds": 15072.56,
+    "quote": "I think Claude is overpriced by 80%. So I'm going to resell it at a much lower rate",
+    "about": "Claude AI pricing and resale strategy"
+   },
+   {
+    "id": "x-2075316750439338088:5115",
+    "line": 5115,
+    "last_line": 5115,
+    "start_seconds": 15180.22,
+    "quote": "people who are using UsePod right now, they're saving on average about 57% off of their AI bills",
+    "about": "UsePod customer savings on AI costs"
+   },
+   {
+    "id": "x-2075316750439338088:5145",
+    "line": 5145,
+    "last_line": 5145,
+    "start_seconds": 15314.92,
+    "quote": "I think you're going to sit back in a year and you're going to see a bunch of agentic companies, companies that are going from this is an AI agent to this is an AI agent that has now built a SaaS product, built a crypto product, and built a company around it",
+    "about": "prediction for autonomous AI agent companies"
+   },
+   {
+    "id": "x-2075316750439338088:5170",
+    "line": 5170,
+    "last_line": 5170,
+    "start_seconds": 15431.24,
+    "quote": "closed-source AI companies, Frontier Labs are going to have to figure out a value proposition that they can bring to day-to-day consumers because these open-source, open-weight models are really catching up, like, months behind, if even months",
+    "about": "closed-source AI versus open-source competition"
+   },
+   {
+    "id": "x-2075316750439338088:5180",
+    "line": 5180,
+    "last_line": 5181,
+    "start_seconds": 15518.9,
+    "quote": "Every problem in 2030s is going to be an AI problem. Every business problem, bar none, is going to be an AI problem",
+    "about": "AI will dominate all business problems"
+   },
+   {
+    "id": "x-2075316750439338088:5209",
+    "line": 5209,
+    "last_line": 5210,
+    "start_seconds": 15670.92,
+    "quote": "if you're a new engineer coming out of college right now, the best thing you can be doing is building. You know, I like to joke that having a well curated X timeline is a superpower",
+    "about": "advice for new engineers starting out"
+   },
+   {
+    "id": "x-2075316750439338088:5220",
+    "line": 5220,
+    "last_line": 5220,
+    "start_seconds": 15764.72,
+    "quote": "nobody in life makes money if they're not taking risks",
+    "about": "importance of taking risks"
+   },
+   {
+    "id": "x-2075316750439338088:5232",
+    "line": 5232,
+    "last_line": 5233,
+    "start_seconds": 15841.24,
+    "quote": "crypto Twitter is amazing for getting feedback. And you're getting feedback from the exact people that are clicking the buttons, that are sending you money",
+    "about": "value of crypto Twitter feedback"
+   },
+   {
+    "id": "x-2075316750439338088:5262",
+    "line": 5262,
+    "last_line": 5262,
+    "start_seconds": 15980.24,
+    "quote": "You know, attention is the most important thing for any market",
+    "about": "attention most important for markets"
+   },
+   {
+    "id": "x-2075316750439338088:5273",
+    "line": 5273,
+    "last_line": 5274,
+    "start_seconds": 16031.46,
+    "quote": "The idea is like get tooling to the market. Get the KPIs that we care about, the key points, like the normies that we onboard, the volume that we bring",
+    "about": "hackathon idea metrics to measure success"
+   },
+   {
+    "id": "x-2075316750439338088:5281",
+    "line": 5281,
+    "last_line": 5281,
+    "start_seconds": 16064.74,
+    "quote": "structure it in such a way that everybody that participates in the hackathon has to do something to benefit your token holders",
+    "about": "hackathon participants must benefit token holders"
+   },
+   {
+    "id": "x-2075316750439338088:5292",
+    "line": 5292,
+    "last_line": 5294,
+    "start_seconds": 16101.18,
+    "quote": "for my inference markets, we could pair an Ansem token with the Squire token. Have that be a liquidity pool. That's where those trading fees are perpetually giving back to inference users",
+    "about": "inference markets token pair liquidity pool"
+   }
+  ]
+ },
+ "lucas-bruder": {
+  "episode_id": "x-2077854740575092752",
+  "proposed": 15,
+  "refused": {
+   "quote is not in the transcript": 1
+  },
+  "candidates": [
+   {
+    "id": "x-2077854740575092752:1735",
+    "line": 1735,
+    "last_line": 1736,
+    "start_seconds": 6120.36,
+    "quote": "i was doing self-driving construction equipment that was super sick got to uh basically like get game xbox controllers hooked up to bulldozers",
+    "about": "self-driving construction equipment using xbox controllers"
+   },
+   {
+    "id": "x-2077854740575092752:1769",
+    "line": 1769,
+    "last_line": 1770,
+    "start_seconds": 6342.7,
+    "quote": "we really took the approach like let's give all these like little guys a ton of money and kind of just see what happens",
+    "about": "strategy behind the Jito airdrop to retail users"
+   },
+   {
+    "id": "x-2077854740575092752:1791",
+    "line": 1791,
+    "last_line": 1793,
+    "start_seconds": 6470.0,
+    "quote": "what was it january 2025 when the trump meme coin launch and melania and like shit was just going crazy there was a period where we made over a million dollars every day for a week",
+    "about": "January 2025 meme coin activity revenue"
+   },
+   {
+    "id": "x-2077854740575092752:1825",
+    "line": 1825,
+    "last_line": 1827,
+    "start_seconds": 6681.08,
+    "quote": "i got into crypto and like this discovered this mev thing and like it's kind of like this high frequency trade this like new era of high frequency trading",
+    "about": "Discovery of MEV and high frequency trading"
+   },
+   {
+    "id": "x-2077854740575092752:1832",
+    "line": 1832,
+    "last_line": 1833,
+    "start_seconds": 6725.3,
+    "quote": "discovered solana through spf's three dollar tweet like sell me all the soul you want at three dollars and go fuck yourself",
+    "about": "How he discovered Solana through SBF tweet"
+   },
+   {
+    "id": "x-2077854740575092752:1840",
+    "line": 1840,
+    "last_line": 1841,
+    "start_seconds": 6775.86,
+    "quote": "you can really feel how good solana is it's like the transactions confirm super fast really tight quotes",
+    "about": "why Solana is superior"
+   },
+   {
+    "id": "x-2077854740575092752:1877",
+    "line": 1877,
+    "last_line": 1878,
+    "start_seconds": 6996.44,
+    "quote": "i think the equities on chain is super underexplored right now there's just a lot of room for improvement on like trading stocks 24 7 365",
+    "about": "opportunity in on-chain equities"
+   },
+   {
+    "id": "x-2077854740575092752:1899",
+    "line": 1899,
+    "last_line": 1901,
+    "start_seconds": 7125.92,
+    "quote": "there's gonna be a lot of unique benefits that you'll be able to get from running a perp sex on solana that some of these other places won't get",
+    "about": "Solana perps advantages over competitors"
+   }
+  ]
+ },
+ "cirrus": {
+  "episode_id": "x-2080390322110992735",
+  "proposed": 20,
+  "refused": {
+   "not in his voice": 4
+  },
+  "candidates": [
+   {
+    "id": "x-2080390322110992735:550",
+    "line": 550,
+    "last_line": 551,
+    "start_seconds": 2105.14,
+    "quote": "quit my job as a dev probably the dumbest thing you could do quit your job to do nfts but it worked out for me",
+    "about": "quitting job to pursue NFTs"
+   },
+   {
+    "id": "x-2080390322110992735:569",
+    "line": 569,
+    "last_line": 570,
+    "start_seconds": 2216.58,
+    "quote": "playing this huge spread that was in nfts mostly because open sea was the only place you could trade them and there's like a 10 spread plus like a 5 royalty",
+    "about": "NFT trading spread strategy on OpenSea"
+   },
+   {
+    "id": "x-2080390322110992735:577",
+    "line": 577,
+    "last_line": 578,
+    "start_seconds": 2261.8,
+    "quote": "they look for these things they find something that's interesting they try to tell as many people as possible about it because they're incentivized to like the more people that know",
+    "about": "how most crypto traders share opportunities"
+   },
+   {
+    "id": "x-2080390322110992735:594",
+    "line": 594,
+    "last_line": 596,
+    "start_seconds": 2348.56,
+    "quote": "found this market maker that was giving odds on mexico to win the group at like 64 percent even though they'd already won the group",
+    "about": "World Cup prediction market glitch discovered"
+   },
+   {
+    "id": "x-2080390322110992735:606",
+    "line": 606,
+    "last_line": 607,
+    "start_seconds": 2403.1,
+    "quote": "And then from there, I just had a bunch of tickets in my account. And I was like, all right, I guess we're spending the month traveling the U.S",
+    "about": "free airline tickets from arbitrage"
+   },
+   {
+    "id": "x-2080390322110992735:638",
+    "line": 638,
+    "last_line": 639,
+    "start_seconds": 2485.62,
+    "quote": "Now I'm like the biggest NFT lender by, I guess, TVL is the word. So I give loans on a bunch of NFTs and capture 2% to 3% a month",
+    "about": "NFT lending business model"
+   },
+   {
+    "id": "x-2080390322110992735:645",
+    "line": 645,
+    "last_line": 646,
+    "start_seconds": 2508.02,
+    "quote": "When Blast came out, they had the leaderboard going. And I was one of the guys that was pretty vocal about thinking it was a big opportunity",
+    "about": "Blast leaderboard as investment opportunity"
+   },
+   {
+    "id": "x-2080390322110992735:664",
+    "line": 664,
+    "last_line": 665,
+    "start_seconds": 2552.02,
+    "quote": "I felt weird about selling because of how much I talked about it. And so I bag held",
+    "about": "holding NFTs due to public commitment"
+   },
+   {
+    "id": "x-2080390322110992735:803",
+    "line": 803,
+    "last_line": 803,
+    "start_seconds": 2931.62,
+    "quote": "my my like Kingmaker trade was was that NFT strategy where I just like turned a small amount of ETH into like a couple thousand ETH",
+    "about": "best investment NFT strategy"
+   },
+   {
+    "id": "x-2080390322110992735:813",
+    "line": 813,
+    "last_line": 813,
+    "start_seconds": 2964.66,
+    "quote": "I know that I know what I'm good at and I kind of stick to that and I try not to stray away from it",
+    "about": "investment strategy discipline"
+   },
+   {
+    "id": "x-2080390322110992735:822",
+    "line": 822,
+    "last_line": 822,
+    "start_seconds": 2995.08,
+    "quote": "I don't think they're ever going to have the volume and the liquidity that they have like back then",
+    "about": "NFT market volume compared to past"
+   },
+   {
+    "id": "x-2080390322110992735:884",
+    "line": 884,
+    "last_line": 884,
+    "start_seconds": 3169.4,
+    "quote": "I just think the level that they were at back then doing like hundreds of millions of dollars of volume a day",
+    "about": "NFT market volume at peak"
+   },
+   {
+    "id": "x-2080390322110992735:891",
+    "line": 891,
+    "last_line": 891,
+    "start_seconds": 3197.64,
+    "quote": "It was like buying a Ferrari for like half a million dollars and you open the door and there's a quarter million dollars of cash sitting on the driver's seat",
+    "about": "ApeCoin arbitrage opportunity analogy"
+   },
+   {
+    "id": "x-2080390322110992735:896",
+    "line": 896,
+    "last_line": 897,
+    "start_seconds": 3218.88,
+    "quote": "So when you say NFTs are back, I think of that. And I don't think anything like that will ever happen again",
+    "about": "NFT market unlikely to repeat"
+   },
+   {
+    "id": "x-2080390322110992735:903",
+    "line": 903,
+    "last_line": 904,
+    "start_seconds": 3239.16,
+    "quote": "Like NFT on the end of my username on Twitter. That was like the biggest L of my life",
+    "about": "regrets about NFT branding"
+   }
+  ]
+ },
+ "kendrick-perkins": {
+  "episode_id": "x-2080390322110992735",
+  "proposed": 39,
+  "refused": {
+   "too short or too long": 3,
+   "quote is not in the transcript": 2,
+   "not in his voice": 2
+  },
+  "candidates": [
+   {
+    "id": "x-2080390322110992735:1224",
+    "line": 1224,
+    "last_line": 1225,
+    "start_seconds": 3977.58,
+    "quote": "all I did was play basketball for a living. All I did was win a 2008 championship down there in the fucking bean town",
+    "about": "his basketball career accomplishments"
+   },
+   {
+    "id": "x-2080390322110992735:1233",
+    "line": 1233,
+    "last_line": 1233,
+    "start_seconds": 3999.62,
+    "quote": "don't have them because they take up your whole damn life",
+    "about": "advice about having kids"
+   },
+   {
+    "id": "x-2080390322110992735:1296",
+    "line": 1296,
+    "last_line": 1296,
+    "start_seconds": 4202.54,
+    "quote": "They can't even fucking release the schedule right now because of LeBron James",
+    "about": "LeBron's power and leverage"
+   },
+   {
+    "id": "x-2080390322110992735:1310",
+    "line": 1310,
+    "last_line": 1312,
+    "start_seconds": 4247.2,
+    "quote": "I feel like it's been a time or a few times where he's like, you know what? We're going to go here. And then all of a sudden, two, three hours later, he's like, ah, let me think about it again and get back to square one",
+    "about": "how difficult LeBron's decision is"
+   },
+   {
+    "id": "x-2080390322110992735:1369",
+    "line": 1369,
+    "last_line": 1369,
+    "start_seconds": 4475.14,
+    "quote": "I done watched this man get treatment in five-star restaurants where he got ice bags and STEM units and stuff like that",
+    "about": "LeBron's extreme dedication to recovery and training"
+   },
+   {
+    "id": "x-2080390322110992735:1386",
+    "line": 1386,
+    "last_line": 1386,
+    "start_seconds": 4536.32,
+    "quote": "The reason that I call him the GOAT is because, one, I witnessed his journey, but, two, there's no other player in sports that had the amount of pressure like LeBron James had",
+    "about": "Why Kendrick considers LeBron the GOAT"
+   },
+   {
+    "id": "x-2080390322110992735:1425",
+    "line": 1425,
+    "last_line": 1426,
+    "start_seconds": 4688.58,
+    "quote": "I was one of those ones where I didn't retire from the NBA on my own terms. I was forced into retirement, meaning that damn phone stopped ringing",
+    "about": "his forced retirement from NBA"
+   },
+   {
+    "id": "x-2080390322110992735:1447",
+    "line": 1447,
+    "last_line": 1447,
+    "start_seconds": 4780.32,
+    "quote": "Yes, because once LeBron James, you know, announced and said it's not about the money, nothing's holding him to the game of basketball but love",
+    "about": "LeBron's motivation is love of game"
+   },
+   {
+    "id": "x-2080390322110992735:1469",
+    "line": 1469,
+    "last_line": 1469,
+    "start_seconds": 4897.18,
+    "quote": "That safe place in their sanctuary is actually those two and a half, three hours that they're on the basketball floor",
+    "about": "where basketball players find sanctuary"
+   },
+   {
+    "id": "x-2080390322110992735:1474",
+    "line": 1474,
+    "last_line": 1475,
+    "start_seconds": 4923.16,
+    "quote": "he has earned the fucking right to take his time. And as students and fans of the game, we need to grant him that and give him that grace",
+    "about": "LeBron James deserves time and grace"
+   },
+   {
+    "id": "x-2080390322110992735:1505",
+    "line": 1505,
+    "last_line": 1505,
+    "start_seconds": 5037.0,
+    "quote": "I wanted to be one of the next big men that would be a head coach in the NBA because I feel like big men don't get enough credit for, you know, the IQ of the game",
+    "about": "why Perkins wanted to coach NBA big men"
+   },
+   {
+    "id": "x-2080390322110992735:1538",
+    "line": 1538,
+    "last_line": 1538,
+    "start_seconds": 5180.92,
+    "quote": "They call it the call wash because they're going to put you through the call wash to see if you pass the test",
+    "about": "what the call wash means in ESPN"
+   },
+   {
+    "id": "x-2080390322110992735:1560",
+    "line": 1560,
+    "last_line": 1561,
+    "start_seconds": 5244.58,
+    "quote": "I'm the only person ever in the history of sports media to do first take and undisputed in the same day",
+    "about": "first take and undisputed same day"
+   },
+   {
+    "id": "x-2080390322110992735:1580",
+    "line": 1580,
+    "last_line": 1581,
+    "start_seconds": 5309.6,
+    "quote": "In this media space, I'm not having any more regrets. Meaning that in my basketball space, although I played 14 years, I won the NBA championship",
+    "about": "regrets about basketball career"
+   },
+   {
+    "id": "x-2080390322110992735:1629",
+    "line": 1629,
+    "last_line": 1629,
+    "start_seconds": 5467.48,
+    "quote": "That's what you fucking learn because that's, that's what you call growth",
+    "about": "failure is what creates growth"
+   },
+   {
+    "id": "x-2080390322110992735:1675",
+    "line": 1675,
+    "last_line": 1676,
+    "start_seconds": 5584.44,
+    "quote": "Well, I mean, the first thing I would say is to all the athletes, make sure you watch your money",
+    "about": "athletes should monitor their own money"
+   },
+   {
+    "id": "x-2080390322110992735:1689",
+    "line": 1689,
+    "last_line": 1690,
+    "start_seconds": 5640.68,
+    "quote": "And you better know that every first of the month, Russell Westbrook had a fucking checkbook out with envelopes, paying and writing his own bills",
+    "about": "Russell Westbrook paid his own bills monthly"
+   },
+   {
+    "id": "x-2080390322110992735:1699",
+    "line": 1699,
+    "last_line": 1701,
+    "start_seconds": 5676.62,
+    "quote": "before you invest, before you do something, don't just take somebody word of mouth. Go out there and actually do your research",
+    "about": "investment research advice"
+   },
+   {
+    "id": "x-2080390322110992735:1762",
+    "line": 1762,
+    "last_line": 1763,
+    "start_seconds": 5915.54,
+    "quote": "When I signed up to be an NBA player, it was for the fortune and the fame. What comes with the fame is people wanting to get a picture or autographs or whatever the case may be",
+    "about": "expectations of fame as NBA player"
+   },
+   {
+    "id": "x-2080390322110992735:1801",
+    "line": 1801,
+    "last_line": 1803,
+    "start_seconds": 6024.36,
+    "quote": "250,000. I invested with a group down in Miami. I don't know if you're familiar with Club 11, but it's a big",
+    "about": "best investment Club 11 nightclub"
+   },
+   {
+    "id": "x-2080390322110992735:1838",
+    "line": 1838,
+    "last_line": 1839,
+    "start_seconds": 6117.2,
+    "quote": "you know, the government is probably paying you out around anywhere from $2,500 to $4,000 a month per bed",
+    "about": "veteran home government payment per bed"
+   },
+   {
+    "id": "x-2080390322110992735:1886",
+    "line": 1886,
+    "last_line": 1887,
+    "start_seconds": 6240.62,
+    "quote": "Like, people give James Harden a lot of heat in Houston because he has a jersey retired or had a jersey retired in this club called Dreams",
+    "about": "James Harden jersey retired Dreams club Houston"
+   },
+   {
+    "id": "x-2080390322110992735:1892",
+    "line": 1892,
+    "last_line": 1893,
+    "start_seconds": 6267.72,
+    "quote": "But if you're out and about on a Friday, Saturday, or Sunday night, big perk, you ain't going to see him in the club, but you will see him in Dreams after hours",
+    "about": "where to find James Harden on weekends Houston"
+   },
+   {
+    "id": "x-2080390322110992735:1901",
+    "line": 1901,
+    "last_line": 1902,
+    "start_seconds": 6301.2,
+    "quote": "So that was my worst investment. I can't even tell you the dollars I threw in that motherfucker",
+    "about": "Dreams club worst investment lost money"
+   },
+   {
+    "id": "x-2080390322110992735:1966",
+    "line": 1966,
+    "last_line": 1967,
+    "start_seconds": 6436.58,
+    "quote": "Like, so, if you look at one thing on your phone, like, I hit a, I was on Instagram. And I hit, like, you know, a video where it was, like, in Florida, you know, they was finding, like, an alligator was, like, climbing a fence",
+    "about": "algorithm showing targeted content about alligators"
+   },
+   {
+    "id": "x-2080390322110992735:1999",
+    "line": 1999,
+    "last_line": 1999,
+    "start_seconds": 6542.24,
+    "quote": "One, whatever you put into something is what you're going to get out of it",
+    "about": "advice on effort and results"
+   },
+   {
+    "id": "x-2080390322110992735:2009",
+    "line": 2009,
+    "last_line": 2010,
+    "start_seconds": 6585.8,
+    "quote": "he used to say, hey, every time before you step on that floor, I always remember, you never know who's watching",
+    "about": "high school coach's advice to Kendrick"
+   }
+  ]
+ },
+ "simple-farmer": {
+  "episode_id": "x-2088002434253922358",
+  "proposed": 19,
+  "refused": {
+   "not in his voice": 4,
+   "quote is not in the transcript": 4,
+   "too short or too long": 1
+  },
+  "candidates": [
+   {
+    "id": "x-2088002434253922358:2253",
+    "line": 2253,
+    "last_line": 2254,
+    "start_seconds": 5690.18,
+    "quote": "I started getting disappointed with a lot of token launches that I was speculating on. I said, let me just do this myself",
+    "about": "why he started developing his own projects"
+   },
+   {
+    "id": "x-2088002434253922358:2288",
+    "line": 2288,
+    "last_line": 2290,
+    "start_seconds": 5844.82,
+    "quote": "it's a new financial primitive. It's a financial technology that's built on chain and you can hold it. And essentially it lets you slowly DCA into either regular crypto tokens or RWAs over time",
+    "about": "what stonkbroker is simplified explanation"
+   },
+   {
+    "id": "x-2088002434253922358:2299",
+    "line": 2299,
+    "last_line": 2300,
+    "start_seconds": 5892.3,
+    "quote": "I'm very aligned with Arbitrum One. That's the people I'm closest to in crypto. And I've worked with them closely and essentially they said, Hey, L2 is coming, Robinhood chain",
+    "about": "why building on Robinhood chain relationship Arbitrum"
+   },
+   {
+    "id": "x-2088002434253922358:2305",
+    "line": 2305,
+    "last_line": 2306,
+    "start_seconds": 5917.74,
+    "quote": "how do we create something cool that has that hook with the RWAs that's useful, but also pushes distribution and marketing really well",
+    "about": "design philosophy balancing product and distribution"
+   },
+   {
+    "id": "x-2088002434253922358:2338",
+    "line": 2338,
+    "last_line": 2340,
+    "start_seconds": 6022.04,
+    "quote": "everything was a lesson. I built a couple of really cool products, but I was struggling with gaining users",
+    "about": "learning from past failures with users"
+   },
+   {
+    "id": "x-2088002434253922358:2345",
+    "line": 2345,
+    "last_line": 2347,
+    "start_seconds": 6035.42,
+    "quote": "focus on the distribution, focus on the distribution, and then continue to aggregate those people",
+    "about": "strategy of focusing on distribution first"
+   },
+   {
+    "id": "x-2088002434253922358:2389",
+    "line": 2389,
+    "last_line": 2391,
+    "start_seconds": 6126.12,
+    "quote": "RWAs are the big unlock. It's like the carrot that everybody wants, and not enough people talk about",
+    "about": "RWAs as the next big opportunity"
+   },
+   {
+    "id": "x-2088002434253922358:2465",
+    "line": 2465,
+    "last_line": 2468,
+    "start_seconds": 6249.58,
+    "quote": "The sex listing moment has been a top signal and that has to change because that's the top of our funnel as well",
+    "about": "Exchange listings as market signal"
+   }
+  ]
+ },
+ "poorgoat": {
+  "episode_id": "x-2088002434253922358",
+  "proposed": 26,
+  "refused": {
+   "not in his voice": 11,
+   "quote is not in the transcript": 1
+  },
+  "candidates": [
+   {
+    "id": "x-2088002434253922358:3084",
+    "line": 3084,
+    "last_line": 3087,
+    "start_seconds": 6906.6,
+    "quote": "this FOMO situation because I held all that Ansem publicly really, really blew it up",
+    "about": "How holding publicly caused growth"
+   },
+   {
+    "id": "x-2088002434253922358:3174",
+    "line": 3174,
+    "last_line": 3176,
+    "start_seconds": 7007.34,
+    "quote": "I have a real career in like traditional finance. So I like work every day",
+    "about": "Poorgoat's career in traditional finance"
+   },
+   {
+    "id": "x-2088002434253922358:3385",
+    "line": 3385,
+    "last_line": 3386,
+    "start_seconds": 7225.34,
+    "quote": "happened is like we we someone launched this coin i like hadn't been trading a lot because my fomo wallet got a lot of motion",
+    "about": "why he stopped trading before the coin"
+   },
+   {
+    "id": "x-2088002434253922358:3400",
+    "line": 3400,
+    "last_line": 3401,
+    "start_seconds": 7310.92,
+    "quote": "i'm not gonna sell because i can't or else everyone will sell it seems like so i just was riding it",
+    "about": "why he held the coin despite the crash"
+   },
+   {
+    "id": "x-2088002434253922358:3425",
+    "line": 3425,
+    "last_line": 3426,
+    "start_seconds": 7444.56,
+    "quote": "i'm not even kidding i can almost ratio anyone on twitter right now by just commenting on their posts and blasting it on fomo",
+    "about": "his influence on social media and fomo"
+   },
+   {
+    "id": "x-2088002434253922358:3431",
+    "line": 3431,
+    "last_line": 3431,
+    "start_seconds": 7476.82,
+    "quote": "on this k coin this is the next doge telling 10 friends and we're we're at 70 000 holders right now",
+    "about": "community growth and early adoption"
+   },
+   {
+    "id": "x-2088002434253922358:3447",
+    "line": 3447,
+    "last_line": 3449,
+    "start_seconds": 7568.94,
+    "quote": "it's a lot harder to sell a coin when when you're gonna look at the fomo thesis and get ripped apart by 50 people",
+    "about": "social pressure preventing insider selling"
+   },
+   {
+    "id": "x-2088002434253922358:3548",
+    "line": 3548,
+    "last_line": 3549,
+    "start_seconds": 8118.22,
+    "quote": "if i pull if i pull off what i want to pull off there's going to be a lot more retail between ansem and kate like that's bringing in new eyes to crypto",
+    "about": "strategy to bring new people into crypto"
+   },
+   {
+    "id": "x-2088002434253922358:3559",
+    "line": 3559,
+    "last_line": 3561,
+    "start_seconds": 8188.16,
+    "quote": "you're trading against professionals who have been in the space for three years four years five years are bundling coins doing everything in between",
+    "about": "trading against experienced professionals"
+   },
+   {
+    "id": "x-2088002434253922358:3568",
+    "line": 3568,
+    "last_line": 3569,
+    "start_seconds": 8236.38,
+    "quote": "it's a hard game right like if it was easy everyone would be rich like it's it's naturally just not an easy game",
+    "about": "trading difficulty and why not everyone gets rich"
+   },
+   {
+    "id": "x-2088002434253922358:3583",
+    "line": 3583,
+    "last_line": 3585,
+    "start_seconds": 8318.68,
+    "quote": "if you're trading with money that you need to pay your bill at the end of the week and like you're gonna get pushed out of a position because like you're down 30 and you don't have the money to like pay for what you need to pay for that's how you get wrecked right",
+    "about": "how traders get wrecked financially"
+   }
+  ]
+ },
+ "brett-harrison": {
+  "episode_id": "x-2088002434253922358",
+  "proposed": 31,
+  "refused": {
+   "not in his voice": 2,
+   "quote is not in the transcript": 1
+  },
+  "candidates": [
+   {
+    "id": "x-2088002434253922358:3658",
+    "line": 3658,
+    "last_line": 3660,
+    "start_seconds": 8718.54,
+    "quote": "we're an exchange group. Uh, we have two different regulated exchanges, one, uh, out of Bermuda that is for perpetual futures on actually strictly non crypto asset classes",
+    "about": "Architect's two regulated exchanges"
+   },
+   {
+    "id": "x-2088002434253922358:3700",
+    "line": 3700,
+    "last_line": 3701,
+    "start_seconds": 8968.52,
+    "quote": "Robin hood. We acquired an exchange regulated by the CFTC to have futures on shore. We were really doing everything in the straight and narrow",
+    "about": "Robinhood's regulated futures exchange acquisition"
+   },
+   {
+    "id": "x-2088002434253922358:3707",
+    "line": 3707,
+    "last_line": 3708,
+    "start_seconds": 9007.66,
+    "quote": "there was a point where I kind of had enough and said, look, like, let me take on the U S company separately, different direction or else like I'm going to be out of here",
+    "about": "ultimatum to Sam Bankman-Fried before leaving"
+   },
+   {
+    "id": "x-2088002434253922358:3728",
+    "line": 3728,
+    "last_line": 3729,
+    "start_seconds": 9119.4,
+    "quote": "in terms of the actual commodity underlying this economy, which is really compute itself, there aren't any ways to, to hedge directly",
+    "about": "lack of direct compute hedging in AI economy"
+   },
+   {
+    "id": "x-2088002434253922358:3738",
+    "line": 3738,
+    "last_line": 3739,
+    "start_seconds": 9184.96,
+    "quote": "NVIDIA B300 GPUs are now going for, you know, $6 and 25 cents per hour, uh, for a one year contract over a thousand GPUs",
+    "about": "GPU rental price per hour benchmark"
+   },
+   {
+    "id": "x-2088002434253922358:3772",
+    "line": 3772,
+    "last_line": 3773,
+    "start_seconds": 9370.94,
+    "quote": "in any commodities market, the amount of yearly volume in commodity futures is a multiple of the actual production yearly of the underlying commodity",
+    "about": "how commodity futures markets work"
+   },
+   {
+    "id": "x-2088002434253922358:3780",
+    "line": 3780,
+    "last_line": 3781,
+    "start_seconds": 9415.86,
+    "quote": "we're thinking it's going to be somewhere in between electricity and oil as kind of a good way to think about it. And so maybe that's 5x",
+    "about": "predicted trading volume multiplier for compute"
+   },
+   {
+    "id": "x-2088002434253922358:3797",
+    "line": 3797,
+    "last_line": 3799,
+    "start_seconds": 9503.56,
+    "quote": "there is no instrument that lets people understand the forward curve for compute. And by that, I mean, what do people expect rental prices to be in one quarter",
+    "about": "why compute derivatives are needed"
+   },
+   {
+    "id": "x-2088002434253922358:3808",
+    "line": 3808,
+    "last_line": 3809,
+    "start_seconds": 9549.34,
+    "quote": "you know, I definitely worry that without good hedging instruments, you know, you end up with like a, you know, a subprime crisis one day",
+    "about": "risk of subprime crisis without hedging"
+   },
+   {
+    "id": "x-2088002434253922358:3821",
+    "line": 3821,
+    "last_line": 3823,
+    "start_seconds": 9604.66,
+    "quote": "the chip that we were, you know, thinking about releasing the first future on, that's a little bit old news now. Like there are, people want different chips for their inference now than they wanted even three to six months ago",
+    "about": "chip preferences changing rapidly"
+   },
+   {
+    "id": "x-2088002434253922358:3832",
+    "line": 3832,
+    "last_line": 3834,
+    "start_seconds": 9665.34,
+    "quote": "that, that, that is what we understand as, as the main, you know, concern over, you know, bringing commodity markets to compute is making sure that, you know, it's not running afoul of U.S. export controls",
+    "about": "main concern with compute commodity markets"
+   },
+   {
+    "id": "x-2088002434253922358:3848",
+    "line": 3848,
+    "last_line": 3850,
+    "start_seconds": 9740.66,
+    "quote": "That's why we're not just stopping at compute with our exchange. We're also going to have electricity futures. We're going to have fuel futures",
+    "about": "expansion beyond compute futures"
+   },
+   {
+    "id": "x-2088002434253922358:3865",
+    "line": 3865,
+    "last_line": 3865,
+    "start_seconds": 9806.52,
+    "quote": "We want to be the home for all the kinds of traders from from institutional commercial hedgers to retail speculators and everyone in between",
+    "about": "target customer base"
+   },
+   {
+    "id": "x-2088002434253922358:3881",
+    "line": 3881,
+    "last_line": 3881,
+    "start_seconds": 9896.4,
+    "quote": "another like big difference from us and Hyperliquid is that we don't do any auto liquidation",
+    "about": "difference from Hyperliquid"
+   },
+   {
+    "id": "x-2088002434253922358:3898",
+    "line": 3898,
+    "last_line": 3898,
+    "start_seconds": 9991.9,
+    "quote": "the incumbents on the space are the CME, the Chicago Mercantile Exchange, and ICE, the Intercontinental Exchange, which owns the New York Stock Exchange",
+    "about": "main competitors in the space"
+   },
+   {
+    "id": "x-2088002434253922358:3912",
+    "line": 3912,
+    "last_line": 3913,
+    "start_seconds": 10072.98,
+    "quote": "You pop in your API key and you're trading tomorrow. And that's the spirit of what we're going for",
+    "about": "ease of access philosophy"
+   },
+   {
+    "id": "x-2088002434253922358:3924",
+    "line": 3924,
+    "last_line": 3924,
+    "start_seconds": 10105.42,
+    "quote": "we're announcing something soon in the nuclear fuel space and there's nothing like that that currently exists",
+    "about": "new nuclear fuel derivatives announcement"
+   },
+   {
+    "id": "x-2088002434253922358:3936",
+    "line": 3936,
+    "last_line": 3937,
+    "start_seconds": 10169.24,
+    "quote": "I'm extremely excited about new applications of AI. You know, I think there's a conventional wisdom that, you know, the largest frontier model companies like OpenA and Anthropic would kind of like eat up all the startups",
+    "about": "AI applications and frontier model competition"
+   },
+   {
+    "id": "x-2088002434253922358:3999",
+    "line": 3999,
+    "last_line": 3999,
+    "start_seconds": 10490.76,
+    "quote": "At the same time, we've been careful to not just like take code written by AI and throw it into production",
+    "about": "cautious approach to AI code in production"
+   },
+   {
+    "id": "x-2088002434253922358:4018",
+    "line": 4018,
+    "last_line": 4018,
+    "start_seconds": 10583.4,
+    "quote": "What's my best portfolio to express that view and how can I enter it and do that for me",
+    "about": "how agents will execute trading strategies"
+   },
+   {
+    "id": "x-2088002434253922358:4028",
+    "line": 4028,
+    "last_line": 4028,
+    "start_seconds": 10622.24,
+    "quote": "And so we've really focused on making sure that our APIs are fully like agent ready",
+    "about": "building APIs for agent trading"
+   },
+   {
+    "id": "x-2088002434253922358:4042",
+    "line": 4042,
+    "last_line": 4042,
+    "start_seconds": 10667.64,
+    "quote": "Yeah, I mean, I guess I'll, I'll close up by saying, you know, our two exchanges, you know, our first one in Bermuda, it's called AX, our architect exchange",
+    "about": "Two new cryptocurrency exchanges launched"
+   },
+   {
+    "id": "x-2088002434253922358:4047",
+    "line": 4047,
+    "last_line": 4047,
+    "start_seconds": 10693.12,
+    "quote": "And then on the U.S. side, you know, we're waiting for that regulatory approval, but we're starting to pre-onboard now",
+    "about": "US regulatory approval pending for exchanges"
+   }
+  ]
+ },
+ "andrej": {
+  "episode_id": "x-2090537938899845434",
+  "proposed": 48,
+  "refused": {
+   "quote is not in the transcript": 8,
+   "not in his voice": 11,
+   "too short or too long": 1
+  },
+  "candidates": [
+   {
+    "id": "x-2090537938899845434:3590",
+    "line": 3590,
+    "last_line": 3590,
+    "start_seconds": 11016.28,
+    "quote": "Grass fundamentally is a network that millions of people joined in order to share their unused Internet bandwidth",
+    "about": "what Grass protocol fundamentally is"
+   },
+   {
+    "id": "x-2090537938899845434:3609",
+    "line": 3609,
+    "last_line": 3610,
+    "start_seconds": 11163.82,
+    "quote": "the Internet is the greatest source of data for not just AI, but basically any data driven or information driven like market business initiative",
+    "about": "why AI labs need Internet bandwidth"
+   },
+   {
+    "id": "x-2090537938899845434:3617",
+    "line": 3617,
+    "last_line": 3618,
+    "start_seconds": 11221.54,
+    "quote": "the rate at which it's shutting off to the public Web is also growing at an exponential pace. What I mean by that is like basically a third of the Internet right now is getting protected by Cloudflare",
+    "about": "Internet access restrictions and Cloudflare protection"
+   },
+   {
+    "id": "x-2090537938899845434:3628",
+    "line": 3628,
+    "last_line": 3628,
+    "start_seconds": 11281.38,
+    "quote": "What we've built is the ability for any AI lab to just tap into millions of IP addresses so that all their crawling activity looks like real user activity",
+    "about": "how Grass solves access problems for AI labs"
+   },
+   {
+    "id": "x-2090537938899845434:3643",
+    "line": 3643,
+    "last_line": 3643,
+    "start_seconds": 11348.4,
+    "quote": "back in 2022, we had the thesis that there's one day going to be a huge market for data for machine learning models",
+    "about": "Grass founding thesis about data market"
+   },
+   {
+    "id": "x-2090537938899845434:3666",
+    "line": 3666,
+    "last_line": 3666,
+    "start_seconds": 11443.56,
+    "quote": "the way that other companies were solving this problem was they were sneaking software into people's smart TVs and then using their Internet connections without telling them",
+    "about": "Why Grass rejected existing approaches"
+   },
+   {
+    "id": "x-2090537938899845434:3678",
+    "line": 3678,
+    "last_line": 3678,
+    "start_seconds": 11512.04,
+    "quote": "I've heard stories of some homeless guy that got an airdrop that was worth forty five thousand dollars at one point",
+    "about": "Early network participant rewards example"
+   },
+   {
+    "id": "x-2090537938899845434:3703",
+    "line": 3703,
+    "last_line": 3703,
+    "start_seconds": 11625.2,
+    "quote": "I think at this point there are thousands of venture backed startups that are attempting in various ways to sell data to frontier companies",
+    "about": "thousands of startups selling AI data"
+   },
+   {
+    "id": "x-2090537938899845434:3725",
+    "line": 3725,
+    "last_line": 3725,
+    "start_seconds": 11725.46,
+    "quote": "like whatever you put into your model ultimately determines what your model's capabilities are",
+    "about": "training data determines model capabilities"
+   },
+   {
+    "id": "x-2090537938899845434:3730",
+    "line": 3730,
+    "last_line": 3731,
+    "start_seconds": 11752.18,
+    "quote": "they took a model and they pre-trained it on the entire curriculum, like a school curriculum up to fifth grade",
+    "about": "German researchers trained model on grade five curriculum"
+   },
+   {
+    "id": "x-2090537938899845434:3745",
+    "line": 3745,
+    "last_line": 3746,
+    "start_seconds": 11818.34,
+    "quote": "So this is a massive, massive finding. And, like, this is not the only paper that proved this",
+    "about": "pre-training data limits model capabilities"
+   },
+   {
+    "id": "x-2090537938899845434:3764",
+    "line": 3764,
+    "last_line": 3765,
+    "start_seconds": 11908.08,
+    "quote": "The current frontier models that are in the pre-training process right now, they range anywhere from 10 to 24 trillion parameters",
+    "about": "size of frontier AI models"
+   },
+   {
+    "id": "x-2090537938899845434:3773",
+    "line": 3773,
+    "last_line": 3774,
+    "start_seconds": 11948.88,
+    "quote": "for a 24 trillion parameter model, that translates to the amount of data, you'd call it 500 trillion tokens",
+    "about": "training data required for models"
+   },
+   {
+    "id": "x-2090537938899845434:3829",
+    "line": 3829,
+    "last_line": 3831,
+    "start_seconds": 12132.16,
+    "quote": "Like your data determines what your model's good at. Like, so you're not going to give, you know, like a bunch of musical scores to like a robotics model",
+    "about": "data determines model capabilities"
+   },
+   {
+    "id": "x-2090537938899845434:3856",
+    "line": 3856,
+    "last_line": 3858,
+    "start_seconds": 12212.86,
+    "quote": "you can kind of infer like the capabilities that models are going to learn in the next six to 12 months by just seeing the, like what the demand is for pre-training data",
+    "about": "predicting model capabilities from data demand"
+   },
+   {
+    "id": "x-2090537938899845434:3908",
+    "line": 3908,
+    "last_line": 3909,
+    "start_seconds": 12330.7,
+    "quote": "the modern internet is impossible to crawl properly or scrape properly unless you route your web requests through millions of residential IPs",
+    "about": "modern internet scraping difficulty"
+   },
+   {
+    "id": "x-2090537938899845434:3928",
+    "line": 3928,
+    "last_line": 3931,
+    "start_seconds": 12362.6,
+    "quote": "and you can assume that anything on the public web is going to end up in an AI model, whether it's in the training process, whether it's an agent retrieving it",
+    "about": "public web content used by AI"
+   },
+   {
+    "id": "x-2090537938899845434:3994",
+    "line": 3994,
+    "last_line": 3997,
+    "start_seconds": 12479.54,
+    "quote": "the best thing you should probably do is embrace AI, make yourself more discoverable. And if your content is good enough, like it's going to be an amazing primary source",
+    "about": "embrace AI for better discoverability"
+   },
+   {
+    "id": "x-2090537938899845434:4043",
+    "line": 4043,
+    "last_line": 4044,
+    "start_seconds": 12549.72,
+    "quote": "there's a crazy amount of alpha into knowing how to properly process raw data into the right format",
+    "about": "value of data processing and formatting"
+   },
+   {
+    "id": "x-2090537938899845434:4159",
+    "line": 4159,
+    "last_line": 4160,
+    "start_seconds": 12735.06,
+    "quote": "like it's not even worth it for this amount of data. Like the check would be so small that it's not even worth it",
+    "about": "why customers rejected overpriced data"
+   },
+   {
+    "id": "x-2090537938899845434:4304",
+    "line": 4304,
+    "last_line": 4306,
+    "start_seconds": 12948.22,
+    "quote": "we've internally built like what we call live context retrieval. Like we've built a massive index of basically, like most of the useful internet",
+    "about": "grass technology for internet data access"
+   },
+   {
+    "id": "x-2090537938899845434:4323",
+    "line": 4323,
+    "last_line": 4323,
+    "start_seconds": 12976.74,
+    "quote": "like why not expose all that infrastructure as a product for AI models to use directly",
+    "about": "exposing infrastructure for AI models"
+   },
+   {
+    "id": "x-2090537938899845434:4365",
+    "line": 4365,
+    "last_line": 4365,
+    "start_seconds": 13026.22,
+    "quote": "the idea would be to eventually turn this into a huge suite for AI agents and LLMs",
+    "about": "building suite for AI agents LLMs"
+   },
+   {
+    "id": "x-2090537938899845434:4429",
+    "line": 4429,
+    "last_line": 4431,
+    "start_seconds": 13120.92,
+    "quote": "like what are the main use cases for transaction data? Um, I think ad tech is a huge one",
+    "about": "blockchain transaction data use cases"
+   },
+   {
+    "id": "x-2090537938899845434:4461",
+    "line": 4461,
+    "last_line": 4461,
+    "start_seconds": 13169.16,
+    "quote": "It's going to teach you how to like read an order book",
+    "about": "what training an LLM on transaction data does"
+   },
+   {
+    "id": "x-2090537938899845434:4473",
+    "line": 4473,
+    "last_line": 4474,
+    "start_seconds": 13180.88,
+    "quote": "I think is going to be an incredibly useful input for, the vast majority of any like financial analysis",
+    "about": "blockchain data usefulness for financial analysis"
+   },
+   {
+    "id": "x-2090537938899845434:4539",
+    "line": 4539,
+    "last_line": 4541,
+    "start_seconds": 13330.14,
+    "quote": "to sell all of our company's intellectual property and, like, all of its customer relationships and everything else to the GRASS Foundation",
+    "about": "selling IP to GRASS Foundation"
+   }
+  ]
+ }
+}
