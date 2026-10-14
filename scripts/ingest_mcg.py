@@ -78,6 +78,17 @@ ARCHIVES = {
         "namespace": lambda s: "threadguy",
         "index": lambda s: s.pinecone_index,
     },
+    # rasmr's channel: his daily live streams (the same broadcasts he runs
+    # on X) and his interviews. Its own namespace in the default index,
+    # like ThreadGuy's. Addressed by channel id because that is the one
+    # form of his channel's address that cannot be renamed.
+    "rasmr": {
+        "shelf": ROOT / "data" / "rasmr_index.json",
+        "audio": Path("/tmp/rasmr_audio"),
+        "handle": "channel/UCT4cClxyjPuPGZg4edI-FPQ",
+        "namespace": lambda s: "rasmr",
+        "index": lambda s: s.pinecone_index,
+    },
 }
 ARCHIVE = "mcg"
 

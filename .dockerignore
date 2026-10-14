@@ -59,5 +59,8 @@ data/
 !data/posts_index.json
 # The guest pages, built by scripts/build_guests.py.
 !data/guests.json
+# rasmr's shelf and his X pairs.
+!data/rasmr_index.json
+!data/rasmr_broadcast_links.json
 redteam_report.md
 PITCH_PREP.md

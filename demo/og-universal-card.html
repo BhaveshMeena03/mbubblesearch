@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <!-- One social card for every page, 1200x630. Render with:
        node scripts/make_og_image.mjs <page>
-     where <page> is home, podcast, mcg, elon, finance, threadguy, calls, posts
-     or guests.
+     where <page> is home, podcast, mcg, elon, finance, threadguy, calls, posts,
+     guests or rasmr.
 
      Deliberately nothing on it that changes: no hour counts, no episode
      counts, no "latest recordings". Every card that carried a number went
@@ -106,7 +106,11 @@
     guests: {room: "guests", accent: "#16c784", path: "/guests",
       head: "Who came on, <em>and what they said</em>.",
       sub: "The guests of Market Bubble, each on a page of their own. Quoted word for word in their own voice, every line linked to the second it was said.",
-      q: "the guest, the line, the second it was said", go: "WATCH"}
+      q: "the guest, the line, the second it was said", go: "WATCH"},
+    rasmr: {room: "rasmr", accent: "#d6ae63", path: "/rasmr",
+      head: "rasmr, <em>in his own words</em>.",
+      sub: "His daily streams on X and YouTube and his interviews, transcribed. Ask what was said, and get the second it was said.",
+      q: "why did rasmr sell all his hype"}
   };
   var key = new URLSearchParams(location.search).get("p") || "home";
   var p = PAGES[key] || PAGES.home;

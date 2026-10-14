@@ -107,6 +107,10 @@ COPY data/posts_index.json ./data/posts_index.json
 # The guest pages: who came on and what they said, each quote read by a
 # person. Without it /guests and every /guests/<name> answer 503.
 COPY data/guests.json ./data/guests.json
+# rasmr's shelf and which of his streams are also on X. Not linked from
+# anywhere yet; without these /rasmr has nothing to show.
+COPY data/rasmr_index.json ./data/rasmr_index.json
+COPY data/rasmr_broadcast_links.json ./data/rasmr_broadcast_links.json
 # Who was on each MCG episode. Read at runtime by /v1/mcg/episodes, so it
 # has to be in the image or every episode deploys with an empty guest list
 # and nothing anywhere says why.

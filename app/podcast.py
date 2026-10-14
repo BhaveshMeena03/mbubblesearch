@@ -403,6 +403,62 @@ made on air, and never add one of your own.
 citation, not an essay."""
 
 
+
+RASMR_SYSTEM_PROMPT = """\
+You answer questions about rasmr's streams and interviews using ONLY the \
+transcript excerpts provided in <excerpts> tags. Each excerpt is tagged \
+with its episode, timestamp, and the date it was published. Excerpts are \
+given oldest first.
+
+Every recording here is rasmr's own: the daily streams he runs on X and \
+YouTube, and the interviews on his channel. He hosts all of them. His name \
+is almost never in the transcript, because he is the one talking and does \
+not introduce himself on his own show. So on his own streams, a question \
+about what rasmr said or thinks is a question about the host's words. \
+Never answer that the excerpts do not mention rasmr because his name is \
+absent: it is his show.
+
+Interviews are the exception, and they are marked: an excerpt with a \
+`guests` attribute is a conversation with those people, read off its \
+title. In one, the person making the case is usually the guest, not \
+rasmr, so a first-person line there about a fund, a trade or a product \
+the speaker runs is the guest's unless it is plainly the host asking, \
+introducing or reacting. Report it as theirs ("his guest Cupsey said"), \
+even when the question asked about rasmr, and build rasmr's own view from \
+his streams and from lines that are plainly his. Never hand a guest's \
+position to the host because the question named the host.
+
+Rules:
+1. Answer strictly from the excerpts. If they do not contain the answer, \
+say "I couldn't find that in the archive", do not use outside knowledge, \
+and do not guess. Say it plainly, without explaining what the excerpts \
+are instead.
+2. Cite the moment. Every line inside an excerpt begins with its own \
+timestamp in square brackets, like [16:16]. Cite the timestamp of the \
+line you actually used, NOT the `at` attribute on the excerpt, that is \
+only where the passage begins, and a passage runs minutes. Write it as \
+"around 16:16 in <episode>", naming each episode once, the first time you \
+cite it, and giving later moments in the same episode by their time \
+alone. NEVER write a URL or a Markdown link: you are not given the \
+addresses, so writing one means inventing it.
+3. Say who is speaking only when the excerpt makes it plain. The \
+transcripts carry no speaker labels and he often has people on. \
+Attribute a line to rasmr when it is plainly the host: running the \
+stream, reading chat, reacting, giving his own position. Attribute it to \
+"a guest", or to the guest by name if the excerpt says it, when it is \
+plainly somebody he is talking to. When you cannot tell, say "on the \
+stream" rather than guessing who.
+4. This is a daily show and the market moves, so a view belongs to the \
+day it was given. When a view is about a price, a position or a trade, \
+say when he said it, and never present an older take as his current one.
+5. Do not put words in anyone's mouth or invent quotes, paraphrase what \
+the excerpt actually says.
+6. This is an informational search tool, not investment advice. Never \
+relay a buy, sell or price call as a recommendation, even when one was \
+made on air, and never add one of your own.
+7. Keep it tight and conversational, a couple of sentences plus the \
+citation, not an essay."""
+
 SYSTEM_PROMPT = """\
 You answer questions about the "Market Bubble" podcast (hosted by Ansem and \
 FaZe Banks) using ONLY the transcript excerpts provided in <excerpts> tags. \
@@ -661,6 +717,17 @@ _ASKS_HIS_VIEW = re.compile(
     r"|\bthread ?guy'?s (?:view|opinion|take|thesis|position|call)",
     re.I)
 _ABOUT_GUESTS = re.compile(r"\bguests?\b|\binterview|\bwho (?:did|was|has)", re.I)
+# The same question about rasmr, whose channel is the same shape: his own
+# streams, and interviews where the guest does most of the talking.
+_ASKS_RASMR_VIEW = re.compile(
+    r"\brasmr(?:'?s)?\b.{0,40}?\b(?:think|thinks|thought|view|views|"
+    r"opinion|take|takes|say|says|said|believe|believes|feel|feels|"
+    r"position|positions|bullish|bearish|call|calls|predict|predicted)\b"
+    r"|\brasmr'?s (?:view|opinion|take|thesis|position|call)",
+    re.I)
+# Archives that are one host's own channel, with guests named in the
+# titles of the interviews, and how a question asks for that host's view.
+HOSTED_CHANNELS = {"threadguy": _ASKS_HIS_VIEW, "rasmr": _ASKS_RASMR_VIEW}
 
 
 # What the search that just ran found out about "now", for the request that
@@ -696,7 +763,8 @@ def _recent_note(hits: list[PodcastHit]) -> str | None:
     return fresh.note()
 
 
-def host_view_only(query: str, hits: list[PodcastHit]) -> list[PodcastHit]:
+def host_view_only(query: str, hits: list[PodcastHit],
+                   asks: re.Pattern = _ASKS_HIS_VIEW) -> list[PodcastHit]:
     """Leave interviews out of a question about ThreadGuy's own view.
 
     Written guidance was not enough. With the guests named on each excerpt
@@ -710,7 +778,7 @@ def host_view_only(query: str, hits: list[PodcastHit]) -> list[PodcastHit]:
     passages); otherwise the interviews stay, labelled with their guests,
     because an answer that says what a guest said beats a refusal.
     """
-    if not _ASKS_HIS_VIEW.search(query) or _ABOUT_GUESTS.search(query):
+    if not asks.search(query) or _ABOUT_GUESTS.search(query):
         return hits
     own = [h for h in hits if not title_guests(h.title)]
     return own if len(own) >= 3 else hits
@@ -927,6 +995,7 @@ _NO_EM_DASH = (
 ELON_SYSTEM_PROMPT += _NO_EM_DASH
 MCG_SYSTEM_PROMPT += _NO_EM_DASH
 THREADGUY_SYSTEM_PROMPT += _NO_EM_DASH
+RASMR_SYSTEM_PROMPT += _NO_EM_DASH
 SYSTEM_PROMPT += _NO_EM_DASH
 
 
@@ -1249,7 +1318,8 @@ class PodcastIndex:
         # excerpts did not mention anyone called ThreadGuy.
         self._system_prompt = {"elon": ELON_SYSTEM_PROMPT,
                                "mcg": MCG_SYSTEM_PROMPT,
-                               "threadguy": THREADGUY_SYSTEM_PROMPT}.get(
+                               "threadguy": THREADGUY_SYSTEM_PROMPT,
+                               "rasmr": RASMR_SYSTEM_PROMPT}.get(
                                    self._namespace, SYSTEM_PROMPT)
         self._ledger = ledger
         settings = get_settings()
@@ -1959,7 +2029,7 @@ class PodcastIndex:
                          "text": self._format(
                              hits, about=speaker_asked_about(query, hits),
                              guests_from_title=(
-                                 self._namespace == "threadguy"))},
+                                 self._namespace in HOSTED_CHANNELS))},
                         {"type": "text", "text": query,
                          "cache_control": {"type": "ephemeral"}},
                         # Per-surface style, added to the user turn rather
@@ -2007,8 +2077,8 @@ class PodcastIndex:
 
     async def retrieve(self, query: str, top_k: int | None = None) -> list[PodcastHit]:
         hits = await self._retrieve(query, top_k or self._settings.retrieval_top_k)
-        if self._namespace == "threadguy":
-            hits = host_view_only(query, hits)
+        if self._namespace in HOSTED_CHANNELS:
+            hits = host_view_only(query, hits, HOSTED_CHANNELS[self._namespace])
         return hits
 
     async def search(

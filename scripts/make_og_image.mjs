@@ -26,6 +26,7 @@ const PAGES = {
   calls: universal("calls", "og-calls.png"),
   posts: universal("posts", "og-posts.png"),
   guests: universal("guests", "og-guests.png"),
+  rasmr: universal("rasmr", "og-rasmr.png"),
 };
 const CARDS = {
   default: { html: "og-card.html", png: "og-image.png" },

@@ -433,6 +433,16 @@ async def lifespan(app: FastAPI):
         logger.warning("the ThreadGuy archive did not start: %s", exc)
         app.state.threadguy = None
 
+    # rasmr's streams and interviews. Same rule: only when there is a shelf.
+    # Not given to the front door or to the bot yet: the page is up for a
+    # look first.
+    try:
+        app.state.rasmr = (PodcastIndex(ledger=app.state.usage, namespace="rasmr")
+                           if _rasmr_episodes() else None)
+    except Exception as exc:                                    # noqa: BLE001
+        logger.warning("the rasmr archive did not start: %s", exc)
+        app.state.rasmr = None
+
     # What Ansem wrote on X, as a source of its own. Built only when the
     # index has been filled, which the coverage file is the record of.
     # Not given to the front door or to the bot: see app/posts.py.
@@ -457,7 +467,8 @@ async def lifespan(app: FastAPI):
                           ("elon", _shelf_of(_elon_episodes)),
                           ("mcg", _shelf_of(_mcg_episodes)),
                           ("tradfi", _shelf_of(_tradfi_episodes)),
-                          ("threadguy", _shelf_of(_threadguy_episodes))):
+                          ("threadguy", _shelf_of(_threadguy_episodes)),
+                          ("rasmr", _shelf_of(_rasmr_episodes))):
         _follow = getattr(getattr(app.state, _name, None), "follow", None)
         if _follow is not None:
             _follow(_shelf)
@@ -1174,6 +1185,7 @@ for _path, _target in (("/home", "/demo/home.html"),
                        ("/threadguy", "/demo/threadguy.html"),
                        ("/threadguy/tokens", "/demo/threadguy-assets.html"),
                        ("/threadguy/assets", "/demo/threadguy-assets.html"),
+                       ("/rasmr", "/demo/rasmr.html"),
                        ("/record", "/demo/finance.html"),
                        ("/mcg/tokens", "/demo/mcg-assets.html"),
                        ("/calls", "/demo/calls.html"),
@@ -2974,6 +2986,164 @@ def _threadguy_payload(question: str, result) -> dict:
         row = shelf.get(data.get("episode_id")) or {}
         data["episode_seconds"] = int(float(row.get("seconds") or 0))
         data["url"] = row.get("url", "")
+        hits.append(data)
+    return {"question": question, "answer": result.answer, "hits": hits}
+
+
+# --- rasmr ---------------------------------------------------------------------
+#
+# His YouTube channel, streams and interviews, plus the broadcasts he ran
+# only on X. The shelf is written by scripts/ingest_mcg.py --archive rasmr
+# and scripts/index_rasmr_x_broadcasts.py. Most of his streams go out on X
+# and YouTube at once; data/rasmr_broadcast_links.json pairs the two, each
+# pair measured by ear (scripts/pair_rasmr_broadcasts.py), so a moment can
+# open on X at the same second: X second = YouTube second + offset.
+RASMR_INDEX = _ROOT / "data" / "rasmr_index.json"
+RASMR_LINKS = _ROOT / "data" / "rasmr_broadcast_links.json"
+_RASMR_CACHE: list[dict] | None = None
+_RASMR_LINKS_CACHE: dict | None = None
+
+
+def _rasmr_episodes() -> list[dict]:
+    """rasmr's shelf: titles, dates, runtimes. The passages are in the index."""
+    global _RASMR_CACHE
+    if _RASMR_CACHE is not None:
+        return _RASMR_CACHE
+    try:
+        rows = json.loads(RASMR_INDEX.read_text())
+        _RASMR_CACHE = rows if isinstance(rows, list) else list(rows.values())
+    except Exception as exc:                                    # noqa: BLE001
+        logger.warning("could not load the rasmr index: %s", exc)
+        _RASMR_CACHE = []
+    return _RASMR_CACHE
+
+
+def _rasmr_links() -> dict:
+    """YouTube id -> the same stream on X, and how far apart the two run."""
+    global _RASMR_LINKS_CACHE
+    if _RASMR_LINKS_CACHE is not None:
+        return _RASMR_LINKS_CACHE
+    try:
+        _RASMR_LINKS_CACHE = json.loads(RASMR_LINKS.read_text())
+    except Exception as exc:                                    # noqa: BLE001
+        logger.warning("could not load the rasmr X pairs: %s", exc)
+        _RASMR_LINKS_CACHE = {}
+    return _RASMR_LINKS_CACHE
+
+
+def _rasmr_on_x(episode_id: str) -> dict:
+    """The X broadcast a YouTube stream is the same as, if it has one."""
+    pair = _rasmr_links().get(episode_id) or {}
+    broadcast = str(pair.get("broadcast") or "")
+    if not re.fullmatch(r"https://x\.com/i/broadcasts/[A-Za-z0-9]+", broadcast):
+        return {}
+    try:
+        offset = int(pair.get("offset") or 0)
+    except (TypeError, ValueError):
+        return {}
+    return {"x_broadcast": broadcast, "x_offset": offset}
+
+
+@app.get("/v1/rasmr/archive", dependencies=[Depends(public_rate_limit)])
+async def rasmr_archive() -> dict:
+    """What rasmr's archive holds, for the readout the page opens with."""
+    episodes = _rasmr_episodes()
+    if not episodes:
+        raise HTTPException(status_code=503, detail="unavailable")
+    dates = sorted(e.get("published_at", "") for e in episodes
+                   if e.get("published_at"))
+    return {
+        "episodes": len(episodes),
+        "hours": round(sum(float(e.get("seconds") or 0)
+                           for e in episodes) / 3600, 1),
+        "first": dates[0] if dates else "",
+        "last": dates[-1] if dates else "",
+        "on_x": sum(1 for e in episodes
+                    if e.get("source") == "x" or _rasmr_on_x(e.get("id", ""))),
+    }
+
+
+@app.get("/v1/rasmr/episodes", dependencies=[Depends(public_rate_limit)])
+async def rasmr_episodes() -> list[dict]:
+    """The shelf, newest first, each stream with its X twin when it has one."""
+    return sorted(
+        ({"episode_id": e.get("id", ""), "title": e.get("title", ""),
+          "url": e.get("url", ""),
+          "published_at": e.get("published_at", ""),
+          "seconds": int(float(e.get("seconds") or 0)),
+          "format": e.get("format", ""),
+          **_rasmr_on_x(e.get("id", ""))}
+         for e in _rasmr_episodes()),
+        key=lambda e: e["published_at"], reverse=True)
+
+
+@app.get("/v1/rasmr/summaries", dependencies=[Depends(public_rate_limit)])
+async def rasmr_summaries() -> dict:
+    """None written yet. The page asks, and draws its shelf either way."""
+    return {"count": 0, "summaries": {}}
+
+
+@app.post("/v1/rasmr/search",
+          dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
+                        Depends(daily_budget), Depends(per_client_daily)])
+async def rasmr_search(
+    body: PodcastSearchRequest,
+    request: Request,
+    answers: AnswerCache = Depends(get_answers),
+) -> dict:
+    """Ask rasmr's archive."""
+    _track("rasmr_searches", q=body.query[:120])
+    index = getattr(request.app.state, "rasmr", None)
+    if index is None:
+        raise HTTPException(status_code=503, detail="The archive is not loaded.")
+    key = make_key(_timed(body.query), surface="rasmr-v1", top_k=body.top_k)
+    cached = answers.get(key)
+    if cached is not None:
+        per_client_daily.refund(request)
+        return _rasmr_payload(body.query, cached)
+    try:
+        result = await index.search(body.query, top_k=body.top_k)
+    except anthropic.RateLimitError as exc:
+        raise HTTPException(status_code=429,
+                            detail="Rate limited; retry shortly.") from exc
+    except anthropic.APIError as exc:
+        logger.error("Anthropic error on the rasmr archive: %s",
+                     type(exc).__name__)
+        raise HTTPException(status_code=502,
+                            detail="Model provider error.") from exc
+    answers.put(key, result)
+    return _rasmr_payload(body.query, result)
+
+
+@app.post("/v1/rasmr/search/stream",
+          dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
+                        Depends(daily_budget), Depends(per_client_daily)])
+async def rasmr_search_stream(
+    body: PodcastSearchRequest, request: Request,
+    answers: AnswerCache = Depends(get_answers),
+) -> StreamingResponse:
+    """Passages first, answer after, like the other archives."""
+    _track("rasmr_searches", q=body.query[:120], stream=True)
+    index = getattr(request.app.state, "rasmr", None)
+    if index is None:
+        raise HTTPException(status_code=503, detail="The archive is not loaded.")
+    shelf = _rasmr_episodes()
+    lengths = {e.get("id"): int(float(e.get("seconds") or 0)) for e in shelf}
+    urls = {e.get("id"): e.get("url", "") for e in shelf}
+    return _archive_stream(index, body.query, body.top_k, lengths, answers,
+                           surface="rasmr-stream-v1", urls=urls)
+
+
+def _rasmr_payload(question: str, result) -> dict:
+    """The page's shape, with the X twin of each stream that has one."""
+    shelf = {e.get("id", ""): e for e in _rasmr_episodes()}
+    hits = []
+    for hit in (result.hits or []):
+        data = hit.model_dump() if hasattr(hit, "model_dump") else dict(hit)
+        row = shelf.get(data.get("episode_id")) or {}
+        data["episode_seconds"] = int(float(row.get("seconds") or 0))
+        data["url"] = row.get("url", "")
+        data.update(_rasmr_on_x(data.get("episode_id", "")))
         hits.append(data)
     return {"question": question, "answer": result.answer, "hits": hits}
 
