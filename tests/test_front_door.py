@@ -17,6 +17,7 @@ names the endpoint actually sends.
 
 from __future__ import annotations
 
+import re
 import sys
 from pathlib import Path
 
@@ -217,7 +218,7 @@ def test_the_sections_are_numbered_in_the_order_they_appear():
     """Inserting the demo above the ranking left two sections numbered
     01 for a while, which is the sort of thing only a reader notices."""
     for n, sel in (("01", "#asked-sect"), ("02", "#archive-sect"),
-                   ("03", ".board"), ("04", "#behaves")):
+                   ("03", ".board"), ("04", "#more"), ("05", "#behaves")):
         assert f'{sel} h2::before{{content:"{n}"}}' in PAGE \
             or f'{sel} h2::before{{content:"{n}"}} ' in PAGE, f"{sel} is not {n}"
 
@@ -322,3 +323,35 @@ def test_the_answer_starts_on_the_pages_left_edge():
     out = PAGE.split("  #out{")[1].split("}")[0]
     assert "max-width" not in out and "auto" not in out
     assert "margin:64px 0 54px" in out
+
+
+def test_every_question_card_has_the_frame_it_quotes():
+    """Each card shows the picture at the second it cites, served from
+    here. A card whose frame is missing would fall back to no picture,
+    which is safe and still wrong, so the files are checked too."""
+    cards = re.findall(r'vid:"([\w-]{11})", at:(\d+)', PAGE)
+    assert len(cards) >= 4
+    for vid, at in cards:
+        frame = ROOT / "demo" / "moments" / f"{vid}-{at}.webp"
+        assert frame.is_file(), frame
+        assert frame.read_bytes()[8:12] == b"WEBP"
+        assert frame.stat().st_size < 120_000, f"{frame.name} is heavy for a card"
+    assert '"/demo/moments/" + m.vid + "-" + m.at + ".webp"' in PAGE
+
+
+def test_what_the_site_does_besides_search_is_on_the_front_door():
+    """The calls board, the token pages, clips, the bot and the API were
+    all live and none of them was reachable from the page people land on."""
+    more = PAGE.split('id="more"')[1].split("</section>")[0]
+    for href in ("/calls", "/demo/assets.html", "/mcg/assets", "/threadguy/tokens",
+                 "https://x.com/mbubbleSearch", "/llms.txt"):
+        assert f'href="{href}"' in more, href
+    assert 'target="_blank" rel="noopener"' in more
+    assert '<a href="/calls">Calls board</a>' in PAGE.split("<footer>")[1]
+    assert "\u2014" not in more and "\u2013" not in more
+
+
+def test_the_record_says_it_is_our_own_collection():
+    """It reads like a show next to four shows, and it is not one."""
+    assert "in a collection of our own rather than one show" in PAGE
+

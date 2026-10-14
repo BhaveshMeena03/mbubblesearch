@@ -129,13 +129,20 @@
 
   /* ── channels: the instrument ─────────────────────────────────────── */
   .board{margin:54px 0 0;border-top:1px solid var(--edge);padding-top:20px}
-  .board h2,.sect h2{font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;
-    text-transform:uppercase;color:var(--ink-3);font-weight:500;margin:0 0 20px;
-    display:flex;align-items:center;gap:12px}
-  .board h2::before,.sect h2::before{color:var(--signal);font-size:10.5px}
+  /* A section's name is a heading, set in the headline's serif. It was a
+     10px label in grey capitals and read as a caption to the section above
+     rather than the start of a new one. The number stays small and amber,
+     on the same baseline, as the index it is. */
+  .board h2,.sect h2{font-family:"Instrument Serif",Georgia,serif;font-size:36px;
+    line-height:1.08;letter-spacing:-.01em;color:var(--ink);font-weight:400;
+    margin:0 0 12px;display:flex;align-items:baseline;gap:14px}
+  .board h2::before,.sect h2::before{color:var(--signal);font-family:var(--mono);
+    font-size:12px;letter-spacing:.18em;font-weight:500;flex:none}
+  @media(max-width:640px){.board h2,.sect h2{font-size:29px;gap:11px}}
   #asked-sect h2::before{content:"01"}
   #archive-sect h2::before{content:"02"}
-  .board h2::before{content:"03"} #behaves h2::before{content:"04"}
+  .board h2::before{content:"03"} #more h2::before{content:"04"}
+  #behaves h2::before{content:"05"}
   .chan{display:grid;grid-template-columns:1fr 128px;gap:4px 18px;
     align-items:center;padding:18px 20px 18px 22px;margin-bottom:8px;
     position:relative;border:1px solid var(--edge);border-radius:3px;
@@ -207,7 +214,30 @@
     transition:border-color var(--quick) var(--ease),
                background var(--quick) var(--ease),transform var(--quick) var(--ease)}
   .moment::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
-    background:var(--c);opacity:.6;transition:opacity var(--quick) var(--ease)}
+    background:var(--c);opacity:.6;transition:opacity var(--quick) var(--ease);z-index:2}
+  /* The frame at the second itself: the person, mid-sentence, at the
+     moment the card quotes. Grabbed once and served from here
+     (demo/moments/<video>-<second>.webp), so the page does not lean on
+     YouTube's thumbnails, which show whatever the uploader picked. */
+  .moment{overflow:hidden}
+  .moment .thumb{position:relative;margin:-22px -24px 18px;aspect-ratio:16/9;
+    background:#000;overflow:hidden}
+  .moment .thumb img{display:block;width:100%;height:100%;object-fit:cover;
+    opacity:.82;transition:opacity var(--quick) var(--ease),transform var(--slow) var(--ease)}
+  .moment .thumb::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(180deg,transparent 55%,rgba(6,7,10,.7))}
+  .moment .thumb .play{position:absolute;left:50%;top:50%;z-index:1;width:46px;height:46px;
+    margin:-23px 0 0 -23px;border-radius:50%;background:rgba(6,7,10,.62);
+    border:1px solid rgba(255,255,255,.28);display:grid;place-items:center;
+    transition:background var(--quick) var(--ease),border-color var(--quick) var(--ease)}
+  .moment .thumb .play::before{content:"";margin-left:3px;border-style:solid;
+    border-width:7px 0 7px 12px;border-color:transparent transparent transparent var(--ink)}
+  .moment .thumb .at{position:absolute;right:10px;bottom:9px;z-index:1;
+    font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink);
+    background:rgba(6,7,10,.72);padding:3px 7px;border-radius:2px}
+  .moment:hover .thumb img,.moment.on .thumb img{opacity:1;transform:scale(1.025)}
+  .moment:hover .thumb .play{background:var(--c);border-color:var(--c)}
+  .moment:hover .thumb .play::before{border-left-color:#06070a}
   .moment:hover{border-color:var(--edge-2);background:#10131a;transform:translateY(-2px)}
   .moment:hover::before{opacity:1}
   .moment:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
@@ -359,6 +389,36 @@
   .player{margin-top:12px;width:100%;aspect-ratio:16/9;border:0;border-radius:2px}
 
   .sect{margin:54px 0 0;border-top:1px solid var(--edge);padding-top:20px}
+  /* What the site does besides answer. Cards and not links in a row,
+     because each one needs a sentence to say what it is. A card holds
+     links rather than being one, since the token card goes three places. */
+  /* Five cards: three over two, so none of them is left alone on a row.
+     Two columns on a tablet with the last one across both, one on a phone. */
+  .tools{display:grid;gap:8px;grid-template-columns:repeat(6,minmax(0,1fr))}
+  .tools .tool{grid-column:span 2}
+  .tools .tool:nth-child(n+4){grid-column:span 3}
+  @media(max-width:900px){
+    .tools{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .tools .tool,.tools .tool:nth-child(n+4){grid-column:span 1}
+    .tools .tool:last-child{grid-column:1/-1}
+  }
+  @media(max-width:640px){
+    .tools{grid-template-columns:minmax(0,1fr)}
+  }
+  .tool{display:flex;flex-direction:column;gap:7px;padding:18px 20px 16px;
+    border:1px solid var(--edge);border-radius:3px;background:var(--deck);
+    transition:border-color var(--quick) var(--ease)}
+  .tool:hover,.tool:focus-within{border-color:var(--edge-2)}
+  .tool .k{font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--signal)}
+  .tool h3{margin:0;font-size:16px;letter-spacing:-.1px}
+  .tool p{margin:0;color:var(--ink-2);font-size:14.5px}
+  .tool .to{display:flex;gap:6px 16px;flex-wrap:wrap;margin-top:auto;padding-top:6px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.08em}
+  .tool .to a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--edge-2);
+    padding-bottom:1px;transition:color .2s,border-color .2s}
+  .tool .to a:hover{color:var(--signal);border-color:var(--signal)}
+  .tool .to a:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
   .rules{display:grid;gap:0;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
   .rules > div{padding:4px 30px 4px 0;border-left:1px solid var(--edge);
     padding-left:26px}
@@ -456,7 +516,7 @@
   </section>
 
   <section class="sect" id="asked-sect">
-    <h2>four questions, four answers</h2>
+    <h2>Four questions, four answers</h2>
     <p class="note">What the archive gives back, read off the transcript at
       the second it was said. Pick one to hear it.</p>
     <div class="moments" id="moments"></div>
@@ -464,7 +524,7 @@
   </section>
 
   <section class="sect" id="archive-sect">
-    <h2>what they actually talk about</h2>
+    <h2>What they actually talk about</h2>
     <p class="note">Every ticker the shows named, counted across Market Bubble
       and MCG Live. Pick one to hear it being discussed.</p>
     <div class="ranks" id="ranks"></div>
@@ -472,12 +532,56 @@
   </section>
 
   <section class="board rise" style="animation-delay:.38s">
-    <h2>channels</h2>
+    <h2>Channels</h2>
     <div id="chans"></div>
   </section>
 
+  <section class="sect" id="more">
+    <h2>More than search</h2>
+    <div class="tools">
+      <div class="tool">
+        <span class="k">calls board</span>
+        <h3>What they called, and what it did</h3>
+        <p>Every time Ansem or FaZe Banks said on air that they own something,
+          named a pick or put a number on it, plus the same from Ansem's posts.
+          Quoted word for word and priced from that day to today. The misses
+          are there too.</p>
+        <span class="to"><a href="/calls">Open the board</a></span>
+      </div>
+      <div class="tool">
+        <span class="k">token dashboards</span>
+        <h3>Every token each show discussed</h3>
+        <p>Every token, stock and index, ranked by how deeply it was covered,
+          with the moment it came up playable on the page.</p>
+        <span class="to"><a href="/demo/assets.html">Market Bubble</a><a href="/mcg/assets">MCG Live</a><a href="/threadguy/tokens">ThreadGuy</a></span>
+      </div>
+      <div class="tool">
+        <span class="k">clips</span>
+        <h3>Cut any moment into a video</h3>
+        <p>Search a show and press make clip on a moment. You get up to two
+          minutes in 1080p, with the words burned in from the transcript,
+          ready to post.</p>
+        <span class="to"><a href="/">Market Bubble</a><a href="/mcg">MCG Live</a><a href="/threadguy">ThreadGuy</a></span>
+      </div>
+      <div class="tool">
+        <span class="k">on x</span>
+        <h3>Ask it in public</h3>
+        <p>Tag @mbubbleSearch on X with a question. It answers in the
+          thread, with the quote and a link to the second it was said.</p>
+        <span class="to"><a href="https://x.com/mbubbleSearch" target="_blank" rel="noopener">@mbubbleSearch</a></span>
+      </div>
+      <div class="tool">
+        <span class="k">for agents</span>
+        <h3>An open API</h3>
+        <p>JSON, no key, answers streamed as they are written, and an
+          llms.txt that says what is indexed and how to ask.</p>
+        <span class="to"><a href="/llms.txt">llms.txt</a></span>
+      </div>
+    </div>
+  </section>
+
   <section class="sect" id="behaves">
-    <h2>how it behaves</h2>
+    <h2>How it behaves</h2>
     <div class="rules">
       <div><span class="n">01</span><h3>It answers only from the transcripts</h3>
         <p>Every claim carries the recording and the second it was said. If the
@@ -501,7 +605,7 @@
     <nav>
       <a href="/">Market Bubble</a><a href="/mcg">MCG Live</a>
       <a href="/elon">Elon Musk</a><a href="/finance">The Record</a><a href="/threadguy">ThreadGuy</a>
-      <a href="/llms.txt">llms.txt</a>
+      <a href="/calls">Calls board</a><a href="/llms.txt">llms.txt</a>
     </nav>
   </footer>
 </div>
@@ -523,7 +627,7 @@
     {k:"elon", name:"Elon Musk", href:"/elon", size:52, n:24,
      meta:"{n} long-form interviews, 2018 to 2026. Rogan, Lex Fridman, Dwarkesh Patel, All-In, the Economist."},
     {k:"tradfi", name:"The Record", href:"/finance", size:48, n:45,
-     meta:"{n} recordings from the people who run the money. Fink, Dalio, Powell, Warsh, Dimon, Wood, Saylor, CZ."},
+     meta:"{n} interviews and press conferences from the people who run the money, in a collection of our own rather than one show: Fink, Dalio, Powell, Warsh, Dimon, Wood, Saylor, CZ."},
     {k:"threadguy", name:"ThreadGuy", href:"/threadguy", size:793, n:620,
      meta:"{n} streams and interviews. The daily market open, and the guests he has on."}
   ];
@@ -939,9 +1043,16 @@
     el.setAttribute("aria-label",
       m.q + " Play " + m.who + " at " + stamp(m.at) + ", " + m.where);
     el.style.setProperty("--c", css(VAR[m.k]));
-    el.innerHTML = '<div class="q"></div><div class="said"></div>'
+    el.innerHTML = '<div class="thumb"><img alt="" loading="lazy" decoding="async">'
+                 + '<span class="play"></span><span class="at"></span></div>'
+                 + '<div class="q"></div><div class="said"></div>'
                  + '<div class="who"></div>'
                  + '<div class="where"><span></span><em></em><span></span></div>';
+    var shot = el.querySelector(".thumb img");
+    // A missing frame takes its box with it rather than leaving a black one.
+    shot.onerror = function(){ el.querySelector(".thumb").remove(); };
+    shot.src = "/demo/moments/" + m.vid + "-" + m.at + ".webp";
+    el.querySelector(".thumb .at").textContent = stamp(m.at);
     el.querySelector(".q").append(m.q);
     el.querySelector(".said").textContent = "\u201c" + m.said + "\u201d";
     el.querySelector(".who").textContent = m.who;

@@ -27,6 +27,7 @@
   ];
 
   var TOOLS = [
+    { href: "/calls",            name: "Calls board" },
     { href: "/demo/assets.html", name: "Market Bubble tokens" },
     { href: "/mcg/assets",       name: "MCG tokens" },
     { href: "/threadguy/tokens", name: "ThreadGuy tokens" }
