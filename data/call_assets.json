@@ -138,5 +138,12 @@
   "yahoo": "SI=F",
   "answers_to": "Silver",
   "ticker": "SILVER"
+ },
+ "SPX": {
+  "name": "S&P 500",
+  "class": "index",
+  "yahoo": "^GSPC",
+  "answers_to": "S&P 500",
+  "ticker": "SPX"
  }
 }

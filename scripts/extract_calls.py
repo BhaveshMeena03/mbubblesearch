@@ -20,6 +20,16 @@ Only the live broadcasts are read. The YouTube uploads are cuts of the
 same shows, so reading both would find every call twice, and only the
 broadcast plays at the second on X.
 
+    env -u ANTHROPIC_BASE_URL .venv/bin/python scripts/extract_calls.py --posts
+
+reads what Ansem posted instead: his own posts and the comments he wrote
+above posts he quoted, from data/ansem_posts.json. Replies are left out,
+because a reply is half an exchange and the other half is not stored. No
+voice check is needed there, since a post on his account is his, and the
+quote is held against the post. The posts a candidate came from are
+written to data/calls_posts.json, which ships, so a test can hold every
+quoted post against the row that quotes it.
+
 The model's raw replies are cached per show in data/.calls_cache/, so a
 run that dies picks up where it stopped and a second run costs nothing.
 """
@@ -40,12 +50,17 @@ sys.path.insert(0, str(ROOT))
 from anthropic import AsyncAnthropic  # noqa: E402
 
 from app import calls  # noqa: E402
+from app import posts as posts_page  # noqa: E402
 from app.config import anthropic_client_kwargs, get_settings, redact  # noqa: E402
 
 EPISODES = ROOT / "data" / "episodes.json"
 LABELS = ROOT / "data" / "speaker_map.json"
 CACHE = ROOT / "data" / ".calls_cache"
 OUT = ROOT / "data" / "calls_candidates.json"
+POSTS = ROOT / "data" / "ansem_posts.json"
+QUOTED = ROOT / "data" / "calls_posts.json"
+# Bump when POSTS_SYSTEM changes and every post should be read again.
+POSTS_PROMPT_VERSION = 1
 
 # Lines per request, and how many are repeated at the start of the next
 # one so a call that straddles the cut is whole in one of them.
@@ -138,6 +153,143 @@ call unless he says he owns it, would buy it, or puts a number on it.\
 """
 
 
+POSTS_TOOL = {
+    "name": "record_calls",
+    "description": "Record every call he makes in these posts.",
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "calls": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "post": {"type": "string",
+                                 "description": "The id of the post the call is in."},
+                        "asset": TOOL["input_schema"]["properties"]["calls"]["items"]["properties"]["asset"],
+                        "symbol": TOOL["input_schema"]["properties"]["calls"]["items"]["properties"]["symbol"],
+                        "asset_class": TOOL["input_schema"]["properties"]["calls"]["items"]["properties"]["asset_class"],
+                        "stance": TOOL["input_schema"]["properties"]["calls"]["items"]["properties"]["stance"],
+                        "kind": {"type": "string", "enum": list(calls.KINDS)},
+                        "quote": {"type": "string",
+                                  "description": "6 to 40 consecutive words copied exactly from that post that contain the call."},
+                        "target": TOOL["input_schema"]["properties"]["calls"]["items"]["properties"]["target"],
+                    },
+                    "required": ["post", "asset", "symbol", "asset_class",
+                                 "stance", "kind", "quote", "target"],
+                },
+            }
+        },
+        "required": ["calls"],
+    },
+}
+
+POSTS_SYSTEM = """\
+You read posts written on X by Ansem (@blknoiz06), a trader and co-host of \
+the Market Bubble show, and record the CALLS he makes in them.
+
+Each post is given with its id, its date and its kind: "post" is his own \
+post; "quote" is the comment he wrote above somebody else's post, and you \
+are shown only his comment. Every word you see is his.
+
+A call is him putting HIMSELF on record about ONE specific tradeable \
+asset. There are four kinds:
+- holding: he says he owns it, is long or short it, bought it or is buying it.
+- pick: he names it as what he would buy, his pick, his highest conviction.
+- target: he predicts a specific price or market cap for it.
+- exit: he says he sold it or closed the position.
+
+Record a call only when ALL of this is true:
+- He is speaking for himself, now. Not reporting what happened to a price, \
+not a question, not a joke, not a hypothetical, not a story about an old \
+trade, not a giveaway, not a list of what an episode covered.
+- It is a view he would stand behind, not a trade. Not a hedge, not a \
+position taken off the chart for a few days, not a setup with an entry, a \
+stop and a target.
+- It is one named asset: a token, a stock, a commodity. Not a category, \
+not a prediction-market bet, not a sponsor.
+- The quote is 6 to 40 consecutive words copied EXACTLY from that one \
+post, and the asset is named in the quote.
+
+Most posts contain no calls. Return an empty list rather than stretch. \
+Praising a team or saying a chart looks good is not a call unless he says \
+he owns it, would buy it, or puts a number on it.\
+"""
+
+
+def posts_worth_reading() -> list[dict]:
+    """His own posts and his comments on quoted posts, as he typed them."""
+    found = []
+    for post in json.loads(POSTS.read_text()):
+        kind = posts_page.kind_of(post)
+        text = posts_page.readable(post.get("text"))
+        if kind == "reply" or text.startswith("RT @"):
+            continue
+        if posts_page.day_number(post.get("created_at")) is None:
+            continue
+        # Too short to hold an asset, a stance and six words of quote.
+        if len(calls.words(text)) < calls.MIN_WORDS + 2:
+            continue
+        found.append({"id": str(post["id"]), "created_at": post["created_at"],
+                      "kind": kind, "text": text})
+    return sorted(found, key=lambda p: (p["created_at"], p["id"]))
+
+
+def post_windows(found: list[dict]) -> list[str]:
+    out, current, size = [], [], 0
+    for post in found:
+        block = (f'<post id="{post["id"]}" on="{post["created_at"][:10]}" '
+                 f'kind="{post["kind"]}">\n{post["text"]}\n</post>')
+        if current and size + len(block) > WINDOW_CHARS:
+            out.append("\n\n".join(current))
+            current, size = [], 0
+        current.append(block)
+        size += len(block)
+    if current:
+        out.append("\n\n".join(current))
+    return out
+
+
+async def read_posts(client, model: str, force: bool) -> dict:
+    """Candidates from his posts, and the posts they came from."""
+    found = posts_worth_reading()
+    by_id = {p["id"]: p for p in found}
+    CACHE.mkdir(exist_ok=True)
+    kept = CACHE / "posts.json"
+    raw = None
+    if kept.exists() and not force:
+        saved = json.loads(kept.read_text())
+        if saved.get("prompt") == POSTS_PROMPT_VERSION and saved.get("posts") == len(found):
+            raw = saved["raw"]
+    if raw is None:
+        gate = asyncio.Semaphore(MAX_CONCURRENCY)
+        parts = await asyncio.gather(*(
+            ask(client, model, w, gate, system=POSTS_SYSTEM, tool=POSTS_TOOL)
+            for w in post_windows(found)))
+        raw = [claim for part in parts for claim in part if isinstance(claim, dict)]
+        kept.write_text(json.dumps({"prompt": POSTS_PROMPT_VERSION,
+                                    "posts": len(found), "raw": raw}, indent=1))
+    refused: Counter = Counter()
+    passed = []
+    for claim in raw:
+        post = by_id.get(str(claim.get("post") or ""))
+        if post is None:
+            refused["no such post"] += 1
+            continue
+        row, why = calls.accept_post(claim, post, posts_page.AUTHOR)
+        if row is None:
+            refused[why] += 1
+        else:
+            passed.append(row)
+    rows = calls.one_per_day(passed)
+    quoted = {r["post_id"]: by_id[r["post_id"]] for r in rows}
+    QUOTED.write_text(json.dumps(dict(sorted(quoted.items())), indent=1,
+                                 ensure_ascii=False) + "\n")
+    print(f"  posts: {len(found)} read  {len(raw)} proposed  {len(rows)} kept  {dict(refused)}")
+    return {"read": len(found), "proposed": len(raw), "refused": dict(refused),
+            "candidates": rows}
+
+
 def windows(segments: list[dict], labels: dict[str, str]) -> list[str]:
     """The show as numbered, voice-marked lines, a few thousand characters
     at a time."""
@@ -169,15 +321,16 @@ USAGE = Counter()
 
 
 async def ask(client: AsyncAnthropic, model: str, window: str,
-              gate: asyncio.Semaphore) -> list[dict]:
+              gate: asyncio.Semaphore, *, system: str | None = None,
+              tool: dict | None = None) -> list[dict]:
     async with gate:
         for attempt in range(4):
             try:
                 reply = await client.messages.create(
                     model=model, max_tokens=2048,
-                    system=[{"type": "text", "text": SYSTEM,
+                    system=[{"type": "text", "text": system or SYSTEM,
                              "cache_control": {"type": "ephemeral"}}],
-                    tools=[TOOL],
+                    tools=[tool or TOOL],
                     tool_choice={"type": "tool", "name": "record_calls"},
                     messages=[{"role": "user",
                                "content": f"<excerpt>\n{window}\n</excerpt>"}],
@@ -236,10 +389,12 @@ async def main() -> int:
     ap.add_argument("--episode", action="append", default=[],
                     help="a broadcast id, e.g. x-2108360500283335093 (repeatable)")
     ap.add_argument("--all", action="store_true", help="every live show")
+    ap.add_argument("--posts", action="store_true",
+                    help="his posts on X instead of the shows")
     ap.add_argument("--force", action="store_true", help="ignore the cache")
     args = ap.parse_args()
-    if not args.all and not args.episode:
-        ap.error("pass --episode ID, or --all")
+    if not args.all and not args.episode and not args.posts:
+        ap.error("pass --episode ID, --all, or --posts")
 
     settings = get_settings()
     model = os.environ.get("CALLS_MODEL", settings.search_model)
@@ -253,6 +408,10 @@ async def main() -> int:
 
     before = json.loads(OUT.read_text()) if OUT.exists() else {"shows": {}}
     report = dict(before.get("shows", {}))
+    from_posts = before.get("posts")
+    if args.posts:
+        from_posts = await read_posts(client, model, args.force)
+        shows = []
     for show in shows:
         marks = labels.get(show["episode_id"], {})
         if not marks:
@@ -275,9 +434,14 @@ async def main() -> int:
         }
         print(f"  {str(show.get('published_at'))[:10]}  {len(raw):3} proposed  "
               f"{len(kept):3} kept  {dict(refused)}  {show['title'][:44]}")
-    OUT.write_text(json.dumps({"shows": report}, indent=1))
+    out = {"shows": report}
+    if from_posts:
+        out["posts"] = from_posts
+    OUT.write_text(json.dumps(out, indent=1, ensure_ascii=False))
     total = sum(len(s["candidates"]) for s in report.values())
-    print(f"\n{total} candidates across {len(report)} shows -> {OUT.relative_to(ROOT)}")
+    print(f"\n{total} candidates across {len(report)} shows"
+          + (f", {len(from_posts['candidates'])} from posts" if from_posts else "")
+          + f" -> {OUT.relative_to(ROOT)}")
     if USAGE:
         print(f"model: {USAGE['requests']} requests, {USAGE['input_tokens']:,} in, "
               f"{USAGE['output_tokens']:,} out")

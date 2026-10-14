@@ -86,13 +86,20 @@ CASHTAGS = {
     "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf": "$VVV",
     "0x163f8c2467924be0ae7b5347228cabf260318753": "$WLD",
 }
+# The same thing for a chain's own coin: "bitcoin:native $74k" is how
+# "$BTC $74k" comes back. The native asset of a chain is not a guess.
+NATIVE = {"bitcoin": "$BTC", "ethereum": "$ETH", "solana": "$SOL",
+          "zcash": "$ZEC", "hyperliquid": "$HYPE", "near": "$NEAR"}
+_NATIVE = re.compile(r"\b([a-z]+):native\b")
 _ONCHAIN = re.compile(r"\b(?:solana|base|ethereum|bsc|hyperliquid):(0x[0-9a-fA-F]{40}|[1-9A-HJ-NP-Za-km-z]{32,44})")
 
 
 def unknown_tokens(text: str) -> list[str]:
     """The on-chain addresses in a post that no ticker is on file for."""
-    return [m.group(0) for m in _ONCHAIN.finditer(text or "")
-            if _ticker(m.group(1)) is None]
+    return ([m.group(0) for m in _ONCHAIN.finditer(text or "")
+             if _ticker(m.group(1)) is None]
+            + [m.group(0) for m in _NATIVE.finditer(text or "")
+               if m.group(1) not in NATIVE])
 
 
 def _ticker(address: str) -> str | None:
@@ -110,6 +117,7 @@ def readable(text: object) -> str:
     """
     plain = html.unescape(str(text or ""))
     plain = _ONCHAIN.sub(lambda m: _ticker(m.group(1)) or m.group(0), plain)
+    plain = _NATIVE.sub(lambda m: NATIVE.get(m.group(1)) or m.group(0), plain)
     lines = [" ".join(line.split()) for line in plain.splitlines()]
     return re.sub(r"\n{3,}", "\n\n", "\n".join(lines)).strip()
 

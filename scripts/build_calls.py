@@ -21,6 +21,16 @@ Three files go in, all of them read by a person:
 
 One comes out, data/calls.json, which is what the site serves.
 
+A call he made in a post is built the same way, with two differences. Its
+words are held against the post, kept in data/calls_posts.json, instead of
+a transcript, and it is priced at the hour he posted, because a post has
+an exact time and a show only has the day it aired.
+
+A target with a number in it is checked: a verdict that gives "level" (and
+"by", when he named a date) gets marked reached, missed or open from the
+daily highs since. "Solana to 150 in Q3" does not get to sit beside a
+green number once the quarter has ended at 125.
+
 A candidate with no verdict does not ship. A kept call whose ticker has no
 listing on file stops the build, and so does one whose quote is no longer
 on the line it was found on, which is what a re-transcribed show looks
@@ -48,6 +58,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from app import call_prices, calls  # noqa: E402
+from app import posts as posts_page  # noqa: E402
 
 DATA = ROOT / "data"
 CANDIDATES = DATA / "calls_candidates.json"
@@ -55,12 +66,13 @@ VERDICTS = DATA / "calls_verdicts.json"
 ASSETS = DATA / "call_assets.json"
 BOARD = DATA / "calls.json"
 LABELS = DATA / "speaker_map.json"
+QUOTED = DATA / "calls_posts.json"
 PLAYERS = DATA / "broadcast_links.json"
 
 # The show is made in Los Angeles, and "the 8 October show" is the day it
 # was there. In UTC it had already become the 9th.
 HOME = ZoneInfo("America/Los_Angeles")
-CORRECTABLE = ("symbol", "stance", "kind", "target")
+CORRECTABLE = ("symbol", "stance", "kind", "target", "level", "by")
 # What a call added by hand has to say for itself. It is checked against
 # the transcript and the voice labels exactly as a proposed one is.
 BY_HAND = ("episode_id", "line", "speaker", "symbol", "stance", "kind", "quote")
@@ -102,6 +114,8 @@ def kept_calls(candidates: dict, verdicts: dict) -> list[dict]:
     """
     by_id = {c["id"]: c for show in candidates.get("shows", {}).values()
              for c in show.get("candidates", [])}
+    by_id.update({c["id"]: c for c in
+                  (candidates.get("posts") or {}).get("candidates", [])})
     stale = sorted(i for i, v in verdicts.items()
                    if v.get("keep") and not v.get("by_hand") and i not in by_id)
     if stale:
@@ -124,7 +138,7 @@ def kept_calls(candidates: dict, verdicts: dict) -> list[dict]:
                 row[field] = verdict[field]
         if verdict.get("quote"):
             row["quote"], row["recut"] = verdict["quote"], True
-        if "line" in verdict:
+        if "line" in verdict and row.get("source") != "post":
             # The same call, said better a minute later.
             row["line"], row["recut"] = int(verdict["line"]), True
         if row["stance"] not in calls.STANCES or row["kind"] not in calls.KINDS:
@@ -164,17 +178,41 @@ def placed(row: dict, episode: dict, labels: dict[str, str]) -> dict | None:
                 start_seconds=float(segments[span.first].get("t", 0.0)))
 
 
-async def fetch(symbol: str, start, end, client) -> tuple[dict, list]:
+def placed_post(row: dict, post: dict | None) -> dict | None:
+    """A call from a post, as it stands in the post on file, or None.
+
+    The quote has to be in the post word for word and must not describe a
+    hedge or a trade. What is kept is cut from the post.
+    """
+    if not post:
+        return None
+    text = " ".join(str(post.get("text") or "").replace("\u2019", "'").split())
+    span = calls.locate_in_text(row["quote"], text)
+    if span is None:
+        return None
+    start, end = span
+    if start and text[start - 1] == "$":
+        start -= 1
+    if end < len(text) and text[end] in "%+":
+        end += 1
+    said = text[start:end]
+    if calls.tactical(said):
+        return None
+    return dict(row, quote=said, posted_at=str(post["created_at"]))
+
+
+async def fetch(symbol: str, start, end, client, *, interval: str = "1d", raw: bool = False):
     for attempt in range(4):
         try:
-            got = await call_prices.chart(symbol, start, end, client=client)
+            reply = await call_prices.chart_reply(symbol, start, end, client=client,
+                                                  interval=interval)
             await asyncio.sleep(PAUSE)
-            return got
+            return reply if raw else call_prices.read_chart(reply)
         except Exception as exc:                                # noqa: BLE001
             if attempt == 3:
                 raise SystemExit(f"could not price {symbol}: {type(exc).__name__}") from exc
             await asyncio.sleep(4 * (attempt + 1))
-    return {}, []
+    return {} if raw else ({}, [])
 
 
 async def main() -> int:
@@ -187,72 +225,127 @@ async def main() -> int:
     labels = json.loads(LABELS.read_text())
     players = json.loads(PLAYERS.read_text()) if PLAYERS.exists() else {}
     assets = json.loads(ASSETS.read_text())
+    quoted = json.loads(QUOTED.read_text()) if QUOTED.exists() else {}
     rows = kept_calls(json.loads(CANDIDATES.read_text()), json.loads(VERDICTS.read_text()))
     before = ({r["id"]: r for r in json.loads(BOARD.read_text()).get("calls", [])}
               if BOARD.exists() else {})
+    today = datetime.now(UTC).date()
 
     problems, board = [], []
     async with httpx.AsyncClient(timeout=20.0) as client:
         latest: dict[str, tuple[float, str] | None] = {}
-        for row in sorted(rows, key=lambda r: (r["episode_id"], r["line"])):
-            episode = shows.get(row["episode_id"])
-            if episode is None:
-                problems.append(f"{row['id']}: the show is not in data/episodes.json")
-                continue
+
+        def named(meta: dict, asset: dict, listing: str) -> bool:
+            return call_prices.is_listing(meta, listing,
+                                          asset.get("answers_to") or asset["name"])
+
+        async def newest(listing: str, old: dict) -> tuple[float, str] | None:
+            if listing not in latest:
+                if args.offline:
+                    latest[listing] = ((old["price_last"], old["last_at"])
+                                       if old.get("price_last") else None)
+                else:
+                    _, bars = await fetch(listing, today - timedelta(days=6), today, client)
+                    got = call_prices.latest(bars)
+                    latest[listing] = (got[0], got[1].date().isoformat()) if got else None
+            return latest[listing]
+
+        async def checked(row: dict, listing: str, then_at: str, old: dict) -> dict | None:
+            """Where a priced target stands, from the daily highs since."""
+            level = row.get("level")
+            if level is None or row["stance"] != "long":
+                return None
+            was = old.get("target_check") or {}
+            if args.offline:
+                same = was.get("level") == float(level) and was.get("by") == row.get("by")
+                return was if same else None
+            reply = await fetch(listing, datetime.fromisoformat(then_at).date(), today,
+                                client, raw=True)
+            return calls.target_status(level, row.get("by"),
+                                       call_prices.read_highs(reply), today)
+
+        for row in sorted(rows, key=lambda r: r["id"]):
             ident = row["id"]
-            row = placed(row, episode, labels.get(row["episode_id"], {}))
-            if row is None:
-                problems.append(f"{ident}: the quote is not on that line in that voice, "
-                                "or it describes a hedge or a trade")
-                continue
+            from_post = row.get("source") == "post"
+            if from_post:
+                row = placed_post(row, quoted.get(row["post_id"]))
+                if row is None:
+                    problems.append(f"{ident}: the quote is not in the post on file, "
+                                    "or it describes a hedge or a trade")
+                    continue
+                when = datetime.fromisoformat(row["posted_at"].replace("Z", "+00:00"))
+                title, where = "posted on X", posts_page.address(row["post_id"])
+                if not where:
+                    problems.append(f"{ident}: the post has no address")
+                    continue
+            else:
+                episode = shows.get(row["episode_id"])
+                if episode is None:
+                    problems.append(f"{ident}: the show is not in data/episodes.json")
+                    continue
+                row = placed(row, episode, labels.get(row["episode_id"], {}))
+                if row is None:
+                    problems.append(f"{ident}: the quote is not on that line in that voice, "
+                                    "or it describes a hedge or a trade")
+                    continue
+                when = calls.aired(row["episode_id"], str(episode.get("published_at") or ""))
+                if when is None:
+                    problems.append(f"{ident}: cannot tell when the show aired")
+                    continue
+                title = " ".join(str(episode.get("title") or "").split())
+                where = link(episode, row["start_seconds"], players)
+
             asset = assets.get(row["symbol"])
             if not asset or not asset.get("yahoo") or not asset.get("name"):
-                problems.append(f"{row['id']}: no listing on file for {row['symbol'] or row['asset']!r}")
+                problems.append(f"{ident}: no listing on file for {row['symbol'] or row['asset']!r}")
                 continue
-            when = calls.aired(row["episode_id"], str(episode.get("published_at") or ""))
-            if when is None:
-                problems.append(f"{row['id']}: cannot tell when the show aired")
-                continue
-            listing, is_stock = asset["yahoo"], asset.get("class") in ("stock", "index", "commodity")
+            listing = asset["yahoo"]
+            is_stock = asset.get("class") in ("stock", "index", "commodity")
 
-            old = before.get(row["id"], {})
+            old = before.get(ident, {})
             if old.get("listing") == listing and old.get("price_then"):
                 then, then_at = old["price_then"], old["then_at"]
             elif args.offline:
-                problems.append(f"{row['id']}: no price on file for {listing} and --offline was given")
+                problems.append(f"{ident}: no price on file for {listing} and --offline was given")
                 continue
+            elif from_post:
+                # The hour he posted. Outside market hours a stock gives
+                # its last trade before the post, which is what anybody
+                # reading it could have paid next.
+                meta, bars = await fetch(listing, when.date() - timedelta(days=4),
+                                         when.date(), client, interval="1h")
+                if not named(meta, asset, listing):
+                    problems.append(f"{ident}: {listing} answered as {meta.get('longName') or meta.get('shortName')!r}")
+                    continue
+                then, then_at = call_prices.close_by(bars, when), when.date().isoformat()
             elif is_stock:
                 meta, bars = await fetch(listing, when.date() - timedelta(days=6), when.date(), client)
-                if not call_prices.is_listing(meta, listing, asset.get("answers_to") or asset["name"]):
-                    problems.append(f"{row['id']}: {listing} answered as {meta.get('longName') or meta.get('shortName')!r}")
+                if not named(meta, asset, listing):
+                    problems.append(f"{ident}: {listing} answered as {meta.get('longName') or meta.get('shortName')!r}")
                     continue
                 then = call_prices.close_by(bars, when)
                 then_at = max((s for s, _, c in bars if s <= when and c), default=when).date().isoformat()
             else:
                 mark = calls.daily_mark(when)
                 meta, bars = await fetch(listing, mark - timedelta(days=2), mark, client)
-                if not call_prices.is_listing(meta, listing, asset.get("answers_to") or asset["name"]):
-                    problems.append(f"{row['id']}: {listing} answered as {meta.get('longName') or meta.get('shortName')!r}")
+                if not named(meta, asset, listing):
+                    problems.append(f"{ident}: {listing} answered as {meta.get('longName') or meta.get('shortName')!r}")
                     continue
                 then, then_at = call_prices.at_mark(bars, mark), mark.isoformat()
             if not then:
-                problems.append(f"{row['id']}: {listing} has no price for {when.date()}")
+                problems.append(f"{ident}: {listing} has no price for {when.date()}")
                 continue
 
-            if listing not in latest:
-                if args.offline:
-                    latest[listing] = ((old["price_last"], old["last_at"])
-                                       if old.get("price_last") else None)
-                else:
-                    today = datetime.now(UTC).date()
-                    _, bars = await fetch(listing, today - timedelta(days=6), today, client)
-                    got = call_prices.latest(bars)
-                    latest[listing] = (got[0], got[1].date().isoformat()) if got else None
-            last = latest[listing]
+            last = await newest(listing, old)
+            check = await checked(row, listing, then_at, old)
+            if row.get("level") is not None and check is None:
+                problems.append(f"{ident}: the target has a level and could not be checked")
+                continue
 
             board.append({
-                "id": row["id"], "episode_id": row["episode_id"],
-                "show": " ".join(str(episode.get("title") or "").split()),
+                "id": ident, "source": "post" if from_post else "show",
+                "episode_id": "" if from_post else row["episode_id"],
+                "show": title,
                 "aired": when.isoformat(timespec="seconds"),
                 "date": when.astimezone(HOME).date().isoformat(),
                 "speaker": row["speaker"], "asset": asset["name"],
@@ -260,12 +353,13 @@ async def main() -> int:
                 "class": asset.get("class") or "crypto", "listing": listing,
                 "stance": row["stance"], "kind": row["kind"],
                 "target": row.get("target") or "", "quote": row["quote"],
-                "start_seconds": row["start_seconds"],
-                "timestamp": stamp(row["start_seconds"]),
-                "link": link(episode, row["start_seconds"], players),
+                "start_seconds": 0.0 if from_post else row["start_seconds"],
+                "timestamp": "" if from_post else stamp(row["start_seconds"]),
+                "link": where,
                 "price_then": then, "then_at": then_at,
                 "price_last": last[0] if last else None,
                 "last_at": last[1] if last else None,
+                "target_check": check,
             })
 
     if problems:
@@ -278,7 +372,13 @@ async def main() -> int:
         "priced_at": priced_at, "calls": board}, indent=1, ensure_ascii=False) + "\n")
     told = calls.tally([dict(r, moved_pct=calls.moved(r["stance"], r["price_then"], r["price_last"]))
                         for r in board if r["kind"] != "exit"])
-    print(f"{len(board)} calls -> {BOARD.relative_to(ROOT)}   {told}")
+    posted = sum(1 for r in board if r["source"] == "post")
+    print(f"{len(board)} calls ({posted} from posts) -> {BOARD.relative_to(ROOT)}   {told}")
+    for r in board:
+        if r["target_check"]:
+            c = r["target_check"]
+            print(f"  target {r['date']} {r['symbol']:6} {c['level']:>12g} "
+                  f"{c['status']:8} {c.get('on') or ''} high {c.get('high')}")
     return 0
 
 

@@ -1,4 +1,532 @@
 {
+ "post:2059000698247811141:NEAR": {
+  "keep": false
+ },
+ "post:2060164492101587122:HYPE": {
+  "keep": false
+ },
+ "post:2061117307259170824:HYPE": {
+  "keep": false
+ },
+ "post:2061445183305052615:BTC": {
+  "keep": false
+ },
+ "post:2061445565775327648:MU": {
+  "keep": false
+ },
+ "post:2061850880303899115:ZEC": {
+  "keep": false
+ },
+ "post:2061932771698688115:BB": {
+  "keep": false
+ },
+ "post:2061932771698688115:MRVL": {
+  "keep": false
+ },
+ "post:2062179316708921436:altcoins": {
+  "keep": false
+ },
+ "post:2062465977569222976:BTC": {
+  "keep": false
+ },
+ "post:2062465977569222976:ETH": {
+  "keep": false
+ },
+ "post:2062718514775867511:HYPE": {
+  "keep": false
+ },
+ "post:2063072041322909711:VVV": {
+  "keep": false
+ },
+ "post:2064142601972826253:SOL": {
+  "keep": false
+ },
+ "post:2064481631642042788:ETH": {
+  "keep": false
+ },
+ "post:2065189892418666928:SPCX": {
+  "keep": false
+ },
+ "post:2065199062723314076:HYPE": {
+  "keep": false
+ },
+ "post:2065199062723314076:VVV": {
+  "keep": false
+ },
+ "post:2065199062723314076:ZEC": {
+  "keep": true,
+  "quote": "how am i positioned in crypto? hype vvv zec"
+ },
+ "post:2065436303915626651:SPCX": {
+  "keep": false
+ },
+ "post:2065643598863831080:SPCX": {
+  "keep": false
+ },
+ "post:2065657725984309285:robostrategy": {
+  "keep": false
+ },
+ "post:2066169428463517801:SPX": {
+  "keep": true,
+  "kind": "target",
+  "target": "8,000+ at the end of the year",
+  "level": 8000,
+  "by": "2026-12-31",
+  "quote": "SPX500 is going to end the year @ 8,000+"
+ },
+ "post:2066521848280449285:JTO": {
+  "keep": true,
+  "kind": "pick",
+  "target": "",
+  "quote": "think $JTO good spot alt buy & hold here, extremely beaten down after 10/10 and general underperformance of sol alts"
+ },
+ "post:2066686111406043393:SPCX": {
+  "keep": false
+ },
+ "post:2066867318190231764:HYPE": {
+  "keep": false
+ },
+ "post:2066867318190231764:JTO": {
+  "keep": false
+ },
+ "post:2067238211877831116:SPCX": {
+  "keep": false
+ },
+ "post:2067252365997019457:BTC": {
+  "keep": false
+ },
+ "post:2067712864828244381:SPCX": {
+  "keep": false
+ },
+ "post:2067727004938482003:HYPE": {
+  "keep": false
+ },
+ "post:2067732268173455440:SOL": {
+  "keep": true,
+  "kind": "holding",
+  "quote": "yeah... I bought $SOL earlier this week"
+ },
+ "post:2067738143348965808:VVV": {
+  "keep": false
+ },
+ "post:2067756533216113103:CARDS": {
+  "keep": false
+ },
+ "post:2067821462019244385:SPCX": {
+  "keep": false
+ },
+ "post:2067946354538664164:SOL": {
+  "keep": false
+ },
+ "post:2068709840227107149:SOL": {
+  "keep": false
+ },
+ "post:2069044444393808329:MU": {
+  "keep": false
+ },
+ "post:2069766422620733585:BTC": {
+  "keep": false
+ },
+ "post:2069766422620733585:MSTR": {
+  "keep": false
+ },
+ "post:2069766422620733585:MU": {
+  "keep": false
+ },
+ "post:2069766422620733585:SOL": {
+  "keep": false
+ },
+ "post:2070178879927443886:BTC": {
+  "keep": true,
+  "kind": "pick",
+  "target": "",
+  "quote": "thesis around buying bitcoin spot here is same as its always been"
+ },
+ "post:2070261963377283520:SOL": {
+  "keep": false
+ },
+ "post:2070309201964916787:BTC": {
+  "keep": false
+ },
+ "post:2070667320574214453:BTC": {
+  "keep": false
+ },
+ "post:2070667320574214453:SOL": {
+  "keep": false
+ },
+ "post:2071082518917292077:ZEC": {
+  "keep": false
+ },
+ "post:2071341653646889386:BTC": {
+  "keep": false
+ },
+ "post:2071341653646889386:SOL": {
+  "keep": false
+ },
+ "post:2071580679398195584:SOL": {
+  "keep": false
+ },
+ "post:2071599576243417454:BTC": {
+  "keep": false
+ },
+ "post:2072142852692279326:ANSEM": {
+  "keep": false
+ },
+ "post:2072142852692279326:BOT": {
+  "keep": false
+ },
+ "post:2072142852692279326:HYPE": {
+  "keep": false
+ },
+ "post:2072142852692279326:SOL": {
+  "keep": false
+ },
+ "post:2072142852692279326:SPCX": {
+  "keep": false
+ },
+ "post:2072686289682415738:RIVN": {
+  "keep": false
+ },
+ "post:2072820922352848955:SOL": {
+  "keep": false
+ },
+ "post:2073764942096871482:SOL": {
+  "keep": false
+ },
+ "post:2075325346547650772:BTC": {
+  "keep": false
+ },
+ "post:2075325346547650772:SOL": {
+  "keep": false
+ },
+ "post:2075335713562780090:ANSEM": {
+  "keep": false
+ },
+ "post:2075395084221088082:PUMP": {
+  "keep": false
+ },
+ "post:2077046415948148930:BTC": {
+  "keep": false
+ },
+ "post:2077046415948148930:ETH": {
+  "keep": false
+ },
+ "post:2077046415948148930:SOL": {
+  "keep": false
+ },
+ "post:2077750339852280173:ANSEM": {
+  "keep": false
+ },
+ "post:2077773554033037509:HYPE": {
+  "keep": false
+ },
+ "post:2077895801712369767:SOL": {
+  "keep": false
+ },
+ "post:2077906604674973918:CXMT": {
+  "keep": false
+ },
+ "post:2078340408975798688:SOL": {
+  "keep": false
+ },
+ "post:2078754530624188548:ZEC": {
+  "keep": false
+ },
+ "post:2078942029116264788:PUMP": {
+  "keep": true,
+  "kind": "holding",
+  "target": "",
+  "quote": "bought $PUMP here on the reclaim of old support @ .001675"
+ },
+ "post:2079203352441749617:SPCX": {
+  "keep": false
+ },
+ "post:2079251019704189352:ANSEM": {
+  "keep": false
+ },
+ "post:2079363273007219138:ANSEM": {
+  "keep": false
+ },
+ "post:2079569874536333777:unknown": {
+  "keep": false
+ },
+ "post:2080414456136212591:BTC": {
+  "keep": false
+ },
+ "post:2080414456136212591:ETH": {
+  "keep": false
+ },
+ "post:2080414456136212591:SOL": {
+  "keep": false
+ },
+ "post:2081238967064707539:SOL": {
+  "keep": false
+ },
+ "post:2081491455843987734:BTC": {
+  "keep": true,
+  "kind": "pick",
+  "target": "",
+  "quote": "bottom's in on bitcoin bottom's in on solana bottom's in on onchain speculation time to make some money"
+ },
+ "post:2081507460444041473:PUMP": {
+  "keep": false
+ },
+ "post:2081823808822947916:BTC": {
+  "keep": false
+ },
+ "post:2082137127488569797:ANSEM": {
+  "keep": false
+ },
+ "post:2082942732238987732:ETH": {
+  "keep": false
+ },
+ "post:2082946345514532962:SOL": {
+  "keep": false
+ },
+ "post:2083204167271596324:PUMP": {
+  "keep": false
+ },
+ "post:2084260610288840990:ANSEM": {
+  "keep": false
+ },
+ "post:2084856154115764408:unknown-token": {
+  "keep": false
+ },
+ "post:2085029078718169369:ANSEM": {
+  "keep": false
+ },
+ "post:2085472818809163803:SOL": {
+  "keep": false
+ },
+ "post:2085483702323380701:ZEC": {
+  "keep": false
+ },
+ "post:2085744494646100163:ANSEM": {
+  "keep": false
+ },
+ "post:2085933701930844357:ANSEM": {
+  "keep": false
+ },
+ "post:2086215826512937228:PUMP": {
+  "keep": false
+ },
+ "post:2086424626775871755:PUMP": {
+  "keep": true,
+  "kind": "target",
+  "target": "top 10 coin by market cap in under 2 years",
+  "quote": "will be top 10 coin by market cap in < 2 years time"
+ },
+ "post:2086688871694160068:ANSEM": {
+  "keep": false
+ },
+ "post:2086688871694160068:BTC": {
+  "keep": false
+ },
+ "post:2086688871694160068:PUMP": {
+  "keep": false
+ },
+ "post:2086688871694160068:SOL": {
+  "keep": false
+ },
+ "post:2086908794517533015:unknown": {
+  "keep": false
+ },
+ "post:2087035896654971125:ANSEM": {
+  "keep": false
+ },
+ "post:2087324157369299029:ETH": {
+  "keep": false
+ },
+ "post:2087710007953404386:ANSEM": {
+  "keep": false
+ },
+ "post:2088060493692842253:stonkbrokers": {
+  "keep": false
+ },
+ "post:2089425355740189031:ANSEM": {
+  "keep": false
+ },
+ "post:2089947186737913895:ANSEM": {
+  "keep": false
+ },
+ "post:2090108668930830569:BTC": {
+  "keep": false
+ },
+ "post:2090108668930830569:HYPE": {
+  "keep": false
+ },
+ "post:2090108668930830569:SOL": {
+  "keep": false
+ },
+ "post:2090341894840537217:ETH": {
+  "keep": false
+ },
+ "post:2090341894840537217:HYPE": {
+  "keep": false
+ },
+ "post:2090341894840537217:SOL": {
+  "keep": false
+ },
+ "post:2090552661279985692:PUMP": {
+  "keep": true,
+  "kind": "pick",
+  "target": "",
+  "quote": "why $PUMP is my highest conviction midcap right now"
+ },
+ "post:2090552661279985692:ZEC": {
+  "keep": false
+ },
+ "post:2090565383388324271:BTC": {
+  "keep": false
+ },
+ "post:2090572244086862247:VVV": {
+  "keep": false
+ },
+ "post:2090582150965858404:ANSEM": {
+  "keep": false
+ },
+ "post:2090717250047156371:z500-coins": {
+  "keep": false
+ },
+ "post:2090717593845838145:ANSEM": {
+  "keep": false
+ },
+ "post:2090962708816421165:cryptocurrency": {
+  "keep": false
+ },
+ "post:2090963589796332015:PUMP": {
+  "keep": false
+ },
+ "post:2091494107063394503:HYPE": {
+  "keep": false
+ },
+ "post:2091602624134910363:PUMP": {
+  "keep": false
+ },
+ "post:2091893167352115676:SOL": {
+  "keep": false
+ },
+ "post:2091997927300350083:BTC": {
+  "keep": false
+ },
+ "post:2092261166277874163:VVV": {
+  "keep": false
+ },
+ "post:2092551310876831841:NET": {
+  "keep": false
+ },
+ "post:2092957165560471989:NVDA": {
+  "keep": false
+ },
+ "post:2093082505091928279:BTC": {
+  "keep": false
+ },
+ "post:2093082505091928279:HYPE": {
+  "keep": false
+ },
+ "post:2093082505091928279:ZEC": {
+  "keep": false
+ },
+ "post:2093110596522697054:PUMP": {
+  "keep": true,
+  "symbol": "BTC",
+  "kind": "holding",
+  "target": "",
+  "quote": "$BTC: my core holding. everybody should hold"
+ },
+ "post:2093361315876102605:ANSEM": {
+  "keep": false
+ },
+ "post:2093361315876102605:PUMP": {
+  "keep": false
+ },
+ "post:2093361315876102605:SOL": {
+  "keep": false
+ },
+ "post:2093707378042470818:ZEC": {
+  "keep": true,
+  "kind": "pick",
+  "target": "",
+  "quote": "buying zcash at $800 is like buying bitcoin at $800"
+ },
+ "post:2093755752330437033:NET": {
+  "keep": false
+ },
+ "post:2094089813351702926:ANSEM": {
+  "keep": false
+ },
+ "post:2094089813351702926:PUMP": {
+  "keep": false
+ },
+ "post:2095238816701243529:HOOD": {
+  "keep": true,
+  "kind": "pick",
+  "target": "ATHs +50% in Q4",
+  "quote": "believe $HOOD will be a great bet here as chart already is coiling off of the bottom & they are adding a significant new revenue line w/ their layer 2 blockchain"
+ },
+ "post:2095560386237845728:ZEC": {
+  "keep": false
+ },
+ "post:2095617798290464862:HOOD": {
+  "keep": false
+ },
+ "post:2095676739821174820:ANSEM": {
+  "keep": false
+ },
+ "post:2095681939525013801:ZEC": {
+  "keep": false
+ },
+ "post:2096434922978246822:ZEC": {
+  "keep": false
+ },
+ "post:2096741233800437786:ZCAT": {
+  "keep": false
+ },
+ "post:2098479988886372453:ZEC": {
+  "keep": false
+ },
+ "post:2098516934132457719:venice": {
+  "keep": false
+ },
+ "post:2098822698432676037:ZCAT": {
+  "keep": false
+ },
+ "post:2100703164152336476:ZEC": {
+  "keep": true,
+  "kind": "target",
+  "target": "like btc in 2017 going from 1k to 20k",
+  "quote": "looks like same spot as btc in 2017 going from 1k to 20k this year and next year gonna be really good for zcash"
+ },
+ "post:2100705882883387843:BTC": {
+  "keep": false
+ },
+ "post:2100708703280247197:VVV": {
+  "keep": false
+ },
+ "post:2100718529771127085:HOOD": {
+  "keep": false
+ },
+ "post:2101355641390411778:META": {
+  "keep": false
+ },
+ "post:2101736901090898034:HOOD": {
+  "keep": false
+ },
+ "post:2102395246298427480:BTC": {
+  "keep": false
+ },
+ "post:2102395246298427480:ZEC": {
+  "keep": false
+ },
+ "post:2103241815600312796:STONK": {
+  "keep": false
+ },
+ "post:2103247919147270328:SOL": {
+  "keep": false
+ },
+ "post:2103263825382236423:BTC": {
+  "keep": false
+ },
  "x-2050035157977944218:173:BTC": {
   "keep": false
  },
@@ -451,7 +979,8 @@
  },
  "x-2070244072342827487:85:SOL": {
   "keep": true,
-  "target": "$600",
+  "target": "$600 this cycle",
+  "level": 600,
   "quote": "This cycle, I think it can go from $60 to around like $600."
  },
  "x-2072780197179666519:1409:SOL": {
@@ -496,6 +1025,7 @@
   "kind": "target",
   "stance": "long",
   "target": "$600",
+  "level": 600,
   "line": 6472,
   "quote": "600 that's my price target for solana i really think it's gonna clip ethereum's uh all-time high market cap"
  },
@@ -538,7 +1068,9 @@
  },
  "x-2075316750439338088:4582:SOL": {
   "keep": true,
-  "target": "150 during Q3 (not reached, the quarter's high was about 125)"
+  "target": "150 during Q3",
+  "level": 150,
+  "by": "2026-09-30"
  },
  "x-2075316750439338088:4642:HYPE": {
   "keep": false,
@@ -825,7 +1357,9 @@
  },
  "x-2090537938899845434:5677:SOL": {
   "keep": true,
-  "target": "150 in Q3 (not reached, the quarter's high was about 125)"
+  "target": "150 in Q3",
+  "level": 150,
+  "by": "2026-09-30"
  },
  "x-2090537938899845434:5768:GLD": {
   "keep": true,
@@ -921,7 +1455,9 @@
  },
  "x-2093074127011909791:371:SOL": {
   "keep": true,
-  "target": "150 in Q3 (not reached, the high was about 125), 600 by the end of this cycle",
+  "target": "150 in Q3, 600 by the end of this cycle",
+  "level": 150,
+  "by": "2026-09-30",
   "quote": "I think it's going to hit 150 in Q3. I still think Solana is going to go back to 600 by the end of this cycle."
  },
  "x-2093074127011909791:384:artificial": {
@@ -972,8 +1508,8 @@
   "keep": false
  },
  "x-2095611959161082020:30:HOOD": {
-  "keep": true,
-  "quote": "believe robin hood will be a great bet here as the chart is already coiling off the bottom and they're adding a significant new revenue line"
+  "keep": false,
+  "why": "He is reading out a post he made the day before, at 12:53. The post is on the board instead, priced at the hour he posted it."
  },
  "x-2095611959161082020:3376:HYPE": {
   "keep": true,
@@ -1076,6 +1612,8 @@
  "x-2100684090018316301:488:HOOD": {
   "keep": true,
   "target": "200 plus by the end of next year",
+  "level": 200,
+  "by": "2027-12-31",
   "quote": "I think it's going to be trading 200 plus, to be honest, by like end of next year. That's my call on that."
  },
  "x-2100684090018316301:547:HOOD": {
@@ -1139,6 +1677,7 @@
  "x-2108360500283335093:519:PUMP": {
   "keep": true,
   "target": "all-time highs within a few weeks, about 0.01",
+  "level": 0.01,
   "quote": "i honestly think it's going to be all-time highs um within like a few weeks which is like 0.01"
  },
  "x-2108360500283335093:528:GRASS": {
@@ -1151,6 +1690,7 @@
   "keep": true,
   "line": 588,
   "target": "1.5 million a coin, gold's market cap, in his lifetime",
+  "level": 1500000,
   "quote": "that's like what 1.5 million per coin that's my real bitcoin target i think in my lifetime bitcoin will reach the same market cap that gold is at"
  },
  "x-2108360500283335093:642:HYPE": {

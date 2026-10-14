@@ -104,6 +104,7 @@ names and tickers survive.
 - https://search.lexthedev.com/threadguy : ThreadGuy, interviews and streams
 - https://search.lexthedev.com/mcg/assets : every asset MCG discussed
 - https://search.lexthedev.com/demo/assets.html : every asset Market Bubble discussed
+- https://search.lexthedev.com/calls : calls Ansem and FaZe Banks made on air, and Ansem in his posts, quoted, linked to the moment and priced since
 
 ## API
 

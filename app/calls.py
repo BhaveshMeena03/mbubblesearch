@@ -253,6 +253,83 @@ def accept(raw: dict, episode: dict, labels: dict[str, str]) -> tuple[Call | Non
     ), ""
 
 
+# --- calls he wrote ---------------------------------------------------------------
+#
+# The same board takes what a host posted as well as what he said, marked
+# as a post and linked to it. Two of the four checks change shape. The
+# voice check is not needed: a post on his account is his by construction.
+# And the words are checked against the post instead of the transcript.
+
+def locate_in_text(quote: str, text: str) -> tuple[int, int] | None:
+    """Where a quote sits in a post, as (start, end) characters, or None
+    if it is not there word for word."""
+    wanted = words(quote)
+    if not (MIN_WORDS <= len(wanted) <= MAX_WORDS):
+        return None
+    spoken = _spoken(text)
+    plain = [word for word, _, _ in spoken]
+    for at in range(len(plain) - len(wanted) + 1):
+        if plain[at:at + len(wanted)] == wanted:
+            return spoken[at][1], spoken[at + len(wanted) - 1][2]
+    return None
+
+
+def accept_post(raw: dict, post: dict, author: str) -> tuple[dict | None, str]:
+    """A model's claim about a post, held against the post.
+
+    `post` is {"id", "created_at", "text", "kind"} with the text as he
+    typed it. Returns the row, or None and the reason it was refused.
+    """
+    stance = str(raw.get("stance") or "").lower()
+    kind = str(raw.get("kind") or "").lower()
+    if stance not in STANCES:
+        return None, "no stance"
+    if kind not in KINDS:
+        return None, "no kind"
+    symbol = _symbol(raw.get("symbol"))
+    asset = " ".join(str(raw.get("asset") or "").split())
+    if not symbol and not asset:
+        return None, "no asset"
+    text = " ".join(str(post.get("text") or "").replace("\u2019", "'").split())
+    span = locate_in_text(str(raw.get("quote") or ""), text)
+    if span is None:
+        return None, "quote is not in the post"
+    start, end = span
+    # A word is letters and digits, so the cut would open on "SOL" and
+    # close on "20" or "8,000". The dollar, percent and plus signs are his.
+    if start and text[start - 1] == "$":
+        start -= 1
+    if end < len(text) and text[end] in "%+":
+        end += 1
+    said = text[start:end]
+    trade = tactical(said)
+    if trade:
+        return None, trade
+    return {
+        "id": f"post:{post['id']}:{symbol or _slug(asset)}",
+        "source": "post", "post_id": str(post["id"]),
+        "posted_at": str(post.get("created_at") or ""),
+        "speaker": author, "asset": asset, "symbol": symbol,
+        "asset_class": str(raw.get("asset_class") or "crypto").lower(),
+        "stance": stance, "kind": kind, "quote": said,
+        "target": " ".join(str(raw.get("target") or "").split()),
+    }, ""
+
+
+def one_per_day(rows: list[dict]) -> list[dict]:
+    """One asset, one side, once a day, however many posts repeat it. The
+    strongest statement is kept, then the earliest."""
+    rank = {"target": 0, "pick": 1, "holding": 2, "exit": 2}
+    kept: dict[tuple, dict] = {}
+    for row in sorted(rows, key=lambda r: (r["posted_at"], r["id"])):
+        key = (row["posted_at"][:10], row["symbol"] or row["asset"].lower(),
+               row["stance"] if row["kind"] != "exit" else "exit")
+        held = kept.get(key)
+        if held is None or rank[row["kind"]] < rank[held["kind"]]:
+            kept[key] = row
+    return sorted(kept.values(), key=lambda r: (r["posted_at"], r["id"]))
+
+
 def one_per_show(found: list[Call]) -> list[Call]:
     """A host on one asset in one show, once.
 
@@ -320,6 +397,40 @@ def moved(stance: str, then: float | None, now: float | None) -> float | None:
     return round(-change if stance == "short" else change, 2)
 
 
+def target_status(level: float | None, by: str | None,
+                  highs: list[tuple[date, float]], today: date) -> dict | None:
+    """Where a priced target stands: reached, missed or still open.
+
+    "Solana to 150 in Q3" sat on the board beside a green +43% and nothing
+    said the quarter had ended with a high of 125. A target with a number
+    and a date is a claim that can be checked, so it is.
+
+    `highs` are the daily highs since the call. Reached on the first day
+    one of them touched the level, if that day is inside the date he
+    gave. Missed once that date has passed without it. Otherwise open,
+    which is also what a target with no date stays until it is reached.
+    None when there is no level to check: "ten percent of Bitcoin's
+    market cap" is not a price.
+    """
+    if not isinstance(level, (int, float)) or isinstance(level, bool) or level <= 0:
+        return None
+    try:
+        last_day = date.fromisoformat(str(by)[:10]) if by else None
+    except ValueError:
+        last_day = None
+    inside = [(day, high) for day, high in highs
+              if last_day is None or day <= last_day]
+    touched = next((day for day, high in inside if high >= level), None)
+    peak = max((high for _, high in inside), default=None)
+    found = {"level": float(level), "by": last_day.isoformat() if last_day else None,
+             "high": peak}
+    if touched is not None:
+        return {**found, "status": "reached", "on": touched.isoformat()}
+    if last_day is not None and today > last_day:
+        return {**found, "status": "missed", "on": None}
+    return {**found, "status": "open", "on": None}
+
+
 def tally(rows: list[dict]) -> dict:
     """The line above the board: how many, how many up, the middle one.
 
@@ -347,7 +458,8 @@ def tally(rows: list[dict]) -> dict:
 # stays on the server.
 _SHOWN = ("id", "episode_id", "show", "aired", "date", "speaker", "asset",
           "symbol", "class", "stance", "kind", "target", "quote",
-          "start_seconds", "timestamp", "link", "price_then", "then_at")
+          "start_seconds", "timestamp", "link", "price_then", "then_at",
+          "source", "target_check")
 # A fresh price this far from the one the board was built with is not a
 # market move, it is a different asset answering to the same symbol or a
 # bad tick. The built price is kept and the row loses nothing.
@@ -377,6 +489,13 @@ def board(shipped: dict, live: dict[str, float] | None = None,
         row["moved_pct"] = (None if kept.get("kind") == "exit" else
                             moved(str(kept.get("stance")), kept.get("price_then"),
                                   row["price_now"]))
+        check = row.get("target_check")
+        if (isinstance(check, dict) and check.get("status") == "open" and fresh
+                and kept.get("stance") == "long" and fresh >= check.get("level", 0) > 0):
+            # Touched since the board was built. Said now, not at the
+            # next build.
+            row["target_check"] = {**check, "status": "reached", "on": live_at,
+                                   "high": max(fresh, check.get("high") or 0)}
         fresh_rows += bool(fresh)
         rows.append(row)
     return {
@@ -384,7 +503,8 @@ def board(shipped: dict, live: dict[str, float] | None = None,
         "summary": tally(rows),
         "by_speaker": {host: tally([r for r in rows if r["speaker"] == host])
                        for host in HOSTS},
-        "shows": len({r["episode_id"] for r in rows}),
+        "shows": len({r["episode_id"] for r in rows if r.get("episode_id")}),
+        "posts": sum(1 for r in rows if r.get("source") == "post"),
         "live": fresh_rows > 0,
         "priced_at": live_at if fresh_rows else shipped.get("priced_at"),
         "built_at": shipped.get("built_at"),

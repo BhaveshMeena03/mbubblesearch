@@ -1,9 +1,10 @@
 {
- "built_at": "2026-10-12T05:21:22+00:00",
- "priced_at": "2026-10-12",
+ "built_at": "2026-10-14T02:03:08+00:00",
+ "priced_at": "2026-10-14",
  "calls": [
   {
    "id": "x-2108360500283335093:486:STRK",
+   "source": "show",
    "episode_id": "x-2108360500283335093",
    "show": "BULL RUN IS OVER?",
    "aired": "2026-10-09T00:54:49+00:00",
@@ -22,11 +23,13 @@
    "link": "https://x.com/i/broadcasts/1XxygwAplMyGM?t=2187",
    "price_then": 0.0555259995162487,
    "then_at": "2026-10-09",
-   "price_last": 0.10750000178813934,
-   "last_at": "2026-10-12"
+   "price_last": 0.08532000333070755,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2108360500283335093:519:PUMP",
+   "source": "show",
    "episode_id": "x-2108360500283335093",
    "show": "BULL RUN IS OVER?",
    "aired": "2026-10-09T00:54:49+00:00",
@@ -45,11 +48,19 @@
    "link": "https://x.com/i/broadcasts/1XxygwAplMyGM?t=2385",
    "price_then": 0.005534000229090452,
    "then_at": "2026-10-09",
-   "price_last": 0.005714000202715397,
-   "last_at": "2026-10-12"
+   "price_last": 0.0051009999588131905,
+   "last_at": "2026-10-14",
+   "target_check": {
+    "level": 0.01,
+    "by": null,
+    "high": 0.006010999903082848,
+    "status": "open",
+    "on": null
+   }
   },
   {
    "id": "x-2108360500283335093:589:BTC",
+   "source": "show",
    "episode_id": "x-2108360500283335093",
    "show": "BULL RUN IS OVER?",
    "aired": "2026-10-09T00:54:49+00:00",
@@ -68,11 +79,19 @@
    "link": "https://x.com/i/broadcasts/1XxygwAplMyGM?t=2802",
    "price_then": 81676.3359375,
    "then_at": "2026-10-09",
-   "price_last": 83467.578125,
-   "last_at": "2026-10-12"
+   "price_last": 83276.5078125,
+   "last_at": "2026-10-14",
+   "target_check": {
+    "level": 1500000.0,
+    "by": null,
+    "high": 84249.21875,
+    "status": "open",
+    "on": null
+   }
   },
   {
    "id": "x-2108360500283335093:642:HYPE",
+   "source": "show",
    "episode_id": "x-2108360500283335093",
    "show": "BULL RUN IS OVER?",
    "aired": "2026-10-09T00:54:49+00:00",
@@ -91,11 +110,13 @@
    "link": "https://x.com/i/broadcasts/1XxygwAplMyGM?t=3135",
    "price_then": 84.14659118652344,
    "then_at": "2026-10-09",
-   "price_last": 87.1500015258789,
-   "last_at": "2026-10-12"
+   "price_last": 82.16999816894531,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2103221357530263924:207:PUMP",
+   "source": "show",
    "episode_id": "x-2103221357530263924",
    "show": "You’re not bullish enough - Live with @rasmr_eth",
    "aired": "2026-09-24T20:33:42+00:00",
@@ -114,11 +135,38 @@
    "link": "https://x.com/i/broadcasts/1rGmqpnbjvnGy?t=1655",
    "price_then": 0.003854000009596348,
    "then_at": "2026-09-25",
-   "price_last": 0.005714000202715397,
-   "last_at": "2026-10-12"
+   "price_last": 0.0051009999588131905,
+   "last_at": "2026-10-14",
+   "target_check": null
+  },
+  {
+   "id": "post:2100703164152336476:ZEC",
+   "source": "post",
+   "episode_id": "",
+   "show": "posted on X",
+   "aired": "2026-09-17T21:47:18+00:00",
+   "date": "2026-09-17",
+   "speaker": "Ansem",
+   "asset": "Zcash",
+   "symbol": "ZEC",
+   "class": "crypto",
+   "listing": "ZEC-USD",
+   "stance": "long",
+   "kind": "target",
+   "target": "like btc in 2017 going from 1k to 20k",
+   "quote": "looks like same spot as btc in 2017 going from 1k to 20k this year and next year gonna be really good for zcash",
+   "start_seconds": 0.0,
+   "timestamp": "",
+   "link": "https://x.com/blknoiz06/status/2100703164152336476",
+   "price_then": 1465.010009765625,
+   "then_at": "2026-09-17",
+   "price_last": 1270.5899658203125,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2100684090018316301:488:HOOD",
+   "source": "show",
    "episode_id": "x-2100684090018316301",
    "show": "THE SEC & CFTC STEAMROLL: Market Bubble Episode 20 - Presented by @Polymarket",
    "aired": "2026-09-17T20:31:30+00:00",
@@ -137,11 +185,19 @@
    "link": "https://x.com/i/broadcasts/1aKbdEmnkDoJX?t=1624",
    "price_then": 109.80999755859375,
    "then_at": "2026-09-17",
-   "price_last": 109.0199966430664,
-   "last_at": "2026-10-09"
+   "price_last": 110.5199966430664,
+   "last_at": "2026-10-13",
+   "target_check": {
+    "level": 200.0,
+    "by": "2027-12-31",
+    "high": 126.73999786376953,
+    "status": "open",
+    "on": null
+   }
   },
   {
    "id": "x-2100684090018316301:1694:NEAR",
+   "source": "show",
    "episode_id": "x-2100684090018316301",
    "show": "THE SEC & CFTC STEAMROLL: Market Bubble Episode 20 - Presented by @Polymarket",
    "aired": "2026-09-17T20:31:30+00:00",
@@ -160,34 +216,13 @@
    "link": "https://x.com/i/broadcasts/1aKbdEmnkDoJX?t=5514",
    "price_then": 3.1563069820404053,
    "then_at": "2026-09-18",
-   "price_last": 5.830100059509277,
-   "last_at": "2026-10-12"
-  },
-  {
-   "id": "x-2095611959161082020:30:HOOD",
-   "episode_id": "x-2095611959161082020",
-   "show": "LIVE W/ WILL CLEMENTE, NET NET CAPITAL, & TYLER BERNABE: Market Bubble Ep 18 - Presented by @Polymarket",
-   "aired": "2026-09-03T20:36:40+00:00",
-   "date": "2026-09-03",
-   "speaker": "Ansem",
-   "asset": "Robinhood",
-   "symbol": "HOOD",
-   "class": "stock",
-   "listing": "HOOD",
-   "stance": "long",
-   "kind": "pick",
-   "target": "",
-   "quote": "believe robin hood will be a great bet here as the chart is already coiling off the bottom and they're adding a significant new revenue line",
-   "start_seconds": 269.38,
-   "timestamp": "4:29",
-   "link": "https://x.com/i/broadcasts/1aKbdELVLoZJX?t=269",
-   "price_then": 124.72000122070312,
-   "then_at": "2026-09-03",
-   "price_last": 109.0199966430664,
-   "last_at": "2026-10-09"
+   "price_last": 5.126999855041504,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2095611959161082020:129:BTC",
+   "source": "show",
    "episode_id": "x-2095611959161082020",
    "show": "LIVE W/ WILL CLEMENTE, NET NET CAPITAL, & TYLER BERNABE: Market Bubble Ep 18 - Presented by @Polymarket",
    "aired": "2026-09-03T20:36:40+00:00",
@@ -206,11 +241,13 @@
    "link": "https://x.com/i/broadcasts/1aKbdELVLoZJX?t=840",
    "price_then": 81271.5390625,
    "then_at": "2026-09-04",
-   "price_last": 83467.578125,
-   "last_at": "2026-10-12"
+   "price_last": 83276.5078125,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2095611959161082020:129:HYPE",
+   "source": "show",
    "episode_id": "x-2095611959161082020",
    "show": "LIVE W/ WILL CLEMENTE, NET NET CAPITAL, & TYLER BERNABE: Market Bubble Ep 18 - Presented by @Polymarket",
    "aired": "2026-09-03T20:36:40+00:00",
@@ -229,11 +266,13 @@
    "link": "https://x.com/i/broadcasts/1aKbdELVLoZJX?t=840",
    "price_then": 87.52536010742188,
    "then_at": "2026-09-04",
-   "price_last": 87.1500015258789,
-   "last_at": "2026-10-12"
+   "price_last": 82.16999816894531,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2095611959161082020:129:PUMP",
+   "source": "show",
    "episode_id": "x-2095611959161082020",
    "show": "LIVE W/ WILL CLEMENTE, NET NET CAPITAL, & TYLER BERNABE: Market Bubble Ep 18 - Presented by @Polymarket",
    "aired": "2026-09-03T20:36:40+00:00",
@@ -252,11 +291,13 @@
    "link": "https://x.com/i/broadcasts/1aKbdELVLoZJX?t=840",
    "price_then": 0.0043299999088048935,
    "then_at": "2026-09-04",
-   "price_last": 0.005714000202715397,
-   "last_at": "2026-10-12"
+   "price_last": 0.0051009999588131905,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2095611959161082020:129:SOL",
+   "source": "show",
    "episode_id": "x-2095611959161082020",
    "show": "LIVE W/ WILL CLEMENTE, NET NET CAPITAL, & TYLER BERNABE: Market Bubble Ep 18 - Presented by @Polymarket",
    "aired": "2026-09-03T20:36:40+00:00",
@@ -275,11 +316,13 @@
    "link": "https://x.com/i/broadcasts/1aKbdELVLoZJX?t=840",
    "price_then": 103.9779052734375,
    "then_at": "2026-09-04",
-   "price_last": 111.58000183105469,
-   "last_at": "2026-10-12"
+   "price_last": 107.38999938964844,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2095611959161082020:129:ZEC",
+   "source": "show",
    "episode_id": "x-2095611959161082020",
    "show": "LIVE W/ WILL CLEMENTE, NET NET CAPITAL, & TYLER BERNABE: Market Bubble Ep 18 - Presented by @Polymarket",
    "aired": "2026-09-03T20:36:40+00:00",
@@ -298,11 +341,13 @@
    "link": "https://x.com/i/broadcasts/1aKbdELVLoZJX?t=840",
    "price_then": 951.94873046875,
    "then_at": "2026-09-04",
-   "price_last": 1283.8399658203125,
-   "last_at": "2026-10-12"
+   "price_last": 1270.5899658203125,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2095611959161082020:hand:129:HOOD",
+   "source": "show",
    "episode_id": "x-2095611959161082020",
    "show": "LIVE W/ WILL CLEMENTE, NET NET CAPITAL, & TYLER BERNABE: Market Bubble Ep 18 - Presented by @Polymarket",
    "aired": "2026-09-03T20:36:40+00:00",
@@ -321,11 +366,13 @@
    "link": "https://x.com/i/broadcasts/1aKbdELVLoZJX?t=840",
    "price_then": 124.72000122070312,
    "then_at": "2026-09-03",
-   "price_last": 109.0199966430664,
-   "last_at": "2026-10-09"
+   "price_last": 110.5199966430664,
+   "last_at": "2026-10-13",
+   "target_check": null
   },
   {
    "id": "x-2095611959161082020:3376:HYPE",
+   "source": "show",
    "episode_id": "x-2095611959161082020",
    "show": "LIVE W/ WILL CLEMENTE, NET NET CAPITAL, & TYLER BERNABE: Market Bubble Ep 18 - Presented by @Polymarket",
    "aired": "2026-09-03T20:36:40+00:00",
@@ -344,11 +391,88 @@
    "link": "https://x.com/i/broadcasts/1aKbdELVLoZJX?t=9633",
    "price_then": 87.52536010742188,
    "then_at": "2026-09-04",
-   "price_last": 87.1500015258789,
-   "last_at": "2026-10-12"
+   "price_last": 82.16999816894531,
+   "last_at": "2026-10-14",
+   "target_check": null
+  },
+  {
+   "id": "post:2095238816701243529:HOOD",
+   "source": "post",
+   "episode_id": "",
+   "show": "posted on X",
+   "aired": "2026-09-02T19:53:56+00:00",
+   "date": "2026-09-02",
+   "speaker": "Ansem",
+   "asset": "Robinhood",
+   "symbol": "HOOD",
+   "class": "stock",
+   "listing": "HOOD",
+   "stance": "long",
+   "kind": "pick",
+   "target": "ATHs +50% in Q4",
+   "quote": "believe $HOOD will be a great bet here as chart already is coiling off of the bottom & they are adding a significant new revenue line w/ their layer 2 blockchain",
+   "start_seconds": 0.0,
+   "timestamp": "",
+   "link": "https://x.com/blknoiz06/status/2095238816701243529",
+   "price_then": 107.0199966430664,
+   "then_at": "2026-09-02",
+   "price_last": 110.5199966430664,
+   "last_at": "2026-10-13",
+   "target_check": null
+  },
+  {
+   "id": "post:2093707378042470818:ZEC",
+   "source": "post",
+   "episode_id": "",
+   "show": "posted on X",
+   "aired": "2026-08-29T14:28:32+00:00",
+   "date": "2026-08-29",
+   "speaker": "Ansem",
+   "asset": "Zcash",
+   "symbol": "ZEC",
+   "class": "crypto",
+   "listing": "ZEC-USD",
+   "stance": "long",
+   "kind": "pick",
+   "target": "",
+   "quote": "buying zcash at $800 is like buying bitcoin at $800",
+   "start_seconds": 0.0,
+   "timestamp": "",
+   "link": "https://x.com/blknoiz06/status/2093707378042470818",
+   "price_then": 838.47998046875,
+   "then_at": "2026-08-29",
+   "price_last": 1270.5899658203125,
+   "last_at": "2026-10-14",
+   "target_check": null
+  },
+  {
+   "id": "post:2093110596522697054:PUMP",
+   "source": "post",
+   "episode_id": "",
+   "show": "posted on X",
+   "aired": "2026-08-27T22:57:08+00:00",
+   "date": "2026-08-27",
+   "speaker": "Ansem",
+   "asset": "Bitcoin",
+   "symbol": "BTC",
+   "class": "crypto",
+   "listing": "BTC-USD",
+   "stance": "long",
+   "kind": "holding",
+   "target": "",
+   "quote": "$BTC: my core holding. everybody should hold",
+   "start_seconds": 0.0,
+   "timestamp": "",
+   "link": "https://x.com/blknoiz06/status/2093110596522697054",
+   "price_then": 80322.0390625,
+   "then_at": "2026-08-27",
+   "price_last": 83276.5078125,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2093074127011909791:185:HYPE",
+   "source": "show",
    "episode_id": "x-2093074127011909791",
    "show": "$100K POLYMARKET FANTASY FOOTBALL DRAFT NIGHT",
    "aired": "2026-08-27T20:32:13+00:00",
@@ -367,11 +491,13 @@
    "link": "https://x.com/i/broadcasts/1jGXgBDzPwEKZ?t=722",
    "price_then": 84.697021484375,
    "then_at": "2026-08-28",
-   "price_last": 87.1500015258789,
-   "last_at": "2026-10-12"
+   "price_last": 82.16999816894531,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2093074127011909791:189:BTC",
+   "source": "show",
    "episode_id": "x-2093074127011909791",
    "show": "$100K POLYMARKET FANTASY FOOTBALL DRAFT NIGHT",
    "aired": "2026-08-27T20:32:13+00:00",
@@ -390,11 +516,13 @@
    "link": "https://x.com/i/broadcasts/1jGXgBDzPwEKZ?t=731",
    "price_then": 80264.6484375,
    "then_at": "2026-08-28",
-   "price_last": 83467.578125,
-   "last_at": "2026-10-12"
+   "price_last": 83276.5078125,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2093074127011909791:192:PUMP",
+   "source": "show",
    "episode_id": "x-2093074127011909791",
    "show": "$100K POLYMARKET FANTASY FOOTBALL DRAFT NIGHT",
    "aired": "2026-08-27T20:32:13+00:00",
@@ -413,11 +541,13 @@
    "link": "https://x.com/i/broadcasts/1jGXgBDzPwEKZ?t=738",
    "price_then": 0.004883999936282635,
    "then_at": "2026-08-28",
-   "price_last": 0.005714000202715397,
-   "last_at": "2026-10-12"
+   "price_last": 0.0051009999588131905,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2093074127011909791:345:PUMP",
+   "source": "show",
    "episode_id": "x-2093074127011909791",
    "show": "$100K POLYMARKET FANTASY FOOTBALL DRAFT NIGHT",
    "aired": "2026-08-27T20:32:13+00:00",
@@ -436,11 +566,13 @@
    "link": "https://x.com/i/broadcasts/1jGXgBDzPwEKZ?t=1133",
    "price_then": 0.004883999936282635,
    "then_at": "2026-08-28",
-   "price_last": 0.005714000202715397,
-   "last_at": "2026-10-12"
+   "price_last": 0.0051009999588131905,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2093074127011909791:371:SOL",
+   "source": "show",
    "episode_id": "x-2093074127011909791",
    "show": "$100K POLYMARKET FANTASY FOOTBALL DRAFT NIGHT",
    "aired": "2026-08-27T20:32:13+00:00",
@@ -452,18 +584,51 @@
    "listing": "SOL-USD",
    "stance": "long",
    "kind": "target",
-   "target": "150 in Q3 (not reached, the high was about 125), 600 by the end of this cycle",
+   "target": "150 in Q3, 600 by the end of this cycle",
    "quote": "I think it's going to hit 150 in Q3. I still think Solana is going to go back to 600 by the end of this cycle",
    "start_seconds": 1228.94,
    "timestamp": "20:28",
    "link": "https://x.com/i/broadcasts/1jGXgBDzPwEKZ?t=1228",
    "price_then": 109.20793151855469,
    "then_at": "2026-08-28",
-   "price_last": 111.58000183105469,
-   "last_at": "2026-10-12"
+   "price_last": 107.38999938964844,
+   "last_at": "2026-10-14",
+   "target_check": {
+    "level": 150.0,
+    "by": "2026-09-30",
+    "high": 124.61737823486328,
+    "status": "missed",
+    "on": null
+   }
+  },
+  {
+   "id": "post:2090552661279985692:PUMP",
+   "source": "post",
+   "episode_id": "",
+   "show": "posted on X",
+   "aired": "2026-08-20T21:32:49+00:00",
+   "date": "2026-08-20",
+   "speaker": "Ansem",
+   "asset": "Pump.fun",
+   "symbol": "PUMP",
+   "class": "crypto",
+   "listing": "PUMP36507-USD",
+   "stance": "long",
+   "kind": "pick",
+   "target": "",
+   "quote": "why $PUMP is my highest conviction midcap right now",
+   "start_seconds": 0.0,
+   "timestamp": "",
+   "link": "https://x.com/blknoiz06/status/2090552661279985692",
+   "price_then": 0.003719999920576811,
+   "then_at": "2026-08-20",
+   "price_last": 0.0051009999588131905,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2090537938899845434:351:ZEC",
+   "source": "show",
    "episode_id": "x-2090537938899845434",
    "show": "LIVE W/ ORANGIE, SE YONG PARK, AUSTIN FEDERA, & GRASS PROTOCOL: Market Bubble EP 16 - Presented by Polymarket",
    "aired": "2026-08-20T20:34:19+00:00",
@@ -482,11 +647,13 @@
    "link": "https://x.com/i/broadcasts/1dJrPrkLoMAKX?t=1169",
    "price_then": 568.0448608398438,
    "then_at": "2026-08-21",
-   "price_last": 1283.8399658203125,
-   "last_at": "2026-10-12"
+   "price_last": 1270.5899658203125,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2090537938899845434:926:VVV",
+   "source": "show",
    "episode_id": "x-2090537938899845434",
    "show": "LIVE W/ ORANGIE, SE YONG PARK, AUSTIN FEDERA, & GRASS PROTOCOL: Market Bubble EP 16 - Presented by Polymarket",
    "aired": "2026-08-20T20:34:19+00:00",
@@ -505,11 +672,13 @@
    "link": "https://x.com/i/broadcasts/1dJrPrkLoMAKX?t=2496",
    "price_then": 14.557741165161133,
    "then_at": "2026-08-21",
-   "price_last": 24.854299545288086,
-   "last_at": "2026-10-12"
+   "price_last": 22.92930030822754,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2090537938899845434:151:PUMP",
+   "source": "show",
    "episode_id": "x-2090537938899845434",
    "show": "LIVE W/ ORANGIE, SE YONG PARK, AUSTIN FEDERA, & GRASS PROTOCOL: Market Bubble EP 16 - Presented by Polymarket",
    "aired": "2026-08-20T20:34:19+00:00",
@@ -528,11 +697,13 @@
    "link": "https://x.com/i/broadcasts/1dJrPrkLoMAKX?t=5303",
    "price_then": 0.003848999971523881,
    "then_at": "2026-08-21",
-   "price_last": 0.005714000202715397,
-   "last_at": "2026-10-12"
+   "price_last": 0.0051009999588131905,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2090537938899845434:5677:SOL",
+   "source": "show",
    "episode_id": "x-2090537938899845434",
    "show": "LIVE W/ ORANGIE, SE YONG PARK, AUSTIN FEDERA, & GRASS PROTOCOL: Market Bubble EP 16 - Presented by Polymarket",
    "aired": "2026-08-20T20:34:19+00:00",
@@ -544,18 +715,26 @@
    "listing": "SOL-USD",
    "stance": "long",
    "kind": "target",
-   "target": "150 in Q3 (not reached, the quarter's high was about 125)",
+   "target": "150 in Q3",
    "quote": "My real target for Q3, which I've been saying, is, like, 150",
    "start_seconds": 15399.3,
    "timestamp": "4:16:39",
    "link": "https://x.com/i/broadcasts/1dJrPrkLoMAKX?t=15399",
    "price_then": 87.63804626464844,
    "then_at": "2026-08-21",
-   "price_last": 111.58000183105469,
-   "last_at": "2026-10-12"
+   "price_last": 107.38999938964844,
+   "last_at": "2026-10-14",
+   "target_check": {
+    "level": 150.0,
+    "by": "2026-09-30",
+    "high": 124.61737823486328,
+    "status": "missed",
+    "on": null
+   }
   },
   {
    "id": "x-2090537938899845434:5768:GLD",
+   "source": "show",
    "episode_id": "x-2090537938899845434",
    "show": "LIVE W/ ORANGIE, SE YONG PARK, AUSTIN FEDERA, & GRASS PROTOCOL: Market Bubble EP 16 - Presented by Polymarket",
    "aired": "2026-08-20T20:34:19+00:00",
@@ -574,11 +753,13 @@
    "link": "https://x.com/i/broadcasts/1dJrPrkLoMAKX?t=16031",
    "price_then": 4571.39990234375,
    "then_at": "2026-08-20",
-   "price_last": 4227.7998046875,
-   "last_at": "2026-10-12"
+   "price_last": 4176.5,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2090537938899845434:hand:5768:BTC",
+   "source": "show",
    "episode_id": "x-2090537938899845434",
    "show": "LIVE W/ ORANGIE, SE YONG PARK, AUSTIN FEDERA, & GRASS PROTOCOL: Market Bubble EP 16 - Presented by Polymarket",
    "aired": "2026-08-20T20:34:19+00:00",
@@ -597,11 +778,13 @@
    "link": "https://x.com/i/broadcasts/1dJrPrkLoMAKX?t=16031",
    "price_then": 73031.0859375,
    "then_at": "2026-08-21",
-   "price_last": 83467.578125,
-   "last_at": "2026-10-12"
+   "price_last": 83276.5078125,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2088002434253922358:974:SOL",
+   "source": "show",
    "episode_id": "x-2088002434253922358",
    "show": "LIVE W/ POORGOAT, MIKE DUDAS, & SIMPLE FARMER: Market Bubble Ep 15 - Presented by @Polymarket",
    "aired": "2026-08-13T20:39:08+00:00",
@@ -620,11 +803,13 @@
    "link": "https://x.com/i/broadcasts/1kJzDPPQlqyKv?t=2310",
    "price_then": 76.17520904541016,
    "then_at": "2026-08-14",
-   "price_last": 111.58000183105469,
-   "last_at": "2026-10-12"
+   "price_last": 107.38999938964844,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2088002434253922358:4188:PUMP",
+   "source": "show",
    "episode_id": "x-2088002434253922358",
    "show": "LIVE W/ POORGOAT, MIKE DUDAS, & SIMPLE FARMER: Market Bubble Ep 15 - Presented by @Polymarket",
    "aired": "2026-08-13T20:39:08+00:00",
@@ -643,11 +828,13 @@
    "link": "https://x.com/i/broadcasts/1kJzDPPQlqyKv?t=11160",
    "price_then": 0.002905000001192093,
    "then_at": "2026-08-14",
-   "price_last": 0.005714000202715397,
-   "last_at": "2026-10-12"
+   "price_last": 0.0051009999588131905,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2088002434253922358:4197:GITO",
+   "source": "show",
    "episode_id": "x-2088002434253922358",
    "show": "LIVE W/ POORGOAT, MIKE DUDAS, & SIMPLE FARMER: Market Bubble Ep 15 - Presented by @Polymarket",
    "aired": "2026-08-13T20:39:08+00:00",
@@ -666,11 +853,38 @@
    "link": "https://x.com/i/broadcasts/1kJzDPPQlqyKv?t=11202",
    "price_then": 0.552918016910553,
    "then_at": "2026-08-14",
-   "price_last": 0.5777999758720398,
-   "last_at": "2026-10-12"
+   "price_last": 0.5374000072479248,
+   "last_at": "2026-10-14",
+   "target_check": null
+  },
+  {
+   "id": "post:2086424626775871755:PUMP",
+   "source": "post",
+   "episode_id": "",
+   "show": "posted on X",
+   "aired": "2026-08-09T12:09:29+00:00",
+   "date": "2026-08-09",
+   "speaker": "Ansem",
+   "asset": "Pump.fun",
+   "symbol": "PUMP",
+   "class": "crypto",
+   "listing": "PUMP36507-USD",
+   "stance": "long",
+   "kind": "target",
+   "target": "top 10 coin by market cap in under 2 years",
+   "quote": "will be top 10 coin by market cap in < 2 years time",
+   "start_seconds": 0.0,
+   "timestamp": "",
+   "link": "https://x.com/blknoiz06/status/2086424626775871755",
+   "price_then": 0.0025969999842345715,
+   "then_at": "2026-08-09",
+   "price_last": 0.0051009999588131905,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2085464542763765841:1221:PUMP",
+   "source": "show",
    "episode_id": "x-2085464542763765841",
    "show": "LIVE W/ RASMR & TUSHAR JAIN: Market Bubble Ep 14 - Presented by @Polymarket",
    "aired": "2026-08-06T20:34:27+00:00",
@@ -689,11 +903,13 @@
    "link": "https://x.com/i/broadcasts/1vJpPPMgoPOJE?t=3275",
    "price_then": 0.0023880000226199627,
    "then_at": "2026-08-07",
-   "price_last": 0.005714000202715397,
-   "last_at": "2026-10-12"
+   "price_last": 0.0051009999588131905,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2082927683709628775:515:gold",
+   "source": "show",
    "episode_id": "x-2082927683709628775",
    "show": "LIVE W/ JOHANN KERBRAT, IVAN SOTO-WRIGHT, & AUSTIN BARACK: Market Bubble Ep 13 - Presented by @Polymarket",
    "aired": "2026-07-30T20:33:53+00:00",
@@ -712,11 +928,13 @@
    "link": "https://x.com/i/broadcasts/1qKDzzgEOwEJV?t=2743",
    "price_then": 4100.10009765625,
    "then_at": "2026-07-30",
-   "price_last": 4227.7998046875,
-   "last_at": "2026-10-12"
+   "price_last": 4176.5,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2082927683709628775:515:silver",
+   "source": "show",
    "episode_id": "x-2082927683709628775",
    "show": "LIVE W/ JOHANN KERBRAT, IVAN SOTO-WRIGHT, & AUSTIN BARACK: Market Bubble Ep 13 - Presented by @Polymarket",
    "aired": "2026-07-30T20:33:53+00:00",
@@ -735,11 +953,13 @@
    "link": "https://x.com/i/broadcasts/1qKDzzgEOwEJV?t=2743",
    "price_then": 58.814998626708984,
    "then_at": "2026-07-30",
-   "price_last": 61.290000915527344,
-   "last_at": "2026-10-12"
+   "price_last": 59.16999816894531,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2082927683709628775:527:ETH",
+   "source": "show",
    "episode_id": "x-2082927683709628775",
    "show": "LIVE W/ JOHANN KERBRAT, IVAN SOTO-WRIGHT, & AUSTIN BARACK: Market Bubble Ep 13 - Presented by @Polymarket",
    "aired": "2026-07-30T20:33:53+00:00",
@@ -758,11 +978,13 @@
    "link": "https://x.com/i/broadcasts/1qKDzzgEOwEJV?t=2806",
    "price_then": 1917.1417236328125,
    "then_at": "2026-07-31",
-   "price_last": 2542.669921875,
-   "last_at": "2026-10-12"
+   "price_last": 2505.85009765625,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2082927683709628775:780:AAPL",
+   "source": "show",
    "episode_id": "x-2082927683709628775",
    "show": "LIVE W/ JOHANN KERBRAT, IVAN SOTO-WRIGHT, & AUSTIN BARACK: Market Bubble Ep 13 - Presented by @Polymarket",
    "aired": "2026-07-30T20:33:53+00:00",
@@ -781,11 +1003,38 @@
    "link": "https://x.com/i/broadcasts/1qKDzzgEOwEJV?t=4077",
    "price_then": 333.42999267578125,
    "then_at": "2026-07-30",
-   "price_last": 336.6400146484375,
-   "last_at": "2026-10-09"
+   "price_last": 341.2699890136719,
+   "last_at": "2026-10-13",
+   "target_check": null
+  },
+  {
+   "id": "post:2081491455843987734:BTC",
+   "source": "post",
+   "episode_id": "",
+   "show": "posted on X",
+   "aired": "2026-07-26T21:26:49+00:00",
+   "date": "2026-07-26",
+   "speaker": "Ansem",
+   "asset": "Bitcoin",
+   "symbol": "BTC",
+   "class": "crypto",
+   "listing": "BTC-USD",
+   "stance": "long",
+   "kind": "pick",
+   "target": "",
+   "quote": "bottom's in on bitcoin bottom's in on solana bottom's in on onchain speculation time to make some money",
+   "start_seconds": 0.0,
+   "timestamp": "",
+   "link": "https://x.com/blknoiz06/status/2081491455843987734",
+   "price_then": 64791.12109375,
+   "then_at": "2026-07-26",
+   "price_last": 83276.5078125,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2080390322110992735:3119:AAPL",
+   "source": "show",
    "episode_id": "x-2080390322110992735",
    "show": "LIVE W/ BRIAN ARMSTRONG & KENDRICK PERKINS: Market Bubble Ep 12 - Presented by @Polymarket",
    "aired": "2026-07-23T20:31:19+00:00",
@@ -804,11 +1053,13 @@
    "link": "https://x.com/i/broadcasts/1yxBeeodPoMJN?t=10245",
    "price_then": 321.6600036621094,
    "then_at": "2026-07-23",
-   "price_last": 336.6400146484375,
-   "last_at": "2026-10-09"
+   "price_last": 341.2699890136719,
+   "last_at": "2026-10-13",
+   "target_check": null
   },
   {
    "id": "x-2080390322110992735:3726:ANSEM",
+   "source": "show",
    "episode_id": "x-2080390322110992735",
    "show": "LIVE W/ BRIAN ARMSTRONG & KENDRICK PERKINS: Market Bubble Ep 12 - Presented by @Polymarket",
    "aired": "2026-07-23T20:31:19+00:00",
@@ -827,11 +1078,38 @@
    "link": "https://x.com/i/broadcasts/1yxBeeodPoMJN?t=12712",
    "price_then": 0.1724420040845871,
    "then_at": "2026-07-24",
-   "price_last": 0.1506490856409073,
-   "last_at": "2026-10-12"
+   "price_last": 0.13335548341274261,
+   "last_at": "2026-10-14",
+   "target_check": null
+  },
+  {
+   "id": "post:2078942029116264788:PUMP",
+   "source": "post",
+   "episode_id": "",
+   "show": "posted on X",
+   "aired": "2026-07-19T20:36:19+00:00",
+   "date": "2026-07-19",
+   "speaker": "Ansem",
+   "asset": "Pump.fun",
+   "symbol": "PUMP",
+   "class": "crypto",
+   "listing": "PUMP36507-USD",
+   "stance": "long",
+   "kind": "holding",
+   "target": "",
+   "quote": "bought $PUMP here on the reclaim of old support @ .001675",
+   "start_seconds": 0.0,
+   "timestamp": "",
+   "link": "https://x.com/blknoiz06/status/2078942029116264788",
+   "price_then": 0.0018520000157877803,
+   "then_at": "2026-07-19",
+   "price_last": 0.0051009999588131905,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2077854740575092752:1590:SOL",
+   "source": "show",
    "episode_id": "x-2077854740575092752",
    "show": "LIVE W/ JESSE POLLAK & LUCAS BRUDER: Market Bubble Ep 11 - Presented by @Polymarket",
    "aired": "2026-07-16T20:35:49+00:00",
@@ -850,11 +1128,13 @@
    "link": "https://x.com/i/broadcasts/1qxvvvaNgpwxB?t=5637",
    "price_then": 75.27239227294922,
    "then_at": "2026-07-17",
-   "price_last": 111.58000183105469,
-   "last_at": "2026-10-12"
+   "price_last": 107.38999938964844,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2075316750439338088:1045:AAPL",
+   "source": "show",
    "episode_id": "x-2075316750439338088",
    "show": "LIVE W/ LUCA NETZ & GPT-LIVE: Market Bubble Ep 10 - Presented by @Polymarket",
    "aired": "2026-07-09T20:30:45+00:00",
@@ -873,11 +1153,13 @@
    "link": "https://x.com/i/broadcasts/1dKrPPqkNdqJX?t=2838",
    "price_then": 316.2200012207031,
    "then_at": "2026-07-09",
-   "price_last": 336.6400146484375,
-   "last_at": "2026-10-09"
+   "price_last": 341.2699890136719,
+   "last_at": "2026-10-13",
+   "target_check": null
   },
   {
    "id": "x-2075316750439338088:4582:SOL",
+   "source": "show",
    "episode_id": "x-2075316750439338088",
    "show": "LIVE W/ LUCA NETZ & GPT-LIVE: Market Bubble Ep 10 - Presented by @Polymarket",
    "aired": "2026-07-09T20:30:45+00:00",
@@ -889,18 +1171,26 @@
    "listing": "SOL-USD",
    "stance": "long",
    "kind": "target",
-   "target": "150 during Q3 (not reached, the quarter's high was about 125)",
+   "target": "150 during Q3",
    "quote": "I'm expecting Solana to go to 150 during Q3",
    "start_seconds": 12991.38,
    "timestamp": "3:36:31",
    "link": "https://x.com/i/broadcasts/1dKrPPqkNdqJX?t=12991",
    "price_then": 78.04427337646484,
    "then_at": "2026-07-10",
-   "price_last": 111.58000183105469,
-   "last_at": "2026-10-12"
+   "price_last": 107.38999938964844,
+   "last_at": "2026-10-14",
+   "target_check": {
+    "level": 150.0,
+    "by": "2026-09-30",
+    "high": 124.61737823486328,
+    "status": "missed",
+    "on": null
+   }
   },
   {
    "id": "x-2075316750439338088:4705:LIGHTER",
+   "source": "show",
    "episode_id": "x-2075316750439338088",
    "show": "LIVE W/ LUCA NETZ & GPT-LIVE: Market Bubble Ep 10 - Presented by @Polymarket",
    "aired": "2026-07-09T20:30:45+00:00",
@@ -919,11 +1209,13 @@
    "link": "https://x.com/i/broadcasts/1dKrPPqkNdqJX?t=13435",
    "price_then": 2.3985049724578857,
    "then_at": "2026-07-10",
-   "price_last": 3.877000093460083,
-   "last_at": "2026-10-12"
+   "price_last": 3.367000102996826,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2075316750439338088:4767:VVV",
+   "source": "show",
    "episode_id": "x-2075316750439338088",
    "show": "LIVE W/ LUCA NETZ & GPT-LIVE: Market Bubble Ep 10 - Presented by @Polymarket",
    "aired": "2026-07-09T20:30:45+00:00",
@@ -942,11 +1234,13 @@
    "link": "https://x.com/i/broadcasts/1dKrPPqkNdqJX?t=13698",
    "price_then": 11.494458198547363,
    "then_at": "2026-07-10",
-   "price_last": 24.854299545288086,
-   "last_at": "2026-10-12"
+   "price_last": 22.92930030822754,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2072780197179666519:3931:BTC",
+   "source": "show",
    "episode_id": "x-2072780197179666519",
    "show": "Market Bubble: The Ansem Edition - Presented by @Polymarket",
    "aired": "2026-07-02T20:31:24+00:00",
@@ -965,11 +1259,13 @@
    "link": "https://x.com/i/broadcasts/1kKzDDrlpOXJv?t=10111",
    "price_then": 61492.06640625,
    "then_at": "2026-07-03",
-   "price_last": 83467.578125,
-   "last_at": "2026-10-12"
+   "price_last": 83276.5078125,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2072780197179666519:3931:venice",
+   "source": "show",
    "episode_id": "x-2072780197179666519",
    "show": "Market Bubble: The Ansem Edition - Presented by @Polymarket",
    "aired": "2026-07-02T20:31:24+00:00",
@@ -988,11 +1284,13 @@
    "link": "https://x.com/i/broadcasts/1kKzDDrlpOXJv?t=10111",
    "price_then": 13.375571250915527,
    "then_at": "2026-07-03",
-   "price_last": 24.854299545288086,
-   "last_at": "2026-10-12"
+   "price_last": 22.92930030822754,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2072780197179666519:hand:3931:ANSEM",
+   "source": "show",
    "episode_id": "x-2072780197179666519",
    "show": "Market Bubble: The Ansem Edition - Presented by @Polymarket",
    "aired": "2026-07-02T20:31:24+00:00",
@@ -1011,11 +1309,13 @@
    "link": "https://x.com/i/broadcasts/1kKzDDrlpOXJv?t=10111",
    "price_then": 0.16947199404239655,
    "then_at": "2026-07-03",
-   "price_last": 0.1506490856409073,
-   "last_at": "2026-10-12"
+   "price_last": 0.13335548341274261,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2072780197179666519:hand:3931:HYPE",
+   "source": "show",
    "episode_id": "x-2072780197179666519",
    "show": "Market Bubble: The Ansem Edition - Presented by @Polymarket",
    "aired": "2026-07-02T20:31:24+00:00",
@@ -1034,11 +1334,13 @@
    "link": "https://x.com/i/broadcasts/1kKzDDrlpOXJv?t=10111",
    "price_then": 66.8698501586914,
    "then_at": "2026-07-03",
-   "price_last": 87.1500015258789,
-   "last_at": "2026-10-12"
+   "price_last": 82.16999816894531,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2072780197179666519:6473:ETH",
+   "source": "show",
    "episode_id": "x-2072780197179666519",
    "show": "Market Bubble: The Ansem Edition - Presented by @Polymarket",
    "aired": "2026-07-02T20:31:24+00:00",
@@ -1057,11 +1359,19 @@
    "link": "https://x.com/i/broadcasts/1kKzDDrlpOXJv?t=13108",
    "price_then": 80.64398193359375,
    "then_at": "2026-07-03",
-   "price_last": 111.58000183105469,
-   "last_at": "2026-10-12"
+   "price_last": 107.38999938964844,
+   "last_at": "2026-10-14",
+   "target_check": {
+    "level": 600.0,
+    "by": null,
+    "high": 124.61737823486328,
+    "status": "open",
+    "on": null
+   }
   },
   {
    "id": "x-2070244072342827487:85:SOL",
+   "source": "show",
    "episode_id": "x-2070244072342827487",
    "show": "LIVE W/ TJR & Mert Market Bubble EP 8 - Presented by @Polymarket",
    "aired": "2026-06-25T20:33:44+00:00",
@@ -1073,18 +1383,26 @@
    "listing": "SOL-USD",
    "stance": "long",
    "kind": "target",
-   "target": "$600",
+   "target": "$600 this cycle",
    "quote": "This cycle, I think it can go from $60 to around like $600",
    "start_seconds": 398.06,
    "timestamp": "6:38",
    "link": "https://x.com/i/broadcasts/1RJjppeVyEvKw?t=398",
    "price_then": 67.57408905029297,
    "then_at": "2026-06-26",
-   "price_last": 111.58000183105469,
-   "last_at": "2026-10-12"
+   "price_last": 107.38999938964844,
+   "last_at": "2026-10-14",
+   "target_check": {
+    "level": 600.0,
+    "by": null,
+    "high": 124.61737823486328,
+    "status": "open",
+    "on": null
+   }
   },
   {
    "id": "x-2070244072342827487:2471:ZEC",
+   "source": "show",
    "episode_id": "x-2070244072342827487",
    "show": "LIVE W/ TJR & Mert Market Bubble EP 8 - Presented by @Polymarket",
    "aired": "2026-06-25T20:33:44+00:00",
@@ -1103,11 +1421,13 @@
    "link": "https://x.com/i/broadcasts/1RJjppeVyEvKw?t=8418",
    "price_then": 414.88812255859375,
    "then_at": "2026-06-26",
-   "price_last": 1283.8399658203125,
-   "last_at": "2026-10-12"
+   "price_last": 1270.5899658203125,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2070244072342827487:3431:VVV",
+   "source": "show",
    "episode_id": "x-2070244072342827487",
    "show": "LIVE W/ TJR & Mert Market Bubble EP 8 - Presented by @Polymarket",
    "aired": "2026-06-25T20:33:44+00:00",
@@ -1126,11 +1446,63 @@
    "link": "https://x.com/i/broadcasts/1RJjppeVyEvKw?t=12819",
    "price_then": 13.69295883178711,
    "then_at": "2026-06-26",
-   "price_last": 24.854299545288086,
-   "last_at": "2026-10-12"
+   "price_last": 22.92930030822754,
+   "last_at": "2026-10-14",
+   "target_check": null
+  },
+  {
+   "id": "post:2070178879927443886:BTC",
+   "source": "post",
+   "episode_id": "",
+   "show": "posted on X",
+   "aired": "2026-06-25T16:14:41+00:00",
+   "date": "2026-06-25",
+   "speaker": "Ansem",
+   "asset": "Bitcoin",
+   "symbol": "BTC",
+   "class": "crypto",
+   "listing": "BTC-USD",
+   "stance": "long",
+   "kind": "pick",
+   "target": "",
+   "quote": "thesis around buying bitcoin spot here is same as its always been",
+   "start_seconds": 0.0,
+   "timestamp": "",
+   "link": "https://x.com/blknoiz06/status/2070178879927443886",
+   "price_then": 59214.28125,
+   "then_at": "2026-06-25",
+   "price_last": 83276.5078125,
+   "last_at": "2026-10-14",
+   "target_check": null
+  },
+  {
+   "id": "post:2067732268173455440:SOL",
+   "source": "post",
+   "episode_id": "",
+   "show": "posted on X",
+   "aired": "2026-06-18T22:12:43+00:00",
+   "date": "2026-06-18",
+   "speaker": "Ansem",
+   "asset": "Solana",
+   "symbol": "SOL",
+   "class": "crypto",
+   "listing": "SOL-USD",
+   "stance": "long",
+   "kind": "holding",
+   "target": "",
+   "quote": "yeah... I bought $SOL earlier this week",
+   "start_seconds": 0.0,
+   "timestamp": "",
+   "link": "https://x.com/blknoiz06/status/2067732268173455440",
+   "price_then": 69.44000244140625,
+   "then_at": "2026-06-18",
+   "price_last": 107.38999938964844,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2067707414028382656:97:HYPE",
+   "source": "show",
    "episode_id": "x-2067707414028382656",
    "show": "LIVE W/ ILLIA POLOSUKHIN, ANDREW KANG, & CAMILLA ARAUJO: Market Bubble EP 7 - Presented by @Polymarket",
    "aired": "2026-06-18T20:33:58+00:00",
@@ -1149,11 +1521,13 @@
    "link": "https://x.com/i/broadcasts/1pJkOOmyOgEJj?t=679",
    "price_then": 68.24859619140625,
    "then_at": "2026-06-19",
-   "price_last": 87.1500015258789,
-   "last_at": "2026-10-12"
+   "price_last": 82.16999816894531,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2067707414028382656:97:TTWO",
+   "source": "show",
    "episode_id": "x-2067707414028382656",
    "show": "LIVE W/ ILLIA POLOSUKHIN, ANDREW KANG, & CAMILLA ARAUJO: Market Bubble EP 7 - Presented by @Polymarket",
    "aired": "2026-06-18T20:33:58+00:00",
@@ -1172,11 +1546,13 @@
    "link": "https://x.com/i/broadcasts/1pJkOOmyOgEJj?t=679",
    "price_then": 239.27999877929688,
    "then_at": "2026-06-18",
-   "price_last": 213.44000244140625,
-   "last_at": "2026-10-09"
+   "price_last": 200.32000732421875,
+   "last_at": "2026-10-13",
+   "target_check": null
   },
   {
    "id": "x-2067707414028382656:155:HYPE",
+   "source": "show",
    "episode_id": "x-2067707414028382656",
    "show": "LIVE W/ ILLIA POLOSUKHIN, ANDREW KANG, & CAMILLA ARAUJO: Market Bubble EP 7 - Presented by @Polymarket",
    "aired": "2026-06-18T20:33:58+00:00",
@@ -1195,11 +1571,13 @@
    "link": "https://x.com/i/broadcasts/1pJkOOmyOgEJj?t=981",
    "price_then": 68.24859619140625,
    "then_at": "2026-06-19",
-   "price_last": 87.1500015258789,
-   "last_at": "2026-10-12"
+   "price_last": 82.16999816894531,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2067707414028382656:337:ZEC",
+   "source": "show",
    "episode_id": "x-2067707414028382656",
    "show": "LIVE W/ ILLIA POLOSUKHIN, ANDREW KANG, & CAMILLA ARAUJO: Market Bubble EP 7 - Presented by @Polymarket",
    "aired": "2026-06-18T20:33:58+00:00",
@@ -1218,11 +1596,13 @@
    "link": "https://x.com/i/broadcasts/1pJkOOmyOgEJj?t=1660",
    "price_then": 455.9239501953125,
    "then_at": "2026-06-19",
-   "price_last": 1283.8399658203125,
-   "last_at": "2026-10-12"
+   "price_last": 1270.5899658203125,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2067707414028382656:4805:GOOGL",
+   "source": "show",
    "episode_id": "x-2067707414028382656",
    "show": "LIVE W/ ILLIA POLOSUKHIN, ANDREW KANG, & CAMILLA ARAUJO: Market Bubble EP 7 - Presented by @Polymarket",
    "aired": "2026-06-18T20:33:58+00:00",
@@ -1241,11 +1621,13 @@
    "link": "https://x.com/i/broadcasts/1pJkOOmyOgEJj?t=16406",
    "price_then": 368.0299987792969,
    "then_at": "2026-06-18",
-   "price_last": 351.6600036621094,
-   "last_at": "2026-10-09"
+   "price_last": 353.7799987792969,
+   "last_at": "2026-10-13",
+   "target_check": null
   },
   {
    "id": "x-2067707414028382656:4807:INTC",
+   "source": "show",
    "episode_id": "x-2067707414028382656",
    "show": "LIVE W/ ILLIA POLOSUKHIN, ANDREW KANG, & CAMILLA ARAUJO: Market Bubble EP 7 - Presented by @Polymarket",
    "aired": "2026-06-18T20:33:58+00:00",
@@ -1264,11 +1646,94 @@
    "link": "https://x.com/i/broadcasts/1pJkOOmyOgEJj?t=16418",
    "price_then": 133.99000549316406,
    "then_at": "2026-06-18",
-   "price_last": 104.69999694824219,
-   "last_at": "2026-10-09"
+   "price_last": 102.80999755859375,
+   "last_at": "2026-10-13",
+   "target_check": null
+  },
+  {
+   "id": "post:2066521848280449285:JTO",
+   "source": "post",
+   "episode_id": "",
+   "show": "posted on X",
+   "aired": "2026-06-15T14:02:57+00:00",
+   "date": "2026-06-15",
+   "speaker": "Ansem",
+   "asset": "Jito",
+   "symbol": "JTO",
+   "class": "crypto",
+   "listing": "JTO-USD",
+   "stance": "long",
+   "kind": "pick",
+   "target": "",
+   "quote": "think $JTO good spot alt buy & hold here, extremely beaten down after 10/10 and general underperformance of sol alts",
+   "start_seconds": 0.0,
+   "timestamp": "",
+   "link": "https://x.com/blknoiz06/status/2066521848280449285",
+   "price_then": 0.7605000138282776,
+   "then_at": "2026-06-15",
+   "price_last": 0.5374000072479248,
+   "last_at": "2026-10-14",
+   "target_check": null
+  },
+  {
+   "id": "post:2066169428463517801:SPX",
+   "source": "post",
+   "episode_id": "",
+   "show": "posted on X",
+   "aired": "2026-06-14T14:42:33+00:00",
+   "date": "2026-06-14",
+   "speaker": "Ansem",
+   "asset": "S&P 500",
+   "symbol": "SPX",
+   "class": "index",
+   "listing": "^GSPC",
+   "stance": "long",
+   "kind": "target",
+   "target": "8,000+ at the end of the year",
+   "quote": "SPX500 is going to end the year @ 8,000+",
+   "start_seconds": 0.0,
+   "timestamp": "",
+   "link": "https://x.com/blknoiz06/status/2066169428463517801",
+   "price_then": 7430.85986328125,
+   "then_at": "2026-06-14",
+   "price_last": 7805.4501953125,
+   "last_at": "2026-10-13",
+   "target_check": {
+    "level": 8000.0,
+    "by": "2026-12-31",
+    "high": 7844.52001953125,
+    "status": "open",
+    "on": null
+   }
+  },
+  {
+   "id": "post:2065199062723314076:ZEC",
+   "source": "post",
+   "episode_id": "",
+   "show": "posted on X",
+   "aired": "2026-06-11T22:26:40+00:00",
+   "date": "2026-06-11",
+   "speaker": "Ansem",
+   "asset": "Zcash",
+   "symbol": "ZEC",
+   "class": "crypto",
+   "listing": "ZEC-USD",
+   "stance": "long",
+   "kind": "holding",
+   "target": "",
+   "quote": "how am i positioned in crypto? hype vvv zec",
+   "start_seconds": 0.0,
+   "timestamp": "",
+   "link": "https://x.com/blknoiz06/status/2065199062723314076",
+   "price_then": 433.0,
+   "then_at": "2026-06-11",
+   "price_last": 1270.5899658203125,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2065170470186651823:hand:1233:HYPE",
+   "source": "show",
    "episode_id": "x-2065170470186651823",
    "show": "LIVE W/ INTERN, & MTVJESSE : Market Bubble EP 6 - Presented by @Polymarket",
    "aired": "2026-06-11T20:33:03+00:00",
@@ -1287,11 +1752,13 @@
    "link": "https://x.com/i/broadcasts/1yKAPPvoZmqxb?t=4141",
    "price_then": 58.937198638916016,
    "then_at": "2026-06-12",
-   "price_last": 87.1500015258789,
-   "last_at": "2026-10-12"
+   "price_last": 82.16999816894531,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2065170470186651823:1234:venice",
+   "source": "show",
    "episode_id": "x-2065170470186651823",
    "show": "LIVE W/ INTERN, & MTVJESSE : Market Bubble EP 6 - Presented by @Polymarket",
    "aired": "2026-06-11T20:33:03+00:00",
@@ -1310,11 +1777,13 @@
    "link": "https://x.com/i/broadcasts/1yKAPPvoZmqxb?t=4145",
    "price_then": 14.610262870788574,
    "then_at": "2026-06-12",
-   "price_last": 24.854299545288086,
-   "last_at": "2026-10-12"
+   "price_last": 22.92930030822754,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2062633295792271762:hand:455:ZEC",
+   "source": "show",
    "episode_id": "x-2062633295792271762",
    "show": "LIVE W/ ERIK VOORHEES, MIKE MAJLAK, & FLOOD: Market Bubble EP 5 - Presented by @Polymarket",
    "aired": "2026-06-04T20:31:14+00:00",
@@ -1333,11 +1802,13 @@
    "link": "https://x.com/i/broadcasts/1dxYllbQZELJX?t=1297",
    "price_then": 457.33551025390625,
    "then_at": "2026-06-05",
-   "price_last": 1283.8399658203125,
-   "last_at": "2026-10-12"
+   "price_last": 1270.5899658203125,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2062633295792271762:457:bbv",
+   "source": "show",
    "episode_id": "x-2062633295792271762",
    "show": "LIVE W/ ERIK VOORHEES, MIKE MAJLAK, & FLOOD: Market Bubble EP 5 - Presented by @Polymarket",
    "aired": "2026-06-04T20:31:14+00:00",
@@ -1356,11 +1827,13 @@
    "link": "https://x.com/i/broadcasts/1dxYllbQZELJX?t=1301",
    "price_then": 16.71583366394043,
    "then_at": "2026-06-05",
-   "price_last": 24.854299545288086,
-   "last_at": "2026-10-12"
+   "price_last": 22.92930030822754,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2062633295792271762:459:NEAR",
+   "source": "show",
    "episode_id": "x-2062633295792271762",
    "show": "LIVE W/ ERIK VOORHEES, MIKE MAJLAK, & FLOOD: Market Bubble EP 5 - Presented by @Polymarket",
    "aired": "2026-06-04T20:31:14+00:00",
@@ -1379,11 +1852,13 @@
    "link": "https://x.com/i/broadcasts/1dxYllbQZELJX?t=1304",
    "price_then": 2.195491075515747,
    "then_at": "2026-06-05",
-   "price_last": 5.830100059509277,
-   "last_at": "2026-10-12"
+   "price_last": 5.126999855041504,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2057559650166559016:195:SOL",
+   "source": "show",
    "episode_id": "x-2057559650166559016",
    "show": "LIVE W/ GREG OSURI & MAYNE: Market Bubble EP 4 - Presented by @Polymarket",
    "aired": "2026-05-21T20:30:22+00:00",
@@ -1402,11 +1877,13 @@
    "link": "https://x.com/i/broadcasts/1OxwbldAYLDJB?t=567",
    "price_then": 77538.1171875,
    "then_at": "2026-05-22",
-   "price_last": 83467.578125,
-   "last_at": "2026-10-12"
+   "price_last": 83276.5078125,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2057559650166559016:hand:195:HYPE",
+   "source": "show",
    "episode_id": "x-2057559650166559016",
    "show": "LIVE W/ GREG OSURI & MAYNE: Market Bubble EP 4 - Presented by @Polymarket",
    "aired": "2026-05-21T20:30:22+00:00",
@@ -1425,11 +1902,13 @@
    "link": "https://x.com/i/broadcasts/1OxwbldAYLDJB?t=567",
    "price_then": 58.65486526489258,
    "then_at": "2026-05-22",
-   "price_last": 87.1500015258789,
-   "last_at": "2026-10-12"
+   "price_last": 82.16999816894531,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2057559650166559016:255:HYPE",
+   "source": "show",
    "episode_id": "x-2057559650166559016",
    "show": "LIVE W/ GREG OSURI & MAYNE: Market Bubble EP 4 - Presented by @Polymarket",
    "aired": "2026-05-21T20:30:22+00:00",
@@ -1448,11 +1927,13 @@
    "link": "https://x.com/i/broadcasts/1OxwbldAYLDJB?t=729",
    "price_then": 58.65486526489258,
    "then_at": "2026-05-22",
-   "price_last": 87.1500015258789,
-   "last_at": "2026-10-12"
+   "price_last": 82.16999816894531,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2057559650166559016:357:ZEC",
+   "source": "show",
    "episode_id": "x-2057559650166559016",
    "show": "LIVE W/ GREG OSURI & MAYNE: Market Bubble EP 4 - Presented by @Polymarket",
    "aired": "2026-05-21T20:30:22+00:00",
@@ -1471,11 +1952,13 @@
    "link": "https://x.com/i/broadcasts/1OxwbldAYLDJB?t=1023",
    "price_then": 663.962158203125,
    "then_at": "2026-05-22",
-   "price_last": 1283.8399658203125,
-   "last_at": "2026-10-12"
+   "price_last": 1270.5899658203125,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2055023168868553083:394:TTWO",
+   "source": "show",
    "episode_id": "x-2055023168868553083",
    "show": "LIVE W/ TRISTAN THOMPSON & TJR: Market Bubble EP 3 - Presented by @Polymarket",
    "aired": "2026-05-14T20:31:18+00:00",
@@ -1494,11 +1977,13 @@
    "link": "https://x.com/i/broadcasts/1DGleEgbRRzJL?t=1505",
    "price_then": 242.41000366210938,
    "then_at": "2026-05-14",
-   "price_last": 213.44000244140625,
-   "last_at": "2026-10-09"
+   "price_last": 200.32000732421875,
+   "last_at": "2026-10-13",
+   "target_check": null
   },
   {
    "id": "x-2055023168868553083:201:INTC",
+   "source": "show",
    "episode_id": "x-2055023168868553083",
    "show": "LIVE W/ TRISTAN THOMPSON & TJR: Market Bubble EP 3 - Presented by @Polymarket",
    "aired": "2026-05-14T20:31:18+00:00",
@@ -1517,11 +2002,13 @@
    "link": "https://x.com/i/broadcasts/1DGleEgbRRzJL?t=5344",
    "price_then": 115.93000030517578,
    "then_at": "2026-05-14",
-   "price_last": 104.69999694824219,
-   "last_at": "2026-10-09"
+   "price_last": 102.80999755859375,
+   "last_at": "2026-10-13",
+   "target_check": null
   },
   {
    "id": "x-2052486417154969659:406:BTC",
+   "source": "show",
    "episode_id": "x-2052486417154969659",
    "show": "LIVE W/ MIZKIF: Market Bubble EP 2 - Presented by @Polymarket",
    "aired": "2026-05-07T20:31:09+00:00",
@@ -1540,11 +2027,13 @@
    "link": "https://x.com/i/broadcasts/1DGleEqQkYVJL?t=1329",
    "price_then": 80009.625,
    "then_at": "2026-05-08",
-   "price_last": 83467.578125,
-   "last_at": "2026-10-12"
+   "price_last": 83276.5078125,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2052486417154969659:406:HYPE",
+   "source": "show",
    "episode_id": "x-2052486417154969659",
    "show": "LIVE W/ MIZKIF: Market Bubble EP 2 - Presented by @Polymarket",
    "aired": "2026-05-07T20:31:09+00:00",
@@ -1563,11 +2052,13 @@
    "link": "https://x.com/i/broadcasts/1DGleEqQkYVJL?t=1329",
    "price_then": 42.508792877197266,
    "then_at": "2026-05-08",
-   "price_last": 87.1500015258789,
-   "last_at": "2026-10-12"
+   "price_last": 82.16999816894531,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2052486417154969659:521:ZEC",
+   "source": "show",
    "episode_id": "x-2052486417154969659",
    "show": "LIVE W/ MIZKIF: Market Bubble EP 2 - Presented by @Polymarket",
    "aired": "2026-05-07T20:31:09+00:00",
@@ -1586,11 +2077,13 @@
    "link": "https://x.com/i/broadcasts/1DGleEqQkYVJL?t=1940",
    "price_then": 571.9104614257812,
    "then_at": "2026-05-08",
-   "price_last": 1283.8399658203125,
-   "last_at": "2026-10-12"
+   "price_last": 1270.5899658203125,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2050035157977944218:209:BTC",
+   "source": "show",
    "episode_id": "x-2050035157977944218",
    "show": "Market Bubble: Episode 1 - WELCOME TO THE SHOW",
    "aired": "2026-05-01T02:10:44+00:00",
@@ -1609,11 +2102,13 @@
    "link": "https://x.com/MarketBubble/status/2050035157977944218?t=1101",
    "price_then": 76305.0546875,
    "then_at": "2026-05-01",
-   "price_last": 83467.578125,
-   "last_at": "2026-10-12"
+   "price_last": 83276.5078125,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2050035157977944218:hand:209:HYPE",
+   "source": "show",
    "episode_id": "x-2050035157977944218",
    "show": "Market Bubble: Episode 1 - WELCOME TO THE SHOW",
    "aired": "2026-05-01T02:10:44+00:00",
@@ -1632,11 +2127,13 @@
    "link": "https://x.com/MarketBubble/status/2050035157977944218?t=1101",
    "price_then": 39.68037414550781,
    "then_at": "2026-05-01",
-   "price_last": 87.1500015258789,
-   "last_at": "2026-10-12"
+   "price_last": 82.16999816894531,
+   "last_at": "2026-10-14",
+   "target_check": null
   },
   {
    "id": "x-2050035157977944218:641:NVDA",
+   "source": "show",
    "episode_id": "x-2050035157977944218",
    "show": "Market Bubble: Episode 1 - WELCOME TO THE SHOW",
    "aired": "2026-05-01T02:10:44+00:00",
@@ -1655,11 +2152,13 @@
    "link": "https://x.com/MarketBubble/status/2050035157977944218?t=3319",
    "price_then": 433.010009765625,
    "then_at": "2026-04-30",
-   "price_last": 429.6499938964844,
-   "last_at": "2026-10-09"
+   "price_last": 428.30999755859375,
+   "last_at": "2026-10-13",
+   "target_check": null
   },
   {
    "id": "x-2050035157977944218:703:TTWO",
+   "source": "show",
    "episode_id": "x-2050035157977944218",
    "show": "Market Bubble: Episode 1 - WELCOME TO THE SHOW",
    "aired": "2026-05-01T02:10:44+00:00",
@@ -1678,8 +2177,9 @@
    "link": "https://x.com/MarketBubble/status/2050035157977944218?t=3642",
    "price_then": 213.75999450683594,
    "then_at": "2026-04-30",
-   "price_last": 213.44000244140625,
-   "last_at": "2026-10-09"
+   "price_last": 200.32000732421875,
+   "last_at": "2026-10-13",
+   "target_check": null
   }
  ]
 }

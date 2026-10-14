@@ -4,8 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0b0e11">
-<!-- Not for search engines until it has been looked over and linked. -->
-<meta name="robots" content="noindex">
 <title>Market Bubble · what they called, and what it did</title>
 <meta name="description" content="Every time Ansem or FaZe Banks said on air that he owned something, named a pick or put a number on it. Quoted word for word, linked to the second, priced from that night to today.">
 <meta property="og:title" content="What they called on Market Bubble, and what it did">
@@ -81,6 +79,11 @@
     border:1px solid var(--line);color:var(--muted);border-radius:9px;
     padding:1px 7px;white-space:nowrap}
   .tag.short{border-color:#e5605e66;color:var(--red)}
+  /* Where a target with a number stands. Colour says it, and so do the
+     words, for anybody who cannot tell the colours apart. */
+  .tag.reached{border-color:#16c78466;color:var(--green);white-space:normal}
+  .tag.missed{border-color:#e5605e66;color:var(--red);white-space:normal}
+  .tag.open{white-space:normal}
   /* A target is in his own words and can run long. It wraps; every other
      tag is two or three words and stays on one line. */
   .tag.target{border-color:#e8c15755;color:var(--amber);white-space:normal;
@@ -151,9 +154,9 @@
 
   <h1>What they called, <em>and what it did</em>.</h1>
   <p class="sub">Every time Ansem or FaZe Banks said on air that he owned
-    something, named a pick or put a number on it. <b>Quoted word for word,
-    linked to the second he said it, priced from that night to today.</b>
-    The misses are here too.</p>
+    something, named a pick or put a number on it, and the calls Ansem made in
+    his own posts. <b>Quoted word for word, linked to the second he said it,
+    priced from that night to today.</b> The misses are here too.</p>
 
   <div class="note">
     This is a record of what was said on the show. It is <b>not advice and not
@@ -184,7 +187,10 @@
     one that is left, and only the ones marked keep are shown. Tokens are
     priced at the midnight UTC nearest the broadcast and stocks at that day's
     close, from the exact listing, never from a ticker alone. Guests are not
-    on the board because their voices are not labelled. Hedges and short-term
+    on the board because their voices are not labelled. A call Ansem made in
+    a post is quoted from the post and priced at the hour he posted it. A
+    target with a number in it is marked reached, not reached, or not reached
+    yet, from the highest price since. Hedges and short-term
     trades are left off whichever way they went: a short put on against his
     own holdings, or a setup for the next few days, is not a view to hold a
     price against months later.
@@ -256,7 +262,7 @@ function tally(rows){
   var mid = median(scored);
   var cls = mid == null ? "" : mid > 0 ? "up" : mid < 0 ? "down" : "";
   var seen = {}, shows = 0;
-  rows.forEach(function(r){ if (!seen[r.episode_id]){ seen[r.episode_id] = 1; shows++; } });
+  rows.forEach(function(r){ if (r.episode_id && !seen[r.episode_id]){ seen[r.episode_id] = 1; shows++; } });
   document.getElementById("tally").innerHTML =
     "<div><b>" + rows.length + "</b><span>calls</span></div>" +
     "<div><b class='up'>" + up + "</b><span>up since</span></div>" +
@@ -273,12 +279,29 @@ function shareUrl(r){
   return "https://x.com/intent/post?text=" + encodeURIComponent(line + "\n\n" + page);
 }
 
+/* A target with a number in it: reached, not reached by the date he gave,
+   or still open. The level is said in the tag, because one row can name
+   two targets and only the dated one has an answer yet. */
+function checked(c){
+  if (!c || typeof c.level !== "number" || !c.status) return "";
+  var level = small(c.level), text;
+  if (c.status === "reached") text = level + " reached" + (c.on ? " " + day(c.on) : "");
+  else if (c.status === "missed") text = level + " not reached by " + day(c.by) +
+    (typeof c.high === "number" ? ", high " + small(c.high) : "");
+  else if (c.status === "open") text = level + " not reached yet" + (c.by ? ", has until " + day(c.by) : "");
+  else return "";
+  return "<span class='tag " + (c.status === "reached" ? "reached" : c.status === "missed" ? "missed" : "open") +
+         "'>" + esc(text) + "</span>";
+}
+
 function row(r, i){
   var cls = typeof r.moved_pct !== "number" ? "none" : r.moved_pct > 0 ? "up" : r.moved_pct < 0 ? "down" : "";
-  var href = safeUrl(r.link);
+  var href = safeUrl(r.link), posted = r.source === "post";
   var said = (KIND[r.stance] || KIND.long)[r.kind] || r.kind;
-  var tags = "<span class='tag" + (r.stance === "short" ? " short" : "") + "'>" + esc(said) + "</span>" +
-    (r.target ? "<span class='tag target'>target: " + esc(r.target) + "</span>" : "");
+  if (posted) said = said.replace(/^said he /, "wrote that he ");
+  var tags = (posted ? "<span class='tag'>in a post</span>" : "") +
+    "<span class='tag" + (r.stance === "short" ? " short" : "") + "'>" + esc(said) + "</span>" +
+    (r.target ? "<span class='tag target'>target: " + esc(r.target) + "</span>" : "") + checked(r.target_check);
   var then = "<b>" + small(r.price_then) + "</b> " + esc(day(r.then_at).replace(/, \d{4}$/, ""));
   var now = "<b>" + small(r.price_now) + "</b> " + (r.now_at ? esc(day(r.now_at).replace(/, \d{4}$/, "")) : "now");
   return "<article class='call' id='" + anchor(r.id) + "' style='animation-delay:" + Math.min(i, 12) * 22 + "ms'>" +
@@ -287,8 +310,9 @@ function row(r, i){
     "<p class='quote'>" + esc(r.quote) + "</p>" +
     "<div class='acts'>" +
       (href ? "<a class='watch' href='" + esc(href) + "' target='_blank' rel='noopener'>" +
+        (posted ? "Read the post" :
         "<svg viewBox='0 0 12 12' aria-hidden='true'><path d='M2 1.2l8.5 4.8L2 10.8z' fill='currentColor'/></svg>" +
-        "Watch at " + esc(r.timestamp) + "</a>" : "") +
+        "Watch at " + esc(r.timestamp)) + "</a>" : "") +
       "<span class='ep'>" + esc(r.show) + "</span>" +
       "<a class='share' href='" + esc(shareUrl(r)) + "' target='_blank' rel='noopener'>Post this</a>" +
     "</div>" +

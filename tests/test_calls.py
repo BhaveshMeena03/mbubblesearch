@@ -464,7 +464,7 @@ def transcripts() -> dict[str, dict]:
 
 def test_every_row_is_said_word_for_word_at_that_second_in_that_voice():
     shows, voices = transcripts(), json.loads((DATA / "speaker_map.json").read_text())
-    board = shipped_board()
+    board = [row for row in shipped_board() if row["source"] == "show"]
     assert len(board) >= 50
     for row in board:
         episode = shows[row["episode_id"]]
@@ -489,10 +489,40 @@ def test_every_candidate_has_been_read():
     """A new show adds candidates. Until somebody has ruled on each one,
     this fails, and the board cannot quietly fall behind the archive."""
     verdicts = json.loads((DATA / "calls_verdicts.json").read_text())
-    candidates = json.loads((DATA / "calls_candidates.json").read_text())["shows"]
-    unread = [c["id"] for show in candidates.values() for c in show["candidates"]
-              if c["id"] not in verdicts]
+    found = json.loads((DATA / "calls_candidates.json").read_text())
+    proposed = [c for show in found["shows"].values() for c in show["candidates"]]
+    proposed += (found.get("posts") or {}).get("candidates", [])
+    unread = [c["id"] for c in proposed if c["id"] not in verdicts]
     assert not unread, unread[:5]
+
+
+def test_every_call_from_a_post_is_in_that_post_word_for_word():
+    """The posts are not in the repo. The few a row quotes are, so this
+    can hold each row against the post it says it came from."""
+    posts_on_file = json.loads((DATA / "calls_posts.json").read_text())
+    rows = [row for row in shipped_board() if row["source"] == "post"]
+    assert rows
+    for row in rows:
+        number = row["id"].split(":")[1]
+        post = posts_on_file[number]
+        text = " ".join(post["text"].split())
+        assert calls.locate_in_text(row["quote"], text) is not None, row["id"]
+        assert row["quote"] in text, row["id"]
+        assert row["link"] == f"https://x.com/blknoiz06/status/{number}", row["id"]
+        assert row["speaker"] == "Ansem" and row["episode_id"] == "", row["id"]
+        assert datetime.fromisoformat(row["aired"]) == datetime.fromisoformat(
+            post["created_at"].replace("Z", "+00:00")), row["id"]
+        assert post["kind"] != "reply", row["id"]
+
+
+def test_a_call_is_not_on_the_board_twice_because_he_said_it_and_posted_it():
+    """He read his Robinhood post out on the next day's show. One row."""
+    board = shipped_board()
+    said = {(r["speaker"], r["listing"], r["stance"], r["date"]) for r in board
+            if r["source"] == "show"}
+    doubled = [r["id"] for r in board if r["source"] == "post"
+               and (r["speaker"], r["listing"], r["stance"], r["date"]) in said]
+    assert not doubled, doubled
 
 
 def test_every_row_is_priced_from_a_listing_on_file_and_a_host_said_it():
@@ -513,6 +543,9 @@ def test_every_row_is_priced_from_a_listing_on_file_and_a_host_said_it():
 def test_every_row_plays_on_x_at_its_second():
     players = set(json.loads((DATA / "broadcast_links.json").read_text()).values())
     for row in shipped_board():
+        if row["source"] == "post":
+            assert row["link"].startswith("https://x.com/blknoiz06/status/"), row["id"]
+            continue
         base, _, second = row["link"].partition("?t=")
         assert second == str(int(row["start_seconds"])), row["id"]
         # Every show but the first has a player that opens at the second.
@@ -520,7 +553,8 @@ def test_every_row_plays_on_x_at_its_second():
 
 
 def test_a_host_is_on_the_board_once_per_asset_per_show_per_side():
-    seen = [(r["episode_id"], r["speaker"], r["listing"], r["stance"]) for r in shipped_board()]
+    seen = [(r["episode_id"] or r["aired"][:10], r["speaker"], r["listing"], r["stance"])
+            for r in shipped_board()]
     assert len(seen) == len(set(seen))
     assert len({r["id"] for r in shipped_board()}) == len(seen)
 
@@ -627,8 +661,165 @@ def test_the_finder_is_gentle_with_the_proxy_it_shares_by_default():
     assert 'os.environ.get("CALLS_CONCURRENCY", "2")' in source
 
 
+def test_the_board_can_be_found():
+    """It was live for two days with no way to reach it but a pasted link."""
+    assert '<meta name="robots" content="noindex">' not in PAGE
+    assert '<a class="also-card" href="/calls">' in (ROOT / "demo" / "podcast.html").read_text()
+    assert "https://search.lexthedev.com/calls :" in (ROOT / "demo" / "llms.txt").read_text()
+
+
+def test_the_page_shows_a_post_as_a_post_and_a_target_as_checked():
+    assert "Read the post" in PAGE and "<span class='tag'>in a post</span>" in PAGE
+    assert 'said.replace(/^said he /, "wrote that he ")' in PAGE
+    body = PAGE.split("function checked(c){")[1].split("function row(r, i){")[0]
+    for words in (' reached"', ' not reached by "', ' not reached yet"'):
+        assert words in body, words
+    assert "esc(text)" in body
+    assert "priced at the hour he posted it" in PAGE
+    assert "and the calls Ansem made in" in PAGE
+
+
 def test_the_page_says_trades_are_left_off():
     assert "Hedges and short-term" in PAGE and "whichever way they went" in PAGE
+
+
+# --- a target with a number in it ---------------------------------------------
+#
+# "Solana to 150 in Q3" sat beside a green +43% and nothing said the
+# quarter had ended with a high of 125.
+
+Q3 = [(date(2026, 7, 20), 96.0), (date(2026, 8, 28), 110.0), (date(2026, 9, 27), 124.62),
+      (date(2026, 10, 2), 123.48)]
+
+
+def test_a_dated_target_that_was_not_touched_in_time_is_missed():
+    found = calls.target_status(150, "2026-09-30", Q3, date(2026, 10, 14))
+    assert found == {"level": 150.0, "by": "2026-09-30", "high": 124.62,
+                     "status": "missed", "on": None}
+
+
+def test_a_target_is_reached_on_the_first_day_the_price_touched_it():
+    found = calls.target_status(110, "2026-09-30", Q3, date(2026, 10, 14))
+    assert (found["status"], found["on"]) == ("reached", "2026-08-28")
+
+
+def test_touching_it_after_the_date_he_gave_does_not_count():
+    late = Q3 + [(date(2026, 10, 9), 151.0)]
+    assert calls.target_status(150, "2026-09-30", late, date(2026, 10, 14))["status"] == "missed"
+    # With no date, the same touch reaches it.
+    assert calls.target_status(150, None, late, date(2026, 10, 14))["on"] == "2026-10-09"
+
+
+def test_a_target_is_open_until_its_date_passes_or_it_is_reached():
+    assert calls.target_status(150, "2026-09-30", Q3[:2], date(2026, 9, 1))["status"] == "open"
+    assert calls.target_status(150, "2026-09-30", Q3[:3], date(2026, 9, 30))["status"] == "open"
+    assert calls.target_status(600, None, Q3, date(2030, 1, 1))["status"] == "open"
+    assert calls.target_status(150, "not a date", Q3, date(2030, 1, 1))["status"] == "open"
+    assert calls.target_status(150, "2026-09-30", [], date(2026, 9, 1))["high"] is None
+
+
+@pytest.mark.parametrize("level", [None, 0, -5, "150", True])
+def test_a_target_with_no_price_in_it_is_not_checked(level):
+    """ "Ten percent of Bitcoin's market cap" is not a price. """
+    assert calls.target_status(level, "2026-09-30", Q3, date(2026, 10, 14)) is None
+
+
+def test_daily_highs_are_read_and_a_day_with_none_is_left_out():
+    reply = {"chart": {"result": [{"meta": {}, "timestamp": [
+        stamp(2026, 9, 26), stamp(2026, 9, 27), stamp(2026, 9, 28), "soon"],
+        "indicators": {"quote": [{"high": [120.1, 124.62, None, 9.0]}]}}]}}
+    assert call_prices.read_highs(reply) == [(date(2026, 9, 26), 120.1), (date(2026, 9, 27), 124.62)]
+    assert call_prices.read_highs({"chart": {"result": None}}) == []
+    assert call_prices.read_highs(None) == []
+
+
+def test_every_dated_target_on_the_board_whose_date_has_passed_says_how_it_ended():
+    built = date.fromisoformat(json.loads((DATA / "calls.json").read_text())["built_at"][:10])
+    checked = [r for r in shipped_board() if r.get("target_check")]
+    assert len(checked) >= 6
+    for row in checked:
+        check = row["target_check"]
+        assert check["status"] in ("reached", "missed", "open"), row["id"]
+        if check["by"] and date.fromisoformat(check["by"]) < built:
+            assert check["status"] != "open", row["id"]
+        if check["status"] == "missed":
+            assert check["high"] < check["level"], row["id"]
+    # The three that started this.
+    q3 = [r for r in checked if r["symbol"] == "SOL" and r["target_check"]["by"] == "2026-09-30"]
+    assert len(q3) == 3 and all(r["target_check"]["status"] == "missed" for r in q3)
+    assert not [r for r in shipped_board() if "not reached" in r["target"]]
+
+
+def test_a_target_touched_since_the_board_was_built_is_said_at_once():
+    shipped = {"calls": [dict(SHIPPED["calls"][0], kind="target", target="15 cents",
+                              target_check={"level": 0.14, "by": None, "high": 0.12,
+                                            "status": "open", "on": None})]}
+    still = calls.board(shipped, {"STRK22691-USD": 0.13}, "2026-10-14")["calls"][0]
+    assert still["target_check"]["status"] == "open"
+    there = calls.board(shipped, {"STRK22691-USD": 0.15}, "2026-10-14")["calls"][0]
+    assert there["target_check"] == {"level": 0.14, "by": None, "high": 0.15,
+                                     "status": "reached", "on": "2026-10-14"}
+    # No fresh price, no claim.
+    assert calls.board(shipped)["calls"][0]["target_check"]["status"] == "open"
+
+
+# --- a call he wrote ------------------------------------------------------------
+
+POST = {"id": "2078942029116264788", "created_at": "2026-07-19T20:36:19.000Z", "kind": "quote",
+        "text": "bought $PUMP here on the reclaim of old support @ .001675\n\n"
+                "thesis: making 30-40M a month during bear market for onchain"}
+POSTED = {"post": "2078942029116264788", "asset": "Pump.fun", "symbol": "pump",
+          "asset_class": "crypto", "stance": "long", "kind": "holding", "target": "",
+          "quote": "bought $PUMP here on the reclaim of old support @ .001675"}
+
+
+def test_a_call_from_a_post_is_cut_from_the_post_and_keyed_by_it():
+    row, why = calls.accept_post(POSTED, POST, "Ansem")
+    assert why == ""
+    assert row["id"] == "post:2078942029116264788:PUMP" and row["source"] == "post"
+    assert row["quote"] == "bought $PUMP here on the reclaim of old support @ .001675"
+    assert (row["speaker"], row["posted_at"]) == ("Ansem", "2026-07-19T20:36:19.000Z")
+
+
+def test_the_signs_around_a_number_are_kept():
+    post = dict(POST, text="$SOL from $60 to $600 this cycle, up 900%\nSPX500 is going to end the year @ 8,000+ easy")
+    row, _ = calls.accept_post(dict(POSTED, symbol="SOL", quote="SOL from $60 to $600 this cycle, up 900"),
+                               post, "Ansem")
+    assert row["quote"] == "$SOL from $60 to $600 this cycle, up 900%"
+    row, _ = calls.accept_post(dict(POSTED, symbol="SPX", quote="spx500 is going to end the year @ 8,000"),
+                               post, "Ansem")
+    assert row["quote"] == "SPX500 is going to end the year @ 8,000+"
+
+
+@pytest.mark.parametrize("change,why", [
+    ({"quote": "bought pump here because the chart looks incredible to me"}, "quote is not in the post"),
+    ({"quote": "bought $PUMP"}, "quote is not in the post"),
+    ({"stance": "bullish"}, "no stance"),
+    ({"kind": "vibes"}, "no kind"),
+    ({"symbol": "", "asset": ""}, "no asset"),
+])
+def test_a_claim_about_a_post_is_refused_with_the_reason(change, why):
+    assert calls.accept_post(dict(POSTED, **change), POST, "Ansem") == (None, why)
+
+
+def test_a_hedge_or_a_trade_in_a_post_is_refused_too():
+    post = dict(POST, text="shorting $ETH here as a hedge against my spot bags for the week")
+    claim = dict(POSTED, symbol="ETH", stance="short",
+                 quote="shorting $ETH here as a hedge against my spot bags")
+    assert calls.accept_post(claim, post, "Ansem") == (None, "a hedge is not a call")
+
+
+def test_one_asset_one_side_once_a_day_and_the_strongest_wins():
+    def posted(ident, at, kind, symbol="PUMP", stance="long"):
+        return {"id": ident, "posted_at": at, "kind": kind, "symbol": symbol,
+                "asset": symbol, "stance": stance}
+    rows = [posted("a", "2026-08-20T10:00:00Z", "holding"),
+            posted("b", "2026-08-20T21:00:00Z", "pick"),
+            posted("c", "2026-08-20T22:00:00Z", "pick"),
+            posted("d", "2026-08-21T09:00:00Z", "holding"),
+            posted("e", "2026-08-20T11:00:00Z", "holding", symbol="ZEC"),
+            posted("f", "2026-08-20T12:00:00Z", "holding", stance="short")]
+    assert [r["id"] for r in calls.one_per_day(rows)] == ["e", "f", "b", "d"]
 
 
 # --- the route and the page -----------------------------------------------------

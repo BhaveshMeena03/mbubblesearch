@@ -69,6 +69,30 @@ def read_chart(payload: object) -> tuple[dict, list[Bar]]:
     return dict(result.get("meta") or {}), bars
 
 
+def read_highs(payload: object) -> list[tuple[date, float]]:
+    """(day, highest price that day) out of a chart reply, oldest first.
+
+    For asking whether a target was ever touched: a close can sit under a
+    level the price reached at noon. A day with no high is left out.
+    """
+    try:
+        result = payload["chart"]["result"][0]
+        stamps = result.get("timestamp") or []
+        highs = result["indicators"]["quote"][0].get("high") or []
+    except (KeyError, IndexError, TypeError):
+        return []
+    found = []
+    for index, stamp in enumerate(stamps):
+        high = _number(highs[index] if index < len(highs) else None)
+        try:
+            day = datetime.fromtimestamp(int(stamp), UTC).date()
+        except (TypeError, ValueError, OverflowError, OSError):
+            continue
+        if high is not None:
+            found.append((day, high))
+    return sorted(found)
+
+
 def is_listing(meta: dict, symbol: str, name: str) -> bool:
     """True when a reply is for the asset that was asked for.
 
@@ -142,17 +166,25 @@ def read_spark(payload: object) -> dict[str, float]:
     return found
 
 
-async def chart(symbol: str, start: date, end: date, *,
-                client: httpx.AsyncClient) -> tuple[dict, list[Bar]]:
-    """Daily bars for one listing between two days, inclusive."""
+async def chart_reply(symbol: str, start: date, end: date, *,
+                      client: httpx.AsyncClient, interval: str = "1d") -> object:
+    """The source's reply for one listing between two days, inclusive."""
     first = datetime(start.year, start.month, start.day, tzinfo=UTC)
     last = datetime(end.year, end.month, end.day, tzinfo=UTC) + timedelta(days=1)
     reply = await client.get(
         CHART.format(symbol=symbol), headers=HEADERS,
         params={"period1": int(first.timestamp()),
-                "period2": int(last.timestamp()), "interval": "1d"})
+                "period2": int(last.timestamp()), "interval": interval})
     reply.raise_for_status()
-    return read_chart(reply.json())
+    return reply.json()
+
+
+async def chart(symbol: str, start: date, end: date, *,
+                client: httpx.AsyncClient, interval: str = "1d") -> tuple[dict, list[Bar]]:
+    """Bars for one listing between two days, inclusive. A bar a day
+    unless an hourly interval is asked for."""
+    return read_chart(await chart_reply(symbol, start, end, client=client,
+                                        interval=interval))
 
 
 async def now(symbols: list[str], *, client: httpx.AsyncClient) -> dict[str, float]:

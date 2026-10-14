@@ -92,6 +92,16 @@ def test_a_cashtag_is_put_back_where_x_stored_an_address():
     assert "$SOL" not in posts.readable("solana:so11111111111111111111111111111111111111112")
 
 
+def test_a_chains_own_coin_comes_back_as_its_ticker():
+    """ "bitcoin:native $74k" is how X stores "$BTC $74k". """
+    stored_text = "bitcoin:native $74k\nzcash:native $750\nethereum:native $2,350\nhyperliquid:native $70"
+    assert posts.readable(stored_text) == "$BTC $74k\n$ZEC $750\n$ETH $2,350\n$HYPE $70"
+    assert posts.readable("been calling zcash:native since $300") == "been calling $ZEC since $300"
+    # A chain nobody has put on file keeps its form and is reported.
+    assert posts.readable("dogechain:native to a dollar") == "dogechain:native to a dollar"
+    assert posts.unknown_tokens("dogechain:native and bitcoin:native") == ["dogechain:native"]
+
+
 def test_an_address_nobody_has_looked_up_is_left_as_it_came():
     """A ticker is put back when it is known, never guessed."""
     raw = "aping solana:7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU today"
