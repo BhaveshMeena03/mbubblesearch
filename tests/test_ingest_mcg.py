@@ -3,6 +3,7 @@
 Both are the same shape of bug: the job went green having done nothing,
 which from outside is indistinguishable from an archive already up to date.
 """
+import json
 import subprocess
 
 import pytest
@@ -241,3 +242,20 @@ def test_the_lookup_asks_for_both_dates(monkeypatch):
     monkeypatch.setattr(ingest_mcg.subprocess, "run", fake_run)
     assert ingest_mcg.published("bX6sTpFxkJs") == "2026-09-30"
     assert "%(release_date)s %(upload_date)s" in seen[0]
+
+
+def test_a_video_already_indexed_from_elsewhere_is_not_pending(monkeypatch, tmp_path):
+    """A shelf row from X that names its YouTube twin keeps the twin out of
+    the queue; everything else new and long enough is still picked up."""
+    shelf = tmp_path / "shelf.json"
+    shelf.write_text(json.dumps([
+        {"id": "x-1", "source": "x", "youtube": "AgeGated001"},
+        {"id": "OnShelf0001"}]))
+    monkeypatch.setattr(ingest_mcg, "SHELF", shelf)
+    monkeypatch.setattr(ingest_mcg, "TABS", [("stream", "streams")])
+    monkeypatch.setattr(ingest_mcg, "enumerate_tab", lambda url, limit: [
+        {"id": "AgeGated001", "duration": 7000},
+        {"id": "OnShelf0001", "duration": 7000},
+        {"id": "BrandNew001", "duration": 7000},
+        {"id": "AShortClip1", "duration": 60}])
+    assert [t["id"] for t in ingest_mcg.pending(20)] == ["BrandNew001"]

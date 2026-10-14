@@ -1,4 +1,4 @@
-"""The morning job that indexes MCG Live and ThreadGuy on the laptop."""
+"""The morning job that indexes MCG Live, ThreadGuy and rasmr on the laptop."""
 
 from pathlib import Path
 
@@ -7,14 +7,14 @@ SCRIPT = (ROOT / "scripts" / "daily_channels_check.sh").read_text()
 WORKFLOW = (ROOT / ".github" / "workflows" / "sync-episodes.yml").read_text()
 
 
-def test_it_covers_both_channels_and_transcribes_with_groq():
-    assert "for archive in threadguy mcg" in SCRIPT
+def test_it_covers_every_channel_and_transcribes_with_groq():
+    assert "for archive in threadguy mcg rasmr; do" in SCRIPT
     assert "--transcriber groq" in SCRIPT
 
 
-def test_it_commits_only_the_two_shelves():
+def test_it_commits_only_the_shelves():
     """It runs in a checkout that may have someone's work in it."""
-    assert 'shelves=(data/threadguy_index.json data/mcg_index.json\n' \
+    assert 'shelves=(data/threadguy_index.json data/mcg_index.json data/rasmr_index.json\n' \
            '         data/threadguy_summaries.json.gz "${terms[@]}")' in SCRIPT
     assert "terms=(data/terms_threadguy.json.gz data/terms_mcg.json.gz)" in SCRIPT
 
@@ -62,3 +62,16 @@ def test_the_jobs_can_find_ffmpeg_under_launchd():
     for name in ("daily_channels_check.sh", "daily_broadcast_check.sh"):
         script = (ROOT / "scripts" / name).read_text()
         assert 'export PATH="/opt/homebrew/bin:' in script, name
+
+
+def test_a_stream_indexed_from_x_is_not_fetched_again_from_youtube():
+    """rasmr's 12 Oct stream is age-gated on YouTube and went in from X.
+    Its row names the YouTube id, so the morning run neither fails on it
+    daily nor, once the gate lifts, indexes the same stream twice."""
+    import json
+    rows = json.loads((ROOT / "data" / "rasmr_index.json").read_text())
+    ids = {r["id"] for r in rows}
+    twins = [r for r in rows if r.get("youtube")]
+    assert twins
+    for row in twins:
+        assert row.get("source") == "x" and row["youtube"] not in ids, row["id"]

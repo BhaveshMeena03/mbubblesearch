@@ -190,7 +190,11 @@ def air_date(printed: str) -> str:
 
 
 def pending(limit: int) -> list[dict]:
-    have = {row["id"] for row in shelf()}
+    # A row indexed from somewhere else names the YouTube video it stands
+    # in for. rasmr's 12 Oct stream is age-gated on YouTube, so it went in
+    # from its X broadcast; without this the morning run would fail on it
+    # every day, and the day the gate lifted it would index the stream twice.
+    have = {key for row in shelf() for key in (row["id"], row.get("youtube")) if key}
     found = []
     for fmt, url in TABS:
         for entry in enumerate_tab(url, limit):

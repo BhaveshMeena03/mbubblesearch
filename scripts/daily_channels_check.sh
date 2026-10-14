@@ -1,5 +1,5 @@
 #!/bin/bash
-# Index new MCG Live and ThreadGuy episodes every morning, on this Mac.
+# Index new MCG Live, ThreadGuy and rasmr episodes every morning, on this Mac.
 #
 # Install (a LaunchAgent that runs daily at 09:00 local time):
 #
@@ -17,19 +17,22 @@
 # runner but YouTube refuses the download from a datacentre IP, so for MCG
 # it has only ever been able to say "there are new episodes" in a warning
 # nobody acted on. This laptop can fetch them. Market Bubble has its own
-# Friday watcher (daily_broadcast_check.sh); this is the other two.
+# Friday watcher (daily_broadcast_check.sh); this is the others.
 #
 # 09:00 IST, from the shows: ThreadGuy's market open runs about 19:00 to
 # 22:00 IST and its upload follows, and MCG's uploads land in the US day.
+# rasmr streams in the US afternoon and evening, so his are up by then too.
 # A morning run picks up everything from the day before. launchd runs a
 # missed job when the Mac next wakes, so a closed lid delays it, it does
 # not skip it.
 #
 # What it does: transcribes with Groq, embeds, adds each finished episode
 # to its shelf (written only after the vectors are in, see ingest_mcg.py),
-# writes notes for ThreadGuy's newest, then commits and pushes the two
-# shelf files and the notes and nothing else, so the site lists what can
-# be searched. It never posts anywhere. The headline
+# writes notes for ThreadGuy's newest, then commits and pushes the shelf
+# files and the notes and nothing else, so the site lists what can be
+# searched. rasmr gets his shelf and nothing more: no notes or tokens yet,
+# and his X-only broadcasts are read off X by hand, because that costs the
+# bot's X credit (scripts/index_rasmr_x_broadcasts.py). It never posts anywhere. The headline
 # totals on the front door and the link cards are not touched; those are
 # redrawn by hand.
 
@@ -72,7 +75,7 @@ case "${1:-}" in
 PLISTEOF
     launchctl unload "$PLIST" 2>/dev/null || true
     launchctl load "$PLIST"
-    echo "  installed: MCG Live and ThreadGuy, daily at 09:00"
+    echo "  installed: MCG Live, ThreadGuy and rasmr, daily at 09:00"
     echo "  log: $LOG"
     exit 0
     ;;
@@ -121,7 +124,7 @@ fi
 unset ANTHROPIC_BASE_URL
 
 status=0
-for archive in threadguy mcg; do
+for archive in threadguy mcg rasmr; do
   echo "-- $archive"
   # --max-new bounds a morning after a week away: newest first, the rest
   # tomorrow. caffeinate keeps the Mac awake through the transcription.
@@ -166,7 +169,7 @@ if [ "$(date +%u)" = "7" ]; then
 fi
 
 # Only the shelves and the indexes, whatever else is uncommitted here.
-shelves=(data/threadguy_index.json data/mcg_index.json
+shelves=(data/threadguy_index.json data/mcg_index.json data/rasmr_index.json
          data/threadguy_summaries.json.gz "${terms[@]}")
 # Only once it is in the repo: git will not commit a path it has never
 # seen, and the refusal would take the shelves down with it.
@@ -177,7 +180,7 @@ if git diff --quiet -- "${shelves[@]}"; then
   echo "  no new episodes"
   exit $status
 fi
-git commit -q -m "Add the MCG Live and ThreadGuy episodes indexed this morning" \
+git commit -q -m "Add the episodes indexed this morning" \
   -- "${shelves[@]}" && git push -q origin main \
   && echo "  pushed: $(git log --oneline -1)" \
   || { echo "  could not commit or push the shelves; they are indexed and will go up with the next push"; status=1; }
