@@ -350,7 +350,7 @@
   @keyframes beat{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
   .verdict{flex-wrap:wrap}
   .verdict b{color:var(--ink);letter-spacing:.06em;overflow-wrap:anywhere}
-  .answer{font-size:16.5px;line-height:1.65;margin:16px 0 0;white-space:pre-wrap;
+  .answer{--caret:var(--signal);font-size:16.5px;line-height:1.65;margin:16px 0 0;white-space:pre-wrap;
     overflow-wrap:anywhere}
   /* A time the answer cites, when a passage below covers it (cite.js). */
   .answer .cite{color:var(--signal);text-decoration:none;white-space:nowrap;
@@ -683,6 +683,7 @@
 
 <script src="/demo/nav.js"></script>
 <script src="/demo/cite.js"></script>
+<script src="/demo/typer.js"></script>
 <script>
 (function(){
   "use strict";
@@ -861,8 +862,13 @@
     if (under > 0) window.scrollBy({top: under, behavior: "smooth"});
   }
 
-  // Pending redraw of an answer that is still arriving.
-  var tick = null;
+  // The answer being typed out (/demo/typer.js), so a newer question,
+  // a failure or the finished answer can stop it.
+  var typing = null;
+  function stopTyping(){
+    if (typing) { typing.stop(); typing = null; }
+    $("answer").classList.remove("typing");
+  }
 
 
   var busy = false;
@@ -884,7 +890,7 @@
     if (busy || !question) return;
     busy = true; $("go").disabled = true; $("go").textContent = "…";
     $("out").style.display = "block";
-    if (tick) { clearTimeout(tick); tick = null; }
+    stopTyping();
     $("verdict").textContent = "searching all five archives";
     $("out").classList.toggle("instant", document.hidden);
     void $("out").offsetHeight;
@@ -912,13 +918,15 @@
 
     function trouble(msg){
       $("out").classList.remove("working");
-      if (tick) { clearTimeout(tick); tick = null; }
+      stopTyping();
       $("verdict").textContent = msg;
       $("answer").textContent = ""; $("hits").innerHTML = "";
       $("out").classList.add("shown"); document.body.classList.add("asked");
       idle();
     }
-    function draw(){ tick = null; Cite.paint($("answer"), said, hits, pickCite); }
+    // Typed out at the Market Bubble page's pace rather than redrawn a
+    // burst at a time as the pieces land.
+    var typer = typing = Typer(function(text){ Cite.paint($("answer"), text, hits, pickCite); });
     function plain(){
       // The stream could not start: ask the endpoint that answers whole.
       return fetch("/v1/search", {method:"POST", signal:stop.signal,
@@ -943,10 +951,17 @@
         } else if (ev === "error") {
           throw new Error("stream failed");
         } else if (ev === "message" && p && typeof p.text === "string") {
-          if (!said) $("out").classList.remove("working");
+          if (!said) {
+            $("out").classList.remove("working");
+            $("answer").classList.add("typing");
+          }
           said += p.text;
-          if (!tick) tick = setTimeout(draw, 40);
+          typer.push(p.text);
         }
+      })
+      .then(function(){
+        // Finished once the last word is on screen, not when it arrives.
+        return new Promise(function(resolve){ typer.finish(resolve); });
       })
       .then(function(){ finish(hits, said, false); })
       .catch(function(err){
@@ -1054,7 +1069,7 @@
   }
 
   function finish(list, text, cut){
-    if (tick) { clearTimeout(tick); tick = null; }
+    stopTyping();
     var cites = Cite.paint($("answer"), text, list, pickCite, true);
     // The passages the answer cites come first, so the card a citation
     // points at is always on the page.

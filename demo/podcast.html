@@ -502,6 +502,7 @@
     justify-content:flex-end}
 </style>
   <script src="/demo/nav.js" defer></script>
+  <script src="/demo/typer.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -709,51 +710,16 @@
   function LimitError(m){ this.message = m; this.isLimit = true; }
   LimitError.prototype = Object.create(Error.prototype);
 
+  // The pace and the hidden-tab fallback live in /demo/typer.js now, so
+  // every page types an answer the way this one always has.
   function Typer(el){
-    var shown="", queue="", done=false, pending=null, onDone=null;
-
-    // Drive the animation with rAF while the tab is visible, but fall back to
-    // a timer when it is hidden. Browsers PAUSE rAF in a backgrounded tab, and
-    // the loop used to depend on it alone — so tabbing away mid-answer left the
-    // queue undrained forever: the completion callback never fired, the spinner
-    // never cleared, and the Search button stayed disabled until a reload.
-    // Timers keep firing (throttled) in the background, so completion is
-    // guaranteed either way.
-    function schedule(){
-      pending = document.hidden
-        ? setTimeout(tick, 100)
-        : requestAnimationFrame(tick);
-    }
-
     // Hide a trailing unmatched ** so emphasis switches on with the word
     // rather than showing its asterisks until the closer arrives.
     function trimDangling(t){
       var n=(t.match(/\*\*/g)||[]).length;
       return n%2 ? t.slice(0,t.lastIndexOf("**")) : t;
     }
-    function paint(){ el.innerHTML=md(trimDangling(shown)); }
-
-    function tick(){
-      if(queue.length){
-        // A hidden tab isn't being watched, so animating it wastes nothing but
-        // battery — flush the whole queue at once. Visible: proportional
-        // catch-up, capped, so a large burst doesn't land in one janky frame.
-        var n = document.hidden
-          ? queue.length
-          : Math.min(14,Math.max(2,Math.ceil(queue.length/12)));
-        shown+=queue.slice(0,n); queue=queue.slice(n); paint();
-      }
-      if(queue.length||!done){ schedule(); }
-      else { pending=null; if(onDone){ onDone(shown); onDone=null; } }
-    }
-    return {
-      push:function(t){ queue+=t; if(pending===null) schedule(); },
-      set:function(t){ queue=""; shown=t; paint(); },
-      finish:function(cb){
-        done=true; onDone=cb;
-        if(pending===null){ cb(shown+queue); onDone=null; }
-      }
-    };
+    return window.Typer(function(shown){ el.innerHTML=md(trimDangling(shown)); });
   }
 
   function md(s){

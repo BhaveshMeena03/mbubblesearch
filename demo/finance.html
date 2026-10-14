@@ -49,6 +49,7 @@ moment they said it, down to the second.">
 -->
 
 <script src="/demo/nav.js" defer></script>
+<script src="/demo/typer.js"></script>
 
 <style>
   @font-face { font-family: "Instrument Serif";
@@ -171,6 +172,7 @@ moment they said it, down to the second.">
     border: 1px solid var(--rule-2); border-left: 3px solid var(--accent);
     padding: 22px 24px; white-space: pre-wrap;
   }
+  .answer .said { --caret: var(--accent); }
   .answer .q {
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 12px; letter-spacing: .04em; color: var(--ink-3);
@@ -675,6 +677,20 @@ moment they said it, down to the second.">
   // use, not a guess at what a refusal sounds like. "don't have" and
   // "not in the" are ordinary prose: a first pass on those relabelled a
   // perfectly good Dimon answer as a refusal.
+  // While the answer types, a timestamp becomes a play button only once
+  // the word after it has started, so a half-typed "12:34" of "12:34:56"
+  // is never a button pointing at the wrong second.
+  function typedHtml(text, hits) {
+    var cut = Math.max(text.lastIndexOf(" "), text.lastIndexOf("\n")) + 1;
+    return linkTimestamps(text.slice(0, cut), hits).html + esc(text.slice(cut));
+  }
+
+  // The answer being typed now, so a newer question can stop it.
+  var typing = null;
+  function stopTyping() {
+    if (typing) { typing.stop(); typing = null; }
+  }
+
   function isRefusal(answer) {
     return /couldn'?t find that|could not find that/i.test(answer || "");
   }
@@ -690,8 +706,11 @@ moment they said it, down to the second.">
     var refused = isRefusal(data.answer);
     var cited = linkTimestamps(data.answer, hits);
 
+    // The answer arrives whole, checked before it is sent, and is typed
+    // out at the Market Bubble page's pace (/demo/typer.js) rather than
+    // landing as a block.
     var html = '<div class="answer"><div class="q">' + esc(data.question) +
-               "</div>" + cited.html + "</div>";
+               '</div><span class="said typing"></span></div>';
 
     if (hits.length) {
       // "Cited" overstated it. The model reads every passage and quotes
@@ -726,6 +745,14 @@ moment they said it, down to the second.">
       }).join("");
     }
     elOut.innerHTML = html;
+    var said = elOut.querySelector(".said");
+    stopTyping();
+    typing = Typer(function (text) { said.innerHTML = typedHtml(text, hits); });
+    typing.push(data.answer || "");
+    typing.finish(function () {
+      said.classList.remove("typing");
+      said.innerHTML = cited.html;
+    });
   }
 
   function ask() {
@@ -733,6 +760,7 @@ moment they said it, down to the second.">
     if (!q || busy) return;
     busy = true;
     elGo.disabled = true;
+    stopTyping();
     elOut.innerHTML = '<div class="answer"><div class="q">' + esc(q) +
                       '</div>reading the archive…</div>';
     if (window.revealOnPhone) revealOnPhone(elOut);

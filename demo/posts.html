@@ -60,7 +60,8 @@
   .answer{display:none;border-top:1px solid var(--line);padding:20px 0 6px}
   .answer.on{display:block}
   .asked{color:var(--muted);font-size:12.5px;margin-bottom:8px;overflow-wrap:anywhere}
-  .said{font:400 21px/1.42 var(--display);color:#dfe3e6;overflow-wrap:anywhere}
+  .said{font:400 21px/1.42 var(--display);color:#dfe3e6;overflow-wrap:anywhere;
+    --caret:var(--green)}
   .said p + p{margin-top:12px}
   .wait{color:var(--muted)}
 
@@ -139,6 +140,7 @@
   </p>
 </div>
 
+<script src="/demo/typer.js"></script>
 <script>
 var API = "";
 var BUSY = false;
@@ -189,9 +191,24 @@ function show(question, html, posts){
   document.getElementById("posts").innerHTML = posts.map(card).join("");
 }
 
+// The answer being typed now (/demo/typer.js), so a newer question can
+// stop it.
+var TYPING = null;
+function stopTyping(){
+  if (TYPING) { TYPING.stop(); TYPING = null; }
+  document.getElementById("said").classList.remove("typing");
+}
+
+// Paragraphs, each escaped: the answer is his posts quoted, never markup.
+function paragraphs(text){
+  return String(text || "").split(/\n{2,}/).filter(function(x){ return x.trim(); })
+    .map(function(x){ return "<p>" + esc(x.trim()) + "</p>"; }).join("");
+}
+
 function ask(question){
   question = String(question || "").trim();
   if (!question || BUSY) return;
+  stopTyping();
   BUSY = true;
   document.getElementById("go").disabled = true;
   document.getElementById("q").value = question;
@@ -204,11 +221,18 @@ function ask(question){
     if (!r.ok) throw new Error("down");
     return r.json();
   }).then(function(d){
-    var paragraphs = String(d.answer || "").split(/\n{2,}/).filter(function(x){ return x.trim(); });
-    show(question, paragraphs.map(function(x){ return "<p>" + esc(x.trim()) + "</p>"; }).join(""),
-         Array.isArray(d.posts) ? d.posts : []);
+    // It arrives whole, checked against the posts before it is sent, and
+    // is typed out at the Market Bubble page's pace rather than landing
+    // as a block.
+    show(question, "", Array.isArray(d.posts) ? d.posts : []);
     covers(d.coverage);
+    var said = document.getElementById("said");
+    said.classList.add("typing");
+    TYPING = Typer(function(text){ said.innerHTML = paragraphs(text); });
+    TYPING.push(String(d.answer || ""));
+    TYPING.finish(function(){ said.classList.remove("typing"); });
   }).catch(function(e){
+    stopTyping();
     show(question, "<p class='wait'>" + (e.message === "busy"
       ? "Too many questions right now. Try again in a minute."
       : "That did not go through. Try again in a minute.") + "</p>", []);

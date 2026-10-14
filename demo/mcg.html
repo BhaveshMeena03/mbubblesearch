@@ -51,7 +51,9 @@ moment.">
 <meta name="twitter:image" content="https://search.lexthedev.com/demo/og-mcg.png?v=2">
 
 <script src="/demo/nav.js" defer></script>
+<script src="/demo/typer.js"></script>
 <style>
+  #answer-body{--caret:var(--blue)}
   :root{
     /* Taken off the channel: mint-jade on black, deep jade behind it. */
     --paper:#080b09;      /* was #000000 — see below */
@@ -750,6 +752,9 @@ moment.">
   // linkified and then have to be unpicked. The fallback fires only if
   // nothing was drawn -- re-running the search after text is on screen
   // would splice two answers together.
+  // The answer being typed now, so a newer question can stop it.
+  var typing = null;
+
   function ask(question){
     if (!question) return;
     $("working").classList.add("on");
@@ -758,6 +763,11 @@ moment.">
     if (window.revealOnPhone) revealOnPhone($("working"));
 
     var acc = "", hits = [], drew = false;
+    // Typed out at the Market Bubble page's pace (/demo/typer.js), not
+    // drawn a burst at a time as the pieces land.
+    if (typing) typing.stop();
+    var typer = typing = Typer(answerText);
+    $("answer-body").classList.remove("typing");
     var done = function(){
       $("working").classList.remove("on");
       $("go").disabled = false;
@@ -800,13 +810,26 @@ moment.">
         } else if (p.text) {
           // First real words: the placeholder goes, and so does the
           // working state it was standing in for.
-          if (!acc) $("working").classList.remove("on");
-          acc += p.text; answerText(acc); drew = true;
+          if (!acc) {
+            $("working").classList.remove("on");
+            $("answer-body").classList.add("typing");
+          }
+          acc += p.text; typer.push(p.text); drew = true;
         }
       }
       function pump(){
         return reader.read().then(function(step){
-          if (step.done) { citeTimestamps(hits); return; }
+          if (step.done) {
+            // Linked once the last word is on screen, not when it
+            // arrives: the typing can still be a sentence behind.
+            return new Promise(function(resolve){
+              typer.finish(function(){
+                $("answer-body").classList.remove("typing");
+                citeTimestamps(hits);
+                resolve();
+              });
+            });
+          }
           buf += dec.decode(step.value, {stream: true});
           var frames = buf.split("\n\n"); buf = frames.pop();
           frames.forEach(frame);
@@ -815,7 +838,11 @@ moment.">
       }
       return pump();
     }).catch(function(){
-      if (drew) return;
+      if (drew) {
+        // Cut short: show what did arrive, and stop the caret.
+        typer.finish(function(){ $("answer-body").classList.remove("typing"); });
+        return;
+      }
       return fetch(API + "/v1/mcg/search", {
         method: "POST",
         headers: {"content-type": "application/json"},
