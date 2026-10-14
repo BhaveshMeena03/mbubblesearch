@@ -42,7 +42,13 @@
      One width for both. Prose inside still gets its own narrower measure,
      because a line of body text 980px wide is hard to read even when the
      column allows it. */
-  .wrap{width:100%;max-width:980px;padding:24px 0 80px}
+  .wrap{width:100%;max-width:1320px;padding:24px 0 80px}
+  /* As wide as the other rooms. The search and what it answers keep the
+     980px column they were built for, centred; the sections a visitor
+     browses, the question cards, the summaries and the rest, use the
+     whole width. */
+  .wrap > .eyebrow,.wrap > h1,.wrap > form,.wrap > .chips,.wrap > .example,
+  .wrap > .spin,.wrap > .answer,.wrap > .hits{max-width:980px;margin-left:auto;margin-right:auto}
   /* The wordmark that was a line of centred text is a header now, styled
      with the rest of it further down this file. */
   /* Live prices for the two coins this project is attached to, and the one
@@ -372,7 +378,7 @@
      The page used to open with a line of text where a product opens with a
      header. A mark, the name, and two places to go is the difference
      between something somebody built and something somebody runs. */
-  header.site{width:100%;max-width:980px;display:flex;align-items:center;
+  header.site{width:100%;max-width:1320px;display:flex;align-items:center;
     justify-content:space-between;gap:20px;padding:20px 4px 0;margin:0 auto}
   header.site .brand{display:flex;align-items:center;gap:10px;
     text-decoration:none;color:var(--text)}

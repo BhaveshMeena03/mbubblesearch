@@ -24,7 +24,7 @@
     podcast: [
       {vid: "F4OhqZjtVkY", at: 1556, who: "Ansem",
        q: "Why does Ansem think Ethereum is done?",
-       said: "Ethereum is going to [expletive] zero.",
+       said: "I said it the first episode, I said it this year, I said it last year, I said the year before that, Ethereum is going to [expletive] zero.",
        where: "Market Bubble #4", when: "22 May 2026"},
       {vid: "cfjK9E7MHzI", at: 4585, who: "Kendrick Perkins",
        q: "How did Kendrick Perkins' NBA career end?",
@@ -32,11 +32,11 @@
        where: "Market Bubble #12", when: "24 Jul 2026"},
       {vid: "TYX2FuacIhE", at: 6263, who: "Lucas Bruder, Jito Labs",
        q: "Why did Jito do its airdrop?",
-       said: "So we really took the approach like let's give all these like little guys a ton of money and kind of just see what happens.",
+       said: "We really took the approach like let's give all these like little guys a ton of money and kind of just see what happens.",
        where: "Market Bubble #11", when: "17 Jul 2026"},
       {vid: "wksdB2BgW3g", at: 979, who: "Tristan Thompson",
        q: "What did BlackRock tell Tristan Thompson about Bitcoin?",
-       said: "Remember talking to BlackRock who managed my portfolio at the time, a good amount. Telling them I want to buy BTC and they're like, 'Nah, it's too volatile. Don't [expletive] with it.'",
+       said: "Telling them I want to buy BTC and they're like, 'Nah, it's too volatile. Don't [expletive] with it.'",
        where: "Market Bubble", when: "14 May 2026"}
     ],
     mcg: [
@@ -50,17 +50,17 @@
        where: "MCG Live", when: "21 Aug 2026"},
       {vid: "SHaUpI7qAUE", at: 947, who: "Ratspeak",
        q: "Why can a mesh network not hold a message for later?",
-       said: "In a mesh network where there's no cloud servers it's not convenient. I can't send a message to a friend offline and they'll just get it when they're online later. There's no cloud to store it.",
+       said: "I can't send a message to a friend offline and they'll just get it when they're online later. There's no cloud to store it.",
        where: "MCG Live", when: "28 Aug 2026"}
     ],
     threadguy: [
       {vid: "QH2d-awq0No", at: 734, who: "ThreadGuy",
        q: "What is the Sweetgreen chud wrap thesis?",
-       said: "Since Chris Camillo came on the stream and he says he has a new investment thesis that is based off of a 1200 calorie slop wrap from Sweet Green and it's up 45% since that moment.",
+       said: "A new investment thesis that is based off of a 1200 calorie slop wrap from Sweet Green and it's up 45% since that moment.",
        where: "Stream recap", when: "23 May 2026"},
       {vid: "xNn_oX8zRJU", at: 3940, who: "ThreadGuy",
        q: "Why does ThreadGuy wish he held HYPE?",
-       said: "And when you like a product, like if you buy iPhones every year, you should probably take the amount of money you put into an iPhone every year and like buy Apple stock, right, because it will probably go up at some point.",
+       said: "If you buy iPhones every year, you should probably take the amount of money you put into an iPhone every year and like buy Apple stock.",
        where: "Live stream", when: "28 Jan 2026"},
       {vid: "2tMMfjBqgvo", at: 563, who: "Blurr",
        q: "What does Papertrade's builder think of other 1000x exchanges?",
@@ -133,8 +133,13 @@
     "letter-spacing:.16em;color:var(--mm-accent);margin-bottom:6px}",
     ".mm-said{font-family:'Instrument Serif',Georgia,serif;font-size:21px;line-height:1.3;flex:1;color:var(--mm-ink)}",
     ".mm-who{margin-top:16px;font-size:13.5px;font-weight:600;color:var(--mm-ink2)}",
-    ".mm-where{margin-top:4px;font:11.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--mm-ink3)}",
+    ".mm-where{margin-top:5px;display:flex;flex-wrap:wrap;gap:2px 0;",
+    "font:11.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--mm-ink3)}",
+    ".mm-where > *{white-space:nowrap}",
+    ".mm-where > * + *::before{content:'\\00b7';margin:0 8px;color:var(--mm-ink3)}",
     ".mm-where b{color:var(--mm-accent);font-weight:500}",
+    // The day on a line of its own, so every card's last line reads the same.
+    ".mm-when{margin-top:2px;font:11.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--mm-ink3)}",
     ".mm-stage{margin-top:16px}",
     ".mm-stage iframe{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:3px;background:#000}",
     ".mm-cap{display:flex;justify-content:space-between;gap:12px;margin-top:8px;",
@@ -176,7 +181,7 @@
         '<span class="mm-thumb"><img alt="" loading="lazy" decoding="async">' +
         '<span class="mm-play"></span><span class="mm-at"></span></span>' +
         '<span class="mm-body"><span class="mm-q"></span><span class="mm-said"></span>' +
-        '<span class="mm-who"></span><span class="mm-where"><span></span> <b></b> <span></span></span></span>';
+        '<span class="mm-who"></span><span class="mm-where"><span></span><b></b></span><span class="mm-when"></span></span>';
       var img = card.querySelector("img");
       // A missing frame takes its box with it rather than leaving a black one.
       img.onerror = function () { var t = card.querySelector(".mm-thumb"); if (t) t.remove(); };
@@ -186,9 +191,9 @@
       card.querySelector(".mm-said").textContent = "“" + m.said + "”";
       card.querySelector(".mm-who").textContent = m.who;
       var where = card.querySelectorAll(".mm-where span");
-      where[0].textContent = m.where + " ·";
+      where[0].textContent = m.where;
       card.querySelector(".mm-where b").textContent = stamp(m.at);
-      where[1].textContent = "· " + m.when;
+      card.querySelector(".mm-when").textContent = m.when;
 
       card.addEventListener("click", function () {
         if (open === card) { close(); return; }

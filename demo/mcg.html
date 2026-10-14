@@ -87,7 +87,11 @@ moment.">
       radial-gradient(760px 420px at 50% -8%, rgba(110,207,158,.10), transparent 70%),
       radial-gradient(900px 600px at 85% 8%, rgba(110,207,158,.045), transparent 70%)}
 
-  .wrap{width:100%;max-width:1040px;position:relative;z-index:1}
+  .wrap{width:100%;max-width:1320px;position:relative;z-index:1}
+  /* As wide as the other rooms. The search box, the examples under it
+     and the answer keep a reading width; the cards and the archive
+     below use the whole page. */
+  .wrap form,.wrap .seeds,.wrap .eg,.wrap .answer,.wrap .working{max-width:960px}
 
   header{display:flex;align-items:baseline;justify-content:space-between;
     gap:16px;padding:26px 0 12px;border-bottom:1px solid var(--rule-dark)}
