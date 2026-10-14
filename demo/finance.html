@@ -179,6 +179,60 @@ moment they said it, down to the second.">
     font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase;
     color: var(--ink-3); margin: 34px 0 10px; font-weight: 400;
   }
+  /* A section of the page, as against a label inside an answer: set in
+     the serif the names are set in, so it reads as the start of
+     something rather than a caption under the thing above. */
+  h2.sect {
+    font-family: "Instrument Serif", Georgia, serif; font-weight: 400;
+    font-size: 34px; line-height: 1.08; letter-spacing: -.3px;
+    color: var(--ink); text-transform: none; margin: 46px 0 6px;
+  }
+  .sect-note { color: var(--ink-2); margin: 0 0 18px; max-width: 60ch; font-size: 15px; }
+
+  /* --- on the record: four sentences, each at its second --------------
+     The same demonstration the front door makes, in this room's paper.
+     Each card opens on the frame at the second it quotes (served from
+     /demo/moments, not YouTube's thumbnail) and plays in the page's one
+     player. Every line was read off the stored transcript. */
+  .moments { display: grid; gap: 14px; grid-template-columns: 1fr; }
+  @media (min-width: 720px) { .moments { grid-template-columns: 1fr 1fr; } }
+  .moment {
+    appearance: none; font: inherit; color: inherit; text-align: left;
+    display: flex; flex-direction: column; width: 100%; padding: 0;
+    background: var(--card); border: 1px solid var(--rule); cursor: pointer;
+    overflow: hidden; transition: border-color .2s, box-shadow .2s;
+  }
+  .moment:hover { border-color: var(--rule-2); box-shadow: 0 6px 22px rgba(23,21,15,.07); }
+  .moment:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .moment .thumb { position: relative; aspect-ratio: 16/9; background: #1b1915; overflow: hidden; }
+  .moment .thumb img { display: block; width: 100%; height: 100%; object-fit: cover;
+    filter: saturate(.9); transition: transform .5s ease, filter .3s; }
+  .moment:hover .thumb img { transform: scale(1.02); filter: none; }
+  .moment .play {
+    position: absolute; left: 50%; top: 50%; width: 44px; height: 44px; margin: -22px 0 0 -22px;
+    border-radius: 50%; background: rgba(244,241,234,.9); display: grid; place-items: center;
+    transition: background .2s;
+  }
+  .moment .play::before {
+    content: ""; margin-left: 3px; border-style: solid; border-width: 7px 0 7px 12px;
+    border-color: transparent transparent transparent var(--ink);
+  }
+  .moment:hover .play { background: var(--accent); }
+  .moment:hover .play::before { border-left-color: var(--paper); }
+  .moment .at {
+    position: absolute; right: 10px; bottom: 9px; padding: 3px 7px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px;
+    background: rgba(23,21,15,.78); color: var(--paper); letter-spacing: .04em;
+  }
+  .moment .body { padding: 16px 18px 16px; display: flex; flex-direction: column; flex: 1; }
+  .moment .q { font-size: 14px; font-weight: 600; color: var(--ink-2);
+    padding-bottom: 12px; margin-bottom: 12px; border-bottom: 1px solid var(--rule); }
+  .moment .said { font-family: "Instrument Serif", Georgia, serif; font-size: 23px;
+    line-height: 1.28; flex: 1; }
+  .moment .by { margin-top: 14px; font-family: "Instrument Serif", Georgia, serif; font-size: 18px; }
+  .moment .where { margin-top: 2px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 11.5px; color: var(--ink-3); }
+  .moment .where b { color: var(--accent); font-weight: 500; }
 
   .cite { border-top: 1px solid var(--rule); padding: 15px 0 14px; }
   .cite:last-child { border-bottom: 1px solid var(--rule); }
@@ -325,9 +379,9 @@ moment they said it, down to the second.">
 
   <header>
     <h1>What they <em>actually</em> said.</h1>
-    <p class="lede">Twelve years of long-form interviews with the people who
-      run the money, transcribed and searchable by meaning. Ask a question,
-      get the sentence and the second it was said.</p>
+    <p class="lede">Twelve years of interviews and press conferences with the
+      people who run the money, gathered by us into one archive and searchable
+      by meaning. Ask a question, get the sentence and the second it was said.</p>
 
     <div class="who" id="who"></div>
 
@@ -347,7 +401,12 @@ moment they said it, down to the second.">
        page whose whole point is watching the moment. -->
   <div class="player" id="player"></div>
 
-  <h2 class="sub" id="shelf-head">what is in it</h2>
+  <h2 class="sect">On the record</h2>
+  <p class="sect-note">Four questions and the sentence that answers each one,
+    read off the transcript at the second it was said. Press one to watch it.</p>
+  <div class="moments" id="moments"></div>
+
+  <h2 class="sect" id="shelf-head">What is in it</h2>
   <div class="shelf" id="shelf"></div>
 
   <p class="note">
@@ -502,6 +561,66 @@ moment they said it, down to the second.">
     playing = src;
     slot.scrollIntoView({ block: "center", behavior: "smooth" });
   }
+
+  // Four sentences on the record, each read off the stored transcript at
+  // the second given, with the speaker checked against the picture.
+  var MOMENTS = [
+    {vid: "ChmRWyye3nM", at: 3406, by: "Larry Fink",
+     q: "When did Fink change his mind on Bitcoin?",
+     said: "And I said, you know what? Bitcoin is a currency of fear.",
+     where: "Legends Live @Citi", when: "19 Aug 2025"},
+    {vid: "IyEadGANbgM", at: 719, by: "Jamie Dimon",
+     q: "What did Dimon say about Bitcoin?",
+     said: "I don't care about Bitcoin. I could give a [expletive], to tell you the truth.",
+     where: "A talk at Stanford", when: "9 Nov 2017"},
+    {vid: "Y1OpbDWp8KY", at: 2432, by: "Ray Dalio",
+     q: "What does Dalio say about the debt cycle?",
+     said: "There's a short-term debt cycle, long-term debt cycle. And in 1929 to 32, we had a debt crisis and then interest rates hit zero. The only other time that's happened is 2008.",
+     where: "Principles for Success", when: "8 Jan 2019"},
+    {vid: "J85O-ckNxCw", at: 900, by: "Michael Saylor",
+     q: "Why does Saylor think Bitcoin is digital energy?",
+     said: "So Bitcoin is digital energy. It's digital capital. It's the basis of digital credit. It's the basis of digital money.",
+     where: "What Bitcoin Did", when: "12 Jan 2026"}
+  ];
+
+  function clock(sec) {
+    sec = Math.floor(sec);
+    var h = Math.floor(sec / 3600), m = Math.floor(sec % 3600 / 60), s = sec % 60;
+    var two = function (n) { return (n < 10 ? "0" : "") + n; };
+    return h ? h + ":" + two(m) + ":" + two(s) : m + ":" + two(s);
+  }
+
+  (function drawMoments() {
+    var host = document.getElementById("moments");
+    if (!host) return;
+    MOMENTS.forEach(function (m) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "moment";
+      b.setAttribute("aria-label", m.q + " Play " + m.by + " at " + clock(m.at) + ", " + m.where);
+      b.innerHTML = '<span class="thumb"><img alt="" loading="lazy" decoding="async">'
+        + '<span class="play"></span><span class="at"></span></span>'
+        + '<span class="body"><span class="q"></span><span class="said"></span>'
+        + '<span class="by"></span><span class="where"><span></span> <b></b> <span></span></span></span>';
+      var img = b.querySelector("img");
+      // A missing frame takes its box with it rather than leaving a dark one.
+      img.onerror = function () { b.querySelector(".thumb").remove(); };
+      img.src = "/demo/moments/" + m.vid + "-" + m.at + ".webp";
+      b.querySelector(".at").textContent = clock(m.at);
+      b.querySelector(".q").textContent = m.q;
+      b.querySelector(".said").textContent = "\u201c" + m.said + "\u201d";
+      b.querySelector(".by").textContent = m.by;
+      var w = b.querySelectorAll(".where span");
+      w[0].textContent = m.where + " \u00b7";
+      b.querySelector(".where b").textContent = clock(m.at);
+      w[1].textContent = "\u00b7 " + m.when;
+      b.addEventListener("click", function () {
+        playHere("https://www.youtube.com/watch?v=" + m.vid, m.at,
+                 m.by + ", " + m.where + ", at " + clock(m.at));
+      });
+      host.appendChild(b);
+    });
+  })();
 
   // Delegated, because every card and every shelf row is built after
   // this runs.
