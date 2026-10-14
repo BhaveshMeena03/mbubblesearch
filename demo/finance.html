@@ -84,7 +84,9 @@ moment they said it, down to the second.">
       radial-gradient(rgba(124,33,40,.025) 1px, transparent 1px);
     background-size: 3px 3px;
   }
-  .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px 72px; }
+  /* As wide as the other rooms. Reading text keeps its own measure below,
+     so a wider page means more on screen, not longer lines. */
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 0 clamp(16px, 3vw, 48px) 72px; }
 
   header { padding: 0 0 24px; border-bottom: 1px solid var(--rule-2); }
   .eyebrow {
@@ -164,6 +166,7 @@ moment they said it, down to the second.">
 
   /* --- answer ------------------------------------------------------- */
   .answer {
+    max-width: 920px;
     margin: 30px 0 0; background: var(--card);
     border: 1px solid var(--rule-2); border-left: 3px solid var(--accent);
     padding: 22px 24px; white-space: pre-wrap;
@@ -196,6 +199,7 @@ moment they said it, down to the second.">
      player. Every line was read off the stored transcript. */
   .moments { display: grid; gap: 14px; grid-template-columns: 1fr; }
   @media (min-width: 720px) { .moments { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1180px) { .moments { grid-template-columns: repeat(4, 1fr); } }
   .moment {
     appearance: none; font: inherit; color: inherit; text-align: left;
     display: flex; flex-direction: column; width: 100%; padding: 0;
@@ -252,7 +256,7 @@ moment they said it, down to the second.">
     margin-left: auto;
   }
   .cite a.at:hover { border-bottom-color: var(--accent); }
-  .cite p { margin: 0; color: var(--ink-2); font-size: 15px; }
+  .cite p { margin: 0; color: var(--ink-2); font-size: 15px; max-width: 86ch; }
   /* The two or three the answer named, against the seven it read. */
   .cite.used { box-shadow: inset 3px 0 0 var(--accent); padding-left: 13px; }
   .answer button.at {
@@ -295,6 +299,9 @@ moment they said it, down to the second.">
   }
   @media (min-width: 760px) {
     .shelf { column-count: 2; column-gap: 34px; }
+  }
+  @media (min-width: 1180px) {
+    .shelf { column-count: 3; column-gap: 40px; }
   }
 
   /* Every recording plays here, the way they do on the other archives.

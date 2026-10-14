@@ -390,36 +390,95 @@
   .player{margin-top:12px;width:100%;aspect-ratio:16/9;border:0;border-radius:2px}
 
   .sect{margin:54px 0 0;border-top:1px solid var(--edge);padding-top:20px}
-  /* What the site does besides answer. Cards and not links in a row,
-     because each one needs a sentence to say what it is. A card holds
-     links rather than being one, since the token card goes three places. */
-  /* Five cards: three over two, so none of them is left alone on a row.
-     Two columns on a tablet with the last one across both, one on a phone. */
-  .tools{display:grid;gap:8px;grid-template-columns:repeat(6,minmax(0,1fr))}
-  .tools .tool{grid-column:span 2}
-  .tools .tool:nth-child(n+4){grid-column:span 3}
-  @media(max-width:900px){
+  /* What the site does besides answer. Each card shows the thing itself:
+     the calls board's own totals and newest rows (read live), the top of
+     the ticker count, a real frame with its words burned in, a question
+     and its answer, the request an agent sends. A bento rather than a row
+     of equal boxes, so the board, the biggest of them, leads. */
+  .tools{display:grid;gap:10px;grid-template-columns:repeat(12,minmax(0,1fr))}
+  .t-calls{grid-column:1/8;grid-row:1/3}
+  .t-tokens{grid-column:8/13;grid-row:1}
+  .t-clips{grid-column:8/13;grid-row:2}
+  .t-x{grid-column:1/7;grid-row:3}
+  .t-api{grid-column:7/13;grid-row:3}
+  @media(max-width:1100px){
     .tools{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .tools .tool,.tools .tool:nth-child(n+4){grid-column:span 1}
-    .tools .tool:last-child{grid-column:1/-1}
+    .t-calls{grid-column:1/-1;grid-row:auto}
+    .t-tokens,.t-clips,.t-x,.t-api{grid-column:auto;grid-row:auto}
   }
-  @media(max-width:640px){
-    .tools{grid-template-columns:minmax(0,1fr)}
-  }
-  .tool{display:flex;flex-direction:column;gap:7px;padding:18px 20px 16px;
+  @media(max-width:640px){.tools{grid-template-columns:minmax(0,1fr)}}
+  .tool{display:flex;flex-direction:column;gap:8px;padding:22px 24px 20px;min-width:0;
     border:1px solid var(--edge);border-radius:3px;background:var(--deck);
-    transition:border-color var(--quick) var(--ease)}
-  .tool:hover,.tool:focus-within{border-color:var(--edge-2)}
+    color:inherit;text-decoration:none;
+    transition:border-color var(--quick) var(--ease),background var(--quick) var(--ease),transform var(--quick) var(--ease)}
+  a.tool:hover,.tool:hover{border-color:var(--edge-2);background:#10131a}
+  a.tool:hover{transform:translateY(-1px)}
+  a.tool:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
   .tool .k{font-family:var(--mono);font-size:10px;letter-spacing:.2em;
     text-transform:uppercase;color:var(--signal)}
-  .tool h3{margin:0;font-size:16px;letter-spacing:-.1px}
-  .tool p{margin:0;color:var(--ink-2);font-size:14.5px}
-  .tool .to{display:flex;gap:6px 16px;flex-wrap:wrap;margin-top:auto;padding-top:6px;
+  .tool h3{margin:0;font-size:17px;letter-spacing:-.15px}
+  .tool p{margin:0;color:var(--ink-2);font-size:14.5px;max-width:62ch}
+  .tool .go{margin-top:auto;padding-top:10px;font-family:var(--mono);font-size:11px;
+    letter-spacing:.08em;color:var(--ink);display:inline-flex;gap:8px;align-items:center}
+  .tool .go i{font-style:normal;color:var(--signal);transition:transform var(--quick) var(--ease)}
+  a.tool:hover .go{color:var(--signal)}
+  a.tool:hover .go i{transform:translateX(3px)}
+  .tool .to{display:flex;gap:6px 16px;flex-wrap:wrap;margin-top:auto;padding-top:10px;
     font-family:var(--mono);font-size:11px;letter-spacing:.08em}
   .tool .to a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--edge-2);
     padding-bottom:1px;transition:color .2s,border-color .2s}
   .tool .to a:hover{color:var(--signal);border-color:var(--signal)}
   .tool .to a:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+  .viz{margin-top:8px;border:1px solid var(--edge);border-radius:3px;background:#08090d}
+
+  /* the board's ledger: hidden until the board answers */
+  .ledger:not(.on){display:none}
+  .ledger{padding:4px 16px 6px}
+  /* Beside two stacked cards, the board's card is as tall as both; its rows
+     spread to fill it rather than leaving a gap under the last one. */
+  .t-calls .ledger.on{flex:1;display:flex;flex-direction:column}
+  .t-calls #lrows{flex:1;display:flex;flex-direction:column;justify-content:space-evenly}
+  .lsum{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-3);
+    padding:10px 0;border-bottom:1px solid var(--edge)}
+  .lsum b{color:var(--ink);font-weight:500}
+  .lrow{display:grid;grid-template-columns:70px minmax(0,1fr) auto;gap:12px;align-items:baseline;
+    padding:11px 0;border-bottom:1px solid var(--edge)}
+  .lrow:last-child{border-bottom:0}
+  .lrow b{font-weight:600;font-size:15px}
+  .lrow .by{color:var(--ink-3);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .lrow .pct{font-family:var(--mono);font-size:13px}
+  .lrow .pct.up{color:#16c784} .lrow .pct.down{color:#e5605e}
+
+  /* the top of the ticker count */
+  .minibars{padding:12px 16px;display:grid;gap:8px}
+  .mb{display:grid;grid-template-columns:46px minmax(0,1fr) 46px;gap:10px;align-items:center;
+    font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+  .mb b{color:var(--ink);font-weight:500}
+  .mb .mb-bar{height:4px;background:var(--edge);border-radius:2px;overflow:hidden}
+  .mb .mb-bar u{display:block;height:100%;background:var(--signal);border-radius:2px}
+  .mb .n{text-align:right}
+
+  /* a clip: the frame, with the words on it */
+  .clipviz{position:relative;aspect-ratio:2/1;overflow:hidden}
+  .clipviz img{display:block;width:100%;height:100%;object-fit:cover;opacity:.9}
+  .clipviz span{position:absolute;left:8%;right:8%;bottom:9%;text-align:center;
+    font-weight:800;font-size:clamp(12px,1.25vw,15px);line-height:1.25;color:#fff;
+    text-shadow:0 0 3px #000,0 0 3px #000,0 1px 2px #000}
+
+  /* a question and its answer */
+  .chat{padding:14px 16px;display:grid;gap:10px}
+  .chat .ask{justify-self:end;max-width:88%;background:#151922;border:1px solid var(--edge-2);
+    border-radius:12px 12px 2px 12px;padding:8px 12px;font-size:13.5px;color:var(--ink)}
+  .chat .reply{max-width:92%;border-left:2px solid var(--signal);padding:2px 0 2px 12px;
+    font-size:13.5px;color:var(--ink-2)}
+  .chat .reply b{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
+    color:var(--ink-3);font-weight:500;margin-bottom:3px}
+  .chat .reply q{font-family:"Instrument Serif",Georgia,serif;font-size:18px;color:var(--ink);quotes:"\201C" "\201D"}
+
+  /* the request an agent sends */
+  pre.code{margin-top:8px;padding:13px 16px;font-family:var(--mono);font-size:12px;line-height:1.6;
+    color:var(--ink-2);white-space:pre-wrap;overflow-wrap:anywhere}
+  pre.code b{color:var(--signal);font-weight:500}
   .rules{display:grid;gap:0;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
   .rules > div{padding:4px 30px 4px 0;border-left:1px solid var(--edge);
     padding-left:26px}
@@ -540,44 +599,55 @@
   <section class="sect" id="more">
     <h2>More than search</h2>
     <div class="tools">
-      <div class="tool">
+      <a class="tool t-calls" href="/calls">
         <span class="k">calls board</span>
         <h3>What they called, and what it did</h3>
         <p>Every time Ansem or FaZe Banks said on air that they own something,
           named a pick or put a number on it, plus the same from Ansem's posts.
           Quoted word for word and priced from that day to today. The misses
           are there too.</p>
-        <span class="to"><a href="/calls">Open the board</a></span>
-      </div>
-      <div class="tool">
+        <div class="viz ledger" id="ledger" aria-hidden="true">
+          <div class="lsum" id="lsum"></div>
+          <div id="lrows"></div>
+        </div>
+        <span class="go">Open the board <i>&rarr;</i></span>
+      </a>
+      <div class="tool t-tokens">
         <span class="k">token dashboards</span>
         <h3>Every token each show discussed</h3>
-        <p>Every token, stock and index, ranked by how deeply it was covered,
-          with the moment it came up playable on the page.</p>
+        <p>Ranked by how deeply it was covered, with the moment it came up
+          playable on the page.</p>
+        <div class="viz minibars" id="minibars" aria-hidden="true"></div>
         <span class="to"><a href="/demo/assets.html">Market Bubble</a><a href="/mcg/assets">MCG Live</a><a href="/threadguy/tokens">ThreadGuy</a></span>
       </div>
-      <div class="tool">
+      <div class="tool t-clips">
         <span class="k">clips</span>
         <h3>Cut any moment into a video</h3>
-        <p>Search a show and press make clip on a moment. You get up to two
-          minutes in 1080p, with the words burned in from the transcript,
-          ready to post.</p>
+        <p>Press make clip on a moment: up to two minutes in 1080p, with the
+          words burned in from the transcript.</p>
+        <div class="viz clipviz" aria-hidden="true"><img src="/demo/moments/sSOxPJD-VNo-6301.webp" alt="" loading="lazy" decoding="async"><span>No one has ever developed a fully reusable orbital heat shield.</span></div>
         <span class="to"><a href="/">Market Bubble</a><a href="/mcg">MCG Live</a><a href="/threadguy">ThreadGuy</a></span>
       </div>
-      <div class="tool">
+      <a class="tool t-x" href="https://x.com/mbubbleSearch" target="_blank" rel="noopener">
         <span class="k">on x</span>
         <h3>Ask it in public</h3>
-        <p>Tag @mbubbleSearch on X with a question. It answers in the
-          thread, with the quote and a link to the second it was said.</p>
-        <span class="to"><a href="https://x.com/mbubbleSearch" target="_blank" rel="noopener">@mbubbleSearch</a></span>
-      </div>
-      <div class="tool">
+        <p>Tag @mbubbleSearch with a question. It answers in the thread, with
+          the quote and a link to the second it was said.</p>
+        <div class="viz chat" aria-hidden="true">
+          <div class="ask">@mbubbleSearch why does ansem think ethereum is done?</div>
+          <div class="reply"><b>Ansem &middot; Market Bubble #4 &middot; 25:56</b><q>Ethereum is going to [expletive] zero.</q></div>
+        </div>
+        <span class="go">@mbubbleSearch <i>&rarr;</i></span>
+      </a>
+      <a class="tool t-api" href="/llms.txt">
         <span class="k">for agents</span>
         <h3>An open API</h3>
-        <p>JSON, no key, answers streamed as they are written, and an
-          llms.txt that says what is indexed and how to ask.</p>
-        <span class="to"><a href="/llms.txt">llms.txt</a></span>
-      </div>
+        <p>JSON, no key, answers streamed as they are written, and an llms.txt
+          that says what is indexed and how to ask.</p>
+        <pre class="viz code" aria-hidden="true"><b>POST</b> https://search.lexthedev.com/v1/search
+{"query": "when did fink change his mind on bitcoin"}</pre>
+        <span class="go">Read llms.txt <i>&rarr;</i></span>
+      </a>
     </div>
   </section>
 
@@ -1092,6 +1162,61 @@
   // interesting. Each row carries a recording and a second where that
   // ticker actually came up, so the count is always checkable.
   var RANKS = [{"sym":"SOL","name":"Solana","n":2925,"vid":"1Mh-UH8bRPg","at":843,"title":"Mizkif gave his chat $400,000 to trade..","room":"podcast"},{"sym":"BTC","name":"Bitcoin","n":1639,"vid":"2GfdXFiTJ-A","at":2220,"title":"Easy Reveals the AI Sleeper Stock Nobody Saw Coming","room":"podcast"},{"sym":"ETH","name":"Ethereum","n":1036,"vid":"2uOI23N1yXY","at":63,"title":"The Best Day Crypto Has Had In Months | Market Bubble #16","room":"podcast"},{"sym":"HYPE","name":"Hyperliquid","n":546,"vid":"2xjkXeXeymU","at":953,"title":"Hunter Biden\u2019s Crypto Launch Was a Disaster","room":"podcast"},{"sym":"USDC","name":"USD Coin","n":489,"vid":"47AACkIhtG8","at":6590,"title":"\"He Turned $500 Into $40,000,000\" | Market Bubble #13","room":"podcast"},{"sym":"PUMP","name":"Pump.fun","n":457,"vid":"FFFnEnXzgEY","at":2207,"title":"\"I Don't Think Intelligence Matters Anymore\" - Tushar Jain  | Market Bubble #14","room":"podcast"},{"sym":"ZEC","name":"Zcash","n":293,"vid":"5mXHC5Hu9Wc","at":794,"title":"Why AI Is Beating Crypto Right Now | Market Bubble #2","room":"podcast"},{"sym":"HOOD","name":"Robinhood","n":271,"vid":"G4gMRER22O8","at":1519,"title":"\"The Next Battle Isn't Attention, It's Agency\" - GPT  | Market Bubble #10","room":"podcast"}];
+
+  // The card for the calls board shows the board: its own totals and its
+  // newest rows, read from the same endpoint the board uses. Nothing is
+  // shown until it answers, so a slow board leaves no empty box.
+  (function(){
+    var box = document.getElementById("ledger");
+    if (!box || !window.fetch) return;
+    var MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    function day(iso){ var p = String(iso || "").split("-");
+      return p.length === 3 ? (+p[2]) + " " + (MON[+p[1] - 1] || "") : ""; }
+    function signed(n){ return (n >= 0 ? "+" : "") + n.toFixed(1) + "%"; }
+    fetch("/v1/calls", {cache: "no-store"})
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(d){
+        if (!d || !d.summary || !Array.isArray(d.calls) || !d.calls.length) return;
+        var s = d.summary, sum = document.getElementById("lsum");
+        sum.innerHTML = "<b></b> calls &middot; <b></b> up &middot; <b></b> down &middot; median <b></b>";
+        var b = sum.querySelectorAll("b");
+        b[0].textContent = s.calls; b[1].textContent = s.up; b[2].textContent = s.down;
+        b[3].textContent = isFinite(s.median_pct) ? signed(Number(s.median_pct)) : "";
+        var host = document.getElementById("lrows");
+        // The newest, no more than two from any one show, so the card reads
+        // as a ledger across shows rather than one night's list.
+        var per = {};
+        d.calls.slice().sort(function(x, y){ return String(y.date).localeCompare(String(x.date)); })
+          .filter(function(c){ per[c.date] = (per[c.date] || 0) + 1; return per[c.date] <= 2; })
+          .slice(0, 7).forEach(function(c){
+            var pct = Number(c.moved_pct), row = document.createElement("div");
+            row.className = "lrow";
+            row.innerHTML = '<b></b><span class="by"></span><span class="pct"></span>';
+            row.children[0].textContent = c.symbol || "";
+            row.children[1].textContent = (c.speaker || "") + ", " + day(c.date);
+            row.children[2].textContent = isFinite(pct) ? signed(pct) : "";
+            row.children[2].classList.add(pct >= 0 ? "up" : "down");
+            host.appendChild(row);
+          });
+        box.classList.add("on");
+      }).catch(function(){});
+  })();
+
+  // The top of the ticker count, from the same list the ranking below uses.
+  (function(){
+    var host = document.getElementById("minibars");
+    if (!host || !RANKS.length) return;
+    var top = RANKS.slice(0, 5), most = top[0].n;
+    top.forEach(function(r){
+      var row = document.createElement("div");
+      row.className = "mb";
+      row.innerHTML = '<b></b><span class="mb-bar"><u></u></span><span class="n"></span>';
+      row.children[0].textContent = r.sym;
+      row.querySelector("u").style.width = (100 * r.n / most) + "%";
+      row.children[2].textContent = r.n.toLocaleString("en-US");
+      host.appendChild(row);
+    });
+  })();
   (function(){
     var host = document.getElementById("ranks");
     if (!host || !RANKS.length) return;
