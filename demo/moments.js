@@ -2,8 +2,8 @@
  * answers it, the frame at the second it was said, and the moment itself,
  * played under the cards.
  *
- * The front door and The Record carry their own. This is the one the four
- * channel pages share, so a fifth archive is a list of four entries here
+ * The front door and The Record carry their own. This is the one the
+ * channel pages share, so another archive is a list of four entries here
  * and a section on its page:
  *
  *   <section class="mm" data-moments="threadguy"
@@ -12,8 +12,8 @@
  * Every sentence was read off the stored transcript at the second given
  * and the speaker checked against the picture. Market Bubble's and the
  * Musk archive's are held to their transcripts by tests/test_moments.py;
- * MCG's and ThreadGuy's transcripts live only in the index, so those were
- * checked there when they were chosen. The frames are served from here,
+ * MCG's, ThreadGuy's and rasmr's transcripts live only in the index, so
+ * those were checked there when they were chosen. The frames are served from here,
  * demo/moments/<video>-<second>.webp, not taken from YouTube's thumbnail,
  * which shows whatever the uploader picked.
  */
@@ -84,6 +84,24 @@
        q: "Does Elon think AI will turn out well?",
        said: "I think the most likely outcome to be specific about it is a good outcome. Most likely a good outcome. But it's not for sure.",
        where: "Joe Rogan Experience #2054", when: "1 Nov 2023"}
+    ],
+    rasmr: [
+      {vid: "PuhcmPK882U", at: 7868, who: "rasmr",
+       q: "How long did rasmr hold HYPE before he sold?",
+       said: "I was in HYPE for [expletive] a year and eight months, bro. I was in for 20 months. When was the last time you held a [expletive] coin for 20 months?",
+       where: "Live stream", when: "17 Aug 2026"},
+      {vid: "A8Zo5iXul_8", at: 39, who: "rasmr",
+       q: "When does rasmr sell a memecoin?",
+       said: "The best time to sell is always after a catalyst, whether it is a positive catalyst or a negative catalyst.",
+       where: "Memecoin guide", when: "25 Aug 2026"},
+      {vid: "EUybINsX9QU", at: 1221, who: "Cupsey",
+       q: "Why does Cupsey make more off stream?",
+       said: "I feel like I'm able to focus more and I can do what I want. Like I can buy and sell how I want. I don't feel like I can do that on stream.",
+       where: "Cupsey interview", when: "11 Aug 2026"},
+      {vid: "7QIW5Dl9daY", at: 1337, who: "Flood",
+       q: "What does Flood tell traders who just made money?",
+       said: "A lot of people will make a bunch of money and then like, they're like, dude, I need to buy a BMW M3. Like, no, you don't, man.",
+       where: "Flood interview", when: "24 Apr 2026"}
     ]
   };
 

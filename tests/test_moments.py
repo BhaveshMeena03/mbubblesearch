@@ -1,12 +1,12 @@
-"""The question cards on the four channel pages (demo/moments.js).
+"""The question cards on the channel pages (demo/moments.js).
 
 A card says somebody said something at a second, with that second's
 frame on it. For the two archives whose transcripts are in the repo,
 Market Bubble's and the Musk interviews, every card is held to the
 transcript word for word here, and every Elon card to the voice labels.
-MCG's and ThreadGuy's transcripts live only in the index, so their cards
-were checked there when they were chosen; here they get the same checks
-on everything else.
+MCG's, ThreadGuy's and rasmr's transcripts live only in the index, so
+their cards were checked there when they were chosen; here they get the
+same checks on everything else.
 """
 
 import gzip
@@ -28,7 +28,8 @@ def cards(archive: str) -> list[tuple]:
     return CARD.findall(block)
 
 
-ALL = [(a, *c) for a in ("podcast", "mcg", "threadguy", "elon") for c in cards(a)]
+CHANNELS = ("podcast", "mcg", "threadguy", "elon", "rasmr")
+ALL = [(a, *c) for a in CHANNELS for c in cards(a)]
 
 
 def shelf(name: str) -> dict:
@@ -63,7 +64,7 @@ def said_there(segments: list[dict], at: int, said: str) -> int | None:
 
 
 def test_every_channel_has_cards_and_none_is_alone_on_a_row():
-    for archive in ("podcast", "mcg", "threadguy", "elon"):
+    for archive in CHANNELS:
         assert len(cards(archive)) in (3, 4), archive
 
 
@@ -118,7 +119,8 @@ def test_every_elon_card_is_word_for_word_and_in_his_voice(vid, at, who, q, said
 
 
 @pytest.mark.parametrize("page, archive", [("podcast.html", "podcast"), ("mcg.html", "mcg"),
-                                           ("threadguy.html", "threadguy"), ("elon.html", "elon")])
+                                           ("threadguy.html", "threadguy"), ("elon.html", "elon"),
+                                           ("rasmr.html", "rasmr")])
 def test_every_channel_page_carries_its_cards(page, archive):
     html = (ROOT / "demo" / page).read_text()
     assert f'data-moments="{archive}"' in html
