@@ -141,7 +141,7 @@ moment they said it, down to the second.">
   /* --- ask ---------------------------------------------------------- */
   form { display: flex; gap: 9px; margin: 22px 0 0; }
   input[type=search] {
-    flex: 1; min-width: 0; font: inherit; color: var(--ink);
+    flex: 1; min-width: 0; font: inherit; font-size: 17px; color: var(--ink);
     background: var(--card); border: 1px solid var(--rule-2);
     padding: 13px 14px; border-radius: 2px;
   }
@@ -150,7 +150,7 @@ moment they said it, down to the second.">
     border-color: transparent;
   }
   button.ask {
-    font: inherit; font-weight: 600; cursor: pointer; border: 0;
+    font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; border: 0;
     background: var(--ink); color: var(--paper);
     padding: 13px 22px; border-radius: 2px;
   }
@@ -158,7 +158,7 @@ moment they said it, down to the second.">
 
   .tries { margin: 12px 0 0; display: flex; flex-wrap: wrap; gap: 7px; }
   .tries button {
-    font: inherit; font-size: 13.5px; cursor: pointer;
+    font: inherit; font-size: 14.5px; cursor: pointer;
     background: transparent; color: var(--ink-2);
     border: 1px solid var(--rule-2); border-radius: 999px;
     padding: 5px 13px;
@@ -172,7 +172,7 @@ moment they said it, down to the second.">
     border: 1px solid var(--rule-2); border-left: 3px solid var(--accent);
     padding: 22px 24px; white-space: pre-wrap;
   }
-  .answer .said { --caret: var(--accent); }
+  .answer .said { --caret: var(--accent); font-size: 17px; line-height: 1.65; }
   .answer .q {
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 12px; letter-spacing: .04em; color: var(--ink-3);
@@ -258,7 +258,7 @@ moment they said it, down to the second.">
     margin-left: auto;
   }
   .cite a.at:hover { border-bottom-color: var(--accent); }
-  .cite p { margin: 0; color: var(--ink-2); font-size: 15px; max-width: 86ch; }
+  .cite p { margin: 0; color: var(--ink-2); font-size: 14.5px; max-width: 86ch; }
   /* The two or three the answer named, against the seven it read. */
   .cite.used { box-shadow: inset 3px 0 0 var(--accent); padding-left: 13px; }
   .answer button.at {

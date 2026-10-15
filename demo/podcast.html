@@ -125,7 +125,7 @@
      rather than as leftovers under the field. */
   .chips{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:44px;
     justify-content:center}
-  .chip{font-size:13px;background:transparent;color:var(--green);
+  .chip{font-size:14.5px;background:transparent;color:var(--green);
     border:1px solid #16c78455;border-radius:16px;padding:6px 12px;cursor:pointer}
   .chip:hover{background:#16c78418}
   .answer{background:var(--panel);border:1px solid var(--line);
@@ -133,6 +133,7 @@
   .answer.show{display:block}
   /* The answer had no block rhythm: paragraphs, headings and lists all ran
      together at the default zero margin. */
+  #answer-body{font-size:17px;line-height:1.65}
   #answer-body p{margin:0 0 12px}
   #answer-body p:last-child{margin-bottom:0}
   #answer-body h4{font-size:15px;font-weight:700;margin:18px 0 8px}
@@ -290,7 +291,7 @@
     white-space:nowrap;max-width:100%}
   .aired{font-size:11px;color:var(--muted);white-space:nowrap;
     border:1px solid var(--line);border-radius:999px;padding:1px 8px}
-  .quote{font-size:13px;color:#8a939e;display:-webkit-box;
+  .quote{font-size:14.5px;color:#8a939e;display:-webkit-box;
     -webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   .empty{color:var(--muted)}
   .spin{display:none;color:var(--muted);margin-bottom:20px}
@@ -462,7 +463,7 @@
      the button then sits in, so the text never runs under it. */
   form{position:relative;display:block;gap:0}
   #q{width:100%;padding-right:132px;border-radius:16px;padding-top:22px;
-    padding-bottom:22px;padding-left:24px;font-size:19px;
+    padding-bottom:22px;padding-left:24px;font-size:17px;
     background:rgba(18,22,28,.86);
     box-shadow:0 1px 0 rgba(255,255,255,.03) inset,
                0 18px 40px -28px rgba(0,0,0,.9)}
@@ -470,7 +471,7 @@
                       0 18px 44px -26px rgba(22,199,132,.35)}
   button{border-radius:16px;font-weight:650;letter-spacing:-.01em}
   #go{position:absolute;top:8px;right:8px;bottom:8px;padding:0 24px;
-    border-radius:12px;font-size:15px;line-height:1;
+    border-radius:12px;font-size:14px;line-height:1;
     transition:filter .15s ease,transform .15s ease}
   #go:hover:not(:disabled){filter:brightness(1.07);transform:translateY(-1px)}
   /* On a phone the button would take half the field. It goes back under it,
@@ -489,7 +490,7 @@
      meant four things shouting at the same volume, and the one that matters
      is the button. Quiet until you go near them, green only on hover. */
   .chip{background:rgba(255,255,255,.02);border-color:var(--line);
-    color:var(--muted);padding:7px 14px;font-size:13px;
+    color:var(--muted);padding:7px 14px;font-size:14.5px;
     transition:color .15s ease,border-color .15s ease,background .15s ease}
   .chip:hover{background:rgba(22,199,132,.08);border-color:#16c78455;
     color:var(--green)}
