@@ -2065,6 +2065,13 @@ _NO_SUBJECT = re.compile(
         (?:\s+on\s+(?:this|it|that))?
       | (?:so\s+)?what\s+do\s+(?:you|u)\s+think
         (?:\s+(?:about|of)\s+(?:this|it|that))?
+      # Asking somebody else's opinion, with this account tagged along. "Let
+      # me know what you think ?" was the dev asking a streamer, under the
+      # streamer's thread, on 15 Oct 2026, and the archive answered it with
+      # somebody's take on detaching from crypto.
+      | (?:let\s+(?:me|us)\s+know|lmk|tell\s+(?:me|us))\s+
+        (?:what\s+(?:you|u|y'?all)\s+think|(?:your|ur)\s+(?:thoughts?|take))
+        (?:\s+(?:about|of|on)\s+(?:this|it|that))?
       | (?:any\s+)?comments?
     )
     \W*$""")

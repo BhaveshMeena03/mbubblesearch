@@ -3731,6 +3731,28 @@ def test_cheering_and_endorsements_are_not_questions(said):
     assert not looks_like_a_question(said)
 
 
+@pytest.mark.parametrize("said", [
+    "Let me know what you think ?",
+    "let me know what you think",
+    "lmk what you think",
+    "lmk your thoughts on this",
+    "tell me what you think about it",
+])
+def test_asking_somebody_for_their_opinion_is_not_a_question(said):
+    """Nothing to look up. The first was the dev asking a streamer under
+    the streamer's own thread, answered with an unrelated take."""
+    from app.x_bot import looks_like_a_question
+
+    assert not looks_like_a_question(said)
+
+
+def test_an_opinion_question_with_a_subject_is_still_asked():
+    from app.x_bot import looks_like_a_question
+
+    assert looks_like_a_question("let me know what ansem thinks about hype")
+    assert looks_like_a_question("what do you think ansem meant about zcash?")
+
+
 def test_the_dev_pointing_a_streamer_at_the_account_is_not_answered():
     """The whole post, as it arrived: handles first, the streamer named,
     then the account described. It was answered with an unrelated Musk
