@@ -452,6 +452,10 @@ class Settings(BaseSettings):
     # here specifically: that question is the one moment where the person
     # asking actually wants somewhere to go.
     x_bot_site: str = "search.lexthedev.com"
+    # The account that runs this one (@Lexx_eth). Never answered when he
+    # replies in a thread, because there he is talking to somebody else;
+    # answered as anyone is when he starts a post himself. Empty turns it off.
+    x_bot_dev_id: str = "1070767274808696832"
 
     @property
     def priority_author_ids(self) -> set[str]:

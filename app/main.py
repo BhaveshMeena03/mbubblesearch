@@ -295,6 +295,7 @@ async def _run_x_bot(app: FastAPI, settings) -> None:
         priority_authors=settings.priority_author_ids,
         speaker_ids=settings.speaker_by_author_id,
         site=settings.x_bot_site,
+        dev_author=settings.x_bot_dev_id,
     )
     # Says whether it can actually work, not just that it started. Both of
     # the silent outages — a state file it could not write, and a highlight

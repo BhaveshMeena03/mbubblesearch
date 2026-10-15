@@ -3710,6 +3710,7 @@ class MentionBot:
                  priority_authors: set | None = None,
                  speaker_ids: dict | None = None,
                  site: str | None = None,
+                 dev_author: str | None = None,
                  token_label: str | None = None,
                  elon_index=None,
                  # The model the bot answers with, when it differs from the
@@ -3780,6 +3781,10 @@ class MentionBot:
         # Set by compose, committed by _answer once a reply is posted.
         self._cited_episode: str | None = None
         self._site = site
+        # The account that runs this one. He tags it while pointing people
+        # at it in their own threads, and is answered only when he starts
+        # the thread himself (see compose).
+        self._dev = str(dev_author or "")
         self._token_label = token_label
         self._state_path = state_path
         self.state = BotState.load(state_path)
@@ -4269,6 +4274,19 @@ class MentionBot:
         Every reply defect found so far came from looking at composed output
         on a real question rather than from a test.
         """
+        # The dev, replying in a thread. He tags this account while pointing
+        # people at it under their own posts, and twice on 15 Oct 2026 that
+        # was answered under a streamer's post with an unrelated passage,
+        # tagging the streamer and his friends. Whatever the words, a reply
+        # of his is talking to someone else. A post he starts himself is
+        # still answered, so a demo in public still works.
+        dev = getattr(self, "_dev", "")
+        if dev and str(getattr(mention, "author_id", "")) == dev and (
+                getattr(mention, "replied_to_id", "")
+                or str(mention.conversation_id or mention.id) != str(mention.id)):
+            logger.info("%s is the dev replying in a thread; staying quiet",
+                        mention.id)
+            return None
         question = question_from(mention.text)
         # What the asker actually typed, kept because `question` is a search
         # string from here on and the branches below may replace it with the
