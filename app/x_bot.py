@@ -1883,8 +1883,32 @@ _HYPE = re.compile(r"""(?ix)^\W*
 # question_from strips the handle, so an endorsement arrives here having lost
 # its own subject: what is left opens with the verb. A real question does not
 # begin "is a search engine".
+#
+# Nor does it begin "does everything". On 15 Oct 2026 the dev pointed a
+# streamer at this account under the streamer's own post, "Rasmr
+# @mbubbleSearch does everything n make your stream searchable", and what
+# reached retrieval was the yes/no question "does everything n make your
+# stream searchable". The Musk archive answered it with Grok reading the
+# firehose, tagging the streamer and two of his friends. So what the account
+# does counts as describing it too: "does everything", "makes every episode
+# searchable", "can make your stream searchable". Only without a question
+# mark, so "does everything he said hold up?" is still asked.
 _DESCRIBES_ITSELF = re.compile(
-    r"(?ix)^\W*(?: is | are | was | '?s )\s+(?: a | an | the | now | also )\b")
+    r"""(?ix)^\W*(?:
+        (?: is | are | was | '?s )\s+(?: a | an | the | now | also )\b
+      | (?![^?]*\?) (?:
+            does \s+ (?: everything | it\s+all | all\s+(?:of\s+)?(?:it|that|this)
+                       | the\s+(?:work|job|rest) )\b
+          | (?: makes | turns | lets | helps | indexes | transcribes | archives
+              | clips | searches ) \s+
+            (?: your | ur | his | her | their | every | any | all | the | you | u
+              | streams? | shows? | episodes? | podcasts? )\b
+          | (?: can | will | could ) \s+ (?: make | turn | index | transcribe
+                                          | archive | clip ) \s+
+            (?: your | ur | his | her | their | every | any | all | the | it
+              | that | this | u | you )\b
+        )
+    )""")
 
 
 # "try again", "again?", "retry", "one more time" — an instruction to redo

@@ -3716,11 +3716,30 @@ def test_the_bot_resolves_before_it_searches():
     "is a semantic search engine for every episode. Ask a question in plain "
     "English and it comes back with the exact timestamp.",
     "is the best tool anyone has built on this show",
+    # What the account does, told to somebody else. The first is what was
+    # left of the dev's own post under a streamer's thread on 15 Oct 2026,
+    # which the Musk archive answered with Grok reading the firehose.
+    "does everything n make your stream searchable Check dms 🫡",
+    "does it all, every stream searchable to the second",
+    "makes every episode searchable",
+    "turns your streams into something you can search",
+    "can make your stream searchable in a day",
 ])
 def test_cheering_and_endorsements_are_not_questions(said):
     from app.x_bot import looks_like_a_question
 
     assert not looks_like_a_question(said)
+
+
+def test_the_dev_pointing_a_streamer_at_the_account_is_not_answered():
+    """The whole post, as it arrived: handles first, the streamer named,
+    then the account described. It was answered with an unrelated Musk
+    passage under the streamer's own thread."""
+    from app.x_bot import looks_like_a_question, question_from
+
+    said = ("@rasmr_eth @fearings_ @jackduval Rasmr @mbubbleSearch does "
+            "everything n make your stream searchable \nCheck dms 🫡")
+    assert not looks_like_a_question(question_from(said))
 
 
 @pytest.mark.parametrize("said", [
@@ -3732,6 +3751,12 @@ def test_cheering_and_endorsements_are_not_questions(said):
     "summarize episode 11",
     "kimchi?",
     "what did banks say about GTA6",
+    # Opening the same way as a description, but asking.
+    "does everything ansem said about eth still hold up?",
+    "does ansem think eth goes to zero",
+    "does banks like sol",
+    "can you find what banks said about gta6",
+    "makes sense, what did ansem say about hype after that?",
 ])
 def test_a_real_question_is_untouched(said):
     from app.x_bot import looks_like_a_question
