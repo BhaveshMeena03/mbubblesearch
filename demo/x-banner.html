@@ -9,10 +9,11 @@
 
      The bottom-left corner is left empty: on a profile the avatar sits over
      it. Measured off the live profile on 16 Oct 2026, it covers x 44 to 395
-     from y 317 down, which put it over the first archive pill, so the
-     lower rows are centred in the space to its right. And X crops the
-     banner shorter on narrow screens, off the top and bottom, so the block
-     is centred with the bottom 90px left empty. -->
+     from y 317 down, and it hid the first archive pill. The pills stay
+     centred, so the whole block rides higher instead and the pill row ends
+     above y 317; the tag line under it is narrow enough to clear the
+     avatar to its left. tests/test_banners.py reads the rendered image to
+     hold that. -->
 <html><head><meta charset="utf-8"><style>
   @font-face { font-family: "Instrument Serif";
     src: url("fonts/InstrumentSerif-Regular.ttf") format("truetype"); }
@@ -23,29 +24,26 @@
         --green:#16c784}
   body{width:1500px;height:500px;background:var(--bg);color:var(--ink);overflow:hidden;
     font-family:"InterV",-apple-system,BlinkMacSystemFont,sans-serif;position:relative;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    padding-bottom:90px}
+    display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+    padding-top:44px}
   .glow{position:absolute;left:50%;top:-420px;transform:translateX(-50%);
     width:1500px;height:820px;border-radius:50%;
     background:radial-gradient(circle,rgba(22,199,132,.25),rgba(22,199,132,.06) 45%,transparent 68%)}
-  /* Right of the avatar: x 440 to 1500, so centred on 970. */
-  .lower{position:relative;width:100%;padding-left:440px;display:flex;flex-direction:column;
-    align-items:center}
   .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
   .eyebrow{position:relative;font-size:15px;letter-spacing:.3em;text-transform:uppercase;
     color:var(--green);font-weight:600}
   .eyebrow span{color:var(--ink3);margin:0 12px}
-  h1{position:relative;margin-top:22px;font-family:"Instrument Serif",Georgia,serif;
+  h1{position:relative;margin-top:16px;font-family:"Instrument Serif",Georgia,serif;
     font-weight:400;font-size:92px;line-height:1;letter-spacing:-1.6px;text-align:center}
   h1 em{font-style:italic;color:var(--green);padding-right:.06em}
-  .sub{position:relative;margin-top:22px;font-size:23px;color:var(--ink2)}
+  .sub{position:relative;margin-top:16px;font-size:23px;color:var(--ink2)}
   .sub b{color:var(--ink);font-weight:600}
-  .rooms{position:relative;display:flex;gap:14px;margin-top:34px}
+  .rooms{position:relative;display:flex;gap:14px;margin-top:26px}
   .rooms span{display:flex;align-items:center;gap:11px;padding:11px 20px;
     border:1.5px solid var(--edge);border-radius:99px;background:rgba(255,255,255,.025);
     font-size:18px;color:var(--ink)}
   .rooms i{width:10px;height:10px;border-radius:50%;background:var(--c)}
-  .ask{position:relative;margin-top:30px;font-size:15px;letter-spacing:.16em;
+  .ask{position:relative;margin-top:24px;font-size:15px;letter-spacing:.16em;
     text-transform:uppercase;color:var(--ink3)}
   .ask b{color:var(--ink2);font-weight:500;letter-spacing:.08em;text-transform:none;font-size:17px}
 </style></head><body>
@@ -53,7 +51,6 @@
   <div class="eyebrow mono">Market Bubble<span>&middot;</span>Search</div>
   <h1>Ask anything. Jump to <em>the exact second</em>.</h1>
   <div class="sub"><b>2,000+ hours</b> of crypto shows and long-form interviews, transcribed and searchable by meaning.</div>
-  <div class="lower">
   <div class="rooms">
     <span style="--c:#16c784"><i></i>Market Bubble</span>
     <span style="--c:#6ecf9e"><i></i>MCG Live</span>
@@ -62,5 +59,4 @@
     <span style="--c:#d8b48a"><i></i>The Record</span>
   </div>
   <div class="ask mono">tag <b>@mbubbleSearch</b> with a question</div>
-  </div>
 </body></html>

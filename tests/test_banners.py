@@ -29,11 +29,14 @@ def test_the_one_figure_is_a_floor_and_the_copy_has_no_dashes(name):
 
 def test_nothing_on_the_x_banner_sits_under_the_avatar():
     """On the live profile the avatar covers x 44 to 395 from y 317 down,
-    and it hid the first archive pill. The lower rows start right of it."""
-    html = (DEMO / "x-banner.html").read_text()
-    lower = re.search(r"\.lower\{[^}]*padding-left:(\d+)px", html)
-    assert lower and int(lower.group(1)) > 395
-    assert html.index('<div class="lower">') < html.index('<div class="rooms">')
+    and it hid the first archive pill. Read off the rendered image, with a
+    margin: nothing in that corner may be brighter than the background
+    (text and pill outlines are 150 and up; the background is under 20)."""
+    image = Image.open(DEMO / "x-banner.png").convert("L")
+    corner = image.crop((44 * 3, 300 * 3, 410 * 3, 500 * 3))
+    assert corner.getextrema()[1] < 60
+    # And the pills are still centred, where they always were.
+    assert '<div class="lower">' not in (DEMO / "x-banner.html").read_text()
 
 
 def test_the_dexscreener_banner_is_the_x_header_centred():
