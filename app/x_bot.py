@@ -1484,6 +1484,13 @@ _ASKS_OUR_MECHANICS = re.compile(
       | \b(?:fees?|revenue|percent|pct|token|mbs|supply|much)\b [^.?!]{0,25}
         \bbuys?\s?backs?\b
       | \b(?:equal|weighted)\b [^.?!]{0,15} \b(?:odds|chance|wallet)\b
+      # Since 16 Oct 2026 the split is an airdrop and a burn, and that is
+      # how it gets asked about. Each needs our token or the fees nearby,
+      # so "what did ansem say about the airdrop" stays with the archive.
+      | \b(?:airdrops?|burns?|burned|burnt|burning)\b [^.?!]{0,25}
+        \b(?:fees?|percent|pct|mbs|holders?|work|works|much)\b
+      | \b(?:fees?|percent|pct|mbs|holders?|how\s+much)\b [^.?!]{0,25}
+        \b(?:airdrops?|airdropped|burns?|burned|burnt)\b
     )""")
 
 # Stated exactly, because every one of these is a setting rather than a
@@ -1491,36 +1498,34 @@ _ASKS_OUR_MECHANICS = re.compile(
 # fact about the project that the index has nothing to say about, and a
 # paraphrase of it would be worse than no answer.
 #
-# Deliberately silent on where the remainder goes. The share paid to the
-# agent wallet was wrong in an earlier draft of the launch post, and a
-# figure nobody has verified does not belong in an answer whose whole
-# value is that it is exact. Say what is known; do not complete the sum.
+# The creator fee split as ClawPump shows it on the token page, read off it
+# on 16 Oct 2026: 15% buys the token and burns it, 50% is airdropped to
+# holders in proportion to what they hold, paid in $ANSEM, and 35% stays
+# with the creator. Those three are the whole creator share, so the answer
+# can state all of it. It replaced a one-winner draw paid in SOL, which is
+# why a question about the draw is told plainly there is none.
 #
 # Hardcoded rather than read from config, by choice: these move rarely and
 # a redeploy is the moment to change them. If the fee strategy changes,
 # THIS BLOCK is the thing to update.
 _MECHANICS = {
-    "buyback_pct": 15,
-    "rewards_pct": 15,
-    "reward_asset": "SOL",
-    "clawpump_share_pct": 25,
-    "clawpump_buyback_pct": 25,
+    "burn_pct": 15,
+    "airdrop_pct": 50,
+    "creator_pct": 35,
+    "airdrop_asset": "$ANSEM",
 }
 
 _MECHANICS_PHRASINGS = (
-    "one wallet per round, and each fee claim funds a round — so it is one "
-    "winner every time fees come in, not one winner overall.\n\n"
-    "equal odds per wallet: holding more does not buy more tickets. paid "
-    "in {asset}. creator, agent and pool wallets are excluded from the "
-    "draw.\n\n"
-    "{rewards}% of creator fees goes to those rewards and {buyback}% buys "
-    "the token back.",
+    "no draw and no single winner. {airdrop}% of creator fees is airdropped "
+    "to holders in {asset}, split in proportion to what each wallet holds.\n\n"
+    "{burn}% buys the token and burns it, and the other {creator}% stays with "
+    "the creator.",
 
-    "{rewards}% of creator fees funds the holder draw and {buyback}% buys "
-    "the token back.\n\n"
-    "each fee claim funds one round with one winner. every wallet has the "
-    "same chance regardless of size, and the creator, agent and pool "
-    "wallets cannot win. prizes are paid in {asset}.",
+    "{airdrop}% of creator fees goes to holders as an airdrop in {asset}, "
+    "shared in proportion to what each holder holds, so there is no draw and "
+    "no single winner.\n\n"
+    "{burn}% buys the token and burns it. the remaining {creator}% is kept by "
+    "the creator.",
 )
 
 
@@ -1536,9 +1541,10 @@ def mechanics_answer(question: str) -> str | None:
     if not _ASKS_OUR_MECHANICS.search(q):
         return None
     return _pick(_MECHANICS_PHRASINGS, q).format(
-        rewards=_MECHANICS["rewards_pct"],
-        buyback=_MECHANICS["buyback_pct"],
-        asset=_MECHANICS["reward_asset"],
+        airdrop=_MECHANICS["airdrop_pct"],
+        burn=_MECHANICS["burn_pct"],
+        creator=_MECHANICS["creator_pct"],
+        asset=_MECHANICS["airdrop_asset"],
     )
 
 

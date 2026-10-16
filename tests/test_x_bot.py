@@ -4608,11 +4608,16 @@ class TestItAnswersItsOwnMechanics:
         "how much of the fees goes to buybacks",
         "the buyback is what percent",
         "what % of revenue buys back the token",
+        # The split since 16 Oct 2026 is an airdrop and a burn, and gets
+        # asked about in those words.
+        "how do the airdrops work",
+        "how much gets burned",
+        "do holders get airdrops",
     ])
     def test_a_mechanics_question_is_answered_not_searched(self, question):
         out = pinned_answer(question, self.CA, "$MBS")
         assert out is not None, "fell through to retrieval"
-        assert "round" in out or "wallet" in out
+        assert "holder" in out
 
     @pytest.mark.parametrize("question", [
         "what % of revenue buys back the token",
@@ -4630,22 +4635,30 @@ class TestItAnswersItsOwnMechanics:
         assert "15%" in out
 
     def test_the_answer_states_the_configured_numbers(self):
-        out = pinned_answer("whats the fee split", self.CA, "$MBS")
-        assert "15%" in out
-        assert "SOL" in out
+        """As ClawPump's token page shows the creator fee split."""
+        for question in ("whats the fee split", "how do the airdrops work"):
+            out = pinned_answer(question, self.CA, "$MBS")
+            for figure in ("15%", "50%", "35%", "$ANSEM"):
+                assert figure in out, (question, figure)
 
-    def test_it_does_not_claim_where_the_remainder_goes(self):
-        """The share paid to the agent wallet was wrong in an earlier
-        draft of the launch post. A figure nobody has verified does not
-        belong in an answer whose whole value is being exact."""
+    def test_the_three_parts_are_the_whole_creator_share(self):
+        """Burn, airdrop and the creator's part are all of it, so the
+        answer can state every one. The old draw left a remainder it would
+        not name, and an earlier launch post got that remainder wrong."""
+        from app.x_bot import _MECHANICS
+        parts = ("burn_pct", "airdrop_pct", "creator_pct")
+        assert sum(_MECHANICS[k] for k in parts) == 100
         out = pinned_answer("whats the fee split", self.CA, "$MBS")
         assert "70%" not in out
 
-    def test_equal_odds_is_stated_plainly(self):
-        """The one part of the mechanic nobody can copy by shipping a
-        token, and the thing both askers actually wanted to know."""
-        out = pinned_answer("only one winning wallet?", self.CA, "$MBS")
-        assert "same chance" in out or "equal odds" in out
+    def test_a_question_about_the_old_draw_is_told_there_is_none(self):
+        """The draw paid one wallet per round in SOL. People who saw that
+        announcement still ask about winners, and the answer is that every
+        holder gets a share by size."""
+        for question in ("only one winning wallet?", "how does the lottery work"):
+            out = pinned_answer(question, self.CA, "$MBS")
+            assert "no draw" in out and "in proportion" in out, question
+            assert "SOL" not in out and "round" not in out, question
 
 
 class TestItStillLeavesTheArchiveAlone:
@@ -4657,6 +4670,8 @@ class TestItStillLeavesTheArchiveAlone:
         "who won the trading competition on the show",
         "what did they say about odds in episode 12",
         "summarize episode 14",
+        "what did ansem say about the airdrop",
+        "did banks talk about burning tokens",
     ])
     def test_a_question_about_the_show_still_reaches_retrieval(self, question):
         """_ABOUT_THE_SHOW gates the mechanics check exactly as it gates
