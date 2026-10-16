@@ -36,7 +36,12 @@ def test_nothing_on_the_x_banner_sits_under_the_avatar():
     assert html.index('<div class="lower">') < html.index('<div class="rooms">')
 
 
-def test_the_dexscreener_banner_shows_the_avatar_and_the_address():
-    html = (DEMO / "dex-banner.html").read_text()
-    assert 'src="icon-512.png"' in html
-    assert "search.lexthedev.com" in html
+def test_the_dexscreener_banner_is_the_x_header_centred():
+    """Same design, but nothing is laid over a DexScreener header, so the
+    rows the X header moves right of the avatar sit centred here."""
+    dex = (DEMO / "dex-banner.html").read_text()
+    x = (DEMO / "x-banner.html").read_text()
+    for words in ("Ask anything. Jump to <em>the exact second</em>.", "Market Bubble</span>",
+                  "The Record</span>", "with a question"):
+        assert words in dex and words in x, words
+    assert '<div class="lower">' not in dex

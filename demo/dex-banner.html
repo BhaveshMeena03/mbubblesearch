@@ -1,43 +1,59 @@
 <!DOCTYPE html>
-<!-- The $MBS header on DexScreener, 1500x500 (rendered at 3x). Render with:
+<!-- The $MBS header on DexScreener: the @mbubbleSearch X header's design,
+     1500x500, rendered at 3x to exactly 4500x1500 (DexScreener refuses a
+     file that is not exactly 3:1; a screenshot of the X header at 2000x667
+     was refused). Render with:
        node scripts/make_x_banner.mjs dex-banner
 
-     Not the X header. DexScreener shows this in the token panel about 400px
-     wide, a quarter of its size, where the X header's archive pills and its
-     "tag @mbubbleSearch" line are unreadable, and its empty bottom third
-     (left for X's avatar) is wasted. So: the avatar, two lines of headline
-     big enough to read at that size, one figure, the address.
+     The X header keeps its lower rows right of the avatar and the bottom
+     strip empty, because X lays the profile photo over that corner.
+     DexScreener lays nothing over it, so here the block is centred.
 
      Same rule as the share cards: nothing that goes stale. "2,000+ hours"
-     is a floor (2,072 when drawn) that the archive only grows past. -->
+     is a floor the archive only grows past. -->
 <html><head><meta charset="utf-8"><style>
   @font-face { font-family: "Instrument Serif";
     src: url("fonts/InstrumentSerif-Regular.ttf") format("truetype"); }
   @font-face { font-family: "InterV";
     src: url("fonts/Inter-Variable.ttf") format("truetype"); }
   *{margin:0;padding:0;box-sizing:border-box}
-  :root{--bg:#0b0e11;--ink:#eef0f3;--ink2:#a7adb8;--green:#16c784}
+  :root{--bg:#0b0e11;--ink:#eef0f3;--ink2:#a7adb8;--ink3:#6e7582;--edge:#232833;
+        --green:#16c784}
   body{width:1500px;height:500px;background:var(--bg);color:var(--ink);overflow:hidden;
     font-family:"InterV",-apple-system,BlinkMacSystemFont,sans-serif;position:relative;
-    display:flex;align-items:center;gap:72px;padding:0 96px}
-  .glow{position:absolute;left:-260px;top:-330px;width:1100px;height:1100px;border-radius:50%;
-    background:radial-gradient(circle,rgba(22,199,132,.22),rgba(22,199,132,.06) 42%,transparent 66%)}
-  .mark{position:relative;width:318px;height:318px;flex:none;border-radius:50%;
-    box-shadow:0 18px 50px rgba(0,0,0,.55)}
-  .copy{position:relative}
-  h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:88px;
-    line-height:.98;letter-spacing:-1.4px}
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding-bottom:10px}
+  .glow{position:absolute;left:50%;top:-420px;transform:translateX(-50%);
+    width:1500px;height:820px;border-radius:50%;
+    background:radial-gradient(circle,rgba(22,199,132,.25),rgba(22,199,132,.06) 45%,transparent 68%)}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  .eyebrow{position:relative;font-size:15px;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--green);font-weight:600}
+  .eyebrow span{color:var(--ink3);margin:0 12px}
+  h1{position:relative;margin-top:22px;font-family:"Instrument Serif",Georgia,serif;
+    font-weight:400;font-size:92px;line-height:1;letter-spacing:-1.6px;text-align:center}
   h1 em{font-style:italic;color:var(--green);padding-right:.06em}
-  .sub{margin-top:26px;font-size:30px;color:var(--ink2)}
+  .sub{position:relative;margin-top:22px;font-size:23px;color:var(--ink2)}
   .sub b{color:var(--ink);font-weight:600}
-  .site{margin-top:22px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-    font-size:27px;letter-spacing:.04em;color:var(--green);font-weight:600}
+  .rooms{position:relative;display:flex;gap:14px;margin-top:34px}
+  .rooms span{display:flex;align-items:center;gap:11px;padding:11px 20px;
+    border:1.5px solid var(--edge);border-radius:99px;background:rgba(255,255,255,.025);
+    font-size:18px;color:var(--ink)}
+  .rooms i{width:10px;height:10px;border-radius:50%;background:var(--c)}
+  .ask{position:relative;margin-top:30px;font-size:15px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--ink3)}
+  .ask b{color:var(--ink2);font-weight:500;letter-spacing:.08em;text-transform:none;font-size:17px}
 </style></head><body>
   <div class="glow"></div>
-  <img class="mark" src="icon-512.png" alt="">
-  <div class="copy">
-    <h1>Ask anything.<br>Jump to <em>the exact second</em>.</h1>
-    <div class="sub"><b>2,000+ hours</b> of crypto shows, searchable by meaning.</div>
-    <div class="site">search.lexthedev.com</div>
+  <div class="eyebrow mono">Market Bubble<span>&middot;</span>Search</div>
+  <h1>Ask anything. Jump to <em>the exact second</em>.</h1>
+  <div class="sub"><b>2,000+ hours</b> of crypto shows and long-form interviews, transcribed and searchable by meaning.</div>
+  <div class="rooms">
+    <span style="--c:#16c784"><i></i>Market Bubble</span>
+    <span style="--c:#6ecf9e"><i></i>MCG Live</span>
+    <span style="--c:#6aa9ff"><i></i>ThreadGuy</span>
+    <span style="--c:#e0485c"><i></i>Elon Musk</span>
+    <span style="--c:#d8b48a"><i></i>The Record</span>
   </div>
+  <div class="ask mono">tag <b>@mbubbleSearch</b> with a question</div>
 </body></html>
