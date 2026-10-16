@@ -1030,6 +1030,13 @@ async def llms_txt(request: Request) -> PlainTextResponse:
     return PlainTextResponse(render_llms(text, await _archive_sizes(request)))
 
 
+@app.get("/favicon.ico", include_in_schema=False)
+async def favicon() -> FileResponse:
+    """Browsers and crawlers ask the root for this whatever a page links,
+    and every one of those requests was a 404."""
+    return FileResponse(_ROOT / "demo" / "favicon.ico", media_type="image/x-icon")
+
+
 app.mount("/widget", StaticFiles(directory=_ROOT / "widget"), name="widget")
 app.mount("/demo", StaticFiles(directory=_ROOT / "demo", html=True), name="demo")
 
