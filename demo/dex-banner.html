@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!-- The $MBS header on DexScreener, 1500x500 (rendered at 3x). Render with:
+       node scripts/make_x_banner.mjs dex-banner
+
+     Not the X header. DexScreener shows this in the token panel about 400px
+     wide, a quarter of its size, where the X header's archive pills and its
+     "tag @mbubbleSearch" line are unreadable, and its empty bottom third
+     (left for X's avatar) is wasted. So: the avatar, two lines of headline
+     big enough to read at that size, one figure, the address.
+
+     Same rule as the share cards: nothing that goes stale. "2,000+ hours"
+     is a floor (2,072 when drawn) that the archive only grows past. -->
+<html><head><meta charset="utf-8"><style>
+  @font-face { font-family: "Instrument Serif";
+    src: url("fonts/InstrumentSerif-Regular.ttf") format("truetype"); }
+  @font-face { font-family: "InterV";
+    src: url("fonts/Inter-Variable.ttf") format("truetype"); }
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#0b0e11;--ink:#eef0f3;--ink2:#a7adb8;--green:#16c784}
+  body{width:1500px;height:500px;background:var(--bg);color:var(--ink);overflow:hidden;
+    font-family:"InterV",-apple-system,BlinkMacSystemFont,sans-serif;position:relative;
+    display:flex;align-items:center;gap:72px;padding:0 96px}
+  .glow{position:absolute;left:-260px;top:-330px;width:1100px;height:1100px;border-radius:50%;
+    background:radial-gradient(circle,rgba(22,199,132,.22),rgba(22,199,132,.06) 42%,transparent 66%)}
+  .mark{position:relative;width:318px;height:318px;flex:none;border-radius:50%;
+    box-shadow:0 18px 50px rgba(0,0,0,.55)}
+  .copy{position:relative}
+  h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:88px;
+    line-height:.98;letter-spacing:-1.4px}
+  h1 em{font-style:italic;color:var(--green);padding-right:.06em}
+  .sub{margin-top:26px;font-size:30px;color:var(--ink2)}
+  .sub b{color:var(--ink);font-weight:600}
+  .site{margin-top:22px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:27px;letter-spacing:.04em;color:var(--green);font-weight:600}
+</style></head><body>
+  <div class="glow"></div>
+  <img class="mark" src="icon-512.png" alt="">
+  <div class="copy">
+    <h1>Ask anything.<br>Jump to <em>the exact second</em>.</h1>
+    <div class="sub"><b>2,000+ hours</b> of crypto shows, searchable by meaning.</div>
+    <div class="site">search.lexthedev.com</div>
+  </div>
+</body></html>
