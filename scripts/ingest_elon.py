@@ -153,6 +153,10 @@ SOURCES = [
     ("iwBOQeFPAwg", "All-In Podcast", "2026-09-15",
      "Elon Musk & Gwynne Shotwell on AI Risks and Peer Review, Starship, "
      "Terafab, SpaceX/Tesla Merger"),
+    # Tesla's own event, not an interview: the one exception to the rule
+    # above, asked for by Lex on 16 Oct 2026. Other people speak on that
+    # stage, so the voice labels are what keep their lines off Elon.
+    ("qt5p-_tE8d0", "Tesla", "2026-10-16", "Roadster Event"),
 ]
 
 

@@ -114,6 +114,16 @@ NOT_HIS = 0.44
 # found above 0.6, but "reads as" is the judgement this exists to replace.
 # Below this its lines are heard one at a time like any other.
 ALSO_HIS = 0.85
+# Through an arena PA his voice does not sound like his voice into a podcast
+# microphone, and the encoder agrees. In Tesla's Roadster event (added 16 Oct
+# 2026) the cluster that is him matched at 0.73, under HIS, so the whole
+# recording went unlabelled, as it should when nobody has looked. Somebody
+# looked: its lines read as him ("better than any James Bond car", "the only
+# manually driven car that Tesla makes") and the picture at 3:16 is him on
+# the mic, while the 0.21 cluster beside it is another Tesla speaker on
+# camera at 1:26 and 4:39. A recording listed here uses its own bar for its
+# first cluster, and only after that check; everything else keeps HIS.
+CHECKED_ON_STAGE = {"qt5p-_tE8d0": 0.70}
 SAME_VOICE = 0.55       # a host's cluster against that host elsewhere
 CLEAR_BY = 0.12         # how much closer a line must be to one side
 AT_LEAST = 0.30         # and how close it must be at all
@@ -234,8 +244,9 @@ def label(rec: dict, elon: np.ndarray, hosts: dict[str, np.ndarray]) -> dict:
     """segment index -> name, for the lines of one recording that are clear."""
     fits = sorted(((float(c @ elon), v) for v, c in rec["big"].items()),
                   reverse=True)
+    first = CHECKED_ON_STAGE.get(rec["id"], HIS)
     his = [v for n, (fit, v) in enumerate(fits)
-           if fit >= (HIS if n == 0 else ALSO_HIS)]
+           if fit >= (first if n == 0 else ALSO_HIS)]
     if not his:
         # Take the nearest voice or label nothing? Nothing. A recording
         # where his voice cannot be found is one where every label would

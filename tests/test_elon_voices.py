@@ -107,6 +107,31 @@ def test_a_recording_where_his_voice_is_not_found_is_labelled_nowhere():
     assert voices.label(rec, ELON, {}) == {}
 
 
+def test_only_a_stage_recording_that_was_checked_gets_its_own_bar():
+    """Through an arena PA he matched himself at 0.73, under HIS. The one
+    recording checked by its words and its picture takes a lower bar for
+    its first cluster; the same voices anywhere else stay unlabelled."""
+    # 0.70 here centres at 0.73 once each line has its own noise, as measured.
+    stage = voices.unit(0.70 * ELON + np.sqrt(1 - 0.70 ** 2) * np.eye(8)[3])
+    lines = talk(stage, 14, 1) + talk(GUEST, 14, 50)
+
+    def heard(name: str) -> dict:
+        # Grouped by who is speaking, as the clustering does on real audio;
+        # the helper's fixed 0.7 cut would split a voice that sits at 0.73.
+        rec = recording(name, lines)
+        rec["voices"] = {0: np.arange(14), 1: np.arange(14, 28)}
+        rec["big"] = {v: voices.centre(rec["vectors"], rows)
+                      for v, rows in rec["voices"].items()}
+        return rec
+
+    assert 0.70 < float(heard("show")["big"][0] @ ELON) < voices.HIS
+    assert voices.ELON in voices.label(heard("qt5p-_tE8d0"), ELON, {}).values()
+    assert voices.label(heard("show"), ELON, {}) == {}
+    # A short list, each bar under HIS but never down among his laughs.
+    assert set(voices.CHECKED_ON_STAGE) == {"qt5p-_tE8d0"}
+    assert all(0.66 < bar < voices.HIS for bar in voices.CHECKED_ON_STAGE.values())
+
+
 def test_a_voice_between_his_and_somebody_elses_is_neither():
     """Small clusters at 0.48 to 0.66 against his voice read, by their
     words, as him laughing, and one or two as anybody. They are not put
@@ -232,3 +257,23 @@ def test_the_introduction_lex_reads_is_never_his():
         opened += 1
         assert names[vid].get("0") in ("Lex Fridman", None), episode["title"]
     assert opened >= 4
+
+
+@pytest.mark.skipif(not (ROOT / "data" / "elon_speaker_map.json").exists(),
+                    reason="the map is built from audio, on the laptop")
+def test_the_roadster_event_names_only_the_lines_the_picture_showed_were_his():
+    """Checked against the video on 16 Oct 2026: Elon on the mic at 3:16,
+    another Tesla speaker at 1:26 and 4:39, the host opening the night."""
+    shelf, names = _shelf_and_names()
+    segments = shelf["qt5p-_tE8d0"]["segments"]
+    said = names["qt5p-_tE8d0"]
+
+    def who(words: str):
+        i = next(n for n, s in enumerate(segments) if words in s["text"])
+        return said.get(str(i))
+
+    assert who("better than any James Bond car") == voices.ELON
+    assert who("only manually driven car that Tesla makes") == voices.ELON
+    assert who("Welcome to McGregor") != voices.ELON
+    assert who("master plan to build an EV") != voices.ELON
+    assert who("technically autonomous for this demo") != voices.ELON
