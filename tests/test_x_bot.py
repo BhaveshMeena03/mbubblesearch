@@ -3968,6 +3968,20 @@ class TestTheThirdArchive:
         assert len(_MCG_NAMES) > 100, "project names should load from data/"
         assert "clawpump" in _MCG_NAMES
 
+    def test_a_project_named_by_its_ticker_in_the_title_goes_to_mcg(self):
+        """"Can $HOTBOT Change How People Trade on Solana?" has no "Name:"
+        in it, so the day after Hotbot's founders were on MCG a question
+        about Hotbot went to the broadcast, which has never heard of it."""
+        assert self._route("@mbubbleSearch how does hotbot pick trades") == "mcg"
+        assert self._route("@mbubbleSearch what is $hotbot") == "mcg"
+        assert self._route("@mbubbleSearch what is umbra privacy building") == "mcg"
+
+    def test_a_ticker_that_is_also_a_word_does_not_steal_the_question(self):
+        # $NOTE, $RECAP, $SAID and $MAXIS are all MCG projects.
+        assert self._route("@mbubbleSearch give me a recap of episode 5") == "podcast"
+        assert self._route("@mbubbleSearch what do btc maxis think") == "podcast"
+        assert self._route("@mbubbleSearch what said ansem about a note") == "podcast"
+
 
 @pytest.mark.anyio
 async def test_an_unwired_archive_falls_back_to_the_broadcast(tmp_path):

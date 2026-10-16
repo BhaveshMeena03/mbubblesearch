@@ -3380,6 +3380,15 @@ _OF_THE_MUSK_ARCHIVE = re.compile(
 #
 # Read from the shipped index rather than hardcoded, so a project that
 # goes on the show next week is routable the moment its episode lands.
+# Newer interview titles name the project by its ticker, or as "X on MCG",
+# rather than "Name: ...": "Can $HOTBOT Change How People Trade on Solana?",
+# "$BUN on MCG | ...", "Umbra Privacy on MCG | ...". Read only the old shape,
+# "how does hotbot pick trades" went to the broadcast, which has never heard
+# of Hotbot, the day after Hotbot's founders were on MCG.
+_TICKER_IN_TITLE = re.compile(r"\$([A-Za-z][A-Za-z0-9]{2,15})\b")
+_ON_MCG = re.compile(r"^\s*([^$|:!]+?)\s+on\s+MCG\b", re.I)
+
+
 def _mcg_projects() -> set[str]:
     path = Path(__file__).resolve().parent.parent / "data" / "mcg_index.json"
     try:
@@ -3390,17 +3399,26 @@ def _mcg_projects() -> set[str]:
     names = set()
     for row in rows:
         title = (row.get("title") or "").strip()
-        if ":" not in title or "LIVE" in title[:12].upper():
+        if "LIVE" in title[:12].upper():
             continue
-        name = title.split(":", 1)[0].strip().strip("🔴 ").strip()
-        # Long enough to be a name rather than a word, and not a word the
-        # broadcast would use in passing. "Earn" and "Programmable" are
-        # real MCG projects and also ordinary English; routing a Market
-        # Bubble question away on one of those is the failure this whole
-        # split exists to avoid.
-        if len(name) < 4 or name.lower() in _TOO_ORDINARY:
-            continue
-        names.add(name.lower())
+        found = _TICKER_IN_TITLE.findall(title)
+        if ":" in title:
+            found.append(title.split(":", 1)[0])
+        on_mcg = _ON_MCG.match(title)
+        if on_mcg and len(on_mcg.group(1).split()) <= 2:
+            found.append(on_mcg.group(1))
+        for name in found:
+            # "$AVICI: ..." used to come out as "$avici", which no question
+            # could match: a word boundary cannot sit in front of a "$".
+            name = name.strip().strip("🔴 ").strip().lstrip("$").lower()
+            # Long enough to be a name rather than a word, and not a word
+            # the broadcast would use in passing. "Earn" and "Programmable"
+            # are real MCG projects and also ordinary English; routing a
+            # Market Bubble question away on one of those is the failure
+            # this whole split exists to avoid.
+            if len(name) < 4 or name in _TOO_ORDINARY:
+                continue
+            names.add(name)
     return names
 
 
@@ -3487,6 +3505,64 @@ _TOO_ORDINARY = {
     'wallet',
     'wonder',
     'yield',
+    # Tickers read out of the newer titles on 16 Oct 2026 (see
+    # _mcg_projects). These are said on the broadcast or in the Musk
+    # interviews, which the transcript check below would catch anyway:
+    'believe',
+    'cities',
+    'developer',
+    'fair',
+    'fitted',
+    'fold',
+    'grand',
+    'grid',
+    'hustle',
+    'inbox',
+    'infra',
+    'karma',
+    'kled',
+    'labs',
+    'link',
+    'milady',
+    'note',
+    'pons',
+    'rain',
+    'recap',
+    'said',
+    'seed',
+    'send',
+    'solo',
+    'split',
+    'squire',
+    'stable',
+    'star',
+    'step',
+    'surf',
+    'virus',
+    'water',
+    'website',
+    'weed',
+    # And these are not, but are ordinary words, people's names, or
+    # slang a broadcast question uses: "what do btc maxis think" has to
+    # stay on the show. Judged by reading the list, not by a count.
+    'aims',
+    'blowfish',
+    'bully',
+    'calvin',
+    'collat',
+    'dexter',
+    'dupe',
+    'forge',
+    'habitat',
+    'juno',
+    'maxis',
+    'modric',
+    'morph',
+    'nook',
+    'omfg',
+    'pact',
+    'rifts',
+    'splat',
 }
 
 _MCG_NAMES = _mcg_projects()
