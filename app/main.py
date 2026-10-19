@@ -44,6 +44,7 @@ from voyageai import error as voyage_error
 from . import (
     attribution,
     call_prices,
+    egress,
     market,
     mcg_transcript,
     og_card,
@@ -1962,7 +1963,10 @@ async def stats() -> dict:
             "answer_cache": app.state.answers.state(),
             # Which endpoint served the answers, so "this runs on usepod"
             # is checkable rather than asserted.
-            "inference": inference_routes()}
+            "inference": inference_routes(),
+            # What this process has read out of Pinecone. The project's
+            # monthly cap is the sum of this and the laptop's morning job.
+            "pinecone_reads": egress.snapshot()}
 
 
 @app.get("/v1/gaps", dependencies=[Depends(require_admin)])
@@ -2037,6 +2041,15 @@ _REPORT_TTL = 1800
 _refreshing: set[str] = set()
 
 
+def _committed_report(fallback: Path) -> dict | None:
+    """The report file the morning job committed, or None."""
+    try:
+        return json.loads(fallback.read_text()) if fallback.exists() else None
+    except (OSError, ValueError) as exc:
+        logger.warning("could not read %s: %s", fallback.name, exc)
+        return None
+
+
 async def _build_report(store, fallback: Path, slot: str,
                         archive: str | None = None) -> dict:
     """Fetch, aggregate and cache one archive's report. Slow by nature.
@@ -2046,6 +2059,26 @@ async def _build_report(store, fallback: Path, slot: str,
     beside CLUDE and DRIVE beside DERIVE, one project split in two, because
     only the committed fallback file had ever been aggregated with them.
     """
+    # The committed report first, when it covers every episode the store
+    # holds. Reading the store is 15 to 30 MB a time (every hit of every
+    # episode, with a vector apiece), and it ran at every boot and every
+    # half hour: most of a month's Pinecone read cap, gone in nineteen
+    # days, for dashboards that change once a morning. The morning job
+    # aggregates the same hits on the laptop and commits the file; asking
+    # the store which episodes it has is a list of ids, a few KB.
+    report = _committed_report(fallback)
+    if report and store is not None and hasattr(store, "episode_ids"):
+        try:
+            stored = await store.episode_ids()
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("asset store unavailable (%s); serving the file", exc)
+            stored = set()
+        missing = stored - set(report.get("episode_ids") or ())
+        if not missing:
+            setattr(app.state, slot, (asyncio.get_event_loop().time(), report))
+            return report
+        logger.info("%s: the store holds %d episodes the committed report "
+                    "lacks; reading it", slot, len(missing))
     hits = []
     if store is not None:
         try:
@@ -2059,9 +2092,7 @@ async def _build_report(store, fallback: Path, slot: str,
         shows = _show_of()
         report["episodes_processed"] = len(
             {shows.get(h.get("episode_id"), h.get("episode_id")) for h in hits})
-    elif fallback.exists():
-        report = json.loads(fallback.read_text())
-    else:
+    elif not report:
         return {"assets": [], "total_hits": 0, "episodes_processed": 0}
 
     setattr(app.state, slot, (asyncio.get_event_loop().time(), report))

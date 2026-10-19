@@ -44,6 +44,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
+from app import egress, local_cache  # noqa: E402
 from app.config import get_settings  # noqa: E402
 from app.podcast import _windows  # noqa: E402
 from app.schemas import Episode  # noqa: E402
@@ -104,13 +105,24 @@ def tokens(text: str) -> set[str]:
     return {w for w in words(text) if worth_indexing(w) and w not in STOP}
 
 
-def from_episodes(settings) -> tuple[list[str], list[tuple[str, str]]]:
-    """Market Bubble: windows rebuilt from the transcripts on disk.
+# Archives whose transcripts are on disk, so nothing is read from Pinecone.
+# Market Bubble always was; the Musk and Record archives were read back out
+# of the index at 25 MB a rebuild until 19 Oct 2026, with the same file
+# sitting right here.
+LOCAL = {"podcast": ROOT / "data" / "episodes.json",
+         "elon": ROOT / "data" / "elon_episodes.json",
+         "tradfi": ROOT / "data" / "tradfi_episodes.json"}
+
+
+def from_episodes(settings, path: Path = EPISODES) -> tuple[list[str], list[tuple[str, str]]]:
+    """An archive whose transcripts are on disk: windows rebuilt from them.
 
     The ids are recomputed exactly as ingest computes them, from the same
     windowing, so no Pinecone read is needed.
     """
-    episodes = [Episode(**e) for e in json.loads(EPISODES.read_text())]
+    raw = path.read_text() if path.exists() else gzip.decompress(
+        path.with_suffix(path.suffix + ".gz").read_bytes()).decode()
+    episodes = [Episode(**e) for e in json.loads(raw)]
     ids, docs = [], []
     for episode in episodes:
         for start_t, text, _stamped in _windows(
@@ -175,6 +187,51 @@ def from_pinecone(namespace: str) -> tuple[list[str], list[tuple[str, str]]]:
     return ids, docs
 
 
+def from_cache(archive: str) -> tuple[list[str], list[tuple[str, str]]]:
+    """The ingest archives, from the passages the ingest kept on this Mac.
+
+    An episode on the shelf with no cached passages is read from the index
+    once, by itself and without its vectors, and kept; so a cache seeded
+    with scripts/seed_local_caches.py stays complete, and a rebuild reads
+    nothing it has already seen. The Sunday rebuild used to fetch every
+    passage of two archives, vectors and all: 850 MB a week, for text the
+    ingest had held in memory six days earlier.
+    """
+    from scripts import ingest_mcg
+    settings = get_settings()
+    spec = ingest_mcg.ARCHIVES[archive]
+    ingest_mcg.use(archive)
+    rows = ingest_mcg.shelf()
+    ids, docs, fetched = [], [], 0
+    index = probe = None
+    for row in rows:
+        windows = local_cache.load_windows(archive, row["id"])
+        if not windows:
+            from app.podcast import PodcastIndex
+            if index is None:
+                index = PodcastIndex(namespace=spec["namespace"](settings),
+                                     index_name=spec["index"](settings)).index
+                probe = [0.0] * settings.embedding_dimension
+                probe[0] = 1.0
+            found = index.query(vector=probe, top_k=1000,
+                                namespace=spec["namespace"](settings),
+                                include_metadata=True, include_values=False,
+                                filter={"episode_id": {"$eq": row["id"]}})
+            windows = [{"id": m["id"], "title": m["metadata"].get("title", ""),
+                        "text": m["metadata"].get("text", "")}
+                       for m in found.get("matches", []) if m.get("metadata")]
+            if windows:
+                local_cache.put_windows(archive, row["id"], windows)
+                fetched += 1
+        for w in windows:
+            if w.get("text"):
+                ids.append(w["id"])
+                docs.append((w.get("title", ""), w["text"]))
+    print(f"  {len(rows)} episodes on the shelf, {fetched} read from the index, "
+          f"{len(ids):,} passages")
+    return ids, docs
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--max-name-df", type=int, default=250,
@@ -190,8 +247,13 @@ def main() -> int:
     args = ap.parse_args()
 
     out = path_for(args.archive)
-    ids, docs = (from_episodes(get_settings()) if args.archive == "podcast"
-                 else from_pinecone(args.archive))
+    from scripts import ingest_mcg
+    if args.archive in LOCAL:
+        ids, docs = from_episodes(get_settings(), LOCAL[args.archive])
+    elif args.archive in ingest_mcg.ARCHIVES:
+        ids, docs = from_cache(args.archive)
+    else:
+        ids, docs = from_pinecone(args.archive)
 
     # Two maps: where a token was SAID, and where it is only in the
     # episode title. The title is embedded with every window at ingest, so
@@ -268,6 +330,7 @@ def main() -> int:
     # mtime=0 so an unchanged index writes identical bytes and git sees
     # no change.
     out.write_bytes(gzip.compress(body, mtime=0) if out.suffix == ".gz" else body)
+    print(f"  pinecone read: {egress.snapshot()['since_start_mb']} MB")
     size = out.stat().st_size
 
     print(f"  {len(ids):,} windows")

@@ -30,6 +30,7 @@ from anthropic import AsyncAnthropic
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+from app import local_cache  # noqa: E402
 from app.assets import (  # noqa: E402,F401
     aggregate,
     canonical,
@@ -303,13 +304,33 @@ async def main() -> None:
             try:
                 n = await store.store(ep["episode_id"], ep["title"], hits)
                 logger.info("  stored %d hits for %s", n, ep["episode_id"])
+                # Kept here too, so the report below and the live
+                # dashboard never read the store back.
+                if hits:
+                    local_cache.put_hits("podcast", ep["episode_id"], hits)
             except Exception as exc:  # noqa: BLE001
                 logger.warning("  store FAILED for %s (%s) — cached locally, "
                                "re-run with --store to retry",
                                ep["episode_id"], exc)
 
-    report = aggregate(all_hits, args.min_confidence, archive="podcast")
-    report["episodes_processed"] = len(episodes)
+    # With --store the report is the whole archive, from the local copy of
+    # every episode's hits, and it carries the episode ids it covers: the
+    # site serves the committed file and asks the store only which
+    # episodes it holds (app/main.py _build_report). Reading the store
+    # back was 15 MB at every boot and every half hour. Without --store it
+    # is this run only, as before.
+    cached = local_cache.load_hits("podcast") if store is not None else {}
+    if cached:
+        rolled = [h for hits in cached.values() for h in hits]
+        report = aggregate(rolled, args.min_confidence, archive="podcast")
+        report["episodes_processed"] = len(cached)
+        report["episode_ids"] = sorted(cached)
+    else:
+        if store is not None:
+            logger.warning("  no local hits cache: the report is this run "
+                           "only; run scripts/seed_local_caches.py")
+        report = aggregate(all_hits, args.min_confidence, archive="podcast")
+        report["episodes_processed"] = len(episodes)
 
     # The report is rebuilt from scratch each run, so a partial run does not
     # add to the index -- it replaces it. One `--episodes 15` run cut a

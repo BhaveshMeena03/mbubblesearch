@@ -49,6 +49,7 @@ from anthropic import AsyncAnthropic
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
+from app import local_cache  # noqa: E402
 from app.assets import aggregate  # noqa: E402
 from app.assets_store import AssetStore  # noqa: E402
 from app.config import anthropic_client_kwargs, get_settings  # noqa: E402
@@ -148,6 +149,9 @@ async def main() -> int:
                                              args.force)
                 if store is not None and hits:
                     await store.store(row["id"], row["title"], hits)
+                    # Kept here too, so the report below and the live
+                    # dashboard never read the store back.
+                    local_cache.put_hits(args.archive, row["id"], hits)
             except Exception as exc:                        # noqa: BLE001
                 failed.append(row["id"])
                 logger.warning("  %s failed: %s", row["id"], str(exc)[:160])
@@ -156,8 +160,23 @@ async def main() -> int:
 
     await asyncio.gather(*(one(n, row) for n, row in enumerate(todo, 1)))
 
-    report = aggregate(every, min_confidence=args.min_confidence,
-                       archive=args.archive)
+    # The report is the whole archive, from the local copy of every
+    # episode's hits, not just this morning's. The morning job commits it
+    # and the site serves it (app/main.py _build_report), so the store is
+    # read only when this copy is missing an episode the store has.
+    cached = local_cache.load_hits(args.archive) if args.store else {}
+    if cached:
+        rolled = [h for hits in cached.values() for h in hits]
+        report = aggregate(rolled, min_confidence=args.min_confidence,
+                           archive=args.archive)
+        report["episodes_processed"] = len(cached)
+        report["episode_ids"] = sorted(cached)
+    else:
+        if args.store:
+            logger.warning("  no local hits cache: the report below is this "
+                           "run only; run scripts/seed_local_caches.py")
+        report = aggregate(every, min_confidence=args.min_confidence,
+                           archive=args.archive)
     out = spec["out"]
     out.write_text(json.dumps(report, indent=1))
     logger.info("\n  %d assets from %d hits -> %s",

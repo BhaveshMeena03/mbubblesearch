@@ -18,6 +18,7 @@ import logging
 from pinecone import Pinecone
 
 from .config import get_settings
+from .egress import metered
 
 logger = logging.getLogger(__name__)
 
@@ -75,9 +76,9 @@ class AssetStore:
     @property
     def index(self):
         if self._index is None:
-            self._index = Pinecone(
+            self._index = metered(Pinecone(
                 api_key=self._settings.pinecone_api_key
-            ).Index(self._index_name)
+            ).Index(self._index_name), "assets")
         return self._index
 
     def _placeholder_vector(self) -> list[float]:
@@ -206,6 +207,28 @@ class AssetStore:
             timeout=timeout,
         )
         return [hit for page in pages for hit in page]
+
+    async def episode_ids(self) -> set[str]:
+        """Which episodes are stored, read off the record ids alone: a list
+        carries ids and nothing else, where a fetch of the same records
+        would carry every hit and a vector apiece. This is how the
+        dashboard tells whether its committed report is current without
+        reading the store."""
+        def _ids() -> set[str]:
+            out = set()
+            for record_id in self._all_ids():
+                if not record_id.startswith("assets-"):
+                    continue
+                rest = record_id[len("assets-"):]
+                # "assets-<episode>-<chunk>"; the episode id itself may
+                # carry dashes, so only a trailing number is the chunk.
+                head, dash, tail = rest.rpartition("-")
+                out.add(head if dash and tail.isdigit() else rest)
+            return out
+        return await asyncio.wait_for(
+            asyncio.to_thread(_ids),
+            timeout=self._settings.pinecone_read_timeout_seconds,
+        )
 
     async def episode_count(self) -> int:
         def _count() -> int:

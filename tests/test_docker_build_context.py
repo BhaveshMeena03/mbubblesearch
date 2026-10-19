@@ -136,13 +136,12 @@ def test_the_highlight_pool_is_shipped():
 # Opened by the app but deliberately not shipped, each with the reason.
 _NOT_SHIPPED = {
     ".usage.json": "written at runtime, not read from the repo",
-    "assets.json": "fallback only; the live asset store is read first",
-    # Same rule as its Market Bubble twin, and the same consequence: until
-    # extract_mcg_assets.py has run with --store, the MCG asset page is
-    # empty in production rather than showing a partial pilot as if it
-    # were the archive.
-    "mcg_assets.json": "fallback only; the live asset store is read first",
-    "threadguy_assets.json": "fallback only; the live asset store is read first",
+    # What the morning job writes to Pinecone, kept on the laptop so the
+    # Sunday exact-word rebuild and the dashboard reports read nothing
+    # back out of the index (app/local_cache.py). Never in the image: the
+    # site serves the committed reports instead.
+    ".hits_cache": "laptop only; the site serves the committed reports",
+    ".windows_cache": "laptop only; the exact-word index is built on the laptop",
     "episodes.json": "shipped gzipped as episodes.json.gz",
     "elon_episodes.json": "shipped gzipped as elon_episodes.json.gz",
     "tradfi_episodes.json": "shipped gzipped as tradfi_episodes.json.gz",

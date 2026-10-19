@@ -28,6 +28,8 @@ from pinecone import Pinecone
 
 from app.config import get_settings
 
+from .egress import metered
+
 logger = logging.getLogger(__name__)
 
 NAMESPACE = "questions"
@@ -41,9 +43,9 @@ class QuestionLog:
     @property
     def index(self):
         if self._index is None:
-            self._index = Pinecone(
+            self._index = metered(Pinecone(
                 api_key=self._settings.pinecone_api_key
-            ).Index(self._settings.pinecone_index)
+            ).Index(self._settings.pinecone_index), "questions")
         return self._index
 
     def _placeholder_vector(self) -> list[float]:

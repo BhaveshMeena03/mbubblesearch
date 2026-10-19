@@ -168,9 +168,13 @@ if [ "$(date +%u)" = "7" ]; then
   done
 fi
 
-# Only the shelves and the indexes, whatever else is uncommitted here.
+# Only the shelves, the indexes and the two token reports, whatever else is
+# uncommitted here. The reports are what the dashboards serve: the site
+# used to rebuild them from Pinecone at every boot and every half hour,
+# which is most of how a month's read cap went in nineteen days.
 shelves=(data/threadguy_index.json data/mcg_index.json data/rasmr_index.json
-         data/threadguy_summaries.json.gz "${terms[@]}")
+         data/threadguy_summaries.json.gz "${terms[@]}"
+         data/mcg_assets.json data/threadguy_assets.json)
 # Only once it is in the repo: git will not commit a path it has never
 # seen, and the refusal would take the shelves down with it.
 if git ls-files --error-unmatch data/mcg_broadcast_links.json >/dev/null 2>&1; then

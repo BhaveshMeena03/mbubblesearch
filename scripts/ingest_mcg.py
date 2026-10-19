@@ -43,6 +43,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
+from app import local_cache  # noqa: E402
 from app.config import get_settings  # noqa: E402
 from app.podcast import PodcastIndex  # noqa: E402
 from app.provenance import drop_hallucinated  # noqa: E402
@@ -463,6 +464,7 @@ def forget(video_id: str) -> int:
         index.delete(ids=ids[at:at + 100], namespace=ns)
     rows = [r for r in shelf() if r.get("id") != video_id]
     SHELF.write_text(json.dumps(rows, indent=1))
+    local_cache.forget(ARCHIVE, video_id)
     return len(ids)
 
 
@@ -632,6 +634,11 @@ async def main() -> int:
             print(f"  [{n}/{len(todo)}] {item['id']}  "
                   f"{item['title'][:44]}  {len(kept)} segments -> "
                   f"{windows} passages", flush=True)
+            # The passages, kept here as they were written, so the Sunday
+            # exact-word rebuild never reads them back out of the index.
+            local_cache.put_windows(ARCHIVE, item["id"], [
+                {"id": r["id"], "title": r["title"], "text": r["text"]}
+                for r in index.rows_for(episode)])
             add_to_shelf({"id": item["id"], "title": item["title"],
                           "url": episode.url, "published_at": date,
                           "seconds": item["seconds"], "format": item["format"]})

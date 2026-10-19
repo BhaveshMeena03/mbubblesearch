@@ -51,6 +51,9 @@ data/
 # in a reply stays a YouTube link: works, and sends the reader off X.
 !data/mcg_broadcast_links.json
 !data/guest_windows.json
+!data/assets.json
+!data/mcg_assets.json
+!data/threadguy_assets.json
 !data/speaker_map.json
 !data/elon_speaker_map.json
 # The calls board, served by /v1/calls.

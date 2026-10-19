@@ -21,6 +21,7 @@ import voyageai
 from pinecone import Pinecone
 
 from .config import get_settings
+from .egress import metered
 from .embeddings import embed_texts
 from .schemas import IngestDocument, SourceType
 
@@ -138,9 +139,9 @@ class IngestionPipeline:
     @property
     def index(self):
         if self._index is None:
-            self._index = Pinecone(
+            self._index = metered(Pinecone(
                 api_key=self._settings.pinecone_api_key
-            ).Index(self._settings.pinecone_index)
+            ).Index(self._settings.pinecone_index), "ingest")
         return self._index
 
     def _chunk(self, doc: IngestDocument) -> list[Chunk]:

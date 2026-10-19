@@ -9,6 +9,10 @@ data/episodes.json
 
 deploy/*.log
 data/.asset_cache/
+# What the morning job wrote to Pinecone, kept here so nothing reads it
+# back out (app/local_cache.py). Refilled by scripts/seed_local_caches.py.
+data/.hits_cache/
+data/.windows_cache/
 # What the model proposed for the calls board, per show. Regenerable.
 data/.calls_cache/
 
@@ -54,7 +58,6 @@ audio
 # 7.8MB of generated output that nothing in production reads -- the live
 # dashboard is served from Pinecone, and .dockerignore keeps this out of
 # the image on purpose. Regenerate it with the extractor; do not commit it.
-data/mcg_assets.json
 # 6,219 of Ansem's posts, fetched once and expensive to refetch. Kept out
 # of the repo for the same reason as mcg_assets.json: it is fetched data,
 # not source, and it is somebody else's timeline.

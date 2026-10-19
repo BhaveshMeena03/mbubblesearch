@@ -94,6 +94,13 @@ COPY data/broadcast_links.json ./data/broadcast_links.json
 COPY data/youtube_map.json ./data/youtube_map.json
 COPY data/mcg_broadcast_links.json ./data/mcg_broadcast_links.json
 COPY data/guest_windows.json ./data/guest_windows.json
+# The three token dashboards, as the morning job aggregated and committed
+# them. The site serves these and asks the asset store only which episodes
+# it holds; rebuilding them from the store was 32 MB of Pinecone reads at
+# every boot and every half hour, most of a month's cap in nineteen days.
+COPY data/assets.json ./data/assets.json
+COPY data/mcg_assets.json ./data/mcg_assets.json
+COPY data/threadguy_assets.json ./data/threadguy_assets.json
 COPY data/speaker_map.json ./data/speaker_map.json
 COPY data/elon_speaker_map.json ./data/elon_speaker_map.json
 # The calls board: what the hosts called on air, read row by row by a

@@ -29,6 +29,7 @@ from pinecone import Pinecone
 
 from . import hedging, names, recency
 from .config import anthropic_client_kwargs, get_settings, redact
+from .egress import metered
 from .embeddings import embed_query, embed_texts, rerank_order, rerank_scores
 from .schemas import (
     Episode,
@@ -1163,6 +1164,12 @@ def _deep_link(url: str, platform: str, seconds: float,
     return url
 
 
+def vector_id(episode_id: str, start_seconds) -> str:
+    """The one id a passage has everywhere: in the index, in the exact-word
+    index and in the local window cache."""
+    return hashlib.sha256(f"{episode_id}:{start_seconds}".encode()).hexdigest()[:32]
+
+
 def _windows(
     segments: list[TranscriptSegment], max_chars: int, overlap_segments: int
 ) -> list[tuple[float, str]]:
@@ -1539,41 +1546,51 @@ class PodcastIndex:
     @property
     def index(self):
         if self._index is None:
-            self._index = Pinecone(
+            self._index = metered(Pinecone(
                 api_key=self._settings.pinecone_api_key
             ).Index(getattr(self, "_index_name", None)
-                    or self._settings.pinecone_index)
+                    or self._settings.pinecone_index), "podcast")
         return self._index
 
     # -- ingestion ----------------------------------------------------------
+    def rows_for(self, ep: Episode) -> list[dict]:
+        """One episode as the passages ingest writes, each carrying the
+        id its vector gets. The exact-word index is built from these
+        (scripts/build_term_index.py), so the ids have to be the same
+        ones a search comes back with."""
+        rows: list[dict] = []
+        for start_t, text, stamped in _windows(
+            ep.segments,
+            self._settings.chunk_max_chars,
+            overlap_segments=2,
+        ):
+            rows.append(
+                {
+                    "id": vector_id(ep.episode_id, start_t),
+                    "episode_id": ep.episode_id,
+                    "title": ep.title,
+                    "url": ep.url,
+                    "platform": ep.platform,
+                    "start_seconds": start_t,
+                    "text": text,
+                    # The same passage with per-line timestamps, read
+                    # only when building the excerpt a model answers
+                    # from. Never embedded, never shown to a reader.
+                    "text_ts": stamped,
+                    # Without this every chunk is timeless, and a view
+                    # from months ago ranks against a later correction
+                    # on wording alone. Pinecone metadata rejects None,
+                    # so undated episodes omit the key entirely.
+                    **({"published_at": ep.published_at}
+                       if ep.published_at else {}),
+                }
+            )
+        return rows
+
     async def ingest(self, episodes: list[Episode]) -> int:
         rows: list[dict] = []
         for ep in episodes:
-            for start_t, text, stamped in _windows(
-                ep.segments,
-                self._settings.chunk_max_chars,
-                overlap_segments=2,
-            ):
-                rows.append(
-                    {
-                        "episode_id": ep.episode_id,
-                        "title": ep.title,
-                        "url": ep.url,
-                        "platform": ep.platform,
-                        "start_seconds": start_t,
-                        "text": text,
-                        # The same passage with per-line timestamps, read
-                        # only when building the excerpt a model answers
-                        # from. Never embedded, never shown to a reader.
-                        "text_ts": stamped,
-                        # Without this every chunk is timeless, and a view
-                        # from months ago ranks against a later correction
-                        # on wording alone. Pinecone metadata rejects None,
-                        # so undated episodes omit the key entirely.
-                        **({"published_at": ep.published_at}
-                           if ep.published_at else {}),
-                    }
-                )
+            rows.extend(self.rows_for(ep))
         if not rows:
             return 0
 
@@ -1593,11 +1610,10 @@ class PodcastIndex:
 
         vectors = [
             {
-                "id": hashlib.sha256(
-                    f"{r['episode_id']}:{r['start_seconds']}".encode()
-                ).hexdigest()[:32],
+                "id": r["id"],
                 "values": emb,
-                "metadata": r,
+                # The id is the vector's name, not something to store twice.
+                "metadata": {k: v for k, v in r.items() if k != "id"},
             }
             for r, emb in zip(rows, embeddings, strict=True)
         ]
@@ -1657,12 +1673,7 @@ class PodcastIndex:
         if not ids:
             return hits
 
-        present = {
-            hashlib.sha256(
-                f"{h.episode_id}:{h.start_seconds}".encode()
-            ).hexdigest()[:32]
-            for h in hits
-        }
+        present = {vector_id(h.episode_id, h.start_seconds) for h in hits}
         wanted = [i for i in ids if i not in present]
         if not wanted:
             return hits

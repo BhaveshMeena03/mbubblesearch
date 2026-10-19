@@ -15,7 +15,8 @@ def test_it_covers_every_channel_and_transcribes_with_groq():
 def test_it_commits_only_the_shelves():
     """It runs in a checkout that may have someone's work in it."""
     assert 'shelves=(data/threadguy_index.json data/mcg_index.json data/rasmr_index.json\n' \
-           '         data/threadguy_summaries.json.gz "${terms[@]}")' in SCRIPT
+           '         data/threadguy_summaries.json.gz "${terms[@]}"\n' \
+           '         data/mcg_assets.json data/threadguy_assets.json)' in SCRIPT
     assert "terms=(data/terms_threadguy.json.gz data/terms_mcg.json.gz)" in SCRIPT
 
 

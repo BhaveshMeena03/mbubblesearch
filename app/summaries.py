@@ -16,6 +16,7 @@ from anthropic import AsyncAnthropic
 from pinecone import Pinecone
 
 from .config import anthropic_client_kwargs, get_settings
+from .egress import metered
 from .schemas import Episode
 
 logger = logging.getLogger(__name__)
@@ -134,9 +135,9 @@ class SummaryStore:
     @property
     def index(self):
         if self._index is None:
-            self._index = Pinecone(
+            self._index = metered(Pinecone(
                 api_key=self._settings.pinecone_api_key
-            ).Index(self._settings.pinecone_index)
+            ).Index(self._settings.pinecone_index), "summaries")
         return self._index
 
     def _placeholder_vector(self) -> list[float]:
