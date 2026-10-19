@@ -184,6 +184,40 @@ class TestVoyageErrorHandling:
         assert r.status_code == 503
         assert "busy" in r.json()["detail"].lower()
 
+    def test_a_paused_vector_store_returns_503_and_says_so(self, client, monkeypatch):
+        """19 Oct 2026: the project's monthly egress cap, hit by a week of
+        reading whole transcripts back out of the index. Every search on
+        five archives was a bare 500 until this."""
+        from pinecone.errors import exceptions as pinecone_error
+
+        async def boom(*a, **k):
+            raise pinecone_error.RateLimitError(
+                "[429] Request failed. You've reached your egress limit for "
+                "the current month (10000000000 bytes).", status_code=429)
+
+        monkeypatch.setattr(StubRetriever, "search", boom)
+        r = client.post("/v1/chat", json={"message": "hi"})
+        assert r.status_code == 503
+        assert "paused" in r.json()["detail"].lower()
+        assert r.headers["retry-after"] == "600"
+
+    def test_the_front_door_says_paused_rather_than_nothing_found(self, client, monkeypatch):
+        """Every room probed at once, and a room that fails is scored 0.0 so
+        one dead archive cannot take the door down. With the store itself
+        paused that made every room 0.0 and the answer "I can't help with
+        that one", which is a false answer about the archive."""
+        from pinecone.errors import exceptions as pinecone_error
+
+        class Paused:
+            async def retrieve(self, query, top_k=None):
+                raise pinecone_error.RateLimitError("egress limit", status_code=429)
+
+        for key, _label, _href in main_module._ROOMS:
+            monkeypatch.setattr(client.app.state, key, Paused(), raising=False)
+        r = client.post("/v1/search", json={"query": "why did rasmr sell his hype"})
+        assert r.status_code == 503
+        assert "paused" in r.json()["detail"].lower()
+
     def test_voyage_generic_error_returns_502(self, client, monkeypatch):
         from voyageai import error as voyage_error
 

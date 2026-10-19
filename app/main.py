@@ -38,6 +38,7 @@ from fastapi.responses import (
     StreamingResponse,
 )
 from fastapi.staticfiles import StaticFiles
+from pinecone.errors import exceptions as pinecone_error
 from voyageai import error as voyage_error
 
 from . import (
@@ -1125,6 +1126,23 @@ async def _voyage_rate_limit(request: Request, exc: voyage_error.RateLimitError)
     )
 
 
+@app.exception_handler(pinecone_error.RateLimitError)
+async def _pinecone_rate_limit(request: Request, exc: pinecone_error.RateLimitError):
+    # The vector store refusing to read. On 19 Oct 2026 that was the
+    # project's monthly egress cap, hit by a week of reading whole
+    # transcripts back out of the index, and every search on five archives
+    # came back "Something went wrong" until the first of the month. A
+    # paused store is not a bug in the question, so it says so and asks
+    # for a retry later rather than at once.
+    logger.error("Pinecone refused a read on %s: %s", request.url.path,
+                 str(exc)[:160])
+    return JSONResponse(
+        status_code=503,
+        content={"detail": "The archive is paused for the moment. Try again later."},
+        headers={"Retry-After": "600"},
+    )
+
+
 @app.exception_handler(voyage_error.VoyageError)
 async def _voyage_error(request: Request, exc: voyage_error.VoyageError):
     logger.error("Voyage error on %s: %s", request.url.path, exc)
@@ -1323,6 +1341,11 @@ async def _probe_rooms(live: list, query: str, top_k) -> list[dict]:
         name, label, href, idx = entry
         try:
             hits = await idx.retrieve(query, top_k=top_k)
+        except pinecone_error.RateLimitError:
+            # The store itself is paused, so every room is, and "nothing
+            # scored" would be a false answer: the handler above says
+            # what is actually happening.
+            raise
         except Exception:                                     # noqa: BLE001
             # One archive being unreachable must not take the door down.
             return {"key": name, "label": label, "href": href,
