@@ -3515,6 +3515,11 @@ _TOO_ORDINARY = {
     # Said at Tesla's Roadster event, which joined the Musk archive on
     # 16 Oct 2026; the collision test caught it when the branch merged.
     'worm',
+    # Read out of titles the morning ingest added on 19 Oct 2026, and both
+    # said on the broadcast: $CLAW is ClawPump's own token, which Ansem's
+    # show talks about, and "stonk broker" is a thing people say.
+    'claw',
+    'stonkbroker',
     # Tickers read out of the newer titles on 16 Oct 2026 (see
     # _mcg_projects). These are said on the broadcast or in the Musk
     # interviews, which the transcript check below would catch anyway:

@@ -250,6 +250,18 @@ def test_rasmr_has_his_own_prompt_and_host_rule():
     assert "—" not in podcast.RASMR_SYSTEM_PROMPT.split("Rules:")[0]
 
 
+def test_the_prompt_carries_the_two_slips_the_launch_battery_found():
+    """19 Oct 2026, against the live index: the bot credited rasmr with
+    "2.8 million on the trade" (a friend's PnL read off screen two lines
+    before his), and the site dated a 2025-07-27 interview "July 2027".
+    Both are now worked cases in the prompt rather than rules in the
+    abstract, the way the ThreadGuy prompt carries its own."""
+    prompt = podcast.RASMR_SYSTEM_PROMPT
+    assert "2.8 mil" in prompt and "his only if he plainly says it is" in prompt
+    assert "`aired` attribute" in prompt and "July 2027" in prompt
+    assert "—" not in prompt and "–" not in prompt
+
+
 def test_a_question_about_his_view_is_answered_from_his_own_streams():
     """The ThreadGuy lesson, for rasmr: a guest's line is not the host's."""
     hits = [hit("LIVE: I Sold All My HYPE | Ansem Is Candling", 1),
