@@ -289,3 +289,61 @@ def test_an_index_that_never_answers_still_fails_loudly(monkeypatch):
     monkeypatch.setattr(build_term_index.time, "sleep", lambda s: None)
     with pytest.raises(ConnectionError):
         build_term_index._fetch(DropsOnce(failures=99), ["a"], "mcg")
+
+
+# --- the loop variable that ate the function --------------------------------
+#
+# bec118d (19 Oct 2026) made vector_id a module function so the local cache
+# and the index name a passage the same way, and used it in
+# _add_exact_matches, whose two loops already had a variable of that name.
+# Python made the name local to the whole method, so every question with a
+# rare word, on every archive, was a 500 for forty minutes: 'str' object is
+# not callable. The tests above passed empty hits, and the comprehension
+# that calls it never ran.
+
+class _Record:
+    def __init__(self, md):
+        self.metadata = md
+
+
+class _Fetched:
+    def __init__(self, vectors):
+        self.vectors = vectors
+
+
+class _FakeIndex:
+    def __init__(self, records):
+        self.records = records
+        self.asked = []
+
+    def fetch(self, ids, namespace):
+        self.asked.append(list(ids))
+        return _Fetched({i: self.records[i] for i in ids if i in self.records})
+
+
+def test_a_rare_word_is_merged_when_there_are_already_hits(tmp_path):
+    import asyncio
+
+    index = PodcastIndex.__new__(PodcastIndex)
+    index._terms = _index(tmp_path, {"s1": [0, 1]})
+    index._namespace = "podcast"
+
+    class S:
+        pinecone_read_timeout_seconds = 5
+    index._settings = S()
+    index._index = _FakeIndex({
+        "id0": _Record({"episode_id": "e", "title": "Anthropic S-1 is UHHH",
+                        "start_seconds": 20.0, "platform": "youtube",
+                        "url": "https://www.youtube.com/watch?v=e",
+                        "text": "the S1 leaked"}),
+        "id1": _Record({"episode_id": "e", "title": "Anthropic S-1 is UHHH",
+                        "start_seconds": 30.0, "platform": "youtube",
+                        "url": "https://www.youtube.com/watch?v=e",
+                        "text": "S1 again"}),
+    })
+    chosen = [_hit(10, "Malcolm, you think I wasn't going to notice?")]
+    merged = asyncio.run(index._add_exact_matches(
+        "what did he say about the anthropic s-1", chosen))
+    assert merged[0] is chosen[0], "the reranker's pick keeps the front"
+    assert [h.start_seconds for h in merged[1:]] == [20.0, 30.0]
+    assert index._index.asked == [["id0", "id1"]]

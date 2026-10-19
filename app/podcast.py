@@ -1661,10 +1661,10 @@ class PodcastIndex:
             ids = list(self._terms.lookup(query))
             seen = set(ids)
             for spelling in names.expand(query):
-                for vector_id in self._terms.lookup(spelling):
-                    if vector_id not in seen:
-                        seen.add(vector_id)
-                        ids.append(vector_id)
+                for vid in self._terms.lookup(spelling):
+                    if vid not in seen:
+                        seen.add(vid)
+                        ids.append(vid)
             ids = ids[:_EXACT_MATCH_CAP]
         except Exception as exc:                              # noqa: BLE001
             logger.warning("exact-match lookup failed (%s) — continuing with "
@@ -1695,8 +1695,8 @@ class PodcastIndex:
         added = 0
         # In the term index's order, which is its ranking. A fetch hands
         # records back keyed by id, in no particular order.
-        for vector_id in wanted:
-            record = records.get(vector_id)
+        for vid in wanted:
+            record = records.get(vid)
             md = getattr(record, "metadata", None) or {}
             if not md.get("text"):
                 continue
