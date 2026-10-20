@@ -4,8 +4,8 @@
    "symbol": "BTC",
    "name": "Bitcoin",
    "asset_class": "crypto",
-   "mentions": 2672,
-   "analysis": 1525,
+   "mentions": 2673,
+   "analysis": 1526,
    "moments": [
     {
      "episode_id": "-A0rmPYG0s0",
@@ -2832,6 +2832,15 @@
      "deep_link": "https://www.youtube.com/watch?v=5RnTRZiTekM&t=1071s",
      "kind": "analysis",
      "note": "Discussed as an asset that people borrow against using DeFi protocols to avoid selling and triggering capital gains taxes."
+    },
+    {
+     "episode_id": "5Rqmhqgd0dU",
+     "episode_title": "how i\u2019m trading the crypto market (positioning update)",
+     "start_seconds": 552.0,
+     "timestamp": "9:12",
+     "deep_link": "https://www.youtube.com/watch?v=5Rqmhqgd0dU&t=552s",
+     "kind": "analysis",
+     "note": "Bitcoin is trading at $83,615; speaker discusses its price action on bad news and its potential to go higher."
     },
     {
      "episode_id": "5e9dedNGgVY",
@@ -24056,7 +24065,7 @@
      "note": "Named in passing when speaker says 'before we even talk about anything with btc we got to get out of here' and mentions needing to 'get out of 73'."
     }
    ],
-   "episode_count": 511,
+   "episode_count": 512,
    "single_reference": false
   },
   {
@@ -34721,7 +34730,7 @@
    "symbol": "HYPE",
    "name": "Hyperliquid",
    "asset_class": "crypto",
-   "mentions": 744,
+   "mentions": 745,
    "analysis": 484,
    "moments": [
     {
@@ -35416,6 +35425,15 @@
      "deep_link": "https://www.youtube.com/watch?v=5RnTRZiTekM&t=1345s",
      "kind": "analysis",
      "note": "Speaker explained that even though Hyperliquid is geoblocked in the U.S., users in the U.S. who trade on it are still required to declare and pay taxes on those transactions."
+    },
+    {
+     "episode_id": "5Rqmhqgd0dU",
+     "episode_title": "how i\u2019m trading the crypto market (positioning update)",
+     "start_seconds": 460.0,
+     "timestamp": "7:40",
+     "deep_link": "https://www.youtube.com/watch?v=5Rqmhqgd0dU&t=460s",
+     "kind": "mention",
+     "note": "Down 20%."
     },
     {
      "episode_id": "5e9dedNGgVY",
@@ -41421,15 +41439,15 @@
      "note": "Speaker references going to hyperliquid and questions whether there is much volume there."
     }
    ],
-   "episode_count": 313,
+   "episode_count": 314,
    "single_reference": false
   },
   {
    "symbol": "ZEC",
    "name": "Zcash",
    "asset_class": "crypto",
-   "mentions": 851,
-   "analysis": 479,
+   "mentions": 852,
+   "analysis": 480,
    "moments": [
     {
      "episode_id": "-IboaV4KXK8",
@@ -42159,6 +42177,15 @@
      "deep_link": "https://www.youtube.com/watch?v=5RnTRZiTekM&t=1330s",
      "kind": "mention",
      "note": "Chat asked whether using Zcash affects tax obligations; speaker suggested having another person on to discuss it."
+    },
+    {
+     "episode_id": "5Rqmhqgd0dU",
+     "episode_title": "how i\u2019m trading the crypto market (positioning update)",
+     "start_seconds": 88.0,
+     "timestamp": "1:28",
+     "deep_link": "https://www.youtube.com/watch?v=5Rqmhqgd0dU&t=88s",
+     "kind": "analysis",
+     "note": "Speaker describes making an identical trade twice on Zcash ('pump into Zach'), selling what they thought was the peak which is now lower, and reflects on buying an irresponsibly large amount for this position."
     },
     {
      "episode_id": "5e9dedNGgVY",
@@ -49091,14 +49118,14 @@
      "note": "Speaker closed a Zcash trade for a million dollars, closed around half of the position and described it as a sick trade."
     }
    ],
-   "episode_count": 269,
+   "episode_count": 270,
    "single_reference": false
   },
   {
    "symbol": "ETH",
    "name": "Ethereum",
    "asset_class": "crypto",
-   "mentions": 973,
+   "mentions": 974,
    "analysis": 447,
    "moments": [
     {
@@ -50108,6 +50135,15 @@
      "deep_link": "https://www.youtube.com/watch?v=5RnTRZiTekM&t=1107s",
      "kind": "analysis",
      "note": "Mentioned alongside Bitcoin as an asset people on Coinbase borrow against while holding to avoid selling."
+    },
+    {
+     "episode_id": "5Rqmhqgd0dU",
+     "episode_title": "how i\u2019m trading the crypto market (positioning update)",
+     "start_seconds": 522.0,
+     "timestamp": "8:42",
+     "deep_link": "https://www.youtube.com/watch?v=5Rqmhqgd0dU&t=522s",
+     "kind": "mention",
+     "note": "Listed as one of the core five good altcoins in the speaker's bull thesis."
     },
     {
      "episode_id": "5e9dedNGgVY",
@@ -57859,7 +57895,7 @@
      "note": "Referenced alongside Bitcoin as comparison for altcoin behavior."
     }
    ],
-   "episode_count": 379,
+   "episode_count": 380,
    "single_reference": false
   },
   {
@@ -118916,7 +118952,7 @@
    "symbol": "NEAR",
    "name": "Near",
    "asset_class": "crypto",
-   "mentions": 110,
+   "mentions": 111,
    "analysis": 44,
    "moments": [
     {
@@ -119053,6 +119089,15 @@
      "deep_link": "https://www.youtube.com/watch?v=5B1GLunfd7E&t=10338s",
      "kind": "mention",
      "note": "Speaker states 'I like Near as well' alongside VVV."
+    },
+    {
+     "episode_id": "5Rqmhqgd0dU",
+     "episode_title": "how i\u2019m trading the crypto market (positioning update)",
+     "start_seconds": 454.0,
+     "timestamp": "7:34",
+     "deep_link": "https://www.youtube.com/watch?v=5Rqmhqgd0dU&t=454s",
+     "kind": "mention",
+     "note": "Down 20%, traded as much as 30% down."
     },
     {
      "episode_id": "5pHRLKS-UqA",
@@ -119910,7 +119955,7 @@
      "note": "Near mentioned alongside Uniswap as a larger-cap token that funds prefer to size into."
     }
    ],
-   "episode_count": 56,
+   "episode_count": 57,
    "single_reference": false
   },
   {
@@ -194102,6 +194147,35 @@
    "single_reference": false
   },
   {
+   "symbol": "ZEX",
+   "name": "Zex",
+   "asset_class": "crypto",
+   "mentions": 2,
+   "analysis": 1,
+   "moments": [
+    {
+     "episode_id": "5Rqmhqgd0dU",
+     "episode_title": "how i\u2019m trading the crypto market (positioning update)",
+     "start_seconds": 449.0,
+     "timestamp": "7:29",
+     "deep_link": "https://www.youtube.com/watch?v=5Rqmhqgd0dU&t=449s",
+     "kind": "mention",
+     "note": "Down 30% off the highs."
+    },
+    {
+     "episode_id": "yFo1Ix03LXc",
+     "episode_title": "God gave me one chance to make $1M and I failed",
+     "start_seconds": 125.0,
+     "timestamp": "2:05",
+     "deep_link": "https://www.youtube.com/watch?v=yFo1Ix03LXc&t=125s",
+     "kind": "analysis",
+     "note": "Speaker bought $500K into Zex spot after a big win, then bought an equivalent amount on leverage, which they acknowledged as oversizing."
+    }
+   ],
+   "episode_count": 2,
+   "single_reference": false
+  },
+  {
    "symbol": "MOO",
    "name": "MOO",
    "asset_class": "crypto",
@@ -206459,26 +206533,6 @@
      "deep_link": "https://www.youtube.com/watch?v=xyvr_WlgnSw&t=8727s",
      "kind": "analysis",
      "note": "An online grocery pioneer once valued over $1 billion that shut down in 2001 after expanding too aggressively and losing hundreds of millions."
-    }
-   ],
-   "episode_count": 1,
-   "single_reference": true
-  },
-  {
-   "symbol": "ZEX",
-   "name": "Zex",
-   "asset_class": "crypto",
-   "mentions": 1,
-   "analysis": 1,
-   "moments": [
-    {
-     "episode_id": "yFo1Ix03LXc",
-     "episode_title": "God gave me one chance to make $1M and I failed",
-     "start_seconds": 125.0,
-     "timestamp": "2:05",
-     "deep_link": "https://www.youtube.com/watch?v=yFo1Ix03LXc&t=125s",
-     "kind": "analysis",
-     "note": "Speaker bought $500K into Zex spot after a big win, then bought an equivalent amount on leverage, which they acknowledged as oversizing."
     }
    ],
    "episode_count": 1,
@@ -220309,10 +220363,10 @@
    "single_reference": true
   }
  ],
- "total_hits": 22242,
- "dropped_low_confidence": 1702,
+ "total_hits": 22248,
+ "dropped_low_confidence": 1703,
  "dropped_not_an_asset": 1345,
- "episodes_processed": 627,
+ "episodes_processed": 628,
  "episode_ids": [
   "-A0rmPYG0s0",
   "-CYcuGbAnpI",
@@ -220392,6 +220446,7 @@
   "5InXzZkSEgE",
   "5QkyJBuPdeA",
   "5RnTRZiTekM",
+  "5Rqmhqgd0dU",
   "5Zp2xP7yzBU",
   "5e9dedNGgVY",
   "5lzRV4uVDcM",
