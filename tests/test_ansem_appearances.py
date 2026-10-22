@@ -161,3 +161,13 @@ def test_a_question_naming_ansem_searches_every_appearance(monkeypatch):
 def test_a_question_naming_banks_is_filtered_as_before(monkeypatch):
     flt = _first_filter(monkeypatch, "what did banks say about hyperliquid")
     assert flt == {"speakers": {"$in": ["FaZe Banks"]}}
+
+
+
+def test_the_summary_of_an_appearance_is_told_what_show_it_is():
+    """Talking Tokens came back as an Ansem and Banks episode before this."""
+    from app.summaries import _appearance_note
+    note = _appearance_note(appearance())
+    assert "not a Market Bubble episode" in note and "Unchained" in note
+    assert "FaZe Banks is not on it" in note
+    assert _appearance_note(appearance(show=None)) == ""

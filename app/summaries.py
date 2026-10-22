@@ -123,6 +123,23 @@ def _annotated_transcript(episode: Episode, max_chars: int = 350_000,
     return text
 
 
+def _appearance_note(episode: Episode) -> str:
+    """Said up front for Ansem's appearances on other shows.
+
+    The system prompt describes Market Bubble, and on 22 Oct 2026 the
+    Talking Tokens appearance came back as "this episode departs from the
+    usual Ansem/FaZe Banks format", with Banks written into a show he was
+    not on. Nothing is said for Market Bubble's own episodes."""
+    show = getattr(episode, "show", None)
+    if not show:
+        return ""
+    return (f"This is not a Market Bubble episode. It is Ansem appearing as "
+            f"a guest on {show}; the other voices are that show's hosts. "
+            f"FaZe Banks is not on it unless a line carries his name. Name "
+            f"a host only if the transcript names them, and give nobody a "
+            f"job title or affiliation the transcript does not state.\n\n")
+
+
 class SummaryStore:
     def __init__(self) -> None:
         settings = get_settings()
@@ -184,6 +201,7 @@ class SummaryStore:
                     "role": "user",
                     "content": (
                         f"Episode: {episode.title}\n\n"
+                        f"{_appearance_note(episode)}"
                         f"{_annotated_transcript(episode, speakers=speakers)}"
                     ),
                 }
