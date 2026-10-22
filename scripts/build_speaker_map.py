@@ -53,6 +53,15 @@ HOSTS = ["FaZe Banks", "Ansem"]
 # left unnamed, which is what this file does with every guest.
 ABSENT = {
     "x-2112232289178722440": {"FaZe Banks"},
+    # Ansem's appearances on other shows (22 Oct 2026): Banks is not on
+    # any of them except the Solana Ecosystem Call (PTWv24czW78), so a
+    # voice nearer his than Ansem's there is one of that show's hosts.
+    **{vid: {"FaZe Banks"} for vid in (
+        "HFuUgSvezlo", "GrKxZ5c_8n8", "KcazozbZHd0", "_iMQyqvGJB4",
+        "Ahs7FL2-ldE", "w1zFOeqaDJY", "xzVbNoHAbmQ", "4wxwrF1hc6k",
+        "wZmNg7rNBks", "OgeBT5eQQlk", "01-Tpg-ffkM", "jEy7cx7pKps",
+        "cadSZWoniV0", "jS5KF6j4-d4", "LMUKBkRVVhw", "q8XBOIFkbGI",
+        "9DLamauYUYc")},
 }
 
 

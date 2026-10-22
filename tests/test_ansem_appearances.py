@@ -109,3 +109,55 @@ def test_the_bot_sends_questions_about_his_appearances_to_this_archive():
               "@mbubbleSearch what did ansem tell taiki maeda about eth",
               "@mbubbleSearch what did ansem say on uponly"):
         assert corpus_for(q) == "podcast", q
+
+
+class _StopError(Exception):
+    pass
+
+
+def _first_filter(monkeypatch, question):
+    """The filter the first search sends, for this question."""
+    import app.podcast as podcast
+    from app.podcast import PodcastIndex
+    seen = []
+
+    async def fake_embed(*a, **k):
+        return [0.0, 1.0]
+
+    async def no_now(self, q):
+        return None
+    monkeypatch.setattr(podcast, "embed_query", fake_embed)
+    monkeypatch.setattr(PodcastIndex, "_about_now", no_now)
+
+    class Index:
+        def query(self, **kwargs):
+            seen.append(kwargs.get("filter"))
+            raise _StopError
+
+    class S:
+        rerank_candidates = 50
+        rerank_model = None
+        voyage_model = "v"
+        embedding_dimension = 2
+        pinecone_read_timeout_seconds = 5
+        retrieval_min_score = 0.0
+    index = PodcastIndex.__new__(PodcastIndex)
+    index._settings, index._voyage, index._namespace = S(), None, "podcast"
+    index._index = Index()
+    try:
+        asyncio.run(index._retrieve(question, 5))
+    except _StopError:
+        pass
+    return seen[0]
+
+
+def test_a_question_naming_ansem_searches_every_appearance(monkeypatch):
+    """Five appearances carry no voice labels at all; they still count."""
+    flt = _first_filter(monkeypatch, "what did ansem say on unchained about memecoins")
+    assert flt == {"$or": [{"speakers": {"$in": ["Ansem"]}},
+                           {"show": {"$exists": True}}]}
+
+
+def test_a_question_naming_banks_is_filtered_as_before(monkeypatch):
+    flt = _first_filter(monkeypatch, "what did banks say about hyperliquid")
+    assert flt == {"speakers": {"$in": ["FaZe Banks"]}}

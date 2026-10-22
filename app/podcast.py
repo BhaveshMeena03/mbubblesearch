@@ -66,6 +66,10 @@ _HOSTS_IN_QUESTION = (
 )
 
 
+# Whose appearances on other shows this archive holds (Episode.show).
+GUEST_ON_EVERY_SHOW = "Ansem"
+
+
 def host_named_in(query: str) -> str | None:
     """The host a question is about, if it is about one.
 
@@ -1781,13 +1785,23 @@ class PodcastIndex:
                 "namespace": self._namespace,
                 "include_metadata": True,
             }
-            narrowed: dict = {}
+            clauses: list[dict] = []
             if restrict:
-                narrowed["speakers"] = {"$in": [restrict]}
+                said = {"speakers": {"$in": [restrict]}}
+                # Every appearance on another show is his, labelled or
+                # not. Five of the eighteen added on 22 Oct 2026 matched
+                # his voice too weakly to be labelled, and this filter
+                # hid them from every question that named him: "what did
+                # ansem say on unchained" answered that no such
+                # appearance existed.
+                if restrict == GUEST_ON_EVERY_SHOW:
+                    said = {"$or": [said, {"show": {"$exists": True}}]}
+                clauses.append(said)
             if only:
-                narrowed["episode_id"] = {"$in": list(only)}
-            if narrowed:
-                kwargs["filter"] = narrowed
+                clauses.append({"episode_id": {"$in": list(only)}})
+            if clauses:
+                kwargs["filter"] = (clauses[0] if len(clauses) == 1
+                                    else {"$and": clauses})
             return self.index.query(**kwargs)
 
         async def ask(restrict: str | None, only: tuple[str, ...] = (),

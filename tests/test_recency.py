@@ -114,20 +114,69 @@ class Database:
     def query(self, **kwargs):
         narrowed = kwargs.get("filter")
         self.filters.append(narrowed)
-        only = set((narrowed or {}).get("episode_id", {}).get("$in", []))
-        who = set((narrowed or {}).get("speakers", {}).get("$in", []))
         found = []
         for episode, score, speakers in self.passages:
-            if only and episode not in only:
-                continue
-            if who and not who & set(speakers):
-                continue
-            found.append(SimpleNamespace(score=score, metadata={
+            metadata = {
                 "episode_id": episode, "title": episode, "text": f"said in {episode}",
                 "start_seconds": 60.0, "url": f"https://youtu.be/{episode}",
                 "platform": "youtube", "speakers": list(speakers),
-                "published_at": "2026-01-01"}))
+                "published_at": "2026-01-01"}
+            if holds(narrowed, metadata):
+                found.append(SimpleNamespace(score=score, metadata=metadata))
         return SimpleNamespace(matches=found)
+
+
+def holds(flt, metadata) -> bool:
+    """Pinecone's filter language, the parts retrieval uses: fields with
+    $in / $exists / $eq, combined with $and and $or. A fake that read only
+    top-level keys passed every filter it did not understand."""
+    if not flt:
+        return True
+    for key, cond in flt.items():
+        if key == "$and":
+            ok = all(holds(c, metadata) for c in cond)
+        elif key == "$or":
+            ok = any(holds(c, metadata) for c in cond)
+        else:
+            value = metadata.get(key)
+            if "$in" in cond:
+                values = value if isinstance(value, list) else [value]
+                ok = bool(set(values) & set(cond["$in"]))
+            elif "$exists" in cond:
+                ok = (key in metadata) == cond["$exists"]
+            elif "$eq" in cond:
+                ok = value == cond["$eq"]
+            else:
+                raise NotImplementedError(cond)
+        if not ok:
+            return False
+    return True
+
+
+def _speakers_in(flt) -> list | None:
+    """Whose labelled passages a filter asks for, wherever it sits."""
+    if not flt:
+        return None
+    if "speakers" in flt:
+        return flt["speakers"].get("$in")
+    for part in flt.get("$and", []) + flt.get("$or", []):
+        found = _speakers_in(part)
+        if found is not None:
+            return found
+    return None
+
+
+def _episodes_in(flt) -> list | None:
+    """The recordings a filter is limited to, wherever it sits."""
+    if not flt:
+        return None
+    if "episode_id" in flt:
+        return flt["episode_id"].get("$in")
+    for part in flt.get("$and", []):
+        found = _episodes_in(part)
+        if found is not None:
+            return found
+    return None
 
 
 # The scores the real question got: the best of the newest show at 0.424
@@ -138,8 +187,7 @@ OLD_AND_NEW = [("may", 0.523, ["Ansem"]), ("june", 0.51, ["Ansem"]),
 
 def narrowed_to(index, *ids):
     """The searches that were limited to exactly these recordings."""
-    return [f for f in index._index.filters
-            if f and f.get("episode_id", {}).get("$in") == list(ids)]
+    return [f for f in index._index.filters if _episodes_in(f) == list(ids)]
 
 
 def index_over(passages, shelf=SHELF, monkeypatch=None):
@@ -210,8 +258,8 @@ async def test_a_named_host_and_this_week_are_both_asked_for(monkeypatch):
     index = index_over(passages, monkeypatch=monkeypatch)
     hits = await index._retrieve("what did ansem say this week", 6)
     judged, both = narrowed_to(index, "x-thursday", "friday-cut")
-    assert "speakers" not in judged
-    assert both["speakers"] == {"$in": ["Ansem"]}
+    assert _speakers_in(judged) is None
+    assert _speakers_in(both) == ["Ansem"]
     assert {h.episode_id for h in hits} == {"x-thursday"}
 
 
@@ -223,7 +271,7 @@ async def test_a_host_with_too_little_this_week_still_gets_this_week(monkeypatch
     hits = await index._retrieve("what did banks say this week", 6)
     assert {h.episode_id for h in hits} == {"x-thursday", "friday-cut"}
     asked = narrowed_to(index, "x-thursday", "friday-cut")
-    assert [("speakers" in f) for f in asked] == [False, True]
+    assert [(_speakers_in(f) is not None) for f in asked] == [False, True]
     assert _recent_note(hits)
 
 
@@ -265,7 +313,10 @@ async def test_an_archive_with_no_shelf_behaves_as_it_always_did(monkeypatch):
     index = index_over(OLD_AND_NEW, shelf=None, monkeypatch=monkeypatch)
     hits = await index._retrieve("what did ansem pick this week", 6)
     assert [h.episode_id for h in hits][:2] == ["may", "june"]
-    assert index._index.filters == [{"speakers": {"$in": ["Ansem"]}}]
+    # Labelled his, or one of his appearances on another show, which are
+    # all his whether or not his voice was matched (22 Oct 2026).
+    assert index._index.filters == [{"$or": [{"speakers": {"$in": ["Ansem"]}},
+                                             {"show": {"$exists": True}}]}]
 
 
 @pytest.mark.anyio

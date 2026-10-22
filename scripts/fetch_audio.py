@@ -41,6 +41,19 @@ def _bin(name: str) -> str:
     return str(local) if local.exists() else (shutil.which(name) or name)
 
 
+# YouTube answers some player clients and refuses others, and which ones
+# changes. On 22 Oct 2026 every one of 18 downloads here got "HTTP Error
+# 403: Forbidden" from the default client while the daily ingest, which
+# rotates clients, was pulling audio fine. Same order as that ingest:
+# tv_embedded is the one that worked that day.
+YOUTUBE_CLIENTS = ("tv_embedded", "", "web_embedded")
+
+
+def _clients_for(url: str) -> tuple[str, ...]:
+    """The player clients to try, in order. Only YouTube has them."""
+    return YOUTUBE_CLIENTS if ("youtube.com" in url or "youtu.be" in url) else ("",)
+
+
 def download(url: str, dest: Path) -> bool:
     """One episode's audio as 16 kHz mono mp3.
 
@@ -50,38 +63,47 @@ def download(url: str, dest: Path) -> bool:
     of video for a five-hour show. Whisper and every diarizer resample to
     16 kHz mono anyway, so the smallest rendition loses nothing.
     """
-    # Sixteen at once turns hours into minutes, and on some streams the
-    # fragments race each other: "No such file or directory:
-    # ...mp4.part-Frag68", reproducibly, on two of thirty-three episodes.
-    # Serial is slow and always works, so it is the retry rather than the
-    # default.
-    for fragments in ("16", "1"):
-        # Leftover fragment state makes the retry resume a download that no
-        # longer exists, and fail differently.
-        for stale in dest.parent.glob(f"{dest.name}.*"):
-            if stale.suffix != ".mp3":
-                stale.unlink(missing_ok=True)
-        try:
-            subprocess.run(
-                # --no-progress: the progress bar redraws thousands of times
-                # per download and wrote 3.6MB of carriage returns into the
-                # log of a single episode, burying the line that mattered.
-                [_bin("yt-dlp"), "--socket-timeout", "30", "--no-warnings",
-                 "--no-progress", "--concurrent-fragments", fragments,
-                 "-f", "worstaudio/worstvideo+bestaudio/worst",
-                 "--extract-audio", "--audio-format", "mp3",
-                 "--postprocessor-args", "ffmpeg:-ac 1 -ar 16000 -b:a 32k",
-                 "-o", str(dest.with_suffix(".%(ext)s")), url],
-                check=True, timeout=7200,
-            )
-        except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as exc:
-            if fragments == "16":
-                print(f"     {type(exc).__name__} — retrying one fragment "
-                      f"at a time")
-                continue
-            print(f"     failed: {type(exc).__name__}")
-            return False
-        return dest.with_suffix(".mp3").exists()
+    for client in _clients_for(url):
+        client_args = (["--extractor-args", f"youtube:player_client={client}"]
+                       if client else [])
+        # Sixteen at once turns hours into minutes, and on some streams the
+        # fragments race each other: "No such file or directory:
+        # ...mp4.part-Frag68", reproducibly, on two of thirty-three episodes.
+        # Serial is slow and always works, so it is the retry rather than the
+        # default.
+        for fragments in ("16", "1"):
+            # Leftover fragment state makes the retry resume a download that
+            # no longer exists, and fail differently.
+            for stale in dest.parent.glob(f"{dest.name}.*"):
+                if stale.suffix != ".mp3":
+                    stale.unlink(missing_ok=True)
+            try:
+                subprocess.run(
+                    # --no-progress: the progress bar redraws thousands of
+                    # times per download and wrote 3.6MB of carriage returns
+                    # into the log of a single episode, burying the line
+                    # that mattered.
+                    [_bin("yt-dlp"), "--socket-timeout", "30", "--no-warnings",
+                     "--no-progress", "--concurrent-fragments", fragments,
+                     *client_args,
+                     "-f", "worstaudio/worstvideo+bestaudio/worst",
+                     "--extract-audio", "--audio-format", "mp3",
+                     "--postprocessor-args", "ffmpeg:-ac 1 -ar 16000 -b:a 32k",
+                     "-o", str(dest.with_suffix(".%(ext)s")), url],
+                    check=True, timeout=7200,
+                )
+            except (subprocess.CalledProcessError,
+                    subprocess.TimeoutExpired) as exc:
+                if fragments == "16":
+                    print(f"     {type(exc).__name__} — retrying one fragment "
+                          f"at a time")
+                    continue
+                print(f"     failed with the {client or 'default'} client: "
+                      f"{type(exc).__name__}")
+                break
+            if dest.with_suffix(".mp3").exists():
+                return True
+            break
     return False
 
 

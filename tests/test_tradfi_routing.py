@@ -164,6 +164,13 @@ class TestTheWordsWereCountedFirst:
             pytest.skip("no broadcast transcripts in this checkout")
         uniq = {}
         for row in rows:
+            # Market Bubble's own episodes. Ansem's appearances on other
+            # shows (`show` set, 22 Oct 2026) sit in this archive too, but
+            # they are not the show this guards, and a question reaches
+            # them by naming him, which is matched before this pattern.
+            # "blackrock" is 8 lines in the show and 10 in those.
+            if row.get("show"):
+                continue
             uniq.setdefault(row["episode_id"], row)
         terms = ["larry fink", "fink", "blackrock", "ibit",
                  "ray dalio", "dalio", "schwarzman", "milken", "davos"]
