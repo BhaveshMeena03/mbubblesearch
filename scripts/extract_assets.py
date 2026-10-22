@@ -287,7 +287,10 @@ async def main() -> None:
     # key that only the proxy accepts, and every window 401'd.
     client = AsyncAnthropic(**anthropic_client_kwargs(settings))
 
-    episodes = json.loads(EPISODES.read_text())
+    # Market Bubble's own episodes only: the appearances on other shows
+    # (`show` set) are searchable here but are not this dashboard's.
+    episodes = [e for e in json.loads(EPISODES.read_text())
+                if not e.get("show")]
     if not args.all:
         episodes = episodes[: args.episodes]
 

@@ -182,6 +182,26 @@ def published(video_id: str) -> str:
     return air_date(done.stdout or "")
 
 
+def still_processing(video_id: str) -> bool:
+    """Is YouTube still turning this finished live stream into a replay?
+
+    It reports "post_live" for a few hours to a day after a stream ends,
+    and in that window a download comes back as only the minutes already
+    processed while every client advertises the whole file. Measured on
+    22 Oct 2026: ThreadGuy's 146-minute market open listed 157 MB and gave
+    4 MB, and two streams before it did the same. The shortfall check
+    kept all three off the shelf, but only after downloading and
+    transcribing the fragment, and the run reported them as failures. A
+    stream in this state is left for the next run instead. Any answer
+    other than "post_live", or none, is not a reason to wait.
+    """
+    done = subprocess.run(
+        [YTDLP, "--no-warnings", *proxy_args(), "--print", "%(live_status)s",
+         f"https://www.youtube.com/watch?v={video_id}"],
+        capture_output=True, text=True, timeout=300)
+    return "post_live" in (done.stdout or "").split()
+
+
 def air_date(printed: str) -> str:
     """The first real YYYYMMDD in "release upload", as YYYY-MM-DD."""
     for raw in printed.split():
@@ -569,6 +589,9 @@ async def main() -> int:
     # drop whichever row lost, and a lost row is an episode that is in
     # the index but that nothing will ever list.
     def prepare(item: dict) -> tuple[dict, list[dict], str]:
+        if still_processing(item["id"]):
+            raise RuntimeError("still being processed on YouTube "
+                               "(post_live); the next run picks it up")
         audio = fetch_audio(item["id"])
         print(f"     {item['id']}: {audio.stat().st_size // 1_000_000} MB, "
               f"transcribing…", flush=True)

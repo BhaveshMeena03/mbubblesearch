@@ -109,6 +109,11 @@ class Episode(BaseModel):
     platform: Literal["youtube", "spotify", "other"] = "youtube"
     published_at: str | None = None
     segments: list[TranscriptSegment]
+    # Set for Ansem's appearances on other shows ("Unchained", "Empire"),
+    # which sit in this archive as their own sub-category. None is Market
+    # Bubble itself. They are counted, listed and token-mined apart from
+    # the show, so "24 episodes" stays a statement about Market Bubble.
+    show: str | None = None
 
 
 class PodcastHit(BaseModel):

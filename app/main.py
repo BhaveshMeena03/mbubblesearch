@@ -833,7 +833,9 @@ async def _archive_sizes(request: Request) -> dict | None:
     except Exception as exc:                                    # noqa: BLE001
         logger.warning("could not size the archives: %s", exc)
         return held[1] if held else None
-    by = {"podcast": {"count": show["shows"], "hours": show["hours"]}}
+    by = {"podcast": {"count": show["shows"] + show.get("appearances", 0),
+                      "appearances": show.get("appearances", 0),
+                      "hours": show["hours"]}}
     for name, a in counted.items():
         by[name] = {"count": a.get("episodes", a.get("recordings")),
                     "hours": a["hours"],
@@ -2465,7 +2467,12 @@ async def podcast_archive(
                 seconds += max((s.get("t", 0)
                                 for s in episode.get("segments") or []),
                                default=0)
-        return {"shows": len(rows), "hours": round(seconds / 3600)}
+        # Ansem's appearances on other shows are in this archive but are
+        # not Market Bubble episodes, so they are counted on their own.
+        # The hours are everything the answers can quote.
+        guest = sum(1 for r in rows if r.get("show"))
+        return {"shows": len(rows) - guest, "appearances": guest,
+                "hours": round(seconds / 3600)}
     except Exception as exc:                                    # noqa: BLE001
         # The page keeps the figures already written into the markup.
         logger.warning("could not size the archive: %s", exc)

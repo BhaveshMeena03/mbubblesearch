@@ -5,6 +5,7 @@ which from outside is indistinguishable from an archive already up to date.
 """
 import json
 import subprocess
+from pathlib import Path
 
 import pytest
 
@@ -259,3 +260,22 @@ def test_a_video_already_indexed_from_elsewhere_is_not_pending(monkeypatch, tmp_
         {"id": "BrandNew001", "duration": 7000},
         {"id": "AShortClip1", "duration": 60}])
     assert [t["id"] for t in ingest_mcg.pending(20)] == ["BrandNew001"]
+
+
+
+@pytest.mark.parametrize("printed, waiting", [
+    ("post_live\n", True), ("was_live\n", False), ("not_live\n", False),
+    ("", False), ("NA\n", False)])
+def test_a_replay_youtube_is_still_processing_is_left_for_later(
+        monkeypatch, printed, waiting):
+    """22 Oct 2026: three streams in two days downloaded as their first
+    few minutes while YouTube still called them post_live."""
+    monkeypatch.setattr(ingest_mcg.subprocess, "run",
+                        lambda cmd, **kw: subprocess.CompletedProcess(cmd, 0, printed, ""))
+    assert ingest_mcg.still_processing("mhlj7R97I8w") is waiting
+
+
+def test_the_check_runs_before_anything_is_downloaded():
+    src = Path(ingest_mcg.__file__).read_text()
+    body = src[src.index("def prepare(item: dict)"):]
+    assert body.index("still_processing(") < body.index("fetch_audio(")

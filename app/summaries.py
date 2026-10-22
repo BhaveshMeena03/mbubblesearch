@@ -226,6 +226,8 @@ class SummaryStore:
         }
         if episode.published_at:
             metadata["published_at"] = episode.published_at
+        if getattr(episode, "show", None):
+            metadata["show"] = episode.show
 
         def _upsert() -> None:
             self.index.upsert(

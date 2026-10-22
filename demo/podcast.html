@@ -339,6 +339,7 @@
   .eps{margin-top:44px;scroll-margin-top:24px}
   .eps h2{font-size:18px;margin-bottom:4px}
   .eps .sub2{color:var(--muted);font-size:13px;margin-bottom:16px}
+  .eps .eps-guest-h{margin-top:32px}
   details.epcard{background:var(--panel);border:1px solid var(--line);
     border-radius:12px;margin-bottom:10px;overflow:hidden}
   details.epcard summary{cursor:pointer;padding:14px 16px;font-weight:600;
@@ -622,6 +623,12 @@
     <p class="sub2">Every episode condensed to a 2-minute read, with
     timestamps. Click to expand.</p>
     <div id="eps-list"></div>
+    <div id="eps-guest" hidden>
+      <h2 class="eps-guest-h">Ansem on other shows</h2>
+      <p class="sub2">His long interviews elsewhere, searchable with the
+      rest. Answers name the show they came from.</p>
+      <div id="eps-guest-list"></div>
+    </div>
   </div>
 
   <!-- These were two bright buttons directly above the search box,
@@ -797,6 +804,9 @@
         if(!el) return;
         el.textContent = "Searchable archive \u00b7 " + a.shows
           + (a.shows === 1 ? " episode" : " episodes")
+          + (a.appearances ? " \u00b7 " + a.appearances
+             + (a.appearances === 1 ? " appearance" : " appearances")
+             + " elsewhere" : "")
           + (a.hours ? " \u00b7 " + a.hours + " hours" : "");
       })
       .catch(function(){ /* the line in the markup stands */ });
@@ -806,6 +816,9 @@
       .then(function(eps){
         if(!eps.length) return;
         var wrap=document.getElementById("eps-list");
+        // Ansem's appearances on other shows get their own list, under
+        // their own heading, so the episode list stays Market Bubble's.
+        var guest=document.getElementById("eps-guest-list");
         eps.forEach(function(ep){
           var d=document.createElement("details");
           d.className="epcard";
@@ -823,7 +836,12 @@
             'target="_blank" rel="noopener">'
             + (live ? 'Watch the full broadcast on X →'
                     : 'Watch the full episode →') + '</a></div>';
-          wrap.appendChild(d);
+          if (ep.show && guest) {
+            guest.appendChild(d);
+            document.getElementById("eps-guest").hidden=false;
+          } else {
+            wrap.appendChild(d);
+          }
         });
         document.getElementById("eps").hidden=false;
         // The nav link is dead until this section exists, so it only

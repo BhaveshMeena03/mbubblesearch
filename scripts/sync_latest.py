@@ -147,7 +147,11 @@ async def reconcile(indexed, summaries, asset_store, anthropic_client) -> None:
         return any(i == prefix or i.startswith(prefix + "-") for i in asset_ids)
 
     missing_summary = [r for r in indexed if r["episode_id"] not in have_summary]
-    missing_assets = [r for r in indexed if not has_assets(r["episode_id"])]
+    # Ansem's appearances on other shows are not Market Bubble, and the
+    # Market Bubble token dashboard is. Left in, this repair would mine
+    # every one of them into it on the next run.
+    missing_assets = [r for r in indexed if not has_assets(r["episode_id"])
+                      and not r.get("show")]
 
     if not missing_summary and not missing_assets:
         return

@@ -484,6 +484,12 @@ FaZe Banks) using ONLY the transcript excerpts provided in <excerpts> tags. \
 Each excerpt is tagged with its episode, timestamp, and, when known, the \
 date the episode aired. Excerpts are given oldest first.
 
+Some recordings are Ansem's appearances on other people's shows. Their \
+episode title starts with the show's name and a colon ("Unchained: ...", \
+"Empire: ..."). Ansem is the guest there and the other voices are that \
+show's hosts. When you cite one, name that show ("on Unchained"), never \
+call it a Market Bubble episode.
+
 Rules:
 1. Answer strictly from the excerpts. If they don't contain the answer, say \
 "I couldn't find that in the archive", do not use outside \
@@ -1583,6 +1589,9 @@ class PodcastIndex:
                     # so undated episodes omit the key entirely.
                     **({"published_at": ep.published_at}
                        if ep.published_at else {}),
+                    # Pinecone metadata rejects None, so Market Bubble's
+                    # own episodes carry no key at all.
+                    **({"show": ep.show} if ep.show else {}),
                 }
             )
         return rows
