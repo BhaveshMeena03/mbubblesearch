@@ -89,6 +89,29 @@ def stamped_with_speakers(episode: Episode, speakers: dict[str, str],
     return "\n".join(lines), present
 
 
+def passage_updates(episode: Episode, speakers: dict[str, str],
+                    chunk_max_chars: int) -> list[tuple[str, str, list[str]]]:
+    """(vector id, text_ts, names) for every passage of one episode.
+
+    Passages with no name are included. Leaving them out was harmless
+    while labels were only ever added, and wrong the first time one was
+    taken away: on the TOKEN2049 talk (19 Oct 2026) two passages lost
+    every label once Banks was shown not to be on stage, were skipped as
+    unnamed, and kept "FaZe Banks:" on lines a guest said.
+    """
+    out = []
+    windows = list(_windows(episode.segments, chunk_max_chars,
+                            overlap_segments=2))
+    for n, (start_t, _text, _stamped) in enumerate(windows):
+        end_t = windows[n + 1][0] if n + 1 < len(windows) else float("inf")
+        text_ts, present = stamped_with_speakers(episode, speakers,
+                                                 start_t, end_t)
+        if text_ts:
+            out.append((vector_id(episode.episode_id, start_t), text_ts,
+                        present))
+    return out
+
+
 async def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true",
@@ -134,25 +157,14 @@ async def main() -> int:
 
     for episode_id in todo:
         episode = Episode(**episodes[episode_id])
-        speakers = mapping[episode_id]
-        windows = list(_windows(episode.segments,
-                                settings.chunk_max_chars, overlap_segments=2))
-        for n, (start_t, _text, _stamped) in enumerate(windows):
-            end_t = (windows[n + 1][0] if n + 1 < len(windows)
-                     else float("inf"))
-            text_ts, present = stamped_with_speakers(
-                episode, speakers, start_t, end_t)
-            if not text_ts:
-                continue
-            if present:
-                named += 1
-                updates.append((vector_id(episode_id, start_t),
-                                text_ts, present))
-            else:
-                plain += 1
+        for vid, text_ts, present in passage_updates(
+                episode, mapping[episode_id], settings.chunk_max_chars):
+            named += bool(present)
+            plain += not present
+            updates.append((vid, text_ts, present))
 
-    print(f"\n  {len(todo)} episodes · {named} passages gain a speaker · "
-          f"{plain} have none and are left alone")
+    print(f"\n  {len(todo)} episodes · {named} passages carry a speaker · "
+          f"{plain} carry none")
     if updates:
         _, sample, who = updates[0]
         print(f"\n  sample ({', '.join(who)}):")

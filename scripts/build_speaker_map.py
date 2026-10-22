@@ -45,6 +45,21 @@ OUT = ROOT / "data" / "speaker_map.json"
 # Identified by ear, 2026-08-28, from stitched cluster-only clips.
 HOSTS = ["FaZe Banks", "Ansem"]
 
+# Episodes a host is known, from the picture, not to be in. A guest whose
+# voice sits closer to the missing host than to anyone else would
+# otherwise be written down as him: on the TOKEN2049 stage (19 Oct 2026,
+# Ansem with Mayne and Avi Felman, checked on nine frames) 33 of the
+# guests' lines came out as Banks, who was not there. Those lines are
+# left unnamed, which is what this file does with every guest.
+ABSENT = {
+    "x-2112232289178722440": {"FaZe Banks"},
+}
+
+
+def may_name(episode_id: str, name: str) -> bool:
+    """False when the picture says this host was not in this episode."""
+    return name not in ABSENT.get(episode_id, ())
+
 # One line whose speaker is known by ear, used to decide which of the two
 # recurring voices is which. The names used to follow rank: whichever
 # voice recurred in more episodes was Banks. Both hosts are in every show,
@@ -251,6 +266,8 @@ def main() -> int:
             best, runner = float(scores[order[0]]), float(scores[order[1]])
             if best < MIN_SIMILARITY or best - runner < MIN_MARGIN:
                 continue                  # not confident enough to name
+            if not may_name(episode_id, names[order[0]]):
+                continue                  # the nearest host was not there
             rows[str(int(segment_index))] = names[order[0]]
         if rows:
             mapping[episode_id] = rows

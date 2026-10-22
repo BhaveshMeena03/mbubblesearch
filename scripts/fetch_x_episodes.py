@@ -104,8 +104,14 @@ def title_from(meta: dict) -> str:
     """
     raw = (meta.get("description") or meta.get("title") or "").strip()
     raw = re.sub(r"https?://\S+", "", raw)
+    # The chapter list starts at its first timestamp. Split there too:
+    # the description can come back with its line breaks flattened, and
+    # then the newline split below never sees one. The TOKEN2049 talk
+    # (19 Oct 2026) was titled "...in Singapore: 0:08 Why is everyone so
+    # bullish?" that way, its first chapter glued to the title.
+    raw = re.split(r"\s(?=\d{1,2}:\d{2}(?::\d{2})?\s)", raw.strip(), maxsplit=1)[0]
     first = re.split(r"(?:\n|(?<=[.!?])\s)", raw.strip(), maxsplit=1)[0].strip()
-    first = re.sub(r"\s+", " ", first)
+    first = re.sub(r"\s+", " ", first).rstrip(" :")
     if 8 <= len(first) <= 120:
         return first
     return (meta.get("uploader") or "Market Bubble") + " broadcast"
