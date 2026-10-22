@@ -32,8 +32,17 @@ def test_the_shipped_index_covers_the_queries_that_failed():
 
     for query in ("what did andre say",
                   "what did mayne n ansem talk about",
-                  "who made 54 million on the drop"):
+                  "who made 54 million on the drop",
+                  # Guests on their third title, lost to a two-title limit
+                  # until 22 Oct 2026.
+                  "what did mizkif say",
+                  "what did rasmr say about hype"):
         assert terms.lookup(query), query
+
+
+def test_a_word_in_three_titles_is_not_a_name_because_of_it():
+    """"sec" reached the name tier with the third title; it is "one sec"."""
+    assert not TermIndex().lookup("hold on one sec")
 
 
 def test_it_stays_out_of_the_way_of_questions_that_work():
@@ -347,3 +356,12 @@ def test_a_rare_word_is_merged_when_there_are_already_hits(tmp_path):
     assert merged[0] is chosen[0], "the reranker's pick keeps the front"
     assert [h.start_seconds for h in merged[1:]] == [20.0, 30.0]
     assert index._index.asked == [["id0", "id1"]]
+
+
+def test_only_market_bubble_gets_the_three_title_limit():
+    """Three titles is rare in 53 and common in 636: measured on 22 Oct
+    2026, ThreadGuy at three would have named "acquisition" and "5x"."""
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import build_term_index as b
+    assert b.NAME_TITLES == {"podcast": 3}
+    assert "sec" in b.NOT_NAMES

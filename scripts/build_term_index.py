@@ -109,6 +109,20 @@ def tokens(text: str) -> set[str]:
 # Market Bubble always was; the Musk and Record archives were read back out
 # of the index at 25 MB a rebuild until 19 Oct 2026, with the same file
 # sitting right here.
+# A title word counts as a name when it is in this many titles or fewer.
+# Two everywhere, except Market Bubble: it has 53 titles and guests come
+# back, and every one who came back a third time stopped being a name.
+# Mizkif and rasmr were lost that way unnoticed, and on 22 Oct 2026 the
+# TOKEN2049 talk was Mayne's third title and "what did mayne n ansem talk
+# about" found nothing. Not the other archives: in ThreadGuy's 636 titles
+# three is not rare, and the same limit there made names of
+# "acquisition", "crashes", "joins" and "5x", measured that day.
+NAME_TITLES = {"podcast": 3}
+# Title words that reach the name tier and are not anybody. "sec" is the
+# regulator in three titles and "one sec" all through the speech; the
+# second is most of its 237 windows.
+NOT_NAMES = frozenset({"sec"})
+
 LOCAL = {"podcast": ROOT / "data" / "episodes.json",
          "elon": ROOT / "data" / "elon_episodes.json",
          "tradfi": ROOT / "data" / "tradfi_episodes.json"}
@@ -307,7 +321,8 @@ def main() -> int:
     for title in {title for title, _ in docs}:
         for token in tokens(title) | phrases(title):
             title_df[token] += 1
-    names = {t for t, n in title_df.items() if n <= 2}
+    names = {t for t, n in title_df.items()
+             if n <= NAME_TITLES.get(args.archive, 2) and t not in NOT_NAMES}
 
     # Names get a higher ceiling, not an unlimited one. Measured across this
     # archive the two groups separate cleanly: guests sit at 104-193 windows
