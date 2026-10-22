@@ -96,3 +96,12 @@ def test_the_self_description_names_all_six_archives():
                         "Elon Musk", "The Record"):
             assert archive in text, (archive, text[:60])
         assert "\u2014" not in text and "The three" not in text
+
+
+def test_the_description_links_the_front_door_not_one_show():
+    from app.x_bot import _front_door, about_answer, automation_answer
+    for reply in (automation_answer("introduce yourself", "search.lexthedev.com"),
+                  about_answer("what is marketbubblesearch", "search.lexthedev.com")):
+        assert reply.rstrip().endswith("search.lexthedev.com/home"), reply[-40:]
+    assert _front_door("search.lexthedev.com/") == "search.lexthedev.com/home"
+    assert _front_door("example.com/somewhere") == "example.com/somewhere"

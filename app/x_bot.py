@@ -1193,6 +1193,16 @@ def automation_answer(question: str, site: str | None = None,
     return _automation_text(site, seed=seed)
 
 
+def _front_door(site: str) -> str:
+    """Where a description of the whole account should send people.
+
+    The site's root is the Market Bubble page. An introduction that names
+    six archives linked there, so the first thing anyone saw after it was
+    one show (22 Oct 2026). /home searches all six."""
+    site = (site or "").strip().rstrip("/")
+    return site if "/" in site else f"{site}/home"
+
+
 def _automation_text(site: str | None,
                      lead: str | None = "Yes, automated, and run by Lex.",
                      seed: str | None = None) -> str:
@@ -1214,7 +1224,7 @@ def _automation_text(site: str | None,
     body = _pick(_INTRO_PHRASINGS, seed or "")
     if lead:
         body = f"{lead}\n\n{body}"
-    return f"{body}\n\n{site}" if site else body
+    return f"{body}\n\n{_front_door(site)}" if site else body
 
 
 def about_answer(question: str, site: str | None = None) -> str | None:
@@ -1228,7 +1238,7 @@ def about_answer(question: str, site: str | None = None) -> str | None:
     if not found or not _is_the_whole_question(found, question):
         return None
     body = f"{_pick(_ABOUT_PHRASINGS, question)}\n\n{_ABOUT_ORIGIN}"
-    return f"{body}\n\n{site}" if site else body
+    return f"{body}\n\n{_front_door(site)}" if site else body
 
 
 # No @mention of the operator in any of these. X restricts mentioning
