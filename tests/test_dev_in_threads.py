@@ -73,3 +73,26 @@ def test_an_empty_setting_turns_it_off(caplog):
 def test_the_live_setting_names_his_account():
     from app.config import Settings
     assert Settings.model_fields["x_bot_dev_id"].default == DEV
+
+
+def test_asked_to_introduce_itself_in_his_reply_it_does():
+    """22 Oct 2026, under @AJMetaX1's post: silence, before this."""
+    b = bot()
+    b._contract_address = b._token_label = None
+    b._site = "search.lexthedev.com"
+    text = ("@AJMetaX1 @Kaiz_294 the archive grows everyday new episodes "
+            "indexed everyday  \u2764\ufe0f \U0001fae1 \n@mbubbleSearch introduce yourself")
+    m = mention(text, conversation="2113268083150516670",
+                mid="2113269674049958283", replied_to="2113268083150516670")
+    reply = asyncio.run(b.compose(m))
+    from app.x_bot import _INTRO_PHRASINGS
+    assert reply and any(v.split("\n")[0] in reply for v in _INTRO_PHRASINGS)
+
+
+def test_the_self_description_names_all_six_archives():
+    from app.x_bot import _ABOUT_PHRASINGS, _INTRO_PHRASINGS
+    for text in _INTRO_PHRASINGS + _ABOUT_PHRASINGS:
+        for archive in ("Market Bubble", "MCG Live", "ThreadGuy", "rasmr",
+                        "Elon Musk", "The Record"):
+            assert archive in text, (archive, text[:60])
+        assert "\u2014" not in text and "The three" not in text

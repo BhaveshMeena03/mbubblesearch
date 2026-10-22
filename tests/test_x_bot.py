@@ -3231,7 +3231,7 @@ def test_the_account_can_be_summoned_to_introduce_itself():
     # to a question, and an account that dodges that one has given away the
     # only thing it has.
     direct = automation_answer("are you a bot", "example.com")
-    assert direct.startswith("Yes — automated")
+    assert direct.startswith("Yes, automated")
 
 
 def test_a_summons_in_a_quote_tweet_still_counts():

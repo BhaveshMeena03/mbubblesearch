@@ -1194,7 +1194,7 @@ def automation_answer(question: str, site: str | None = None,
 
 
 def _automation_text(site: str | None,
-                     lead: str | None = "Yes — automated, and run by Lex.",
+                     lead: str | None = "Yes, automated, and run by Lex.",
                      seed: str | None = None) -> str:
     """The description, with or without the disclosure in front of it.
 
@@ -1235,30 +1235,30 @@ def about_answer(question: str, site: str | None = None) -> str | None:
 # accounts that are not already in the thread, and a reply that tags someone
 # uninvolved is the kind of thing the automation rules are written about.
 _ABOUT_PHRASINGS = (
-    "I'm a semantic search engine over the entire Market Bubble archive.\n\n"
-    "Ask in plain English — you don't need the exact words anyone used. "
-    "Every episode is transcribed and indexed by meaning, so \"why does "
+    "I'm a semantic search engine over six archives, starting with every "
+    "Market Bubble episode.\n\n"
+    "Ask in plain English. You don't need the exact words anyone used: "
+    "every recording is transcribed and indexed by meaning, so \"why does "
     "ansem think eth is done\" finds the moment even if nobody said it "
     "that way.\n\n"
     "You get the answer and the exact second it was said. The live "
     "broadcasts are in there alongside the uploads.\n\n"
-    "Two more archives sit alongside it: every long-form Elon Musk "
-    "interview, 2018 to 2025, and every MCG Live episode and live "
-    "stream. Name Elon "
-    "or say MCG and I'll answer from those instead.\n\n"
+    "The other five: MCG Live, ThreadGuy, rasmr, every long-form Elon "
+    "Musk interview from 2018 on, and The Record, with Larry Fink, CZ, "
+    "Kevin Warsh and more. Name one and I'll answer from it.\n\n"
     "I only answer from what was actually said. If it isn't in the "
     "archive I'll tell you so rather than guess.",
 
-    "Semantic search across every Market Bubble episode.\n\n"
-    "Not keyword matching — the transcripts are indexed by meaning, so you "
+    "Semantic search across every Market Bubble episode, and five more "
+    "archives beside it.\n\n"
+    "Not keyword matching: the transcripts are indexed by meaning, so you "
     "can ask the way you'd ask a person and it finds the moment even when "
     "the words don't line up.\n\n"
-    "Ask me anything from any episode and you get the answer plus the "
-    "timestamp it was said at. The live broadcasts are indexed too, not "
-    "just the uploads.\n\n"
-    "I also hold every long-form Elon Musk interview, 2018 to 2025, and "
-    "every MCG Live episode and live stream — name Elon or MCG and you "
-    "get those.\n\n"
+    "Ask me anything and you get the answer plus the timestamp it was "
+    "said at. The live broadcasts are indexed too, not just the "
+    "uploads.\n\n"
+    "I also hold MCG Live, ThreadGuy, rasmr, every long-form Elon Musk "
+    "interview from 2018 on, and The Record. Name one and you get it.\n\n"
     "Everything is grounded in the transcripts. No guessing.",
 
     "I've transcribed and indexed every Market Bubble episode, then made it "
@@ -1267,10 +1267,9 @@ _ABOUT_PHRASINGS = (
     "knowing which episode, and get back what he said and the second he "
     "said it.\n\n"
     "The live broadcasts are indexed as well as the uploads.\n\n"
-    "Elon Musk's long-form interviews are a separate archive I hold too, "
-    "2018 to 2025, and MCG Live is a third — every episode and live "
-    "stream. The three "
-    "never mix.\n\n"
+    "Five more archives sit beside it: MCG Live, ThreadGuy, rasmr, Elon "
+    "Musk's long-form interviews from 2018 on, and The Record. They never "
+    "mix.\n\n"
     "I answer only from the transcripts, and say so when something isn't "
     "in there.",
 )
@@ -1287,41 +1286,39 @@ _ABOUT_PHRASINGS = (
 # Each carries a different real example, so the introduction demonstrates
 # the thing instead of describing it.
 _INTRO_PHRASINGS = (
-    "I'm a search engine over the Market Bubble archive: tag me with a "
-    "question about anything said on the show and I answer from the "
-    "transcripts, with the timestamp it was said at. I hold two more "
-    "archives as well: every long-form Elon Musk interview, and every "
-    "MCG Live episode and live stream.\n\n"
-    "I only answer from what is actually in the episodes. If it is not "
+    "I'm a search engine over six archives: Market Bubble, MCG Live, "
+    "ThreadGuy, rasmr, Elon Musk's long-form interviews, and The Record, "
+    "which holds Larry Fink, CZ, Kevin Warsh and more. Tag me with a "
+    "question about anything said on them and I answer from the "
+    "transcripts, with the timestamp it was said at.\n\n"
+    "I only answer from what is actually in the recordings. If it is not "
     "in there, I say so.",
 
-    "Semantic search over every Market Bubble episode.\n\n"
-    "Ask in plain English — \"who was the guy who sold his entire ETH "
+    "Semantic search over every Market Bubble episode, and five more "
+    "archives beside it.\n\n"
+    "Ask in plain English: \"who was the guy who sold his entire ETH "
     "position\" finds David Hoffman at 27:09, without you needing to know "
     "his name.\n\n"
-    "Two more archives sit alongside it: every long-form Elon Musk "
-    "interview, and every MCG Live episode and live stream. Name Elon "
-    "or say MCG to "
-    "get those instead.\n\n"
+    "The others are MCG Live, ThreadGuy, rasmr, Elon Musk's interviews "
+    "and The Record. Name the show or the person to get that one "
+    "instead.\n\n"
     "I only answer from what was actually said.",
 
     "Every word of every Market Bubble episode, indexed by meaning.\n\n"
     "Ask \"what did banks say about hyperliquid\" and you get his own "
-    "line — \"basically full ported hyperliquid at $30\" — and the second "
+    "line, \"basically full ported hyperliquid at $30\", and the second "
     "he said it.\n\n"
-    "Elon Musk's long-form interviews are a second archive I hold, and "
-    "MCG Live is a third — every episode and live stream. Name one and "
-    "you get it.\n\n"
+    "MCG Live, ThreadGuy, rasmr, Elon Musk's interviews and The Record "
+    "are archives I hold too. Name one and you get it.\n\n"
     "If it isn't in the archive I'll say so rather than guess.",
 
-    "Tag me with a question about anything said on the show and you get "
-    "the answer, who said it, and the second it was said.\n\n"
-    "Ask \"who is michael catt\" and it is Banks who answers — \"our head "
-    "of production... he does 80 different jobs\" — because the hosts are "
+    "Tag me with a question about anything said on Market Bubble and you "
+    "get the answer, who said it, and the second it was said.\n\n"
+    "Ask \"who is michael catt\" and it is Banks who answers, \"our head "
+    "of production... he does 80 different jobs\", because the hosts are "
     "told apart by voice rather than guessed at.\n\n"
-    "I hold two more archives as well: every long-form Elon Musk "
-    "interview, and every MCG Live episode and live stream. The three "
-    "never mix.\n\n"
+    "I hold five more archives as well: MCG Live, ThreadGuy, rasmr, Elon "
+    "Musk's interviews and The Record. They never mix.\n\n"
     "Only what is in the transcripts. Nothing invented.",
 )
 
@@ -4405,10 +4402,19 @@ class MentionBot:
         # tagging the streamer and his friends. Whatever the words, a reply
         # of his is talking to someone else. A post he starts himself is
         # still answered, so a demo in public still works.
+        #
+        # One exception: asked to introduce itself, it does. On 22 Oct 2026
+        # he ended a reply under @AJMetaX1's post with "@mbubbleSearch
+        # introduce yourself" and got silence. That request is the one
+        # thing in his replies said to this account, and the answer is the
+        # fixed description, not a retrieved passage, so it cannot drag an
+        # unrelated quote into somebody's thread the way the 15 Oct
+        # replies did.
         dev = getattr(self, "_dev", "")
         if dev and str(getattr(mention, "author_id", "")) == dev and (
                 getattr(mention, "replied_to_id", "")
-                or str(mention.conversation_id or mention.id) != str(mention.id)):
+                or str(mention.conversation_id or mention.id) != str(mention.id)
+        ) and not summons(mention.text):
             logger.info("%s is the dev replying in a thread; staying quiet",
                         mention.id)
             return None
