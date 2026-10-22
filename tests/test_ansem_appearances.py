@@ -171,3 +171,10 @@ def test_the_summary_of_an_appearance_is_told_what_show_it_is():
     assert "not a Market Bubble episode" in note and "Unchained" in note
     assert "FaZe Banks is not on it" in note
     assert _appearance_note(appearance(show=None)) == ""
+
+
+
+def test_a_link_to_the_appearances_opens_on_them():
+    """The section renders after load, so the anchor alone went nowhere."""
+    page = (ROOT / "demo" / "podcast.html").read_text()
+    assert 'want === "ansem"' in page and 'scrollIntoView' in page

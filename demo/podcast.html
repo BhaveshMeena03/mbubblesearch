@@ -340,6 +340,7 @@
   .eps h2{font-size:18px;margin-bottom:4px}
   .eps .sub2{color:var(--muted);font-size:13px;margin-bottom:16px}
   .eps .eps-guest-h{margin-top:32px}
+  #eps-guest{scroll-margin-top:24px}
   details.epcard{background:var(--panel);border:1px solid var(--line);
     border-radius:12px;margin-bottom:10px;overflow:hidden}
   details.epcard summary{cursor:pointer;padding:14px 16px;font-weight:600;
@@ -844,6 +845,15 @@
           }
         });
         document.getElementById("eps").hidden=false;
+        // search.lexthedev.com/#ansem opens on Ansem's appearances. The
+        // browser looks for the anchor as the page loads, before this list
+        // exists, finds nothing and stays at the top: the section is about
+        // 14,000 pixels down. So it is scrolled to once it is there.
+        var want = (location.hash || "").slice(1);
+        if (want === "ansem" || want === "eps-guest") {
+          var shows = document.getElementById("eps-guest");
+          if (shows && !shows.hidden) shows.scrollIntoView({block: "start"});
+        }
         // The nav link is dead until this section exists, so it only
         // appears once there is somewhere for it to go. It pointed at
         // #episodes while the section was #eps, which is a link that
