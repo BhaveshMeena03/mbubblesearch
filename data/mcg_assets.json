@@ -4,9 +4,18 @@
    "symbol": "SOL",
    "name": "Solana",
    "asset_class": "crypto",
-   "mentions": 2581,
-   "analysis": 784,
+   "mentions": 2583,
+   "analysis": 785,
    "moments": [
+    {
+     "episode_id": "-6Sccmoz7RQ",
+     "episode_title": "Is this Higgsfield AI built on Solana? | $CLAWHUNTER",
+     "start_seconds": 624.0,
+     "timestamp": "10:24",
+     "deep_link": "https://www.youtube.com/watch?v=-6Sccmoz7RQ&t=624s",
+     "kind": "analysis",
+     "note": "Studios is described as an AI creative suite being built as 'Hicksfield on Solana' with CryptoBits and CryptoRail integration."
+    },
     {
      "episode_id": "-Lbmo2D7630",
      "episode_title": "Why privacy in crypto is important ft. @radrdotfun",
@@ -6504,6 +6513,15 @@
      "deep_link": "https://www.youtube.com/watch?v=JaSBuI56yIg&t=1014s",
      "kind": "mention",
      "note": "The speaker mentions they have done 15,000 or 70,000 transactions on Solana since starting their campaign."
+    },
+    {
+     "episode_id": "JipaDoMQT-E",
+     "episode_title": "Ramses Hits $2.5B Volume on Robinhood Chain | Agentic Buybacks & Product Updates",
+     "start_seconds": 1428.0,
+     "timestamp": "23:48",
+     "deep_link": "https://www.youtube.com/watch?v=JipaDoMQT-E&t=1428s",
+     "kind": "mention",
+     "note": "Mentioned as having ecosystem builders competing for attention and liquidity on Robinhood alongside EVM builders."
     },
     {
      "episode_id": "JlFABCLweBc",
@@ -23237,7 +23255,7 @@
      "note": "Speaker discusses Solana price levels, noting a 20x move from 500K to current 8 million levels and speculating on future levels in another month."
     }
    ],
-   "episode_count": 523,
+   "episode_count": 525,
    "single_reference": false
   },
   {
@@ -35018,7 +35036,7 @@
    "symbol": "ETH",
    "name": "Ethereum",
    "asset_class": "crypto",
-   "mentions": 917,
+   "mentions": 918,
    "analysis": 325,
    "moments": [
     {
@@ -37243,6 +37261,15 @@
      "deep_link": "https://www.youtube.com/watch?v=JZeOr9lkQzU&t=13982s",
      "kind": "analysis",
      "note": "ETH is down 8.5% on the year and was previously going up for a decent while."
+    },
+    {
+     "episode_id": "JipaDoMQT-E",
+     "episode_title": "Ramses Hits $2.5B Volume on Robinhood Chain | Agentic Buybacks & Product Updates",
+     "start_seconds": 1721.0,
+     "timestamp": "28:41",
+     "deep_link": "https://www.youtube.com/watch?v=JipaDoMQT-E&t=1721s",
+     "kind": "mention",
+     "note": "Used as an example trading pair (ETH USDC) when explaining the Magic Max feature for rebalancing liquidity provider positions."
     },
     {
      "episode_id": "JlFABCLweBc",
@@ -43275,7 +43302,7 @@
      "note": "Speaker mentions Solana DATs and companies using treasuries to buy ETH."
     }
    ],
-   "episode_count": 344,
+   "episode_count": 345,
    "single_reference": false
   },
   {
@@ -51793,7 +51820,7 @@
    "symbol": "USDC",
    "name": "USD Coin",
    "asset_class": "crypto",
-   "mentions": 491,
+   "mentions": 492,
    "analysis": 142,
    "moments": [
     {
@@ -53019,6 +53046,15 @@
      "deep_link": "https://www.youtube.com/watch?v=JZeOr9lkQzU&t=3186s",
      "kind": "analysis",
      "note": "Discussed as a stable coin alternative; noted as being FDIC insured consideration and backed by Coinbase, with 75% in US treasuries."
+    },
+    {
+     "episode_id": "JipaDoMQT-E",
+     "episode_title": "Ramses Hits $2.5B Volume on Robinhood Chain | Agentic Buybacks & Product Updates",
+     "start_seconds": 1721.0,
+     "timestamp": "28:41",
+     "deep_link": "https://www.youtube.com/watch?v=JipaDoMQT-E&t=1721s",
+     "kind": "mention",
+     "note": "Used as an example trading pair (ETH USDC) when explaining the Magic Max feature for rebalancing liquidity provider positions."
     },
     {
      "episode_id": "JsgtP-nXIkA",
@@ -56216,7 +56252,7 @@
      "note": "Mentioned as an asset users needed to send to Arbitrum to access perp platforms."
     }
    ],
-   "episode_count": 282,
+   "episode_count": 283,
    "single_reference": false
   },
   {
@@ -57530,8 +57566,8 @@
    "symbol": "UNI",
    "name": "Uniswap V4",
    "asset_class": "crypto",
-   "mentions": 224,
-   "analysis": 113,
+   "mentions": 226,
+   "analysis": 114,
    "moments": [
     {
      "episode_id": "-8z0M77EVZg",
@@ -57928,6 +57964,24 @@
      "deep_link": "https://www.youtube.com/watch?v=JZeOr9lkQzU&t=3300s",
      "kind": "analysis",
      "note": "Uniswap flipped on the fee switch and is now using Uniswap fees to buy back their token; noted as one of top 25 tokens using large amounts of fees to go back into the token."
+    },
+    {
+     "episode_id": "JipaDoMQT-E",
+     "episode_title": "Ramses Hits $2.5B Volume on Robinhood Chain | Agentic Buybacks & Product Updates",
+     "start_seconds": 474.0,
+     "timestamp": "7:54",
+     "deep_link": "https://www.youtube.com/watch?v=JipaDoMQT-E&t=474s",
+     "kind": "mention",
+     "note": "Mentioned in comparison to Ramses on performance level."
+    },
+    {
+     "episode_id": "JipaDoMQT-E",
+     "episode_title": "Ramses Hits $2.5B Volume on Robinhood Chain | Agentic Buybacks & Product Updates",
+     "start_seconds": 1403.0,
+     "timestamp": "23:23",
+     "deep_link": "https://www.youtube.com/watch?v=JipaDoMQT-E&t=1403s",
+     "kind": "analysis",
+     "note": "Speakers discuss a migration tool allowing users to seamlessly move Uniswap v3 positions to Ramsey's positions, positioning it as a feature to help users tap into their resources and tooling."
     },
     {
      "episode_id": "JsgtP-nXIkA",
@@ -59550,7 +59604,7 @@
      "note": "Gabriel mentions having done consulting work with Uniswap."
     }
    ],
-   "episode_count": 107,
+   "episode_count": 108,
    "single_reference": false
   },
   {
@@ -86518,11 +86572,20 @@
   },
   {
    "symbol": "CLAW",
-   "name": "Claw",
+   "name": "Claw Hunter",
    "asset_class": "crypto",
-   "mentions": 50,
-   "analysis": 41,
+   "mentions": 51,
+   "analysis": 42,
    "moments": [
+    {
+     "episode_id": "-6Sccmoz7RQ",
+     "episode_title": "Is this Higgsfield AI built on Solana? | $CLAWHUNTER",
+     "start_seconds": 0.0,
+     "timestamp": "0:00",
+     "deep_link": "https://www.youtube.com/watch?v=-6Sccmoz7RQ&t=0s",
+     "kind": "analysis",
+     "note": "Project that experienced significant price appreciation from 240K to 1.6 million after being mentioned by Bunny on October 6th stream; founder L (Lacavillo) is being interviewed about the project."
+    },
     {
      "episode_id": "20OApcj88ZM",
      "episode_title": "\ud83d\udd34LIVE: Crypto Lagging. Will It Catch Up? | Market Updates + utility tokens to watch",
@@ -86974,7 +87037,7 @@
      "note": "Listed as a top ecosystem token on Bags app; identified as 'Claw Lancer'."
     }
    ],
-   "episode_count": 31,
+   "episode_count": 32,
    "single_reference": false
   },
   {
@@ -107417,6 +107480,224 @@
    "single_reference": false
   },
   {
+   "symbol": "ROBIN",
+   "name": "Robin Hood",
+   "asset_class": "crypto",
+   "mentions": 23,
+   "analysis": 19,
+   "moments": [
+    {
+     "episode_id": "1UFlORh3zt0",
+     "episode_title": "\ud83d\udd34 LIVE: FOMC Day, Onchain Rotations...Next Leg Loading? | Market Update + Interviews",
+     "start_seconds": 5920.0,
+     "timestamp": "1:38:40",
+     "deep_link": "https://www.youtube.com/watch?v=1UFlORh3zt0&t=5920s",
+     "kind": "analysis",
+     "note": "Referenced as an early blockchain ecosystem that faced initial skepticism but then experienced a boom where early tokens re-rated significantly."
+    },
+    {
+     "episode_id": "AImBDqEWd8E",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding | Ceilings Rising | Market Update + Interviews",
+     "start_seconds": 308.0,
+     "timestamp": "5:08",
+     "deep_link": "https://www.youtube.com/watch?v=AImBDqEWd8E&t=308s",
+     "kind": "analysis",
+     "note": "Speakers discuss Robin Hood chain as a new ecosystem with opportunities for profitable trading and mention it has better opportunities than Solana, and discuss category leaders on the chain including Cash Cat."
+    },
+    {
+     "episode_id": "AImBDqEWd8E",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding | Ceilings Rising | Market Update + Interviews",
+     "start_seconds": 15677.0,
+     "timestamp": "4:21:17",
+     "deep_link": "https://www.youtube.com/watch?v=AImBDqEWd8E&t=15677s",
+     "kind": "analysis",
+     "note": "Speaker states Solana is kind of dead right now compared to Robin Hood and discusses a chart that looks ready, predicting it will go up to 13."
+    },
+    {
+     "episode_id": "Ck1DT4ivFl8",
+     "episode_title": "\ud83d\udd34 LIVE: Top Picks w/@FloodCapital, More IPO's on Solana,  Intro to Internet Rounds!",
+     "start_seconds": 10395.0,
+     "timestamp": "2:53:15",
+     "deep_link": "https://www.youtube.com/watch?v=Ck1DT4ivFl8&t=10395s",
+     "kind": "analysis",
+     "note": "Robin Hood chain launched and speakers discussed how quickly they integrated support for it within 16 hours after it went live, compared to competitors like FOMO who took a week and a half."
+    },
+    {
+     "episode_id": "JipaDoMQT-E",
+     "episode_title": "Ramses Hits $2.5B Volume on Robinhood Chain | Agentic Buybacks & Product Updates",
+     "start_seconds": 1175.0,
+     "timestamp": "19:35",
+     "deep_link": "https://www.youtube.com/watch?v=JipaDoMQT-E&t=1175s",
+     "kind": "analysis",
+     "note": "Speakers discuss Robinhood as a blockchain attracting retail users through Robinhood's 20+ million user base on mobile, compare it to Hyper-EVM and Base, and describe platform updates and liquidity incentives being pushed on the chain."
+    },
+    {
+     "episode_id": "LpwKHoAJu2Q",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood DEX volume at ATH's | Pennie stocks on Solana? | Market Update + Interviews",
+     "start_seconds": 9406.0,
+     "timestamp": "2:36:46",
+     "deep_link": "https://www.youtube.com/watch?v=LpwKHoAJu2Q&t=9406s",
+     "kind": "analysis",
+     "note": "Discussed as an early meme coin that experienced profit-taking and a blowoff top, with speakers noting early traders and FOMO traders made significant P&Ls on it. The coin is identified as one of two market-leading tokens expected to matter in the next 18 months."
+    },
+    {
+     "episode_id": "N0q17BVEOtQ",
+     "episode_title": "\ud83d\udd34 LIVE: HOOD Summit Approaches | Robinhood vs Solana | Market Update + Interviews",
+     "start_seconds": 8355.0,
+     "timestamp": "2:19:15",
+     "deep_link": "https://www.youtube.com/watch?v=N0q17BVEOtQ&t=8355s",
+     "kind": "analysis",
+     "note": "Identified as a main chain focus with RWA tokenization and stock options; described as part of long-term investable bags alongside infrastructure and AI focus."
+    },
+    {
+     "episode_id": "PZ5E7taO1Yo",
+     "episode_title": "\ud83d\udd34 LIVE: RWA Memes Heating Up | Next Leg Soon? | Market Update + Interviews",
+     "start_seconds": 2267.0,
+     "timestamp": "37:47",
+     "deep_link": "https://www.youtube.com/watch?v=PZ5E7taO1Yo&t=2267s",
+     "kind": "analysis",
+     "note": "Speakers discuss building a DEX screener and explorer for the Robin Hood chain, mentioning the Robin Hood Explorer is poor quality and comparing it to explorers on other chains."
+    },
+    {
+     "episode_id": "RZCgNCdubQc",
+     "episode_title": "\ud83d\udd34 LIVE: MetaDAO Owners Meeting Recap | Founder Interviews + Market Update",
+     "start_seconds": 419.0,
+     "timestamp": "6:59",
+     "deep_link": "https://www.youtube.com/watch?v=RZCgNCdubQc&t=419s",
+     "kind": "analysis",
+     "note": "Speakers discuss a huge dip across the Robin Hood ecosystem over the weekend and cover Robin Hood chain launch with Virtuals integration."
+    },
+    {
+     "episode_id": "RufYrYmMVwU",
+     "episode_title": "\ud83d\udd34 LIVE: Onchain Market Bottom Forming | Q4 Rally Setup + How to Maximize Returns",
+     "start_seconds": 6285.0,
+     "timestamp": "1:44:45",
+     "deep_link": "https://www.youtube.com/watch?v=RufYrYmMVwU&t=6285s",
+     "kind": "mention",
+     "note": "Referenced as a chain and deployment platform for the RAM token."
+    },
+    {
+     "episode_id": "SrY9mYI88ho",
+     "episode_title": "Watch out for the Agent Wormhole | $WORM",
+     "start_seconds": 2830.0,
+     "timestamp": "47:10",
+     "deep_link": "https://www.youtube.com/watch?v=SrY9mYI88ho&t=2830s",
+     "kind": "analysis",
+     "note": "Speaker highlights Robinhood reaching 100 billion in cumulative DEX volume within first 3.5 months, argues it is a major winner if Bitcoin scenario plays out to 90K's, and contends that despite skepticism, Robinhood has delivered the most runners of any ecosystem over the last year."
+    },
+    {
+     "episode_id": "UbKsP6WCsPs",
+     "episode_title": "\ud83d\udd34 LIVE: Market Cooling Off | Buy The Dip? | Market Update + Interviews",
+     "start_seconds": 10225.0,
+     "timestamp": "2:50:25",
+     "deep_link": "https://www.youtube.com/watch?v=UbKsP6WCsPs&t=10225s",
+     "kind": "analysis",
+     "note": "Robin Hood is described as a brand new blockchain providing opportunities for infrastructure builders; speaker discusses its tokenomics including revenue to stakers model and compares it favorably to other chains."
+    },
+    {
+     "episode_id": "YOWeFQZjsBs",
+     "episode_title": "$NET Al Dunlap: Treasury at 1.4x NAV, $1M+ Buybacks, No-Loss Sportsbook & NetLong Launch | MCG",
+     "start_seconds": 411.0,
+     "timestamp": "6:51",
+     "deep_link": "https://www.youtube.com/watch?v=YOWeFQZjsBs&t=411s",
+     "kind": "mention",
+     "note": "Referenced as the blockchain where the treasury is held and where the speaker is aligned with Robinhood, though open to builders on other chains."
+    },
+    {
+     "episode_id": "ZSBmoD9oLw8",
+     "episode_title": "\ud83d\udd34 LIVE: The Battle Of Blockchains | Solana vs Robinhood | Market Update + Interviews",
+     "start_seconds": 1112.0,
+     "timestamp": "18:32",
+     "deep_link": "https://www.youtube.com/watch?v=ZSBmoD9oLw8&t=1112s",
+     "kind": "analysis",
+     "note": "Speaker's on-chain bags on Robin Hood chain were down over the week, but overall portfolio was up due to stock trade."
+    },
+    {
+     "episode_id": "akxWR63zdtk",
+     "episode_title": "The Hot $STONKBROKER Dev Appeared on MCG!",
+     "start_seconds": 98.0,
+     "timestamp": "1:38",
+     "deep_link": "https://www.youtube.com/watch?v=akxWR63zdtk&t=98s",
+     "kind": "analysis",
+     "note": "Simple Farmer discusses building infrastructure and a full ecosystem around RWAs and DeFi on Robinhood Chain, and mentions starting to build on its testnet in January/February after hearing about an upcoming mainnet."
+    },
+    {
+     "episode_id": "cHos0BsSoFM",
+     "episode_title": "\ud83d\udd34 LIVE: S&P New ATH, BTC Stuck at $86K | Crypto Uptober Canceled?",
+     "start_seconds": 1748.0,
+     "timestamp": "29:08",
+     "deep_link": "https://www.youtube.com/watch?v=cHos0BsSoFM&t=1748s",
+     "kind": "analysis",
+     "note": "Integration with Robinhood Chain is being considered; speakers express interest in seeing more durable agentic-specific projects there but note current focus is on Solana where more experimentation is occurring."
+    },
+    {
+     "episode_id": "gQU9V7n-cRM",
+     "episode_title": "\ud83d\udd34 LIVE: BTC cools while Alts show strength | RHC recovery? | Market update + Interviews",
+     "start_seconds": 7589.0,
+     "timestamp": "2:06:29",
+     "deep_link": "https://www.youtube.com/watch?v=gQU9V7n-cRM&t=7589s",
+     "kind": "analysis",
+     "note": "Speaker discusses a violent dip off highs on the Robinhood chain and broader pullback; mentions bidding strategy during dips and predicts it could drop to sub-5 million market cap with ultimate buy zone at 3.5 million market cap."
+    },
+    {
+     "episode_id": "hcjIEdcjlPw",
+     "episode_title": "UP: The native (3,3) exchange and liquidity layer of Robinhood Chain.",
+     "start_seconds": 673.0,
+     "timestamp": "11:13",
+     "deep_link": "https://www.youtube.com/watch?v=hcjIEdcjlPw&t=673s",
+     "kind": "analysis",
+     "note": "Speaker discusses Robin Hood as a protocol/platform with strong onboarding method for bringing normal people into crypto, comparing its opportunity across chains and describing its synergy with on-chain activity and Coinbase integration."
+    },
+    {
+     "episode_id": "qDr3pkTC7KM",
+     "episode_title": "Programmable: A launch platform for Uniswap v4 products",
+     "start_seconds": 1593.0,
+     "timestamp": "26:33",
+     "deep_link": "https://www.youtube.com/watch?v=qDr3pkTC7KM&t=1593s",
+     "kind": "analysis",
+     "note": "Referenced as the chain everyone is on; Hooks is migrating to Robin Hood chain with discussion of liquidity pool migration mechanics."
+    },
+    {
+     "episode_id": "qHavUGBG56A",
+     "episode_title": "\ud83d\udd34 LIVE: Black Monday Overblown? | Staying Bullish | Market Update",
+     "start_seconds": 12038.0,
+     "timestamp": "3:20:38",
+     "deep_link": "https://www.youtube.com/watch?v=qHavUGBG56A&t=12038s",
+     "kind": "mention",
+     "note": "Speaker mentioned discovering Robin Hood chain in July before it went live, comparing it to an early-stage play with high risk but potential upside."
+    },
+    {
+     "episode_id": "qq_4gfyjN6s",
+     "episode_title": "\ud83d\udd34 LIVE: MonkeDAO Solana Product Spotlight + Trader Radio w/@ChillTRD | Market Updates",
+     "start_seconds": 296.0,
+     "timestamp": "4:56",
+     "deep_link": "https://www.youtube.com/watch?v=qq_4gfyjN6s&t=296s",
+     "kind": "analysis",
+     "note": "Speaker claims a 4x trade in the last week, growing from 2.5 million to 10 million, and mentions it was found in mid-June."
+    },
+    {
+     "episode_id": "twr8yC6xgVo",
+     "episode_title": "Scherwode.fun: The Launchpad Built for Robinhood Chain",
+     "start_seconds": 1823.0,
+     "timestamp": "30:23",
+     "deep_link": "https://www.youtube.com/watch?v=twr8yC6xgVo&t=1823s",
+     "kind": "mention",
+     "note": "Mentioned as the chain that EVM tokens from other chains can migrate to via a migration protocol."
+    },
+    {
+     "episode_id": "x7qRX-hWxg8",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding (Memes, V4 Hooks, Infra) | Market Update + Interviews",
+     "start_seconds": 8483.0,
+     "timestamp": "2:21:23",
+     "deep_link": "https://www.youtube.com/watch?v=x7qRX-hWxg8&t=8483s",
+     "kind": "analysis",
+     "note": "Discussion of Robin Hood's DeFi metrics including TVL ranking (number 11), DEX volume ranking (number 2), and stable coin market cap ranking (number 15), with assessment that the asset is not at fair value despite lagging metrics."
+    }
+   ],
+   "episode_count": 22,
+   "single_reference": false
+  },
+  {
    "symbol": "LIT",
    "name": "Lit",
    "asset_class": "crypto",
@@ -108495,215 +108776,6 @@
     }
    ],
    "episode_count": 22,
-   "single_reference": false
-  },
-  {
-   "symbol": "ROBIN",
-   "name": "Robin Hood",
-   "asset_class": "crypto",
-   "mentions": 22,
-   "analysis": 18,
-   "moments": [
-    {
-     "episode_id": "1UFlORh3zt0",
-     "episode_title": "\ud83d\udd34 LIVE: FOMC Day, Onchain Rotations...Next Leg Loading? | Market Update + Interviews",
-     "start_seconds": 5920.0,
-     "timestamp": "1:38:40",
-     "deep_link": "https://www.youtube.com/watch?v=1UFlORh3zt0&t=5920s",
-     "kind": "analysis",
-     "note": "Referenced as an early blockchain ecosystem that faced initial skepticism but then experienced a boom where early tokens re-rated significantly."
-    },
-    {
-     "episode_id": "AImBDqEWd8E",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding | Ceilings Rising | Market Update + Interviews",
-     "start_seconds": 308.0,
-     "timestamp": "5:08",
-     "deep_link": "https://www.youtube.com/watch?v=AImBDqEWd8E&t=308s",
-     "kind": "analysis",
-     "note": "Speakers discuss Robin Hood chain as a new ecosystem with opportunities for profitable trading and mention it has better opportunities than Solana, and discuss category leaders on the chain including Cash Cat."
-    },
-    {
-     "episode_id": "AImBDqEWd8E",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding | Ceilings Rising | Market Update + Interviews",
-     "start_seconds": 15677.0,
-     "timestamp": "4:21:17",
-     "deep_link": "https://www.youtube.com/watch?v=AImBDqEWd8E&t=15677s",
-     "kind": "analysis",
-     "note": "Speaker states Solana is kind of dead right now compared to Robin Hood and discusses a chart that looks ready, predicting it will go up to 13."
-    },
-    {
-     "episode_id": "Ck1DT4ivFl8",
-     "episode_title": "\ud83d\udd34 LIVE: Top Picks w/@FloodCapital, More IPO's on Solana,  Intro to Internet Rounds!",
-     "start_seconds": 10395.0,
-     "timestamp": "2:53:15",
-     "deep_link": "https://www.youtube.com/watch?v=Ck1DT4ivFl8&t=10395s",
-     "kind": "analysis",
-     "note": "Robin Hood chain launched and speakers discussed how quickly they integrated support for it within 16 hours after it went live, compared to competitors like FOMO who took a week and a half."
-    },
-    {
-     "episode_id": "LpwKHoAJu2Q",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood DEX volume at ATH's | Pennie stocks on Solana? | Market Update + Interviews",
-     "start_seconds": 9406.0,
-     "timestamp": "2:36:46",
-     "deep_link": "https://www.youtube.com/watch?v=LpwKHoAJu2Q&t=9406s",
-     "kind": "analysis",
-     "note": "Discussed as an early meme coin that experienced profit-taking and a blowoff top, with speakers noting early traders and FOMO traders made significant P&Ls on it. The coin is identified as one of two market-leading tokens expected to matter in the next 18 months."
-    },
-    {
-     "episode_id": "N0q17BVEOtQ",
-     "episode_title": "\ud83d\udd34 LIVE: HOOD Summit Approaches | Robinhood vs Solana | Market Update + Interviews",
-     "start_seconds": 8355.0,
-     "timestamp": "2:19:15",
-     "deep_link": "https://www.youtube.com/watch?v=N0q17BVEOtQ&t=8355s",
-     "kind": "analysis",
-     "note": "Identified as a main chain focus with RWA tokenization and stock options; described as part of long-term investable bags alongside infrastructure and AI focus."
-    },
-    {
-     "episode_id": "PZ5E7taO1Yo",
-     "episode_title": "\ud83d\udd34 LIVE: RWA Memes Heating Up | Next Leg Soon? | Market Update + Interviews",
-     "start_seconds": 2267.0,
-     "timestamp": "37:47",
-     "deep_link": "https://www.youtube.com/watch?v=PZ5E7taO1Yo&t=2267s",
-     "kind": "analysis",
-     "note": "Speakers discuss building a DEX screener and explorer for the Robin Hood chain, mentioning the Robin Hood Explorer is poor quality and comparing it to explorers on other chains."
-    },
-    {
-     "episode_id": "RZCgNCdubQc",
-     "episode_title": "\ud83d\udd34 LIVE: MetaDAO Owners Meeting Recap | Founder Interviews + Market Update",
-     "start_seconds": 419.0,
-     "timestamp": "6:59",
-     "deep_link": "https://www.youtube.com/watch?v=RZCgNCdubQc&t=419s",
-     "kind": "analysis",
-     "note": "Speakers discuss a huge dip across the Robin Hood ecosystem over the weekend and cover Robin Hood chain launch with Virtuals integration."
-    },
-    {
-     "episode_id": "RufYrYmMVwU",
-     "episode_title": "\ud83d\udd34 LIVE: Onchain Market Bottom Forming | Q4 Rally Setup + How to Maximize Returns",
-     "start_seconds": 6285.0,
-     "timestamp": "1:44:45",
-     "deep_link": "https://www.youtube.com/watch?v=RufYrYmMVwU&t=6285s",
-     "kind": "mention",
-     "note": "Referenced as a chain and deployment platform for the RAM token."
-    },
-    {
-     "episode_id": "SrY9mYI88ho",
-     "episode_title": "Watch out for the Agent Wormhole | $WORM",
-     "start_seconds": 2830.0,
-     "timestamp": "47:10",
-     "deep_link": "https://www.youtube.com/watch?v=SrY9mYI88ho&t=2830s",
-     "kind": "analysis",
-     "note": "Speaker highlights Robinhood reaching 100 billion in cumulative DEX volume within first 3.5 months, argues it is a major winner if Bitcoin scenario plays out to 90K's, and contends that despite skepticism, Robinhood has delivered the most runners of any ecosystem over the last year."
-    },
-    {
-     "episode_id": "UbKsP6WCsPs",
-     "episode_title": "\ud83d\udd34 LIVE: Market Cooling Off | Buy The Dip? | Market Update + Interviews",
-     "start_seconds": 10225.0,
-     "timestamp": "2:50:25",
-     "deep_link": "https://www.youtube.com/watch?v=UbKsP6WCsPs&t=10225s",
-     "kind": "analysis",
-     "note": "Robin Hood is described as a brand new blockchain providing opportunities for infrastructure builders; speaker discusses its tokenomics including revenue to stakers model and compares it favorably to other chains."
-    },
-    {
-     "episode_id": "YOWeFQZjsBs",
-     "episode_title": "$NET Al Dunlap: Treasury at 1.4x NAV, $1M+ Buybacks, No-Loss Sportsbook & NetLong Launch | MCG",
-     "start_seconds": 411.0,
-     "timestamp": "6:51",
-     "deep_link": "https://www.youtube.com/watch?v=YOWeFQZjsBs&t=411s",
-     "kind": "mention",
-     "note": "Referenced as the blockchain where the treasury is held and where the speaker is aligned with Robinhood, though open to builders on other chains."
-    },
-    {
-     "episode_id": "ZSBmoD9oLw8",
-     "episode_title": "\ud83d\udd34 LIVE: The Battle Of Blockchains | Solana vs Robinhood | Market Update + Interviews",
-     "start_seconds": 1112.0,
-     "timestamp": "18:32",
-     "deep_link": "https://www.youtube.com/watch?v=ZSBmoD9oLw8&t=1112s",
-     "kind": "analysis",
-     "note": "Speaker's on-chain bags on Robin Hood chain were down over the week, but overall portfolio was up due to stock trade."
-    },
-    {
-     "episode_id": "akxWR63zdtk",
-     "episode_title": "The Hot $STONKBROKER Dev Appeared on MCG!",
-     "start_seconds": 98.0,
-     "timestamp": "1:38",
-     "deep_link": "https://www.youtube.com/watch?v=akxWR63zdtk&t=98s",
-     "kind": "analysis",
-     "note": "Simple Farmer discusses building infrastructure and a full ecosystem around RWAs and DeFi on Robinhood Chain, and mentions starting to build on its testnet in January/February after hearing about an upcoming mainnet."
-    },
-    {
-     "episode_id": "cHos0BsSoFM",
-     "episode_title": "\ud83d\udd34 LIVE: S&P New ATH, BTC Stuck at $86K | Crypto Uptober Canceled?",
-     "start_seconds": 1748.0,
-     "timestamp": "29:08",
-     "deep_link": "https://www.youtube.com/watch?v=cHos0BsSoFM&t=1748s",
-     "kind": "analysis",
-     "note": "Integration with Robinhood Chain is being considered; speakers express interest in seeing more durable agentic-specific projects there but note current focus is on Solana where more experimentation is occurring."
-    },
-    {
-     "episode_id": "gQU9V7n-cRM",
-     "episode_title": "\ud83d\udd34 LIVE: BTC cools while Alts show strength | RHC recovery? | Market update + Interviews",
-     "start_seconds": 7589.0,
-     "timestamp": "2:06:29",
-     "deep_link": "https://www.youtube.com/watch?v=gQU9V7n-cRM&t=7589s",
-     "kind": "analysis",
-     "note": "Speaker discusses a violent dip off highs on the Robinhood chain and broader pullback; mentions bidding strategy during dips and predicts it could drop to sub-5 million market cap with ultimate buy zone at 3.5 million market cap."
-    },
-    {
-     "episode_id": "hcjIEdcjlPw",
-     "episode_title": "UP: The native (3,3) exchange and liquidity layer of Robinhood Chain.",
-     "start_seconds": 673.0,
-     "timestamp": "11:13",
-     "deep_link": "https://www.youtube.com/watch?v=hcjIEdcjlPw&t=673s",
-     "kind": "analysis",
-     "note": "Speaker discusses Robin Hood as a protocol/platform with strong onboarding method for bringing normal people into crypto, comparing its opportunity across chains and describing its synergy with on-chain activity and Coinbase integration."
-    },
-    {
-     "episode_id": "qDr3pkTC7KM",
-     "episode_title": "Programmable: A launch platform for Uniswap v4 products",
-     "start_seconds": 1593.0,
-     "timestamp": "26:33",
-     "deep_link": "https://www.youtube.com/watch?v=qDr3pkTC7KM&t=1593s",
-     "kind": "analysis",
-     "note": "Referenced as the chain everyone is on; Hooks is migrating to Robin Hood chain with discussion of liquidity pool migration mechanics."
-    },
-    {
-     "episode_id": "qHavUGBG56A",
-     "episode_title": "\ud83d\udd34 LIVE: Black Monday Overblown? | Staying Bullish | Market Update",
-     "start_seconds": 12038.0,
-     "timestamp": "3:20:38",
-     "deep_link": "https://www.youtube.com/watch?v=qHavUGBG56A&t=12038s",
-     "kind": "mention",
-     "note": "Speaker mentioned discovering Robin Hood chain in July before it went live, comparing it to an early-stage play with high risk but potential upside."
-    },
-    {
-     "episode_id": "qq_4gfyjN6s",
-     "episode_title": "\ud83d\udd34 LIVE: MonkeDAO Solana Product Spotlight + Trader Radio w/@ChillTRD | Market Updates",
-     "start_seconds": 296.0,
-     "timestamp": "4:56",
-     "deep_link": "https://www.youtube.com/watch?v=qq_4gfyjN6s&t=296s",
-     "kind": "analysis",
-     "note": "Speaker claims a 4x trade in the last week, growing from 2.5 million to 10 million, and mentions it was found in mid-June."
-    },
-    {
-     "episode_id": "twr8yC6xgVo",
-     "episode_title": "Scherwode.fun: The Launchpad Built for Robinhood Chain",
-     "start_seconds": 1823.0,
-     "timestamp": "30:23",
-     "deep_link": "https://www.youtube.com/watch?v=twr8yC6xgVo&t=1823s",
-     "kind": "mention",
-     "note": "Mentioned as the chain that EVM tokens from other chains can migrate to via a migration protocol."
-    },
-    {
-     "episode_id": "x7qRX-hWxg8",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding (Memes, V4 Hooks, Infra) | Market Update + Interviews",
-     "start_seconds": 8483.0,
-     "timestamp": "2:21:23",
-     "deep_link": "https://www.youtube.com/watch?v=x7qRX-hWxg8&t=8483s",
-     "kind": "analysis",
-     "note": "Discussion of Robin Hood's DeFi metrics including TVL ranking (number 11), DEX volume ranking (number 2), and stable coin market cap ranking (number 15), with assessment that the asset is not at fair value despite lagging metrics."
-    }
-   ],
-   "episode_count": 21,
    "single_reference": false
   },
   {
@@ -114323,6 +114395,161 @@
     }
    ],
    "episode_count": 9,
+   "single_reference": false
+  },
+  {
+   "symbol": "RAM",
+   "name": "Ramses",
+   "asset_class": "crypto",
+   "mentions": 16,
+   "analysis": 15,
+   "moments": [
+    {
+     "episode_id": "JipaDoMQT-E",
+     "episode_title": "Ramses Hits $2.5B Volume on Robinhood Chain | Agentic Buybacks & Product Updates",
+     "start_seconds": 0.0,
+     "timestamp": "0:00",
+     "deep_link": "https://www.youtube.com/watch?v=JipaDoMQT-E&t=0s",
+     "kind": "analysis",
+     "note": "Ramses is a stock tokens and liquidity protocol on Robinhood Chain with 2.5 billion trading volume and 30+ stock tokens; has received recognition from Rob No Crypto and experienced significant price movement following a social media shout-out."
+    },
+    {
+     "episode_id": "JipaDoMQT-E",
+     "episode_title": "Ramses Hits $2.5B Volume on Robinhood Chain | Agentic Buybacks & Product Updates",
+     "start_seconds": 474.0,
+     "timestamp": "7:54",
+     "deep_link": "https://www.youtube.com/watch?v=JipaDoMQT-E&t=474s",
+     "kind": "analysis",
+     "note": "The speakers discuss Ramses token and its performance relative to Uniswap, transaction volume benchmarks of 100 million daily, an agentic buyback mechanism on Robinhood chain using generated fees, token deployment differences between Robinhood and HyperEVM chains, and whether it is deflationary or inflationary based on buyback versus emissions activity."
+    },
+    {
+     "episode_id": "JipaDoMQT-E",
+     "episode_title": "Ramses Hits $2.5B Volume on Robinhood Chain | Agentic Buybacks & Product Updates",
+     "start_seconds": 797.0,
+     "timestamp": "13:17",
+     "deep_link": "https://www.youtube.com/watch?v=JipaDoMQT-E&t=797s",
+     "kind": "analysis",
+     "note": "Speakers discussed RAM burn history, recent buybacks, agentic buy pressure, token count of 776,000 into the module, and deflationary mechanics when buyback modules exceed voter fees."
+    },
+    {
+     "episode_id": "JipaDoMQT-E",
+     "episode_title": "Ramses Hits $2.5B Volume on Robinhood Chain | Agentic Buybacks & Product Updates",
+     "start_seconds": 1813.0,
+     "timestamp": "30:13",
+     "deep_link": "https://www.youtube.com/watch?v=JipaDoMQT-E&t=1813s",
+     "kind": "analysis",
+     "note": "Token discussed with a two million dollar market cap for a protocol that has done 2.5 billion in volume; September revenue for the protocol and token holders was over half a million dollars ($510,677); speaker notes people are comparing this valuation to other billion-dollar market cap protocols on the chain."
+    },
+    {
+     "episode_id": "JipaDoMQT-E",
+     "episode_title": "Ramses Hits $2.5B Volume on Robinhood Chain | Agentic Buybacks & Product Updates",
+     "start_seconds": 1943.0,
+     "timestamp": "32:23",
+     "deep_link": "https://www.youtube.com/watch?v=JipaDoMQT-E&t=1943s",
+     "kind": "analysis",
+     "note": "Discussed RAM token dynamics including fee structures ($128,000 in Robinhood fees versus $50,000 in Hyper-EVM), buyback mechanisms, and transition from inflationary to deflationary model."
+    },
+    {
+     "episode_id": "N0q17BVEOtQ",
+     "episode_title": "\ud83d\udd34 LIVE: HOOD Summit Approaches | Robinhood vs Solana | Market Update + Interviews",
+     "start_seconds": 4049.0,
+     "timestamp": "1:07:29",
+     "deep_link": "https://www.youtube.com/watch?v=N0q17BVEOtQ&t=4049s",
+     "kind": "analysis",
+     "note": "Platform offers options trading on RAM (memory modules), tracking secondary market pricing on a monthly basis with user-submitted information and oracle pricing."
+    },
+    {
+     "episode_id": "RufYrYmMVwU",
+     "episode_title": "\ud83d\udd34 LIVE: Onchain Market Bottom Forming | Q4 Rally Setup + How to Maximize Returns",
+     "start_seconds": 6300.0,
+     "timestamp": "1:45:00",
+     "deep_link": "https://www.youtube.com/watch?v=RufYrYmMVwU&t=6300s",
+     "kind": "analysis",
+     "note": "Discussed as a veteran centralized liquidity DEX with $100 billion in transaction volumes, $2 million spent on audits, no VC funding, LP fees of 95% pool and 5% burn to RAM stakers, $100 million 24-hour volume, and phase two roadmap involving emissions on Robinhood; noted as down 95% but ranking eighth highest 24-hour DEX volume in crypto."
+    },
+    {
+     "episode_id": "SrY9mYI88ho",
+     "episode_title": "Watch out for the Agent Wormhole | $WORM",
+     "start_seconds": 3074.0,
+     "timestamp": "51:14",
+     "deep_link": "https://www.youtube.com/watch?v=SrY9mYI88ho&t=3074s",
+     "kind": "analysis",
+     "note": "A centralized liquidity DEX that routes fees to token holders; $100 billion in transaction volumes; $100 million 24-hour volume; LPs receive 95% of pool fees with 5% burned to RAM stakers; down 95% from previous high; second highest 24-hour DEX volume on Robinhood chain after Uniswap."
+    },
+    {
+     "episode_id": "ZSBmoD9oLw8",
+     "episode_title": "\ud83d\udd34 LIVE: The Battle Of Blockchains | Solana vs Robinhood | Market Update + Interviews",
+     "start_seconds": 10611.0,
+     "timestamp": "2:56:51",
+     "deep_link": "https://www.youtube.com/watch?v=ZSBmoD9oLw8&t=10611s",
+     "kind": "analysis",
+     "note": "Speaker discusses RAM as a competitor to UP and Prologue, expresses confusion about its tokenomics as it is pooled on hyperEVM (inflationary) but not natively on Robin Hood chain."
+    },
+    {
+     "episode_id": "ckSVVsCYrSI",
+     "episode_title": "\ud83d\udd34 LIVE: Uptober Turned Choptober | Bitcoin Holding $80K | What's Next?",
+     "start_seconds": 11191.0,
+     "timestamp": "3:06:31",
+     "deep_link": "https://www.youtube.com/watch?v=ckSVVsCYrSI&t=11191s",
+     "kind": "mention",
+     "note": "Mentioned Ramses and noted that the team got quote tweeted by Robin Hood; referred to looking at the RAM token earlier."
+    },
+    {
+     "episode_id": "iE95_Wr3ThQ",
+     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
+     "start_seconds": 1241.0,
+     "timestamp": "20:41",
+     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=1241s",
+     "kind": "analysis",
+     "note": "Ramses is a liquidity protocol on RobnoChain with 2.5 billion trading volume and 30+ stock tokens; operates as infrastructure layer for builders and provides fee flexibility compared to Uniswap."
+    },
+    {
+     "episode_id": "iE95_Wr3ThQ",
+     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
+     "start_seconds": 1666.0,
+     "timestamp": "27:46",
+     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=1666s",
+     "kind": "analysis",
+     "note": "Speakers discuss Ramsey (RAM) token performance, its deployment across HyperEVM and Robinhood chains, agentic buyback mechanisms funded by fees, tokenomics with periods of deflation when buybacks exceed emissions, and buyback amounts including 776,000 tokens burned in recent epochs."
+    },
+    {
+     "episode_id": "iE95_Wr3ThQ",
+     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
+     "start_seconds": 2066.0,
+     "timestamp": "34:26",
+     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=2066s",
+     "kind": "analysis",
+     "note": "RAM discussed in context of burns outpacing emissions and considering holders; mentioned as protocol with buyers and voter fees mechanism."
+    },
+    {
+     "episode_id": "iE95_Wr3ThQ",
+     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
+     "start_seconds": 3028.0,
+     "timestamp": "50:28",
+     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=3028s",
+     "kind": "analysis",
+     "note": "Protocol token with a $2 million market cap discussed relative to $2.5 billion in volume; September revenue was $510,677 for token holders; compared to other protocols by market cap-to-revenue multiples."
+    },
+    {
+     "episode_id": "iE95_Wr3ThQ",
+     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
+     "start_seconds": 3199.0,
+     "timestamp": "53:19",
+     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=3199s",
+     "kind": "analysis",
+     "note": "Protocol discussed as helping projects bootstrap liquidity efficiently; token stakers benefit from open buyback season with network effects."
+    },
+    {
+     "episode_id": "iE95_Wr3ThQ",
+     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
+     "start_seconds": 3292.0,
+     "timestamp": "54:52",
+     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=3292s",
+     "kind": "analysis",
+     "note": "RAM token compared across chains; on Robinhood doing twice the volume and revenue compared to Hyper EVM version, transitioned from inflationary to deflationary model with buybacks outpacing emissions."
+    }
+   ],
+   "episode_count": 7,
    "single_reference": false
   },
   {
@@ -122580,6 +122807,134 @@
    "single_reference": false
   },
   {
+   "symbol": "MANCER",
+   "name": "Mancer",
+   "asset_class": "crypto",
+   "mentions": 13,
+   "analysis": 11,
+   "moments": [
+    {
+     "episode_id": "IeKSAMWNmGs",
+     "episode_title": "\ud83d\udd34 LIVE: Hood Summit Day 2 | Is Robinhood Chain Dead? | Market Update + Interviews",
+     "start_seconds": 7532.0,
+     "timestamp": "2:05:32",
+     "deep_link": "https://www.youtube.com/watch?v=IeKSAMWNmGs&t=7532s",
+     "kind": "analysis",
+     "note": "Described as definitively the best router on Robinhood Chain with the best quotes and speeds, positioned as an infrastructure player for the long term."
+    },
+    {
+     "episode_id": "JipaDoMQT-E",
+     "episode_title": "Ramses Hits $2.5B Volume on Robinhood Chain | Agentic Buybacks & Product Updates",
+     "start_seconds": 2094.0,
+     "timestamp": "34:54",
+     "deep_link": "https://www.youtube.com/watch?v=JipaDoMQT-E&t=2094s",
+     "kind": "mention",
+     "note": "Mentioned as part of DeFi tokens on Robinhood described as being in a bottomed-out category."
+    },
+    {
+     "episode_id": "QSRP-rTwfYE",
+     "episode_title": "\ud83d\udd34 LIVE: Calm Before the Storm | Onchain Weekly Recap",
+     "start_seconds": 6586.0,
+     "timestamp": "1:49:46",
+     "deep_link": "https://www.youtube.com/watch?v=QSRP-rTwfYE&t=6586s",
+     "kind": "analysis",
+     "note": "Host disclosed buying a bag of Mancer and discussed its circulating supply at less than 50%, noting the tokenomics and platform revenue sharing structure."
+    },
+    {
+     "episode_id": "QSRP-rTwfYE",
+     "episode_title": "\ud83d\udd34 LIVE: Calm Before the Storm | Onchain Weekly Recap",
+     "start_seconds": 6674.0,
+     "timestamp": "1:51:14",
+     "deep_link": "https://www.youtube.com/watch?v=QSRP-rTwfYE&t=6674s",
+     "kind": "analysis",
+     "note": "Discussed staking mechanism where staking generates Mancer tokens and 50% of platform revenue; 318 million tokens burned from total supply of 2.5 billion; chart analysis shows 90% down from all-time high with support reversal forming."
+    },
+    {
+     "episode_id": "QSRP-rTwfYE",
+     "episode_title": "\ud83d\udd34 LIVE: Calm Before the Storm | Onchain Weekly Recap",
+     "start_seconds": 10049.0,
+     "timestamp": "2:47:29",
+     "deep_link": "https://www.youtube.com/watch?v=QSRP-rTwfYE&t=10049s",
+     "kind": "analysis",
+     "note": "Trading at similar valuation to HYDX; generated $100 in fees in one day on $100K volume with $18K all-time fees; in market since August; speakers consider it a great buy and note it should be further along in development and revenue generation than newer competitors."
+    },
+    {
+     "episode_id": "RufYrYmMVwU",
+     "episode_title": "\ud83d\udd34 LIVE: Onchain Market Bottom Forming | Q4 Rally Setup + How to Maximize Returns",
+     "start_seconds": 11550.0,
+     "timestamp": "3:12:30",
+     "deep_link": "https://www.youtube.com/watch?v=RufYrYmMVwU&t=11550s",
+     "kind": "mention",
+     "note": "Described as having an advisory relationship (not paid in dollars)."
+    },
+    {
+     "episode_id": "UbKsP6WCsPs",
+     "episode_title": "\ud83d\udd34 LIVE: Market Cooling Off | Buy The Dip? | Market Update + Interviews",
+     "start_seconds": 272.0,
+     "timestamp": "4:32",
+     "deep_link": "https://www.youtube.com/watch?v=UbKsP6WCsPs&t=272s",
+     "kind": "analysis",
+     "note": "Mancer is described as a privacy protocol with swaps functionality and a DEX aggregator with privacy as an add-on being teased; the chart shows it peaked at about 8.5 million and dropped to 2 million, currently at 3.04 million."
+    },
+    {
+     "episode_id": "UbKsP6WCsPs",
+     "episode_title": "\ud83d\udd34 LIVE: Market Cooling Off | Buy The Dip? | Market Update + Interviews",
+     "start_seconds": 5518.0,
+     "timestamp": "1:31:58",
+     "deep_link": "https://www.youtube.com/watch?v=UbKsP6WCsPs&t=5518s",
+     "kind": "analysis",
+     "note": "DEX aggregator protocol providing quotes and routing for decentralized exchanges; speakers discuss its performance against other DEX aggregators, integration with trading platforms, and projected volume growth through platform partnerships."
+    },
+    {
+     "episode_id": "UbKsP6WCsPs",
+     "episode_title": "\ud83d\udd34 LIVE: Market Cooling Off | Buy The Dip? | Market Update + Interviews",
+     "start_seconds": 6653.0,
+     "timestamp": "1:50:53",
+     "deep_link": "https://www.youtube.com/watch?v=UbKsP6WCsPs&t=6653s",
+     "kind": "analysis",
+     "note": "A DEX aggregator that competes on quote quality and is working on integrations with trading platforms; the speaker discussed Mancer's roadmap, product development focus on beating competitors on quotes, and an upcoming integration partnership."
+    },
+    {
+     "episode_id": "iE95_Wr3ThQ",
+     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
+     "start_seconds": 438.0,
+     "timestamp": "7:18",
+     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=438s",
+     "kind": "analysis",
+     "note": "Mancer is launching a social capital/trading platform called Books that allows tokenized traders using ERC-6551 standard, where traders create their own tradeable tokens and share profits with token holders; speaker discussed it as a bullish development and disclosed buying Mancer on the dip."
+    },
+    {
+     "episode_id": "iE95_Wr3ThQ",
+     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
+     "start_seconds": 771.0,
+     "timestamp": "12:51",
+     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=771s",
+     "kind": "analysis",
+     "note": "Speaker has a decent size position in Mancer, owns the token, mentions 1% of fees goes to Mancer, and states the protocol had success in their first week."
+    },
+    {
+     "episode_id": "iE95_Wr3ThQ",
+     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
+     "start_seconds": 11450.0,
+     "timestamp": "3:10:50",
+     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=11450s",
+     "kind": "analysis",
+     "note": "Described as still looking good with potential catalysts this week; speaker noted they have not yet seen new social capital thing."
+    },
+    {
+     "episode_id": "vBZ8pcgAzJY",
+     "episode_title": "\ud83d\udd34 LIVE: Solana Onchain Surges While Robinhood Chain Cools | What's the Trade?",
+     "start_seconds": 13851.0,
+     "timestamp": "3:50:51",
+     "deep_link": "https://www.youtube.com/watch?v=vBZ8pcgAzJY&t=13851s",
+     "kind": "analysis",
+     "note": "Speaker analyzes Mancer chart, noting it is down 80% from all-time high, discussing support levels around the 2 million level, potential entry points, and stating the project has 'legit tech' being built."
+    }
+   ],
+   "episode_count": 7,
+   "single_reference": false
+  },
+  {
    "symbol": "MOBY",
    "name": "Moby Token",
    "asset_class": "crypto",
@@ -122815,125 +123170,6 @@
     }
    ],
    "episode_count": 5,
-   "single_reference": false
-  },
-  {
-   "symbol": "MANCER",
-   "name": "Mancer",
-   "asset_class": "crypto",
-   "mentions": 12,
-   "analysis": 11,
-   "moments": [
-    {
-     "episode_id": "IeKSAMWNmGs",
-     "episode_title": "\ud83d\udd34 LIVE: Hood Summit Day 2 | Is Robinhood Chain Dead? | Market Update + Interviews",
-     "start_seconds": 7532.0,
-     "timestamp": "2:05:32",
-     "deep_link": "https://www.youtube.com/watch?v=IeKSAMWNmGs&t=7532s",
-     "kind": "analysis",
-     "note": "Described as definitively the best router on Robinhood Chain with the best quotes and speeds, positioned as an infrastructure player for the long term."
-    },
-    {
-     "episode_id": "QSRP-rTwfYE",
-     "episode_title": "\ud83d\udd34 LIVE: Calm Before the Storm | Onchain Weekly Recap",
-     "start_seconds": 6586.0,
-     "timestamp": "1:49:46",
-     "deep_link": "https://www.youtube.com/watch?v=QSRP-rTwfYE&t=6586s",
-     "kind": "analysis",
-     "note": "Host disclosed buying a bag of Mancer and discussed its circulating supply at less than 50%, noting the tokenomics and platform revenue sharing structure."
-    },
-    {
-     "episode_id": "QSRP-rTwfYE",
-     "episode_title": "\ud83d\udd34 LIVE: Calm Before the Storm | Onchain Weekly Recap",
-     "start_seconds": 6674.0,
-     "timestamp": "1:51:14",
-     "deep_link": "https://www.youtube.com/watch?v=QSRP-rTwfYE&t=6674s",
-     "kind": "analysis",
-     "note": "Discussed staking mechanism where staking generates Mancer tokens and 50% of platform revenue; 318 million tokens burned from total supply of 2.5 billion; chart analysis shows 90% down from all-time high with support reversal forming."
-    },
-    {
-     "episode_id": "QSRP-rTwfYE",
-     "episode_title": "\ud83d\udd34 LIVE: Calm Before the Storm | Onchain Weekly Recap",
-     "start_seconds": 10049.0,
-     "timestamp": "2:47:29",
-     "deep_link": "https://www.youtube.com/watch?v=QSRP-rTwfYE&t=10049s",
-     "kind": "analysis",
-     "note": "Trading at similar valuation to HYDX; generated $100 in fees in one day on $100K volume with $18K all-time fees; in market since August; speakers consider it a great buy and note it should be further along in development and revenue generation than newer competitors."
-    },
-    {
-     "episode_id": "RufYrYmMVwU",
-     "episode_title": "\ud83d\udd34 LIVE: Onchain Market Bottom Forming | Q4 Rally Setup + How to Maximize Returns",
-     "start_seconds": 11550.0,
-     "timestamp": "3:12:30",
-     "deep_link": "https://www.youtube.com/watch?v=RufYrYmMVwU&t=11550s",
-     "kind": "mention",
-     "note": "Described as having an advisory relationship (not paid in dollars)."
-    },
-    {
-     "episode_id": "UbKsP6WCsPs",
-     "episode_title": "\ud83d\udd34 LIVE: Market Cooling Off | Buy The Dip? | Market Update + Interviews",
-     "start_seconds": 272.0,
-     "timestamp": "4:32",
-     "deep_link": "https://www.youtube.com/watch?v=UbKsP6WCsPs&t=272s",
-     "kind": "analysis",
-     "note": "Mancer is described as a privacy protocol with swaps functionality and a DEX aggregator with privacy as an add-on being teased; the chart shows it peaked at about 8.5 million and dropped to 2 million, currently at 3.04 million."
-    },
-    {
-     "episode_id": "UbKsP6WCsPs",
-     "episode_title": "\ud83d\udd34 LIVE: Market Cooling Off | Buy The Dip? | Market Update + Interviews",
-     "start_seconds": 5518.0,
-     "timestamp": "1:31:58",
-     "deep_link": "https://www.youtube.com/watch?v=UbKsP6WCsPs&t=5518s",
-     "kind": "analysis",
-     "note": "DEX aggregator protocol providing quotes and routing for decentralized exchanges; speakers discuss its performance against other DEX aggregators, integration with trading platforms, and projected volume growth through platform partnerships."
-    },
-    {
-     "episode_id": "UbKsP6WCsPs",
-     "episode_title": "\ud83d\udd34 LIVE: Market Cooling Off | Buy The Dip? | Market Update + Interviews",
-     "start_seconds": 6653.0,
-     "timestamp": "1:50:53",
-     "deep_link": "https://www.youtube.com/watch?v=UbKsP6WCsPs&t=6653s",
-     "kind": "analysis",
-     "note": "A DEX aggregator that competes on quote quality and is working on integrations with trading platforms; the speaker discussed Mancer's roadmap, product development focus on beating competitors on quotes, and an upcoming integration partnership."
-    },
-    {
-     "episode_id": "iE95_Wr3ThQ",
-     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
-     "start_seconds": 438.0,
-     "timestamp": "7:18",
-     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=438s",
-     "kind": "analysis",
-     "note": "Mancer is launching a social capital/trading platform called Books that allows tokenized traders using ERC-6551 standard, where traders create their own tradeable tokens and share profits with token holders; speaker discussed it as a bullish development and disclosed buying Mancer on the dip."
-    },
-    {
-     "episode_id": "iE95_Wr3ThQ",
-     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
-     "start_seconds": 771.0,
-     "timestamp": "12:51",
-     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=771s",
-     "kind": "analysis",
-     "note": "Speaker has a decent size position in Mancer, owns the token, mentions 1% of fees goes to Mancer, and states the protocol had success in their first week."
-    },
-    {
-     "episode_id": "iE95_Wr3ThQ",
-     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
-     "start_seconds": 11450.0,
-     "timestamp": "3:10:50",
-     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=11450s",
-     "kind": "analysis",
-     "note": "Described as still looking good with potential catalysts this week; speaker noted they have not yet seen new social capital thing."
-    },
-    {
-     "episode_id": "vBZ8pcgAzJY",
-     "episode_title": "\ud83d\udd34 LIVE: Solana Onchain Surges While Robinhood Chain Cools | What's the Trade?",
-     "start_seconds": 13851.0,
-     "timestamp": "3:50:51",
-     "deep_link": "https://www.youtube.com/watch?v=vBZ8pcgAzJY&t=13851s",
-     "kind": "analysis",
-     "note": "Speaker analyzes Mancer chart, noting it is down 80% from all-time high, discussing support levels around the 2 million level, potential entry points, and stating the project has 'legit tech' being built."
-    }
-   ],
-   "episode_count": 6,
    "single_reference": false
   },
   {
@@ -123318,6 +123554,152 @@
     }
    ],
    "episode_count": 12,
+   "single_reference": false
+  },
+  {
+   "symbol": "ORBEO",
+   "name": "Orbeo",
+   "asset_class": "other",
+   "mentions": 15,
+   "analysis": 10,
+   "moments": [
+    {
+     "episode_id": "-6Sccmoz7RQ",
+     "episode_title": "Is this Higgsfield AI built on Solana? | $CLAWHUNTER",
+     "start_seconds": 1420.0,
+     "timestamp": "23:40",
+     "deep_link": "https://www.youtube.com/watch?v=-6Sccmoz7RQ&t=1420s",
+     "kind": "mention",
+     "note": "Mentioned as having launched and caught traction around the time Recast had similar features."
+    },
+    {
+     "episode_id": "RLS5bDw7pYg",
+     "episode_title": "\ud83d\udd34 LIVE: Clarity Act Vote...What Next? | Market Update + Interviews",
+     "start_seconds": 4186.0,
+     "timestamp": "1:09:46",
+     "deep_link": "https://www.youtube.com/watch?v=RLS5bDw7pYg&t=4186s",
+     "kind": "analysis",
+     "note": "Speaker bought Orbeo after learning about it from Farmer Joe, citing the developer's background in NFT perp and the project's focus on inference capital markets."
+    },
+    {
+     "episode_id": "Y9xI81lOP7U",
+     "episode_title": "\ud83d\udfe2 LIVE: Uptober Calm Before the Storm | AI Szn Next Up?",
+     "start_seconds": 425.0,
+     "timestamp": "7:05",
+     "deep_link": "https://www.youtube.com/watch?v=Y9xI81lOP7U&t=425s",
+     "kind": "mention",
+     "note": "Named as a project in the agentic finance space on Robinhood chain, with a reference to Farmer Joe discussing it."
+    },
+    {
+     "episode_id": "ct401gJf-as",
+     "episode_title": "\ud83d\udd34 LIVE: Hood summit day | Revenue coins dominating | Interviews + Positioning",
+     "start_seconds": 237.0,
+     "timestamp": "3:57",
+     "deep_link": "https://www.youtube.com/watch?v=ct401gJf-as&t=237s",
+     "kind": "analysis",
+     "note": "AI play that kicked off; Farmer Joe was early and saw it grow from initial suggestion to $100M market cap; described as a compute/AI play with its own twist."
+    },
+    {
+     "episode_id": "ct401gJf-as",
+     "episode_title": "\ud83d\udd34 LIVE: Hood summit day | Revenue coins dominating | Interviews + Positioning",
+     "start_seconds": 4120.0,
+     "timestamp": "1:08:40",
+     "deep_link": "https://www.youtube.com/watch?v=ct401gJf-as&t=4120s",
+     "kind": "analysis",
+     "note": "Farmer Joe called Orbeo his 'AI golden child' and mentioned launching interesting projects on it, referencing its growth from 400k to 80 million market cap."
+    },
+    {
+     "episode_id": "ct401gJf-as",
+     "episode_title": "\ud83d\udd34 LIVE: Hood summit day | Revenue coins dominating | Interviews + Positioning",
+     "start_seconds": 6900.0,
+     "timestamp": "1:55:00",
+     "deep_link": "https://www.youtube.com/watch?v=ct401gJf-as&t=6900s",
+     "kind": "mention",
+     "note": "Mentioned as having clear road ahead with potential for developers and agents in ecosystem; speaker suggests it may be outpacing on price."
+    },
+    {
+     "episode_id": "d-mQ25Dpn68",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Hits $85K | Bull Market Confirmed | Market Update + Interview",
+     "start_seconds": 1103.0,
+     "timestamp": "18:23",
+     "deep_link": "https://www.youtube.com/watch?v=d-mQ25Dpn68&t=1103s",
+     "kind": "analysis",
+     "note": "Orbeo's chart was analyzed on a 12-hour timeframe showing significant price movement, with the developer associated with NFT perp and Pump Fun."
+    },
+    {
+     "episode_id": "iE95_Wr3ThQ",
+     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
+     "start_seconds": 894.0,
+     "timestamp": "14:54",
+     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=894s",
+     "kind": "mention",
+     "note": "Mentioned as a competitor to another token; speakers reference a previous Orbeo interview."
+    },
+    {
+     "episode_id": "iE95_Wr3ThQ",
+     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
+     "start_seconds": 9997.0,
+     "timestamp": "2:46:37",
+     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=9997s",
+     "kind": "analysis",
+     "note": "Discussed as a platform with a revenue-generating business and launchpad business; creator fees harvested reach quarter million dollars."
+    },
+    {
+     "episode_id": "n-1Tj9Emstc",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holding Above $82.5K | Calm Before the Storm?",
+     "start_seconds": 8032.0,
+     "timestamp": "2:13:52",
+     "deep_link": "https://www.youtube.com/watch?v=n-1Tj9Emstc&t=8032s",
+     "kind": "analysis",
+     "note": "Mentioned as a comparison point focused on agents rather than LLMs; launched September 14th and ran to 117 million market cap, used as reference for potential trajectory of similar projects."
+    },
+    {
+     "episode_id": "pwhvqgCGV0w",
+     "episode_title": "This Trader Caught $ORBIO at $40K Market Cap (Now $100M+)",
+     "start_seconds": 911.0,
+     "timestamp": "15:11",
+     "deep_link": "https://www.youtube.com/watch?v=pwhvqgCGV0w&t=911s",
+     "kind": "analysis",
+     "note": "Speaker invested in Orbeo token launched by developer Yash, describing it as combining on-chain inference with a launchpad function similar to Virtuals 2.0; expressed strong bullish conviction that the launchpad and inference infrastructure should be worth many multiples of any individual AI agent token, noting it became one of their largest positions with no plans to de-risk."
+    },
+    {
+     "episode_id": "pwhvqgCGV0w",
+     "episode_title": "This Trader Caught $ORBIO at $40K Market Cap (Now $100M+)",
+     "start_seconds": 1100.0,
+     "timestamp": "18:20",
+     "deep_link": "https://www.youtube.com/watch?v=pwhvqgCGV0w&t=1100s",
+     "kind": "analysis",
+     "note": "Discussed as an AI coin that bonded at around 10K-40K market cap; speakers shared it publicly and bought in early, with one speaker speculating it could be worth many multiples of its initial price."
+    },
+    {
+     "episode_id": "pwhvqgCGV0w",
+     "episode_title": "This Trader Caught $ORBIO at $40K Market Cap (Now $100M+)",
+     "start_seconds": 2170.0,
+     "timestamp": "36:10",
+     "deep_link": "https://www.youtube.com/watch?v=pwhvqgCGV0w&t=2170s",
+     "kind": "analysis",
+     "note": "Described as infrastructure to build agents that can do things, changing inference, functioning as a layer one for AI agents with launchpad and builder tool capabilities; speaker refers to it as their 'AI golden child'."
+    },
+    {
+     "episode_id": "q7hcCdzTTiI",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holds Above $83K | Uptober Incoming? | Market Update + Interviews",
+     "start_seconds": 304.0,
+     "timestamp": "5:04",
+     "deep_link": "https://www.youtube.com/watch?v=q7hcCdzTTiI&t=304s",
+     "kind": "mention",
+     "note": "Mentioned as something that ran over the last week or two; Farmer Joe has a thesis on it."
+    },
+    {
+     "episode_id": "vBZ8pcgAzJY",
+     "episode_title": "\ud83d\udd34 LIVE: Solana Onchain Surges While Robinhood Chain Cools | What's the Trade?",
+     "start_seconds": 13520.0,
+     "timestamp": "3:45:20",
+     "deep_link": "https://www.youtube.com/watch?v=vBZ8pcgAzJY&t=13520s",
+     "kind": "analysis",
+     "note": "Speaker examines Orbeo chart after noting it recently launched agentic launch pad or inference infrastructure, describes the chart pattern as pretty self-explanatory with continued upward trend expected to bounce."
+    }
+   ],
+   "episode_count": 10,
    "single_reference": false
   },
   {
@@ -123738,143 +124120,6 @@
     }
    ],
    "episode_count": 8,
-   "single_reference": false
-  },
-  {
-   "symbol": "ORBEO",
-   "name": "Orbeo",
-   "asset_class": "crypto",
-   "mentions": 14,
-   "analysis": 10,
-   "moments": [
-    {
-     "episode_id": "RLS5bDw7pYg",
-     "episode_title": "\ud83d\udd34 LIVE: Clarity Act Vote...What Next? | Market Update + Interviews",
-     "start_seconds": 4186.0,
-     "timestamp": "1:09:46",
-     "deep_link": "https://www.youtube.com/watch?v=RLS5bDw7pYg&t=4186s",
-     "kind": "analysis",
-     "note": "Speaker bought Orbeo after learning about it from Farmer Joe, citing the developer's background in NFT perp and the project's focus on inference capital markets."
-    },
-    {
-     "episode_id": "Y9xI81lOP7U",
-     "episode_title": "\ud83d\udfe2 LIVE: Uptober Calm Before the Storm | AI Szn Next Up?",
-     "start_seconds": 425.0,
-     "timestamp": "7:05",
-     "deep_link": "https://www.youtube.com/watch?v=Y9xI81lOP7U&t=425s",
-     "kind": "mention",
-     "note": "Named as a project in the agentic finance space on Robinhood chain, with a reference to Farmer Joe discussing it."
-    },
-    {
-     "episode_id": "ct401gJf-as",
-     "episode_title": "\ud83d\udd34 LIVE: Hood summit day | Revenue coins dominating | Interviews + Positioning",
-     "start_seconds": 237.0,
-     "timestamp": "3:57",
-     "deep_link": "https://www.youtube.com/watch?v=ct401gJf-as&t=237s",
-     "kind": "analysis",
-     "note": "AI play that kicked off; Farmer Joe was early and saw it grow from initial suggestion to $100M market cap; described as a compute/AI play with its own twist."
-    },
-    {
-     "episode_id": "ct401gJf-as",
-     "episode_title": "\ud83d\udd34 LIVE: Hood summit day | Revenue coins dominating | Interviews + Positioning",
-     "start_seconds": 4120.0,
-     "timestamp": "1:08:40",
-     "deep_link": "https://www.youtube.com/watch?v=ct401gJf-as&t=4120s",
-     "kind": "analysis",
-     "note": "Farmer Joe called Orbeo his 'AI golden child' and mentioned launching interesting projects on it, referencing its growth from 400k to 80 million market cap."
-    },
-    {
-     "episode_id": "ct401gJf-as",
-     "episode_title": "\ud83d\udd34 LIVE: Hood summit day | Revenue coins dominating | Interviews + Positioning",
-     "start_seconds": 6900.0,
-     "timestamp": "1:55:00",
-     "deep_link": "https://www.youtube.com/watch?v=ct401gJf-as&t=6900s",
-     "kind": "mention",
-     "note": "Mentioned as having clear road ahead with potential for developers and agents in ecosystem; speaker suggests it may be outpacing on price."
-    },
-    {
-     "episode_id": "d-mQ25Dpn68",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Hits $85K | Bull Market Confirmed | Market Update + Interview",
-     "start_seconds": 1103.0,
-     "timestamp": "18:23",
-     "deep_link": "https://www.youtube.com/watch?v=d-mQ25Dpn68&t=1103s",
-     "kind": "analysis",
-     "note": "Orbeo's chart was analyzed on a 12-hour timeframe showing significant price movement, with the developer associated with NFT perp and Pump Fun."
-    },
-    {
-     "episode_id": "iE95_Wr3ThQ",
-     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
-     "start_seconds": 894.0,
-     "timestamp": "14:54",
-     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=894s",
-     "kind": "mention",
-     "note": "Mentioned as a competitor to another token; speakers reference a previous Orbeo interview."
-    },
-    {
-     "episode_id": "iE95_Wr3ThQ",
-     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
-     "start_seconds": 9997.0,
-     "timestamp": "2:46:37",
-     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=9997s",
-     "kind": "analysis",
-     "note": "Discussed as a platform with a revenue-generating business and launchpad business; creator fees harvested reach quarter million dollars."
-    },
-    {
-     "episode_id": "n-1Tj9Emstc",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holding Above $82.5K | Calm Before the Storm?",
-     "start_seconds": 8032.0,
-     "timestamp": "2:13:52",
-     "deep_link": "https://www.youtube.com/watch?v=n-1Tj9Emstc&t=8032s",
-     "kind": "analysis",
-     "note": "Mentioned as a comparison point focused on agents rather than LLMs; launched September 14th and ran to 117 million market cap, used as reference for potential trajectory of similar projects."
-    },
-    {
-     "episode_id": "pwhvqgCGV0w",
-     "episode_title": "This Trader Caught $ORBIO at $40K Market Cap (Now $100M+)",
-     "start_seconds": 911.0,
-     "timestamp": "15:11",
-     "deep_link": "https://www.youtube.com/watch?v=pwhvqgCGV0w&t=911s",
-     "kind": "analysis",
-     "note": "Speaker invested in Orbeo token launched by developer Yash, describing it as combining on-chain inference with a launchpad function similar to Virtuals 2.0; expressed strong bullish conviction that the launchpad and inference infrastructure should be worth many multiples of any individual AI agent token, noting it became one of their largest positions with no plans to de-risk."
-    },
-    {
-     "episode_id": "pwhvqgCGV0w",
-     "episode_title": "This Trader Caught $ORBIO at $40K Market Cap (Now $100M+)",
-     "start_seconds": 1100.0,
-     "timestamp": "18:20",
-     "deep_link": "https://www.youtube.com/watch?v=pwhvqgCGV0w&t=1100s",
-     "kind": "analysis",
-     "note": "Discussed as an AI coin that bonded at around 10K-40K market cap; speakers shared it publicly and bought in early, with one speaker speculating it could be worth many multiples of its initial price."
-    },
-    {
-     "episode_id": "pwhvqgCGV0w",
-     "episode_title": "This Trader Caught $ORBIO at $40K Market Cap (Now $100M+)",
-     "start_seconds": 2170.0,
-     "timestamp": "36:10",
-     "deep_link": "https://www.youtube.com/watch?v=pwhvqgCGV0w&t=2170s",
-     "kind": "analysis",
-     "note": "Described as infrastructure to build agents that can do things, changing inference, functioning as a layer one for AI agents with launchpad and builder tool capabilities; speaker refers to it as their 'AI golden child'."
-    },
-    {
-     "episode_id": "q7hcCdzTTiI",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holds Above $83K | Uptober Incoming? | Market Update + Interviews",
-     "start_seconds": 304.0,
-     "timestamp": "5:04",
-     "deep_link": "https://www.youtube.com/watch?v=q7hcCdzTTiI&t=304s",
-     "kind": "mention",
-     "note": "Mentioned as something that ran over the last week or two; Farmer Joe has a thesis on it."
-    },
-    {
-     "episode_id": "vBZ8pcgAzJY",
-     "episode_title": "\ud83d\udd34 LIVE: Solana Onchain Surges While Robinhood Chain Cools | What's the Trade?",
-     "start_seconds": 13520.0,
-     "timestamp": "3:45:20",
-     "deep_link": "https://www.youtube.com/watch?v=vBZ8pcgAzJY&t=13520s",
-     "kind": "analysis",
-     "note": "Speaker examines Orbeo chart after noting it recently launched agentic launch pad or inference infrastructure, describes the chart pattern as pretty self-explanatory with continued upward trend expected to bounce."
-    }
-   ],
-   "episode_count": 9,
    "single_reference": false
   },
   {
@@ -124461,116 +124706,6 @@
     }
    ],
    "episode_count": 5,
-   "single_reference": false
-  },
-  {
-   "symbol": "RAM",
-   "name": "RAM (Memory Modules)",
-   "asset_class": "commodity",
-   "mentions": 11,
-   "analysis": 10,
-   "moments": [
-    {
-     "episode_id": "N0q17BVEOtQ",
-     "episode_title": "\ud83d\udd34 LIVE: HOOD Summit Approaches | Robinhood vs Solana | Market Update + Interviews",
-     "start_seconds": 4049.0,
-     "timestamp": "1:07:29",
-     "deep_link": "https://www.youtube.com/watch?v=N0q17BVEOtQ&t=4049s",
-     "kind": "analysis",
-     "note": "Platform offers options trading on RAM (memory modules), tracking secondary market pricing on a monthly basis with user-submitted information and oracle pricing."
-    },
-    {
-     "episode_id": "RufYrYmMVwU",
-     "episode_title": "\ud83d\udd34 LIVE: Onchain Market Bottom Forming | Q4 Rally Setup + How to Maximize Returns",
-     "start_seconds": 6300.0,
-     "timestamp": "1:45:00",
-     "deep_link": "https://www.youtube.com/watch?v=RufYrYmMVwU&t=6300s",
-     "kind": "analysis",
-     "note": "Discussed as a veteran centralized liquidity DEX with $100 billion in transaction volumes, $2 million spent on audits, no VC funding, LP fees of 95% pool and 5% burn to RAM stakers, $100 million 24-hour volume, and phase two roadmap involving emissions on Robinhood; noted as down 95% but ranking eighth highest 24-hour DEX volume in crypto."
-    },
-    {
-     "episode_id": "SrY9mYI88ho",
-     "episode_title": "Watch out for the Agent Wormhole | $WORM",
-     "start_seconds": 3074.0,
-     "timestamp": "51:14",
-     "deep_link": "https://www.youtube.com/watch?v=SrY9mYI88ho&t=3074s",
-     "kind": "analysis",
-     "note": "A centralized liquidity DEX that routes fees to token holders; $100 billion in transaction volumes; $100 million 24-hour volume; LPs receive 95% of pool fees with 5% burned to RAM stakers; down 95% from previous high; second highest 24-hour DEX volume on Robinhood chain after Uniswap."
-    },
-    {
-     "episode_id": "ZSBmoD9oLw8",
-     "episode_title": "\ud83d\udd34 LIVE: The Battle Of Blockchains | Solana vs Robinhood | Market Update + Interviews",
-     "start_seconds": 10611.0,
-     "timestamp": "2:56:51",
-     "deep_link": "https://www.youtube.com/watch?v=ZSBmoD9oLw8&t=10611s",
-     "kind": "analysis",
-     "note": "Speaker discusses RAM as a competitor to UP and Prologue, expresses confusion about its tokenomics as it is pooled on hyperEVM (inflationary) but not natively on Robin Hood chain."
-    },
-    {
-     "episode_id": "ckSVVsCYrSI",
-     "episode_title": "\ud83d\udd34 LIVE: Uptober Turned Choptober | Bitcoin Holding $80K | What's Next?",
-     "start_seconds": 11191.0,
-     "timestamp": "3:06:31",
-     "deep_link": "https://www.youtube.com/watch?v=ckSVVsCYrSI&t=11191s",
-     "kind": "mention",
-     "note": "Mentioned Ramses and noted that the team got quote tweeted by Robin Hood; referred to looking at the RAM token earlier."
-    },
-    {
-     "episode_id": "iE95_Wr3ThQ",
-     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
-     "start_seconds": 1241.0,
-     "timestamp": "20:41",
-     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=1241s",
-     "kind": "analysis",
-     "note": "Ramses is a liquidity protocol on RobnoChain with 2.5 billion trading volume and 30+ stock tokens; operates as infrastructure layer for builders and provides fee flexibility compared to Uniswap."
-    },
-    {
-     "episode_id": "iE95_Wr3ThQ",
-     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
-     "start_seconds": 1666.0,
-     "timestamp": "27:46",
-     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=1666s",
-     "kind": "analysis",
-     "note": "Speakers discuss Ramsey (RAM) token performance, its deployment across HyperEVM and Robinhood chains, agentic buyback mechanisms funded by fees, tokenomics with periods of deflation when buybacks exceed emissions, and buyback amounts including 776,000 tokens burned in recent epochs."
-    },
-    {
-     "episode_id": "iE95_Wr3ThQ",
-     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
-     "start_seconds": 2066.0,
-     "timestamp": "34:26",
-     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=2066s",
-     "kind": "analysis",
-     "note": "RAM discussed in context of burns outpacing emissions and considering holders; mentioned as protocol with buyers and voter fees mechanism."
-    },
-    {
-     "episode_id": "iE95_Wr3ThQ",
-     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
-     "start_seconds": 3028.0,
-     "timestamp": "50:28",
-     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=3028s",
-     "kind": "analysis",
-     "note": "Protocol token with a $2 million market cap discussed relative to $2.5 billion in volume; September revenue was $510,677 for token holders; compared to other protocols by market cap-to-revenue multiples."
-    },
-    {
-     "episode_id": "iE95_Wr3ThQ",
-     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
-     "start_seconds": 3199.0,
-     "timestamp": "53:19",
-     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=3199s",
-     "kind": "analysis",
-     "note": "Protocol discussed as helping projects bootstrap liquidity efficiently; token stakers benefit from open buyback season with network effects."
-    },
-    {
-     "episode_id": "iE95_Wr3ThQ",
-     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
-     "start_seconds": 3292.0,
-     "timestamp": "54:52",
-     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=3292s",
-     "kind": "analysis",
-     "note": "RAM token compared across chains; on Robinhood doing twice the volume and revenue compared to Hyper EVM version, transitioned from inflationary to deflationary model with buybacks outpacing emissions."
-    }
-   ],
-   "episode_count": 6,
    "single_reference": false
   },
   {
@@ -145057,6 +145192,116 @@
    "single_reference": false
   },
   {
+   "symbol": "AERO",
+   "name": "Aerodrome",
+   "asset_class": "other",
+   "mentions": 11,
+   "analysis": 3,
+   "moments": [
+    {
+     "episode_id": "H0LU6CPnYXI",
+     "episode_title": "LongBow: Lend USDG. Borrow and leverage against stocks, NFTs, RWAs, memes.",
+     "start_seconds": 264.0,
+     "timestamp": "4:24",
+     "deep_link": "https://www.youtube.com/watch?v=H0LU6CPnYXI&t=264s",
+     "kind": "mention",
+     "note": "Mentioned as a protocol with incentivized liquidity through voting incentives and token locking, distinct from Longboat's credit layer approach."
+    },
+    {
+     "episode_id": "HpUlB1tVeCI",
+     "episode_title": "\ud83d\udd34 LIVE: Did Meteora Just Do What Believe Couldn't? | Live Market Updates + Onchain Positioning",
+     "start_seconds": 8921.0,
+     "timestamp": "2:28:41",
+     "deep_link": "https://www.youtube.com/watch?v=HpUlB1tVeCI&t=8921s",
+     "kind": "mention",
+     "note": "Mentioned as a liquidity pool platform alongside Uniswap where liquidity position tokenization is expanding."
+    },
+    {
+     "episode_id": "JipaDoMQT-E",
+     "episode_title": "Ramses Hits $2.5B Volume on Robinhood Chain | Agentic Buybacks & Product Updates",
+     "start_seconds": 1532.0,
+     "timestamp": "25:32",
+     "deep_link": "https://www.youtube.com/watch?v=JipaDoMQT-E&t=1532s",
+     "kind": "mention",
+     "note": "Mentioned briefly at the end as a competitive reference point in a question about competition."
+    },
+    {
+     "episode_id": "JlFABCLweBc",
+     "episode_title": "NYSE A16Z PUSH TO CRYPTO, TRADERS WINNING WITH @MeteoraAG DLMM w/@MeteoraEco @KittyKunt_ @vesper792",
+     "start_seconds": 8696.0,
+     "timestamp": "2:24:56",
+     "deep_link": "https://www.youtube.com/watch?v=JlFABCLweBc&t=8696s",
+     "kind": "mention",
+     "note": "Named as generating less revenue than Meteor."
+    },
+    {
+     "episode_id": "bckrJLRN_l0",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto Pulling Back...Buy the Dip? | Market Update + Interviews",
+     "start_seconds": 1557.0,
+     "timestamp": "25:57",
+     "deep_link": "https://www.youtube.com/watch?v=bckrJLRN_l0&t=1557s",
+     "kind": "mention",
+     "note": "Named as a blue chip application that launched on ARK blockchain."
+    },
+    {
+     "episode_id": "cLf8mjJjEJY",
+     "episode_title": "Own a Piece of the Robotics Revolution - XMAQUINA",
+     "start_seconds": 1970.0,
+     "timestamp": "32:50",
+     "deep_link": "https://www.youtube.com/watch?v=cLf8mjJjEJY&t=1970s",
+     "kind": "analysis",
+     "note": "Selected as the preferred back-end infrastructure for the protocol due to their tokenization infrastructure and whitelist/freeze capabilities for real world assets; identified as partners for launch."
+    },
+    {
+     "episode_id": "gQU9V7n-cRM",
+     "episode_title": "\ud83d\udd34 LIVE: BTC cools while Alts show strength | RHC recovery? | Market update + Interviews",
+     "start_seconds": 1218.0,
+     "timestamp": "20:18",
+     "deep_link": "https://www.youtube.com/watch?v=gQU9V7n-cRM&t=1218s",
+     "kind": "analysis",
+     "note": "Speaker mentions Aerodrome could pick up and gain traction and is looking good."
+    },
+    {
+     "episode_id": "hcjIEdcjlPw",
+     "episode_title": "UP: The native (3,3) exchange and liquidity layer of Robinhood Chain.",
+     "start_seconds": 146.0,
+     "timestamp": "2:26",
+     "deep_link": "https://www.youtube.com/watch?v=hcjIEdcjlPw&t=146s",
+     "kind": "mention",
+     "note": "Aerodrome is named as an iteration of VE(3,3) mechanisms across different chains."
+    },
+    {
+     "episode_id": "hcjIEdcjlPw",
+     "episode_title": "UP: The native (3,3) exchange and liquidity layer of Robinhood Chain.",
+     "start_seconds": 1190.0,
+     "timestamp": "19:50",
+     "deep_link": "https://www.youtube.com/watch?v=hcjIEdcjlPw&t=1190s",
+     "kind": "analysis",
+     "note": "The protocol is a fork of Aerodrome; speakers discuss how Aerodrome has done well with innovation and they keep those elements while making custom changes."
+    },
+    {
+     "episode_id": "q7hcCdzTTiI",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holds Above $83K | Uptober Incoming? | Market Update + Interviews",
+     "start_seconds": 13042.0,
+     "timestamp": "3:37:22",
+     "deep_link": "https://www.youtube.com/watch?v=q7hcCdzTTiI&t=13042s",
+     "kind": "mention",
+     "note": "Mentioned as the original project that UP is forked from."
+    },
+    {
+     "episode_id": "zWznxthbJNA",
+     "episode_title": "\ud83d\udd34 LIVE: MSTR STRC gets crushed. P2P Cash, onchain startups | Live Market Updates",
+     "start_seconds": 8802.0,
+     "timestamp": "2:26:42",
+     "deep_link": "https://www.youtube.com/watch?v=zWznxthbJNA&t=8802s",
+     "kind": "mention",
+     "note": "Mentioned as a pool migration announcement related to Velvet's recent price movement."
+    }
+   ],
+   "episode_count": 10,
+   "single_reference": false
+  },
+  {
    "symbol": "GC",
    "name": "Gold",
    "asset_class": "commodity",
@@ -145155,107 +145400,6 @@
     }
    ],
    "episode_count": 10,
-   "single_reference": false
-  },
-  {
-   "symbol": "AERO",
-   "name": "Aerodrome",
-   "asset_class": "other",
-   "mentions": 10,
-   "analysis": 3,
-   "moments": [
-    {
-     "episode_id": "H0LU6CPnYXI",
-     "episode_title": "LongBow: Lend USDG. Borrow and leverage against stocks, NFTs, RWAs, memes.",
-     "start_seconds": 264.0,
-     "timestamp": "4:24",
-     "deep_link": "https://www.youtube.com/watch?v=H0LU6CPnYXI&t=264s",
-     "kind": "mention",
-     "note": "Mentioned as a protocol with incentivized liquidity through voting incentives and token locking, distinct from Longboat's credit layer approach."
-    },
-    {
-     "episode_id": "HpUlB1tVeCI",
-     "episode_title": "\ud83d\udd34 LIVE: Did Meteora Just Do What Believe Couldn't? | Live Market Updates + Onchain Positioning",
-     "start_seconds": 8921.0,
-     "timestamp": "2:28:41",
-     "deep_link": "https://www.youtube.com/watch?v=HpUlB1tVeCI&t=8921s",
-     "kind": "mention",
-     "note": "Mentioned as a liquidity pool platform alongside Uniswap where liquidity position tokenization is expanding."
-    },
-    {
-     "episode_id": "JlFABCLweBc",
-     "episode_title": "NYSE A16Z PUSH TO CRYPTO, TRADERS WINNING WITH @MeteoraAG DLMM w/@MeteoraEco @KittyKunt_ @vesper792",
-     "start_seconds": 8696.0,
-     "timestamp": "2:24:56",
-     "deep_link": "https://www.youtube.com/watch?v=JlFABCLweBc&t=8696s",
-     "kind": "mention",
-     "note": "Named as generating less revenue than Meteor."
-    },
-    {
-     "episode_id": "bckrJLRN_l0",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto Pulling Back...Buy the Dip? | Market Update + Interviews",
-     "start_seconds": 1557.0,
-     "timestamp": "25:57",
-     "deep_link": "https://www.youtube.com/watch?v=bckrJLRN_l0&t=1557s",
-     "kind": "mention",
-     "note": "Named as a blue chip application that launched on ARK blockchain."
-    },
-    {
-     "episode_id": "cLf8mjJjEJY",
-     "episode_title": "Own a Piece of the Robotics Revolution - XMAQUINA",
-     "start_seconds": 1970.0,
-     "timestamp": "32:50",
-     "deep_link": "https://www.youtube.com/watch?v=cLf8mjJjEJY&t=1970s",
-     "kind": "analysis",
-     "note": "Selected as the preferred back-end infrastructure for the protocol due to their tokenization infrastructure and whitelist/freeze capabilities for real world assets; identified as partners for launch."
-    },
-    {
-     "episode_id": "gQU9V7n-cRM",
-     "episode_title": "\ud83d\udd34 LIVE: BTC cools while Alts show strength | RHC recovery? | Market update + Interviews",
-     "start_seconds": 1218.0,
-     "timestamp": "20:18",
-     "deep_link": "https://www.youtube.com/watch?v=gQU9V7n-cRM&t=1218s",
-     "kind": "analysis",
-     "note": "Speaker mentions Aerodrome could pick up and gain traction and is looking good."
-    },
-    {
-     "episode_id": "hcjIEdcjlPw",
-     "episode_title": "UP: The native (3,3) exchange and liquidity layer of Robinhood Chain.",
-     "start_seconds": 146.0,
-     "timestamp": "2:26",
-     "deep_link": "https://www.youtube.com/watch?v=hcjIEdcjlPw&t=146s",
-     "kind": "mention",
-     "note": "Aerodrome is named as an iteration of VE(3,3) mechanisms across different chains."
-    },
-    {
-     "episode_id": "hcjIEdcjlPw",
-     "episode_title": "UP: The native (3,3) exchange and liquidity layer of Robinhood Chain.",
-     "start_seconds": 1190.0,
-     "timestamp": "19:50",
-     "deep_link": "https://www.youtube.com/watch?v=hcjIEdcjlPw&t=1190s",
-     "kind": "analysis",
-     "note": "The protocol is a fork of Aerodrome; speakers discuss how Aerodrome has done well with innovation and they keep those elements while making custom changes."
-    },
-    {
-     "episode_id": "q7hcCdzTTiI",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holds Above $83K | Uptober Incoming? | Market Update + Interviews",
-     "start_seconds": 13042.0,
-     "timestamp": "3:37:22",
-     "deep_link": "https://www.youtube.com/watch?v=q7hcCdzTTiI&t=13042s",
-     "kind": "mention",
-     "note": "Mentioned as the original project that UP is forked from."
-    },
-    {
-     "episode_id": "zWznxthbJNA",
-     "episode_title": "\ud83d\udd34 LIVE: MSTR STRC gets crushed. P2P Cash, onchain startups | Live Market Updates",
-     "start_seconds": 8802.0,
-     "timestamp": "2:26:42",
-     "deep_link": "https://www.youtube.com/watch?v=zWznxthbJNA&t=8802s",
-     "kind": "mention",
-     "note": "Mentioned as a pool migration announcement related to Velvet's recent price movement."
-    }
-   ],
-   "episode_count": 9,
    "single_reference": false
   },
   {
@@ -149229,6 +149373,44 @@
      "deep_link": "https://www.youtube.com/watch?v=dHFyU0S98K4&t=10203s",
      "kind": "analysis",
      "note": "Speaker analyzes ZK-SL as a project using zero-knowledge proofs to reduce Solana validator costs by 99.9% from $34+ million annually to $5-10,000, examines GitHub code quality, and discusses staking tokens to validate on Solana network."
+    }
+   ],
+   "episode_count": 2,
+   "single_reference": false
+  },
+  {
+   "symbol": "XRAM",
+   "name": "XRAM",
+   "asset_class": "other",
+   "mentions": 3,
+   "analysis": 3,
+   "moments": [
+    {
+     "episode_id": "JipaDoMQT-E",
+     "episode_title": "Ramses Hits $2.5B Volume on Robinhood Chain | Agentic Buybacks & Product Updates",
+     "start_seconds": 869.0,
+     "timestamp": "14:29",
+     "deep_link": "https://www.youtube.com/watch?v=JipaDoMQT-E&t=869s",
+     "kind": "analysis",
+     "note": "Speakers discussed XRAM games, emissions direction, voter fees paid to XRAM holders to incentivize staking liquidity, and identified XRAM as where token holders would see the highest impact from fees."
+    },
+    {
+     "episode_id": "iE95_Wr3ThQ",
+     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
+     "start_seconds": 1392.0,
+     "timestamp": "23:12",
+     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=1392s",
+     "kind": "analysis",
+     "note": "XRAM token holders can have a say in where emissions go to support strategic initiatives and gauge games."
+    },
+    {
+     "episode_id": "iE95_Wr3ThQ",
+     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
+     "start_seconds": 2048.0,
+     "timestamp": "34:08",
+     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=2048s",
+     "kind": "analysis",
+     "note": "XRAM discussed as a token where partners can direct emissions and where voters stake liquidity to earn voter fees; described as where token holders see highest impact when fees are directed to them."
     }
    ],
    "episode_count": 2,
@@ -159627,35 +159809,6 @@
    "single_reference": false
   },
   {
-   "symbol": "XRAM",
-   "name": "XRAM",
-   "asset_class": "crypto",
-   "mentions": 2,
-   "analysis": 2,
-   "moments": [
-    {
-     "episode_id": "iE95_Wr3ThQ",
-     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
-     "start_seconds": 1392.0,
-     "timestamp": "23:12",
-     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=1392s",
-     "kind": "analysis",
-     "note": "XRAM token holders can have a say in where emissions go to support strategic initiatives and gauge games."
-    },
-    {
-     "episode_id": "iE95_Wr3ThQ",
-     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
-     "start_seconds": 2048.0,
-     "timestamp": "34:08",
-     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=2048s",
-     "kind": "analysis",
-     "note": "XRAM discussed as a token where partners can direct emissions and where voters stake liquidity to earn voter fees; described as where token holders see highest impact when fees are directed to them."
-    }
-   ],
-   "episode_count": 1,
-   "single_reference": false
-  },
-  {
    "symbol": "OTC",
    "name": "OTC",
    "asset_class": "crypto",
@@ -164862,6 +165015,35 @@
      "deep_link": "https://www.youtube.com/watch?v=cHos0BsSoFM&t=1250s",
      "kind": "mention",
      "note": "Described as a paired token on Pardot family launchpad with small market cap, mentioned as potential asymmetry or beta play related to NetNet."
+    }
+   ],
+   "episode_count": 2,
+   "single_reference": false
+  },
+  {
+   "symbol": "HYPER",
+   "name": "Hyper-EVM",
+   "asset_class": "other",
+   "mentions": 2,
+   "analysis": 1,
+   "moments": [
+    {
+     "episode_id": "JipaDoMQT-E",
+     "episode_title": "Ramses Hits $2.5B Volume on Robinhood Chain | Agentic Buybacks & Product Updates",
+     "start_seconds": 1231.0,
+     "timestamp": "20:31",
+     "deep_link": "https://www.youtube.com/watch?v=JipaDoMQT-E&t=1231s",
+     "kind": "analysis",
+     "note": "Speakers compare Hyper-EVM to Robinhood chain, discuss how HyperLiquid created the chain and varying degrees of support for it, mention potential for excitement depending on leadership decisions, and note past airdrops as potential incentives."
+    },
+    {
+     "episode_id": "bckrJLRN_l0",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto Pulling Back...Buy the Dip? | Market Update + Interviews",
+     "start_seconds": 9877.0,
+     "timestamp": "2:44:37",
+     "deep_link": "https://www.youtube.com/watch?v=bckrJLRN_l0&t=9877s",
+     "kind": "mention",
+     "note": "Referenced as past Hyperliquid pairings on Stonk leaderboard."
     }
    ],
    "episode_count": 2,
@@ -183754,6 +183936,35 @@
    "single_reference": false
   },
   {
+   "symbol": "R33",
+   "name": "R33",
+   "asset_class": "other",
+   "mentions": 2,
+   "analysis": 0,
+   "moments": [
+    {
+     "episode_id": "JipaDoMQT-E",
+     "episode_title": "Ramses Hits $2.5B Volume on Robinhood Chain | Agentic Buybacks & Product Updates",
+     "start_seconds": 1099.0,
+     "timestamp": "18:19",
+     "deep_link": "https://www.youtube.com/watch?v=JipaDoMQT-E&t=1099s",
+     "kind": "mention",
+     "note": "R33 and auto-compounding R33 were mentioned briefly as options available to users."
+    },
+    {
+     "episode_id": "iE95_Wr3ThQ",
+     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
+     "start_seconds": 2284.0,
+     "timestamp": "38:04",
+     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=2284s",
+     "kind": "mention",
+     "note": "R33 mentioned as an auto-compounding option related to XRAM."
+    }
+   ],
+   "episode_count": 2,
+   "single_reference": false
+  },
+  {
    "symbol": "RPL",
    "name": "Rocket Pool",
    "asset_class": "crypto",
@@ -184448,6 +184659,26 @@
    ],
    "episode_count": 1,
    "single_reference": false
+  },
+  {
+   "symbol": "CLAWH",
+   "name": "Claw Hunter",
+   "asset_class": "crypto",
+   "mentions": 1,
+   "analysis": 0,
+   "moments": [
+    {
+     "episode_id": "-6Sccmoz7RQ",
+     "episode_title": "Is this Higgsfield AI built on Solana? | $CLAWHUNTER",
+     "start_seconds": 563.0,
+     "timestamp": "9:23",
+     "deep_link": "https://www.youtube.com/watch?v=-6Sccmoz7RQ&t=563s",
+     "kind": "mention",
+     "note": "Studios project initially launched under the ticker Claw Hunter on Claw Pump."
+    }
+   ],
+   "episode_count": 1,
+   "single_reference": true
   },
   {
    "symbol": "RVN",
@@ -190570,26 +190801,6 @@
    "single_reference": true
   },
   {
-   "symbol": "HYPER",
-   "name": "Hyperliquid (alternative reference)",
-   "asset_class": "crypto",
-   "mentions": 1,
-   "analysis": 0,
-   "moments": [
-    {
-     "episode_id": "bckrJLRN_l0",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto Pulling Back...Buy the Dip? | Market Update + Interviews",
-     "start_seconds": 9877.0,
-     "timestamp": "2:44:37",
-     "deep_link": "https://www.youtube.com/watch?v=bckrJLRN_l0&t=9877s",
-     "kind": "mention",
-     "note": "Referenced as past Hyperliquid pairings on Stonk leaderboard."
-    }
-   ],
-   "episode_count": 1,
-   "single_reference": true
-  },
-  {
    "symbol": "JUDY",
    "name": "Judy Shelton",
    "asset_class": "other",
@@ -191784,26 +191995,6 @@
      "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=855s",
      "kind": "mention",
      "note": "Sahiro submitted this ticker; described as productized tokenized money and compute dollar for agents."
-    }
-   ],
-   "episode_count": 1,
-   "single_reference": true
-  },
-  {
-   "symbol": "R33",
-   "name": "R33",
-   "asset_class": "crypto",
-   "mentions": 1,
-   "analysis": 0,
-   "moments": [
-    {
-     "episode_id": "iE95_Wr3ThQ",
-     "episode_title": "\ud83d\udd34 LIVE: Market Bouncing | Start of a Bigger Move?",
-     "start_seconds": 2284.0,
-     "timestamp": "38:04",
-     "deep_link": "https://www.youtube.com/watch?v=iE95_Wr3ThQ&t=2284s",
-     "kind": "mention",
-     "note": "R33 mentioned as an auto-compounding option related to XRAM."
     }
    ],
    "episode_count": 1,
@@ -194250,11 +194441,12 @@
    "single_reference": true
   }
  ],
- "total_hits": 18810,
- "dropped_low_confidence": 2284,
- "dropped_not_an_asset": 2091,
- "episodes_processed": 662,
+ "total_hits": 18830,
+ "dropped_low_confidence": 2286,
+ "dropped_not_an_asset": 2097,
+ "episodes_processed": 664,
  "episode_ids": [
+  "-6Sccmoz7RQ",
   "-8z0M77EVZg",
   "-Lbmo2D7630",
   "-NFoneGDrT0",
@@ -194444,6 +194636,7 @@
   "JVolyfFS-MI",
   "JZeOr9lkQzU",
   "JaSBuI56yIg",
+  "JipaDoMQT-E",
   "JlFABCLweBc",
   "JsgtP-nXIkA",
   "K2e4svCMBxY",
