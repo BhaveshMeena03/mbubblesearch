@@ -25,8 +25,24 @@ jobs:
       # _has_audio and leading_video_gap unverified in CI, and render.yaml
       # treats ffmpeg's behaviour as a production concern -- a max-quality
       # encode peaks near 1GB and OOM-kills a smaller box.
+      #
+      # Bounded, and retried. On 22 and 23 Oct 2026 this step hung for over
+      # twenty minutes on a stalled package mirror, twice, with lint and the
+      # tests never starting; both runs had to be cancelled by hand. Each
+      # attempt now gets 150 seconds, three attempts, and the step a hard
+      # ceiling, so a bad mirror means a retry or a red run, never a hang.
       - name: Install ffmpeg
-        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+        timeout-minutes: 8
+        run: |
+          for attempt in 1 2 3; do
+            if timeout 150 sudo apt-get update -o Acquire::Retries=3 \
+               && timeout 150 sudo apt-get install -y --no-install-recommends ffmpeg; then
+              exit 0
+            fi
+            echo "ffmpeg install attempt $attempt stalled or failed; retrying"
+            sleep 10
+          done
+          exit 1
 
       - name: Lint
         run: ruff check .
