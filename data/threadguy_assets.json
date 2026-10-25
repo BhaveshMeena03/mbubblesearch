@@ -4,8 +4,8 @@
    "symbol": "BTC",
    "name": "Bitcoin",
    "asset_class": "crypto",
-   "mentions": 2720,
-   "analysis": 1552,
+   "mentions": 2721,
+   "analysis": 1553,
    "moments": [
     {
      "episode_id": "-A0rmPYG0s0",
@@ -12302,6 +12302,15 @@
      "note": "Speaker mentions voting for Trump as a crypto Bitcoin holder."
     },
     {
+     "episode_id": "W8emBqu0gGI",
+     "episode_title": "Surveillor - How to Size Into a Bottom Without Leverage",
+     "start_seconds": 173.0,
+     "timestamp": "2:53",
+     "deep_link": "https://www.youtube.com/watch?v=W8emBqu0gGI&t=173s",
+     "kind": "analysis",
+     "note": "Speaker mentions Bitcoin as a 'major' alongside ETH and SOL, discussing when they would graduate to trading it as their size grows; also mentioned in context of FUD about encryption being cracked."
+    },
+    {
      "episode_id": "Wfxvpj7jMyg",
      "episode_title": "Robinhood\u2019s Memecoin Strategy is Working and Onchain is Fun Again",
      "start_seconds": 924.0,
@@ -24488,15 +24497,15 @@
      "note": "Named in passing when speaker says 'before we even talk about anything with btc we got to get out of here' and mentions needing to 'get out of 73'."
     }
    ],
-   "episode_count": 518,
+   "episode_count": 519,
    "single_reference": false
   },
   {
    "symbol": "SOL",
    "name": "Solana",
    "asset_class": "crypto",
-   "mentions": 1199,
-   "analysis": 573,
+   "mentions": 1200,
+   "analysis": 574,
    "moments": [
     {
      "episode_id": "-A0rmPYG0s0",
@@ -30079,6 +30088,15 @@
      "note": "Speaker mentioned Super Intelligence on Solana as a possible AI coin candidate."
     },
     {
+     "episode_id": "W8emBqu0gGI",
+     "episode_title": "Surveillor - How to Size Into a Bottom Without Leverage",
+     "start_seconds": 173.0,
+     "timestamp": "2:53",
+     "deep_link": "https://www.youtube.com/watch?v=W8emBqu0gGI&t=173s",
+     "kind": "analysis",
+     "note": "Speaker lists SOL as a 'major' cryptocurrency alongside Bitcoin and ETH, identifying it as part of flows that move to alternative coins."
+    },
+    {
      "episode_id": "Wfxvpj7jMyg",
      "episode_title": "Robinhood\u2019s Memecoin Strategy is Working and Onchain is Fun Again",
      "start_seconds": 574.0,
@@ -35290,14 +35308,14 @@
      "note": "Speaker mentions buying Solana in passing while discussing market downturn."
     }
    ],
-   "episode_count": 418,
+   "episode_count": 419,
    "single_reference": false
   },
   {
    "symbol": "ZEC",
    "name": "Zcash",
    "asset_class": "crypto",
-   "mentions": 870,
+   "mentions": 872,
    "analysis": 494,
    "moments": [
     {
@@ -39387,6 +39405,24 @@
      "note": "Speaker speculates that ZEC could reach 7K if they went into a coma for six months."
     },
     {
+     "episode_id": "W8emBqu0gGI",
+     "episode_title": "Surveillor - How to Size Into a Bottom Without Leverage",
+     "start_seconds": 273.0,
+     "timestamp": "4:33",
+     "deep_link": "https://www.youtube.com/watch?v=W8emBqu0gGI&t=273s",
+     "kind": "mention",
+     "note": "Speaker mentions Zcash flows in context of capital moving out of major cryptocurrencies."
+    },
+    {
+     "episode_id": "W8emBqu0gGI",
+     "episode_title": "Surveillor - How to Size Into a Bottom Without Leverage",
+     "start_seconds": 1363.0,
+     "timestamp": "22:43",
+     "deep_link": "https://www.youtube.com/watch?v=W8emBqu0gGI&t=1363s",
+     "kind": "mention",
+     "note": "Speaker briefly mentions Zcash positively in passing when discussing privacy coins, noting it has a good case due to longevity and distributed supply."
+    },
+    {
      "episode_id": "Wfxvpj7jMyg",
      "episode_title": "Robinhood\u2019s Memecoin Strategy is Working and Onchain is Fun Again",
      "start_seconds": 951.0,
@@ -43131,14 +43167,14 @@
      "note": "Speaker closed a Zcash trade for a million dollars, closed around half of the position and described it as a sick trade."
     }
    ],
-   "episode_count": 276,
+   "episode_count": 277,
    "single_reference": false
   },
   {
    "symbol": "HYPE",
    "name": "Hyperliquid",
    "asset_class": "crypto",
-   "mentions": 748,
+   "mentions": 750,
    "analysis": 486,
    "moments": [
     {
@@ -46787,6 +46823,24 @@
      "note": "Speaker expresses trust in Hyperliquid and references BitGet's claim that Hyperliquid could be the next FTX after a Jelly Jelly exploit."
     },
     {
+     "episode_id": "W8emBqu0gGI",
+     "episode_title": "Surveillor - How to Size Into a Bottom Without Leverage",
+     "start_seconds": 278.0,
+     "timestamp": "4:38",
+     "deep_link": "https://www.youtube.com/watch?v=W8emBqu0gGI&t=278s",
+     "kind": "mention",
+     "note": "Speaker mentions Hyperliquid flows in context of capital rotation from majors like Bitcoin, ETH, and Solana."
+    },
+    {
+     "episode_id": "W8emBqu0gGI",
+     "episode_title": "Surveillor - How to Size Into a Bottom Without Leverage",
+     "start_seconds": 1633.0,
+     "timestamp": "27:13",
+     "deep_link": "https://www.youtube.com/watch?v=W8emBqu0gGI&t=1633s",
+     "kind": "mention",
+     "note": "Mentioned as going through integration with other partners like Kraken that have legal stack to serve perps."
+    },
+    {
      "episode_id": "XDnTEqurUS8",
      "episode_title": "Lighter Founder Vlad DEBATE with Top Traders Robert Chang & Marty | TG Podcast",
      "start_seconds": 1763.0,
@@ -49874,15 +49928,15 @@
      "note": "Speaker references going to hyperliquid and questions whether there is much volume there."
     }
    ],
-   "episode_count": 316,
+   "episode_count": 317,
    "single_reference": false
   },
   {
    "symbol": "ETH",
    "name": "Ethereum",
    "asset_class": "crypto",
-   "mentions": 988,
-   "analysis": 452,
+   "mentions": 989,
+   "analysis": 453,
    "moments": [
     {
      "episode_id": "-A0rmPYG0s0",
@@ -54385,6 +54439,15 @@
      "note": "Ethereum mentioned as one of several assets where people hear about others making obscene amounts of money."
     },
     {
+     "episode_id": "W8emBqu0gGI",
+     "episode_title": "Surveillor - How to Size Into a Bottom Without Leverage",
+     "start_seconds": 173.0,
+     "timestamp": "2:53",
+     "deep_link": "https://www.youtube.com/watch?v=W8emBqu0gGI&t=173s",
+     "kind": "analysis",
+     "note": "Speaker lists ETH alongside Bitcoin and SOL as a 'major' that they currently avoid in most cases, focusing instead on altcoins until reaching a size where majors must be traded."
+    },
+    {
      "episode_id": "Wfxvpj7jMyg",
      "episode_title": "Robinhood\u2019s Memecoin Strategy is Working and Onchain is Fun Again",
      "start_seconds": 2020.0,
@@ -58777,15 +58840,15 @@
      "note": "Referenced alongside Bitcoin as comparison for altcoin behavior."
     }
    ],
-   "episode_count": 385,
+   "episode_count": 386,
    "single_reference": false
   },
   {
    "symbol": "PUMP",
    "name": "Pump.fun",
    "asset_class": "crypto",
-   "mentions": 514,
-   "analysis": 401,
+   "mentions": 517,
+   "analysis": 404,
    "moments": [
     {
      "episode_id": "-ILnWOT87hQ",
@@ -61380,6 +61443,33 @@
      "note": "Speaker stated they could save Pump.fun and discussed acquiring competing platforms to dominate the digital collectible gambling niche; later referenced as having no clear most valuable token."
     },
     {
+     "episode_id": "W8emBqu0gGI",
+     "episode_title": "Surveillor - How to Size Into a Bottom Without Leverage",
+     "start_seconds": 439.0,
+     "timestamp": "7:19",
+     "deep_link": "https://www.youtube.com/watch?v=W8emBqu0gGI&t=439s",
+     "kind": "analysis",
+     "note": "Speaker mentions sizing positions 50-70% at the bottom, receiving voice notes recommending purchases, and mostly exiting the position slightly early."
+    },
+    {
+     "episode_id": "W8emBqu0gGI",
+     "episode_title": "Surveillor - How to Size Into a Bottom Without Leverage",
+     "start_seconds": 1225.0,
+     "timestamp": "20:25",
+     "deep_link": "https://www.youtube.com/watch?v=W8emBqu0gGI&t=1225s",
+     "kind": "analysis",
+     "note": "Speaker discusses Pump Fun's app growth nearing parity with FOMO app, their launchpad and social trading platform revenue streams, partnerships with Hyperliquid and Collector, engineering improvements including native bridge and limit orders, and marketing efforts including trader partnerships with Kimchi."
+    },
+    {
+     "episode_id": "W8emBqu0gGI",
+     "episode_title": "Surveillor - How to Size Into a Bottom Without Leverage",
+     "start_seconds": 1587.0,
+     "timestamp": "26:27",
+     "deep_link": "https://www.youtube.com/watch?v=W8emBqu0gGI&t=1587s",
+     "kind": "analysis",
+     "note": "Speaker discusses investment thesis for Pump, noting founders have already made significant money and are going for a big swing; also likes it because there is no ceiling and every price is justifiable due to insane revenue."
+    },
+    {
      "episode_id": "Wfxvpj7jMyg",
      "episode_title": "Robinhood\u2019s Memecoin Strategy is Working and Onchain is Fun Again",
      "start_seconds": 924.0,
@@ -63414,7 +63504,7 @@
      "note": "Mentioned in passing as transitioning from pump fun to AI trades."
     }
    ],
-   "episode_count": 218,
+   "episode_count": 219,
    "single_reference": false
   },
   {
@@ -105264,7 +105354,7 @@
    "symbol": "XMR",
    "name": "Monero",
    "asset_class": "crypto",
-   "mentions": 172,
+   "mentions": 173,
    "analysis": 67,
    "moments": [
     {
@@ -105968,6 +106058,15 @@
      "deep_link": "https://www.youtube.com/watch?v=VyaMBvTj7Cw&t=2349s",
      "kind": "analysis",
      "note": "Speaker noted that Monero goes up in a straight line every time there's a hack, though it always retraces."
+    },
+    {
+     "episode_id": "W8emBqu0gGI",
+     "episode_title": "Surveillor - How to Size Into a Bottom Without Leverage",
+     "start_seconds": 1365.0,
+     "timestamp": "22:45",
+     "deep_link": "https://www.youtube.com/watch?v=W8emBqu0gGI&t=1365s",
+     "kind": "mention",
+     "note": "Speaker briefly mentions Monero in passing when discussing privacy coins, noting it has a good case due to longevity and distributed supply."
     },
     {
      "episode_id": "Wfxvpj7jMyg",
@@ -106816,7 +106915,7 @@
      "note": "Speaker compares Monero favorably as fully private with no optional privacy, but then expresses concern that Monero's supply cannot be fully verified and could have bugs causing undetectable inflation."
     }
    ],
-   "episode_count": 113,
+   "episode_count": 114,
    "single_reference": false
   },
   {
@@ -132518,7 +132617,7 @@
    "symbol": "ANSEM",
    "name": "Ansem (The Black Bull)",
    "asset_class": "crypto",
-   "mentions": 45,
+   "mentions": 46,
    "analysis": 33,
    "moments": [
     {
@@ -132756,6 +132855,15 @@
      "note": "Referenced as an example of on-chain coin price action."
     },
     {
+     "episode_id": "W8emBqu0gGI",
+     "episode_title": "Surveillor - How to Size Into a Bottom Without Leverage",
+     "start_seconds": 1922.0,
+     "timestamp": "32:02",
+     "deep_link": "https://www.youtube.com/watch?v=W8emBqu0gGI&t=1922s",
+     "kind": "mention",
+     "note": "Speaker mentions selling Ansem, noting they don't like holding coins that go down too much as it is mentally draining."
+    },
+    {
      "episode_id": "Y1f-62h_wk8",
      "episode_title": "MARKET OPEN: CPI Today!? Stocks Are Red! Oil Is Back & Pumping\u2026",
      "start_seconds": 8361.0,
@@ -132927,7 +133035,7 @@
      "note": "Named as something that got the speaker fired up."
     }
    ],
-   "episode_count": 37,
+   "episode_count": 38,
    "single_reference": false
   },
   {
@@ -149867,6 +149975,224 @@
    "single_reference": false
   },
   {
+   "symbol": "CARDS",
+   "name": "Cards",
+   "asset_class": "crypto",
+   "mentions": 23,
+   "analysis": 19,
+   "moments": [
+    {
+     "episode_id": "-uarB5g12aY",
+     "episode_title": "MARKET OPEN: Russian PLAGUE OUTBREAK, I BOUGHT ZCASH BACK, Michael Burry vs the BULL MARKET",
+     "start_seconds": 2509.0,
+     "timestamp": "41:49",
+     "deep_link": "https://www.youtube.com/watch?v=-uarB5g12aY&t=2509s",
+     "kind": "analysis",
+     "note": "Speaker expresses bullish conviction on Cards as an old coin with old business model that makes money and will likely be re-rated higher like Pump Fun was, based on sustainable revenue generation."
+    },
+    {
+     "episode_id": "67rkaWvWGpE",
+     "episode_title": "LIVE: Memory Is CRASHING... Ansem Saved Memecoins & Saylor Saved Bitcoin!?! MSTR?! Are We BACK!???!?",
+     "start_seconds": 4442.0,
+     "timestamp": "1:14:02",
+     "deep_link": "https://www.youtube.com/watch?v=67rkaWvWGpE&t=4442s",
+     "kind": "analysis",
+     "note": "Solana-based coin discussed at length regarding Arthur Hayes receiving a $1.5 million OTC allocation from the project, which he subsequently sold; described as one of only two coins on Solana that mattered at the time alongside Anthem."
+    },
+    {
+     "episode_id": "6WP7HN3NYIg",
+     "episode_title": "MARKET OPEN: Did PumpFun SAVE ONCHAIN?, I BOUGHT CRYPTO BACK, Citrini, BIO & the Future of BALDING",
+     "start_seconds": 2791.0,
+     "timestamp": "46:31",
+     "deep_link": "https://www.youtube.com/watch?v=6WP7HN3NYIg&t=2791s",
+     "kind": "analysis",
+     "note": "Speaker expressed frustration at missing CARDS when it went up and mentioned shilling it hard."
+    },
+    {
+     "episode_id": "AnkbghJYh50",
+     "episode_title": "Market Open: Crypto is on FIRE. CXMT IPO. China vs USA AI. and everything else",
+     "start_seconds": 1672.0,
+     "timestamp": "27:52",
+     "deep_link": "https://www.youtube.com/watch?v=AnkbghJYh50&t=1672s",
+     "kind": "analysis",
+     "note": "Cards in April reached 80 million market cap, and speaker liked trading it from 12 to 90."
+    },
+    {
+     "episode_id": "BJphreY_h7s",
+     "episode_title": "MARKET OPEN: Crypto Bull Market Resumed!!! Trump Mentions Hyperliquid!? Anthropic & OpenAI IPO Soon",
+     "start_seconds": 4236.0,
+     "timestamp": "1:10:36",
+     "deep_link": "https://www.youtube.com/watch?v=BJphreY_h7s&t=4236s",
+     "kind": "analysis",
+     "note": "Speaker discusses Cards coin, noting interest in the token and examining its DEX volume and revenue metrics."
+    },
+    {
+     "episode_id": "E-ab4x9fBpU",
+     "episode_title": "LIVE: The War is BACK.. Oil at $115!! Bitcoin $80K!? - Korean Stocks are CRAZY! + Mando Interview",
+     "start_seconds": 2269.0,
+     "timestamp": "37:49",
+     "deep_link": "https://www.youtube.com/watch?v=E-ab4x9fBpU&t=2269s",
+     "kind": "analysis",
+     "note": "Discussed as a crypto token combining Pokemon cards and gambling, with strong chart patterns and potential to double to $100 million; described as making a lot of money, doing buybacks, and being a 'good coin' that could excite retail investors."
+    },
+    {
+     "episode_id": "EKxm903EQAQ",
+     "episode_title": "MARKET OPEN: Dean Ball/Kimi, Is MEMORY Back? PUMP.FUN & CRYPTO Are RIPPING",
+     "start_seconds": 8057.0,
+     "timestamp": "2:14:17",
+     "deep_link": "https://www.youtube.com/watch?v=EKxm903EQAQ&t=8057s",
+     "kind": "analysis",
+     "note": "Speaker described Cards as a coin that could fall into the category of having a dedicated market, calling it 'an interesting coin' if on-chain activity returns."
+    },
+    {
+     "episode_id": "EhJiU6Eswi8",
+     "episode_title": "Ryan Watkins & Monk: Hyperliquid's Future, Trading in 2025, and More | TG Podcast",
+     "start_seconds": 3147.0,
+     "timestamp": "52:27",
+     "deep_link": "https://www.youtube.com/watch?v=EhJiU6Eswi8&t=3147s",
+     "kind": "analysis",
+     "note": "Speaker mentions CARDS made a new all-time high during the same period as Solana's price appreciation and pump.fun's rise."
+    },
+    {
+     "episode_id": "G4JBjXx5IMc",
+     "episode_title": "MARKET OPEN: Crypto Onchain is HOT, NVDA\u2019s $500B DEAL, Unitree IPO",
+     "start_seconds": 8943.0,
+     "timestamp": "2:29:03",
+     "deep_link": "https://www.youtube.com/watch?v=G4JBjXx5IMc&t=8943s",
+     "kind": "analysis",
+     "note": "Speaker discusses CARDS as a speculative crypto project that should have been worth a billion dollars but failed to reach that valuation; mentions the founders called it a meme coin and sold to Arthur Hayes, and that mocking its revenue prevented it from reaching higher valuations."
+    },
+    {
+     "episode_id": "QxxEyW06XRU",
+     "episode_title": "MARKET OPEN: The Meta PUMP CONTINUES, Zcash at $1,600, ALT SEASON is REAL, TIRED OF WINNING",
+     "start_seconds": 4023.0,
+     "timestamp": "1:07:03",
+     "deep_link": "https://www.youtube.com/watch?v=QxxEyW06XRU&t=4023s",
+     "kind": "analysis",
+     "note": "Speaker discusses that Jack Surveiller loves this coin and describes him as one of the better crypto traders in the world; notes the floor price rose to $76-$80 with 889 ETH volume and significant price appreciation."
+    },
+    {
+     "episode_id": "T93k_hsxqgA",
+     "episode_title": "AJC - Turning an 80% Nuke Into $3 Million on Robinhood Chain",
+     "start_seconds": 22.0,
+     "timestamp": "0:22",
+     "deep_link": "https://www.youtube.com/watch?v=T93k_hsxqgA&t=22s",
+     "kind": "mention",
+     "note": "JC mentioned previously being on stream when Cards was discussed."
+    },
+    {
+     "episode_id": "W8emBqu0gGI",
+     "episode_title": "Surveillor - How to Size Into a Bottom Without Leverage",
+     "start_seconds": 914.0,
+     "timestamp": "15:14",
+     "deep_link": "https://www.youtube.com/watch?v=W8emBqu0gGI&t=914s",
+     "kind": "analysis",
+     "note": "Speaker has held the coin for approximately six months starting from around 0.035, describes it as having poor price action and low liquidity on-chain, expects eventual entry into an impulsive trend once it reaches major exchanges and gains whale/fund allocation capability."
+    },
+    {
+     "episode_id": "W8emBqu0gGI",
+     "episode_title": "Surveillor - How to Size Into a Bottom Without Leverage",
+     "start_seconds": 1239.0,
+     "timestamp": "20:39",
+     "deep_link": "https://www.youtube.com/watch?v=W8emBqu0gGI&t=1239s",
+     "kind": "analysis",
+     "note": "Speaker is highly convicted on CARDS, describing their fee structure and positioning as a back-end provider used by exchanges like Hyperliquid and Kraken for swaps and perps."
+    },
+    {
+     "episode_id": "W8emBqu0gGI",
+     "episode_title": "Surveillor - How to Size Into a Bottom Without Leverage",
+     "start_seconds": 2030.0,
+     "timestamp": "33:50",
+     "deep_link": "https://www.youtube.com/watch?v=W8emBqu0gGI&t=2030s",
+     "kind": "analysis",
+     "note": "Speaker mentioned having a significant amount of capital in Cards across multiple wallets, representing less than 10% of their total holdings, and expressed optimism that it 'is gonna cook.'"
+    },
+    {
+     "episode_id": "XnhxH4Y5dI8",
+     "episode_title": "LIVE: Stocks ATH!! Saylor SOLD Bitcoin..!? Anthropic IPO Is Here!!!! HYPE to $100!?",
+     "start_seconds": 9548.0,
+     "timestamp": "2:39:08",
+     "deep_link": "https://www.youtube.com/watch?v=XnhxH4Y5dI8&t=9548s",
+     "kind": "analysis",
+     "note": "Discussed as a crypto platform with strong free cash flow, mentioned buybacks over a million, price-to-revenue ratio concerns noted, and current price at 54."
+    },
+    {
+     "episode_id": "Z8PbXmkpyPI",
+     "episode_title": "MARKET OPEN: Robinhood Chain is ON FIRE, WAR & RATE HIKES, BITCOIN is in TROUBLE",
+     "start_seconds": 6203.0,
+     "timestamp": "1:43:23",
+     "deep_link": "https://www.youtube.com/watch?v=Z8PbXmkpyPI&t=6203s",
+     "kind": "mention",
+     "note": "AJC appeared on stream previously to discuss CARDS alongside Zora."
+    },
+    {
+     "episode_id": "ma5DVQEZNXI",
+     "episode_title": "MARKET OPEN: Anthropic Has LOST IT, Crypto is BATTLE TESTED, Day 2 of the SECURITY PANIC,",
+     "start_seconds": 5953.0,
+     "timestamp": "1:39:13",
+     "deep_link": "https://www.youtube.com/watch?v=ma5DVQEZNXI&t=5953s",
+     "kind": "mention",
+     "note": "The speaker mentions being convinced to buy CARDS by Jack Surveiller, then selling at the bottom."
+    },
+    {
+     "episode_id": "ma5DVQEZNXI",
+     "episode_title": "MARKET OPEN: Anthropic Has LOST IT, Crypto is BATTLE TESTED, Day 2 of the SECURITY PANIC,",
+     "start_seconds": 7159.0,
+     "timestamp": "1:59:19",
+     "deep_link": "https://www.youtube.com/watch?v=ma5DVQEZNXI&t=7159s",
+     "kind": "analysis",
+     "note": "Speaker holds this coin as a long-term position since the bottom, bought at 0.035, has been sitting in it for approximately six months, expects it to eventually trade at $2 when institutional investors can allocate size after listing on major exchanges."
+    },
+    {
+     "episode_id": "ma5DVQEZNXI",
+     "episode_title": "MARKET OPEN: Anthropic Has LOST IT, Crypto is BATTLE TESTED, Day 2 of the SECURITY PANIC,",
+     "start_seconds": 7310.0,
+     "timestamp": "2:01:50",
+     "deep_link": "https://www.youtube.com/watch?v=ma5DVQEZNXI&t=7310s",
+     "kind": "analysis",
+     "note": "Speaker discusses buying CARDS at 0.1-0.12 price range, plans to hold until next year or until hitting 1.5 for de-risking, and analyzes token buyback mechanics and alignment incentives for the protocol team."
+    },
+    {
+     "episode_id": "qYbGK1ycv2I",
+     "episode_title": "MARKET OPEN: Pok\u00e9mon Cards have TOPPED, Bitcoin BREAKOUT?, Anthropic IPO is COMING",
+     "start_seconds": 2181.0,
+     "timestamp": "36:21",
+     "deep_link": "https://www.youtube.com/watch?v=qYbGK1ycv2I&t=2181s",
+     "kind": "analysis",
+     "note": "Speaker discusses CARDS coin positively for the first time, noting monthly burn updates funded by economic activity on Collector Crypt, mentioning the founder appeared on stream in October 2025."
+    },
+    {
+     "episode_id": "qYbGK1ycv2I",
+     "episode_title": "MARKET OPEN: Pok\u00e9mon Cards have TOPPED, Bitcoin BREAKOUT?, Anthropic IPO is COMING",
+     "start_seconds": 3560.0,
+     "timestamp": "59:20",
+     "deep_link": "https://www.youtube.com/watch?v=qYbGK1ycv2I&t=3560s",
+     "kind": "analysis",
+     "note": "Speaker expresses enthusiasm about CARDS being back in rotation and repeatedly states it is the only coin that matters, describing a strong bullish sentiment."
+    },
+    {
+     "episode_id": "rBw5a_iRHNs",
+     "episode_title": "FULL Davos 2026 Recap & News + Why Crypto Is About To PUMP (LIVE)",
+     "start_seconds": 4210.0,
+     "timestamp": "1:10:10",
+     "deep_link": "https://www.youtube.com/watch?v=rBw5a_iRHNs&t=4210s",
+     "kind": "mention",
+     "note": "Speakers discussed market cap of cards and noted it was up 6% in response to Pentagon Pokemon vending machine news."
+    },
+    {
+     "episode_id": "xkYHBboXqd8",
+     "episode_title": "MARKET OPEN: I SOLD ZCASH, The GUARANTEED 4-Year Cycle Bottom is in TWO DAYS, The Pope vs Anthropic",
+     "start_seconds": 3749.0,
+     "timestamp": "1:02:29",
+     "deep_link": "https://www.youtube.com/watch?v=xkYHBboXqd8&t=3749s",
+     "kind": "analysis",
+     "note": "Speaker states it is their biggest on-chain holding and looks great."
+    }
+   ],
+   "episode_count": 18,
+   "single_reference": false
+  },
+  {
    "symbol": "LINK",
    "name": "Chainlink",
    "asset_class": "crypto",
@@ -153061,197 +153387,6 @@
     }
    ],
    "episode_count": 26,
-   "single_reference": false
-  },
-  {
-   "symbol": "CARDS",
-   "name": "Cards",
-   "asset_class": "crypto",
-   "mentions": 20,
-   "analysis": 16,
-   "moments": [
-    {
-     "episode_id": "-uarB5g12aY",
-     "episode_title": "MARKET OPEN: Russian PLAGUE OUTBREAK, I BOUGHT ZCASH BACK, Michael Burry vs the BULL MARKET",
-     "start_seconds": 2509.0,
-     "timestamp": "41:49",
-     "deep_link": "https://www.youtube.com/watch?v=-uarB5g12aY&t=2509s",
-     "kind": "analysis",
-     "note": "Speaker expresses bullish conviction on Cards as an old coin with old business model that makes money and will likely be re-rated higher like Pump Fun was, based on sustainable revenue generation."
-    },
-    {
-     "episode_id": "67rkaWvWGpE",
-     "episode_title": "LIVE: Memory Is CRASHING... Ansem Saved Memecoins & Saylor Saved Bitcoin!?! MSTR?! Are We BACK!???!?",
-     "start_seconds": 4442.0,
-     "timestamp": "1:14:02",
-     "deep_link": "https://www.youtube.com/watch?v=67rkaWvWGpE&t=4442s",
-     "kind": "analysis",
-     "note": "Solana-based coin discussed at length regarding Arthur Hayes receiving a $1.5 million OTC allocation from the project, which he subsequently sold; described as one of only two coins on Solana that mattered at the time alongside Anthem."
-    },
-    {
-     "episode_id": "6WP7HN3NYIg",
-     "episode_title": "MARKET OPEN: Did PumpFun SAVE ONCHAIN?, I BOUGHT CRYPTO BACK, Citrini, BIO & the Future of BALDING",
-     "start_seconds": 2791.0,
-     "timestamp": "46:31",
-     "deep_link": "https://www.youtube.com/watch?v=6WP7HN3NYIg&t=2791s",
-     "kind": "analysis",
-     "note": "Speaker expressed frustration at missing CARDS when it went up and mentioned shilling it hard."
-    },
-    {
-     "episode_id": "AnkbghJYh50",
-     "episode_title": "Market Open: Crypto is on FIRE. CXMT IPO. China vs USA AI. and everything else",
-     "start_seconds": 1672.0,
-     "timestamp": "27:52",
-     "deep_link": "https://www.youtube.com/watch?v=AnkbghJYh50&t=1672s",
-     "kind": "analysis",
-     "note": "Cards in April reached 80 million market cap, and speaker liked trading it from 12 to 90."
-    },
-    {
-     "episode_id": "BJphreY_h7s",
-     "episode_title": "MARKET OPEN: Crypto Bull Market Resumed!!! Trump Mentions Hyperliquid!? Anthropic & OpenAI IPO Soon",
-     "start_seconds": 4236.0,
-     "timestamp": "1:10:36",
-     "deep_link": "https://www.youtube.com/watch?v=BJphreY_h7s&t=4236s",
-     "kind": "analysis",
-     "note": "Speaker discusses Cards coin, noting interest in the token and examining its DEX volume and revenue metrics."
-    },
-    {
-     "episode_id": "E-ab4x9fBpU",
-     "episode_title": "LIVE: The War is BACK.. Oil at $115!! Bitcoin $80K!? - Korean Stocks are CRAZY! + Mando Interview",
-     "start_seconds": 2269.0,
-     "timestamp": "37:49",
-     "deep_link": "https://www.youtube.com/watch?v=E-ab4x9fBpU&t=2269s",
-     "kind": "analysis",
-     "note": "Discussed as a crypto token combining Pokemon cards and gambling, with strong chart patterns and potential to double to $100 million; described as making a lot of money, doing buybacks, and being a 'good coin' that could excite retail investors."
-    },
-    {
-     "episode_id": "EKxm903EQAQ",
-     "episode_title": "MARKET OPEN: Dean Ball/Kimi, Is MEMORY Back? PUMP.FUN & CRYPTO Are RIPPING",
-     "start_seconds": 8057.0,
-     "timestamp": "2:14:17",
-     "deep_link": "https://www.youtube.com/watch?v=EKxm903EQAQ&t=8057s",
-     "kind": "analysis",
-     "note": "Speaker described Cards as a coin that could fall into the category of having a dedicated market, calling it 'an interesting coin' if on-chain activity returns."
-    },
-    {
-     "episode_id": "EhJiU6Eswi8",
-     "episode_title": "Ryan Watkins & Monk: Hyperliquid's Future, Trading in 2025, and More | TG Podcast",
-     "start_seconds": 3147.0,
-     "timestamp": "52:27",
-     "deep_link": "https://www.youtube.com/watch?v=EhJiU6Eswi8&t=3147s",
-     "kind": "analysis",
-     "note": "Speaker mentions CARDS made a new all-time high during the same period as Solana's price appreciation and pump.fun's rise."
-    },
-    {
-     "episode_id": "G4JBjXx5IMc",
-     "episode_title": "MARKET OPEN: Crypto Onchain is HOT, NVDA\u2019s $500B DEAL, Unitree IPO",
-     "start_seconds": 8943.0,
-     "timestamp": "2:29:03",
-     "deep_link": "https://www.youtube.com/watch?v=G4JBjXx5IMc&t=8943s",
-     "kind": "analysis",
-     "note": "Speaker discusses CARDS as a speculative crypto project that should have been worth a billion dollars but failed to reach that valuation; mentions the founders called it a meme coin and sold to Arthur Hayes, and that mocking its revenue prevented it from reaching higher valuations."
-    },
-    {
-     "episode_id": "QxxEyW06XRU",
-     "episode_title": "MARKET OPEN: The Meta PUMP CONTINUES, Zcash at $1,600, ALT SEASON is REAL, TIRED OF WINNING",
-     "start_seconds": 4023.0,
-     "timestamp": "1:07:03",
-     "deep_link": "https://www.youtube.com/watch?v=QxxEyW06XRU&t=4023s",
-     "kind": "analysis",
-     "note": "Speaker discusses that Jack Surveiller loves this coin and describes him as one of the better crypto traders in the world; notes the floor price rose to $76-$80 with 889 ETH volume and significant price appreciation."
-    },
-    {
-     "episode_id": "T93k_hsxqgA",
-     "episode_title": "AJC - Turning an 80% Nuke Into $3 Million on Robinhood Chain",
-     "start_seconds": 22.0,
-     "timestamp": "0:22",
-     "deep_link": "https://www.youtube.com/watch?v=T93k_hsxqgA&t=22s",
-     "kind": "mention",
-     "note": "JC mentioned previously being on stream when Cards was discussed."
-    },
-    {
-     "episode_id": "XnhxH4Y5dI8",
-     "episode_title": "LIVE: Stocks ATH!! Saylor SOLD Bitcoin..!? Anthropic IPO Is Here!!!! HYPE to $100!?",
-     "start_seconds": 9548.0,
-     "timestamp": "2:39:08",
-     "deep_link": "https://www.youtube.com/watch?v=XnhxH4Y5dI8&t=9548s",
-     "kind": "analysis",
-     "note": "Discussed as a crypto platform with strong free cash flow, mentioned buybacks over a million, price-to-revenue ratio concerns noted, and current price at 54."
-    },
-    {
-     "episode_id": "Z8PbXmkpyPI",
-     "episode_title": "MARKET OPEN: Robinhood Chain is ON FIRE, WAR & RATE HIKES, BITCOIN is in TROUBLE",
-     "start_seconds": 6203.0,
-     "timestamp": "1:43:23",
-     "deep_link": "https://www.youtube.com/watch?v=Z8PbXmkpyPI&t=6203s",
-     "kind": "mention",
-     "note": "AJC appeared on stream previously to discuss CARDS alongside Zora."
-    },
-    {
-     "episode_id": "ma5DVQEZNXI",
-     "episode_title": "MARKET OPEN: Anthropic Has LOST IT, Crypto is BATTLE TESTED, Day 2 of the SECURITY PANIC,",
-     "start_seconds": 5953.0,
-     "timestamp": "1:39:13",
-     "deep_link": "https://www.youtube.com/watch?v=ma5DVQEZNXI&t=5953s",
-     "kind": "mention",
-     "note": "The speaker mentions being convinced to buy CARDS by Jack Surveiller, then selling at the bottom."
-    },
-    {
-     "episode_id": "ma5DVQEZNXI",
-     "episode_title": "MARKET OPEN: Anthropic Has LOST IT, Crypto is BATTLE TESTED, Day 2 of the SECURITY PANIC,",
-     "start_seconds": 7159.0,
-     "timestamp": "1:59:19",
-     "deep_link": "https://www.youtube.com/watch?v=ma5DVQEZNXI&t=7159s",
-     "kind": "analysis",
-     "note": "Speaker holds this coin as a long-term position since the bottom, bought at 0.035, has been sitting in it for approximately six months, expects it to eventually trade at $2 when institutional investors can allocate size after listing on major exchanges."
-    },
-    {
-     "episode_id": "ma5DVQEZNXI",
-     "episode_title": "MARKET OPEN: Anthropic Has LOST IT, Crypto is BATTLE TESTED, Day 2 of the SECURITY PANIC,",
-     "start_seconds": 7310.0,
-     "timestamp": "2:01:50",
-     "deep_link": "https://www.youtube.com/watch?v=ma5DVQEZNXI&t=7310s",
-     "kind": "analysis",
-     "note": "Speaker discusses buying CARDS at 0.1-0.12 price range, plans to hold until next year or until hitting 1.5 for de-risking, and analyzes token buyback mechanics and alignment incentives for the protocol team."
-    },
-    {
-     "episode_id": "qYbGK1ycv2I",
-     "episode_title": "MARKET OPEN: Pok\u00e9mon Cards have TOPPED, Bitcoin BREAKOUT?, Anthropic IPO is COMING",
-     "start_seconds": 2181.0,
-     "timestamp": "36:21",
-     "deep_link": "https://www.youtube.com/watch?v=qYbGK1ycv2I&t=2181s",
-     "kind": "analysis",
-     "note": "Speaker discusses CARDS coin positively for the first time, noting monthly burn updates funded by economic activity on Collector Crypt, mentioning the founder appeared on stream in October 2025."
-    },
-    {
-     "episode_id": "qYbGK1ycv2I",
-     "episode_title": "MARKET OPEN: Pok\u00e9mon Cards have TOPPED, Bitcoin BREAKOUT?, Anthropic IPO is COMING",
-     "start_seconds": 3560.0,
-     "timestamp": "59:20",
-     "deep_link": "https://www.youtube.com/watch?v=qYbGK1ycv2I&t=3560s",
-     "kind": "analysis",
-     "note": "Speaker expresses enthusiasm about CARDS being back in rotation and repeatedly states it is the only coin that matters, describing a strong bullish sentiment."
-    },
-    {
-     "episode_id": "rBw5a_iRHNs",
-     "episode_title": "FULL Davos 2026 Recap & News + Why Crypto Is About To PUMP (LIVE)",
-     "start_seconds": 4210.0,
-     "timestamp": "1:10:10",
-     "deep_link": "https://www.youtube.com/watch?v=rBw5a_iRHNs&t=4210s",
-     "kind": "mention",
-     "note": "Speakers discussed market cap of cards and noted it was up 6% in response to Pentagon Pokemon vending machine news."
-    },
-    {
-     "episode_id": "xkYHBboXqd8",
-     "episode_title": "MARKET OPEN: I SOLD ZCASH, The GUARANTEED 4-Year Cycle Bottom is in TWO DAYS, The Pope vs Anthropic",
-     "start_seconds": 3749.0,
-     "timestamp": "1:02:29",
-     "deep_link": "https://www.youtube.com/watch?v=xkYHBboXqd8&t=3749s",
-     "kind": "analysis",
-     "note": "Speaker states it is their biggest on-chain holding and looks great."
-    }
-   ],
-   "episode_count": 17,
    "single_reference": false
   },
   {
@@ -205186,6 +205321,26 @@
    "single_reference": true
   },
   {
+   "symbol": "LETTER",
+   "name": "Leiter",
+   "asset_class": "crypto",
+   "mentions": 1,
+   "analysis": 1,
+   "moments": [
+    {
+     "episode_id": "W8emBqu0gGI",
+     "episode_title": "Surveillor - How to Size Into a Bottom Without Leverage",
+     "start_seconds": 628.0,
+     "timestamp": "10:28",
+     "deep_link": "https://www.youtube.com/watch?v=W8emBqu0gGI&t=628s",
+     "kind": "analysis",
+     "note": "Speaker describes buying at the bottom around 2.8-2.9 following Robinhood's announcement of integration into their U.S. app; cites fundamental misunderstanding by the public as the reason for the dip."
+    }
+   ],
+   "episode_count": 1,
+   "single_reference": true
+  },
+  {
    "symbol": "BLND",
    "name": "Believe",
    "asset_class": "stock",
@@ -223684,10 +223839,10 @@
    "single_reference": true
   }
  ],
- "total_hits": 22595,
- "dropped_low_confidence": 1734,
- "dropped_not_an_asset": 1358,
- "episodes_processed": 635,
+ "total_hits": 22611,
+ "dropped_low_confidence": 1738,
+ "dropped_not_an_asset": 1361,
+ "episodes_processed": 636,
  "episode_ids": [
   "-A0rmPYG0s0",
   "-CYcuGbAnpI",
@@ -224017,6 +224172,7 @@
   "VwETXnQ5aUs",
   "VwzVPobrVdQ",
   "VyaMBvTj7Cw",
+  "W8emBqu0gGI",
   "WQPqkseigfk",
   "Wfxvpj7jMyg",
   "WtN45Of-cnw",

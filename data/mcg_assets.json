@@ -4,7 +4,7 @@
    "symbol": "SOL",
    "name": "Solana",
    "asset_class": "crypto",
-   "mentions": 2604,
+   "mentions": 2608,
    "analysis": 793,
    "moments": [
     {
@@ -21878,6 +21878,42 @@
      "note": "Identified as having the next highest volume after examining chain activity flows."
     },
     {
+     "episode_id": "vgXFm_eqY8M",
+     "episode_title": "HyperDex($HYDX) | Best Rates Across Hyperliquid, Ondo & Lighter + Live Swap Demo",
+     "start_seconds": 75.0,
+     "timestamp": "1:15",
+     "deep_link": "https://www.youtube.com/watch?v=vgXFm_eqY8M&t=75s",
+     "kind": "mention",
+     "note": "Jack mentioned joining Solana after working on Ethereum."
+    },
+    {
+     "episode_id": "vgXFm_eqY8M",
+     "episode_title": "HyperDex($HYDX) | Best Rates Across Hyperliquid, Ondo & Lighter + Live Swap Demo",
+     "start_seconds": 529.0,
+     "timestamp": "8:49",
+     "deep_link": "https://www.youtube.com/watch?v=vgXFm_eqY8M&t=529s",
+     "kind": "mention",
+     "note": "Mentioned as a blockchain where tokenized stocks can be purchased."
+    },
+    {
+     "episode_id": "vgXFm_eqY8M",
+     "episode_title": "HyperDex($HYDX) | Best Rates Across Hyperliquid, Ondo & Lighter + Live Swap Demo",
+     "start_seconds": 1039.0,
+     "timestamp": "17:19",
+     "deep_link": "https://www.youtube.com/watch?v=vgXFm_eqY8M&t=1039s",
+     "kind": "mention",
+     "note": "Speaker mentions putting 0.1 SOL into a wallet for demonstration purposes."
+    },
+    {
+     "episode_id": "vgXFm_eqY8M",
+     "episode_title": "HyperDex($HYDX) | Best Rates Across Hyperliquid, Ondo & Lighter + Live Swap Demo",
+     "start_seconds": 1209.0,
+     "timestamp": "20:09",
+     "deep_link": "https://www.youtube.com/watch?v=vgXFm_eqY8M&t=1209s",
+     "kind": "mention",
+     "note": "Mentioned that the platform was funded with 0.1 SOL."
+    },
+    {
      "episode_id": "vpOPBLHmtrA",
      "episode_title": "Kru from Umbra: Building Solana\u2019s Incognito Mode, Privacy for Traders & $154M Demand | MCG Podcast",
      "start_seconds": 190.0,
@@ -23444,15 +23480,15 @@
      "note": "Speaker discusses Solana price levels, noting a 20x move from 500K to current 8 million levels and speculating on future levels in another month."
     }
    ],
-   "episode_count": 528,
+   "episode_count": 529,
    "single_reference": false
   },
   {
    "symbol": "BTC",
    "name": "Bitcoin",
    "asset_class": "crypto",
-   "mentions": 1329,
-   "analysis": 722,
+   "mentions": 1331,
+   "analysis": 723,
    "moments": [
     {
      "episode_id": "-8z0M77EVZg",
@@ -34741,6 +34777,24 @@
      "note": "Speaker discusses a Bitcoin pullback on-chain with technical analysis including support levels, monthly timeframe, FVG (Fair Value Gap), and liquidity sweep above 83K."
     },
     {
+     "episode_id": "vgXFm_eqY8M",
+     "episode_title": "HyperDex($HYDX) | Best Rates Across Hyperliquid, Ondo & Lighter + Live Swap Demo",
+     "start_seconds": 329.0,
+     "timestamp": "5:29",
+     "deep_link": "https://www.youtube.com/watch?v=vgXFm_eqY8M&t=329s",
+     "kind": "mention",
+     "note": "Jack mentioned native crypto assets like BTC and ETH experiencing fragmentation."
+    },
+    {
+     "episode_id": "vgXFm_eqY8M",
+     "episode_title": "HyperDex($HYDX) | Best Rates Across Hyperliquid, Ondo & Lighter + Live Swap Demo",
+     "start_seconds": 1113.0,
+     "timestamp": "18:33",
+     "deep_link": "https://www.youtube.com/watch?v=vgXFm_eqY8M&t=1113s",
+     "kind": "analysis",
+     "note": "Speaker discusses taking 50 BTC long positions and 500 BTC orders as examples of trade sizing across exchanges."
+    },
+    {
      "episode_id": "vqOeJKpQ61E",
      "episode_title": "A Conversation with Sonder: Trading the Crypto Trenches",
      "start_seconds": 188.0,
@@ -35416,14 +35470,14 @@
      "note": "Speaker mentions companies using treasuries to buy Bitcoin."
     }
    ],
-   "episode_count": 371,
+   "episode_count": 372,
    "single_reference": false
   },
   {
    "symbol": "ETH",
    "name": "Ethereum",
    "asset_class": "crypto",
-   "mentions": 933,
+   "mentions": 937,
    "analysis": 330,
    "moments": [
     {
@@ -43320,6 +43374,42 @@
      "note": "Referenced as the mainnet chain where multiple tokens including IMD and Zipcoin have been running with significant activity."
     },
     {
+     "episode_id": "vgXFm_eqY8M",
+     "episode_title": "HyperDex($HYDX) | Best Rates Across Hyperliquid, Ondo & Lighter + Live Swap Demo",
+     "start_seconds": 79.0,
+     "timestamp": "1:19",
+     "deep_link": "https://www.youtube.com/watch?v=vgXFm_eqY8M&t=79s",
+     "kind": "mention",
+     "note": "Jack mentioned his early days were in DeFi summer when he joined Ethereum."
+    },
+    {
+     "episode_id": "vgXFm_eqY8M",
+     "episode_title": "HyperDex($HYDX) | Best Rates Across Hyperliquid, Ondo & Lighter + Live Swap Demo",
+     "start_seconds": 529.0,
+     "timestamp": "8:49",
+     "deep_link": "https://www.youtube.com/watch?v=vgXFm_eqY8M&t=529s",
+     "kind": "mention",
+     "note": "Mentioned as a blockchain where tokenized stocks can be purchased."
+    },
+    {
+     "episode_id": "vgXFm_eqY8M",
+     "episode_title": "HyperDex($HYDX) | Best Rates Across Hyperliquid, Ondo & Lighter + Live Swap Demo",
+     "start_seconds": 1783.0,
+     "timestamp": "29:43",
+     "deep_link": "https://www.youtube.com/watch?v=vgXFm_eqY8M&t=1783s",
+     "kind": "mention",
+     "note": "Mentioned as an example token in a swap between BNB and Ethereum."
+    },
+    {
+     "episode_id": "vgXFm_eqY8M",
+     "episode_title": "HyperDex($HYDX) | Best Rates Across Hyperliquid, Ondo & Lighter + Live Swap Demo",
+     "start_seconds": 2462.0,
+     "timestamp": "41:02",
+     "deep_link": "https://www.youtube.com/watch?v=vgXFm_eqY8M&t=2462s",
+     "kind": "mention",
+     "note": "Swapped 0.1 ETH to USDC on Arbitrum as a demonstration of the swap functionality."
+    },
+    {
      "episode_id": "vqOeJKpQ61E",
      "episode_title": "A Conversation with Sonder: Trading the Crypto Trenches",
      "start_seconds": 2161.0,
@@ -43824,7 +43914,7 @@
      "note": "Speaker mentions Solana DATs and companies using treasuries to buy ETH."
     }
    ],
-   "episode_count": 349,
+   "episode_count": 350,
    "single_reference": false
   },
   {
@@ -52504,7 +52594,7 @@
    "symbol": "USDC",
    "name": "USD Coin",
    "asset_class": "crypto",
-   "mentions": 497,
+   "mentions": 498,
    "analysis": 143,
    "moments": [
     {
@@ -56720,6 +56810,15 @@
      "note": "The game uses Sol and USDC as currency rather than a floating token."
     },
     {
+     "episode_id": "vgXFm_eqY8M",
+     "episode_title": "HyperDex($HYDX) | Best Rates Across Hyperliquid, Ondo & Lighter + Live Swap Demo",
+     "start_seconds": 2448.0,
+     "timestamp": "40:48",
+     "deep_link": "https://www.youtube.com/watch?v=vgXFm_eqY8M&t=2448s",
+     "kind": "mention",
+     "note": "Target asset in a swap demonstration where 0.1 ETH was exchanged for USDC on Arbitrum."
+    },
+    {
      "episode_id": "vpOPBLHmtrA",
      "episode_title": "Kru from Umbra: Building Solana\u2019s Incognito Mode, Privacy for Traders & $154M Demand | MCG Podcast",
      "start_seconds": 443.0,
@@ -56981,7 +57080,7 @@
      "note": "Mentioned as an asset users needed to send to Arbitrum to access perp platforms."
     }
    ],
-   "episode_count": 285,
+   "episode_count": 286,
    "single_reference": false
   },
   {
@@ -64632,7 +64731,7 @@
    "symbol": "ZEC",
    "name": "Zcash",
    "asset_class": "crypto",
-   "mentions": 167,
+   "mentions": 168,
    "analysis": 84,
    "moments": [
     {
@@ -66067,6 +66166,15 @@
      "note": "Named as 'going crazy' in context of privacy-related narrative alongside discussion of private AI."
     },
     {
+     "episode_id": "vgXFm_eqY8M",
+     "episode_title": "HyperDex($HYDX) | Best Rates Across Hyperliquid, Ondo & Lighter + Live Swap Demo",
+     "start_seconds": 2687.0,
+     "timestamp": "44:47",
+     "deep_link": "https://www.youtube.com/watch?v=vgXFm_eqY8M&t=2687s",
+     "kind": "mention",
+     "note": "Referenced in context of Shielded Swap functionality that provides a different wallet powered by Zcash for privacy."
+    },
+    {
      "episode_id": "vpOPBLHmtrA",
      "episode_title": "Kru from Umbra: Building Solana\u2019s Incognito Mode, Privacy for Traders & $154M Demand | MCG Podcast",
      "start_seconds": 1741.0,
@@ -66139,7 +66247,7 @@
      "note": "Named as an example of Stonk's crypto-native pairings."
     }
    ],
-   "episode_count": 91,
+   "episode_count": 92,
    "single_reference": false
   },
   {
@@ -98037,7 +98145,7 @@
    "symbol": "SPX",
    "name": "S&P 500",
    "asset_class": "index",
-   "mentions": 82,
+   "mentions": 83,
    "analysis": 28,
    "moments": [
     {
@@ -98716,6 +98824,15 @@
      "note": "S&P 6900 mentioned as a target level for the stock market."
     },
     {
+     "episode_id": "vgXFm_eqY8M",
+     "episode_title": "HyperDex($HYDX) | Best Rates Across Hyperliquid, Ondo & Lighter + Live Swap Demo",
+     "start_seconds": 369.0,
+     "timestamp": "6:09",
+     "deep_link": "https://www.youtube.com/watch?v=vgXFm_eqY8M&t=369s",
+     "kind": "mention",
+     "note": "Jack mentioned S&P 500 as an example of a perp product offered across different platforms."
+    },
+    {
      "episode_id": "vqOeJKpQ61E",
      "episode_title": "A Conversation with Sonder: Trading the Crypto Trenches",
      "start_seconds": 592.0,
@@ -98779,7 +98896,7 @@
      "note": "Speaker mentioned that the S&P 500 has been performing well as a reference point for stock market returns."
     }
    ],
-   "episode_count": 66,
+   "episode_count": 67,
    "single_reference": false
   },
   {
@@ -100594,7 +100711,7 @@
    "symbol": "BNB",
    "name": "Binance",
    "asset_class": "crypto",
-   "mentions": 106,
+   "mentions": 108,
    "analysis": 26,
    "moments": [
     {
@@ -101408,6 +101525,24 @@
      "note": "Speaker identifies BNB as the third chain where people are bridging to, and notes that money and liquidity are flowing to it."
     },
     {
+     "episode_id": "vgXFm_eqY8M",
+     "episode_title": "HyperDex($HYDX) | Best Rates Across Hyperliquid, Ondo & Lighter + Live Swap Demo",
+     "start_seconds": 304.0,
+     "timestamp": "5:04",
+     "deep_link": "https://www.youtube.com/watch?v=vgXFm_eqY8M&t=304s",
+     "kind": "mention",
+     "note": "Jack mentioned that the same Apple stock can be found on BNB issued by different issuers."
+    },
+    {
+     "episode_id": "vgXFm_eqY8M",
+     "episode_title": "HyperDex($HYDX) | Best Rates Across Hyperliquid, Ondo & Lighter + Live Swap Demo",
+     "start_seconds": 1783.0,
+     "timestamp": "29:43",
+     "deep_link": "https://www.youtube.com/watch?v=vgXFm_eqY8M&t=1783s",
+     "kind": "mention",
+     "note": "Mentioned as an example token in a swap between BNB and Ethereum."
+    },
+    {
      "episode_id": "vqOeJKpQ61E",
      "episode_title": "A Conversation with Sonder: Trading the Crypto Trenches",
      "start_seconds": 1084.0,
@@ -101552,7 +101687,7 @@
      "note": "Mentioned in discussion about 'Binance crime' and a price movement from 40 million to 800 million."
     }
    ],
-   "episode_count": 76,
+   "episode_count": 77,
    "single_reference": false
   },
   {
@@ -106610,7 +106745,7 @@
    "symbol": "USDG",
    "name": "USDG",
    "asset_class": "crypto",
-   "mentions": 47,
+   "mentions": 48,
    "analysis": 20,
    "moments": [
     {
@@ -107028,6 +107163,15 @@
      "note": "Mentioned as one of the stablecoins the Midas bot can rebalance wallet positions into."
     },
     {
+     "episode_id": "vgXFm_eqY8M",
+     "episode_title": "HyperDex($HYDX) | Best Rates Across Hyperliquid, Ondo & Lighter + Live Swap Demo",
+     "start_seconds": 2594.0,
+     "timestamp": "43:14",
+     "deep_link": "https://www.youtube.com/watch?v=vgXFm_eqY8M&t=2594s",
+     "kind": "mention",
+     "note": "Mentioned as a target asset for swapping 0.1 Ethereum, with an expected output of 0.01."
+    },
+    {
      "episode_id": "zDMFsmfIkkM",
      "episode_title": "\ud83d\udd34 LIVE: SEC Greenlights Onchain Stocks | Tokenization Supercycle | Market Update + Interviews",
      "start_seconds": 10882.0,
@@ -107037,7 +107181,7 @@
      "note": "Described as used in a bonding mechanism where traders take USDG to buy NET, which adds to USD treasury."
     }
    ],
-   "episode_count": 33,
+   "episode_count": 34,
    "single_reference": false
   },
   {
@@ -118756,7 +118900,7 @@
    "symbol": "AAPL",
    "name": "Apple",
    "asset_class": "stock",
-   "mentions": 74,
+   "mentions": 76,
    "analysis": 13,
    "moments": [
     {
@@ -119381,6 +119525,24 @@
      "note": "Mentioned as a large company with significant capital that acquires AI startups."
     },
     {
+     "episode_id": "vgXFm_eqY8M",
+     "episode_title": "HyperDex($HYDX) | Best Rates Across Hyperliquid, Ondo & Lighter + Live Swap Demo",
+     "start_seconds": 304.0,
+     "timestamp": "5:04",
+     "deep_link": "https://www.youtube.com/watch?v=vgXFm_eqY8M&t=304s",
+     "kind": "mention",
+     "note": "Jack used Apple stock as an example of the same tokenized asset being fragmented across multiple chains and issuers."
+    },
+    {
+     "episode_id": "vgXFm_eqY8M",
+     "episode_title": "HyperDex($HYDX) | Best Rates Across Hyperliquid, Ondo & Lighter + Live Swap Demo",
+     "start_seconds": 1447.0,
+     "timestamp": "24:07",
+     "deep_link": "https://www.youtube.com/watch?v=vgXFm_eqY8M&t=1447s",
+     "kind": "mention",
+     "note": "Used as an example of a stock that customers in Brazil could buy through the platform."
+    },
+    {
      "episode_id": "wsTdtrlI2I8",
      "episode_title": "\ud83d\udd34 LIVE: Robinhood launchpad war drama | Live Market Updates + Onchain Positioning",
      "start_seconds": 4971.0,
@@ -119426,7 +119588,7 @@
      "note": "Named as part of a basket of stocks being distributed; speakers mention it as one of the current holdings."
     }
    ],
-   "episode_count": 49,
+   "episode_count": 50,
    "single_reference": false
   },
   {
@@ -129825,6 +129987,179 @@
    "single_reference": false
   },
   {
+   "symbol": "OHM",
+   "name": "Olympus DAO",
+   "asset_class": "crypto",
+   "mentions": 18,
+   "analysis": 8,
+   "moments": [
+    {
+     "episode_id": "1UFlORh3zt0",
+     "episode_title": "\ud83d\udd34 LIVE: FOMC Day, Onchain Rotations...Next Leg Loading? | Market Update + Interviews",
+     "start_seconds": 7639.0,
+     "timestamp": "2:07:19",
+     "deep_link": "https://www.youtube.com/watch?v=1UFlORh3zt0&t=7639s",
+     "kind": "mention",
+     "note": "Mentioned briefly in context of a dev, with speculation about an exploit or rug."
+    },
+    {
+     "episode_id": "50P-rICrUfs",
+     "episode_title": "\ud83d\udd34 LIVE: Launchpad Wars On Robinhood | Original $ANSEM Dev Interview | Onchain Update",
+     "start_seconds": 1146.0,
+     "timestamp": "19:06",
+     "deep_link": "https://www.youtube.com/watch?v=50P-rICrUfs&t=1146s",
+     "kind": "mention",
+     "note": "Speaker mentions trading Olympus as one of the rebase tokens in 2022."
+    },
+    {
+     "episode_id": "8Tgu7gZ-7Lk",
+     "episode_title": "NetNet Capital:Reserve Manager for $NET on Robinhood Chain.",
+     "start_seconds": 374.0,
+     "timestamp": "6:14",
+     "deep_link": "https://www.youtube.com/watch?v=8Tgu7gZ-7Lk&t=374s",
+     "kind": "analysis",
+     "note": "NetNet is described as an 'Ohm provement' that took what Olympus did, implemented improvements, and shows faster treasury growth and different liquidity mechanisms."
+    },
+    {
+     "episode_id": "8Tgu7gZ-7Lk",
+     "episode_title": "NetNet Capital:Reserve Manager for $NET on Robinhood Chain.",
+     "start_seconds": 999.0,
+     "timestamp": "16:39",
+     "deep_link": "https://www.youtube.com/watch?v=8Tgu7gZ-7Lk&t=999s",
+     "kind": "mention",
+     "note": "Mentioned as a comparison point; the protocol being discussed is positioned as improving upon Ohm's design by implementing a trading levy that Ohm did not have."
+    },
+    {
+     "episode_id": "8Tgu7gZ-7Lk",
+     "episode_title": "NetNet Capital:Reserve Manager for $NET on Robinhood Chain.",
+     "start_seconds": 3475.0,
+     "timestamp": "57:55",
+     "deep_link": "https://www.youtube.com/watch?v=8Tgu7gZ-7Lk&t=3475s",
+     "kind": "mention",
+     "note": "Speaker mentions that no one thought an Ohm fork could last more than a few days, and notes there were about a hundred Ohm forks in 2021."
+    },
+    {
+     "episode_id": "RLS5bDw7pYg",
+     "episode_title": "\ud83d\udd34 LIVE: Clarity Act Vote...What Next? | Market Update + Interviews",
+     "start_seconds": 7630.0,
+     "timestamp": "2:07:10",
+     "deep_link": "https://www.youtube.com/watch?v=RLS5bDw7pYg&t=7630s",
+     "kind": "mention",
+     "note": "Referenced as an example of another protocol that had a clear one-liner messaging ('reserve currency') that Standard is trying to emulate."
+    },
+    {
+     "episode_id": "RLS5bDw7pYg",
+     "episode_title": "\ud83d\udd34 LIVE: Clarity Act Vote...What Next? | Market Update + Interviews",
+     "start_seconds": 8528.0,
+     "timestamp": "2:22:08",
+     "deep_link": "https://www.youtube.com/watch?v=RLS5bDw7pYg&t=8528s",
+     "kind": "analysis",
+     "note": "The speaker describes the Standard Reserve protocol as similar to Ohm but with smart contracts that dynamically adjust emissions based on ETH inflows and outflows; Ohm is used as a comparison model."
+    },
+    {
+     "episode_id": "ZSBmoD9oLw8",
+     "episode_title": "\ud83d\udd34 LIVE: The Battle Of Blockchains | Solana vs Robinhood | Market Update + Interviews",
+     "start_seconds": 3338.0,
+     "timestamp": "55:38",
+     "deep_link": "https://www.youtube.com/watch?v=ZSBmoD9oLw8&t=3338s",
+     "kind": "analysis",
+     "note": "Speaker was an early participant in Olympus; noted for its huge runup and collapse but still operating with one of the biggest treasuries in DeFi."
+    },
+    {
+     "episode_id": "ZSBmoD9oLw8",
+     "episode_title": "\ud83d\udd34 LIVE: The Battle Of Blockchains | Solana vs Robinhood | Market Update + Interviews",
+     "start_seconds": 4834.0,
+     "timestamp": "1:20:34",
+     "deep_link": "https://www.youtube.com/watch?v=ZSBmoD9oLw8&t=4834s",
+     "kind": "analysis",
+     "note": "Speaker discusses their early involvement in Olympus and lessons learned about redemption, buybacks, and avoiding hyperinflation through minting yield based on actual economic productivity."
+    },
+    {
+     "episode_id": "_bXn26hfpJA",
+     "episode_title": "\ud83d\udd34 LIVE: No Sleep Szn is Here | Market Update + Interviews",
+     "start_seconds": 1656.0,
+     "timestamp": "27:36",
+     "deep_link": "https://www.youtube.com/watch?v=_bXn26hfpJA&t=1656s",
+     "kind": "analysis",
+     "note": "Olympus DAO hit $4 billion market cap on a $400 million treasury, applying a 10x multiple to their treasury valuation."
+    },
+    {
+     "episode_id": "gWC1Hq-i9-g",
+     "episode_title": "\ud83d\udd34 LIVE: The Bear Market is Almost Over...Here's Why | Market Update + Interviews",
+     "start_seconds": 599.0,
+     "timestamp": "9:59",
+     "deep_link": "https://www.youtube.com/watch?v=gWC1Hq-i9-g&t=599s",
+     "kind": "mention",
+     "note": "Speaker mentions someone made $80 million off a pre-seed allocation into Olympus Dao from 2021, then lost it all."
+    },
+    {
+     "episode_id": "jzXZPIYqQPg",
+     "episode_title": "Trophy Tomato ($SOL) : Premises Of Food On Mars? 10 Token Commandments, Tomato Day 80 | MCG Show",
+     "start_seconds": 2438.0,
+     "timestamp": "40:38",
+     "deep_link": "https://www.youtube.com/watch?v=jzXZPIYqQPg&t=2438s",
+     "kind": "analysis",
+     "note": "Olympus DAO was a DeFi experiment from 2021 intended to create a cryptonative reserve currency; it evolved into degenerate forks that became DeFi Ponzis offering extremely high returns (500% APR daily, 10x money gains) before eventual value collapse."
+    },
+    {
+     "episode_id": "lN2kZJ0CNZg",
+     "episode_title": "\ud83d\udfe2 LIVE: Robinhood Chain Rally Incoming? How to Position",
+     "start_seconds": 3131.0,
+     "timestamp": "52:11",
+     "deep_link": "https://www.youtube.com/watch?v=lN2kZJ0CNZg&t=3131s",
+     "kind": "mention",
+     "note": "NET is described as the Ohm version on Robinhood, and speaker mentions original Ohm did not have certain features NET added."
+    },
+    {
+     "episode_id": "p1DZ7LSLlNM",
+     "episode_title": "\ud83d\udd34 LIVE: Trading with onchain w/SPAWN Agents, MCG Trader Radio",
+     "start_seconds": 1248.0,
+     "timestamp": "20:48",
+     "deep_link": "https://www.youtube.com/watch?v=p1DZ7LSLlNM&t=1248s",
+     "kind": "mention",
+     "note": "Referenced as having forks on Ethereum and Avalanche, and on Sonic blockchain."
+    },
+    {
+     "episode_id": "qS9ddGA9Gzc",
+     "episode_title": "Nookplot $NOOK: emerges as the Settlement Layer for Agent Coordination as Meta Enters the Space",
+     "start_seconds": 3272.0,
+     "timestamp": "54:32",
+     "deep_link": "https://www.youtube.com/watch?v=qS9ddGA9Gzc&t=3272s",
+     "kind": "analysis",
+     "note": "Discussed in terms of how early and late-stage Olympus differed, noting that agents would have exploited it on day one, and that early success was dependent on mutual trust in the coin's value increasing over time before the protocol was fixed."
+    },
+    {
+     "episode_id": "vBRvDqOdKwQ",
+     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
+     "start_seconds": 6058.0,
+     "timestamp": "1:40:58",
+     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=6058s",
+     "kind": "analysis",
+     "note": "Coyote was on the Olympus team, launched the token but left before the protocol launch due to personal problems with team member Zeus."
+    },
+    {
+     "episode_id": "vgXFm_eqY8M",
+     "episode_title": "HyperDex($HYDX) | Best Rates Across Hyperliquid, Ondo & Lighter + Live Swap Demo",
+     "start_seconds": 83.0,
+     "timestamp": "1:23",
+     "deep_link": "https://www.youtube.com/watch?v=vgXFm_eqY8M&t=83s",
+     "kind": "mention",
+     "note": "Jack mentioned working with Olympus DAO and Wonderland.money fork during DeFi summer."
+    },
+    {
+     "episode_id": "y-dVmUtS2hQ",
+     "episode_title": "ZCombinator ($ZC): No Fees, Futarchy Markets, Token Emissions Control + More!",
+     "start_seconds": 181.0,
+     "timestamp": "3:01",
+     "deep_link": "https://www.youtube.com/watch?v=y-dVmUtS2hQ&t=181s",
+     "kind": "mention",
+     "note": "Uguay was previously on the monetary policy team at Olympus DAO."
+    }
+   ],
+   "episode_count": 14,
+   "single_reference": false
+  },
+  {
    "symbol": "CAKE",
    "name": "PancakeSwap",
    "asset_class": "crypto",
@@ -129995,170 +130330,6 @@
     }
    ],
    "episode_count": 15,
-   "single_reference": false
-  },
-  {
-   "symbol": "OHM",
-   "name": "Olympus DAO",
-   "asset_class": "crypto",
-   "mentions": 17,
-   "analysis": 8,
-   "moments": [
-    {
-     "episode_id": "1UFlORh3zt0",
-     "episode_title": "\ud83d\udd34 LIVE: FOMC Day, Onchain Rotations...Next Leg Loading? | Market Update + Interviews",
-     "start_seconds": 7639.0,
-     "timestamp": "2:07:19",
-     "deep_link": "https://www.youtube.com/watch?v=1UFlORh3zt0&t=7639s",
-     "kind": "mention",
-     "note": "Mentioned briefly in context of a dev, with speculation about an exploit or rug."
-    },
-    {
-     "episode_id": "50P-rICrUfs",
-     "episode_title": "\ud83d\udd34 LIVE: Launchpad Wars On Robinhood | Original $ANSEM Dev Interview | Onchain Update",
-     "start_seconds": 1146.0,
-     "timestamp": "19:06",
-     "deep_link": "https://www.youtube.com/watch?v=50P-rICrUfs&t=1146s",
-     "kind": "mention",
-     "note": "Speaker mentions trading Olympus as one of the rebase tokens in 2022."
-    },
-    {
-     "episode_id": "8Tgu7gZ-7Lk",
-     "episode_title": "NetNet Capital:Reserve Manager for $NET on Robinhood Chain.",
-     "start_seconds": 374.0,
-     "timestamp": "6:14",
-     "deep_link": "https://www.youtube.com/watch?v=8Tgu7gZ-7Lk&t=374s",
-     "kind": "analysis",
-     "note": "NetNet is described as an 'Ohm provement' that took what Olympus did, implemented improvements, and shows faster treasury growth and different liquidity mechanisms."
-    },
-    {
-     "episode_id": "8Tgu7gZ-7Lk",
-     "episode_title": "NetNet Capital:Reserve Manager for $NET on Robinhood Chain.",
-     "start_seconds": 999.0,
-     "timestamp": "16:39",
-     "deep_link": "https://www.youtube.com/watch?v=8Tgu7gZ-7Lk&t=999s",
-     "kind": "mention",
-     "note": "Mentioned as a comparison point; the protocol being discussed is positioned as improving upon Ohm's design by implementing a trading levy that Ohm did not have."
-    },
-    {
-     "episode_id": "8Tgu7gZ-7Lk",
-     "episode_title": "NetNet Capital:Reserve Manager for $NET on Robinhood Chain.",
-     "start_seconds": 3475.0,
-     "timestamp": "57:55",
-     "deep_link": "https://www.youtube.com/watch?v=8Tgu7gZ-7Lk&t=3475s",
-     "kind": "mention",
-     "note": "Speaker mentions that no one thought an Ohm fork could last more than a few days, and notes there were about a hundred Ohm forks in 2021."
-    },
-    {
-     "episode_id": "RLS5bDw7pYg",
-     "episode_title": "\ud83d\udd34 LIVE: Clarity Act Vote...What Next? | Market Update + Interviews",
-     "start_seconds": 7630.0,
-     "timestamp": "2:07:10",
-     "deep_link": "https://www.youtube.com/watch?v=RLS5bDw7pYg&t=7630s",
-     "kind": "mention",
-     "note": "Referenced as an example of another protocol that had a clear one-liner messaging ('reserve currency') that Standard is trying to emulate."
-    },
-    {
-     "episode_id": "RLS5bDw7pYg",
-     "episode_title": "\ud83d\udd34 LIVE: Clarity Act Vote...What Next? | Market Update + Interviews",
-     "start_seconds": 8528.0,
-     "timestamp": "2:22:08",
-     "deep_link": "https://www.youtube.com/watch?v=RLS5bDw7pYg&t=8528s",
-     "kind": "analysis",
-     "note": "The speaker describes the Standard Reserve protocol as similar to Ohm but with smart contracts that dynamically adjust emissions based on ETH inflows and outflows; Ohm is used as a comparison model."
-    },
-    {
-     "episode_id": "ZSBmoD9oLw8",
-     "episode_title": "\ud83d\udd34 LIVE: The Battle Of Blockchains | Solana vs Robinhood | Market Update + Interviews",
-     "start_seconds": 3338.0,
-     "timestamp": "55:38",
-     "deep_link": "https://www.youtube.com/watch?v=ZSBmoD9oLw8&t=3338s",
-     "kind": "analysis",
-     "note": "Speaker was an early participant in Olympus; noted for its huge runup and collapse but still operating with one of the biggest treasuries in DeFi."
-    },
-    {
-     "episode_id": "ZSBmoD9oLw8",
-     "episode_title": "\ud83d\udd34 LIVE: The Battle Of Blockchains | Solana vs Robinhood | Market Update + Interviews",
-     "start_seconds": 4834.0,
-     "timestamp": "1:20:34",
-     "deep_link": "https://www.youtube.com/watch?v=ZSBmoD9oLw8&t=4834s",
-     "kind": "analysis",
-     "note": "Speaker discusses their early involvement in Olympus and lessons learned about redemption, buybacks, and avoiding hyperinflation through minting yield based on actual economic productivity."
-    },
-    {
-     "episode_id": "_bXn26hfpJA",
-     "episode_title": "\ud83d\udd34 LIVE: No Sleep Szn is Here | Market Update + Interviews",
-     "start_seconds": 1656.0,
-     "timestamp": "27:36",
-     "deep_link": "https://www.youtube.com/watch?v=_bXn26hfpJA&t=1656s",
-     "kind": "analysis",
-     "note": "Olympus DAO hit $4 billion market cap on a $400 million treasury, applying a 10x multiple to their treasury valuation."
-    },
-    {
-     "episode_id": "gWC1Hq-i9-g",
-     "episode_title": "\ud83d\udd34 LIVE: The Bear Market is Almost Over...Here's Why | Market Update + Interviews",
-     "start_seconds": 599.0,
-     "timestamp": "9:59",
-     "deep_link": "https://www.youtube.com/watch?v=gWC1Hq-i9-g&t=599s",
-     "kind": "mention",
-     "note": "Speaker mentions someone made $80 million off a pre-seed allocation into Olympus Dao from 2021, then lost it all."
-    },
-    {
-     "episode_id": "jzXZPIYqQPg",
-     "episode_title": "Trophy Tomato ($SOL) : Premises Of Food On Mars? 10 Token Commandments, Tomato Day 80 | MCG Show",
-     "start_seconds": 2438.0,
-     "timestamp": "40:38",
-     "deep_link": "https://www.youtube.com/watch?v=jzXZPIYqQPg&t=2438s",
-     "kind": "analysis",
-     "note": "Olympus DAO was a DeFi experiment from 2021 intended to create a cryptonative reserve currency; it evolved into degenerate forks that became DeFi Ponzis offering extremely high returns (500% APR daily, 10x money gains) before eventual value collapse."
-    },
-    {
-     "episode_id": "lN2kZJ0CNZg",
-     "episode_title": "\ud83d\udfe2 LIVE: Robinhood Chain Rally Incoming? How to Position",
-     "start_seconds": 3131.0,
-     "timestamp": "52:11",
-     "deep_link": "https://www.youtube.com/watch?v=lN2kZJ0CNZg&t=3131s",
-     "kind": "mention",
-     "note": "NET is described as the Ohm version on Robinhood, and speaker mentions original Ohm did not have certain features NET added."
-    },
-    {
-     "episode_id": "p1DZ7LSLlNM",
-     "episode_title": "\ud83d\udd34 LIVE: Trading with onchain w/SPAWN Agents, MCG Trader Radio",
-     "start_seconds": 1248.0,
-     "timestamp": "20:48",
-     "deep_link": "https://www.youtube.com/watch?v=p1DZ7LSLlNM&t=1248s",
-     "kind": "mention",
-     "note": "Referenced as having forks on Ethereum and Avalanche, and on Sonic blockchain."
-    },
-    {
-     "episode_id": "qS9ddGA9Gzc",
-     "episode_title": "Nookplot $NOOK: emerges as the Settlement Layer for Agent Coordination as Meta Enters the Space",
-     "start_seconds": 3272.0,
-     "timestamp": "54:32",
-     "deep_link": "https://www.youtube.com/watch?v=qS9ddGA9Gzc&t=3272s",
-     "kind": "analysis",
-     "note": "Discussed in terms of how early and late-stage Olympus differed, noting that agents would have exploited it on day one, and that early success was dependent on mutual trust in the coin's value increasing over time before the protocol was fixed."
-    },
-    {
-     "episode_id": "vBRvDqOdKwQ",
-     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
-     "start_seconds": 6058.0,
-     "timestamp": "1:40:58",
-     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=6058s",
-     "kind": "analysis",
-     "note": "Coyote was on the Olympus team, launched the token but left before the protocol launch due to personal problems with team member Zeus."
-    },
-    {
-     "episode_id": "y-dVmUtS2hQ",
-     "episode_title": "ZCombinator ($ZC): No Fees, Futarchy Markets, Token Emissions Control + More!",
-     "start_seconds": 181.0,
-     "timestamp": "3:01",
-     "deep_link": "https://www.youtube.com/watch?v=y-dVmUtS2hQ&t=181s",
-     "kind": "mention",
-     "note": "Uguay was previously on the monetary policy team at Olympus DAO."
-    }
-   ],
-   "episode_count": 13,
    "single_reference": false
   },
   {
@@ -134342,6 +134513,98 @@
    "single_reference": false
   },
   {
+   "symbol": "HYDX",
+   "name": "HyperDEX",
+   "asset_class": "other",
+   "mentions": 9,
+   "analysis": 7,
+   "moments": [
+    {
+     "episode_id": "LNC5N-W785g",
+     "episode_title": "\ud83d\udd34 LIVE: Pullbacks in a Bull Market | 3 Rules to Stay Profitable",
+     "start_seconds": 1746.0,
+     "timestamp": "29:06",
+     "deep_link": "https://www.youtube.com/watch?v=LNC5N-W785g&t=1746s",
+     "kind": "analysis",
+     "note": "HyperDEX is presented as a unified marketplace for real world assets including tokenized stocks, ETFs, treasuries, commodities, and private credit across multiple chains and issuers in a single interface, leveraging the RWA meta."
+    },
+    {
+     "episode_id": "LNC5N-W785g",
+     "episode_title": "\ud83d\udd34 LIVE: Pullbacks in a Bull Market | 3 Rules to Stay Profitable",
+     "start_seconds": 1871.0,
+     "timestamp": "31:11",
+     "deep_link": "https://www.youtube.com/watch?v=LNC5N-W785g&t=1871s",
+     "kind": "mention",
+     "note": "Speaker asks if Hyperdex is a continuation of HYDX token from ICM days; Jack clarifies it is completely different."
+    },
+    {
+     "episode_id": "QSRP-rTwfYE",
+     "episode_title": "\ud83d\udd34 LIVE: Calm Before the Storm | Onchain Weekly Recap",
+     "start_seconds": 8191.0,
+     "timestamp": "2:16:31",
+     "deep_link": "https://www.youtube.com/watch?v=QSRP-rTwfYE&t=8191s",
+     "kind": "analysis",
+     "note": "Described as a unified marketplace for real-world assets including tokenized stocks, ETFs, commodities, treasuries, and private credit with features like aggregated trading, private swaps, lending and borrowing, and spot/perps integration."
+    },
+    {
+     "episode_id": "QSRP-rTwfYE",
+     "episode_title": "\ud83d\udd34 LIVE: Calm Before the Storm | Onchain Weekly Recap",
+     "start_seconds": 8646.0,
+     "timestamp": "2:24:06",
+     "deep_link": "https://www.youtube.com/watch?v=QSRP-rTwfYE&t=8646s",
+     "kind": "analysis",
+     "note": "Discussed as an aggregator layer for on-chain capital markets and unified marketplace for tokenized assets; routes across 68 chains, 36 bridges and 37 DEXs; positioned as solving fragmentation in tokenized stock offerings."
+    },
+    {
+     "episode_id": "QSRP-rTwfYE",
+     "episode_title": "\ud83d\udd34 LIVE: Calm Before the Storm | Onchain Weekly Recap",
+     "start_seconds": 9939.0,
+     "timestamp": "2:45:39",
+     "deep_link": "https://www.youtube.com/watch?v=QSRP-rTwfYE&t=9939s",
+     "kind": "analysis",
+     "note": "Described as the biggest aggregator of DeFi; speakers praised its UI/UX as professionally done with thought and experience behind it; token launched September 24th, faded to $300K in early October, now 10x higher; speakers debate whether to buy based on future growth potential and compare it to Mancer."
+    },
+    {
+     "episode_id": "qHavUGBG56A",
+     "episode_title": "\ud83d\udd34 LIVE: Black Monday Overblown? | Staying Bullish | Market Update",
+     "start_seconds": 6499.0,
+     "timestamp": "1:48:19",
+     "deep_link": "https://www.youtube.com/watch?v=qHavUGBG56A&t=6499s",
+     "kind": "analysis",
+     "note": "HYDX thesis discussed at length; had a 2x pump following Friday coverage, then dropped to 1.5 on Saturday; described as looking solid with large position bets."
+    },
+    {
+     "episode_id": "qHavUGBG56A",
+     "episode_title": "\ud83d\udd34 LIVE: Black Monday Overblown? | Staying Bullish | Market Update",
+     "start_seconds": 7223.0,
+     "timestamp": "2:00:23",
+     "deep_link": "https://www.youtube.com/watch?v=qHavUGBG56A&t=7223s",
+     "kind": "analysis",
+     "note": "Speaker mentioned HYDX sent almost 2-2.5x over the weekend."
+    },
+    {
+     "episode_id": "vgXFm_eqY8M",
+     "episode_title": "HyperDex($HYDX) | Best Rates Across Hyperliquid, Ondo & Lighter + Live Swap Demo",
+     "start_seconds": 29.0,
+     "timestamp": "0:29",
+     "deep_link": "https://www.youtube.com/watch?v=vgXFm_eqY8M&t=29s",
+     "kind": "mention",
+     "note": "Jack clarified that the current Hyperdex project is completely different from HYDX token from ICM days."
+    },
+    {
+     "episode_id": "vgXFm_eqY8M",
+     "episode_title": "HyperDex($HYDX) | Best Rates Across Hyperliquid, Ondo & Lighter + Live Swap Demo",
+     "start_seconds": 1221.0,
+     "timestamp": "20:21",
+     "deep_link": "https://www.youtube.com/watch?v=vgXFm_eqY8M&t=1221s",
+     "kind": "analysis",
+     "note": "The platform's token page shows 17-18 million tokens burned so far."
+    }
+   ],
+   "episode_count": 4,
+   "single_reference": false
+  },
+  {
    "symbol": "PEARL",
    "name": "Pearl",
    "asset_class": "crypto",
@@ -136975,80 +137238,6 @@
      "deep_link": "https://www.youtube.com/watch?v=TSJslPanmbk&t=3717s",
      "kind": "analysis",
      "note": "Founder owns 17% of the token with 0.25% unlocking per week via Streamflow wallet; token was valued at $2 million at one point; transaction fees are split with half going to automatic token burn to create deflationary mechanics."
-    }
-   ],
-   "episode_count": 3,
-   "single_reference": false
-  },
-  {
-   "symbol": "HYDX",
-   "name": "HyperDEX",
-   "asset_class": "other",
-   "mentions": 7,
-   "analysis": 6,
-   "moments": [
-    {
-     "episode_id": "LNC5N-W785g",
-     "episode_title": "\ud83d\udd34 LIVE: Pullbacks in a Bull Market | 3 Rules to Stay Profitable",
-     "start_seconds": 1746.0,
-     "timestamp": "29:06",
-     "deep_link": "https://www.youtube.com/watch?v=LNC5N-W785g&t=1746s",
-     "kind": "analysis",
-     "note": "HyperDEX is presented as a unified marketplace for real world assets including tokenized stocks, ETFs, treasuries, commodities, and private credit across multiple chains and issuers in a single interface, leveraging the RWA meta."
-    },
-    {
-     "episode_id": "LNC5N-W785g",
-     "episode_title": "\ud83d\udd34 LIVE: Pullbacks in a Bull Market | 3 Rules to Stay Profitable",
-     "start_seconds": 1871.0,
-     "timestamp": "31:11",
-     "deep_link": "https://www.youtube.com/watch?v=LNC5N-W785g&t=1871s",
-     "kind": "mention",
-     "note": "Speaker asks if Hyperdex is a continuation of HYDX token from ICM days; Jack clarifies it is completely different."
-    },
-    {
-     "episode_id": "QSRP-rTwfYE",
-     "episode_title": "\ud83d\udd34 LIVE: Calm Before the Storm | Onchain Weekly Recap",
-     "start_seconds": 8191.0,
-     "timestamp": "2:16:31",
-     "deep_link": "https://www.youtube.com/watch?v=QSRP-rTwfYE&t=8191s",
-     "kind": "analysis",
-     "note": "Described as a unified marketplace for real-world assets including tokenized stocks, ETFs, commodities, treasuries, and private credit with features like aggregated trading, private swaps, lending and borrowing, and spot/perps integration."
-    },
-    {
-     "episode_id": "QSRP-rTwfYE",
-     "episode_title": "\ud83d\udd34 LIVE: Calm Before the Storm | Onchain Weekly Recap",
-     "start_seconds": 8646.0,
-     "timestamp": "2:24:06",
-     "deep_link": "https://www.youtube.com/watch?v=QSRP-rTwfYE&t=8646s",
-     "kind": "analysis",
-     "note": "Discussed as an aggregator layer for on-chain capital markets and unified marketplace for tokenized assets; routes across 68 chains, 36 bridges and 37 DEXs; positioned as solving fragmentation in tokenized stock offerings."
-    },
-    {
-     "episode_id": "QSRP-rTwfYE",
-     "episode_title": "\ud83d\udd34 LIVE: Calm Before the Storm | Onchain Weekly Recap",
-     "start_seconds": 9939.0,
-     "timestamp": "2:45:39",
-     "deep_link": "https://www.youtube.com/watch?v=QSRP-rTwfYE&t=9939s",
-     "kind": "analysis",
-     "note": "Described as the biggest aggregator of DeFi; speakers praised its UI/UX as professionally done with thought and experience behind it; token launched September 24th, faded to $300K in early October, now 10x higher; speakers debate whether to buy based on future growth potential and compare it to Mancer."
-    },
-    {
-     "episode_id": "qHavUGBG56A",
-     "episode_title": "\ud83d\udd34 LIVE: Black Monday Overblown? | Staying Bullish | Market Update",
-     "start_seconds": 6499.0,
-     "timestamp": "1:48:19",
-     "deep_link": "https://www.youtube.com/watch?v=qHavUGBG56A&t=6499s",
-     "kind": "analysis",
-     "note": "HYDX thesis discussed at length; had a 2x pump following Friday coverage, then dropped to 1.5 on Saturday; described as looking solid with large position bets."
-    },
-    {
-     "episode_id": "qHavUGBG56A",
-     "episode_title": "\ud83d\udd34 LIVE: Black Monday Overblown? | Staying Bullish | Market Update",
-     "start_seconds": 7223.0,
-     "timestamp": "2:00:23",
-     "deep_link": "https://www.youtube.com/watch?v=qHavUGBG56A&t=7223s",
-     "kind": "analysis",
-     "note": "Speaker mentioned HYDX sent almost 2-2.5x over the weekend."
     }
    ],
    "episode_count": 3,
@@ -148287,6 +148476,71 @@
    "single_reference": false
   },
   {
+   "symbol": "CVX",
+   "name": "Chevron",
+   "asset_class": "stock",
+   "mentions": 6,
+   "analysis": 3,
+   "moments": [
+    {
+     "episode_id": "0cdFekQht5w",
+     "episode_title": "\ud83d\udd34 LIVE: Collector Crypt Pokemon Market Review, Solana securing onchain Defi | Macro + Watchlists",
+     "start_seconds": 2010.0,
+     "timestamp": "33:30",
+     "deep_link": "https://www.youtube.com/watch?v=0cdFekQht5w&t=2010s",
+     "kind": "analysis",
+     "note": "Discussed as an energy stock that has performed well over recent months as a basket/ETF holding."
+    },
+    {
+     "episode_id": "LNC5N-W785g",
+     "episode_title": "\ud83d\udd34 LIVE: Pullbacks in a Bull Market | 3 Rules to Stay Profitable",
+     "start_seconds": 3751.0,
+     "timestamp": "1:02:31",
+     "deep_link": "https://www.youtube.com/watch?v=LNC5N-W785g&t=3751s",
+     "kind": "mention",
+     "note": "Speaker mentioned being an advisor to Convex, an AMM on Ethereum, as a previous project in crypto."
+    },
+    {
+     "episode_id": "LNC5N-W785g",
+     "episode_title": "\ud83d\udd34 LIVE: Pullbacks in a Bull Market | 3 Rules to Stay Profitable",
+     "start_seconds": 3761.0,
+     "timestamp": "1:02:41",
+     "deep_link": "https://www.youtube.com/watch?v=LNC5N-W785g&t=3761s",
+     "kind": "mention",
+     "note": "Speaker described Convex as a big DeFi project they worked on in 2021."
+    },
+    {
+     "episode_id": "hcjIEdcjlPw",
+     "episode_title": "UP: The native (3,3) exchange and liquidity layer of Robinhood Chain.",
+     "start_seconds": 219.0,
+     "timestamp": "3:39",
+     "deep_link": "https://www.youtube.com/watch?v=hcjIEdcjlPw&t=219s",
+     "kind": "analysis",
+     "note": "Convex is described as existing on top of Curve, taking governance away from Curve by offering better governance and VE token management."
+    },
+    {
+     "episode_id": "n8w_k4atbMM",
+     "episode_title": "\ud83d\udd34 LIVE: Undervalued projects, Printr sale goes live, massive Week Onchain | Alpha + Market Updates",
+     "start_seconds": 11280.0,
+     "timestamp": "3:08:00",
+     "deep_link": "https://www.youtube.com/watch?v=n8w_k4atbMM&t=11280s",
+     "kind": "analysis",
+     "note": "Chevron on a big dip; speaker suggests longing oil companies like Chevron as good plays due to growing markets in emerging countries benefiting from Venezuela and Iran geopolitical situations."
+    },
+    {
+     "episode_id": "vgXFm_eqY8M",
+     "episode_title": "HyperDex($HYDX) | Best Rates Across Hyperliquid, Ondo & Lighter + Live Swap Demo",
+     "start_seconds": 1912.0,
+     "timestamp": "31:52",
+     "deep_link": "https://www.youtube.com/watch?v=vgXFm_eqY8M&t=1912s",
+     "kind": "mention",
+     "note": "Speaker was an advisor to Convex, an AMM on Ethereum, in 2021."
+    }
+   ],
+   "episode_count": 5,
+   "single_reference": false
+  },
+  {
    "symbol": "WORLD",
    "name": "Worldcoin",
    "asset_class": "crypto",
@@ -148609,62 +148863,6 @@
     }
    ],
    "episode_count": 6,
-   "single_reference": false
-  },
-  {
-   "symbol": "CVX",
-   "name": "Chevron",
-   "asset_class": "stock",
-   "mentions": 5,
-   "analysis": 3,
-   "moments": [
-    {
-     "episode_id": "0cdFekQht5w",
-     "episode_title": "\ud83d\udd34 LIVE: Collector Crypt Pokemon Market Review, Solana securing onchain Defi | Macro + Watchlists",
-     "start_seconds": 2010.0,
-     "timestamp": "33:30",
-     "deep_link": "https://www.youtube.com/watch?v=0cdFekQht5w&t=2010s",
-     "kind": "analysis",
-     "note": "Discussed as an energy stock that has performed well over recent months as a basket/ETF holding."
-    },
-    {
-     "episode_id": "LNC5N-W785g",
-     "episode_title": "\ud83d\udd34 LIVE: Pullbacks in a Bull Market | 3 Rules to Stay Profitable",
-     "start_seconds": 3751.0,
-     "timestamp": "1:02:31",
-     "deep_link": "https://www.youtube.com/watch?v=LNC5N-W785g&t=3751s",
-     "kind": "mention",
-     "note": "Speaker mentioned being an advisor to Convex, an AMM on Ethereum, as a previous project in crypto."
-    },
-    {
-     "episode_id": "LNC5N-W785g",
-     "episode_title": "\ud83d\udd34 LIVE: Pullbacks in a Bull Market | 3 Rules to Stay Profitable",
-     "start_seconds": 3761.0,
-     "timestamp": "1:02:41",
-     "deep_link": "https://www.youtube.com/watch?v=LNC5N-W785g&t=3761s",
-     "kind": "mention",
-     "note": "Speaker described Convex as a big DeFi project they worked on in 2021."
-    },
-    {
-     "episode_id": "hcjIEdcjlPw",
-     "episode_title": "UP: The native (3,3) exchange and liquidity layer of Robinhood Chain.",
-     "start_seconds": 219.0,
-     "timestamp": "3:39",
-     "deep_link": "https://www.youtube.com/watch?v=hcjIEdcjlPw&t=219s",
-     "kind": "analysis",
-     "note": "Convex is described as existing on top of Curve, taking governance away from Curve by offering better governance and VE token management."
-    },
-    {
-     "episode_id": "n8w_k4atbMM",
-     "episode_title": "\ud83d\udd34 LIVE: Undervalued projects, Printr sale goes live, massive Week Onchain | Alpha + Market Updates",
-     "start_seconds": 11280.0,
-     "timestamp": "3:08:00",
-     "deep_link": "https://www.youtube.com/watch?v=n8w_k4atbMM&t=11280s",
-     "kind": "analysis",
-     "note": "Chevron on a big dip; speaker suggests longing oil companies like Chevron as good plays due to growing markets in emerging countries benefiting from Venezuela and Iran geopolitical situations."
-    }
-   ],
-   "episode_count": 4,
    "single_reference": false
   },
   {
@@ -196914,10 +197112,10 @@
    "single_reference": true
   }
  ],
- "total_hits": 19095,
+ "total_hits": 19117,
  "dropped_low_confidence": 2331,
  "dropped_not_an_asset": 2130,
- "episodes_processed": 668,
+ "episodes_processed": 669,
  "episode_ids": [
   "-6Sccmoz7RQ",
   "-8z0M77EVZg",
@@ -197542,6 +197740,7 @@
   "vBRvDqOdKwQ",
   "vBZ8pcgAzJY",
   "vNGAz4HkGZg",
+  "vgXFm_eqY8M",
   "vpOPBLHmtrA",
   "vqOeJKpQ61E",
   "vtjLReYCARY",
