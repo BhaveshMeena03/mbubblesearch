@@ -105,3 +105,46 @@ def test_the_description_links_the_front_door_not_one_show():
         assert reply.rstrip().endswith("search.lexthedev.com/home"), reply[-40:]
     assert _front_door("search.lexthedev.com/") == "search.lexthedev.com/home"
     assert _front_door("example.com/somewhere") == "example.com/somewhere"
+
+
+def stayed_quiet_tagging_others(b, m, caplog) -> bool:
+    caplog.clear()
+    with caplog.at_level(logging.INFO, logger="app.x_bot"):
+        try:
+            result = asyncio.run(b.compose(m))
+        except AttributeError:
+            return False
+    return result is None and "dev tagging other accounts" in caplog.text
+
+
+def own_post(text, author=DEV):
+    return mention(text, author=author, conversation="2114685308264751495",
+                   mid="2114685308264751495", replied_to="")
+
+
+# His quote of the archive's announcement on 26 Oct 2026, word for word.
+ANNOUNCEMENT = (
+    "started this as a search engine for one show, @MarketBubble.\n\n"
+    "now it's six archives and 2,300+ hours, updated every morning.\n\n"
+    "ask @mbubbleSearch what @blknoiz06, @Banks, @notthreadguy, @rasmr_eth, "
+    "@MCGlive, elon or powell said and it takes you to the exact second.\n\n"
+    "job's not done https://t.co/abc123")
+
+
+def test_his_own_post_that_tags_other_accounts_gets_no_reply(caplog):
+    assert stayed_quiet_tagging_others(bot(), own_post(ANNOUNCEMENT), caplog)
+
+
+def test_his_demo_that_tags_only_this_account_is_still_answered(caplog):
+    m = own_post("@mbubbleSearch what did ansem say about shorting last week?")
+    assert not stayed_quiet_tagging_others(bot(), m, caplog)
+
+
+def test_asked_to_introduce_itself_it_still_does(caplog):
+    m = own_post("@rasmr_eth meet @mbubbleSearch. @mbubbleSearch introduce yourself")
+    assert not stayed_quiet_tagging_others(bot(), m, caplog)
+
+
+def test_anyone_else_tagging_other_accounts_is_unaffected(caplog):
+    m = own_post("@mbubbleSearch what did @blknoiz06 say about hype?", author="999")
+    assert not stayed_quiet_tagging_others(bot(), m, caplog)

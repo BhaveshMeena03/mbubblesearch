@@ -1174,6 +1174,12 @@ def summons(question: str) -> bool:
     return bool(_SUMMONS.search(strip_urls(question or "").strip()))
 
 
+def tags_others(text: str, handle: str = "mbubbleSearch") -> bool:
+    """Does this post tag anyone besides this account?"""
+    tagged = {h[1:].lower() for h in _HANDLE.findall(strip_urls(text or ""))}
+    return bool(tagged - {handle.lower()})
+
+
 def automation_answer(question: str, site: str | None = None,
                       seed: str | None = None) -> str | None:
     """Yes, and who runs it.
@@ -4426,6 +4432,17 @@ class MentionBot:
                 or str(mention.conversation_id or mention.id) != str(mention.id)
         ) and not summons(mention.text):
             logger.info("%s is the dev replying in a thread; staying quiet",
+                        mention.id)
+            return None
+        # A post he starts himself that tags other accounts is talking to
+        # them. On 26 Oct 2026 he quoted the archive's own announcement with
+        # "ask @mbubbleSearch what @blknoiz06, @Banks, @notthreadguy,
+        # @rasmr_eth, @MCGlive, elon or powell said and it takes you to the
+        # exact second", an invitation, and the bot answered it with Banks
+        # losing six figures, tagging all six. A demo tags this account alone.
+        if dev and str(getattr(mention, "author_id", "")) == dev and \
+                tags_others(mention.text) and not summons(mention.text):
+            logger.info("%s is the dev tagging other accounts; staying quiet",
                         mention.id)
             return None
         question = question_from(mention.text)
