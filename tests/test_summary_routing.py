@@ -51,6 +51,15 @@ class TestTheLatestEpisode:
         "summarize the latest episode", "summarise the newest episode",
         "tldr of the latest episode", "recap the most recent episode",
         "what happened in the last show",
+        # 28 Oct 2026: these fell through to search and the model said it
+        # could not find the newest show.
+        "what was the latest market bubble episode about?",
+        "whats in the most recent market bubble episode",
+        "what's on the latest episode",
+        "what did they talk about on the last episode",
+        "what did they discuss in the latest market bubble episode",
+        "latest episode?",
+        "the newest show",
     ])
     def test_it_is_recognised_without_a_number(self, asked):
         """The model cannot know what is newest from six excerpts, so it
@@ -69,6 +78,12 @@ class TestOrdinaryQuestionsAreNotHijacked:
         "who was the guy who sold all his eth holding",
         "what did ansem say about the 17 million dollar wallet",
         "what did they say about the 2017 cycle",
+        # A topic in the latest episode is still a question for search.
+        "what did ansem say about sol in the latest episode",
+        "what did they talk about bitcoin on the last episode",
+        "what did banks say on the latest market bubble episode about kimchi",
+        "what did they say about hyperliquid on the last episode",
+        "is the latest episode bullish on zcash",
     ])
     def test_it_still_goes_to_search(self, asked):
         assert summary_request(asked) is None, asked
@@ -92,3 +107,46 @@ class TestTheStoredSummaryIsTheLongestCut:
         matches += _same_show_as(matches, rows)
         best = max(matches, key=lambda s: len(s["summary"]))
         assert len(best["summary"]) == 3114
+
+
+class TestTheLatestShowIsTheFullBroadcast:
+    """28 Oct 2026: the YouTube upload of episode 23 was the newest row by
+    date, so "the latest episode" would have summarised a cut."""
+
+    @staticmethod
+    def rows(*specs):
+        return [{"episode_id": eid, "published_at": day, "summary": "x", **extra}
+                for eid, day, extra in specs]
+
+    def test_the_upload_gives_way_to_its_broadcast(self):
+        from app.x_bot import latest_show
+        rows = self.rows(("x-23", "2026-10-22T20:30:00", {}),
+                         ("81mlycpzKR4", "2026-10-23", {}),
+                         ("x-token2049", "2026-10-19", {}))
+        assert latest_show(rows)["episode_id"] == "x-23"
+
+    def test_a_newer_broadcast_is_the_latest(self):
+        from app.x_bot import latest_show
+        rows = self.rows(("x-23", "2026-10-22", {}), ("x-24", "2026-10-29", {}),
+                         ("81mlycpzKR4", "2026-10-23", {}))
+        assert latest_show(rows)["episode_id"] == "x-24"
+
+    def test_an_upload_with_no_broadcast_beside_it_stands(self):
+        from app.x_bot import latest_show
+        rows = self.rows(("x-23", "2026-10-15", {}), ("yt-only", "2026-10-23", {}))
+        assert latest_show(rows)["episode_id"] == "yt-only"
+
+    def test_an_appearance_on_another_show_is_not_the_latest_episode(self):
+        from app.x_bot import latest_show
+        rows = self.rows(("x-23", "2026-10-22", {}),
+                         ("unchained", "2026-10-25", {"show": "Unchained"}))
+        assert latest_show(rows)["episode_id"] == "x-23"
+
+    def test_a_special_on_x_is_the_latest_when_it_is_newest(self):
+        from app.x_bot import latest_show
+        rows = self.rows(("x-23", "2026-10-22", {}), ("x-special", "2026-10-24", {}))
+        assert latest_show(rows)["episode_id"] == "x-special"
+
+    def test_nothing_dated_is_none(self):
+        from app.x_bot import latest_show
+        assert latest_show([{"episode_id": "a"}, {"episode_id": "b", "published_at": "soon"}]) is None

@@ -416,8 +416,23 @@ _ASKS_FOR_LATEST = re.compile(
     (?: \b(?:{_ASKS})\b [^.?!]{{0,30}}
         \b(?:latest|newest|most\s+recent|last|previous|this\s+week's)\b
         [^.?!]{{0,12}} \b(?:episode|ep|show|broadcast|stream)?\b
-      | \bwhat(?:'?s|\s+is|\s+was)\s+(?:the\s+)?
-        (?:latest|newest|most\s+recent)\s+(?:episode|ep|show|broadcast)\b
+      # The show's name may sit in the middle ("what was the latest market
+      # bubble episode about", "whats in the most recent market bubble
+      # episode"): on 28 Oct 2026 that fell through to search and the
+      # model said it could not find the newest show.
+      | \bwhat(?:'?s|\s+is|\s+was)\s+(?:(?:in|on)\s+)?(?:the\s+)?
+        (?:latest|newest|most\s+recent)\s+(?:market\s+bubble\s+)?
+        (?:episode|ep|show|broadcast)\b
+      # "what did they talk about on the last episode", with no topic
+      # between: a topic ("talk about bitcoin on the last episode") is a
+      # question for search, and this does not match it.
+      | \bwhat\s+did\s+(?:they|you\s+guys|the\s+hosts|ansem\s+and\s+banks)\s+
+        (?:talk|discuss|cover)(?:\s+about)?\s+(?:on|in)\s+(?:the\s+)?
+        (?:latest|newest|most\s+recent|last)\s+(?:market\s+bubble\s+)?
+        (?:episode|ep|show)\b
+      # The bare ask, and nothing else: "latest episode?"
+      | ^\W*(?:the\s+)?(?:latest|newest|most\s+recent)\s+
+        (?:market\s+bubble\s+)?(?:episode|ep|show)\W*$
       # The other word order, which is how people actually type it:
       # "latest summary", "latest episode summary", "give me the newest
       # recap". The pattern above only caught the verb-first form.
@@ -766,6 +781,36 @@ def _same_show_as(numbered: list[dict], every: list[dict]) -> list[dict]:
         if at and any(abs((at - a).days) <= _SAME_SHOW_DAYS for a in anchors):
             out.append(candidate)
     return out
+
+
+def latest_show(summaries: list[dict]) -> dict | None:
+    """The newest Market Bubble show, as its fullest copy.
+
+    Ansem's appearances on other shows are not Market Bubble episodes. And
+    the YouTube upload of a show lands a day or so after its live broadcast
+    and summarises a cut of it, so where the broadcast is on file from up to
+    two days earlier, the broadcast is the show: on 28 Oct 2026 the upload
+    of episode 23 was the newest row by date. A special posted on X, like
+    the TOKEN2049 conversation, is a broadcast itself and stands as it is.
+    """
+    from datetime import date
+
+    def day(row: dict) -> date | None:
+        try:
+            return date.fromisoformat(str(row.get("published_at") or "")[:10])
+        except ValueError:
+            return None
+
+    dated = [s for s in summaries
+             if s.get("published_at") and not s.get("show") and day(s)]
+    if not dated:
+        return None
+    newest = max(dated, key=lambda s: s["published_at"])
+    if str(newest.get("episode_id", "")).startswith("x-"):
+        return newest
+    live = [s for s in dated if str(s.get("episode_id", "")).startswith("x-")
+            and 0 <= (day(newest) - day(s)).days <= 2]
+    return max(live, key=lambda s: s["published_at"]) if live else newest
 
 
 def episode_number(title: str) -> int | None:
@@ -3459,6 +3504,12 @@ def _mcg_projects() -> set[str]:
 # safe direction and the rule everywhere else here: the show wins ties.
 # Regenerate this when episodes are added on either side.
 _TOO_ORDINARY = {
+    # Added 28 Oct 2026, said on the show since the 23 Oct ingest: "racer"
+    # is FriendTech's founder, named on the Empire, Good Game, vers la Lune
+    # and Defiant appearances and on episode 23; "railgun" is TulipKing on
+    # episode 23.
+    'racer',
+    'railgun',
     'agent',
     'agents',
     'bean',
@@ -4300,10 +4351,7 @@ class MentionBot:
             return None
         if self._summary_cache is None:
             self._summary_cache = await self._summaries.list_all()
-        dated = [s for s in self._summary_cache if s.get("published_at")]
-        if not dated:
-            return None
-        return max(dated, key=lambda s: s["published_at"])
+        return latest_show(self._summary_cache)
 
     async def _broadcast_for(self, number: int) -> dict | None:
         """The live broadcast for an episode number, if one is indexed.
