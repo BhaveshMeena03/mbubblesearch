@@ -55,6 +55,9 @@ PAGES = re.compile(r"^/(?:home|mcg|elon|musk|finance|record|threadguy|rasmr|meth
 BOTS = re.compile(r"bot|crawl|spider|slurp|preview|facebookexternalhit|embedly"
                   r"|whatsapp|telegram|discord|curl|python-requests|httpx|wget"
                   r"|headless", re.I)
+# Referrer hosts that mean "came from a post on X". t.co is the link
+# wrapper on every post; the rest are profiles and the web app.
+FROM_X = frozenset({"t.co", "x.com", "twitter.com", "mobile.twitter.com", "mobile.x.com"})
 
 
 def today() -> str:
@@ -130,6 +133,8 @@ def day_summary(day: str, data: dict) -> dict:
             "bot_views": data["bot_views"],
             "top_pages": dict(data["pages"].most_common(6)),
             "referrers": dict(data["referrers"].most_common(6)),
+            # From every referrer, not just the six kept above.
+            "from_x": sum(n for host, n in data["referrers"].items() if host in FROM_X),
             "events": dict(counts)}
 
 

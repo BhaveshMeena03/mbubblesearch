@@ -1222,6 +1222,7 @@ for _path, _target in (("/home", "/demo/home.html"),
                        ("/record", "/demo/finance.html"),
                        ("/mcg/tokens", "/demo/mcg-assets.html"),
                        ("/calls", "/demo/calls.html"),
+                       ("/metrics", "/demo/metrics.html"),
                        ("/posts", "/demo/posts.html"),
                        ("/method", "/demo/how-it-works.html")):
     _shortcut(_path, _target)
@@ -1969,6 +1970,22 @@ async def stats() -> dict:
             # What this process has read out of Pinecone. The project's
             # monthly cap is the sum of this and the laptop's morning job.
             "pinecone_reads": egress.snapshot()}
+
+
+@app.get("/v1/metrics", dependencies=[Depends(public_rate_limit)])
+async def metrics(request: Request) -> dict:
+    """What the metrics page draws: traffic for each of the last 30 days,
+    the totals over them, and the size of every archive.
+
+    From memory and the shipped shelves only. The daily records are read
+    from Pinecone once at boot (app/traffic.py), so loading this page costs
+    no index reads however often it is opened.
+    """
+    keep = ("day", "visitors", "page_views", "searches", "from_x")
+    days = [{k: r[k] for k in keep} for r in TRAFFIC.history(days=30)]
+    days.sort(key=lambda r: r["day"])
+    return {"days": days, "totals": TRAFFIC.totals(),
+            "archives": await _archive_sizes(request)}
 
 
 @app.get("/v1/gaps", dependencies=[Depends(require_admin)])

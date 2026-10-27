@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Shared by link with people deciding whether to back or sponsor the
+     project, so it is not linked from the site and asks search engines
+     to leave it alone. The numbers come from /v1/metrics, which serves
+     what app/traffic.py keeps per day; opening it reads nothing from the
+     index. -->
+<meta name="robots" content="noindex, nofollow">
+<title>MarketBubbleSearch · metrics</title>
+<style>
+  @font-face{font-family:"Instrument Serif";src:url("/demo/fonts/InstrumentSerif-Regular.ttf") format("truetype");font-display:swap}
+  @font-face{font-family:"InterV";src:url("/demo/fonts/Inter-Variable.ttf") format("truetype");font-display:swap}
+  :root{
+    --bg:#0b0e11;--panel:#12161c;--line:#232a33;--grid:#1a2027;--text:#e6e8ea;--muted:#8a939e;--faint:#646d78;
+    --green:#16c784;--bar:#12ad74;--x:#6aa9ff;
+    --display:"Instrument Serif",Georgia,serif;--body:"InterV",-apple-system,BlinkMacSystemFont,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,monospace;color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);font-size:15px;line-height:1.5;
+    padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px}
+  .wrap{max-width:920px;margin:0 auto;display:grid;gap:28px}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
+  h1{font-family:var(--display);font-weight:400;font-size:clamp(32px,5vw,46px);line-height:1.05;margin:8px 0 6px;text-wrap:balance}
+  .sub{color:var(--muted);margin:0}
+  h2{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:0 0 12px}
+  .tiles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .tile{background:var(--panel);padding:14px 14px 12px;min-width:0}
+  .tile b{display:block;font-family:var(--display);font-weight:400;font-size:32px;line-height:1;font-variant-numeric:tabular-nums}
+  .tile span{display:block;color:var(--muted);font-size:12.5px;margin-top:6px}
+  .charts{display:grid;gap:14px}
+  .chart{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 14px 8px;position:relative;min-width:0}
+  .chart header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .chart header p{margin:0;font-weight:600}
+  .chart header span{color:var(--muted);font-size:12.5px;font-variant-numeric:tabular-nums}
+  svg{display:block;width:100%;height:auto}
+  .tip{position:absolute;pointer-events:none;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:6px 9px;font-size:12.5px;white-space:nowrap;transform:translate(-50%,-110%);font-variant-numeric:tabular-nums}
+  .tip[hidden]{display:none}
+  .arch{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+  .arch th,.arch td{padding:8px 10px;border-bottom:1px solid var(--grid);text-align:right}
+  .arch th:first-child,.arch td:first-child{text-align:left}
+  .arch th{font-weight:500;color:var(--muted);font-size:12.5px}
+  .arch tfoot td{font-weight:600}
+  details{color:var(--muted);font-size:13px}
+  summary{cursor:pointer}
+  summary:focus-visible,.hit:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+  .tbl{overflow-x:auto;margin-top:8px}
+  .tbl table{border-collapse:collapse;min-width:460px;font-variant-numeric:tabular-nums;font-size:12.5px}
+  .tbl th,.tbl td{padding:3px 10px;text-align:right;border-bottom:1px solid var(--grid)}
+  .tbl th:first-child,.tbl td:first-child{text-align:left}
+  .note{color:var(--faint);font-size:12.5px;margin:0}
+  .err{color:var(--muted)}
+  @media (max-width:700px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.tile:last-child{grid-column:span 2}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">MarketBubbleSearch</div>
+    <h1>How people use the archive</h1>
+    <p class="sub" id="span">The last 30 days, counted on the live site.</p>
+  </header>
+
+  <section aria-label="Totals">
+    <div class="tiles" id="tiles">
+      <div class="tile"><b>…</b><span>visits</span></div>
+      <div class="tile"><b>…</b><span>page views</span></div>
+      <div class="tile"><b>…</b><span>searches</span></div>
+      <div class="tile"><b>…</b><span>visits from X</span></div>
+      <div class="tile"><b>…</b><span>best day</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Every day</h2>
+    <div class="charts">
+      <div class="chart" data-key="visitors" data-label="Visitors" data-color="var(--bar)"><header><p>Visitors</p><span></span></header><div class="svgwrap"><svg role="img"></svg></div><div class="tip" hidden></div></div>
+      <div class="chart" data-key="from_x" data-label="Visits from X" data-color="var(--x)"><header><p>Visits from X</p><span></span></header><div class="svgwrap"><svg role="img"></svg></div><div class="tip" hidden></div></div>
+      <div class="chart" data-key="searches" data-label="Searches" data-color="var(--bar)"><header><p>Searches on the site</p><span></span></header><div class="svgwrap"><svg role="img"></svg></div><div class="tip" hidden></div></div>
+    </div>
+    <details style="margin-top:12px">
+      <summary>Show the numbers</summary>
+      <div class="tbl"><table><thead><tr><th>Day</th><th>Visitors</th><th>Page views</th><th>Searches</th><th>From X</th></tr></thead><tbody id="rows"></tbody></table></div>
+    </details>
+    <p class="note" style="margin-top:10px">A visitor is counted once a day, from a hash that changes daily, so nobody can be followed across days. Link previews and crawlers are not counted. The X bot's answers happen on X and are not in these numbers.</p>
+  </section>
+
+  <section>
+    <h2>What is searchable</h2>
+    <div style="overflow-x:auto"><table class="arch"><thead><tr><th>Archive</th><th>Recordings</th><th>Hours</th></tr></thead><tbody id="arch"></tbody><tfoot id="archfoot"></tfoot></table></div>
+  </section>
+</div>
+
+<script>
+(function(){
+  const NAMES={podcast:"Market Bubble",mcg:"MCG Live",threadguy:"ThreadGuy",rasmr:"rasmr",elon:"Elon Musk",tradfi:"The Record"};
+  const num=v=>Math.round(v).toLocaleString("en-US");
+  const fmt=d=>new Date(d+"T00:00:00Z").toLocaleDateString("en-GB",{day:"numeric",month:"short",timeZone:"UTC"});
+  const ns="http://www.w3.org/2000/svg";
+  const el=(t,a)=>{const e=document.createElementNS(ns,t);for(const k in a)e.setAttribute(k,a[k]);return e};
+
+  function niceMax(v){if(v<=5)return 5;const p=Math.pow(10,Math.floor(Math.log10(v)));for(const m of [1,1.5,2,2.5,3,4,5,6,8,10])if(m*p>=v)return m*p;return 10*p}
+
+  function draw(box,days){
+    const key=box.dataset.key,color=box.dataset.color,svg=box.querySelector("svg"),tip=box.querySelector(".tip");
+    const W=Math.max(300,Math.round(svg.parentNode.clientWidth)),H=170,L=44,R=10,T=12,B=26,n=days.length;
+    const every=Math.max(1,Math.ceil(n/Math.floor((W-L-R)/58)));
+    svg.replaceChildren();
+    const vals=days.map(d=>d[key]),top=niceMax(Math.max(1,...vals)),cw=(W-L-R)/n,bw=Math.max(3,cw-3);
+    const y=v=>T+(H-T-B)*(1-v/top);
+    svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
+    svg.setAttribute("aria-label",`${box.dataset.label} per day, ${fmt(days[0].day)} to ${fmt(days[n-1].day)}. Highest ${num(Math.max(...vals))}.`);
+    [0,top/2,top].forEach(v=>{
+      svg.appendChild(el("line",{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:"var(--grid)","stroke-width":1}));
+      const t=el("text",{x:L-8,y:y(v)+4,"text-anchor":"end","font-size":11,fill:"var(--faint)","font-family":"var(--mono)"});t.textContent=num(v);svg.appendChild(t);
+    });
+    days.forEach((d,i)=>{
+      const v=d[key],x=L+i*cw+(cw-bw)/2,yt=y(v),h=y(0)-yt,r=Math.min(4,bw/2,h);
+      const bar=h>0.5?el("path",{d:`M${x},${y(0)}V${yt+r}Q${x},${yt} ${x+r},${yt}H${x+bw-r}Q${x+bw},${yt} ${x+bw},${yt+r}V${y(0)}Z`,fill:color}):null;
+      if(bar)svg.appendChild(bar);
+      const hit=el("rect",{class:"hit",x:L+i*cw,y:T,width:cw,height:H-T-B,fill:"transparent",tabindex:0,"aria-label":`${fmt(d.day)}: ${num(v)}`});
+      const show=()=>{const rb=svg.getBoundingClientRect(),bb=box.getBoundingClientRect(),s=rb.width/W;
+        tip.textContent=`${fmt(d.day)} · ${num(v)} ${box.dataset.label.toLowerCase()}`;
+        tip.style.left=(rb.left-bb.left+(x+bw/2)*s)+"px";tip.style.top=(rb.top-bb.top+Math.min(yt,y(top*0.15))*s)+"px";tip.hidden=false;if(bar)bar.style.opacity=".75"};
+      const hide=()=>{tip.hidden=true;if(bar)bar.style.opacity=""};
+      hit.addEventListener("mouseenter",show);hit.addEventListener("mouseleave",hide);hit.addEventListener("focus",show);hit.addEventListener("blur",hide);
+      svg.appendChild(hit);
+      const last=i===n-1;
+      if(i%every===0&&n-1-i>=every||last){const t=el("text",{x:last?x+bw:x+bw/2,y:H-7,"text-anchor":last?"end":"middle","font-size":11,fill:"var(--faint)","font-family":"var(--mono)"});t.textContent=fmt(d.day);svg.appendChild(t)}
+    });
+    box.querySelector("header span").textContent=`${num(vals.reduce((a,b)=>a+b,0))} in ${n} days`;
+  }
+
+  fetch("/v1/metrics").then(r=>{if(!r.ok)throw new Error(r.status);return r.json()}).then(m=>{
+    const days=m.days||[];
+    if(!days.length)throw new Error("no days");
+    const sum=k=>days.reduce((a,d)=>a+d[k],0),best=days.reduce((a,d)=>d.visitors>a.visitors?d:a,days[0]);
+    document.getElementById("span").textContent=`${fmt(days[0].day)} to ${fmt(days[days.length-1].day)}, counted on the live site.`;
+    const tiles=document.querySelectorAll("#tiles b");
+    [num(sum("visitors")),num(sum("page_views")),num(sum("searches")),num(sum("from_x")),num(best.visitors)].forEach((v,i)=>tiles[i].textContent=v);
+    document.querySelectorAll("#tiles span")[4].textContent=`best day, ${fmt(best.day)}`;
+    const all=()=>document.querySelectorAll(".chart").forEach(b=>draw(b,days));
+    all();
+    let wait;addEventListener("resize",()=>{clearTimeout(wait);wait=setTimeout(all,150)});
+    const rows=document.getElementById("rows");
+    days.slice().reverse().forEach(d=>{const tr=document.createElement("tr");tr.innerHTML=`<td>${fmt(d.day)}</td><td>${num(d.visitors)}</td><td>${num(d.page_views)}</td><td>${num(d.searches)}</td><td>${num(d.from_x)}</td>`;rows.appendChild(tr)});
+    const a=m.archives;
+    if(a&&a.by){
+      const body=document.getElementById("arch");
+      Object.keys(NAMES).forEach(k=>{const r=a.by[k];if(!r)return;const tr=document.createElement("tr");
+        const count=k==="podcast"&&r.appearances?`${num(r.count-r.appearances)} + ${num(r.appearances)} appearances`:num(r.count);
+        tr.innerHTML=`<td>${NAMES[k]}</td><td>${count}</td><td>${num(r.hours)}</td>`;body.appendChild(tr)});
+      document.getElementById("archfoot").innerHTML=`<tr><td>All six</td><td>${num(a.recordings)}</td><td>${num(a.hours)}</td></tr>`;
+    }
+  }).catch(()=>{
+    document.getElementById("span").innerHTML='<span class="err">The numbers could not be loaded just now. Refresh in a minute.</span>';
+  });
+})();
+</script>
+</body>
+</html>
