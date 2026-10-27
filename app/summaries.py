@@ -383,5 +383,7 @@ class SummaryStore:
             held = {_episode_of(i) for i in ids}
             rows = [r for eid, r in shipped.items() if eid in held] + fresh
         rows = [dict(r) for r in rows]
-        rows.sort(key=lambda r: r.get("published_at", ""), reverse=True)
+        # `or`, not a default: a row can carry published_at None, and None
+        # against a date string would take the whole list down.
+        rows.sort(key=lambda r: r.get("published_at") or "", reverse=True)
         return rows

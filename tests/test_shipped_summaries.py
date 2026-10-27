@@ -144,3 +144,150 @@ def test_a_store_built_without_a_file_never_touches_the_real_one():
     assert len(asyncio.run(s.list_all())) == 1
     after = summaries.SHIPPED.read_bytes() if summaries.SHIPPED.exists() else None
     assert before == after
+
+
+# -- what could go wrong in production ------------------------------------
+
+def test_a_corrupt_file_is_ignored_and_everything_is_fetched(tmp_path):
+    path = tmp_path / "summaries.json.gz"
+    path.write_bytes(b"not gzip at all")
+    index = FakeIndex({"summary-a": row("a")})
+    assert [r["episode_id"] for r in asyncio.run(store(index, path).list_all())] == ["a"]
+    assert index.fetched == ["summary-a"]
+
+
+def test_a_truncated_file_is_ignored(tmp_path):
+    path = tmp_path / "summaries.json.gz"
+    save_shipped({"a": row("a")}, path)
+    path.write_bytes(path.read_bytes()[:20])
+    assert load_shipped(path) == {}
+
+
+def test_rows_without_an_episode_id_are_skipped(tmp_path):
+    path = tmp_path / "summaries.json.gz"
+    path.write_bytes(gzip.compress(json.dumps([row("a"), {"title": "no id"}, "junk"]).encode()))
+    assert list(load_shipped(path)) == ["a"]
+
+
+def test_an_id_without_the_usual_prefix_is_fetched_not_dropped(tmp_path):
+    path = tmp_path / "summaries.json.gz"
+    save_shipped({"a": row("a")}, path)
+    index = FakeIndex({"summary-a": row("a"), "legacy-b": row("b", "2026-09-01")})
+    rows = asyncio.run(store(index, path).list_all())
+    assert sorted(r["episode_id"] for r in rows) == ["a", "b"]
+    assert index.fetched == ["legacy-b"]
+
+
+def test_an_id_pinecone_cannot_return_does_not_break_the_list(tmp_path):
+    path = tmp_path / "summaries.json.gz"
+    save_shipped({"a": row("a")}, path)
+
+    class Gappy(FakeIndex):
+        def fetch(self, ids, namespace):
+            self.fetched += ids
+            return types.SimpleNamespace(vectors={})
+    rows = asyncio.run(store(Gappy({"summary-a": row("a"), "summary-b": row("b")}), path).list_all())
+    assert [r["episode_id"] for r in rows] == ["a"]
+
+
+def test_a_missing_or_null_date_sorts_last_instead_of_crashing(tmp_path):
+    path = tmp_path / "summaries.json.gz"
+    nodate = {**row("n"), "published_at": None}
+    save_shipped({"a": row("a", "2026-10-01"), "n": nodate}, path)
+    index = FakeIndex({"summary-a": row("a"), "summary-n": nodate,
+                       "summary-z": {**row("z"), "published_at": None}})
+    rows = asyncio.run(store(index, path).list_all())
+    assert rows[0]["episode_id"] == "a" and len(rows) == 3
+
+
+def test_an_index_that_hangs_times_out_and_the_file_is_served(tmp_path):
+    import time
+    path = tmp_path / "summaries.json.gz"
+    save_shipped({"a": row("a")}, path)
+
+    class Slow(FakeIndex):
+        def list(self, namespace):
+            time.sleep(2)
+            yield from super().list(namespace)
+    s = store(Slow({"summary-a": row("a")}), path)
+    s._settings.pinecone_read_timeout_seconds = 0.2
+    assert [r["episode_id"] for r in asyncio.run(s.list_all())] == ["a"]
+
+
+def test_an_unwritable_file_does_not_fail_the_store(tmp_path):
+    folder = tmp_path / "ro"
+    folder.mkdir()
+    path = folder / "summaries.json.gz"
+    save_shipped({"a": row("a")}, path)
+    folder.chmod(0o500)
+    try:
+        s = store(FakeIndex({}), path)
+        episode = Episode(episode_id="b", title="b", url="u", segments=[])
+        asyncio.run(s.store(episode, "a summary " * 40))
+        assert len(s._index.upserted) == 1
+    finally:
+        folder.chmod(0o700)
+
+
+def test_two_lists_at_once_agree(tmp_path):
+    path = tmp_path / "summaries.json.gz"
+    save_shipped({"a": row("a")}, path)
+    s = store(FakeIndex({"summary-a": row("a"), "summary-b": row("b", "2026-10-09")}), path)
+
+    async def both():
+        return await asyncio.gather(s.list_all(), s.list_all())
+    one, two = asyncio.run(both())
+    assert one == two and len(one) == 2
+
+
+def test_the_shipped_file_matches_what_the_site_lists():
+    """The committed file is real data: every row has the fields the
+    episode list renders, and no duplicate ids."""
+    rows = json.loads(gzip.decompress(summaries.SHIPPED.read_bytes()))
+    ids = [r["episode_id"] for r in rows]
+    assert len(ids) == len(set(ids)) and len(ids) >= 70
+    for r in rows:
+        assert r.get("title") and r.get("url") and len(r.get("summary") or "") >= 200, r["episode_id"]
+
+
+def test_pack_refuses_to_write_an_empty_file(tmp_path, monkeypatch):
+    import sys
+    sys.path.insert(0, str(summaries.SHIPPED.parent.parent / "scripts"))
+    import pack_summaries
+    path = tmp_path / "summaries.json.gz"
+    save_shipped({"a": row("a")}, path)
+    monkeypatch.setattr(pack_summaries, "SHIPPED", path)
+    monkeypatch.setattr(pack_summaries, "load_shipped", lambda: load_shipped(path))
+    monkeypatch.setattr(pack_summaries, "save_shipped", lambda rows: save_shipped(rows, path))
+
+    class Empty:
+        _shipped = None
+
+        async def list_all(self):
+            return []
+    monkeypatch.setattr(pack_summaries, "SummaryStore", Empty)
+    monkeypatch.setattr(sys, "argv", ["pack_summaries.py"])
+    assert asyncio.run(pack_summaries.main()) == 1
+    assert list(load_shipped(path)) == ["a"]
+
+
+def test_pack_adds_what_is_new(tmp_path, monkeypatch, capsys):
+    import sys
+    sys.path.insert(0, str(summaries.SHIPPED.parent.parent / "scripts"))
+    import pack_summaries
+    path = tmp_path / "summaries.json.gz"
+    save_shipped({"a": row("a")}, path)
+    monkeypatch.setattr(pack_summaries, "SHIPPED", path)
+    monkeypatch.setattr(pack_summaries, "load_shipped", lambda: load_shipped(path))
+    monkeypatch.setattr(pack_summaries, "save_shipped", lambda rows: save_shipped(rows, path))
+
+    class Two:
+        _shipped = None
+
+        async def list_all(self):
+            return [row("a"), row("b", "2026-10-22")]
+    monkeypatch.setattr(pack_summaries, "SummaryStore", Two)
+    monkeypatch.setattr(sys, "argv", ["pack_summaries.py"])
+    assert asyncio.run(pack_summaries.main()) == 0
+    assert sorted(load_shipped(path)) == ["a", "b"]
+    assert "1 new" in capsys.readouterr().out
