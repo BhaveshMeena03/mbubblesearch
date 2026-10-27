@@ -75,6 +75,9 @@ COPY data/tradfi_episodes.json.gz ./data/tradfi_episodes.json.gz
 # back in.
 COPY data/mcg_index.json ./data/mcg_index.json
 COPY data/threadguy_index.json ./data/threadguy_index.json
+# Market Bubble's summaries. The site serves this and asks Pinecone only which
+# episodes have one, instead of reading every summary back at 0.6 MB a time.
+COPY data/summaries.json.gz ./data/summaries.json.gz
 # 404 episode summaries, gzipped: 873KB of JSON down to a fifth.
 COPY data/mcg_summaries.json.gz ./data/mcg_summaries.json.gz
 # ThreadGuy's, for the newest episodes; the page draws them as notes.

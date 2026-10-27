@@ -76,3 +76,11 @@ def test_a_stream_indexed_from_x_is_not_fetched_again_from_youtube():
     assert twins
     for row in twins:
         assert row.get("source") == "x" and row["youtube"] not in ids, row["id"]
+
+
+def test_market_bubble_summaries_are_refreshed_and_committed():
+    """The site serves them from the file, so the file has to keep up."""
+    packed = SCRIPT.index("scripts/pack_summaries.py")
+    assert SCRIPT.index("unset ANTHROPIC_BASE_URL") < packed
+    assert packed < SCRIPT.index('git diff --quiet -- "${shelves[@]}"')
+    assert "shelves+=(data/summaries.json.gz)" in SCRIPT

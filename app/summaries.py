@@ -10,7 +10,11 @@ looked up by ID, never by similarity, and must not pollute search results.
 """
 
 import asyncio
+import gzip
+import json
 import logging
+import os
+from pathlib import Path
 
 from anthropic import AsyncAnthropic
 from pinecone import Pinecone
@@ -23,6 +27,39 @@ logger = logging.getLogger(__name__)
 
 NAMESPACE = "summaries"
 MAX_METADATA_CHARS = 30_000  # Pinecone metadata cap is 40KB; stay well under
+# Every summary on file, shipped with the image. Reading them all back from
+# the index was 0.6 MB a call (each record carries its placeholder vector),
+# most of what the site still read from Pinecone after the 19 Oct 2026 fix.
+# list_all() now asks the index only which ids it holds and fetches just the
+# summaries this file does not have yet.
+SHIPPED = Path(__file__).resolve().parent.parent / "data" / "summaries.json.gz"
+# Ids per fetch: they go in the query string, and a long enough list is a 414.
+FETCH_BATCH = 100
+
+
+def _episode_of(vector_id: str) -> str:
+    return vector_id.removeprefix("summary-")
+
+
+def load_shipped(path: Path = SHIPPED) -> dict[str, dict]:
+    """The shipped summaries by episode id, or {} if there is no file."""
+    try:
+        rows = json.loads(gzip.decompress(path.read_bytes()))
+    except (OSError, ValueError, EOFError):
+        return {}
+    return {r["episode_id"]: r for r in rows
+            if isinstance(r, dict) and r.get("episode_id")}
+
+
+def save_shipped(rows: dict[str, dict], path: Path = SHIPPED) -> None:
+    """Write the file, newest first, the same bytes for the same rows."""
+    ordered = sorted(rows.values(), reverse=True,
+                     key=lambda r: (r.get("published_at") or "", r["episode_id"]))
+    data = gzip.compress(json.dumps(ordered, ensure_ascii=False,
+                                    sort_keys=True).encode(), mtime=0)
+    tmp = path.with_name(path.name + ".tmp")
+    tmp.write_bytes(data)
+    os.replace(tmp, path)
 
 SUMMARY_SYSTEM = """\
 You summarize episodes of the "Market Bubble" podcast (hosted by Ansem and \
@@ -148,6 +185,18 @@ class SummaryStore:
         # else that spends money on a model.
         self._anthropic = AsyncAnthropic(**anthropic_client_kwargs(settings))
         self._index = None
+        self._shipped_path = SHIPPED
+        self._shipped: dict[str, dict] | None = None
+
+    def _shipped_rows(self) -> dict[str, dict]:
+        # A store built without __init__ (the tests do) has no file, and
+        # must neither read nor write the real one.
+        path = getattr(self, "_shipped_path", None)
+        if path is None:
+            return {}
+        if getattr(self, "_shipped", None) is None:
+            self._shipped = load_shipped(path)
+        return self._shipped
 
     @property
     def index(self):
@@ -261,6 +310,19 @@ class SummaryStore:
             asyncio.to_thread(_upsert),
             timeout=self._settings.pinecone_write_timeout_seconds,
         )
+        # Into the shipped file too, so a summary written again (the same id,
+        # new text) is what the next deploy serves, not the old one. The
+        # file is committed by the morning job or by hand.
+        path = getattr(self, "_shipped_path", None)
+        if path is not None:
+            try:
+                rows = load_shipped(path)
+                rows[episode.episode_id] = metadata
+                save_shipped(rows, path)
+            except OSError as exc:
+                logger.warning("summaries: could not update %s (%s)",
+                               path.name, exc)
+            self._shipped = None
 
     # -- serving --------------------------------------------------------------
     async def exists(self, episode_id: str) -> bool:
@@ -278,25 +340,48 @@ class SummaryStore:
         return bool(result.vectors)
 
     async def list_all(self) -> list[dict]:
-        """All episode summaries, newest first by published date."""
-        def _load() -> list[dict]:
+        """All episode summaries, newest first by published date.
+
+        The index decides which episodes have one: its ids are listed (a few
+        KB) and a summary it no longer holds is not served. The text comes
+        from the shipped file, and only a summary the file lacks, one
+        written since the last deploy, is fetched. If the index cannot be
+        reached the file is served as it is.
+        """
+        shipped = self._shipped_rows()
+
+        def _load() -> tuple[list[str], list[dict]]:
             # index.list() yields ListResponse pages; IDs live in .vectors.
             ids = [
                 item.id if hasattr(item, "id") else str(item)
                 for page in self.index.list(namespace=NAMESPACE)
                 for item in (page.vectors if hasattr(page, "vectors") else page)
             ]
-            if not ids:
-                return []
-            fetched = self.index.fetch(ids=ids, namespace=NAMESPACE)
-            return [dict(v.metadata or {}) for v in fetched.vectors.values()]
+            want = [i for i in ids if _episode_of(i) not in shipped]
+            fresh: list[dict] = []
+            for at in range(0, len(want), FETCH_BATCH):
+                fetched = self.index.fetch(ids=want[at:at + FETCH_BATCH],
+                                           namespace=NAMESPACE)
+                fresh += [dict(v.metadata or {}) for v in fetched.vectors.values()]
+            return ids, fresh
 
         # Bounded: the Pinecone client has no read timeout, and this sits
         # on the request path holding a thread from the bounded to_thread
         # pool. A hang here starves every offloaded call in the process.
-        rows = await asyncio.wait_for(
-            asyncio.to_thread(_load),
-            timeout=self._settings.pinecone_read_timeout_seconds,
-        )
+        try:
+            ids, fresh = await asyncio.wait_for(
+                asyncio.to_thread(_load),
+                timeout=self._settings.pinecone_read_timeout_seconds,
+            )
+        except Exception as exc:  # noqa: BLE001
+            if not shipped:
+                raise
+            logger.warning("summaries: index unavailable (%s); serving %s",
+                           exc, self._shipped_path.name)
+            rows = list(shipped.values())
+        else:
+            held = {_episode_of(i) for i in ids}
+            rows = [r for eid, r in shipped.items() if eid in held] + fresh
+        rows = [dict(r) for r in rows]
         rows.sort(key=lambda r: r.get("published_at", ""), reverse=True)
         return rows

@@ -33,6 +33,7 @@ data/
 # The fifth archive's listing, same reasoning as MCG's above:
 # the passages come back from Pinecone, only the shelf ships.
 !data/threadguy_index.json
+!data/summaries.json.gz
 !data/mcg_summaries.json.gz
 !data/threadguy_summaries.json.gz
 # Which broadcast player each X episode's citations should point at. Read

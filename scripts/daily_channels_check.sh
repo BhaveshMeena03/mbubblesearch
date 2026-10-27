@@ -146,6 +146,12 @@ echo "-- mcg on x"
 echo "-- threadguy notes"
 .venv/bin/python -u scripts/summarize_threadguy.py --latest 10 || status=1
 
+# Market Bubble's summaries, which the site serves from this file rather
+# than reading them back from Pinecone. A show added since yesterday has its
+# summary in the index first; this fetches just that one.
+echo "-- market bubble summaries"
+.venv/bin/python -u scripts/pack_summaries.py || status=1
+
 # Tokens from the newest uploads of both channels, into each dashboard's
 # store. Episodes already extracted are cached and skipped; two at a time,
 # because the proxy is shared with the live site and the bot, and a run
@@ -179,6 +185,9 @@ shelves=(data/threadguy_index.json data/mcg_index.json data/rasmr_index.json
 # seen, and the refusal would take the shelves down with it.
 if git ls-files --error-unmatch data/mcg_broadcast_links.json >/dev/null 2>&1; then
   shelves+=(data/mcg_broadcast_links.json)
+fi
+if git ls-files --error-unmatch data/summaries.json.gz >/dev/null 2>&1; then
+  shelves+=(data/summaries.json.gz)
 fi
 if git diff --quiet -- "${shelves[@]}"; then
   echo "  no new episodes"
