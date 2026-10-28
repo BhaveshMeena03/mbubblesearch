@@ -3510,6 +3510,10 @@ _TOO_ORDINARY = {
     # episode 23.
     'racer',
     'railgun',
+    # Added 29 Oct 2026, from MCG's "Chief $CHOP cooking?" (28 Oct): the
+    # market "chopping" is said in 21 Market Bubble recordings and twice in
+    # the Musk interviews.
+    'chop',
     'agent',
     'agents',
     'bean',
