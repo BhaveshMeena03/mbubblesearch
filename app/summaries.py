@@ -170,6 +170,13 @@ def _appearance_note(episode: Episode) -> str:
     show = getattr(episode, "show", None)
     if not show:
         return ""
+    if show.startswith("Ansem "):
+        # His own videos ("Ansem on X"). Told he was a guest, the 28 Oct
+        # 2026 one came back as "posted as a guest appearance".
+        return (f"This is not a Market Bubble episode. It is Ansem on his "
+                f"own, in a video he posted ({show}): nobody hosts it. "
+                f"FaZe Banks is not on it, and nobody else speaks unless a "
+                f"line carries their name.\n\n")
     return (f"This is not a Market Bubble episode. It is Ansem appearing as "
             f"a guest on {show}; the other voices are that show's hosts. "
             f"FaZe Banks is not on it unless a line carries his name. Name "

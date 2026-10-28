@@ -50,13 +50,23 @@ import httpx  # noqa: E402
 
 from app.config import get_settings  # noqa: E402
 from app.episode_store import load  # noqa: E402
-from app.podcast import PodcastIndex  # noqa: E402
+from app.episode_store import merge as merge_episodes  # noqa: E402
+from app.podcast import GUEST_ON_EVERY_SHOW, PodcastIndex  # noqa: E402
 from app.schemas import Episode  # noqa: E402
 from app.summaries import SummaryStore  # noqa: E402
 from app.x_api import API, XCredentials  # noqa: E402
 
 EPISODES = ROOT / "data" / "episodes.json"
 SPEAKER_MAP = ROOT / "data" / "speaker_map.json"
+
+
+def as_appearance(rows: list[dict], show: str) -> list[dict]:
+    """Tagged with the show and titled "<show>: ...", as Ansem's
+    appearances on other shows are. Running it twice changes nothing."""
+    prefix = f"{show}: "
+    return [{**row, "show": show,
+             "title": row["title"] if row["title"].startswith(prefix)
+             else prefix + row["title"]} for row in rows]
 
 
 def step(n: int, of: int, what: str) -> None:
@@ -172,9 +182,19 @@ async def main() -> int:
                     help="leave the unprompted-answer pool as it is")
     ap.add_argument("--force", action="store_true",
                     help="index it even if it looks like it is still live")
+    # 28 Oct 2026: Ansem posted 34 minutes of "Q4 market thoughts" as a
+    # plain video. Not an episode, so it goes in the way his appearances
+    # on other shows did: tagged with a show, out of the episode count.
+    ap.add_argument("--show", metavar="NAME",
+                    help="not a Market Bubble episode: tag it with this show "
+                         "(\"Ansem on X\", \"Unchained\"). Skips the length "
+                         "check, which is for full shows, and the speaker "
+                         "labels, since every appearance is Ansem's")
     args = ap.parse_args()
 
-    partial, why = await still_running(args.url)
+    # The length check reads the post from the X API, and a full show is
+    # the only thing it knows how to judge.
+    partial, why = (False, "") if args.show else await still_running(args.url)
     if partial and not args.force:
         print(f"\n  Not starting.\n\n  {why}\n")
         print("  Transcribing now would spend twenty minutes and store a "
@@ -206,6 +226,10 @@ async def main() -> int:
         # which is a correct outcome and not a failure.
         print("\n  nothing new — already indexed, or skipped as a duplicate")
         return 0
+    if args.show:
+        fresh = as_appearance(fresh, args.show)
+        merge_episodes(fresh, EPISODES)
+        print(f"  tagged as {args.show}: {fresh[0]['title'][:60]}")
 
     # 2 — ingest -------------------------------------------------------------
     step(2, 10, f"indexing {len(fresh)} episode(s) — appending, not rebuilding")
@@ -222,6 +246,11 @@ async def main() -> int:
     step(3, 10, "working out who is speaking")
     speaker_map: dict[str, dict[str, str]] = {}
     for episode in parsed:
+        if episode.show:
+            # A question about Ansem already takes every passage that has
+            # a show, and this step rebuilds the whole speaker map.
+            print(f"  skipped: {episode.show} is all {GUEST_ON_EVERY_SHOW}")
+            continue
         audio = ROOT / "audio" / f"{episode.episode_id}.mp3"
         if not audio.exists():
             print(f"  no audio kept for {episode.episode_id} — skipping "
@@ -300,6 +329,9 @@ async def main() -> int:
     # that jumps nowhere -- the exact bug the mapping was built to fix.
     step(8, 10, "registering the broadcast player, so citations seek")
     for episode in parsed:
+        if args.show:
+            print("  skipped: an X read, and a posted video has no player link")
+            continue
         await register_player(episode.episode_id)
 
     # 8 — the copy the server ships -----------------------------------------
@@ -316,6 +348,9 @@ async def main() -> int:
         # where they are named.
         who = episode.title.split(":")[0].replace("LIVE W/", "").strip()
         question = f"what did {who.split('&')[0].strip().lower()} say"
+        if episode.show:
+            about = episode.title.split(":", 1)[-1].strip().lower()
+            question = f"what did {GUEST_ON_EVERY_SHOW.lower()} say in {about}"
         result = await index.search(question)
         print(f"\n  Q: {question}")
         print(f"  A: {result.answer[:200]}")

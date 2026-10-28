@@ -173,8 +173,49 @@ def test_the_summary_of_an_appearance_is_told_what_show_it_is():
     assert _appearance_note(appearance(show=None)) == ""
 
 
+def test_his_own_video_is_not_summarized_as_a_guest_spot():
+    """28 Oct 2026: "posted as a guest appearance on 'Ansem on X'"."""
+    from app.summaries import _appearance_note
+    note = _appearance_note(appearance(show="Ansem on X"))
+    assert "on his own" in note and "guest" not in note and "hosts it" in note
+    assert "FaZe Banks is not on it" in note
+
+
 
 def test_a_link_to_the_appearances_opens_on_them():
     """The section renders after load, so the anchor alone went nowhere."""
     page = (ROOT / "demo" / "podcast.html").read_text()
     assert 'want === "ansem"' in page and 'scrollIntoView' in page
+
+
+def test_a_posted_video_goes_in_as_an_appearance():
+    """28 Oct 2026: his "Q4 market thoughts", a plain video on X."""
+    from scripts.add_broadcast import as_appearance
+    row = {"episode_id": "x-2115418459765113280", "title": "Q4 market thoughts",
+           "url": "https://x.com/blknoiz06/status/2115418459765113280",
+           "platform": "other", "published_at": "2026-10-28", "segments": []}
+    tagged = as_appearance([row], "Ansem on X")
+    assert tagged[0]["show"] == "Ansem on X"
+    assert tagged[0]["title"] == "Ansem on X: Q4 market thoughts"
+    assert as_appearance(tagged, "Ansem on X") == tagged
+    assert "show" not in row
+    assert Episode(**tagged[0]).show == "Ansem on X"
+
+
+def test_an_appearance_is_not_held_to_a_full_shows_length(monkeypatch):
+    """The length check reads the post from the X API (the bot's credit)
+    and would call a 34 minute video a show that is still streaming."""
+    from types import SimpleNamespace
+
+    from scripts import add_broadcast
+
+    async def reads_x(url):
+        raise AssertionError("read the post from X")
+    monkeypatch.setattr(add_broadcast, "still_running", reads_x)
+    monkeypatch.setattr(add_broadcast, "load", lambda path: [])
+    monkeypatch.setattr(add_broadcast.subprocess, "run",
+                        lambda *a, **k: SimpleNamespace(returncode=1))
+    monkeypatch.setattr("sys.argv", ["add_broadcast.py", "https://x.com/blknoiz06/status/1",
+                                     "--show", "Ansem on X"])
+    # Stops at transcription, which only happens once the check is passed.
+    assert asyncio.run(add_broadcast.main()) == 1
