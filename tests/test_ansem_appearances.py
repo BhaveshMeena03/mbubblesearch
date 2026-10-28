@@ -239,3 +239,10 @@ def test_an_appearance_is_not_held_to_a_full_shows_length(monkeypatch):
 def test_his_posted_video_is_not_badged_as_a_live_broadcast():
     page = (ROOT / "demo" / "podcast.html").read_text()
     assert "(ep.show ? 'on X' : 'full live · on X')" in page
+
+
+def test_a_link_can_open_one_summary():
+    page = (ROOT / "demo" / "podcast.html").read_text()
+    assert 'd.id = "ep-" + ep.episode_id;' in page
+    assert 'want.indexOf("ep-") === 0' in page and "card.open = true" in page
+    assert "(ep.show ? 'Watch the video on X →'" in page

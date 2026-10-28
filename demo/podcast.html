@@ -342,7 +342,9 @@
   .eps .eps-guest-h{margin-top:32px}
   #eps-guest{scroll-margin-top:24px}
   details.epcard{background:var(--panel);border:1px solid var(--line);
-    border-radius:12px;margin-bottom:10px;overflow:hidden}
+    border-radius:12px;margin-bottom:10px;overflow:hidden;
+    /* Opened from a link (#ep-<id>), its title clears the sticky header. */
+    scroll-margin-top:64px}
   details.epcard summary{cursor:pointer;padding:14px 16px;font-weight:600;
     list-style:none;display:flex;align-items:center;gap:10px}
   details.epcard summary::-webkit-details-marker{display:none}
@@ -837,8 +839,11 @@
             +'<div class="player ep-player"></div>'+bodyHtml+
             '<a class="ep-link" href="'+escAttr(safeUrl(ep.url||""))+'" '+
             'target="_blank" rel="noopener">'
-            + (live ? 'Watch the full broadcast on X →'
+            + (live ? (ep.show ? 'Watch the video on X →'
+                               : 'Watch the full broadcast on X →')
                     : 'Watch the full episode →') + '</a></div>';
+          // So a link can open one summary: /demo/podcast.html#ep-<id>.
+          d.id = "ep-" + ep.episode_id;
           if (ep.show && guest) {
             guest.appendChild(d);
             document.getElementById("eps-guest").hidden=false;
@@ -855,6 +860,11 @@
         if (want === "ansem" || want === "eps-guest") {
           var shows = document.getElementById("eps-guest");
           if (shows && !shows.hidden) shows.scrollIntoView({block: "start"});
+        } else if (want.indexOf("ep-") === 0) {
+          // A reply under Ansem's 28 Oct video wanted the two minute read
+          // of it, open, not a list to find it in.
+          var card = document.getElementById(want);
+          if (card) { card.open = true; card.scrollIntoView({block: "start"}); }
         }
         // The nav link is dead until this section exists, so it only
         // appears once there is somewhere for it to go. It pointed at
