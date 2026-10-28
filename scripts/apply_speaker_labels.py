@@ -45,9 +45,9 @@ sys.path.insert(0, str(ROOT))
 from pinecone import Pinecone  # noqa: E402
 
 from app.config import get_settings  # noqa: E402
+from app.podcast import GUEST_ON_EVERY_SHOW, _timestamp, _windows  # noqa: E402
 from app.podcast import NAMESPACE as PODCAST_NS  # noqa: E402
-from app.podcast import _timestamp, _windows  # noqa: E402
-from app.schemas import Episode  # noqa: E402
+from app.schemas import Episode, his_own  # noqa: E402
 
 EPISODES = ROOT / "data" / "episodes.json"
 SPEAKER_MAP = ROOT / "data" / "speaker_map.json"
@@ -57,6 +57,21 @@ SPEAKER_MAP = ROOT / "data" / "speaker_map.json"
 # machine output into it would lose the distinction for good. The hand
 # map wins every tie below.
 GUEST_LABELS = ROOT / "data" / "guest_labels.json"
+
+
+def own_video_labels(episodes: dict[str, dict]) -> dict[str, dict[str, str]]:
+    """Every line of a video Ansem posted himself, as his.
+
+    One voice, so there is nothing to fingerprint. Unlabelled, his "Q4
+    market thoughts" of 28 Oct 2026 was answered as "an unidentified
+    speaker (discussing Ansem's thoughts)". Numbered as the fingerprinting
+    numbers segments: non-empty text only, in order."""
+    out = {}
+    for episode_id, row in episodes.items():
+        if his_own(row.get("show")):
+            numbered = [s for s in row["segments"] if (s.get("text") or "").strip()]
+            out[episode_id] = {str(i): GUEST_ON_EVERY_SHOW for i in range(len(numbered))}
+    return out
 
 
 def vector_id(episode_id: str, start_seconds: float) -> str:
@@ -137,6 +152,8 @@ async def main() -> int:
                     added += 1
         print(f"  + {added} guest labels from "
               f"{GUEST_LABELS.name} across {len(guests)} episode(s)")
+    for episode_id, labels in own_video_labels(episodes).items():
+        mapping.setdefault(episode_id, labels)
     index = Pinecone(api_key=settings.pinecone_api_key).Index(
         settings.pinecone_index)
 

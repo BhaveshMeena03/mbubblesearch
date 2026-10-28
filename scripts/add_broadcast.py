@@ -52,7 +52,7 @@ from app.config import get_settings  # noqa: E402
 from app.episode_store import load  # noqa: E402
 from app.episode_store import merge as merge_episodes  # noqa: E402
 from app.podcast import GUEST_ON_EVERY_SHOW, PodcastIndex  # noqa: E402
-from app.schemas import Episode  # noqa: E402
+from app.schemas import Episode, his_own  # noqa: E402
 from app.summaries import SummaryStore  # noqa: E402
 from app.x_api import API, XCredentials  # noqa: E402
 
@@ -246,10 +246,17 @@ async def main() -> int:
     step(3, 10, "working out who is speaking")
     speaker_map: dict[str, dict[str, str]] = {}
     for episode in parsed:
+        if his_own(episode.show):
+            # One voice: every line is his, with no fingerprinting and no
+            # rebuild of the whole map (apply_speaker_labels.own_video_labels).
+            print(f"  {episode.show}: every line is {GUEST_ON_EVERY_SHOW}'s")
+            subprocess.run([sys.executable, "scripts/apply_speaker_labels.py",
+                            "--only", episode.episode_id], cwd=ROOT)
+            continue
         if episode.show:
             # A question about Ansem already takes every passage that has
             # a show, and this step rebuilds the whole speaker map.
-            print(f"  skipped: {episode.show} is all {GUEST_ON_EVERY_SHOW}")
+            print(f"  skipped: {episode.show} has hosts the map does not know")
             continue
         audio = ROOT / "audio" / f"{episode.episode_id}.mp3"
         if not audio.exists():

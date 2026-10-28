@@ -116,6 +116,12 @@ class Episode(BaseModel):
     show: str | None = None
 
 
+def his_own(show: str | None) -> bool:
+    """A video Ansem posted himself ("Ansem on X"), not a show he was a
+    guest on: nobody hosts it, and every line in it is his."""
+    return bool(show) and show.startswith("Ansem ")
+
+
 class PodcastHit(BaseModel):
     """A retrieved transcript window, deep-linked to the moment in the episode."""
 

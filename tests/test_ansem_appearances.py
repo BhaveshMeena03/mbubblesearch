@@ -202,6 +202,21 @@ def test_a_posted_video_goes_in_as_an_appearance():
     assert Episode(**tagged[0]).show == "Ansem on X"
 
 
+def test_every_line_of_his_own_video_is_his():
+    """Unlabelled, the 28 Oct video was answered as "an unidentified
+    speaker (discussing Ansem's thoughts)"."""
+    from app.schemas import his_own
+    from scripts.apply_speaker_labels import own_video_labels, stamped_with_speakers
+    assert his_own("Ansem on X") and not his_own("Unchained") and not his_own(None)
+    own = appearance(show="Ansem on X", segments=[
+        {"t": 0.0, "text": "good morning"}, {"t": 3.0, "text": "  "},
+        {"t": 5.0, "text": "currently i flip bearish"}]).model_dump()
+    labels = own_video_labels({"x-1": own, "HFuUgSvezlo": appearance().model_dump()})
+    assert labels == {"x-1": {"0": "Ansem", "1": "Ansem"}}
+    text, present = stamped_with_speakers(Episode(**own), labels["x-1"], 0, 60)
+    assert present == ["Ansem"] and "Ansem: currently i flip bearish" in text
+
+
 def test_an_appearance_is_not_held_to_a_full_shows_length(monkeypatch):
     """The length check reads the post from the X API (the bot's credit)
     and would call a 34 minute video a show that is still streaming."""

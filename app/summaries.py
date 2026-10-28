@@ -21,7 +21,7 @@ from pinecone import Pinecone
 
 from .config import anthropic_client_kwargs, get_settings
 from .egress import metered
-from .schemas import Episode
+from .schemas import Episode, his_own
 
 logger = logging.getLogger(__name__)
 
@@ -170,7 +170,7 @@ def _appearance_note(episode: Episode) -> str:
     show = getattr(episode, "show", None)
     if not show:
         return ""
-    if show.startswith("Ansem "):
+    if his_own(show):
         # His own videos ("Ansem on X"). Told he was a guest, the 28 Oct
         # 2026 one came back as "posted as a guest appearance".
         return (f"This is not a Market Bubble episode. It is Ansem on his "
