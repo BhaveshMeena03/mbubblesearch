@@ -829,7 +829,9 @@
           // the upload is edited down. They sit next to each other in the
           // list and would otherwise read as the same show duplicated.
           var live = !canSeek(ep.url || "");
-          var badge = live ? '<span class="srcbadge">full live · on X</span>' : '';
+          // A video Ansem posted on X was never a live broadcast.
+          var badge = live ? '<span class="srcbadge">' +
+            (ep.show ? 'on X' : 'full live · on X') + '</span>' : '';
           d.innerHTML='<summary><span class="tw">▶</span>'+esc(ep.title)+badge+
             '</summary><div class="ep-body">'
             +'<div class="player ep-player"></div>'+bodyHtml+

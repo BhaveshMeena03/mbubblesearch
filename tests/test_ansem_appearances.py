@@ -234,3 +234,8 @@ def test_an_appearance_is_not_held_to_a_full_shows_length(monkeypatch):
                                      "--show", "Ansem on X"])
     # Stops at transcription, which only happens once the check is passed.
     assert asyncio.run(add_broadcast.main()) == 1
+
+
+def test_his_posted_video_is_not_badged_as_a_live_broadcast():
+    page = (ROOT / "demo" / "podcast.html").read_text()
+    assert "(ep.show ? 'on X' : 'full live · on X')" in page
