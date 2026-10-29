@@ -27,6 +27,19 @@ sys.path.insert(0, str(ROOT))
 PAGE = (ROOT / "demo" / "podcast.html").read_text()
 
 
+def test_every_summary_can_be_shared_by_link():
+    """A summary already opened from #ep-<id>, but only for someone who
+    knew to build that address. Each card now carries a button that copies
+    it, and the address it copies is the one the page opens from."""
+    assert 'class="share ep-share"' in PAGE
+    assert 'd.id = "ep-" + ep.episode_id' in PAGE
+    assert 'location.origin + location.pathname + "#" + d.id' in PAGE
+    assert 'want.indexOf("ep-") === 0' in PAGE
+    # Followed from the page itself, only the hash changes and nothing
+    # reloads; the card has to open on that too.
+    assert 'addEventListener("hashchange", goToHash)' in PAGE
+
+
 def test_a_summary_timestamp_plays_rather_than_navigating_away():
     assert 'class="cite ep-cite"' in PAGE
     assert 'class="player ep-player"' in PAGE

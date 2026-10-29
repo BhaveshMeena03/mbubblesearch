@@ -365,6 +365,12 @@
   .ep-link{display:inline-block;margin-top:10px;color:var(--green);
     font-size:13px;text-decoration:none}
   .ep-link:hover{text-decoration:underline}
+  /* The way out to the show on the left, the link to this summary on the
+     right. */
+  .ep-foot{display:flex;align-items:center;justify-content:space-between;
+    gap:12px;margin-top:10px}
+  .ep-foot .ep-link{margin-top:0}
+  .ep-foot .share{float:none;flex-shrink:0}
   .share{background:transparent;color:var(--muted);border:1px solid var(--line);
     border-radius:8px;font-size:12px;padding:4px 10px;cursor:pointer;
     float:right;font-weight:400}
@@ -837,13 +843,26 @@
           d.innerHTML='<summary><span class="tw">▶</span>'+esc(ep.title)+badge+
             '</summary><div class="ep-body">'
             +'<div class="player ep-player"></div>'+bodyHtml+
+            '<div class="ep-foot">'+
             '<a class="ep-link" href="'+escAttr(safeUrl(ep.url||""))+'" '+
             'target="_blank" rel="noopener">'
             + (live ? (ep.show ? 'Watch the video on X →'
                                : 'Watch the full broadcast on X →')
-                    : 'Watch the full episode →') + '</a></div>';
+                    : 'Watch the full episode →') + '</a>'+
+            '<button class="share ep-share" type="button">share link</button>'+
+            '</div></div>';
           // So a link can open one summary: /demo/podcast.html#ep-<id>.
           d.id = "ep-" + ep.episode_id;
+          // And so anyone reading one can pass that link on. It opens this
+          // card, already open, wherever it sits in the list.
+          var share = d.querySelector(".ep-share");
+          share.addEventListener("click", function(){
+            var url = location.origin + location.pathname + "#" + d.id;
+            (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject())
+              .then(function(){ share.textContent = "copied ✓"; })
+              .catch(function(){ prompt("Copy this link:", url); });
+            setTimeout(function(){ share.textContent = "share link"; }, 2000);
+          });
           if (ep.show && guest) {
             guest.appendChild(d);
             document.getElementById("eps-guest").hidden=false;
@@ -856,16 +875,22 @@
         // browser looks for the anchor as the page loads, before this list
         // exists, finds nothing and stays at the top: the section is about
         // 14,000 pixels down. So it is scrolled to once it is there.
-        var want = (location.hash || "").slice(1);
-        if (want === "ansem" || want === "eps-guest") {
-          var shows = document.getElementById("eps-guest");
-          if (shows && !shows.hidden) shows.scrollIntoView({block: "start"});
-        } else if (want.indexOf("ep-") === 0) {
-          // A reply under Ansem's 28 Oct video wanted the two minute read
-          // of it, open, not a list to find it in.
-          var card = document.getElementById(want);
-          if (card) { card.open = true; card.scrollIntoView({block: "start"}); }
+        function goToHash(){
+          var want = (location.hash || "").slice(1);
+          if (want === "ansem" || want === "eps-guest") {
+            var shows = document.getElementById("eps-guest");
+            if (shows && !shows.hidden) shows.scrollIntoView({block: "start"});
+          } else if (want.indexOf("ep-") === 0) {
+            // A reply under Ansem's 28 Oct video wanted the two minute read
+            // of it, open, not a list to find it in.
+            var card = document.getElementById(want);
+            if (card) { card.open = true; card.scrollIntoView({block: "start"}); }
+          }
         }
+        goToHash();
+        // A shared link followed from this same page changes only the hash,
+        // which loads nothing, so the card would stay shut.
+        window.addEventListener("hashchange", goToHash);
         // The nav link is dead until this section exists, so it only
         // appears once there is somewhere for it to go. It pointed at
         // #episodes while the section was #eps, which is a link that
