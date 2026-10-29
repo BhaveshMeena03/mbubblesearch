@@ -33,6 +33,7 @@ profile URL — so the URLs are supplied by hand, one per line in a file.
 from __future__ import annotations
 
 import argparse
+import html
 import json
 import re
 import shutil
@@ -103,6 +104,9 @@ def title_from(meta: dict) -> str:
     unreadable one.
     """
     raw = (meta.get("description") or meta.get("title") or "").strip()
+    # X sends the post text HTML-escaped. Ansem's 29 Oct 2026 video was
+    # titled "trading breakouts &amp; breakdowns" until this.
+    raw = html.unescape(raw)
     raw = re.sub(r"https?://\S+", "", raw)
     # The chapter list starts at its first timestamp. Split there too:
     # the description can come back with its line breaks flattened, and

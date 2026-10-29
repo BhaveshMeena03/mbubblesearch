@@ -34,6 +34,14 @@ def test_titles_that_were_already_right_are_unchanged():
         == "LIVE W/ JOHANN KERBRAT, IVAN SOTO-WRIGHT, & AUSTIN BARACK: Market Bubble Ep 13"
 
 
+def test_an_escaped_ampersand_in_the_post_is_not_in_the_title():
+    """X's post text for Ansem's 29 Oct 2026 video, as yt-dlp returned it."""
+    meta = {"description": "market thoughts, trading breakouts &amp; breakdowns, "
+            "candlesticks as fractals\n\n0:00 - market bleeding and the $ETH short"}
+    assert title_from(meta) == ("market thoughts, trading breakouts & breakdowns, "
+                                "candlesticks as fractals")
+
+
 def test_a_host_who_was_not_on_stage_is_never_named():
     assert not may_name("x-2112232289178722440", "FaZe Banks")
     assert may_name("x-2112232289178722440", "Ansem")
