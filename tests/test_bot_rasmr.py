@@ -249,6 +249,8 @@ def test_a_broken_rasmr_file_costs_only_his_links(tmp_path, monkeypatch, shipped
     assert mcg_on_x.on_x(link) == link
     # MCG's own pairs still load.
     mcg = json.loads((ROOT / "data" / "mcg_broadcast_links.json").read_text())
-    some, pair = next(iter(mcg.items()))
+    # One with a single offset: a show whose clocks moved may leave 2400s
+    # unmapped, and that keeps its YouTube link on purpose.
+    some, pair = next((k, p) for k, p in mcg.items() if "sections" not in p)
     assert mcg_on_x.on_x(f"https://www.youtube.com/watch?v={some}&t=2400s") \
         .startswith(pair["broadcast"])

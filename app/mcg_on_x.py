@@ -19,6 +19,13 @@ scripts/pair_mcg_broadcasts.py, which measures the gap for each show
 rather than assuming it. A show that is not in the file keeps its YouTube
 link, which also opens at the second.
 
+Not every show keeps one gap. On 26 October the clocks were 1.5 seconds
+apart for two hours and twenty minutes and 20 after, and 21 and 23
+October jumped too. Such a show is stored as "sections": stretches of
+YouTube time, from and to in seconds (to is null for the last), each
+with its own offset. A second in none of them is in the minutes where
+the clocks moved, and keeps its YouTube link.
+
 rasmr goes live on both at once as well, and his pairs are in
 data/rasmr_broadcast_links.json: the same shape, measured the same way by
 scripts/pair_rasmr_broadcasts.py, with the same rule that X's second is
@@ -74,8 +81,27 @@ def on_x(link: str) -> str:
         # No second to keep, so nothing to gain: the broadcast would open
         # at the waiting screen of a four hour stream.
         return link
-    second = max(0, int(at.group(1)) + int(round(pair.get("offset", 0))))
-    return f"{pair['broadcast']}?t={second}"
+    given = int(at.group(1))
+    gap = _offset(pair, given)
+    if gap is None:
+        return link
+    return f"{pair['broadcast']}?t={max(0, given + gap)}"
+
+
+def _offset(pair: dict, second: int) -> int | None:
+    """How far X's clock is from YouTube's at this second of the show, or
+    None where it is not known."""
+    sections = pair.get("sections")
+    if not sections:
+        return int(round(pair.get("offset", 0)))
+    try:
+        for stretch in sections:
+            ends = stretch.get("to")
+            if stretch["from"] <= second and (ends is None or second < ends):
+                return int(round(stretch["offset"]))
+    except (KeyError, TypeError, AttributeError):
+        logger.warning("unreadable sections for %s", pair.get("broadcast"))
+    return None
 
 
 if __name__ == "__main__":
