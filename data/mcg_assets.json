@@ -50981,8 +50981,8 @@
    "symbol": "HOOD",
    "name": "Robinhood",
    "asset_class": "stock",
-   "mentions": 244,
-   "analysis": 154,
+   "mentions": 248,
+   "analysis": 158,
    "moments": [
     {
      "episode_id": "0cdFekQht5w",
@@ -51082,6 +51082,42 @@
      "deep_link": "https://www.youtube.com/watch?v=2PHeTXu_wyY&t=201s",
      "kind": "mention",
      "note": "Speaker mentions Robinhood cooling off on-chain and references the Robinhood ecosystem dumping."
+    },
+    {
+     "episode_id": "4HAGLloGzBo",
+     "episode_title": "I listened to the Robinhood earnings call so you don\u2019t have to\u2026 bullish crypto?",
+     "start_seconds": 0.0,
+     "timestamp": "0:00",
+     "deep_link": "https://www.youtube.com/watch?v=4HAGLloGzBo&t=0s",
+     "kind": "analysis",
+     "note": "Robinhood earnings call discussed as bullish, with emphasis on Robinhood Chain generating 22% of crypto revenues, agentic trading products with $250 million in accounts, perpetual futures, and global expansion strategy targeting over 50% revenue outside the U.S."
+    },
+    {
+     "episode_id": "4HAGLloGzBo",
+     "episode_title": "I listened to the Robinhood earnings call so you don\u2019t have to\u2026 bullish crypto?",
+     "start_seconds": 354.0,
+     "timestamp": "5:54",
+     "deep_link": "https://www.youtube.com/watch?v=4HAGLloGzBo&t=354s",
+     "kind": "analysis",
+     "note": "Robinhood's CEO discussed the company's focus on global expansion, blockchain integration through Robinhood chain, and investment in agentic trading as a first-class offering where they claim to lead the industry."
+    },
+    {
+     "episode_id": "4HAGLloGzBo",
+     "episode_title": "I listened to the Robinhood earnings call so you don\u2019t have to\u2026 bullish crypto?",
+     "start_seconds": 633.0,
+     "timestamp": "10:33",
+     "deep_link": "https://www.youtube.com/watch?v=4HAGLloGzBo&t=633s",
+     "kind": "analysis",
+     "note": "Vlad discusses Robinhood Chain's traction, developer activity ranking, and strategy for on-chain products including stock tokens and options contracts."
+    },
+    {
+     "episode_id": "4HAGLloGzBo",
+     "episode_title": "I listened to the Robinhood earnings call so you don\u2019t have to\u2026 bullish crypto?",
+     "start_seconds": 1010.0,
+     "timestamp": "16:50",
+     "deep_link": "https://www.youtube.com/watch?v=4HAGLloGzBo&t=1010s",
+     "kind": "analysis",
+     "note": "Discussion of Robinhood chain earnings call, focusing on democratizing access to stocks and agentic finance as core strategic focuses."
     },
     {
      "episode_id": "4PlcWhQM96A",
@@ -53181,7 +53217,7 @@
      "note": "Mentioned in passing regarding what happened to Robinhood; no analysis provided."
     }
    ],
-   "episode_count": 124,
+   "episode_count": 125,
    "single_reference": false
   },
   {
@@ -76835,7 +76871,7 @@
    "symbol": "BASE",
    "name": "Base",
    "asset_class": "crypto",
-   "mentions": 149,
+   "mentions": 150,
    "analysis": 57,
    "moments": [
     {
@@ -76909,6 +76945,15 @@
      "deep_link": "https://www.youtube.com/watch?v=3FUHKA46z-I&t=154s",
      "kind": "mention",
      "note": "Mentioned as an EVM chain where they deployed ERC8004 alongside Ethereum."
+    },
+    {
+     "episode_id": "4HAGLloGzBo",
+     "episode_title": "I listened to the Robinhood earnings call so you don\u2019t have to\u2026 bullish crypto?",
+     "start_seconds": 1055.0,
+     "timestamp": "17:35",
+     "deep_link": "https://www.youtube.com/watch?v=4HAGLloGzBo&t=1055s",
+     "kind": "mention",
+     "note": "Referenced in comparison as people calling Robinhood chain 'Base 2.0', with mention of Jesse from Base."
     },
     {
      "episode_id": "7F5EpnbfPAQ",
@@ -78180,7 +78225,7 @@
      "note": "Mentioned as a blockchain integrated into the cross-chain swaps platform alongside Ethereum, BNB, and Solana."
     }
    ],
-   "episode_count": 106,
+   "episode_count": 107,
    "single_reference": false
   },
   {
@@ -129857,6 +129902,134 @@
    "single_reference": false
   },
   {
+   "symbol": "XYZ",
+   "name": "Authentic Finance",
+   "asset_class": "other",
+   "mentions": 13,
+   "analysis": 9,
+   "moments": [
+    {
+     "episode_id": "4HAGLloGzBo",
+     "episode_title": "I listened to the Robinhood earnings call so you don\u2019t have to\u2026 bullish crypto?",
+     "start_seconds": 856.0,
+     "timestamp": "14:16",
+     "deep_link": "https://www.youtube.com/watch?v=4HAGLloGzBo&t=856s",
+     "kind": "mention",
+     "note": "Mentioned as a company Vlad directly quote tweeted, in context of stock token democratization."
+    },
+    {
+     "episode_id": "Mwp0GbhnqLI",
+     "episode_title": "\ud83d\udd34 LIVE: No bailouts for crypto, Clarity Act In Days? | Founder Interviews + Market Updates",
+     "start_seconds": 11956.0,
+     "timestamp": "3:19:16",
+     "deep_link": "https://www.youtube.com/watch?v=Mwp0GbhnqLI&t=11956s",
+     "kind": "analysis",
+     "note": "A launchpad platform that tokenizes stock tokens merged with memes and crypto-native assets, enabling token launches on top of real stocks."
+    },
+    {
+     "episode_id": "RLS5bDw7pYg",
+     "episode_title": "\ud83d\udd34 LIVE: Clarity Act Vote...What Next? | Market Update + Interviews",
+     "start_seconds": 9680.0,
+     "timestamp": "2:41:20",
+     "deep_link": "https://www.youtube.com/watch?v=RLS5bDw7pYg&t=9680s",
+     "kind": "mention",
+     "note": "Named in passing as described as very bullish with reference to a Vlad tweet."
+    },
+    {
+     "episode_id": "RLS5bDw7pYg",
+     "episode_title": "\ud83d\udd34 LIVE: Clarity Act Vote...What Next? | Market Update + Interviews",
+     "start_seconds": 10071.0,
+     "timestamp": "2:47:51",
+     "deep_link": "https://www.youtube.com/watch?v=RLS5bDw7pYg&t=10071s",
+     "kind": "analysis",
+     "note": "Described as the leader in tokenized stocks ecosystem; speakers discuss its positioning in accumulating tokenized stocks and serving as a liquidity layer for on-chain stock trading with routing fees."
+    },
+    {
+     "episode_id": "UbKsP6WCsPs",
+     "episode_title": "\ud83d\udd34 LIVE: Market Cooling Off | Buy The Dip? | Market Update + Interviews",
+     "start_seconds": 1894.0,
+     "timestamp": "31:34",
+     "deep_link": "https://www.youtube.com/watch?v=UbKsP6WCsPs&t=1894s",
+     "kind": "analysis",
+     "note": "Speaker identified Long XYZ as a platform for a DeFi playground for tokenized stocks on Robin Hood chain, and bought early positions in its ecosystem tokens."
+    },
+    {
+     "episode_id": "WVuH7wyZwbY",
+     "episode_title": "FRIDAY TRADER RADIO, ALTS VS BTC BREAKING OUT? w/@CHILLTRD",
+     "start_seconds": 3181.0,
+     "timestamp": "53:01",
+     "deep_link": "https://www.youtube.com/watch?v=WVuH7wyZwbY&t=3181s",
+     "kind": "analysis",
+     "note": "Stock gapped up and rose 36-40% after CEO announced significant job cuts; discussed as a market reaction to workforce reduction."
+    },
+    {
+     "episode_id": "ZSBmoD9oLw8",
+     "episode_title": "\ud83d\udd34 LIVE: The Battle Of Blockchains | Solana vs Robinhood | Market Update + Interviews",
+     "start_seconds": 1182.0,
+     "timestamp": "19:42",
+     "deep_link": "https://www.youtube.com/watch?v=ZSBmoD9oLw8&t=1182s",
+     "kind": "analysis",
+     "note": "Mentioned as one of three ecosystems expected to run in tandem alongside Pawns and Stock in early innings of bull market."
+    },
+    {
+     "episode_id": "_bXn26hfpJA",
+     "episode_title": "\ud83d\udd34 LIVE: No Sleep Szn is Here | Market Update + Interviews",
+     "start_seconds": 309.0,
+     "timestamp": "5:09",
+     "deep_link": "https://www.youtube.com/watch?v=_bXn26hfpJA&t=309s",
+     "kind": "analysis",
+     "note": "Speakers claim they were early to the long.xyz XYZ and AI thesis."
+    },
+    {
+     "episode_id": "bckrJLRN_l0",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto Pulling Back...Buy the Dip? | Market Update + Interviews",
+     "start_seconds": 10706.0,
+     "timestamp": "2:58:26",
+     "deep_link": "https://www.youtube.com/watch?v=bckrJLRN_l0&t=10706s",
+     "kind": "analysis",
+     "note": "Speaker likes long.xyz eco and considers dips in it good to buy."
+    },
+    {
+     "episode_id": "dIsFawgT6DQ",
+     "episode_title": "\ud83d\udd34 LIVE: FOMO App Dominating | Onchain is HOT | Creator Coins Back? + Market Update",
+     "start_seconds": 10189.0,
+     "timestamp": "2:49:49",
+     "deep_link": "https://www.youtube.com/watch?v=dIsFawgT6DQ&t=10189s",
+     "kind": "mention",
+     "note": "Referenced as a previous cryptocurrency in the RWA memes category that came out before the discussion of AI memes."
+    },
+    {
+     "episode_id": "gTl0GwRHeAU",
+     "episode_title": "\ud83d\udd34 LIVE: Bears Are Cooked | $600M BTC Shorts Liquidated | Market Update + Interviews",
+     "start_seconds": 12165.0,
+     "timestamp": "3:22:45",
+     "deep_link": "https://www.youtube.com/watch?v=gTl0GwRHeAU&t=12165s",
+     "kind": "analysis",
+     "note": "Speaker stated they like the long XYZ ecosystem."
+    },
+    {
+     "episode_id": "q2zmdT9CnNA",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto Pulling Back... What's Next? | Market Update + Interviews",
+     "start_seconds": 7009.0,
+     "timestamp": "1:56:49",
+     "deep_link": "https://www.youtube.com/watch?v=q2zmdT9CnNA&t=7009s",
+     "kind": "analysis",
+     "note": "Long.xyz announced a partnership with Rialto to unlock more liquidity for top pairs and stock token options. Speakers discussed Long's role in creating the stock token pairing hype, mentioned AI token launched by Long, and discussed liquidity challenges in the platform."
+    },
+    {
+     "episode_id": "zTEsQqVVsZk",
+     "episode_title": "\ud83d\udd34 LIVE: Bear Market Ending? | RH Szn Continues | Market Update + Interviews",
+     "start_seconds": 7112.0,
+     "timestamp": "1:58:32",
+     "deep_link": "https://www.youtube.com/watch?v=zTEsQqVVsZk&t=7112s",
+     "kind": "mention",
+     "note": "Named as an example of applications being built on the Robin Hood platform for managing baskets of tokens."
+    }
+   ],
+   "episode_count": 12,
+   "single_reference": false
+  },
+  {
    "symbol": "CVT",
    "name": "CVT",
    "asset_class": "crypto",
@@ -130092,125 +130265,6 @@
     }
    ],
    "episode_count": 10,
-   "single_reference": false
-  },
-  {
-   "symbol": "XYZ",
-   "name": "Long",
-   "asset_class": "crypto",
-   "mentions": 12,
-   "analysis": 9,
-   "moments": [
-    {
-     "episode_id": "Mwp0GbhnqLI",
-     "episode_title": "\ud83d\udd34 LIVE: No bailouts for crypto, Clarity Act In Days? | Founder Interviews + Market Updates",
-     "start_seconds": 11956.0,
-     "timestamp": "3:19:16",
-     "deep_link": "https://www.youtube.com/watch?v=Mwp0GbhnqLI&t=11956s",
-     "kind": "analysis",
-     "note": "A launchpad platform that tokenizes stock tokens merged with memes and crypto-native assets, enabling token launches on top of real stocks."
-    },
-    {
-     "episode_id": "RLS5bDw7pYg",
-     "episode_title": "\ud83d\udd34 LIVE: Clarity Act Vote...What Next? | Market Update + Interviews",
-     "start_seconds": 9680.0,
-     "timestamp": "2:41:20",
-     "deep_link": "https://www.youtube.com/watch?v=RLS5bDw7pYg&t=9680s",
-     "kind": "mention",
-     "note": "Named in passing as described as very bullish with reference to a Vlad tweet."
-    },
-    {
-     "episode_id": "RLS5bDw7pYg",
-     "episode_title": "\ud83d\udd34 LIVE: Clarity Act Vote...What Next? | Market Update + Interviews",
-     "start_seconds": 10071.0,
-     "timestamp": "2:47:51",
-     "deep_link": "https://www.youtube.com/watch?v=RLS5bDw7pYg&t=10071s",
-     "kind": "analysis",
-     "note": "Described as the leader in tokenized stocks ecosystem; speakers discuss its positioning in accumulating tokenized stocks and serving as a liquidity layer for on-chain stock trading with routing fees."
-    },
-    {
-     "episode_id": "UbKsP6WCsPs",
-     "episode_title": "\ud83d\udd34 LIVE: Market Cooling Off | Buy The Dip? | Market Update + Interviews",
-     "start_seconds": 1894.0,
-     "timestamp": "31:34",
-     "deep_link": "https://www.youtube.com/watch?v=UbKsP6WCsPs&t=1894s",
-     "kind": "analysis",
-     "note": "Speaker identified Long XYZ as a platform for a DeFi playground for tokenized stocks on Robin Hood chain, and bought early positions in its ecosystem tokens."
-    },
-    {
-     "episode_id": "WVuH7wyZwbY",
-     "episode_title": "FRIDAY TRADER RADIO, ALTS VS BTC BREAKING OUT? w/@CHILLTRD",
-     "start_seconds": 3181.0,
-     "timestamp": "53:01",
-     "deep_link": "https://www.youtube.com/watch?v=WVuH7wyZwbY&t=3181s",
-     "kind": "analysis",
-     "note": "Stock gapped up and rose 36-40% after CEO announced significant job cuts; discussed as a market reaction to workforce reduction."
-    },
-    {
-     "episode_id": "ZSBmoD9oLw8",
-     "episode_title": "\ud83d\udd34 LIVE: The Battle Of Blockchains | Solana vs Robinhood | Market Update + Interviews",
-     "start_seconds": 1182.0,
-     "timestamp": "19:42",
-     "deep_link": "https://www.youtube.com/watch?v=ZSBmoD9oLw8&t=1182s",
-     "kind": "analysis",
-     "note": "Mentioned as one of three ecosystems expected to run in tandem alongside Pawns and Stock in early innings of bull market."
-    },
-    {
-     "episode_id": "_bXn26hfpJA",
-     "episode_title": "\ud83d\udd34 LIVE: No Sleep Szn is Here | Market Update + Interviews",
-     "start_seconds": 309.0,
-     "timestamp": "5:09",
-     "deep_link": "https://www.youtube.com/watch?v=_bXn26hfpJA&t=309s",
-     "kind": "analysis",
-     "note": "Speakers claim they were early to the long.xyz XYZ and AI thesis."
-    },
-    {
-     "episode_id": "bckrJLRN_l0",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto Pulling Back...Buy the Dip? | Market Update + Interviews",
-     "start_seconds": 10706.0,
-     "timestamp": "2:58:26",
-     "deep_link": "https://www.youtube.com/watch?v=bckrJLRN_l0&t=10706s",
-     "kind": "analysis",
-     "note": "Speaker likes long.xyz eco and considers dips in it good to buy."
-    },
-    {
-     "episode_id": "dIsFawgT6DQ",
-     "episode_title": "\ud83d\udd34 LIVE: FOMO App Dominating | Onchain is HOT | Creator Coins Back? + Market Update",
-     "start_seconds": 10189.0,
-     "timestamp": "2:49:49",
-     "deep_link": "https://www.youtube.com/watch?v=dIsFawgT6DQ&t=10189s",
-     "kind": "mention",
-     "note": "Referenced as a previous cryptocurrency in the RWA memes category that came out before the discussion of AI memes."
-    },
-    {
-     "episode_id": "gTl0GwRHeAU",
-     "episode_title": "\ud83d\udd34 LIVE: Bears Are Cooked | $600M BTC Shorts Liquidated | Market Update + Interviews",
-     "start_seconds": 12165.0,
-     "timestamp": "3:22:45",
-     "deep_link": "https://www.youtube.com/watch?v=gTl0GwRHeAU&t=12165s",
-     "kind": "analysis",
-     "note": "Speaker stated they like the long XYZ ecosystem."
-    },
-    {
-     "episode_id": "q2zmdT9CnNA",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto Pulling Back... What's Next? | Market Update + Interviews",
-     "start_seconds": 7009.0,
-     "timestamp": "1:56:49",
-     "deep_link": "https://www.youtube.com/watch?v=q2zmdT9CnNA&t=7009s",
-     "kind": "analysis",
-     "note": "Long.xyz announced a partnership with Rialto to unlock more liquidity for top pairs and stock token options. Speakers discussed Long's role in creating the stock token pairing hype, mentioned AI token launched by Long, and discussed liquidity challenges in the platform."
-    },
-    {
-     "episode_id": "zTEsQqVVsZk",
-     "episode_title": "\ud83d\udd34 LIVE: Bear Market Ending? | RH Szn Continues | Market Update + Interviews",
-     "start_seconds": 7112.0,
-     "timestamp": "1:58:32",
-     "deep_link": "https://www.youtube.com/watch?v=zTEsQqVVsZk&t=7112s",
-     "kind": "mention",
-     "note": "Named as an example of applications being built on the Robin Hood platform for managing baskets of tokens."
-    }
-   ],
-   "episode_count": 11,
    "single_reference": false
   },
   {
@@ -199243,10 +199297,10 @@
    "single_reference": true
   }
  ],
- "total_hits": 19333,
+ "total_hits": 19339,
  "dropped_low_confidence": 2360,
- "dropped_not_an_asset": 2148,
- "episodes_processed": 673,
+ "dropped_not_an_asset": 2149,
+ "episodes_processed": 674,
  "episode_ids": [
   "-6Sccmoz7RQ",
   "-8z0M77EVZg",
@@ -199294,6 +199348,7 @@
   "3iU5-zMbEBE",
   "3pnWf5GuTag",
   "3uGW4hozEqE",
+  "4HAGLloGzBo",
   "4PlcWhQM96A",
   "4eErwRiL8VE",
   "50P-rICrUfs",
