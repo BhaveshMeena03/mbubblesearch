@@ -37,7 +37,9 @@ def test_every_pair_is_a_youtube_stream_on_the_shelf():
         assert vid in rows, vid
         assert rows[vid]["format"] == "stream" and rows[vid].get("source") != "x", vid
         assert PLAYER.fullmatch(pair["broadcast"]), pair
-        assert isinstance(pair["offset"], int) and abs(pair["offset"]) <= 600, pair
+        offsets = ([s["offset"] for s in pair["sections"]] if "sections" in pair
+                   else [pair["offset"]])
+        assert all(isinstance(o, int) and abs(o) <= 600 for o in offsets), pair
 
 
 def test_no_broadcast_is_paired_twice_or_also_indexed_on_its_own():
@@ -65,6 +67,43 @@ def test_every_broadcast_read_off_x_is_a_player_address():
         assert re.fullmatch(r"\d+", cast["post"]), cast
 
 
+# --- pairing his broadcasts --------------------------------------------------------
+
+def cast(broadcast: str, posted: str) -> dict:
+    return {"broadcast": f"https://x.com/i/broadcasts/{broadcast}", "posted": posted}
+
+
+def test_only_names_the_broadcasts_to_listen_for():
+    from scripts.pair_rasmr_broadcasts import wanted
+    casts = [cast("new2", "2026-10-28T15:53:35Z"), cast("old", "2026-09-10T16:00:00Z"),
+             cast("new1", "2026-10-21T16:31:33Z"), cast("done", "2026-10-20T16:29:27Z")]
+    taken = {"https://x.com/i/broadcasts/done"}
+
+    def ids(found):
+        return [c["broadcast"].rsplit("/", 1)[-1] for c in found]
+    assert ids(wanted(casts, taken, [])) == ["old", "new1", "new2"]
+    assert ids(wanted(casts, taken, ["new2", "new1", "done"])) == ["new1", "new2"]
+
+
+def test_a_broadcast_is_paired_only_when_two_slices_are_the_show(monkeypatch):
+    """3971cc4 replaced settle() in the MCG pairing, and this script still
+    imported it, so it could not start until it measured the same way."""
+    from scripts import pair_rasmr_broadcasts as pairing
+    row = {"id": "g2gLF6EcSac", "seconds": 3487}
+    url = "https://x.com/i/broadcasts/1YGNrblaopvGw"
+    monkeypatch.setattr(pairing, "rebuild", lambda *_: [{"t": 0, "text": "gm"}])
+    monkeypatch.setattr(pairing, "hear", lambda *_: [])
+
+    monkeypatch.setattr(pairing, "offset", lambda *_: 4.2)
+    assert pairing.measure(None, 3, url, row) == {"offset": 4}
+
+    monkeypatch.setattr(pairing, "offset", lambda *_: None)
+    assert pairing.measure(None, 3, url, row) is None
+
+    monkeypatch.setattr(pairing, "rebuild", lambda *_: [])
+    assert pairing.measure(None, 3, url, row) is None
+
+
 # --- the routes --------------------------------------------------------------------
 
 @pytest.fixture(scope="module")
@@ -82,7 +121,10 @@ def test_the_archive_reports_the_shelf(client):
     body = reply.json()
     assert body["episodes"] == len(SHELF)
     assert body["hours"] == round(sum(r["seconds"] for r in SHELF) / 3600, 1)
-    assert body["on_x"] == len(PAIRS) + sum(1 for r in SHELF if r.get("source") == "x")
+    # A stream whose clocks moved partway is stored as sections and keeps
+    # YouTube on the page, so it does not count as opening on X there.
+    seekable = sum(1 for p in PAIRS.values() if "offset" in p)
+    assert body["on_x"] == seekable + sum(1 for r in SHELF if r.get("source") == "x")
 
 
 def test_the_episodes_are_newest_first_and_carry_their_x_twin(client):
@@ -92,11 +134,23 @@ def test_the_episodes_are_newest_first_and_carry_their_x_twin(client):
     assert days == sorted(days, reverse=True)
     for row in rows:
         pair = PAIRS.get(row["episode_id"])
-        if pair:
+        if pair and "offset" in pair:
             assert row["x_broadcast"] == pair["broadcast"]
             assert row["x_offset"] == pair["offset"]
         else:
             assert "x_broadcast" not in row
+
+
+def test_some_real_pairs_moved_partway_and_they_stay_on_youtube():
+    """30 Oct 2026: four of the eight streams paired that day were measured
+    in stretches (the 20 Oct vlog reaction runs -5s, then -6s from 52
+    minutes). They must be in the file as sections, never as one offset
+    that is wrong for part of the stream."""
+    moved = [p for p in PAIRS.values() if "sections" in p]
+    assert moved, "expected some pairs with sections in the real file"
+    for pair in moved:
+        assert "offset" not in pair
+        assert all("from" in s and "offset" in s for s in pair["sections"])
 
 
 def test_a_pair_that_is_not_a_player_address_is_not_offered(monkeypatch):
@@ -105,10 +159,14 @@ def test_a_pair_that_is_not_a_player_address_is_not_offered(monkeypatch):
         "bad": {"broadcast": "javascript:alert(1)", "offset": 2},
         "elsewhere": {"broadcast": "https://evil.example/i/broadcasts/abc", "offset": 0},
         "odd": {"broadcast": "https://x.com/i/broadcasts/abcDEF1", "offset": "soon"},
+        "moved": {"broadcast": "https://x.com/i/broadcasts/abcDEF1",
+                  "sections": [{"from": 0, "to": 5000, "offset": -2},
+                               {"from": 5200, "to": None, "offset": -41}]},
         "good": {"broadcast": "https://x.com/i/broadcasts/abcDEF1", "offset": -3}})
     assert main._rasmr_on_x("bad") == {}
     assert main._rasmr_on_x("elsewhere") == {}
     assert main._rasmr_on_x("odd") == {}
+    assert main._rasmr_on_x("moved") == {}
     assert main._rasmr_on_x("missing") == {}
     assert main._rasmr_on_x("good") == {"x_broadcast": "https://x.com/i/broadcasts/abcDEF1",
                                         "x_offset": -3}

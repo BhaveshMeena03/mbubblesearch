@@ -48,7 +48,9 @@ import asyncio
 import collections
 import html
 import json
+import os
 import re
+import signal
 import statistics
 import subprocess
 import sys
@@ -73,6 +75,11 @@ QUERY = f'from:{SHOW} url:"i/broadcasts" -is:retweet -is:reply'
 
 RUN = 8            # words per run, as in build_youtube_map
 SLICE = 90         # seconds of the broadcast listened to at each point
+# Ninety seconds of audio arrives in well under a minute. On 29 Oct 2026
+# one fetch from an X replay sat for thirteen and a half hours, ffmpeg
+# waiting on a stream that never sent another byte, and the rasmr
+# pairing run behind it never finished.
+HEAR_TIMEOUT = 300
 WITHIN = 5.0       # a run agrees if it is this close to the median
 ENOUGH = 20        # shared runs needed before a slice counts as evidence
 AGREE = 0.9        # and this share of them must agree
@@ -245,14 +252,24 @@ def hear(broadcast: str, at: int, work: Path) -> list[dict]:
     from scripts.ingest_mcg import groq_key, transcribe_via_groq
 
     target = work / f"x_{at}.mp3"
-    proc = subprocess.run(
+    # Its own process group, so a timeout takes ffmpeg down with yt-dlp.
+    # Killing only yt-dlp left the ffmpeg under it running, still holding
+    # the connection, after the run that started it was gone.
+    proc = subprocess.Popen(
         [str(ROOT / ".venv" / "bin" / "yt-dlp"), "--no-warnings", "-q",
          "-f", "bestaudio/worst", "--download-sections", f"*{at}-{at + SLICE}",
          "-x", "--audio-format", "mp3", "--audio-quality", "7",
          "-o", str(work / f"x_{at}.%(ext)s"), broadcast],
-        capture_output=True, text=True, check=False)
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
+        start_new_session=True)
+    try:
+        _, stderr = proc.communicate(timeout=HEAR_TIMEOUT)
+    except subprocess.TimeoutExpired:
+        os.killpg(proc.pid, signal.SIGKILL)
+        proc.communicate()
+        raise RuntimeError(f"no audio from {at}s after {HEAR_TIMEOUT}s") from None
     if not target.exists():
-        raise RuntimeError((proc.stderr.strip().splitlines() or ["no audio"])[-1][:200])
+        raise RuntimeError((stderr.strip().splitlines() or ["no audio"])[-1][:200])
     return transcribe_via_groq(target, groq_key())
 
 

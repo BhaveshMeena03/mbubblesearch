@@ -306,3 +306,35 @@ def test_a_pair_made_by_hand_without_a_post_is_skipped():
     pairs = {"a": {"broadcast": "x"}, "b": {"post": "2114751097718145346"}}
     posted = ((2114751097718145346 >> 22) + 1288834974657) / 1000
     assert since(pairs, now=posted + 60) == "2114751097718145346"
+
+
+def test_a_stalled_download_is_given_up_on_and_takes_ffmpeg_with_it(tmp_path, monkeypatch):
+    """29 Oct 2026: one fetch from an X replay sat for thirteen and a half
+    hours and the run behind it never finished. Killing yt-dlp alone left
+    its ffmpeg running, so the whole process group goes."""
+    import signal
+    import subprocess
+
+    import scripts.pair_mcg_broadcasts as pair
+
+    killed = []
+
+    class Stalled:
+        pid = 4242
+
+        def __init__(self, *args, **kwargs):
+            assert kwargs.get("start_new_session") is True
+            self.calls = 0
+
+        def communicate(self, timeout=None):
+            self.calls += 1
+            if self.calls == 1:
+                raise subprocess.TimeoutExpired("yt-dlp", timeout)
+            return "", ""
+
+    monkeypatch.setattr(pair.subprocess, "Popen", Stalled)
+    monkeypatch.setattr(pair.os, "killpg", lambda pid, sig: killed.append((pid, sig)))
+    with pytest.raises(RuntimeError, match="no audio"):
+        pair.hear("https://x.com/i/broadcasts/abc", 600, tmp_path)
+    assert killed == [(4242, signal.SIGKILL)]
+    assert pair.HEAR_TIMEOUT <= 600

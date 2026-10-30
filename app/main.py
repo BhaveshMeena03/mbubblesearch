@@ -3133,8 +3133,14 @@ def _rasmr_on_x(episode_id: str) -> dict:
     broadcast = str(pair.get("broadcast") or "")
     if not re.fullmatch(r"https://x\.com/i/broadcasts/[A-Za-z0-9]+", broadcast):
         return {}
+    # The page moves every second by one offset. A stream whose clocks
+    # moved partway is stored as "sections" with no offset, and reading
+    # that as 0 would open X at the wrong second; it keeps YouTube here
+    # (replies still reach X through app.mcg_on_x, which reads sections).
+    if "offset" not in pair:
+        return {}
     try:
-        offset = int(pair.get("offset") or 0)
+        offset = int(pair["offset"])
     except (TypeError, ValueError):
         return {}
     return {"x_broadcast": broadcast, "x_offset": offset}
