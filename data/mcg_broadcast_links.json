@@ -137,6 +137,32 @@
   "offset": 1,
   "post": "2105691838023909495"
  },
+ "ZzAQtJ4j3hk": {
+  "broadcast": "https://x.com/i/broadcasts/1oKMvNPQyEdGQ",
+  "post": "2115474426590531719",
+  "sections": [
+   {
+    "from": 2,
+    "offset": 11698,
+    "to": 92
+   },
+   {
+    "from": 2,
+    "offset": 11998,
+    "to": 92
+   },
+   {
+    "from": 2,
+    "offset": 12314,
+    "to": 92
+   },
+   {
+    "from": 2,
+    "offset": 12630,
+    "to": null
+   }
+  ]
+ },
  "__DYw4iUAQ0": {
   "broadcast": "https://x.com/i/broadcasts/1oKMvNARgWDGQ",
   "offset": -1,
