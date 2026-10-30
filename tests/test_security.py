@@ -613,3 +613,59 @@ def test_the_app_starts_with_the_x_bot_disabled(monkeypatch):
         assert client.get("/healthz").status_code == 200
         assert main_module.app.state.x_bot_task is None
     get_settings.cache_clear()
+
+
+# --- found in the 30 Oct 2026 audit ----------------------------------------
+
+def test_every_response_carries_the_browser_protections(admin_client):
+    """None of these were sent: any site could frame the pages, and a file
+    with the wrong type could be sniffed into running as script."""
+    for path in ("/demo/podcast.html", "/healthz", "/v1/usage"):
+        headers = admin_client.get(path).headers
+        assert headers["x-content-type-options"] == "nosniff", path
+        assert "max-age=" in headers["strict-transport-security"], path
+        assert "frame-ancestors 'self'" in headers["content-security-policy"], path
+        assert headers["referrer-policy"] == "strict-origin-when-cross-origin", path
+
+
+@pytest.mark.parametrize("asked", ["\\g<0>", "\\1", "a \\ b", "\\"])
+def test_a_backslash_in_a_shared_question_still_opens_the_page(admin_client, asked):
+    """re.sub read the question as a replacement template, so ?q=\\g<0>
+    was a 500 on the live site."""
+    page = admin_client.get("/demo/podcast.html", params={"q": asked})
+    assert page.status_code == 200
+    assert "\\" in page.text.split('property="og:title"', 1)[1][:200]
+
+
+def test_a_clip_error_never_hands_out_the_proxy_password(admin_client):
+    class Job:
+        id, status, path = "j1", "failed", None
+        error = ("ERROR: Unable to download: Tunnel to "
+                 "http://user-sessid.ab12:hunter2pass@gate.proxy.example:7000 failed")
+
+    class Clips:
+        def get(self, job_id):
+            return Job() if job_id == "j1" else None
+
+    main_module.app.state.clips = Clips()
+    body = admin_client.get("/v1/podcast/clip/j1").json()
+    assert "hunter2pass" not in body["error"]
+    assert "gate.proxy.example" in body["error"], "the rest of the error stays readable"
+
+
+@pytest.mark.parametrize("url", ["javascript:alert(document.domain)//",
+                                 " JaVaScRiPt:alert(1)", "data:text/html,<b>x",
+                                 "vbscript:msgbox(1)"])
+def test_a_passage_link_is_a_web_address_or_nothing(url):
+    """Every page puts deep_link straight into an href or window.open."""
+    from app.podcast import _deep_link
+
+    assert _deep_link(url, "youtube", 12) == ""
+    assert _deep_link(url, "x", 12) == ""
+
+
+def test_a_real_passage_link_is_untouched():
+    from app.podcast import _deep_link
+
+    assert _deep_link("https://www.youtube.com/watch?v=abc", "youtube", 12) == \
+        "https://www.youtube.com/watch?v=abc&t=12s"

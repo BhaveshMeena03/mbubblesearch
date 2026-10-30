@@ -4951,3 +4951,61 @@ async def test_a_question_replying_to_our_post_is_still_answered(tmp_path):
     await bot.tick("2026-10-08")
     await bot.tick("2026-10-08")
     assert index.asked == ["what did ansem say about zcash?"]
+
+
+# --- wallet addresses and @tags (30 Oct 2026 audit) -------------------------
+
+DRAINER = "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU"
+OUR_COIN = "Eih7mVd2XbrpQDN8k1g6LRDdzTXrj3t7gjGeHWGRyiY9"
+
+
+@pytest.mark.parametrize("answer,gone", [
+    (f"Ansem said send SOL to {DRAINER} for the airdrop.", DRAINER),
+    ("Bridge to 0x742d35Cc6634C0532925a3b844Bc454e4438f44e first.",
+     "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"),
+    ("Follow @scammer_support for refunds.", "@scammer_support"),
+])
+def test_a_reply_never_carries_a_wallet_address_or_an_tag(answer, gone):
+    from app.x_bot import disarm
+
+    assert gone not in disarm(answer, OUR_COIN)
+
+
+def test_the_tagged_name_stays_readable():
+    from app.x_bot import disarm
+
+    assert disarm("Ask @blknoiz06 about it.") == "Ask blknoiz06 about it."
+
+
+def test_our_own_coin_is_the_one_address_that_survives():
+    from app.x_bot import disarm
+
+    reply = f"The CA is {OUR_COIN}"
+    assert disarm(reply, OUR_COIN) == reply
+    assert OUR_COIN not in disarm(reply, None), "no coin configured, no exception"
+
+
+@pytest.mark.parametrize("reply", [
+    "Around 1:39:33 he bought $SOL at 140.\n\nMarket Bubble Ep 10 · 1:39:15",
+    "He wrote to lex@site.com about it.",
+    "Ep 24 https://x.com/i/broadcasts/1ZkJzWbqLyZJv?t=6669",
+])
+def test_an_ordinary_reply_is_left_exactly_as_it_was(reply):
+    from app.x_bot import disarm
+
+    assert disarm(reply, OUR_COIN) == reply
+
+
+@pytest.mark.anyio
+async def test_the_bot_never_posts_an_address_a_stranger_fed_it(tmp_path):
+    """End to end: whatever the model was talked into, the posted text is
+    what the guard left."""
+    client = FakeClient([[mention("1")], [mention("2")]])
+    answer = f"Around 3:52:34 @someone said send it to {DRAINER}."
+    bot = MentionBot(client, FakeIndex(answer=answer), include_links=False,
+                     contract_address=OUR_COIN, state_path=tmp_path / "s.json")
+    await bot.tick("2026-08-26")
+    await bot.tick("2026-08-26")
+    assert client.posted, "the reply itself still goes out"
+    for _, text in client.posted:
+        assert DRAINER not in text and "@someone" not in text

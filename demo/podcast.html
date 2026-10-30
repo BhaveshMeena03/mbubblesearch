@@ -1738,7 +1738,7 @@ function airedLabel(iso){
        next to it. One behaviour, fewer ways to be surprised. */
     var el = document.createElement("a");
     el.className = "tick" + (t.own ? " own" : "");
-    el.href = pair.url || ("https://dexscreener.com/solana/" + t.mint);
+    el.href = safeUrl(pair.url || ("https://dexscreener.com/solana/" + t.mint));
     el.target = "_blank"; el.rel = "noopener noreferrer";
     var chunk = '<span class="sym">$' + t.sym + '</span>' +
                 '<span class="px">' + px + '</span>';

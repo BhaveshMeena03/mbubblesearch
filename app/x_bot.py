@@ -2821,6 +2821,31 @@ def strip_model_links(answer: str) -> str:
     return re.sub(r" +([,.;:!?])", r"\1", out).strip()
 
 
+# Two more things a model can be talked into writing that no answer from
+# this archive ever needs, checked on 30 Oct 2026 and both getting through.
+#
+# A wallet address. "did ansem ever mention <address>" gets the address
+# echoed back under an account people trust, which is all a drainer needs.
+# The one address this account has reason to post is its own coin's, and
+# pinned_answer writes that itself.
+#
+# An @tag. A reply that tags somebody notifies them on a stranger's say-so,
+# and X counts automated mentions as spam. The name stays; the @ goes.
+_WALLET = re.compile(r"(?<!\w)(?:0x[0-9a-fA-F]{40}|[1-9A-HJ-NP-Za-km-z]{32,44})(?!\w)")
+_TAG = re.compile(r"(?<![\w@.])@(?=\w{1,15}\b)")
+
+
+def disarm(text: str, own_address: str | None = None) -> str:
+    """The reply without any wallet address but our own, and without @tags."""
+    out = _WALLET.sub(lambda m: m.group(0) if m.group(0) == own_address else "",
+                      text or "")
+    out = _TAG.sub("", out)
+    if out == text:
+        return text
+    out = re.sub(r"[ \t]{2,}", " ", out)
+    return re.sub(r"[ \t]+([,.;:!?])", r"\1", out).strip()
+
+
 def format_reply(answer: str, hits: list, include_links: bool | str = False,
                  limit: int = POST_LIMIT) -> str:
     """One reply: the answer, then where it was said.
@@ -5153,6 +5178,13 @@ class MentionBot:
         # so the sentence still reads. The site this account posts on
         # purpose is exempt -- the note above records what happened the
         # last time a guard here refused a link the code had placed itself.
+        # Every reply passes here, whichever path wrote it, so this is the
+        # one place a wallet address or an @tag can be caught for all of them.
+        safe = disarm(text, self._contract_address)
+        if safe != text:
+            logger.warning("%s: took a wallet address or @tag out of the "
+                           "reply before posting", mention.id)
+            text = safe
         card = would_render_a_card(text, self._site or "")
         if card:
             logger.warning("%s: %r would render a link card — posting it "

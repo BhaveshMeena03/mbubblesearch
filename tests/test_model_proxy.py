@@ -24,6 +24,7 @@ Two things this pins:
 
 from __future__ import annotations
 
+import os
 import sys
 from pathlib import Path
 
@@ -182,3 +183,56 @@ class TestTheTokenStaysOutOfTheLogs:
                            ("https://api.usepod.ai/proxy/leaky/v1/messages",), None)
         _RedactProxyToken().filter(rec)
         assert "leaky" not in rec.getMessage()
+
+
+class TestNoLogPathPrintsTheToken:
+    """Three ways past the old filter, found on 30 Oct 2026 by logging an
+    httpx error the way production would. Run in a fresh process, set up
+    the way `uvicorn app.main:app` sets it up, because the bug was in which
+    handlers the filter sat on, and an in-process test shares this suite's
+    logging setup instead of production's."""
+
+    SCRIPT = r'''
+import logging, logging.config, os, sys
+sys.path.insert(0, os.getcwd())
+import httpx, uvicorn.config
+logging.config.dictConfig(uvicorn.config.LOGGING_CONFIG)
+import app.main  # noqa: F401
+url = "https://api.usepod.ai/proxy/SECRETTOKEN123/v1/messages"
+request = httpx.Request("POST", url)
+err = httpx.HTTPStatusError(f"Server error '502 Bad Gateway' for url '{url}'",
+                            request=request, response=httpx.Response(502, request=request))
+log = logging.getLogger("app.podcast")
+log.info("plain line %s", url)
+try:
+    raise err
+except Exception:
+    log.exception("search failed")
+    logging.getLogger("uvicorn.error").exception("Exception in ASGI application")
+log.warning("failed: %r", err)
+logging.getLogger("app.clipper").warning("clip failed: %s",
+    "Tunnel to http://user:hunter2pass@gate.proxy.example:7000 failed")
+'''
+
+    def test_not_in_a_traceback_uvicorns_log_or_an_exception_argument(self):
+        import subprocess
+
+        env = {**os.environ, "ANTHROPIC_BASE_URL": "https://api.usepod.ai/proxy/SECRETTOKEN123",
+               "TRAFFIC_ENABLED": "false", "X_BOT_ENABLED": "false"}
+        out = subprocess.run([sys.executable, "-c", self.SCRIPT], cwd=ROOT, env=env,
+                             capture_output=True, text=True, timeout=120)
+        printed = out.stdout + out.stderr
+        assert "search failed" in printed and "Exception in ASGI application" in printed
+        assert "Traceback" in printed, "the traceback itself must still be logged"
+        assert "SECRETTOKEN123" not in printed
+        assert "hunter2pass" not in printed
+        assert printed.count("/proxy/<token>") >= 4
+
+    def test_proxy_credentials_are_redacted_too(self):
+        line = "Tunnel to http://user-sessid.ab:hunter2pass@gate.proxy.example:7000 failed"
+        assert "hunter2pass" not in redact(line)
+        assert "http://<credentials>@gate.proxy.example:7000" in redact(line)
+
+    def test_a_handle_in_a_url_is_not_mistaken_for_credentials(self):
+        line = "see https://x.com/@mbubbleSearch and mail lex@site.com"
+        assert redact(line) == line

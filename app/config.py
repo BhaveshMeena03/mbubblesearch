@@ -563,5 +563,10 @@ def redact(text: str) -> str:
     traces and in httpx's own request repr. Redacting BEFORE truncating
     matters: cutting a URL to eighty characters can leave the token intact
     and drop the part that made it look like a URL.
+
+    Credentials written into a URL go too. CLIP_PROXY is a residential
+    proxy given as http://user:password@host:port, and a yt-dlp or ffmpeg
+    failure can quote it back in the error a clip job hands the visitor.
     """
-    return re.sub(r"(/proxy/)[^/\s]+", r"\1<token>", text or "")
+    text = re.sub(r"(/proxy/)[^/\s\"']+", r"\1<token>", text or "")
+    return re.sub(r"(?i)\b([a-z][a-z0-9+.-]*://)[^/\s@\"']+@", r"\1<credentials>@", text)

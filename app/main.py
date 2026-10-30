@@ -68,7 +68,7 @@ from .clipper import (
     ClipService,
     ffmpeg_available,
 )
-from .config import get_settings
+from .config import get_settings, redact
 from .dedupe import canonical_episode_ids, episode_number, group_by_show
 from .ingest import IngestionPipeline
 from .podcast import REFUSAL_ANSWER as PODCAST_REFUSAL
@@ -117,30 +117,49 @@ class _RedactProxyToken(logging.Filter):
     decides to log a URL later. Applied to the root handler so it covers
     every logger in the process, and to the record's args as well as its
     message, because "%s" formatting keeps the URL in args until render.
+
+    That version had three ways past it, found on 30 Oct 2026 by logging
+    an httpx error the way production would: the traceback that
+    logger.exception() prints, uvicorn's own "Exception in ASGI
+    application" (uvicorn's loggers have their own handlers, so a filter
+    on the root's never saw them), and an exception passed as an argument,
+    whose repr carries the URL and is not a string. So this renders the
+    whole record, traceback included, and redacts what renders. And it is
+    installed as the record factory rather than on a handler, so every
+    record from every logger passes through it, whoever prints it.
     """
 
-    _TOKEN = re.compile(r"(/proxy/)[^/\s\"']+")
-
     def filter(self, record: logging.LogRecord) -> bool:
-        if isinstance(record.msg, str) and "/proxy/" in record.msg:
-            record.msg = self._TOKEN.sub(r"\1<token>", record.msg)
-        if record.args:
-            args = record.args
-            if isinstance(args, dict):
-                record.args = {
-                    k: (self._TOKEN.sub(r"\1<token>", v)
-                        if isinstance(v, str) and "/proxy/" in v else v)
-                    for k, v in args.items()}
-            else:
-                record.args = tuple(
-                    self._TOKEN.sub(r"\1<token>", a)
-                    if isinstance(a, str) and "/proxy/" in a else a
-                    for a in args)
+        # uvicorn's access formatter unpacks record.args itself and breaks
+        # on anything else, and a request line is the caller's own text:
+        # it cannot carry our token.
+        if record.name == "uvicorn.access":
+            return True
+        try:
+            message = record.getMessage()
+        except Exception:                                   # noqa: BLE001
+            return True     # a bad format string is logging's to report
+        clean = redact(message)
+        if clean != message:
+            record.msg, record.args = clean, None
+        if record.exc_info and not record.exc_text:
+            record.exc_text = redact(
+                logging.Formatter().formatException(record.exc_info))
+        if record.stack_info:
+            record.stack_info = redact(record.stack_info)
         return True
 
 
-for _handler in logging.getLogger().handlers:
-    _handler.addFilter(_RedactProxyToken())
+_new_record = logging.getLogRecordFactory()
+
+
+def _redacted_record(*args, **kwargs) -> logging.LogRecord:
+    record = _new_record(*args, **kwargs)
+    _RedactProxyToken().filter(record)
+    return record
+
+
+logging.setLogRecordFactory(_redacted_record)
 logger = logging.getLogger(__name__)
 
 # Lightweight usage counters (in-memory: reset on restart/redeploy — good
@@ -661,21 +680,25 @@ async def podcast_page(request: Request):
         # literal version silently stopped firing the moment the title was
         # copy-edited, and a share card that quietly reverts to the generic
         # title is the kind of break nobody notices for a week.
+        #
+        # Every replacement below goes in through a function, never as a
+        # replacement string: re.sub reads backslashes in a string as group
+        # references, so a shared link asking "\g<0>" was a 500.
         for tag_name in ("og:title", "twitter:title"):
             prefix = "property" if tag_name.startswith("og:") else "name"
+            tag = f'<meta {prefix}="{tag_name}" content="&#8220;{shown}&#8221;">'
             page = re.sub(
                 rf'<meta {prefix}="{tag_name}" content="[^"]*">',
-                f'<meta {prefix}="{tag_name}" content="&#8220;{shown}&#8221;">',
-                page, count=1)
+                lambda _m, tag=tag: tag, page, count=1)
         # The card is drawn per question too, so the image and the title
         # stop showing two different ones.
         card = f"{canonical.split('?')[0].rsplit('/demo/', 1)[0]}/og/search.png?q={quote_plus(asked[:180])}"
         for tag_name in ("og:image", "twitter:image"):
             prefix = "property" if tag_name.startswith("og:") else "name"
+            tag = f'<meta {prefix}="{tag_name}" content="{html_escape(card, quote=True)}">'
             page = re.sub(
                 rf'<meta {prefix}="{tag_name}" content="[^"]*">',
-                f'<meta {prefix}="{tag_name}" content="{html_escape(card, quote=True)}">',
-                page, count=1)
+                lambda _m, tag=tag: tag, page, count=1)
         answer_line = ("Answered from the Market Bubble transcripts, with "
                        "the moment it was said.")
         for tag in ("og:description", "twitter:description"):
@@ -687,9 +710,9 @@ async def podcast_page(request: Request):
                 f'<meta {prefix}="{tag}" content="{answer_line}">')
     # Never let og:url override the URL somebody actually shared: it made
     # every search link canonicalise to the empty homepage.
+    tag = f'<meta property="og:url" content="{html_escape(canonical, quote=True)}">'
     page = re.sub(r'<meta property="og:url" content="[^"]*">',
-                  f'<meta property="og:url" content="{html_escape(canonical, quote=True)}">',
-                  page, count=1)
+                  lambda _m: tag, page, count=1)
     return HTMLResponse(page)
 
 
@@ -1082,6 +1105,38 @@ async def cache_headers(request: Request, call_next):
     elif path.endswith((".woff2", ".woff", ".ttf")):
         # Hashed by content in practice and never edited in place.
         response.headers.setdefault("Cache-Control", "public, max-age=604800")
+    return response
+
+
+# What a browser enforces on the visitor's side. None of these were sent
+# until 30 Oct 2026, so any site could frame these pages under its own
+# overlay, and a file served with the wrong type could be sniffed into
+# running as script.
+#
+# Not a full Content-Security-Policy: every page's script is inline and
+# each one plays YouTube and X embeds, so a strict policy is a rewrite of
+# the pages, and a loose one would block nothing. This keeps the parts
+# that cost nothing: only this site and lexthedev.com may frame it, no
+# <base> tag can repoint relative links, and no plugins.
+#
+# Referrer-Policy is the browser default, written down. no-referrer would
+# break the YouTube embeds, which refuse to play without an origin.
+_SECURITY_HEADERS = {
+    "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=()",
+    "Content-Security-Policy": ("frame-ancestors 'self' https://lexthedev.com "
+                                "https://*.lexthedev.com; base-uri 'self'; "
+                                "object-src 'none'"),
+}
+
+
+@app.middleware("http")
+async def security_headers(request: Request, call_next):
+    response = await call_next(request)
+    for name, value in _SECURITY_HEADERS.items():
+        response.headers.setdefault(name, value)
     return response
 
 
@@ -3624,7 +3679,10 @@ async def podcast_clip_status(job_id: str, request: Request) -> dict:
         # is a capability, and confirming which ids were real would let one
         # be guessed.
         raise HTTPException(status_code=404, detail="No such clip.")
-    return {"job_id": job.id, "status": job.status, "error": job.error,
+    # Redacted: the error is yt-dlp's or ffmpeg's own text, and either can
+    # quote the proxy URL with its password in it.
+    return {"job_id": job.id, "status": job.status,
+            "error": redact(job.error) if job.error else job.error,
             "ready": job.status == "done",
             "url": f"/v1/podcast/clip/{job.id}/file"
                    if job.status == "done" else None}

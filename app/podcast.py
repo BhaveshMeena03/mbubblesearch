@@ -1158,6 +1158,12 @@ def _broadcast_players() -> dict[str, str]:
 
 def _deep_link(url: str, platform: str, seconds: float,
                episode_id: str = "") -> str:
+    # A web address or nothing. Every page puts this straight into an href
+    # or window.open, so a javascript: url in a passage's metadata would
+    # run on the reader's click. Nothing writes one today; this is what
+    # keeps it that way if a bad row ever lands in the index.
+    if not str(url or "").lower().startswith(("https://", "http://")):
+        return ""
     sec = int(seconds)
     if platform == "youtube":
         joiner = "&" if "?" in url else "?"

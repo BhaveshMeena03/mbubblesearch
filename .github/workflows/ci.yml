@@ -5,6 +5,12 @@ on:
     branches: [main]
   pull_request:
 
+# Read-only, written here rather than left to the repo setting. A pull
+# request from a fork runs this, and the token it gets should not be able
+# to push to main whatever the setting says that day.
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
