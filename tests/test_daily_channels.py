@@ -84,3 +84,20 @@ def test_market_bubble_summaries_are_refreshed_and_committed():
     assert SCRIPT.index("unset ANTHROPIC_BASE_URL") < packed
     assert packed < SCRIPT.index('git diff --quiet -- "${shelves[@]}"')
     assert "shelves+=(data/summaries.json.gz)" in SCRIPT
+
+
+def test_threadguys_x_broadcasts_are_paired_every_morning_and_committed():
+    """The extension's button on his posts needs each new broadcast paired;
+    after the notes, so a show paired today already has its summary."""
+    paired = SCRIPT.index("scripts/pair_threadguy_broadcasts.py --search")
+    assert SCRIPT.index("scripts/summarize_threadguy.py") < paired
+    assert paired < SCRIPT.index('git diff --quiet -- "${shelves[@]}"')
+    for kept in ("data/threadguy_broadcast_links.json", "data/threadguy_x_broadcasts.json"):
+        assert kept in SCRIPT
+
+
+def test_mcg_gets_its_notes_every_morning_through_the_proxy_and_committed():
+    notes = SCRIPT.index("scripts/summarize_mcg.py --latest 5")
+    assert SCRIPT.index("unset ANTHROPIC_BASE_URL") < notes
+    assert notes < SCRIPT.index('git diff --quiet -- "${shelves[@]}"')
+    assert "data/mcg_summaries.json.gz" in SCRIPT

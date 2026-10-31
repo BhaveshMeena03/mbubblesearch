@@ -146,6 +146,19 @@ echo "-- mcg on x"
 echo "-- threadguy notes"
 .venv/bin/python -u scripts/summarize_threadguy.py --latest 10 || status=1
 
+# ThreadGuy's X broadcasts, for the browser extension's button on his
+# posts: one search on X for broadcast posts from @notthreadguy since the
+# newest one on file (about one a day, half a cent), then each new one is
+# heard against the show indexed above. After the notes, so a show paired
+# this morning already has its summary.
+echo "-- threadguy on x"
+.venv/bin/python -u scripts/pair_threadguy_broadcasts.py --search || status=1
+
+# Notes for MCG's newest, the daily live show included: the extension
+# shows them on MCG Live's posts on X. Already-written ones are skipped.
+echo "-- mcg notes"
+.venv/bin/python -u scripts/summarize_mcg.py --latest 5 || status=1
+
 # Market Bubble's summaries, which the site serves from this file rather
 # than reading them back from Pinecone. A show added since yesterday has its
 # summary in the index first; this fetches just that one.
@@ -183,9 +196,12 @@ shelves=(data/threadguy_index.json data/mcg_index.json data/rasmr_index.json
          data/mcg_assets.json data/threadguy_assets.json)
 # Only once it is in the repo: git will not commit a path it has never
 # seen, and the refusal would take the shelves down with it.
-if git ls-files --error-unmatch data/mcg_broadcast_links.json >/dev/null 2>&1; then
-  shelves+=(data/mcg_broadcast_links.json)
-fi
+for kept in data/mcg_broadcast_links.json data/threadguy_broadcast_links.json \
+            data/threadguy_x_broadcasts.json data/mcg_summaries.json.gz; do
+  if git ls-files --error-unmatch "$kept" >/dev/null 2>&1; then
+    shelves+=("$kept")
+  fi
+done
 if git ls-files --error-unmatch data/summaries.json.gz >/dev/null 2>&1; then
   shelves+=(data/summaries.json.gz)
 fi
