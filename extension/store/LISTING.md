@@ -7,7 +7,7 @@ Checked against the store's own pages on 1 Nov 2026: image sizes
 
 ## Package
 
-Upload `marketbubblesearch-for-x-1.0.0.zip`: `manifest.json`, `lib.js`, `background.js`,
+Upload `marketbubblesearch-for-x-1.0.1.zip`: `manifest.json`, `lib.js`, `background.js`,
 `content.js`, `icons/`, `README.md`. Not `test/` or `store/`.
 
 ## Store listing tab

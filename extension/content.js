@@ -79,28 +79,45 @@
     });
   }
 
-  // The site's own mark, drawn in X's style: a lens with a play button in
-  // it and a handle, one colour, the size of X's own icons. The sound-wave
-  // lens it replaced was three bars too small to read at 18px.
-  function svgIcon() {
+  function drawSvg(shapes) {
     var ns = "http://www.w3.org/2000/svg";
     var svg = document.createElementNS(ns, "svg");
     svg.setAttribute("viewBox", "0 0 24 24");
     svg.setAttribute("aria-hidden", "true");
-    var shapes = [
-      ["circle", { cx: "10.25", cy: "10.25", r: "7", fill: "none",
-                   stroke: "currentColor", "stroke-width": "2" }],
-      ["path", { d: "M15.5 15.5 20.75 20.75", stroke: "currentColor",
-                 "stroke-width": "2.5", "stroke-linecap": "round" }],
-      ["path", { d: "M8.6 7.3v5.9l5-2.95z", fill: "currentColor", stroke: "currentColor",
-                 "stroke-width": "1", "stroke-linejoin": "round" }]
-    ];
     shapes.forEach(function (shape) {
       var node = document.createElementNS(ns, shape[0]);
       Object.keys(shape[1]).forEach(function (name) { node.setAttribute(name, shape[1][name]); });
       svg.appendChild(node);
     });
     return svg;
+  }
+
+  // The site's own mark, drawn in X's style: a lens with a play button in
+  // it and a handle, one colour, the size of X's own icons. The sound-wave
+  // lens it replaced was three bars too small to read at 18px.
+  function svgIcon() {
+    return drawSvg([
+      ["circle", { cx: "10.25", cy: "10.25", r: "7", fill: "none",
+                   stroke: "currentColor", "stroke-width": "2" }],
+      ["path", { d: "M15.5 15.5 20.75 20.75", stroke: "currentColor",
+                 "stroke-width": "2.5", "stroke-linecap": "round" }],
+      ["path", { d: "M8.6 7.3v5.9l5-2.95z", fill: "currentColor", stroke: "currentColor",
+                 "stroke-width": "1", "stroke-linejoin": "round" }]
+    ]);
+  }
+
+  // The mark in its own colours, the store icon at the size of a line of
+  // text, for the panel's name. Drawn here rather than loaded: an image
+  // file would have to be exposed to x.com to show on it.
+  function brandMark() {
+    return drawSvg([
+      ["circle", { cx: "12", cy: "12", r: "12", fill: "#16c784" }],
+      ["path", { d: "M15.6 15.4 18.8 18.6", stroke: "#0b0e11",
+                 "stroke-width": "2.4", "stroke-linecap": "round" }],
+      ["circle", { cx: "11.1", cy: "10.9", r: "6.2", fill: "#0b0e11" }],
+      ["path", { d: "M9.6 8.3v5.7l4.9-2.85z", fill: "#2fe6a6", stroke: "#2fe6a6",
+                 "stroke-width": "0.8", "stroke-linejoin": "round" }]
+    ]);
   }
 
   function isLight() {
@@ -122,8 +139,14 @@
     "  font:400 14px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;",
     "  background:#0b0e11;color:#e7e9ea;border:1px solid #2f3336}",
     ".light .panel{background:#f7f9f9;color:#0f1419;border-color:#cfd9de}",
-    ".head{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:6px}",
-    ".src{color:#16c784;font-weight:600;font-size:12px;letter-spacing:.02em;text-transform:lowercase}",
+    ".head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:8px}",
+    ".src{display:inline-flex;align-items:center;gap:7px;color:#16c784;font-weight:700;",
+    "  font-size:14px;text-decoration:none}",
+    ".src:hover{text-decoration:underline}.src:focus-visible{outline:2px solid #16c784}",
+    ".src svg{width:20px;height:20px;flex:none}",
+    // The brand green on X's light page is 2.2:1, under the 4.5:1 text
+    // needs; this one is 4.9:1.
+    ".light .src,.light .t,.light .watch{color:#0b7d53}",
     ".x{all:unset;cursor:pointer;color:rgb(113,118,123);font-size:16px;padding:0 4px}",
     ".title{font-weight:700;margin:0 0 2px}",
     ".date{color:rgb(113,118,123);font-size:12px;margin-bottom:8px}",
@@ -399,7 +422,14 @@
     root.appendChild(panel);
 
     var head = el("div", "head");
-    head.appendChild(el("span", "src", "marketbubblesearch"));
+    // The name as it is written, with its mark, and a way to the site.
+    var name = el("a", "src");
+    name.href = MBS.API + "/home";
+    name.target = "_blank";
+    name.rel = "noopener noreferrer";
+    name.appendChild(brandMark());
+    name.appendChild(document.createTextNode("MarketBubbleSearch"));
+    head.appendChild(name);
     var close = el("button", "x", "×");
     close.type = "button";
     close.setAttribute("aria-label", "Close");

@@ -202,6 +202,14 @@ test("the content script on an X-shaped page", { skip }, async t => {
       assert.deepEqual(icon.size, ["18.75px", "18.75px"]);
     });
 
+    await t.test("the panel is named as the site writes it, with its mark and a way there", async () => {
+      const name = tab.locator("#ours .panel .src");
+      assert.equal(await name.textContent(), "MarketBubbleSearch");
+      assert.equal(await name.locator("svg > *").count(), 4, "the store icon's disc, handle, lens and play");
+      assert.equal(await name.getAttribute("href"), "https://search.lexthedev.com/home");
+      assert.equal(await name.getAttribute("rel"), "noopener noreferrer");
+    });
+
     await t.test("the summary opens under a TL;DR heading, with no dash in it", async () => {
       const headings = await tab.locator("#ours .panel h4").allTextContents();
       assert.deepEqual(headings, ["TL;DR", "Topics"]);
@@ -422,6 +430,8 @@ test("a light X gets a light panel", { skip }, async () => {
     await tab.locator("#ours .panel .title").waitFor();
     const bg = await tab.locator("#ours .panel").evaluate(n => getComputedStyle(n).backgroundColor);
     assert.equal(bg, "rgb(247, 249, 249)");
+    const green = await tab.locator("#ours .panel .src").evaluate(n => getComputedStyle(n).color);
+    assert.equal(green, "rgb(11, 125, 83)", "a green that can be read on a light page");
   } finally {
     await browser.close();
   }
