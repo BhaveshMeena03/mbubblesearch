@@ -161,8 +161,13 @@ def test_every_data_file_the_app_opens_is_in_the_image():
     each working locally, where data/ is simply there.
     """
     opened = set()
+    # Both spellings the app uses: ROOT / "data" / "x.json", and a module's
+    # own _DATA / "x.json". Only the first was read until 1 Nov 2026, so
+    # the seven files app/x_posts.py opens were invisible here, and the
+    # one of them nobody had happened to COPY, x_clips.json, shipped
+    # nowhere: every clip lost its button in production and nothing said.
     for path in (ROOT / "app").glob("*.py"):
-        opened |= set(re.findall(r'"data"\s*/\s*"([A-Za-z0-9_.-]+)"',
+        opened |= set(re.findall(r'(?:"data"|\b_DATA)\s*/\s*"([A-Za-z0-9_.-]+)"',
                                  path.read_text()))
     copied = {Path(s).name for s in copy_sources(DOCKERFILE.read_text())}
     missing = sorted(name for name in opened

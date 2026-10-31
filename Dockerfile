@@ -126,6 +126,9 @@ COPY data/rasmr_broadcast_links.json ./data/rasmr_broadcast_links.json
 # has to be in the image or every episode deploys with an empty guest list
 # and nothing anywhere says why.
 COPY data/mcg_guests.json ./data/mcg_guests.json
+# The clips the browser extension knows, placed by scripts/place_x_clips.py.
+# Without it every clip on X has no button, and nothing says why.
+COPY data/x_clips.json ./data/x_clips.json
 COPY widget ./widget
 COPY demo ./demo
 

@@ -66,5 +66,7 @@ data/
 # rasmr's shelf and his X pairs.
 !data/rasmr_index.json
 !data/rasmr_broadcast_links.json
+# The extension's placed clips.
+!data/x_clips.json
 redteam_report.md
 PITCH_PREP.md
