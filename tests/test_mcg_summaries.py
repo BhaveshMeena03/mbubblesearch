@@ -85,6 +85,20 @@ def test_copied_timestamps_come_back_as_the_seconds_of_their_lines():
     assert client.sent[0]["system"] == sm.SYSTEM
 
 
+def test_the_daily_live_show_gets_the_live_shows_prompt():
+    """256 of the shelf's rows are MCG Live's daily market show, which has
+    no project and no founder for the interview prompt to ask after."""
+    client = Replies(reply(GOOD))
+    asyncio.run(sm.summarize(client, "m", {**ROW, "format": "stream"}, SEGMENTS))
+    assert client.sent[0]["system"] == sm.STREAM_SYSTEM
+    assert "MCG Live" in sm.STREAM_SYSTEM and "founder" not in sm.STREAM_SYSTEM
+    for rule in ('{"at": "0:02:05"', "copied exactly as it is printed",
+                 "never investment advice", "No em dashes", 'return {"tldr": "", "topics": []}'):
+        assert rule in sm.STREAM_SYSTEM, rule
+    assert sm.prompt_for({"format": "interview"}) == sm.SYSTEM
+    assert sm.prompt_for({}) == sm.SYSTEM
+
+
 def test_minutes_written_where_seconds_belong_are_refused():
     """Arrow Finance's notes: 21 for a topic at 22:05, 34 for one at 34:08."""
     minutes = [("0:00:21", GOOD[1][1]), ("0:00:23", GOOD[2][1]),

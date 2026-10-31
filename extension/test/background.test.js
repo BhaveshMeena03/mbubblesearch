@@ -19,7 +19,7 @@ function worker(respond) {
   const listeners = [];
   const requests = [];
   const sandbox = {
-    console, URL, JSON, Promise, Object, Array, Date, Error,
+    console, URL, JSON, Promise, Object, Array, Date, Error, Number, TextDecoder,
     AbortController,
     setTimeout: (...a) => setTimeout(...a),
     clearTimeout: (...a) => clearTimeout(...a),
@@ -161,4 +161,36 @@ test("a clip's links are cleaned before the page sees them", async () => {
   assert.equal(post.clip.watch, show + "?t=5993");
   assert.equal(post.clip.afterWatch, "");
   assert.deepEqual(post.links, { "0:04:31": show + "?t=271" });
+});
+
+test("a reply is read only up to the cap, whatever it says about itself", async () => {
+  const declared = await worker(() => Promise.resolve({
+    status: 200, ok: true, headers: { get: (h) => h === "content-length" ? "999999999" : null },
+    text: () => { throw new Error("must not be read"); },
+  })).send({ type: "post", post: POST });
+  assert.deepEqual(declared, { ok: false, code: "failed" }, "a declared length over the cap");
+
+  let pulled = 0;
+  let cancelled = false;
+  const endless = await worker(() => Promise.resolve({
+    status: 200, ok: true, headers: { get: () => null },
+    body: { getReader: () => ({
+      read: () => { pulled += 1; return Promise.resolve({ done: false, value: new Uint8Array(512 * 1024) }); },
+      cancel: () => { cancelled = true; },
+    }) },
+  })).send({ type: "post", post: POST });
+  assert.deepEqual(endless, { ok: false, code: "failed" }, "a body that never ends");
+  assert.ok(cancelled && pulled <= 5, `stopped at the cap after ${pulled} reads`);
+
+  const chunks = [JSON.stringify(POST_BODY).slice(0, 40), JSON.stringify(POST_BODY).slice(40)];
+  const streamed = await worker(() => Promise.resolve({
+    status: 200, ok: true, headers: { get: () => null },
+    body: { getReader: () => ({
+      read: () => Promise.resolve(chunks.length
+        ? { done: false, value: new TextEncoder().encode(chunks.shift()) } : { done: true }),
+      cancel: () => {},
+    }) },
+  })).send({ type: "post", post: POST });
+  assert.equal(streamed.ok, true, "a normal reply read in parts");
+  assert.equal(streamed.data.post.title, "t");
 });

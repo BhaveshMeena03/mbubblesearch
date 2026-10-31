@@ -60,6 +60,8 @@ test("the panel's link is rebuilt from the archive, never taken from the reply",
   assert.equal(odd.page, "https://search.lexthedev.com/demo/podcast.html");
   const mcg = MBS.cleanPost({ post: OURS, archive: "mcg", episode_id: "2NK_MBlFvtM" });
   assert.equal(mcg.page, "https://search.lexthedev.com/demo/mcg.html");
+  const tg = MBS.cleanPost({ post: OURS, archive: "threadguy", episode_id: "EOkDv8qm8ik" });
+  assert.equal(tg.page, "https://search.lexthedev.com/demo/threadguy.html");
 });
 
 test("a reply that is not ours, or not this post, is refused", () => {
@@ -232,4 +234,11 @@ test("dates read the way the account writes them", () => {
 
 test("the extension talks to one origin, over https", () => {
   assert.equal(MBS.API, "https://search.lexthedev.com");
+});
+
+test("a question cut at the cap never keeps half an emoji", () => {
+  const q = "q".repeat(499) + "\u{1F525}";
+  const cut = MBS.cleanQuestion(q);
+  assert.equal(cut, "q".repeat(499));
+  assert.doesNotMatch(cut, /[\uD800-\uDBFF]$/);
 });

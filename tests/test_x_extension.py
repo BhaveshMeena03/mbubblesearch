@@ -44,6 +44,7 @@ CLIP_POST = "2116428709150478840"        # Ansem's clip of it, from 1:39:53
 MCG_POST = "2115115665753518109"
 RASMR_PAIRED = "2090840111306936721"
 RASMR_X_ONLY = "2109683904819150927"
+TG_POST = "2116149081211048039"          # ThreadGuy's market open, 30 Oct
 
 
 # --- the shelf -------------------------------------------------------------
@@ -90,11 +91,13 @@ def files(tmp_path, monkeypatch):
         CLIP_POST: {"account": "blknoiz06", "archive": "podcast", "episode_id": EP24,
                     "start": 5993, "end": 6072, "before": "lab diamonds.",
                     "after": "How does MicroStrategy look?", "after_at": 6078},
-        "2116000000000000001": {"archive": "podcast", "episode_id": "KcazozbZHd0",
+        "2116000000000000001": {"account": "MarketBubble", "archive": "podcast",
+                                "episode_id": "KcazozbZHd0",
                                 "start": 60, "end": 90, "before": "", "after": "a",
                                 "after_at": None},
         MB_POST: {"archive": "podcast", "episode_id": EP24, "start": 1, "end": 2},
-        "2115461279163052437": {"archive": "podcast", "episode_id": "x-2115418459765113280",
+        "2115461279163052437": {"account": "blknoiz06", "archive": "podcast",
+                                "episode_id": "x-2115418459765113280",
                                 "start": 1719, "end": 1805, "before": "b", "after": "a",
                                 "after_at": 1809},
         "2116000000000000002": {"archive": "podcast", "episode_id": EP24, "start": "5993", "end": 6072},
@@ -106,19 +109,46 @@ def files(tmp_path, monkeypatch):
         "2116000000000000007": {"archive": "podcast", "episode_id": EP24, "start": True, "end": 2},
         "2116000000000000008": {"archive": "podcast", "episode_id": EP24, "start": 1, "end": 2,
                                 "after_at": -5},
-        "not-a-post": {"archive": "podcast", "episode_id": EP24, "start": 1, "end": 2}}))
+        "not-a-post": {"archive": "podcast", "episode_id": EP24, "start": 1, "end": 2},
+        "2116000000000000009": {"account": "someclipper", "archive": "podcast",
+                                "episode_id": EP24, "start": 5993, "end": 6072}}))
+    with gzip.open(tmp_path / "mcg_summaries.json.gz", "wt") as fh:
+        json.dump({"2NK_MBlFvtM": {"tldr": "Bitcoin held 75.2K.", "model": "m", "pinned": True,
+                                   "topics": [{"t": 249, "text": "the chart"},
+                                              {"t": 1500, "text": "in the minutes X missed"},
+                                              {"t": 3600, "text": "an hour in"},
+                                              {"t": "60", "text": "a bad time"},
+                                              {"t": 60}]},
+                   "noclock0000": {"tldr": "", "topics": [], "pinned": True},
+                   "Y9xI81lOP7U": {"tldr": "written before topics were pinned", "model": "m",
+                                   "topics": [{"t": 60, "text": "maybe minutes late"}]}}, fh)
+    (tmp_path / "tg.json").write_text(json.dumps({
+        "EOkDv8qm8ik": {"broadcast": "https://x.com/i/broadcasts/1pJdRDqeOYnKW",
+                        "offset": -3, "post": TG_POST}}))
+    (tmp_path / "threadguy_index.json").write_text(json.dumps([
+        {"id": "EOkDv8qm8ik", "title": "MARKET OPEN: Binance Suffers the BIGGEST HACK EVER",
+         "published_at": "2026-10-30", "format": "stream"}]))
+    with gzip.open(tmp_path / "threadguy_summaries.json.gz", "wt") as fh:
+        json.dump({"EOkDv8qm8ik": {"tldr": "The Binance hack, live.", "model": "m", "pinned": True,
+                                   "topics": [{"t": 1, "text": "before X began"},
+                                              {"t": 600, "text": "ten minutes in"}]}}, fh)
     links = json.loads((tmp_path / "broadcast_links.json").read_text())
     monkeypatch.setattr(podcast, "_broadcast_players", lambda: links)
     for name, value in (("SUMMARIES", "summaries.json.gz"),
                         ("BROADCAST_LINKS", "broadcast_links.json"),
                         ("MCG_PAIRS", "mcg.json"), ("RASMR_PAIRS", "rasmr.json"),
                         ("RASMR_SHELF", "rasmr_index.json"),
-                        ("MCG_SHELF", "mcg_index.json"), ("CLIPS", "x_clips.json")):
+                        ("MCG_SHELF", "mcg_index.json"), ("CLIPS", "x_clips.json"),
+                        ("MCG_SUMMARIES", "mcg_summaries.json.gz"),
+                        ("THREADGUY_PAIRS", "tg.json"), ("THREADGUY_SHELF", "threadguy_index.json"),
+                        ("THREADGUY_SUMMARIES", "threadguy_summaries.json.gz")):
         monkeypatch.setattr(x_posts, name, tmp_path / value)
-    for cached in (x_posts.shelf, x_posts._summaries, x_posts._clips):
+    caches = (x_posts.shelf, x_posts._summaries, x_posts._clips, x_posts._mcg_summaries,
+              x_posts._threadguy_summaries)
+    for cached in caches:
         cached.cache_clear()
     yield tmp_path
-    for cached in (x_posts.shelf, x_posts._summaries, x_posts._clips):
+    for cached in caches:
         cached.cache_clear()
 
 
@@ -213,8 +243,45 @@ def test_the_panel_names_its_post(files):
     assert row["times"] == {"0:01:40": 100, "0:04:57": 297}
     assert row["page"] == f"https://search.lexthedev.com/demo/podcast.html#ep-x-{MB_POST}"
     mcg = x_posts.describe(MCG_POST)
-    assert mcg["summary"] is None and mcg["page"].endswith("/demo/mcg.html")
+    assert mcg["page"].endswith("/demo/mcg.html")
     assert x_posts.describe("1234567") is None
+
+
+def test_an_mcg_live_show_on_x_opens_with_its_summary_on_xs_clock(files):
+    """Summary times are on YouTube's clock; the pair moves them to X's.
+    0:04:09 is 249 - 128; 0:25:00 falls in the minutes X's stream missed,
+    so it stays words; 1:00:00 is 3600 - 161."""
+    row = x_posts.describe(MCG_POST)
+    assert row["summary"] == ("**TL;DR** Bitcoin held 75.2K.\n\n**Topics**\n"
+                              "- [0:04:09] the chart\n- [0:25:00] in the minutes X missed\n"
+                              "- [1:00:00] an hour in")
+    assert row["times"] == {"0:04:09": 121, "1:00:00": 3439}
+
+
+def test_a_threadguy_show_on_x_has_his_summary_and_answers_on_xs_clock(files, client):
+    """X runs three seconds behind YouTube on this one: 0:10:00 is 597.
+    A time before X's stream began stays words."""
+    row = x_posts.describe(TG_POST)
+    assert row["archive"] == "threadguy" and row["archive_name"] == "ThreadGuy"
+    assert row["title"].startswith("MARKET OPEN: Binance")
+    assert row["times"] == {"0:10:00": 597}
+    assert row["page"] == "https://search.lexthedev.com/demo/threadguy.html"
+    r = client.post("/v1/x/ask", json={"post": TG_POST, "question": "what about binance"})
+    assert r.status_code == 200 and r.json()["times"] == {"0:10:00": 597}
+    assert client.app.state.threadguy.calls[-1]["episode_id"] == "EOkDv8qm8ik"
+
+
+def test_an_mcg_show_with_no_summary_or_an_empty_one_has_none(files):
+    assert x_posts._mcg_markdown("noclock0000") is None
+    assert x_posts._mcg_markdown("not-on-file") is None
+
+
+def test_a_summary_whose_times_were_never_pinned_is_not_shown(files):
+    """Its times could be minutes late, and here a time moves the video."""
+    assert x_posts._mcg_markdown("Y9xI81lOP7U") is None
+    for pinned in (False, "yes", 1, None):
+        store = {"e": {"tldr": "t", "topics": [], "pinned": pinned}}
+        assert x_posts._notes_markdown(store, "e") is None, pinned
 
 
 # --- clips -----------------------------------------------------------------
@@ -263,7 +330,7 @@ def test_a_whole_recording_never_turns_into_a_clip(files):
 def test_a_clip_row_wrong_in_any_way_is_left_out_whole(files):
     shelf = x_posts.shelf()
     assert CLIP_POST in shelf and "2116000000000000001" in shelf
-    for n in range(2, 9):
+    for n in range(2, 10):
         assert f"211600000000000000{n}" not in shelf, n
     assert "not-a-post" not in shelf
 
@@ -360,6 +427,7 @@ def client(files, monkeypatch):
         c.app.state.podcast = _Archive()
         c.app.state.mcg = _Archive("At 30:00 and 1:00:00 they said it.")
         c.app.state.rasmr = None
+        c.app.state.threadguy = _Archive("At 0:10:00 he said it.")
         c.app.state.answers._store.clear() if hasattr(c.app.state.answers, "_store") else None
         yield c
     get_settings.cache_clear()
@@ -372,7 +440,7 @@ def test_the_shelf_is_public_cacheable_and_only_ids(client):
     assert r.headers["x-content-type-options"] == "nosniff"
     body = r.json()
     assert body["posts"][MB_POST] == "podcast" and body["count"] == len(body["posts"])
-    assert set(body["posts"].values()) <= {"podcast", "mcg", "rasmr"}
+    assert set(body["posts"].values()) <= {"podcast", "mcg", "rasmr", "threadguy"}
 
 
 def test_a_post_opens_with_its_summary_and_x_seconds(client):
@@ -643,3 +711,154 @@ def test_the_extensions_own_tests_pass():
     run = subprocess.run(["node", "--test", *map(str, files)],
                          capture_output=True, text=True, timeout=600)
     assert run.returncode == 0, run.stdout[-3000:] + run.stderr[-2000:]
+
+
+# --- the privacy policy the store links to ----------------------------------
+
+PRIVACY = ROOT / "demo" / "extension-privacy.html"
+
+
+def test_the_privacy_policy_is_served_where_the_listing_points(client):
+    r = client.get("/extension/privacy", follow_redirects=False)
+    assert r.status_code == 301 and r.headers["location"] == "/demo/extension-privacy.html"
+    page = client.get("/demo/extension-privacy.html")
+    assert page.status_code == 200 and "Limited Use" in page.text
+
+
+def test_what_the_privacy_policy_promises_is_what_the_code_does():
+    """The page is a promise about this code. Each line here is one a
+    change could break without anyone rereading the page."""
+    page = re.sub(r"\s+", " ", PRIVACY.read_text())
+    manifest = _manifest()
+    # "asks for no permissions", "talks only to search.lexthedev.com"
+    assert "None. It runs on <code>https://x.com/*</code>" in page
+    for key in ("permissions", "host_permissions", "optional_permissions",
+                "optional_host_permissions", "externally_connectable"):
+        assert key not in manifest, key
+    assert [c["matches"] for c in manifest["content_scripts"]] == [["https://x.com/*"]]
+    # "logs ... its first 120 characters"
+    assert "its first 120 characters" in page
+    assert "q=body.question[:120]" in (ROOT / "app" / "main.py").read_text()
+    # "the same question within 24 hours is answered from a cache"
+    from app.answer_cache import AnswerCache
+    assert AnswerCache()._ttl == 86_400.0 and "within 24 hours" in page
+    # "at most once an hour"
+    assert "SHELF_TTL_MS = 60 * 60 * 1000" in (EXT / "background.js").read_text()
+    assert "at most once an hour" in page
+    # Never an em or en dash: the page speaks for the project.
+    assert not re.search("[–—]", page)
+
+
+# --- what the 1 Nov review found ------------------------------------------
+
+def test_a_client_at_its_cap_spends_nothing_of_the_day(client, budgets, monkeypatch):
+    """Per-client first: a client over its cap is turned away before the
+    day is charged. In the other order one address emptied the day."""
+    from app.security import daily_budget, per_client_daily, public_rate_limit
+    monkeypatch.setattr(public_rate_limit, "_rpm", 100_000)
+    monkeypatch.setattr(public_rate_limit, "_burst", 100_000)
+    monkeypatch.setattr(per_client_daily, "_limit", 2)
+    monkeypatch.setattr(daily_budget, "_limit", 10)
+    codes = [client.post("/v1/x/ask", json={"post": MB_POST, "question": f"question {i}"}).status_code
+             for i in range(6)]
+    assert codes == [200, 200, 429, 429, 429, 429]
+    assert daily_budget.state()["used"] == 2
+
+
+def test_a_day_that_is_out_gives_the_client_its_slot_back(client, budgets, monkeypatch):
+    from app.security import daily_budget, per_client_daily
+    monkeypatch.setattr(daily_budget, "_limit", 1)
+    assert client.post("/v1/x/ask", json={"post": MB_POST, "question": "one"}).status_code == 200
+    assert client.post("/v1/x/ask", json={"post": MB_POST, "question": "two"}).status_code == 503
+    assert sum(per_client_daily._counts.values()) == 1
+
+
+def test_a_cached_answer_on_the_site_costs_nobody_a_slot(client, budgets, monkeypatch):
+    """The front door charged the day for answers it already had; only the
+    client's slot came back, so the day drained with no model call."""
+    import app.main as m
+    from app.answer_cache import make_key
+    from app.security import daily_budget, per_client_daily, public_rate_limit
+    monkeypatch.setattr(public_rate_limit, "_rpm", 100_000)
+    monkeypatch.setattr(public_rate_limit, "_burst", 100_000)
+    monkeypatch.setattr(daily_budget, "_limit", 10)
+    client.app.state.answers.put(make_key(m._timed("what about gold"), surface="front-door",
+                                          top_k=None), {"answer": "cached"})
+    codes = {client.post("/v1/search", json={"query": "what about gold"}).status_code
+             for _ in range(12)}
+    assert codes == {200}
+    assert daily_budget.state()["used"] == 0 and sum(per_client_daily._counts.values()) == 0
+
+
+@pytest.mark.parametrize("path,size,code", [
+    ("/v1/x/ask", 15_000, 422),        # under the extension's cap: read and refused as a body
+    ("/v1/x/ask", 17_000, 413),
+    ("/v1/search", 200_000, 422),
+    ("/v1/search", 300_000, 413),
+])
+def test_a_body_over_its_routes_limit_is_refused_before_it_is_read(client, path, size, code):
+    body = b'{"pad": "' + b"0" * size + b'"}'
+    assert client.post(path, content=body, headers={"content-type": "application/json"}).status_code == code
+
+
+def test_a_body_with_no_length_is_held_to_the_same_limit(client):
+    def chunks(total):
+        yield b'{"post": "' + MB_POST.encode() + b'", "question": "q", "pad": "'
+        for _ in range(total // 4096):
+            yield b"0" * 4096
+        yield b'"}'
+    big = client.post("/v1/x/ask", content=chunks(40_000), headers={"content-type": "application/json"})
+    assert big.status_code == 413
+    small = client.post("/v1/x/ask", content=chunks(4_000), headers={"content-type": "application/json"})
+    assert small.status_code == 200, "a small chunked body still reaches the route whole"
+
+
+def test_the_admin_ingest_keeps_room_for_whole_episodes():
+    import app.main as m
+    assert m._body_limit("/v1/podcast/ingest") == 20_000_000
+    assert m._body_limit("/v1/x/ask") == 16_000 and m._body_limit("/v1/xyz") == 256_000
+
+
+def test_half_an_emoji_in_a_question_is_a_422_not_a_500(client, budgets):
+    body = '{"post": "' + MB_POST + '", "question": "abc \\ud83d"}'
+    r = client.post("/v1/x/ask", content=body, headers={"content-type": "application/json"})
+    assert r.status_code in (200, 422)
+    r = client.post("/v1/x/ask", content='{"post": "\\ud83d", "question": "q"}',
+                    headers={"content-type": "application/json"})
+    assert r.status_code == 422
+    assert "input" not in r.json()["detail"][0], "the bad value is not echoed back"
+
+
+def test_the_privacy_policys_log_line_carries_what_it_says(client, budgets, caplog):
+    import logging
+    with caplog.at_level(logging.INFO):
+        client.post("/v1/x/ask", json={"post": MB_POST, "question": "what about gold"})
+    line = next(r.getMessage() for r in caplog.records if "x_extension_asks" in r.getMessage())
+    logged = json.loads(line.split("ANALYTICS ", 1)[1])
+    assert logged == {"event": "x_extension_asks", "post": MB_POST, "q": "what about gold"}
+
+
+def test_the_daily_caps_log_line_names_no_address(caplog):
+    import logging
+
+    from app.security import PerClientDailyBudget
+    budget = PerClientDailyBudget(limit=1)
+    request = type("R", (), {"client": type("C", (), {"host": "203.0.113.9"})(), "headers": {}})()
+    asyncio.run(budget(request))
+    from fastapi import HTTPException
+    with caplog.at_level(logging.WARNING), pytest.raises(HTTPException):
+        asyncio.run(budget(request))
+    assert caplog.records and not any("203.0.113.9" in r.getMessage() for r in caplog.records)
+
+
+def test_the_extension_knows_every_archive_the_server_names():
+    """An archive the server sends that the extension's list lacks makes
+    every one of its posts fail in the browser, and fixing that means a
+    new version through the store's review."""
+    if not shutil.which("node"):
+        pytest.skip("node is not installed")
+    script = (f"const M=require({json.dumps(str(EXT / 'lib.js'))});"
+              "console.log(JSON.stringify(M.ARCHIVES))")
+    found = json.loads(subprocess.run(["node", "-e", script], capture_output=True,
+                                      text=True, timeout=60, check=True).stdout)
+    assert sorted(found) == sorted(x_posts.ARCHIVE_NAMES) == sorted(x_posts._PAGES)

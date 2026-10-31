@@ -390,8 +390,12 @@ async def main() -> int:
             print(f"  x {vid}  {row.get('title', '')[:60]}: {str(exc)[:160]}{kept}")
             continue
         dropped = summary.pop("dropped")
+        # "pinned": every topic's time is a line of the show, copied and
+        # checked here. Summaries from before 28 Oct 2026 have no mark, and
+        # their times could be minutes late; the browser extension only
+        # shows marked ones, since it moves a video to the time.
         summary.update(title=row.get("title", ""),
-                       published_at=row.get("published_at", ""), model=model)
+                       published_at=row.get("published_at", ""), model=model, pinned=True)
         print(f"  + {vid}  {int(time.monotonic() - started)}s  "
               f"{len(summary['topics'])} topics  {row.get('title', '')[:60]}")
         for problem in dropped:

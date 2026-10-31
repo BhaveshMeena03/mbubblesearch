@@ -225,7 +225,24 @@
     return out;
   }
 
+  // Is this still the post the button or panel was made for? X reuses a
+  // post's nodes for another as you scroll, and the next post may not be a
+  // video at all, an ad, or a text post, so it is never a candidate and was
+  // never looked at again: the old button stayed, and its panel's times
+  // moved the new post's video (found in review on 1 Nov 2026).
+  function still(article, post) {
+    return !!article && article.isConnected && ownPostId(article) === post && !!ownVideo(article);
+  }
+
+  function sweep() {
+    document.querySelectorAll("[" + BUTTON + "],[data-mbs-panel]").forEach(function (host) {
+      var post = host.getAttribute(BUTTON) || host.getAttribute("data-mbs-panel");
+      if (!still(host.closest("article"), post)) host.remove();
+    });
+  }
+
   function scan() {
+    sweep();
     var found = candidates();
     if (!found.length) return;
     if (!posts) { loadShelf(); return; }
@@ -264,6 +281,7 @@
       // page reach this button, and a scripted click must not spend a
       // question from the reader's address.
       if (!e.isTrusted) return;
+      if (!still(article, post)) { sweep(); return; }
       if (panel && panel.host.isConnected) {
         panel.host.remove();
         panel = null;
@@ -279,7 +297,7 @@
   }
 
   // ── the panel ────────────────────────────────────────────────────────
-  function render(target, markdown, times, links, article, status) {
+  function render(target, markdown, times, links, article, status, post) {
     MBS.blocks(markdown, times, links).forEach(function (block) {
       var node = block.kind === "heading" ? el("h4") : block.kind === "item" ? el("li") : el("p");
       block.parts.forEach(function (part) {
@@ -291,7 +309,7 @@
           t.type = "button";
           t.title = "Play from " + part.time + " on this post";
           t.addEventListener("click", function (e) {
-            if (!e.isTrusted) return;
+            if (!e.isTrusted || !still(article, post)) return;
             target.querySelectorAll(".t.on").forEach(function (n) { n.classList.remove("on"); });
             t.classList.add("on");
             seek(article, part.seconds, status);
@@ -420,11 +438,11 @@
           // about, the rest of the show is one click away.
           var whole = el("details");
           whole.appendChild(el("summary", null, "The whole episode"));
-          render(whole, data.summary, data.times, data.links, article, status);
+          render(whole, data.summary, data.times, data.links, article, status, post);
           body.appendChild(whole);
         }
       } else if (data.summary) {
-        render(body, data.summary, data.times, data.links, article, status);
+        render(body, data.summary, data.times, data.links, article, status, post);
       } else {
         body.appendChild(el("div", "note",
           "No summary for this one yet. Ask anything about it below."));
@@ -455,6 +473,8 @@
     input.placeholder = prompt;
     input.setAttribute("aria-label", prompt);
     input.autocomplete = "off";
+    var typed = "";
+    input.addEventListener("input", function (e) { if (e.isTrusted) typed = input.value; });
     var go = el("button", "go", "Ask");
     go.type = "button";
     form.appendChild(input);
@@ -464,6 +484,12 @@
     wrap.appendChild(out);
 
     function ask() {
+      // Only what the reader typed. The shadow root is open, so a script on
+      // the page can set the box's value and lay the Ask button over X's
+      // own buttons; a real click would then have sent its question
+      // (found in review on 1 Nov 2026). The value is held to the last one
+      // a real keystroke or paste produced.
+      if (input.value !== typed || !still(article, post)) return;
       var question = MBS.cleanQuestion(input.value);
       if (!question || go.disabled) return;
       go.disabled = true;
@@ -478,7 +504,7 @@
         }
         var answer = el("div", "answer");
         render(answer, reply.data.answer.answer, reply.data.answer.times,
-               reply.data.answer.links, article, status);
+               reply.data.answer.links, article, status, post);
         out.appendChild(answer);
       });
     }

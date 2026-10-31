@@ -35,9 +35,8 @@ function fetchJson(path, options, timeoutMs) {
     if (response.status === 503) throw { code: "limit" };
     if (response.status === 404) throw { code: "unknown" };
     if (!response.ok) throw { code: "failed" };
-    return response.text();
+    return readCapped(response);
   }).then(function (text) {
-    if (text.length > MAX_REPLY) throw { code: "failed" };
     try {
       return JSON.parse(text);
     } catch (e) {
@@ -48,6 +47,39 @@ function fetchJson(path, options, timeoutMs) {
     if (error && error.name === "AbortError") throw { code: "slow" };
     throw { code: "offline" };
   }).finally(function () { clearTimeout(timer); });
+}
+
+// The reply as text, but never more than MAX_REPLY of it: a declared
+// length over the cap is refused before reading, and a body that keeps
+// coming is cut off at the cap rather than held whole first (found in
+// review on 1 Nov 2026: response.text() buffered all of it, then checked).
+function readCapped(response) {
+  var declared = Number(response.headers && response.headers.get &&
+                        response.headers.get("content-length"));
+  if (declared > MAX_REPLY) return Promise.reject({ code: "failed" });
+  if (!response.body || !response.body.getReader) {
+    return response.text().then(function (text) {
+      if (text.length > MAX_REPLY) throw { code: "failed" };
+      return text;
+    });
+  }
+  var reader = response.body.getReader();
+  var decoder = new TextDecoder();
+  var text = "";
+  var size = 0;
+  function next() {
+    return reader.read().then(function (part) {
+      if (part.done) return text + decoder.decode();
+      size += part.value.byteLength;
+      if (size > MAX_REPLY) {
+        reader.cancel();
+        throw { code: "failed" };
+      }
+      text += decoder.decode(part.value, { stream: true });
+      return next();
+    });
+  }
+  return next();
 }
 
 function getShelf() {

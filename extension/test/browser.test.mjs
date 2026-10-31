@@ -534,3 +534,66 @@ test("a clip says where it is from and what came after the cut", { skip }, async
     await browser.close();
   }
 });
+
+// Found in review on 1 Nov 2026, both reproduced before they were fixed.
+test("a post X reuses for something else loses the button and panel it had", { skip }, async () => {
+  const browser = await launch({ headless: true });
+  try {
+    const tab = await open(browser, TIMELINE, { shelf: SHELF, post: postReply(OURS) });
+    await tab.locator("#ours [data-mbs-button] .btn").click();
+    await tab.locator("#ours .panel .title").waitFor();
+    // The same nodes, now someone's text post: another id, no video.
+    await tab.evaluate(other => {
+      const post = document.querySelector("#ours");
+      post.querySelector("a[href*='/status/']").setAttribute("href", "/someone/status/" + other);
+      post.querySelector("[data-testid='videoPlayer']").remove();
+    }, OTHER);
+    await tab.waitForFunction(() => !document.querySelector("#ours [data-mbs-button],#ours [data-mbs-panel]"),
+      null, { timeout: 4000 });
+    // And an ad: the same post, its timestamp link gone.
+    await tab.evaluate(() => document.querySelector("#ownquote a[href*='/status/'] time").parentElement.remove());
+    await tab.waitForFunction(() => !document.querySelector("#ownquote [data-mbs-button]"), null, { timeout: 4000 });
+  } finally {
+    await browser.close();
+  }
+});
+
+test("a page that steers the reader's clicks can't send a question they didn't type", { skip }, async () => {
+  const browser = await launch({ headless: true });
+  try {
+    const tab = await open(browser, TIMELINE, { shelf: SHELF, post: postReply(OURS),
+      ask: { ok: true, data: { answer: { answer: "a", refused: false, times: {}, links: {} } } } });
+    await tab.locator("#ours [data-mbs-button] .btn").click();
+    await tab.locator("#ours .panel input").waitFor();
+    // The page writes its own question and lays Ask over everything.
+    await tab.evaluate(() => {
+      const root = document.querySelector("#ours [data-mbs-panel]").shadowRoot;
+      root.querySelector("input").value = "question chosen by the page";
+      Object.assign(root.querySelector(".go").style, { position: "fixed", inset: "0", zIndex: "2147483647" });
+    });
+    await tab.mouse.click(200, 200);                        // the reader's own click
+    await tab.keyboard.press("Enter");
+    await tab.waitForTimeout(400);
+    assert.deepEqual(await tab.evaluate(() => window.__sent.map(m => m.type)), ["shelf", "post"]);
+    // A question the reader typed still goes, on the same real click.
+    await tab.evaluate(() => {
+      const root = document.querySelector("#ours [data-mbs-panel]").shadowRoot;
+      root.querySelector(".go").removeAttribute("style");
+      root.querySelector("input").value = "";
+    });
+    await tab.locator("#ours .panel input").fill("what about gold");
+    await tab.locator("#ours .panel .go").click();
+    await tab.waitForFunction(() => window.__sent.some(m => m.type === "ask"), null, { timeout: 4000 });
+    assert.equal((await tab.evaluate(() => window.__sent.at(-1))).question, "what about gold");
+    // Typed, then rewritten by the page: refused.
+    await tab.evaluate(() => {
+      document.querySelector("#ours [data-mbs-panel]").shadowRoot.querySelector("input").value = "swapped";
+    });
+    const before = await tab.evaluate(() => window.__sent.length);
+    await tab.locator("#ours .panel .go").click();
+    await tab.waitForTimeout(300);
+    assert.equal(await tab.evaluate(() => window.__sent.length), before);
+  } finally {
+    await browser.close();
+  }
+});

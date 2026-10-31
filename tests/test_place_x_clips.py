@@ -92,6 +92,8 @@ def _got(**over):
 
 @pytest.mark.parametrize("got,said", [
     ({"error": "X would not give the post: 404"}, "X would not give the post"),
+    (_got(account="someclipper"), "not one of the show's accounts"),
+    (_got(account=""), "not one of the show's accounts"),
     (_got(broadcast=True), "a broadcast"),
     (_got(duration=None), "no length"),
     (_got(duration=2729.0), "45 minutes long"),

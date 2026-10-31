@@ -11,7 +11,7 @@ var MBS = (function () {
   "use strict";
 
   var API = "https://search.lexthedev.com";
-  var ARCHIVES = ["podcast", "mcg", "rasmr"];
+  var ARCHIVES = ["podcast", "mcg", "rasmr", "threadguy"];
   var POST_ID = /^[0-9]{5,25}$/;
   // "/blknoiz06/status/2116220650058846455", relative or absolute, with
   // anything after it. X's handles are 1 to 15 of letters, digits and _.
@@ -116,7 +116,7 @@ var MBS = (function () {
   // The panel's data. The site link is rebuilt here from the archive name,
   // never taken from the reply, so the panel opens no address it was sent.
   var PAGES = { podcast: "/demo/podcast.html", mcg: "/demo/mcg.html",
-                rasmr: "/demo/rasmr.html" };
+                rasmr: "/demo/rasmr.html", threadguy: "/demo/threadguy.html" };
 
   function pageFor(archive, episodeId) {
     if (archive === "podcast" && /^[A-Za-z0-9_-]{1,40}$/.test(episodeId)) {
@@ -232,7 +232,9 @@ var MBS = (function () {
 
   function cleanQuestion(value) {
     if (typeof value !== "string") return "";
-    return value.replace(/\s+/g, " ").trim().slice(0, MAX_QUESTION);
+    // Cut at 500, never between the two halves of an emoji: half of one is
+    // not text, and the server refuses it.
+    return value.replace(/\s+/g, " ").trim().slice(0, MAX_QUESTION).replace(/[\uD800-\uDBFF]$/, "");
   }
 
   function longDate(iso) {

@@ -93,6 +93,55 @@ dashes.
 - If the transcript is too broken or too short to summarise honestly, \
 return {"tldr": "", "topics": []} rather than inventing something."""
 
+# MCG's daily live show is not an interview: no one project, a host or two
+# talking through the market for two or three hours. 256 of the shelf's
+# 704 rows are these ("format": "stream"), and the interview prompt above
+# asks the model to name the project and the founder, which a market show
+# doesn't have. The rules that keep a summary honest are the same.
+STREAM_SYSTEM = """\
+You are summarising one episode of MCG Live, MCG's daily live crypto \
+market show. Every transcript line starts with its [h:mm:ss] timestamp.
+
+Return ONLY a JSON object, no prose around it, shaped exactly like this:
+
+{"tldr": "...", "topics": [{"at": "0:02:05", "text": "..."}, ...]}
+
+tldr: two or three sentences. What the show covered that day and its \
+single most interesting or surprising thread. Write it for somebody \
+deciding whether to spend an evening here, not as a description of a \
+video. Do not open with "In this episode" or "This episode covers".
+
+topics: between six and twelve entries, in the order they occur, spread \
+across the whole show.
+  at    the timestamp of the line the topic begins at, copied exactly as \
+it is printed in front of that line, like 0:12:05. A reader presses it and \
+expects to land on that line. If you are not certain which line a topic \
+starts at, leave the topic out.
+  text  one sentence, specific: the coin, the level, the number, the \
+claim. "Bitcoin held 82.5K; the host expects a retest of 80K before \
+higher" not "They discuss Bitcoin". Numbers, names and tickers exactly as \
+the transcript has them.
+
+Rules:
+- Use ONLY the transcript. Do not add anything you know from elsewhere.
+- These are auto-generated captions with no speaker labels. Say "the \
+host" or "on the stream" unless the transcript itself makes a name \
+unambiguous. Being ADDRESSED is not a name: "dude", "bro", "man", "boss", \
+"guys" are how people talk to each other.
+- Leave out what is not content: waiting for the stream to start, \
+reading out who is in chat, sponsor reads, audio trouble.
+- This is informational, never investment advice. Report a call as what \
+was said on the day, attributed to whoever said it. Never endorse a \
+coin or repeat a projection as though it were a fact. No em dashes.
+- If the transcript is too broken or too short to summarise honestly, \
+return {"tldr": "", "topics": []} rather than inventing something."""
+
+
+def prompt_for(row: dict) -> str:
+    """The live show's prompt for a stream, the interview's for the rest."""
+    return STREAM_SYSTEM if row.get("format") == "stream" else SYSTEM
+
+
 # Words that are how people address each other, not names. A TL;DR that
 # misnames the founder in its first word is worse than one that says "the
 # founder": it reads as confidently wrong.
@@ -114,7 +163,7 @@ def transcripts_from(path: Path) -> dict[str, list[dict]]:
 
 
 async def summarize(client, model: str, row: dict, segments: list[dict]) -> dict:
-    summary = await held.summarize(client, model, row, segments, system=SYSTEM,
+    summary = await held.summarize(client, model, row, segments, system=prompt_for(row),
                                    given=row.get("title", ""))
     if looks_misattributed(summary["tldr"]):
         raise ValueError(f"the tldr opens on a word that is not a name: "
@@ -195,6 +244,8 @@ async def main() -> int:
             continue
         dropped = summary.pop("dropped")
         summary["model"] = model
+        # Every topic's time is a line of the show (see summarize_threadguy).
+        summary["pinned"] = True
         print(f"  + {vid}  {int(time.monotonic() - started)}s  "
               f"{len(summary['topics'])} topics  {row.get('title', '')[:60]}")
         for problem in dropped:

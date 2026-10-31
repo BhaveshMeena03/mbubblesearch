@@ -129,6 +129,8 @@ COPY data/mcg_guests.json ./data/mcg_guests.json
 # The clips the browser extension knows, placed by scripts/place_x_clips.py.
 # Without it every clip on X has no button, and nothing says why.
 COPY data/x_clips.json ./data/x_clips.json
+# Which of ThreadGuy's X broadcasts is which show, and its clock.
+COPY data/threadguy_broadcast_links.json ./data/threadguy_broadcast_links.json
 COPY widget ./widget
 COPY demo ./demo
 

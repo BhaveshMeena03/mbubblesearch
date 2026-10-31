@@ -3,7 +3,7 @@
   "name": "MarketBubbleSearch for X",
   "short_name": "MBSearch",
   "version": "1.0.0",
-  "description": "Summaries and answers for Market Bubble, MCG and rasmr recordings on X, with every time playing at the second.",
+  "description": "Summaries, answers and where clips came from, for Market Bubble, MCG, ThreadGuy and rasmr on X. Every time plays at its second.",
   "homepage_url": "https://search.lexthedev.com",
   "minimum_chrome_version": "111",
   "icons": {

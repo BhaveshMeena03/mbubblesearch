@@ -1,0 +1,118 @@
+{
+ "-uarB5g12aY": {
+  "broadcast": "https://x.com/i/broadcasts/1rGmqpQNRrwGy",
+  "post": "2107450624644423804",
+  "sections": [
+   {
+    "from": 0,
+    "offset": 0,
+    "to": 3090
+   },
+   {
+    "from": 3155,
+    "offset": -5,
+    "to": null
+   }
+  ]
+ },
+ "17CBqFNR7r8": {
+  "broadcast": "https://x.com/i/broadcasts/1vKpPNedZnbKE",
+  "post": "2108176640652226900",
+  "sections": [
+   {
+    "from": 0,
+    "offset": 0,
+    "to": 6440
+   },
+   {
+    "from": 6472,
+    "offset": -5,
+    "to": null
+   }
+  ]
+ },
+ "5-6QFnh7k0o": {
+  "broadcast": "https://x.com/i/broadcasts/1AKEmvApMERKL",
+  "offset": -4,
+  "post": "2108538101950005277"
+ },
+ "A3d_bMWhII4": {
+  "broadcast": "https://x.com/i/broadcasts/1nxeLMlMgjLJX",
+  "offset": 0,
+  "post": "2107891637645180974"
+ },
+ "EOkDv8qm8ik": {
+  "broadcast": "https://x.com/i/broadcasts/1pJdRDqeOYnKW",
+  "offset": -3,
+  "post": "2116149081211048039"
+ },
+ "SUtNB4f7msQ": {
+  "broadcast": "https://x.com/i/broadcasts/1NGarovdMgNJj",
+  "post": "2105639046097818091",
+  "sections": [
+   {
+    "from": 0,
+    "offset": 0,
+    "to": 2940
+   },
+   {
+    "from": 3007,
+    "offset": -7,
+    "to": null
+   }
+  ]
+ },
+ "qYbGK1ycv2I": {
+  "broadcast": "https://x.com/i/broadcasts/1wxWjlkLoPNJQ",
+  "post": "2106000877211558163",
+  "sections": [
+   {
+    "from": 0,
+    "offset": -6,
+    "to": 1296
+   },
+   {
+    "from": 1349,
+    "offset": 1,
+    "to": null
+   }
+  ]
+ },
+ "tysAvH2KfWI": {
+  "broadcast": "https://x.com/i/broadcasts/1dKrPrqDRROJX",
+  "post": "2107813103874506895",
+  "sections": [
+   {
+    "from": 0,
+    "offset": -5,
+    "to": 4445
+   },
+   {
+    "from": 4922,
+    "offset": -8,
+    "to": 5012
+   },
+   {
+    "from": 5030,
+    "offset": -1,
+    "to": null
+   }
+  ]
+ },
+ "xkYHBboXqd8": {
+  "broadcast": "https://x.com/i/broadcasts/1vJpPNRbQpgJE",
+  "post": "2107087405136413068",
+  "sections": [
+   {
+    "from": 0,
+    "offset": 0,
+    "to": 3990
+   },
+   {
+    "from": 4057,
+    "offset": -7,
+    "to": null
+   }
+  ]
+ }
+}

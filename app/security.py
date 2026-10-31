@@ -213,6 +213,17 @@ class DailyBudget:
         self._count += 1
         return True
 
+    def refund(self) -> None:
+        """Give the slot back when the request cost nothing: a cached
+        answer, or one the per-client cap refused after this was charged.
+
+        There was none until 1 Nov 2026, and a review found what that let
+        through: a cached answer spent a slot of the day for everyone, so
+        one address repeating one question drained the whole day without a
+        single model call and without ever reaching its own cap."""
+        if self._day == self._today() and self._count > 0:
+            self._count -= 1
+
     def state(self) -> dict:
         return {"day": self._day, "used": self._count, "limit": self._ceiling()}
 
@@ -246,8 +257,14 @@ class PerClientDailyBudget:
     The cap here is deliberately far above human behaviour. Someone
     enthusiastic might ask twenty or thirty questions in a day; this allows
     several times that, so it should only ever be met by something automated.
-    Draining the service now needs a spread of addresses rather than one, and
-    the log line names the client when it happens.
+    Draining the service now needs a spread of addresses rather than one.
+    It runs BEFORE the global budget on every route, so a client already at
+    its cap is turned away without charging everyone's day (in the other
+    order, found in review on 1 Nov 2026, each refused request still spent
+    a slot of the shared budget, and one address emptied it).
+
+    The log line says that a client hit the cap, not which: the address is
+    held in memory to count, and is not written anywhere.
 
     In-memory and per-process, matching the other limiters. Same caveat: with
     a second replica this needs to move to Redis, or each replica enforces its
@@ -283,8 +300,8 @@ class PerClientDailyBudget:
         used = self._counts.get(key, 0)
         if used >= limit:
             logger.warning(
-                "Per-client daily cap reached: %s used %d today — refusing.",
-                key, used,
+                "Per-client daily cap reached: a client used %d today, refusing.",
+                used,
             )
             raise HTTPException(
                 status_code=429,

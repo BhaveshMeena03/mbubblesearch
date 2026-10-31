@@ -1,7 +1,8 @@
 # MarketBubbleSearch for X
 
 A button on the X posts that are recordings in [search.lexthedev.com](https://search.lexthedev.com):
-Market Bubble's broadcasts, Ansem's own videos, and the MCG and rasmr streams that went out on X.
+Market Bubble's broadcasts, Ansem's own videos, and the MCG Live, ThreadGuy and rasmr streams that
+went out on X.
 
 Click it and you get:
 
@@ -42,7 +43,8 @@ What it sends, and what it doesn't:
   It sends no cookies, no referrer and no identifiers with any request, and stores nothing.
 - Like every request to the site, the server sees your IP address, and uses it only to keep any one
   address from using up everyone's daily limit.
-- A script on the page can't make it ask anything: only a real click or a real Enter does.
+- A script on the page can't make it ask anything you didn't type: a question goes only if you
+  typed it, and only on a real click or a real Enter.
 - The only addresses it ever opens are the site, and the show itself at a second: X's broadcast
   player, an X post, or a YouTube video, each checked against one fixed pattern before it becomes a
   link. They open in a new tab, only when you click them.

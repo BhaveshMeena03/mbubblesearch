@@ -45,7 +45,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from app import clipmatch, episode_store  # noqa: E402
+from app import clipmatch, episode_store, x_posts  # noqa: E402
 
 OUT = ROOT / "data" / "x_clips.json"
 POST_ID = re.compile(r"^[0-9]{5,25}$")
@@ -173,6 +173,8 @@ def place_one(post: str, got: dict, episodes: list[dict]) -> tuple[dict | None, 
     """(the entry for x_clips.json, or None; what happened, for the log)."""
     if got.get("error"):
         return None, got["error"]
+    if got.get("account") not in x_posts.CLIP_ACCOUNTS:
+        return None, f"posted by @{got.get('account') or '?'}, not one of the show's accounts"
     if got.get("broadcast"):
         return None, "a broadcast, not a clip"
     duration = got.get("duration")

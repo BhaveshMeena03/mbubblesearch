@@ -52,6 +52,10 @@ RASMR_PAIRS = _DATA / "rasmr_broadcast_links.json"
 RASMR_SHELF = _DATA / "rasmr_index.json"
 MCG_SHELF = _DATA / "mcg_index.json"
 CLIPS = _DATA / "x_clips.json"
+MCG_SUMMARIES = _DATA / "mcg_summaries.json.gz"
+THREADGUY_PAIRS = _DATA / "threadguy_broadcast_links.json"
+THREADGUY_SHELF = _DATA / "threadguy_index.json"
+THREADGUY_SUMMARIES = _DATA / "threadguy_summaries.json.gz"
 
 POST_ID = re.compile(r"^[0-9]{5,25}$")
 EPISODE_ID = re.compile(r"^[A-Za-z0-9_-]{1,40}$")
@@ -73,19 +77,24 @@ SEEKS = re.compile(
     r"^https://(?:x\.com/i/broadcasts/[A-Za-z0-9]{8,20}\?t=[0-9]{1,6}"
     r"|www\.youtube\.com/watch\?v=[A-Za-z0-9_-]{11}&t=[0-9]{1,6}s)$")
 
+# Whose clips are placed: the show's own accounts. Anyone's audio can match
+# the archive, but the panel says "This clip is from" over the video, and
+# over a stranger's post that would vouch for whatever they cut around it.
+CLIP_ACCOUNTS = frozenset({"blknoiz06", "MarketBubble"})
+
 # A clip's own player covers its words; a time a few seconds past the last
 # one is still the clip, a time beyond that is the whole show's.
 CLIP_SLACK_SECONDS = 5
 _DAY = 24 * 3600
 
 ARCHIVE_NAMES = {"podcast": "Market Bubble", "mcg": "MCG Live",
-                 "rasmr": "rasmr"}
+                 "rasmr": "rasmr", "threadguy": "ThreadGuy"}
 
 # Where each archive's page is, for the "open on the site" link. Built
 # here and nowhere else: the extension opens no address it was sent.
 SITE = "https://search.lexthedev.com"
 _PAGES = {"podcast": "/demo/podcast.html", "mcg": "/demo/mcg.html",
-          "rasmr": "/demo/rasmr.html"}
+          "rasmr": "/demo/rasmr.html", "threadguy": "/demo/threadguy.html"}
 
 # h:mm:ss or m:ss, the way summaries and answers write times. Two digits
 # after every colon, so "3:1" in a ratio is not a time.
@@ -117,6 +126,45 @@ def _summaries() -> dict[str, dict]:
             if isinstance(r, dict) and r.get("episode_id")}
 
 
+@lru_cache(maxsize=1)
+def _mcg_summaries() -> dict[str, dict]:
+    given = _json(MCG_SUMMARIES) or {}
+    return given if isinstance(given, dict) else {}
+
+
+@lru_cache(maxsize=1)
+def _threadguy_summaries() -> dict[str, dict]:
+    given = _json(THREADGUY_SUMMARIES) or {}
+    return given if isinstance(given, dict) else {}
+
+
+def _mcg_markdown(episode_id: str) -> str | None:
+    return _notes_markdown(_mcg_summaries(), episode_id)
+
+
+def _notes_markdown(store: dict, episode_id: str) -> str | None:
+    """An MCG or ThreadGuy summary in the markdown the panel reads, its
+    topic times written h:mm:ss on YouTube's clock, which times_in moves to
+    X's.
+
+    Only a summary marked "pinned" is shown: one whose every topic time is
+    a line of the show, as the writers have checked since 28 Oct 2026.
+    Older ones could run up to 35 minutes late, and a button here moves the
+    video to the time, so a late one plays the wrong words. A show whose
+    summary isn't pinned keeps its ask box and gets no summary.
+    """
+    row = store.get(episode_id)
+    if (not isinstance(row, dict) or row.get("pinned") is not True
+            or not isinstance(row.get("tldr"), str) or not row["tldr"]):
+        return None
+    lines = [f"**TL;DR** {row['tldr'].strip()}", "", "**Topics**"]
+    for topic in row.get("topics") or []:
+        at = _second(topic.get("t")) if isinstance(topic, dict) else None
+        if at is not None and isinstance(topic.get("text"), str):
+            lines.append(f"- [{clock_text(at)}] {topic['text'].strip()}")
+    return "\n".join(lines)
+
+
 def _rows(path: Path) -> list[dict]:
     rows = _json(path) or []
     return rows if isinstance(rows, list) else rows.get("episodes", [])
@@ -141,7 +189,7 @@ def _clips() -> dict[str, dict]:
             continue
         start, end = _second(row.get("start")), _second(row.get("end"))
         after_at = row.get("after_at")
-        if (row.get("archive") != "podcast"
+        if (row.get("archive") != "podcast" or row.get("account") not in CLIP_ACCOUNTS
                 or not EPISODE_ID.fullmatch(str(row.get("episode_id", "")))
                 or start is None or end is None or end < start
                 or (after_at is not None and _second(after_at) is None)
@@ -160,7 +208,7 @@ def _clips() -> dict[str, dict]:
 def shelf() -> dict[str, dict]:
     """Post id to what it is: archive, episode, and the clock to X."""
     posts: dict[str, dict] = {}
-    titled = {str(r.get("id")): r for path in (MCG_SHELF, RASMR_SHELF)
+    titled = {str(r.get("id")): r for path in (MCG_SHELF, RASMR_SHELF, THREADGUY_SHELF)
               for r in _rows(path)}
 
     # Market Bubble: every episode indexed from X. The summaries file has
@@ -172,7 +220,8 @@ def shelf() -> dict[str, dict]:
             posts[post] = {"archive": "podcast", "episode_id": episode_id,
                            "clock": {"offset": 0}}
 
-    for archive, path in (("mcg", MCG_PAIRS), ("rasmr", RASMR_PAIRS)):
+    for archive, path in (("mcg", MCG_PAIRS), ("rasmr", RASMR_PAIRS),
+                          ("threadguy", THREADGUY_PAIRS)):
         for video, pair in (_json(path) or {}).items():
             post = str(pair.get("post", ""))
             if not POST_ID.fullmatch(post):
@@ -328,6 +377,10 @@ def describe(post: str) -> dict | None:
     archive, episode_id = row["archive"], row["episode_id"]
     summary = _summaries().get(episode_id) if archive == "podcast" else None
     text = (summary or {}).get("summary") or None
+    if archive == "mcg":
+        text = _mcg_markdown(episode_id)
+    elif archive == "threadguy":
+        text = _notes_markdown(_threadguy_summaries(), episode_id)
     times, links = marks(text or "", row)
     out = {
         "post": post,

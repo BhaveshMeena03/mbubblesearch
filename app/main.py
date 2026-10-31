@@ -27,6 +27,7 @@ from urllib.parse import quote_plus
 import anthropic
 import httpx
 from fastapi import Depends, FastAPI, HTTPException, Request
+from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import (
     FileResponse,
@@ -194,6 +195,13 @@ def _track(kind: str, **fields) -> None:
     STATS[kind] = STATS.get(kind, 0) + 1
     TRAFFIC.event(kind)
     logger.info("ANALYTICS %s", json.dumps({"event": kind, **fields}))
+
+
+def _refund_budgets(request: Request) -> None:
+    """A request that turned out to cost nothing gives back both of the
+    slots it took: its client's and the day's."""
+    per_client_daily.refund(request)
+    daily_budget.refund()
 
 
 # Feedback loop: the questions the concierge could NOT answer from the
@@ -1142,6 +1150,92 @@ async def security_headers(request: Request, call_next):
     return response
 
 
+# How big a request body may be, by path, checked before anything reads it.
+# FastAPI parses a whole JSON body before any limiter runs, so a 30 MB body
+# that was going to be refused anyway still cost 160 MB of memory first, on
+# a 2 GB instance with one process (found in review, 1 Nov 2026). The
+# largest real bodies: an admin ingest of whole episodes, a few MB; a chat
+# with its history, 60,000 characters; an extension question, 500.
+_BODY_LIMITS = (("/v1/ingest", 20_000_000), ("/v1/podcast/ingest", 20_000_000),
+                ("/v1/x/", 16_000))
+_BODY_LIMIT = 256_000
+
+
+def _body_limit(path: str) -> int:
+    for prefix, limit in _BODY_LIMITS:
+        if path == prefix or (prefix.endswith("/") and path.startswith(prefix)):
+            return limit
+    return _BODY_LIMIT
+
+
+class _BodyLimit:
+    """413 for a body over its path's limit, before the app reads a byte.
+
+    A declared Content-Length is checked as is (the server holds the client
+    to it). A body sent without one is read here, up to the limit, and
+    handed on, so a chunked upload can't get round the check.
+    """
+
+    def __init__(self, app):
+        self.app = app
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] != "http" or scope["method"] not in ("POST", "PUT", "PATCH"):
+            return await self.app(scope, receive, send)
+        limit = _body_limit(scope["path"])
+        declared = dict(scope["headers"]).get(b"content-length")
+        if declared is not None:
+            if not declared.isdigit() or int(declared) > limit:
+                return await self._refuse(send)
+            return await self.app(scope, receive, send)
+        parts, size = [], 0
+        while True:
+            message = await receive()
+            if message["type"] != "http.request":
+                return
+            parts.append(message.get("body", b""))
+            size += len(parts[-1])
+            if size > limit:
+                return await self._refuse(send)
+            if not message.get("more_body"):
+                break
+        body, given = b"".join(parts), False
+
+        async def replay():
+            nonlocal given
+            if given:
+                return await receive()
+            given = True
+            return {"type": "http.request", "body": body, "more_body": False}
+        await self.app(scope, replay, send)
+
+    @staticmethod
+    async def _refuse(send):
+        payload = b'{"detail":"Request body too large."}'
+        await send({"type": "http.response.start", "status": 413,
+                    "headers": [(b"content-type", b"application/json"),
+                                (b"content-length", str(len(payload)).encode())]})
+        await send({"type": "http.response.body", "body": payload})
+
+
+app.add_middleware(_BodyLimit)
+
+
+@app.exception_handler(RequestValidationError)
+async def invalid_request(request: Request, exc: RequestValidationError) -> Response:
+    """422 with what was wrong, but not the value that was wrong.
+
+    FastAPI's own reply echoes each bad value back. A lone half of an emoji
+    pair in a question can't be encoded, so that reply raised and became a
+    500 with a traceback in the log (found in review, 1 Nov 2026). Written
+    with ensure_ascii, so anything that does come back is escaped.
+    """
+    errors = [{"loc": list(e.get("loc", ())), "msg": e.get("msg", ""), "type": e.get("type", "")}
+              for e in exc.errors()]
+    return Response(json.dumps({"detail": errors}), status_code=422,
+                    media_type="application/json")
+
+
 
 def get_retriever(request: Request) -> Retriever:
     return request.app.state.retriever
@@ -1281,7 +1375,8 @@ for _path, _target in (("/home", "/demo/home.html"),
                        ("/calls", "/demo/calls.html"),
                        ("/metrics", "/demo/metrics.html"),
                        ("/posts", "/demo/posts.html"),
-                       ("/method", "/demo/how-it-works.html")):
+                       ("/method", "/demo/how-it-works.html"),
+                       ("/extension/privacy", "/demo/extension-privacy.html")):
     _shortcut(_path, _target)
 
 
@@ -1426,7 +1521,7 @@ def _considered(probes: list[dict]) -> list[dict]:
 
 @app.post("/v1/search",
           dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
-                        Depends(daily_budget), Depends(per_client_daily)])
+                        Depends(per_client_daily), Depends(daily_budget)])
 async def search_everything(
     body: PodcastSearchRequest,
     request: Request,
@@ -1443,7 +1538,7 @@ async def search_everything(
     key = make_key(_timed(body.query), surface="front-door", top_k=body.top_k)
     cached = answers.get(key)
     if cached is not None:
-        per_client_daily.refund(request)
+        _refund_budgets(request)
         return cached
 
     probes = await _probe_rooms(live, body.query, body.top_k)
@@ -1478,7 +1573,7 @@ def _frame(data, event: str | None = None) -> str:
 
 @app.post("/v1/search/stream",
           dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
-                        Depends(daily_budget), Depends(per_client_daily)])
+                        Depends(per_client_daily), Depends(daily_budget)])
 async def search_everything_stream(
     body: PodcastSearchRequest,
     request: Request,
@@ -1632,7 +1727,7 @@ async def x_bot_status(request: Request) -> dict:
 
 @app.post("/v1/chat", response_model=ChatResponse,
           dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
-                        Depends(daily_budget), Depends(per_client_daily)])
+                        Depends(per_client_daily), Depends(daily_budget)])
 async def chat(
     body: ChatRequest,
     request: Request,
@@ -1648,7 +1743,7 @@ async def chat(
         cached = answers.get(key)
         if cached is not None:
             usage.record("concierge", cached.model, None, cached=True)
-            per_client_daily.refund(request)
+            _refund_budgets(request)
             return cached
     chunks = await retriever.search(body.message, filters=body.filters)
     try:
@@ -1674,7 +1769,7 @@ async def chat(
 
 @app.post("/v1/clawpump/chat", response_model=ChatResponse,
           dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
-                        Depends(daily_budget), Depends(per_client_daily)])
+                        Depends(per_client_daily), Depends(daily_budget)])
 async def clawpump_chat(
     body: ChatRequest,
     request: Request,
@@ -1698,7 +1793,7 @@ async def clawpump_chat(
         cached = answers.get(key)
         if cached is not None:
             usage.record("clawpump-support", cached.model, None, cached=True)
-            per_client_daily.refund(request)
+            _refund_budgets(request)
             return cached
     chunks = await retriever.search(body.message, namespace=CLAWPUMP_NAMESPACE)
     try:
@@ -1723,7 +1818,7 @@ async def clawpump_chat(
 
 
 @app.post("/v1/chat/stream", dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
-                        Depends(daily_budget), Depends(per_client_daily)])
+                        Depends(per_client_daily), Depends(daily_budget)])
 async def chat_stream(
     body: ChatRequest,
     retriever: Retriever = Depends(get_retriever),
@@ -1799,7 +1894,7 @@ def _chat_event_source(agent: ConciergeAgent, body: ChatRequest,
 
 @app.post("/v1/clawpump/chat/stream",
           dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
-                        Depends(daily_budget), Depends(per_client_daily)])
+                        Depends(per_client_daily), Depends(daily_budget)])
 async def clawpump_chat_stream(
     body: ChatRequest,
     retriever: Retriever = Depends(get_retriever),
@@ -1828,7 +1923,7 @@ async def ingest(
 
 @app.post("/v1/podcast/search", response_model=PodcastSearchResponse,
           dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
-                        Depends(daily_budget), Depends(per_client_daily)])
+                        Depends(per_client_daily), Depends(daily_budget)])
 async def podcast_search(
     body: PodcastSearchRequest,
     request: Request,
@@ -1846,7 +1941,7 @@ async def podcast_search(
         usage.record("market-bubble-search", cached.model, None, cached=True)
         # A cache hit costs nothing, so it must not spend the caller's
         # daily allowance. See RateLimiter.refund.
-        per_client_daily.refund(request)
+        _refund_budgets(request)
         return cached
     try:
         result = await podcast.search(body.query, top_k=body.top_k)
@@ -1884,7 +1979,7 @@ async def podcast_search(
 
 @app.post("/v1/podcast/search/stream",
           dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
-                        Depends(daily_budget), Depends(per_client_daily)])
+                        Depends(per_client_daily), Depends(daily_budget)])
 async def podcast_search_stream(
     body: PodcastSearchRequest,
     podcast: PodcastIndex = Depends(get_podcast),
@@ -2784,7 +2879,7 @@ async def elon_episodes() -> list[dict]:
 
 @app.post("/v1/elon/search",
           dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
-                        Depends(daily_budget), Depends(per_client_daily)])
+                        Depends(per_client_daily), Depends(daily_budget)])
 async def elon_search(
     body: PodcastSearchRequest,
     request: Request,
@@ -2805,7 +2900,7 @@ async def elon_search(
     key = make_key(_timed(body.query), surface="elon-v2", top_k=body.top_k)
     cached = answers.get(key)
     if cached is not None:
-        per_client_daily.refund(request)
+        _refund_budgets(request)
         return _elon_payload(body.query, cached)
 
     try:
@@ -2874,7 +2969,7 @@ async def posts_archive(request: Request) -> dict:
 
 @app.post("/v1/posts/search",
           dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
-                        Depends(daily_budget), Depends(per_client_daily)])
+                        Depends(per_client_daily), Depends(daily_budget)])
 async def posts_search(
     body: PodcastSearchRequest,
     request: Request,
@@ -2891,7 +2986,7 @@ async def posts_search(
     key = make_key(_timed(body.query), surface="posts", top_k=body.top_k)
     cached = answers.get(key)
     if cached is not None:
-        per_client_daily.refund(request)
+        _refund_budgets(request)
         return _posts_payload(body.query, cached)
 
     try:
@@ -2960,7 +3055,7 @@ async def finance_episodes() -> list[dict]:
 
 @app.post("/v1/finance/search",
           dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
-                        Depends(daily_budget), Depends(per_client_daily)])
+                        Depends(per_client_daily), Depends(daily_budget)])
 async def finance_search(
     body: PodcastSearchRequest,
     request: Request,
@@ -2977,7 +3072,7 @@ async def finance_search(
     key = make_key(_timed(body.query), surface="finance", top_k=body.top_k)
     cached = answers.get(key)
     if cached is not None:
-        per_client_daily.refund(request)
+        _refund_budgets(request)
         return _finance_payload(body.query, cached)
 
     try:
@@ -3073,7 +3168,7 @@ async def threadguy_summaries() -> dict:
 
 @app.post("/v1/threadguy/search",
           dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
-                        Depends(daily_budget), Depends(per_client_daily)])
+                        Depends(per_client_daily), Depends(daily_budget)])
 async def threadguy_search(
     body: PodcastSearchRequest,
     request: Request,
@@ -3092,7 +3187,7 @@ async def threadguy_search(
     key = make_key(_timed(body.query), surface="threadguy-v3", top_k=body.top_k)
     cached = answers.get(key)
     if cached is not None:
-        per_client_daily.refund(request)
+        _refund_budgets(request)
         return _threadguy_payload(body.query, cached)
 
     try:
@@ -3111,7 +3206,7 @@ async def threadguy_search(
 
 @app.post("/v1/threadguy/search/stream",
           dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
-                        Depends(daily_budget), Depends(per_client_daily)])
+                        Depends(per_client_daily), Depends(daily_budget)])
 async def threadguy_search_stream(
     body: PodcastSearchRequest, request: Request,
     answers: AnswerCache = Depends(get_answers),
@@ -3244,7 +3339,7 @@ async def rasmr_summaries() -> dict:
 
 @app.post("/v1/rasmr/search",
           dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
-                        Depends(daily_budget), Depends(per_client_daily)])
+                        Depends(per_client_daily), Depends(daily_budget)])
 async def rasmr_search(
     body: PodcastSearchRequest,
     request: Request,
@@ -3258,7 +3353,7 @@ async def rasmr_search(
     key = make_key(_timed(body.query), surface="rasmr-v1", top_k=body.top_k)
     cached = answers.get(key)
     if cached is not None:
-        per_client_daily.refund(request)
+        _refund_budgets(request)
         return _rasmr_payload(body.query, cached)
     try:
         result = await index.search(body.query, top_k=body.top_k)
@@ -3276,7 +3371,7 @@ async def rasmr_search(
 
 @app.post("/v1/rasmr/search/stream",
           dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
-                        Depends(daily_budget), Depends(per_client_daily)])
+                        Depends(per_client_daily), Depends(daily_budget)])
 async def rasmr_search_stream(
     body: PodcastSearchRequest, request: Request,
     answers: AnswerCache = Depends(get_answers),
@@ -3350,7 +3445,7 @@ async def mcg_summaries() -> dict:
 
 @app.post("/v1/mcg/search",
           dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
-                        Depends(daily_budget), Depends(per_client_daily)])
+                        Depends(per_client_daily), Depends(daily_budget)])
 async def mcg_search(
     body: PodcastSearchRequest,
     request: Request,
@@ -3367,7 +3462,7 @@ async def mcg_search(
     key = make_key(_timed(body.query), surface="mcg", top_k=body.top_k)
     cached = answers.get(key)
     if cached is not None:
-        per_client_daily.refund(request)
+        _refund_budgets(request)
         return _mcg_payload(body.query, cached)
 
     try:
@@ -3498,7 +3593,7 @@ def _archive_stream(index, query: str, top_k, lengths: dict,
 
 @app.post("/v1/elon/search/stream",
           dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
-                        Depends(daily_budget), Depends(per_client_daily)])
+                        Depends(per_client_daily), Depends(daily_budget)])
 async def elon_search_stream(
     body: PodcastSearchRequest, request: Request,
     answers: AnswerCache = Depends(get_answers),
@@ -3515,7 +3610,7 @@ async def elon_search_stream(
 
 @app.post("/v1/mcg/search/stream",
           dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
-                        Depends(daily_budget), Depends(per_client_daily)])
+                        Depends(per_client_daily), Depends(daily_budget)])
 async def mcg_search_stream(
     body: PodcastSearchRequest, request: Request,
     answers: AnswerCache = Depends(get_answers),
@@ -3872,6 +3967,7 @@ async def threadguy_clip_file(job_id: str, request: Request):
 _X_UNKNOWN = "Not a post this archive has."
 
 
+
 @app.get("/v1/x/shelf", dependencies=[Depends(public_rate_limit)])
 async def x_shelf(response: Response) -> dict:
     """Which posts get a button.
@@ -3918,10 +4014,10 @@ async def x_ask(
 
     The two daily budgets are charged here, once the question is known to
     reach the model, rather than as dependencies. As dependencies they ran
-    before anything was checked, and the service-wide one has no refund:
-    asks about posts that don't exist spent it without a model call, so
-    one address could empty everybody's day for free. Found in review on
-    31 Oct 2026. The per-minute limits above still count every request.
+    before anything was checked: asks about posts that don't exist spent
+    the service-wide one without a model call, so one address could empty
+    everybody's day for free. Found in review on 31 Oct 2026. The
+    per-minute limits above still count every request.
     """
     found = x_posts.shelf().get(body.post)
     if found is None:
@@ -3929,13 +4025,20 @@ async def x_ask(
     index = getattr(request.app.state, found["archive"], None)
     if index is None:
         raise HTTPException(status_code=503, detail="The archive is not loaded.")
-    _track("x_extension_asks", q=body.question[:120])
+    _track("x_extension_asks", post=body.post, q=body.question[:120])
 
     key = make_key(_timed(body.question), surface=f"x:{body.post}")
     result = answers.get(key)
     if result is None:
-        await daily_budget(request)
+        # The client's cap first: one already at it is turned away without
+        # spending a slot of everyone's day. And if the day is what's out,
+        # the client's slot comes back, since nothing was asked.
         await per_client_daily(request)
+        try:
+            await daily_budget(request)
+        except HTTPException:
+            per_client_daily.refund(request)
+            raise
         try:
             result = await index.search(body.question, instruction=_X_INSTRUCTION,
                                         episode_id=found["episode_id"])
