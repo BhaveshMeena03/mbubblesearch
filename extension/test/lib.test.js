@@ -126,9 +126,30 @@ test("markup in a summary stays text", () => {
 test("the summaries' own markdown becomes headings, items and paragraphs", () => {
   const md = "**TL;DR** — short\n\n**Topics**\n- [0:00:36] gold history\n- [0:01:40] blow off top\n\nplain";
   const blocks = MBS.blocks(md, { "0:00:36": 36, "0:01:40": 100 });
-  assert.deepEqual(blocks.map((b) => b.kind), ["para", "heading", "item", "item", "para"]);
-  assert.equal(blocks[1].parts[0].text, "Topics");
-  assert.deepEqual(blocks[2].parts[0], { time: "0:00:36", seconds: 36, bold: false });
+  assert.deepEqual(blocks.map((b) => b.kind), ["heading", "para", "heading", "item", "item", "para"]);
+  assert.equal(blocks[0].parts[0].text, "TL;DR");
+  assert.deepEqual(blocks[1].parts, [{ text: "short", bold: false }]);
+  assert.equal(blocks[2].parts[0].text, "Topics");
+  assert.deepEqual(blocks[3].parts[0], { time: "0:00:36", seconds: 36, bold: false });
+});
+
+test("the panel shows no em or en dash, and keeps what they joined", () => {
+  const text = (md, times = {}) => MBS.blocks(md, times)
+    .map((b) => b.parts.map((p) => p.text || p.time).join("")).join("\n");
+  assert.equal(text("**TL;DR** — the Binance hack"), "TL;DR\nthe Binance hack");
+  assert.equal(text("**TL;DR**: the Binance hack"), "TL;DR\nthe Binance hack");
+  assert.equal(text("- **[0:08:11]** Cerebras IPO recap — how it traded", { "0:08:11": 491 }),
+    "0:08:11 Cerebras IPO recap, how it traded");
+  assert.equal(text("a funding round—which he turned down"), "a funding round, which he turned down");
+  assert.equal(text("the ~$2.5–5B hack, bottom 3,100 – 3,500"), "the ~$2.5-5B hack, bottom 3,100-3,500");
+  assert.equal(text("— opens on a dash, ends on one —"), "opens on a dash, ends on one");
+  assert.equal(text("\"in cash\" — ."), "\"in cash\".");
+  const ranged = MBS.blocks("from 10:25–14:20", { "10:25": 625, "14:20": 860 })[0].parts;
+  assert.deepEqual(ranged.filter((p) => p.time).map((p) => p.seconds), [625, 860],
+    "a range of two times keeps both buttons");
+  for (const b of MBS.blocks("x — y\n- a – b\n**TL;DR** — c — d", {})) {
+    for (const p of b.parts) assert.doesNotMatch(p.text || "", /[–—]/);
+  }
 });
 
 test("a question is trimmed, flattened and capped", () => {

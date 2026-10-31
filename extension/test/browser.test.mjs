@@ -193,6 +193,21 @@ test("the content script on an X-shaped page", { skip }, async t => {
       assert.deepEqual(await tab.evaluate(() => window.__sent.at(-1)), { type: "post", post: OURS });
     });
 
+    await t.test("the button wears the site's mark at X's icon size", async () => {
+      const icon = await tab.locator("#ours [data-mbs-button] .btn svg").evaluate(svg => ({
+        shapes: [...svg.children].map(n => n.tagName),
+        size: [getComputedStyle(svg).width, getComputedStyle(svg).height],
+      }));
+      assert.deepEqual(icon.shapes, ["circle", "path", "path"], "lens, handle, play");
+      assert.deepEqual(icon.size, ["18.75px", "18.75px"]);
+    });
+
+    await t.test("the summary opens under a TL;DR heading, with no dash in it", async () => {
+      const headings = await tab.locator("#ours .panel h4").allTextContents();
+      assert.deepEqual(headings, ["TL;DR", "Topics"]);
+      assert.doesNotMatch(await tab.locator("#ours .panel").textContent(), /[–—]/);
+    });
+
     await t.test("only times the server gave a second become buttons", async () => {
       const times = await tab.locator("#ours .panel .t").allTextContents();
       assert.deepEqual(times, ["0:01:40", "1:39:33", "9:59:59"]);

@@ -128,13 +128,31 @@ var MBS = (function () {
     return out;
   }
 
+  // No em or en dashes in anything the panel shows: the account never
+  // writes them, and 76 of the 79 summaries had one. A dash between words
+  // reads as a comma; one between two numbers is a range, so a hyphen.
+  function undash(line) {
+    return line
+      .replace(/(\d)\s*[–—]\s*(\d)/g, "$1-$2")
+      .replace(/\s*[–—]+\s*/g, ", ")
+      .replace(/^,\s*|,\s*$/g, "")
+      .replace(/,\s*([,.;:!?])/g, "$1");
+  }
+
   // The summaries' markdown, as blocks: a heading on its own line, a list
   // item, or a paragraph. Square brackets around a time are dropped, the
-  // way the site shows them.
+  // way the site shows them. A summary's opening "**TL;DR** — ..." becomes
+  // a heading over its paragraph, the same as "Topics" below it.
   function blocks(markdown, times) {
     var out = [];
     String(markdown || "").split(/\r?\n/).forEach(function (raw) {
       var line = raw.trim().replace(/\[(\d{1,2}:\d{2}(?::\d{2})?)\]/g, "$1");
+      var label = /^\*\*(TL;DR)\*\*\s*[–—:-]?\s*(.+)$/i.exec(line);
+      if (label) {
+        out.push({ kind: "heading", parts: [{ text: label[1], bold: true }] });
+        line = label[2];
+      }
+      line = undash(line);
       if (!line) return;
       var heading = /^\*\*([^*]+)\*\*$/.exec(line) || /^#{1,4}\s+(.+)$/.exec(line);
       if (heading) {

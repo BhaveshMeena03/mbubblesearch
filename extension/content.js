@@ -79,15 +79,27 @@
     });
   }
 
+  // The site's own mark, drawn in X's style: a lens with a play button in
+  // it and a handle, one colour, the size of X's own icons. The sound-wave
+  // lens it replaced was three bars too small to read at 18px.
   function svgIcon() {
     var ns = "http://www.w3.org/2000/svg";
     var svg = document.createElementNS(ns, "svg");
     svg.setAttribute("viewBox", "0 0 24 24");
     svg.setAttribute("aria-hidden", "true");
-    var path = document.createElementNS(ns, "path");
-    // A magnifier with a sound wave in the lens: search what was said.
-    path.setAttribute("d", "M10.5 3a7.5 7.5 0 0 1 5.96 12.05l4.25 4.24-1.42 1.42-4.24-4.25A7.5 7.5 0 1 1 10.5 3zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11zM7 9h1.5v3H7V9zm2.75-1.5h1.5v6h-1.5v-6zM12.5 9.5H14v2h-1.5v-2z");
-    svg.appendChild(path);
+    var shapes = [
+      ["circle", { cx: "10.25", cy: "10.25", r: "7", fill: "none",
+                   stroke: "currentColor", "stroke-width": "2" }],
+      ["path", { d: "M15.5 15.5 20.75 20.75", stroke: "currentColor",
+                 "stroke-width": "2.5", "stroke-linecap": "round" }],
+      ["path", { d: "M8.6 7.3v5.9l5-2.95z", fill: "currentColor", stroke: "currentColor",
+                 "stroke-width": "1", "stroke-linejoin": "round" }]
+    ];
+    shapes.forEach(function (shape) {
+      var node = document.createElementNS(ns, shape[0]);
+      Object.keys(shape[1]).forEach(function (name) { node.setAttribute(name, shape[1][name]); });
+      svg.appendChild(node);
+    });
     return svg;
   }
 
@@ -105,7 +117,7 @@
     "  padding:0 8px;height:34px;border-radius:999px}",
     ".btn:hover,.btn[aria-expanded=true]{color:#16c784;background:rgba(22,199,132,.1)}",
     ".btn:focus-visible{outline:2px solid #16c784}",
-    ".btn svg{width:18px;height:18px;fill:currentColor}",
+    ".btn svg{width:18.75px;height:18.75px;flex:none}",
     ".panel{margin:6px 0 10px;border-radius:14px;padding:12px 14px;max-height:460px;overflow:auto;",
     "  font:400 14px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;",
     "  background:#0b0e11;color:#e7e9ea;border:1px solid #2f3336}",
