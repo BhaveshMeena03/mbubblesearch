@@ -141,6 +141,8 @@ test("a question is trimmed, flattened and capped", () => {
 test("dates read the way the account writes them", () => {
   assert.equal(MBS.longDate("2026-10-30"), "october 30, 2026");
   assert.equal(MBS.longDate("30 oct"), "");
+  assert.equal(MBS.longDate("2026-13-45"), "", "a bad date from a hostile server is no date");
+  assert.equal(MBS.longDate("2026-00-10"), "");
 });
 
 test("the extension talks to one origin, over https", () => {

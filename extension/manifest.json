@@ -17,12 +17,16 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://x.com/*"],
-      "js": ["lib.js", "content.js"],
+      "matches": [
+        "https://x.com/*"
+      ],
+      "js": [
+        "lib.js",
+        "content.js"
+      ],
       "run_at": "document_idle"
     }
   ],
-  "host_permissions": ["https://search.lexthedev.com/*"],
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'none'; base-uri 'none'"
   }

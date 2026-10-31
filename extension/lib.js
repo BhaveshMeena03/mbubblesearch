@@ -165,7 +165,7 @@ var MBS = (function () {
     var months = ["january", "february", "march", "april", "may", "june", "july",
                   "august", "september", "october", "november", "december"];
     var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || "");
-    if (!m) return "";
+    if (!m || +m[2] < 1 || +m[2] > 12 || +m[3] < 1 || +m[3] > 31) return "";
     return months[parseInt(m[2], 10) - 1] + " " + parseInt(m[3], 10) + ", " + m[1];
   }
 

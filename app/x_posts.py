@@ -157,19 +157,35 @@ def _seconds(token: str) -> int:
     return h * 3600 + m * 60 + s
 
 
+# A time of day, not a moment in the recording: "CPI prints at 8:30 ET",
+# "the open at 9:30am". Shown as words, because a button would play
+# minute eight of the show.
+_CLOCK_OF_DAY = re.compile(
+    r"\s?(?:a\.?m\b\.?|p\.?m\b\.?|(?:et|est|edt|ct|cst|cdt|mt|pt|pst|pdt|utc|gmt|ist|bst|cet)\b)",
+    re.I)
+
+
 def times_in(text: str, clock: dict) -> dict[str, int]:
     """Every time written in `text`, to the X second it plays at.
 
     Keyed by the time exactly as written, so the extension finds each one
     by the characters it sees and never parses a clock itself. A time
-    whose minutes or seconds are 60 or more is not a time.
+    whose minutes or seconds are 60 or more is not a time, and neither is
+    a time of day.
     """
     out: dict[str, int] = {}
-    for token in TIME.findall(text or ""):
+    text = text or ""
+    day_times = {f.group(1) for f in TIME.finditer(text)
+                 if _CLOCK_OF_DAY.match(text, f.end())}
+    for found in TIME.finditer(text):
+        token = found.group(1)
         if any(int(p) >= 60 for p in token.split(":")[1:]):
             continue
+        # Every copy of a time of day stays words: the extension finds
+        # times by their characters, so "8:30" cannot be a button in one
+        # place and the clock in another.
         at = to_x(_seconds(token), clock)
-        if at is not None:
+        if at is not None and token not in day_times:
             out[token] = at
     return out
 

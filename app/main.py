@@ -3880,7 +3880,7 @@ async def x_shelf(response: Response) -> dict:
     the page are ours, so what anyone scrolls past on X never reaches this
     server. Only a click on the button sends a post id.
     """
-    response.headers["Cache-Control"] = "public, max-age=900"
+    response.headers["Cache-Control"] = "public, max-age=3600"
     posts = x_posts.listing()
     return {"count": len(posts), "posts": posts}
 
@@ -3903,8 +3903,7 @@ _X_INSTRUCTION = ("The reader is watching this one recording on X and asked "
 
 
 @app.post("/v1/x/ask",
-          dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
-                        Depends(daily_budget), Depends(per_client_daily)])
+          dependencies=[Depends(public_rate_limit), Depends(global_rate_limit)])
 async def x_ask(
     body: XAskRequest,
     request: Request,
@@ -3916,22 +3915,27 @@ async def x_ask(
     The same limits as every other question this service answers. Nothing
     the caller sends picks an index or a namespace: the post id is looked
     up in the shelf, and only what the shelf says is used.
+
+    The two daily budgets are charged here, once the question is known to
+    reach the model, rather than as dependencies. As dependencies they ran
+    before anything was checked, and the service-wide one has no refund:
+    asks about posts that don't exist spent it without a model call, so
+    one address could empty everybody's day for free. Found in review on
+    31 Oct 2026. The per-minute limits above still count every request.
     """
     found = x_posts.shelf().get(body.post)
-    index = getattr(request.app.state, found["archive"], None) if found else None
+    if found is None:
+        raise HTTPException(status_code=404, detail=_X_UNKNOWN)
+    index = getattr(request.app.state, found["archive"], None)
     if index is None:
-        # Nothing was spent, so nothing is charged.
-        per_client_daily.refund(request)
-        if found is None:
-            raise HTTPException(status_code=404, detail=_X_UNKNOWN)
         raise HTTPException(status_code=503, detail="The archive is not loaded.")
     _track("x_extension_asks", q=body.question[:120])
 
     key = make_key(_timed(body.question), surface=f"x:{body.post}")
     result = answers.get(key)
-    if result is not None:
-        per_client_daily.refund(request)
-    else:
+    if result is None:
+        await daily_budget(request)
+        await per_client_daily(request)
         try:
             result = await index.search(body.question, instruction=_X_INSTRUCTION,
                                         episode_id=found["episode_id"])

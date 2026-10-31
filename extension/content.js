@@ -1,10 +1,11 @@
 /* The button and the panel, on x.com.
 
-   A post gets a button when it carries a video and its id is on the shelf
-   (the list of X posts these archives hold, downloaded once by
-   background.js). That decision is made here, in the browser, so nothing
-   about what you scroll past is sent anywhere. Only a click sends the post
-   id, and only a question sends the question.
+   A post gets a button when its own video is on it and its own id is on
+   the shelf (the list of X posts these archives hold, which background.js
+   downloads at most once an hour, and only on a page that has a video
+   post). That decision is made here, in the browser, so nothing about
+   what you scroll past is sent anywhere. Only a click sends the post id,
+   and only a question sends the question.
 
    Everything is built with createElement and textContent. No markup from
    the server, or from anywhere, is ever parsed: a summary that somehow
@@ -149,20 +150,25 @@
   }
 
   // ── finding our posts ────────────────────────────────────────────────
-  function postIdsIn(article) {
-    // The post's own id first: the first link holding a <time> is the
-    // post's timestamp. A quoted post has a <time> link too, later on, so
-    // only the first one counts as the post's own.
-    var own = null;
-    var ids = [];
-    article.querySelectorAll("a[href*='/status/']").forEach(function (a) {
-      var id = MBS.postIdFromHref(a.getAttribute("href"));
-      if (!id) return;
-      if (!own && a.querySelector("time")) own = id;
-      if (ids.indexOf(id) === -1) ids.push(id);
-    });
-    if (own) ids = [own].concat(ids.filter(function (id) { return id !== own; }));
-    return ids;
+  //
+  // Only the post's own id, and only its own video. A quoted post sits in
+  // a card X marks role="link"; anything inside one belongs to the quoted
+  // post. Giving the button to a quote post would put the archive's
+  // summary over somebody else's clip, and its times would play that clip:
+  // a way to pass a cut-up video off as the archive's. Found in review on
+  // 31 Oct 2026, before it shipped.
+  function ownPart(node) {
+    return !node.closest("[role='link']");
+  }
+
+  function ownPostId(article) {
+    var links = article.querySelectorAll("a[href*='/status/']");
+    for (var i = 0; i < links.length; i++) {
+      if (links[i].querySelector("time") && ownPart(links[i])) {
+        return MBS.postIdFromHref(links[i].getAttribute("href"));
+      }
+    }
+    return null;
   }
 
   function actionBar(article) {
@@ -175,23 +181,38 @@
     return null;
   }
 
-  function hasVideo(article) {
-    return !!article.querySelector("video,[data-testid='videoPlayer'],[data-testid='videoComponent']");
+  function ownVideo(article) {
+    var found = article.querySelectorAll("video,[data-testid='videoPlayer'],[data-testid='videoComponent']");
+    for (var i = 0; i < found.length; i++) if (ownPart(found[i])) return found[i];
+    return null;
+  }
+
+  // Posts that could be ours: their own video, an action bar, an id. The
+  // shelf is not even asked for on a page without one.
+  function candidates() {
+    var out = [];
+    document.querySelectorAll("article").forEach(function (article) {
+      var bar = actionBar(article);
+      var post = bar && ownVideo(article) ? ownPostId(article) : null;
+      if (post) out.push({ article: article, bar: bar, post: post });
+    });
+    return out;
   }
 
   function scan() {
-    if (!posts) return;
-    document.querySelectorAll("article").forEach(function (article) {
-      var bar = actionBar(article);
-      if (!bar || bar.querySelector("[" + BUTTON + "]")) return;
-      if (!hasVideo(article)) return;
-      var ids = postIdsIn(article);
-      for (var i = 0; i < ids.length; i++) {
-        if (Object.prototype.hasOwnProperty.call(posts, ids[i])) {
-          addButton(article, bar, ids[i]);
-          return;
-        }
+    var found = candidates();
+    if (!found.length) return;
+    if (!posts) { loadShelf(); return; }
+    found.forEach(function (c) {
+      var had = c.bar.querySelector("[" + BUTTON + "]");
+      // X reuses a post's nodes for another post as you scroll. A button
+      // left from the last one would open the wrong summary.
+      if (had && had.getAttribute(BUTTON) === c.post) return;
+      if (had) {
+        had.remove();
+        c.article.querySelectorAll("[data-mbs-panel]").forEach(function (n) { n.remove(); });
       }
+      if (Object.prototype.hasOwnProperty.call(posts, c.post)) addButton(c.article, c.bar, c.post);
     });
   }
 
@@ -212,7 +233,11 @@
     bar.appendChild(made.host);
 
     var panel = null;
-    button.addEventListener("click", function () {
+    button.addEventListener("click", function (e) {
+      // A person, not a script on the page: an open shadow root lets the
+      // page reach this button, and a scripted click must not spend a
+      // question from the reader's address.
+      if (!e.isTrusted) return;
       if (panel && panel.host.isConnected) {
         panel.host.remove();
         panel = null;
@@ -236,7 +261,8 @@
           var t = el("button", "t", part.time);
           t.type = "button";
           t.title = "Play from " + part.time + " on this post";
-          t.addEventListener("click", function () {
+          t.addEventListener("click", function (e) {
+            if (!e.isTrusted) return;
             target.querySelectorAll(".t.on").forEach(function (n) { n.classList.remove("on"); });
             t.classList.add("on");
             seek(article, part.seconds, status);
@@ -264,6 +290,7 @@
 
   function openPanel(article, bar, post, onClose) {
     var made = shadowHost("div");
+    made.host.setAttribute("data-mbs-panel", post);
     var root = made.root;
     var panel = el("div", "panel");
     panel.setAttribute("role", "region");
@@ -275,7 +302,11 @@
     var close = el("button", "x", "×");
     close.type = "button";
     close.setAttribute("aria-label", "Close");
-    close.addEventListener("click", function () { made.host.remove(); onClose(); });
+    close.addEventListener("click", function (e) {
+      if (!e.isTrusted) return;
+      made.host.remove();
+      onClose();
+    });
     head.appendChild(close);
     panel.appendChild(head);
 
@@ -330,20 +361,19 @@
     input.setAttribute("aria-label", "Ask about this recording");
     input.autocomplete = "off";
     var go = el("button", "go", "Ask");
-    go.type = "submit";
+    go.type = "button";
     form.appendChild(input);
     form.appendChild(go);
     var out = el("div");
     wrap.appendChild(form);
     wrap.appendChild(out);
 
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
+    function ask() {
       var question = MBS.cleanQuestion(input.value);
       if (!question || go.disabled) return;
       go.disabled = true;
       out.textContent = "";
-      out.appendChild(el("div", "note", "Searching this recording…"));
+      out.appendChild(el("div", "note", "Searching this recording\u2026"));
       send({ type: "ask", post: post, question: question }).then(function (reply) {
         go.disabled = false;
         out.textContent = "";
@@ -355,54 +385,52 @@
         render(answer, reply.data.answer.answer, reply.data.answer.times, article, status);
         out.appendChild(answer);
       });
+    }
+
+    // Asked only by a person: a real click on Ask, or a real Enter in the
+    // box. Not on "submit": a script calling form.requestSubmit() gets a
+    // submit event the browser marks as trusted, which is how a page could
+    // have spent a question from the reader's address. Caught by the
+    // browser tests on 31 Oct 2026.
+    form.addEventListener("submit", function (e) { e.preventDefault(); });
+    go.addEventListener("click", function (e) { if (e.isTrusted) ask(); });
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" && e.isTrusted) {
+        e.preventDefault();
+        ask();
+      }
     });
     return wrap;
   }
 
   // ── moving X's own player ────────────────────────────────────────────
+  // The post's own <video>, never a quoted one's.
   function findVideo(article) {
-    return article.querySelector("video");
-  }
-
-  function waitForVideo(article, ms) {
-    return new Promise(function (resolve) {
-      var start = Date.now();
-      (function look() {
-        var video = findVideo(article);
-        if (video || Date.now() - start > ms) resolve(video);
-        else setTimeout(look, 150);
-      })();
-    });
+    var videos = article.querySelectorAll("video");
+    for (var i = 0; i < videos.length; i++) if (ownPart(videos[i])) return videos[i];
+    return null;
   }
 
   function seek(article, seconds, status) {
     status.textContent = "";
-    var video = findVideo(article);
-    var started = Promise.resolve(video);
-    if (!video) {
-      // A post scrolled past without playing has a poster and no <video>
-      // yet. Pressing play is what makes X build it.
-      var play = article.querySelector("[data-testid='videoPlayer'] [role='button'],[data-testid='playButton']");
-      if (play) play.click();
-      started = waitForVideo(article, 4000);
+    // Nothing is clicked on the page to make a player appear: whatever
+    // sits where a play button usually is might be something else.
+    var found = findVideo(article);
+    if (!found) {
+      status.textContent = "Start the video, then pick the time again.";
+      return;
     }
-    started.then(function (found) {
-      if (!found) {
-        status.textContent = "Start the video, then pick the time again.";
-        return;
-      }
-      if (isFinite(found.duration) && found.duration > 0 && seconds > found.duration) {
-        status.textContent = "That moment is past the end of this video.";
-        return;
-      }
-      found.currentTime = seconds;
-      var playing = found.play();
-      if (playing && playing.catch) playing.catch(function () {});
-      var box = found.getBoundingClientRect();
-      if (box.bottom < 0 || box.top > window.innerHeight) {
-        found.scrollIntoView({ block: "center", behavior: "smooth" });
-      }
-    });
+    if (isFinite(found.duration) && found.duration > 0 && seconds > found.duration) {
+      status.textContent = "That moment is past the end of this video.";
+      return;
+    }
+    found.currentTime = seconds;
+    var playing = found.play();
+    if (playing && playing.catch) playing.catch(function () {});
+    var box = found.getBoundingClientRect();
+    if (box.bottom < 0 || box.top > window.innerHeight) {
+      found.scrollIntoView({ block: "center", behavior: "smooth" });
+    }
   }
 
   // ── watching the page ────────────────────────────────────────────────
@@ -412,11 +440,10 @@
     pending = true;
     setTimeout(function () {
       pending = false;
-      if (!posts) loadShelf();
       scan();
     }, 300);
   }
 
   new MutationObserver(soon).observe(document.documentElement, { childList: true, subtree: true });
-  loadShelf();
+  scan();
 })();

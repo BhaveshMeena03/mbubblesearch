@@ -140,6 +140,18 @@ def test_only_real_times_convert():
     assert times == {"1:03:00": 3780, "1:20:00": 4800, "14:25": 865, "10:15": 615}
 
 
+@pytest.mark.parametrize("text", ["CPI prints at 8:30 ET", "the open at 9:30am",
+                                  "around 1:20 pm", "at 10:00 UTC", "8:30 ET and later 8:30"])
+def test_a_time_of_day_is_never_a_button(text):
+    """It would play minute eight of the show for "8:30 ET"."""
+    assert x_posts.times_in(text, {"offset": 0}) == {}
+
+
+def test_words_that_only_start_like_a_zone_leave_the_time_alone():
+    assert x_posts.times_in("at 1:39:33 eth dumped, 14:25 amazing, 2:00 etc", {"offset": 0}) == {
+        "1:39:33": 5973, "14:25": 865, "2:00": 120}
+
+
 def test_the_browser_finds_the_same_times_the_server_converts():
     """Two copies of one pattern, in two languages. If they drift, a time
     the server converted shows as a plain word, or the reverse."""
@@ -207,7 +219,7 @@ def client(files, monkeypatch):
 def test_the_shelf_is_public_cacheable_and_only_ids(client):
     r = client.get("/v1/x/shelf")
     assert r.status_code == 200
-    assert "max-age" in r.headers["cache-control"]
+    assert "max-age=3600" in r.headers["cache-control"]
     assert r.headers["x-content-type-options"] == "nosniff"
     body = r.json()
     assert body["posts"][MB_POST] == "podcast" and body["count"] == len(body["posts"])
@@ -260,26 +272,58 @@ def test_a_malformed_question_is_refused_before_anything_is_spent(client, body):
     assert client.app.state.podcast.calls == []
 
 
-def test_an_unknown_post_costs_the_caller_nothing(client):
-    from app.security import per_client_daily
-    per_client_daily._counts.clear()
-    r = client.post("/v1/x/ask", json={"post": "1234567", "question": "q"})
-    assert r.status_code == 404
-    assert sum(per_client_daily._counts.values()) == 0
+def _spent():
+    """(service-wide, this client) daily budget used so far."""
+    from app.security import daily_budget, per_client_daily
+    return daily_budget.state()["used"], sum(per_client_daily._counts.values())
 
 
-def test_an_archive_that_is_not_loaded_says_so_and_costs_nothing(client):
-    from app.security import per_client_daily
+@pytest.fixture
+def budgets():
+    from app.security import daily_budget, per_client_daily
+    daily_budget._day, daily_budget._count = None, 0
     per_client_daily._counts.clear()
+    yield
+    per_client_daily._counts.clear()
+
+
+def test_an_unknown_post_costs_nobody_anything(client, budgets):
+    """Found in review: asks about posts that don't exist spent the
+    service-wide budget, which has no refund, with no model call. 200 of
+    them from one address took 200 off everybody's day."""
+    # Five: inside the per-minute burst, which counts every request and
+    # is not what this is about.
+    for i in range(5):
+        r = client.post("/v1/x/ask", json={"post": f"12345{i:02d}", "question": "q"})
+        assert r.status_code == 404
+    assert _spent() == (0, 0)
+
+
+def test_an_archive_that_is_not_loaded_costs_nothing(client, budgets):
     r = client.post("/v1/x/ask", json={"post": RASMR_PAIRED, "question": "q"})
     assert r.status_code == 503
-    assert sum(per_client_daily._counts.values()) == 0
+    assert _spent() == (0, 0)
 
 
-def test_the_same_question_twice_is_answered_once(client):
-    for _ in range(2):
+def test_a_malformed_question_spends_no_budget(client, budgets):
+    for body in ({"post": "abc", "question": "q"}, {"post": MB_POST, "question": ""}):
+        assert client.post("/v1/x/ask", json=body).status_code == 422
+    assert _spent() == (0, 0)
+
+
+def test_one_answer_is_charged_once_and_its_repeat_is_free(client, budgets):
+    for _ in range(3):
         assert client.post("/v1/x/ask", json={"post": MB_POST, "question": "the top"}
                            ).status_code == 200
+    assert len(client.app.state.podcast.calls) == 1
+    assert _spent() == (1, 1)
+
+
+def test_an_exhausted_day_refuses_before_the_model_is_asked(client, budgets, monkeypatch):
+    from app.security import daily_budget
+    monkeypatch.setattr(daily_budget, "_limit", 1)
+    assert client.post("/v1/x/ask", json={"post": MB_POST, "question": "one"}).status_code == 200
+    assert client.post("/v1/x/ask", json={"post": MB_POST, "question": "two"}).status_code == 503
     assert len(client.app.state.podcast.calls) == 1
 
 
@@ -295,15 +339,16 @@ def test_a_market_bubble_answer_gets_the_pages_attribution_guard(client, monkeyp
 
 
 def test_asking_carries_every_limit_a_search_has():
+    """The per-minute limits as dependencies; the two daily budgets are
+    charged inside, after the checks that cost nothing (tested above)."""
     route = next(r for r in main_module.app.routes if getattr(r, "path", "") == "/v1/x/ask")
     deps = {d.call for d in route.dependant.dependencies}
-    from app.security import (
-        daily_budget,
-        global_rate_limit,
-        per_client_daily,
-        public_rate_limit,
-    )
-    assert {public_rate_limit, global_rate_limit, daily_budget, per_client_daily} <= deps
+    from app.security import global_rate_limit, public_rate_limit
+    assert {public_rate_limit, global_rate_limit} <= deps
+    source = (ROOT / "app" / "main.py").read_text()
+    body = source[source.index("async def x_ask("):]
+    assert body.index("await daily_budget(request)") < body.index("await index.search(")
+    assert body.index("await per_client_daily(request)") < body.index("await index.search(")
     for path in ("/v1/x/shelf", "/v1/x/post/{post_id}"):
         route = next(r for r in main_module.app.routes if getattr(r, "path", "") == path)
         assert public_rate_limit in {d.call for d in route.dependant.dependencies}
@@ -383,7 +428,10 @@ def test_it_asks_for_no_permission_it_does_not_use():
     m = _manifest()
     assert m["manifest_version"] == 3
     assert "permissions" not in m and "optional_permissions" not in m
-    assert m["host_permissions"] == ["https://search.lexthedev.com/*"]
+    # Not even our own origin: the API answers any origin, so the
+    # extension needs no host access to reach it, and none is one less
+    # warning at install.
+    assert "host_permissions" not in m
     assert [c["matches"] for c in m["content_scripts"]] == [["https://x.com/*"]]
     for key in ("externally_connectable", "web_accessible_resources",
                 "optional_host_permissions", "oauth2", "key", "update_url"):
@@ -437,9 +485,12 @@ def test_the_background_answers_only_its_own_script_on_x():
 
 
 def test_the_extensions_own_tests_pass():
-    """CI runs pytest, so the JavaScript runs here too."""
+    """CI runs pytest, so the JavaScript runs here too: the logic and the
+    background worker always, and the browser tests wherever a Chromium
+    and ffmpeg are installed (they skip themselves elsewhere)."""
     if not shutil.which("node"):
         pytest.skip("node is not installed")
-    run = subprocess.run(["node", "--test", *map(str, sorted((EXT / "test").glob("*.test.js")))],
-                         capture_output=True, text=True, timeout=120)
+    files = sorted((EXT / "test").glob("*.test.js")) + sorted((EXT / "test").glob("*.test.mjs"))
+    run = subprocess.run(["node", "--test", *map(str, files)],
+                         capture_output=True, text=True, timeout=600)
     assert run.returncode == 0, run.stdout[-3000:] + run.stderr[-2000:]

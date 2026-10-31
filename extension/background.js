@@ -8,8 +8,14 @@
 
 importScripts("lib.js");
 
-var SHELF_TTL_MS = 15 * 60 * 1000;
+var SHELF_TTL_MS = 60 * 60 * 1000;
+var MAX_REPLY = 2 * 1024 * 1024;   // a summary is 4 KB, the shelf 3 KB
 var shelf = null;           // { posts, at }, kept while the worker is awake
+
+// The codes the panel knows. Anything else is "failed": a DOMException
+// carries a numeric .code of its own (AbortError's is 20), and letting
+// that through is how a timeout once read as "something went wrong".
+var CODES = ["busy", "limit", "unknown", "slow", "offline", "failed"];
 
 function fetchJson(path, options, timeoutMs) {
   var controller = new AbortController();
@@ -17,7 +23,10 @@ function fetchJson(path, options, timeoutMs) {
   var init = Object.assign({
     credentials: "omit",
     referrerPolicy: "no-referrer",
-    cache: "no-store",
+    // The browser's own cache, which honours the server's max-age. With
+    // no-store the shelf was fetched on nearly every page of x.com,
+    // telling the server each time someone opened X.
+    cache: "default",
     redirect: "error",
     signal: controller.signal
   }, options || {});
@@ -26,10 +35,18 @@ function fetchJson(path, options, timeoutMs) {
     if (response.status === 503) throw { code: "limit" };
     if (response.status === 404) throw { code: "unknown" };
     if (!response.ok) throw { code: "failed" };
-    return response.json();
+    return response.text();
+  }).then(function (text) {
+    if (text.length > MAX_REPLY) throw { code: "failed" };
+    try {
+      return JSON.parse(text);
+    } catch (e) {
+      throw { code: "failed" };
+    }
   }).catch(function (error) {
-    if (error && error.code) throw error;
-    throw { code: error && error.name === "AbortError" ? "slow" : "offline" };
+    if (error && CODES.indexOf(error.code) !== -1) throw error;
+    if (error && error.name === "AbortError") throw { code: "slow" };
+    throw { code: "offline" };
   }).finally(function () { clearTimeout(timer); });
 }
 
@@ -54,6 +71,7 @@ function getPost(post) {
 function ask(post, question) {
   return fetchJson("/v1/x/ask", {
     method: "POST",
+    cache: "no-store",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ post: post, question: question })
   }, 60000).then(function (body) {
