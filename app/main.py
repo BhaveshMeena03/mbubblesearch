@@ -1071,6 +1071,21 @@ async def llms_txt(request: Request) -> PlainTextResponse:
     return PlainTextResponse(render_llms(text, await _archive_sizes(request)))
 
 
+# Google Search Console's proof that this site is ours, for the Chrome Web
+# Store's "official URL" on the extension's listing. The file is public by
+# design and holds only its own name; Google asks for it to stay up after
+# verifying. Served at the root and under /home/, the two properties it
+# can be checked as.
+_GOOGLE_VERIFICATION = "google925ad965c5e0aab5.html"
+
+
+@app.get(f"/{_GOOGLE_VERIFICATION}", include_in_schema=False)
+@app.get(f"/home/{_GOOGLE_VERIFICATION}", include_in_schema=False)
+async def google_verification() -> PlainTextResponse:
+    return PlainTextResponse(f"google-site-verification: {_GOOGLE_VERIFICATION}",
+                             media_type="text/html")
+
+
 @app.get("/favicon.ico", include_in_schema=False)
 async def favicon() -> FileResponse:
     """Browsers and crawlers ask the root for this whatever a page links,

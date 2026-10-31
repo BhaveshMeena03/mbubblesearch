@@ -862,3 +862,11 @@ def test_the_extension_knows_every_archive_the_server_names():
     found = json.loads(subprocess.run(["node", "-e", script], capture_output=True,
                                       text=True, timeout=60, check=True).stdout)
     assert sorted(found) == sorted(x_posts.ARCHIVE_NAMES) == sorted(x_posts._PAGES)
+
+
+@pytest.mark.parametrize("path", ["/google925ad965c5e0aab5.html",
+                                  "/home/google925ad965c5e0aab5.html"])
+def test_search_console_can_see_the_sites_verification_file(client, path):
+    r = client.get(path)
+    assert r.status_code == 200
+    assert r.text == "google-site-verification: google925ad965c5e0aab5.html"
