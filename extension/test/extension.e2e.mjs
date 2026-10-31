@@ -33,7 +33,7 @@ const NOT_OURS = "1999999999999999999";
 function page(posts) {
   const article = (id, post) => `
   <article data-testid="tweet" id="${id}">
-    <a href="/someone/status/${post}"><time datetime="2026-10-30T17:28:15.000Z">Oct 30</time></a>
+    <a role="link" href="/someone/status/${post}"><time datetime="2026-10-30T17:28:15.000Z">Oct 30</time></a>
     <div data-testid="videoPlayer"><video playsinline muted></video></div>
     <div role="group"><div data-testid="reply">r</div><div data-testid="like">l</div></div>
   </article>`;

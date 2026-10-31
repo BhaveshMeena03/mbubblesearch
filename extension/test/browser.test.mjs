@@ -44,16 +44,20 @@ function video() {
   return VIDEO;
 }
 
-// A post the way X writes one. A quoted post is a card marked role="link",
-// with its own time link and, here, its own video.
+// A post the way X writes one: every <a> carries role="link", as X's do,
+// and a quoted post is a <div role="link"> card with its own time and,
+// here, its own video. (Fixture made to match real X on 31 Oct 2026, after
+// a rule that passed here missed every post there.)
 function article(id, post, { video = true, quoting = null, quotedVideo = true } = {}) {
   return `
   <article data-testid="tweet" id="${id}">
-    <a href="/someone/status/${post}"><time datetime="2026-10-30T17:28:15.000Z">Oct 30</time></a>
-    <div data-testid="tweetText">a post</div>
+    <a role="link" href="/someone"><span>someone</span></a>
+    <a role="link" href="/someone/status/${post}"><time datetime="2026-10-30T17:28:15.000Z">Oct 30</time></a>
+    <div data-testid="tweetText">a post <a role="link" href="https://t.co/x">t.co/x</a></div>
     ${video ? `<div data-testid="videoPlayer"><video class="own" playsinline muted></video></div>` : ""}
+    <div role="link" tabindex="0" class="broadcast-title">the broadcast's title</div>
     ${quoting ? `<div role="link" tabindex="0" class="card">
-      <a href="/blknoiz06/status/${quoting}"><time>Oct 29</time></a>
+      <a role="link" href="/blknoiz06/status/${quoting}"><time>Oct 29</time></a>
       ${quotedVideo ? `<div data-testid="videoPlayer"><video class="quoted" playsinline muted></video></div>` : ""}
     </div>` : ""}
     <div role="group" aria-label="1 reply"><div data-testid="reply">r</div>

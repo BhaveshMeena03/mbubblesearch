@@ -157,8 +157,14 @@
   // summary over somebody else's clip, and its times would play that clip:
   // a way to pass a cut-up video off as the archive's. Found in review on
   // 31 Oct 2026, before it shipped.
+  //
+  // A div, specifically. X puts role="link" on its ordinary <a> tags too,
+  // the post's own timestamp among them, and a rule on [role='link'] alone
+  // matched the timestamp itself: no post had an id of its own and no
+  // button appeared anywhere on real X. Checked against a real quote of
+  // @cz_binance on 31 Oct 2026: the card is a <div role="link">.
   function ownPart(node) {
-    return !node.closest("[role='link']");
+    return !node.closest("div[role='link']");
   }
 
   function ownPostId(article) {
