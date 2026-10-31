@@ -180,6 +180,25 @@ class PodcastSearchRequest(BaseModel):
     top_k: int | None = None
 
 
+class XAskRequest(BaseModel):
+    """A question about one X post, from the browser extension.
+
+    Tighter than a search: the box under a post is for a question, and
+    500 characters is several. The post is digits and nothing else, so
+    nothing a caller writes there reaches a filter or a file name.
+    """
+
+    post: str = Field(..., pattern=r"^[0-9]{5,25}$")
+    question: str = Field(..., min_length=1, max_length=500)
+
+    @field_validator("question")
+    @classmethod
+    def _not_blank(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("ask a question")
+        return value.strip()
+
+
 class QuoteCheckRequest(BaseModel):
     """A quote somebody is attributing to someone in this archive.
 

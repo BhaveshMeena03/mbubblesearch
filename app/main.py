@@ -51,6 +51,7 @@ from . import (
     quotes,
     recency,
     sources,
+    x_posts,
 )
 from . import calls as on_air_calls
 from . import guests as guest_pages
@@ -87,6 +88,7 @@ from .schemas import (
     PodcastSearchResponse,
     QuoteCheckRequest,
     RetrievedChunk,
+    XAskRequest,
 )
 from .security import (
     RateLimiter,
@@ -3860,4 +3862,94 @@ async def threadguy_clip_status(job_id: str, request: Request) -> dict:
 async def threadguy_clip_file(job_id: str, request: Request):
     return _clip_file(job_id, request, "threadguy")
 
+
+# ─── the browser extension ────────────────────────────────────────────────
+#
+# extension/ puts a button on X posts that are recordings in these
+# archives: the summary, an ask box, and times that move X's own player to
+# the second. Three routes, and only the last one costs anything.
+
+_X_UNKNOWN = "Not a post this archive has."
+
+
+@app.get("/v1/x/shelf", dependencies=[Depends(public_rate_limit)])
+async def x_shelf(response: Response) -> dict:
+    """Which posts get a button.
+
+    The extension downloads this and decides for itself which posts on
+    the page are ours, so what anyone scrolls past on X never reaches this
+    server. Only a click on the button sends a post id.
+    """
+    response.headers["Cache-Control"] = "public, max-age=900"
+    posts = x_posts.listing()
+    return {"count": len(posts), "posts": posts}
+
+
+@app.get("/v1/x/post/{post_id}", dependencies=[Depends(public_rate_limit)])
+async def x_post(post_id: str) -> dict:
+    """The panel for one post: what it is, its summary when it has one,
+    and the X second for every time the summary writes. No model call."""
+    found = x_posts.describe(post_id) if x_posts.POST_ID.match(post_id) else None
+    if found is None:
+        raise HTTPException(status_code=404, detail=_X_UNKNOWN)
+    _track("x_extension_opens")
+    return found
+
+
+# A style note for the model, never part of the query that is embedded.
+_X_INSTRUCTION = ("The reader is watching this one recording on X and asked "
+                  "about it, and every excerpt is from it. Answer from them "
+                  "and give the time each point was said.")
+
+
+@app.post("/v1/x/ask",
+          dependencies=[Depends(public_rate_limit), Depends(global_rate_limit),
+                        Depends(daily_budget), Depends(per_client_daily)])
+async def x_ask(
+    body: XAskRequest,
+    request: Request,
+    answers: AnswerCache = Depends(get_answers),
+) -> dict:
+    """A question about the post the reader is watching, answered from that
+    recording only, with the X second of every time in the answer.
+
+    The same limits as every other question this service answers. Nothing
+    the caller sends picks an index or a namespace: the post id is looked
+    up in the shelf, and only what the shelf says is used.
+    """
+    found = x_posts.shelf().get(body.post)
+    index = getattr(request.app.state, found["archive"], None) if found else None
+    if index is None:
+        # Nothing was spent, so nothing is charged.
+        per_client_daily.refund(request)
+        if found is None:
+            raise HTTPException(status_code=404, detail=_X_UNKNOWN)
+        raise HTTPException(status_code=503, detail="The archive is not loaded.")
+    _track("x_extension_asks", q=body.question[:120])
+
+    key = make_key(_timed(body.question), surface=f"x:{body.post}")
+    result = answers.get(key)
+    if result is not None:
+        per_client_daily.refund(request)
+    else:
+        try:
+            result = await index.search(body.question, instruction=_X_INSTRUCTION,
+                                        episode_id=found["episode_id"])
+        except anthropic.RateLimitError as exc:
+            raise HTTPException(status_code=429,
+                                detail="Rate limited; retry shortly.") from exc
+        except anthropic.APIError as exc:
+            logger.error("Anthropic error on an extension question: %s",
+                         type(exc).__name__)
+            raise HTTPException(status_code=502,
+                                detail="Model provider error.") from exc
+        if found["archive"] == "podcast":
+            # The page's guard, for the page's archive: a line the
+            # transcript labels as one host is never given to the other.
+            fixed, demoted = attribution.correct(result.answer, result.hits)
+            if demoted:
+                result = result.model_copy(update={"answer": fixed})
+        answers.put(key, result)
+    return {"answer": result.answer, "refused": bool(result.refused),
+            "times": x_posts.times_in(result.answer, found["clock"])}
 

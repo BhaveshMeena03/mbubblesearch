@@ -1750,7 +1750,13 @@ class PodcastIndex:
                         added, query[:60])
         return hits
 
-    async def _retrieve(self, query: str, top_k: int) -> list[PodcastHit]:
+    async def _retrieve(self, query: str, top_k: int,
+                        only_episode: str | None = None) -> list[PodcastHit]:
+        # `only_episode` is one episode's id: the browser extension asks about
+        # the recording the reader is watching, and an answer from a
+        # different show is no answer to that. Every search below is
+        # filtered to it, and the pool is checked again before ranking.
+        scope = (only_episode,) if only_episode else ()
         # If the question names a host, search what that host actually
         # said. Without this the ranking is decided by topic alone, and
         # for "what did banks say about solana" the six best Solana
@@ -1766,7 +1772,7 @@ class PodcastIndex:
         # And if it is about now, search now. Cleared first, so a question
         # that is not about now never inherits the last one's dates.
         _ABOUT_NOW.set(None)
-        now = await self._about_now(query)
+        now = None if only_episode else await self._about_now(query)
         # Cached, retry-on-rate-limit query embedding — repeat queries are
         # free and a rate-limited one backs off instead of hard-failing.
         vector = await embed_query(
@@ -1845,7 +1851,7 @@ class PodcastIndex:
             # across everything, as before, and nothing tells the model
             # the excerpts are recent, because they are not.
             fresh = None
-            response = await ask(speaker)
+            response = await ask(speaker, scope)
             # Ask again unfiltered when the filter found nothing worth
             # having. Only half the archive carries speaker labels, so a
             # question about a host whose passages are all unlabelled
@@ -1854,7 +1860,7 @@ class PodcastIndex:
             if speaker and len(getattr(response, "matches", []) or []) < 3:
                 logger.info("speaker filter for %r returned too little — "
                             "falling back to the whole archive", speaker)
-                response = await ask(None)
+                response = await ask(None, scope)
         hits: list[PodcastHit] = []
         for match in response.matches:
             if match.score < self._settings.retrieval_min_score:
@@ -1897,7 +1903,16 @@ class PodcastIndex:
         # subject: "who made 54 million on the drop" missed a line reading
         # "54 million dollars on the drop".
         before = len(hits)
-        hits = await self._add_exact_matches(query, hits)
+        # Not for one episode. The word index points across the whole
+        # archive and its candidates are fetched from Pinecone by id, so
+        # nearly every read would be thrown away by the filter below, and
+        # reads are the budget that ran out on 19 Oct 2026. One episode is
+        # a few dozen passages, which the vector search above already
+        # ranks nearly whole.
+        if not only_episode:
+            hits = await self._add_exact_matches(query, hits)
+        if only_episode:
+            hits = [h for h in hits if h.episode_id == only_episode]
         if fresh:
             # The word index knows nothing about dates. A rare word from
             # the question, said in May, does not belong in an answer
@@ -2133,8 +2148,10 @@ class PodcastIndex:
         except Exception as exc:  # noqa: BLE001
             logger.warning("usage accounting failed: %s", exc)
 
-    async def retrieve(self, query: str, top_k: int | None = None) -> list[PodcastHit]:
-        hits = await self._retrieve(query, top_k or self._settings.retrieval_top_k)
+    async def retrieve(self, query: str, top_k: int | None = None,
+                       episode_id: str | None = None) -> list[PodcastHit]:
+        hits = await self._retrieve(query, top_k or self._settings.retrieval_top_k,
+                                    only_episode=episode_id)
         if self._namespace in HOSTED_CHANNELS:
             hits = host_view_only(query, hits, HOSTED_CHANNELS[self._namespace])
         return hits
@@ -2143,8 +2160,9 @@ class PodcastIndex:
         self, query: str, top_k: int | None = None,
         instruction: str | None = None,
         model: str | None = None,
+        episode_id: str | None = None,
     ) -> PodcastSearchResponse:
-        """Answer `query` from the index.
+        """Answer `query` from the index, or from one episode of it.
 
         `instruction` adds a per-surface style note for the model only. It is
         deliberately not part of `query`: the query is what gets embedded,
@@ -2152,7 +2170,7 @@ class PodcastIndex:
         back — measured, on this corpus, as the difference between finding a
         guest and missing them.
         """
-        hits = await self.retrieve(query, top_k)
+        hits = await self.retrieve(query, top_k, episode_id=episode_id)
         primary, route, can_fall_back = self._llm()
         request = self._build_request(query, hits, instruction, model=model)
         try:
