@@ -246,3 +246,23 @@ def test_a_link_can_open_one_summary():
     assert 'd.id = "ep-" + ep.episode_id;' in page
     assert 'want.indexOf("ep-") === 0' in page and "card.open = true" in page
     assert "(ep.show ? 'Watch the video on X →'" in page
+
+
+def test_fixing_a_word_keeps_the_show_on_every_passage():
+    """fix_transcript re-embeds the episode, which replaces each passage's
+    metadata whole. It used to rebuild the episode without its show, so a
+    one-word fix in his own video would have filed it as Market Bubble."""
+    import sys
+
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from fix_transcript import episode_for
+
+    from app.podcast import PodcastIndex
+    index = PodcastIndex.__new__(PodcastIndex)
+
+    class S:
+        chunk_max_chars = 10_000
+    index._settings = S()
+    row = appearance(show="Ansem on X").model_dump()
+    rows = index.rows_for(episode_for(row))
+    assert rows and all(r["show"] == "Ansem on X" for r in rows)

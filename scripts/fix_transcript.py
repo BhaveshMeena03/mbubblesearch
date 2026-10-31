@@ -57,6 +57,19 @@ def matching(word: str) -> re.Pattern:
     return re.compile(rf"\b{re.escape(word)}(?='s\b|\b)", re.I)
 
 
+def episode_for(row: dict) -> Episode:
+    """The shelf row as ingest needs it, show included.
+
+    Re-embedding replaces every passage's metadata whole. Without the
+    show, fixing a word in one of Ansem's own videos would have stripped
+    "Ansem on X" from all of its passages, and the archive would count it
+    as a Market Bubble episode. Found 31 Oct 2026, before it happened.
+    """
+    return Episode(**{k: row[k] for k in
+                      ("episode_id", "title", "url", "platform",
+                       "published_at", "segments", "show") if k in row})
+
+
 def replace(text: str, pattern: re.Pattern, to: str) -> str:
     def one(m: re.Match) -> str:
         return to.capitalize() if m.group(0)[:1].isupper() else to
@@ -103,9 +116,7 @@ async def main() -> int:
 
     index = (PodcastIndex(namespace=namespace) if namespace
              else PodcastIndex())
-    episode = Episode(**{k: row[k] for k in
-                         ("episode_id", "title", "url", "platform",
-                          "published_at", "segments") if k in row})
+    episode = episode_for(row)
     print(f"  re-embedded {await index.ingest([episode])} passages")
 
     # Only the broadcast carries speaker labels, and re-embedding above

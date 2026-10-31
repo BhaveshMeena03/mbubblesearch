@@ -3539,6 +3539,10 @@ _TOO_ORDINARY = {
     # market "chopping" is said in 21 Market Bubble recordings and twice in
     # the Musk interviews.
     'chop',
+    # Added 31 Oct 2026, from MCG's $ANYONE privacy network interview
+    # (30 Oct): "anyone" is an everyday word on every show, so it would
+    # have sent "did anyone talk about zcash" to MCG.
+    'anyone',
     'agent',
     'agents',
     'bean',
