@@ -12,6 +12,9 @@ the second. Built 31 Oct 2026. What has to stay true:
     the post
   - the extension asks for no permission it does not use, talks to one
     origin, and never parses markup
+  - a clip placed in the archive says where it is from; a time inside it
+    plays in the clip, and the rest open the whole show, only ever at an
+    address of one of three shapes
 """
 
 from __future__ import annotations
@@ -28,7 +31,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 import app.main as main_module
-from app import x_posts
+from app import podcast, x_posts
 from app.config import get_settings
 from app.schemas import PodcastHit, PodcastSearchResponse
 
@@ -36,6 +39,8 @@ ROOT = Path(__file__).resolve().parent.parent
 EXT = ROOT / "extension"
 
 MB_POST = "2116220650058846455"          # Ansem's gold video, on the MB shelf
+EP24 = "x-2115904746355851479"           # Market Bubble Episode 24, on X
+CLIP_POST = "2116428709150478840"        # Ansem's clip of it, from 1:39:53
 MCG_POST = "2115115665753518109"
 RASMR_PAIRED = "2090840111306936721"
 RASMR_X_ONLY = "2109683904819150927"
@@ -51,7 +56,18 @@ def files(tmp_path, monkeypatch):
                     "show": "Ansem on X", "published_at": "2026-10-30",
                     "summary": "**Topics**\n- [0:01:40] blow off top\n- [0:04:57] bottom"},
                    {"episode_id": "KcazozbZHd0", "title": "a YouTube one",
-                    "summary": "x"}], fh)
+                    "summary": "x", "platform": "youtube",
+                    "url": "https://www.youtube.com/watch?v=KcazozbZHd0"},
+                   {"episode_id": EP24, "title": "Market Bubble Episode 24",
+                    "published_at": "2026-10-29", "platform": "other",
+                    "url": "https://x.com/MarketBubble/status/2115904746355851479",
+                    "summary": "**Topics**\n- [0:04:31] macro\n- [1:40:05] the clip's moment\n"
+                               "- [2:00:00] later, CPI at 8:30 ET"},
+                   {"episode_id": "x-2115418459765113280", "title": "Q4 market thoughts",
+                    "platform": "other", "summary": "- [0:10:37] AI stocks",
+                    "url": "https://x.com/blknoiz06/status/2115418459765113280"},
+                   {"episode_id": "x-2111111111111111111", "title": "a bad row",
+                    "platform": "other", "url": "javascript:alert(1)//x.com/a/status/1"}], fh)
     (tmp_path / "broadcast_links.json").write_text(json.dumps(
         {"x-2115904746355851479": "https://x.com/i/broadcasts/1dxYlaZbXWQJX",
          "x-notdigits": "https://x.com/i/broadcasts/abc"}))
@@ -70,17 +86,40 @@ def files(tmp_path, monkeypatch):
         {"id": "2bev0UDp79Y", "title": "a paired stream", "published_at": "2026-08-21"}]))
     (tmp_path / "mcg_index.json").write_text(json.dumps([
         {"id": "2NK_MBlFvtM", "title": "MCG Live: Binance", "published_at": "2026-10-27"}]))
+    (tmp_path / "x_clips.json").write_text(json.dumps({
+        CLIP_POST: {"account": "blknoiz06", "archive": "podcast", "episode_id": EP24,
+                    "start": 5993, "end": 6072, "before": "lab diamonds.",
+                    "after": "How does MicroStrategy look?", "after_at": 6078},
+        "2116000000000000001": {"archive": "podcast", "episode_id": "KcazozbZHd0",
+                                "start": 60, "end": 90, "before": "", "after": "a",
+                                "after_at": None},
+        MB_POST: {"archive": "podcast", "episode_id": EP24, "start": 1, "end": 2},
+        "2115461279163052437": {"archive": "podcast", "episode_id": "x-2115418459765113280",
+                                "start": 1719, "end": 1805, "before": "b", "after": "a",
+                                "after_at": 1809},
+        "2116000000000000002": {"archive": "podcast", "episode_id": EP24, "start": "5993", "end": 6072},
+        "2116000000000000003": {"archive": "podcast", "episode_id": EP24, "start": 90, "end": 60},
+        "2116000000000000004": {"archive": "podcast", "episode_id": "../../etc", "start": 1, "end": 2},
+        "2116000000000000005": {"archive": "elon", "episode_id": EP24, "start": 1, "end": 2},
+        "2116000000000000006": {"archive": "podcast", "episode_id": EP24, "start": 1, "end": 2,
+                                "after": {"not": "text"}},
+        "2116000000000000007": {"archive": "podcast", "episode_id": EP24, "start": True, "end": 2},
+        "2116000000000000008": {"archive": "podcast", "episode_id": EP24, "start": 1, "end": 2,
+                                "after_at": -5},
+        "not-a-post": {"archive": "podcast", "episode_id": EP24, "start": 1, "end": 2}}))
+    links = json.loads((tmp_path / "broadcast_links.json").read_text())
+    monkeypatch.setattr(podcast, "_broadcast_players", lambda: links)
     for name, value in (("SUMMARIES", "summaries.json.gz"),
                         ("BROADCAST_LINKS", "broadcast_links.json"),
                         ("MCG_PAIRS", "mcg.json"), ("RASMR_PAIRS", "rasmr.json"),
                         ("RASMR_SHELF", "rasmr_index.json"),
-                        ("MCG_SHELF", "mcg_index.json")):
+                        ("MCG_SHELF", "mcg_index.json"), ("CLIPS", "x_clips.json")):
         monkeypatch.setattr(x_posts, name, tmp_path / value)
-    x_posts.shelf.cache_clear()
-    x_posts._summaries.cache_clear()
+    for cached in (x_posts.shelf, x_posts._summaries, x_posts._clips):
+        cached.cache_clear()
     yield tmp_path
-    x_posts.shelf.cache_clear()
-    x_posts._summaries.cache_clear()
+    for cached in (x_posts.shelf, x_posts._summaries, x_posts._clips):
+        cached.cache_clear()
 
 
 def test_each_kind_of_post_lands_in_its_archive_on_its_clock(files):
@@ -176,6 +215,116 @@ def test_the_panel_names_its_post(files):
     mcg = x_posts.describe(MCG_POST)
     assert mcg["summary"] is None and mcg["page"].endswith("/demo/mcg.html")
     assert x_posts.describe("1234567") is None
+
+
+# --- clips -----------------------------------------------------------------
+
+BROADCAST = "https://x.com/i/broadcasts/1dxYlaZbXWQJX"
+
+
+def test_a_placed_clip_says_where_it_is_from_and_what_came_after(files):
+    row = x_posts.describe(CLIP_POST)
+    assert row["kind"] == "clip" and row["episode_id"] == EP24
+    assert row["title"] == "Market Bubble Episode 24" and row["seekable"] is True
+    assert row["clip"] == {
+        "at": "1:39:53", "until": "1:41:12", "watch": f"{BROADCAST}?t=5993", "seeks": True,
+        "before": "lab diamonds.", "after": "How does MicroStrategy look?",
+        "after_at": "1:41:18", "after_watch": f"{BROADCAST}?t=6078"}
+
+
+def test_a_time_inside_the_clip_plays_in_it_and_every_time_opens_the_show(files):
+    row = x_posts.describe(CLIP_POST)
+    assert row["times"] == {"1:40:05": 12}, "the clip's own second, from its start"
+    assert row["links"] == {"0:04:31": f"{BROADCAST}?t=271",
+                            "1:40:05": f"{BROADCAST}?t=6005",
+                            "2:00:00": f"{BROADCAST}?t=7200"}
+    assert "8:30" not in row["links"], "a time of day opens nothing"
+
+
+def test_the_last_seconds_of_a_clip_still_play_in_it(files):
+    clip = x_posts.shelf()[CLIP_POST]
+    times, _ = x_posts.marks("1:39:52 1:41:12 1:41:17 1:41:18", clip)
+    assert times == {"1:41:12": 79, "1:41:17": 84}
+
+
+def test_a_recording_answers_with_no_links(files):
+    times, links = x_posts.marks("at 0:01:40", x_posts.shelf()[MB_POST])
+    assert times == {"0:01:40": 100} and links == {}
+    assert x_posts.describe(MB_POST)["kind"] == "recording"
+
+
+def test_a_whole_recording_never_turns_into_a_clip(files):
+    """A clip row for a post that is the whole show loses: that post gets
+    the whole show's panel, and its times play the whole show."""
+    assert x_posts.shelf()[MB_POST] == {"archive": "podcast", "episode_id": f"x-{MB_POST}",
+                                        "clock": {"offset": 0}}
+
+
+def test_a_clip_row_wrong_in_any_way_is_left_out_whole(files):
+    shelf = x_posts.shelf()
+    assert CLIP_POST in shelf and "2116000000000000001" in shelf
+    for n in range(2, 9):
+        assert f"211600000000000000{n}" not in shelf, n
+    assert "not-a-post" not in shelf
+
+
+def test_a_clip_of_a_youtube_copy_opens_youtube_at_the_second(files):
+    row = x_posts.describe("2116000000000000001")
+    assert row["clip"]["watch"] == "https://www.youtube.com/watch?v=KcazozbZHd0&t=60s"
+    assert row["clip"]["after_at"] is None and row["clip"]["after_watch"] is None
+
+
+def test_a_clip_of_an_uploaded_video_promises_no_second_it_cannot_open(files):
+    """X opens a post's own video at 0:00 whatever ?t= says. The full
+    video is still offered, but no time links to it."""
+    row = x_posts.describe("2115461279163052437")
+    upload = "https://x.com/blknoiz06/status/2115418459765113280"
+    assert row["clip"]["watch"] == f"{upload}?t=1719"
+    assert row["clip"]["seeks"] is False and row["clip"]["after_watch"] is None
+    assert row["links"] == {}
+    assert x_posts.describe(CLIP_POST)["clip"]["seeks"] is True
+
+
+def test_an_address_that_is_not_a_web_link_is_never_offered(files):
+    assert x_posts.watch("x-2111111111111111111", 60) is None
+    assert x_posts.watch("x-not-in-the-archive", 60) is None
+
+
+@pytest.mark.parametrize("url,ok", [
+    (f"{BROADCAST}?t=5993", True),
+    ("https://x.com/MarketBubble/status/2115904746355851479?t=60", True),
+    ("https://www.youtube.com/watch?v=KcazozbZHd0&t=60s", True),
+    (f"{BROADCAST}?t=5993&next=https://evil.example", False),
+    ("https://x.com.evil.example/i/broadcasts/1dxYlaZbXWQJX?t=1", False),
+    ("http://x.com/i/broadcasts/1dxYlaZbXWQJX?t=1", False),
+    ("https://x.com/i/broadcasts/../../login?t=1", False),
+    ("javascript:alert(1)//https://x.com/i/broadcasts/1dxYlaZbXWQJX?t=1", False),
+    ("https://youtube.com.evil/watch?v=KcazozbZHd0&t=60s", False),
+    ("https://www.youtube.com/watch?v=KcazozbZHd0&t=60s\n", False),
+    (f"{BROADCAST}?t=1234567", False),
+])
+def test_a_link_to_the_show_has_one_of_three_shapes(url, ok):
+    assert bool(x_posts.LINK.fullmatch(url)) is ok
+
+
+def test_the_browser_allows_exactly_the_links_the_server_does():
+    if not shutil.which("node"):
+        pytest.skip("node is not installed")
+    samples = [f"{BROADCAST}?t=5993", f"{BROADCAST}?t=5993#x", "https://x.com/a/status/12345?t=1",
+               "https://x.com/abcdefghijklmnop/status/12345?t=1",
+               "https://www.youtube.com/watch?v=KcazozbZHd0&t=60s",
+               "https://www.youtube.com/watch?v=KcazozbZHd0&t=60", "https://evil.example/",
+               "https://x.com/i/broadcasts/1dxYlaZbXWQJX?t=60\n"]
+    script = (f"const M=require({json.dumps(str(EXT / 'lib.js'))});"
+              f"console.log(JSON.stringify({json.dumps(samples)}.map(s=>M.LINK.test(s))))")
+    found = json.loads(subprocess.run(["node", "-e", script], capture_output=True,
+                                      text=True, timeout=60, check=True).stdout)
+    assert found == [bool(x_posts.LINK.fullmatch(s)) for s in samples]
+    script = (f"const M=require({json.dumps(str(EXT / 'lib.js'))});"
+              f"console.log(JSON.stringify({json.dumps(samples)}.map(s=>M.seeks(s))))")
+    found = json.loads(subprocess.run(["node", "-e", script], capture_output=True,
+                                      text=True, timeout=60, check=True).stdout)
+    assert found == [bool(x_posts.SEEKS.fullmatch(s)) for s in samples]
 
 
 # --- the routes ------------------------------------------------------------

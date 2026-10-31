@@ -134,6 +134,14 @@
     ".t:hover{text-decoration:underline}.t:focus-visible{outline:2px solid #16c784}",
     ".t.on{background:rgba(22,199,132,.18)}",
     ".note{color:rgb(113,118,123);font-size:13px;margin:6px 0}",
+    ".from{margin:0 0 2px;font-size:12px}",
+    ".at{margin:6px 0 4px}",
+    "a.t{text-decoration:none}",
+    ".watch{all:unset;cursor:pointer;color:#16c784;font-weight:600}",
+    ".watch:hover{text-decoration:underline}.watch:focus-visible{outline:2px solid #16c784}",
+    ".before{color:rgb(113,118,123)}",
+    "details{margin:10px 0 4px}",
+    "summary{cursor:pointer;color:rgb(113,118,123);font-size:13px;font-weight:600}",
     ".err{color:#f4212e;font-size:13px;margin:6px 0}",
     "form{display:flex;gap:8px;margin:10px 0 6px}",
     "input{flex:1;min-width:0;border-radius:999px;border:1px solid #2f3336;background:transparent;",
@@ -271,11 +279,14 @@
   }
 
   // ── the panel ────────────────────────────────────────────────────────
-  function render(target, markdown, times, article, status) {
-    MBS.blocks(markdown, times).forEach(function (block) {
+  function render(target, markdown, times, links, article, status) {
+    MBS.blocks(markdown, times, links).forEach(function (block) {
       var node = block.kind === "heading" ? el("h4") : block.kind === "item" ? el("li") : el("p");
       block.parts.forEach(function (part) {
-        if (part.time) {
+        if (part.link) {
+          var a = showLink(part.time, part.link);
+          node.appendChild(part.bold ? wrapBold(a) : a);
+        } else if (part.time) {
           var t = el("button", "t", part.time);
           t.type = "button";
           t.title = "Play from " + part.time + " on this post";
@@ -298,6 +309,60 @@
         target.appendChild(node);
       }
     });
+  }
+
+  // A time that opens the whole show at that second, in a new tab: a
+  // clip's own player only holds its own minute. A real link, so the
+  // reader sees where it goes. The address passed MBS.LINK in the worker
+  // and passes it again here, where it becomes an href; one that doesn't
+  // is shown as the words it is.
+  function showLink(text, href) {
+    if (!MBS.LINK.test(href)) return el("span", null, text);
+    var a = el("a", "t", text);
+    a.href = href;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.title = "Open the whole show at " + text;
+    return a;
+  }
+
+  // Where a clip sits in the show, and what the clipper left out either
+  // side of it. The archive's own words, shown as text.
+  //
+  // A time is a link only where the link opens at it: X's broadcast player
+  // and YouTube do. A post's own video starts at 0:00 whatever the link
+  // says, so for one of those the time stays words and the link just
+  // opens the full video.
+  function renderClip(target, clip) {
+    var seeks = MBS.seeks(clip.watch);
+    var at = el("p", "at");
+    at.appendChild(seeks ? showLink(clip.at, clip.watch) : el("strong", null, clip.at));
+    at.appendChild(document.createTextNode(
+      (clip.until && clip.until !== clip.at ? " to " + clip.until : "") + " in the show"));
+    if (clip.watch) {
+      at.appendChild(document.createTextNode(". "));
+      var full = showLink(seeks ? "Watch it in the full show" : "Open the full video", clip.watch);
+      full.className = "watch";
+      full.title = seeks ? "Open the whole show at " + clip.at
+                         : "Open the full video on X. It starts at the beginning.";
+      at.appendChild(full);
+    }
+    target.appendChild(at);
+    if (clip.before) {
+      target.appendChild(el("h4", null, "Just before the clip"));
+      target.appendChild(el("p", "said before", "\u2026" + MBS.undash(clip.before)));
+    }
+    if (clip.after) {
+      target.appendChild(el("h4", null, "Right after the clip"));
+      var after = el("p", "said");
+      if (clip.afterAt) {
+        after.appendChild(clip.afterWatch ? showLink(clip.afterAt, clip.afterWatch)
+                                          : el("strong", null, clip.afterAt));
+        after.appendChild(document.createTextNode(" "));
+      }
+      after.appendChild(document.createTextNode(MBS.undash(clip.after) + "\u2026"));
+      target.appendChild(after);
+    }
   }
 
   function wrapBold(node) {
@@ -343,12 +408,23 @@
         return;
       }
       var data = reply.data.post;
+      if (data.clip) body.appendChild(el("div", "note from", "This clip is from"));
       body.appendChild(el("div", "title", data.title || data.archiveName));
       var line = [data.show || data.archiveName, MBS.longDate(data.publishedAt)]
         .filter(Boolean).join(", ");
       if (line) body.appendChild(el("div", "date", line));
-      if (data.summary) {
-        render(body, data.summary, data.times, article, status);
+      if (data.clip) {
+        renderClip(body, data.clip);
+        if (data.summary) {
+          // The episode's summary, folded: the clip is what was asked
+          // about, the rest of the show is one click away.
+          var whole = el("details");
+          whole.appendChild(el("summary", null, "The whole episode"));
+          render(whole, data.summary, data.times, data.links, article, status);
+          body.appendChild(whole);
+        }
+      } else if (data.summary) {
+        render(body, data.summary, data.times, data.links, article, status);
       } else {
         body.appendChild(el("div", "note",
           "No summary for this one yet. Ask anything about it below."));
@@ -357,7 +433,8 @@
         body.appendChild(el("div", "note",
           "Times here can't be matched to this post's player, so they show as text."));
       }
-      body.appendChild(askBox(post, article, status));
+      body.appendChild(askBox(post, article, status,
+        data.clip ? "Ask about the episode" : "Ask about this recording"));
       var foot = el("div", "foot");
       var link = el("a", null, "open on search.lexthedev.com");
       link.href = data.page;
@@ -369,14 +446,14 @@
     return made;
   }
 
-  function askBox(post, article, status) {
+  function askBox(post, article, status, prompt) {
     var wrap = el("div");
     var form = el("form");
     var input = el("input");
     input.type = "text";
     input.maxLength = MBS.MAX_QUESTION;
-    input.placeholder = "Ask about this recording";
-    input.setAttribute("aria-label", "Ask about this recording");
+    input.placeholder = prompt;
+    input.setAttribute("aria-label", prompt);
     input.autocomplete = "off";
     var go = el("button", "go", "Ask");
     go.type = "button";
@@ -400,7 +477,8 @@
           return;
         }
         var answer = el("div", "answer");
-        render(answer, reply.data.answer.answer, reply.data.answer.times, article, status);
+        render(answer, reply.data.answer.answer, reply.data.answer.times,
+               reply.data.answer.links, article, status);
         out.appendChild(answer);
       });
     }

@@ -12,6 +12,12 @@ Click it and you get:
 X can't open a posted video at a time from a link. The extension sets the player's clock directly,
 so 1:39:33 lands on 1:39:33.
 
+It also works on clips. Ansem posts a minute of the show several times a day; for each one the
+archive holds, the button says where it is from ("Episode 24, 1:39:53 to 1:41:12"), shows what was
+said just before it and right after the cut, and links to the full show at that second. Clips are
+placed ahead of time by `scripts/place_x_clips.py`, from X's own captions, so a clip the archive
+doesn't hold gets no button rather than a guess.
+
 ## Install
 
 Until it is on the Chrome Web Store:
@@ -37,6 +43,9 @@ What it sends, and what it doesn't:
 - Like every request to the site, the server sees your IP address, and uses it only to keep any one
   address from using up everyone's daily limit.
 - A script on the page can't make it ask anything: only a real click or a real Enter does.
+- The only addresses it ever opens are the site, and the show itself at a second: X's broadcast
+  player, an X post, or a YouTube video, each checked against one fixed pattern before it becomes a
+  link. They open in a new tab, only when you click them.
 
 ## Permissions
 

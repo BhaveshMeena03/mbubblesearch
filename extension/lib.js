@@ -19,6 +19,12 @@ var MBS = (function () {
   // The server's own pattern (app/x_posts.py TIME): h:mm:ss or m:ss with
   // two digits after every colon, so a ratio like 3:1 is not a time.
   var TIME = /(?<![\d:])(\d{1,2}:\d{2}(?::\d{2})?)(?![\d:])/g;
+  var TOKEN = /^\d{1,2}:\d{2}(?::\d{2})?$/;
+  // The whole show at a second, in the three shapes the site links to it:
+  // X's broadcast player, an X post, a YouTube video. The server's own
+  // pattern (app/x_posts.py LINK); a link of any other shape is dropped,
+  // so the panel opens nothing it was merely sent.
+  var LINK = /^https:\/\/(?:x\.com\/i\/broadcasts\/[A-Za-z0-9]{8,20}\?t=[0-9]{1,6}|x\.com\/[A-Za-z0-9_]{1,15}\/status\/[0-9]{5,25}\?t=[0-9]{1,6}|www\.youtube\.com\/watch\?v=[A-Za-z0-9_-]{11}&t=[0-9]{1,6}s)$/;
 
   var MAX_TEXT = 20000;   // a summary is about 3,500 characters
   var MAX_TITLE = 300;
@@ -47,13 +53,54 @@ var MBS = (function () {
     if (!value || typeof value !== "object" || Array.isArray(value)) return out;
     Object.keys(value).slice(0, 500).forEach(function (key) {
       var seconds = value[key];
-      if (/^\d{1,2}:\d{2}(?::\d{2})?$/.test(key) &&
+      if (TOKEN.test(key) &&
           typeof seconds === "number" && Number.isInteger(seconds) &&
           seconds >= 0 && seconds < 24 * 3600) {
         out[key] = seconds;
       }
     });
     return out;
+  }
+
+  // Time as written to the whole show at that second, for a clip, whose
+  // own player only holds its own minute.
+  // The two of those that open at the second. X opens a post's video at
+  // its start whatever ?t= says, so a time is never a link to one.
+  var SEEKS = /^https:\/\/(?:x\.com\/i\/broadcasts\/[A-Za-z0-9]{8,20}\?t=[0-9]{1,6}|www\.youtube\.com\/watch\?v=[A-Za-z0-9_-]{11}&t=[0-9]{1,6}s)$/;
+
+  function seeks(url) {
+    return typeof url === "string" && SEEKS.test(url);
+  }
+
+  function cleanLinks(value) {
+    var out = {};
+    if (!value || typeof value !== "object" || Array.isArray(value)) return out;
+    Object.keys(value).slice(0, 500).forEach(function (key) {
+      if (TOKEN.test(key) && seeks(value[key])) {
+        out[key] = value[key];
+      }
+    });
+    return out;
+  }
+
+  function link(value) {
+    return typeof value === "string" && LINK.test(value) ? value : "";
+  }
+
+  // Where a clip is from in the show, and what was said either side of
+  // it. No valid start, no clip panel: the post then shows as what it
+  // is, with the episode's summary and the ask box.
+  function cleanClip(value) {
+    if (!value || typeof value !== "object" || !TOKEN.test(value.at)) return null;
+    return {
+      at: value.at,
+      until: TOKEN.test(value.until) ? value.until : "",
+      watch: link(value.watch),
+      before: str(value.before, 1500),
+      after: str(value.after, 3000),
+      afterAt: TOKEN.test(value.after_at) ? value.after_at : "",
+      afterWatch: seeks(value.after_watch) ? value.after_watch : ""
+    };
   }
 
   function cleanShelf(value) {
@@ -82,8 +129,11 @@ var MBS = (function () {
     if (!value || typeof value !== "object") return null;
     if (!isPostId(value.post) || ARCHIVES.indexOf(value.archive) === -1) return null;
     var episodeId = str(value.episode_id, 40);
+    var clip = value.kind === "clip" ? cleanClip(value.clip) : null;
     return {
       post: value.post,
+      kind: clip ? "clip" : "recording",
+      clip: clip,
       archive: value.archive,
       archiveName: str(value.archive_name, 40),
       title: str(value.title, MAX_TITLE),
@@ -91,6 +141,7 @@ var MBS = (function () {
       publishedAt: /^\d{4}-\d{2}-\d{2}$/.test(value.published_at || "") ? value.published_at : "",
       summary: str(value.summary, MAX_TEXT),
       times: cleanTimes(value.times),
+      links: cleanLinks(value.links),
       seekable: value.seekable === true,
       page: pageFor(value.archive, episodeId)
     };
@@ -101,14 +152,17 @@ var MBS = (function () {
     return {
       answer: str(value.answer, MAX_TEXT),
       refused: value.refused === true,
-      times: cleanTimes(value.times)
+      times: cleanTimes(value.times),
+      links: cleanLinks(value.links)
     };
   }
 
   // A line of text as pieces: plain words, bold words, and times. A time
-  // is only a time if the server gave its X second; the rest stay words,
-  // because a time with no second on X is one the player cannot reach.
-  function pieces(line, times) {
+  // is only a time if the server gave its X second, or for a clip a link
+  // to the whole show at it; the rest stay words, because a time with
+  // neither is one nothing can play.
+  function pieces(line, times, links) {
+    links = links || {};
     var out = [];
     String(line).split(/(\*\*[^*]+\*\*)/).forEach(function (chunk) {
       if (!chunk) return;
@@ -116,9 +170,11 @@ var MBS = (function () {
       var text = bold ? chunk.slice(2, -2) : chunk;
       var last = 0;
       text.replace(TIME, function (match, token, offset) {
-        if (Object.prototype.hasOwnProperty.call(times, token)) {
+        var own = Object.prototype.hasOwnProperty.call(times, token);
+        if (own || Object.prototype.hasOwnProperty.call(links, token)) {
           if (offset > last) out.push({ text: text.slice(last, offset), bold: bold });
-          out.push({ time: token, seconds: times[token], bold: bold });
+          out.push(own ? { time: token, seconds: times[token], bold: bold }
+                       : { time: token, link: links[token], bold: bold });
           last = offset + match.length;
         }
         return match;
@@ -143,7 +199,7 @@ var MBS = (function () {
   // item, or a paragraph. Square brackets around a time are dropped, the
   // way the site shows them. A summary's opening "**TL;DR** — ..." becomes
   // a heading over its paragraph, the same as "Topics" below it.
-  function blocks(markdown, times) {
+  function blocks(markdown, times, links) {
     var out = [];
     String(markdown || "").split(/\r?\n/).forEach(function (raw) {
       var line = raw.trim().replace(/\[(\d{1,2}:\d{2}(?::\d{2})?)\]/g, "$1");
@@ -158,9 +214,9 @@ var MBS = (function () {
       if (heading) {
         out.push({ kind: "heading", parts: [{ text: heading[1], bold: true }] });
       } else if (/^[-*]\s+/.test(line)) {
-        out.push({ kind: "item", parts: pieces(line.replace(/^[-*]\s+/, ""), times) });
+        out.push({ kind: "item", parts: pieces(line.replace(/^[-*]\s+/, ""), times, links) });
       } else {
-        out.push({ kind: "para", parts: pieces(line, times) });
+        out.push({ kind: "para", parts: pieces(line, times, links) });
       }
     });
     return out;
@@ -191,7 +247,8 @@ var MBS = (function () {
     API: API, ARCHIVES: ARCHIVES, MAX_QUESTION: MAX_QUESTION,
     isPostId: isPostId, postIdFromHref: postIdFromHref,
     cleanShelf: cleanShelf, cleanPost: cleanPost, cleanAnswer: cleanAnswer,
-    cleanTimes: cleanTimes, cleanQuestion: cleanQuestion,
+    cleanTimes: cleanTimes, cleanLinks: cleanLinks, cleanClip: cleanClip,
+    cleanQuestion: cleanQuestion, undash: undash, LINK: LINK, seeks: seeks,
     pieces: pieces, blocks: blocks, pageFor: pageFor, longDate: longDate,
     timeTokens: timeTokens
   };

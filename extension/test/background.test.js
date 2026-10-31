@@ -149,3 +149,16 @@ test("a hostile shelf is cleaned before the page sees it", async () => {
   const reply = await w.send({ type: "shelf" });
   assert.deepEqual(Object.keys(reply.data.posts), [POST]);
 });
+
+test("a clip's links are cleaned before the page sees them", async () => {
+  const show = "https://x.com/i/broadcasts/1dxYlaZbXWQJX";
+  const w = worker(() => json(200, { ...POST_BODY, kind: "clip",
+    clip: { at: "1:39:53", until: "1:41:12", watch: show + "?t=5993", before: "b", after: "a",
+            after_at: "1:41:18", after_watch: "https://evil.example/?t=1" },
+    links: { "0:04:31": show + "?t=271", "0:05:00": "javascript:alert(1)" } }));
+  const { post } = (await w.send({ type: "post", post: POST })).data;
+  assert.equal(post.kind, "clip");
+  assert.equal(post.clip.watch, show + "?t=5993");
+  assert.equal(post.clip.afterWatch, "");
+  assert.deepEqual(post.links, { "0:04:31": show + "?t=271" });
+});

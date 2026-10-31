@@ -3889,7 +3889,7 @@ async def x_shelf(response: Response) -> dict:
 async def x_post(post_id: str) -> dict:
     """The panel for one post: what it is, its summary when it has one,
     and the X second for every time the summary writes. No model call."""
-    found = x_posts.describe(post_id) if x_posts.POST_ID.match(post_id) else None
+    found = x_posts.describe(post_id) if x_posts.POST_ID.fullmatch(post_id) else None
     if found is None:
         raise HTTPException(status_code=404, detail=_X_UNKNOWN)
     _track("x_extension_opens")
@@ -3954,6 +3954,7 @@ async def x_ask(
             if demoted:
                 result = result.model_copy(update={"answer": fixed})
         answers.put(key, result)
+    times, links = x_posts.marks(result.answer, found)
     return {"answer": result.answer, "refused": bool(result.refused),
-            "times": x_posts.times_in(result.answer, found["clock"])}
+            "times": times, "links": links}
 

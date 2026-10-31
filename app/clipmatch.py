@@ -142,13 +142,17 @@ def _densest(times: list[float],
     return best[0] / len(order), best[1], best[2]
 
 
-def place(transcript: str, episodes: list[dict],
-          duration_seconds: float | None = None) -> dict | None:
-    """Where this clip came from, or None when it cannot be placed.
+def candidates(transcript: str, episodes: list[dict],
+               duration_seconds: float | None = None) -> list[dict]:
+    """Every episode this clip passes both gates in, strongest first.
 
-    None is the important return. A clip from a show that was never
-    indexed matches almost nothing, and answering it from the newest
-    episode is the bug this module exists to remove.
+    More than one is the same tape held twice, not a guess between shows:
+    each has to hold a dozen eight-word runs of the clip that occur once
+    in it, all inside one clip-length stretch, and two different shows
+    don't share that. Market Bubble goes out on X and again on YouTube,
+    so a clip often lands in both copies; the caller picks which copy to
+    point at. Measured 31 Oct 2026: a clip of Episode 23 matched the X
+    broadcast 157 times and the YouTube cut 167.
 
     Only runs that are unique IN THE EPISODE are counted, the same rule
     align_recordings.offset() uses: a phrase somebody repeats through the
@@ -157,7 +161,7 @@ def place(transcript: str, episodes: list[dict],
     """
     wanted = runs(transcript)
     if len(wanted) < MIN_UNIQUE_RUNS:
-        return None
+        return []
     asked = set(wanted)
 
     # How long a stretch of tape this clip is allowed to occupy. The
@@ -189,9 +193,21 @@ def place(transcript: str, episodes: list[dict],
             "end": end,
             "share_in_span": share,
         })
+    scored.sort(key=lambda row: row["matches"], reverse=True)
+    return scored
+
+
+def place(transcript: str, episodes: list[dict],
+          duration_seconds: float | None = None) -> dict | None:
+    """Where this clip came from, or None when it cannot be placed.
+
+    None is the important return. A clip from a show that was never
+    indexed matches almost nothing, and answering it from the newest
+    episode is the bug this module exists to remove.
+    """
+    scored = candidates(transcript, episodes, duration_seconds)
     if not scored:
         return None
-    scored.sort(key=lambda row: row["matches"], reverse=True)
     best = scored[0]
     # Two episodes both matching well means the archive holds the same
     # show twice -- a broadcast and its YouTube cut, which dedupe.py

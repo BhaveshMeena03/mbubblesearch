@@ -19,6 +19,13 @@ Three kinds of post, all from files the service already ships:
   rasmr X-only         streams that never reached YouTube, indexed from X
                        as "x-<post>" like Market Bubble's.
 
+And a fourth that is not a whole recording: clips. Ansem posts a minute
+of Market Bubble or of his own videos several times a day. Each one
+placed in the archive by its own words (scripts/place_x_clips.py, written
+to data/x_clips.json) gets a panel saying where it is from and what was
+said right after the cut. A time inside the clip moves the clip's player;
+any other opens the whole show at that second.
+
 Every time the extension shows is converted here, never in the browser,
 so there is one copy of the clock arithmetic and it is the one the bot's
 links already use.
@@ -33,7 +40,7 @@ import re
 from functools import lru_cache
 from pathlib import Path
 
-from . import mcg_on_x
+from . import mcg_on_x, podcast
 
 logger = logging.getLogger(__name__)
 
@@ -44,8 +51,32 @@ MCG_PAIRS = _DATA / "mcg_broadcast_links.json"
 RASMR_PAIRS = _DATA / "rasmr_broadcast_links.json"
 RASMR_SHELF = _DATA / "rasmr_index.json"
 MCG_SHELF = _DATA / "mcg_index.json"
+CLIPS = _DATA / "x_clips.json"
 
 POST_ID = re.compile(r"^[0-9]{5,25}$")
+EPISODE_ID = re.compile(r"^[A-Za-z0-9_-]{1,40}$")
+
+# The whole show at a second, in the three shapes the site's own links take
+# for this archive: X's broadcast player, an X post, a YouTube video. Any
+# other is dropped here, and the extension checks again with the same
+# pattern (tests/test_x_extension.py holds them to it).
+LINK = re.compile(
+    r"^https://(?:x\.com/i/broadcasts/[A-Za-z0-9]{8,20}\?t=[0-9]{1,6}"
+    r"|x\.com/[A-Za-z0-9_]{1,15}/status/[0-9]{5,25}\?t=[0-9]{1,6}"
+    r"|www\.youtube\.com/watch\?v=[A-Za-z0-9_-]{11}&t=[0-9]{1,6}s)$")
+
+# The two of those that open at the second. X opens a post's video at its
+# start whatever ?t= says, so a time is never a link to one: 12 of the
+# first 31 clips came from Ansem's uploads, and "watch from 0:12:26" would
+# have started them at 0:00.
+SEEKS = re.compile(
+    r"^https://(?:x\.com/i/broadcasts/[A-Za-z0-9]{8,20}\?t=[0-9]{1,6}"
+    r"|www\.youtube\.com/watch\?v=[A-Za-z0-9_-]{11}&t=[0-9]{1,6}s)$")
+
+# A clip's own player covers its words; a time a few seconds past the last
+# one is still the clip, a time beyond that is the whole show's.
+CLIP_SLACK_SECONDS = 5
+_DAY = 24 * 3600
 
 ARCHIVE_NAMES = {"podcast": "Market Bubble", "mcg": "MCG Live",
                  "rasmr": "rasmr"}
@@ -76,7 +107,7 @@ def _json(path: Path):
 
 def _post_of(episode_id: str) -> str | None:
     post = episode_id[2:] if episode_id.startswith("x-") else ""
-    return post if POST_ID.match(post) else None
+    return post if POST_ID.fullmatch(post) else None
 
 
 @lru_cache(maxsize=1)
@@ -89,6 +120,40 @@ def _summaries() -> dict[str, dict]:
 def _rows(path: Path) -> list[dict]:
     rows = _json(path) or []
     return rows if isinstance(rows, list) else rows.get("episodes", [])
+
+
+def _second(value) -> int | None:
+    ok = isinstance(value, int) and not isinstance(value, bool) and 0 <= value < _DAY
+    return value if ok else None
+
+
+@lru_cache(maxsize=1)
+def _clips() -> dict[str, dict]:
+    """data/x_clips.json, each row checked. A row that is wrong in any
+    way is left out whole, the post then has no button, rather than shown
+    with a guessed part."""
+    out: dict[str, dict] = {}
+    given = _json(CLIPS) or {}
+    if not isinstance(given, dict):
+        return out
+    for post, row in given.items():
+        if not (POST_ID.fullmatch(str(post)) and isinstance(row, dict)):
+            continue
+        start, end = _second(row.get("start")), _second(row.get("end"))
+        after_at = row.get("after_at")
+        if (row.get("archive") != "podcast"
+                or not EPISODE_ID.fullmatch(str(row.get("episode_id", "")))
+                or start is None or end is None or end < start
+                or (after_at is not None and _second(after_at) is None)
+                or not isinstance(row.get("before", ""), str)
+                or not isinstance(row.get("after", ""), str)):
+            logger.warning("x posts: clip %s is malformed, left out", post)
+            continue
+        out[str(post)] = {"episode_id": row["episode_id"], "start": start, "end": end,
+                          "before": row.get("before", "")[:1500],
+                          "after": row.get("after", "")[:3000],
+                          "after_at": after_at}
+    return out
 
 
 @lru_cache(maxsize=1)
@@ -110,7 +175,7 @@ def shelf() -> dict[str, dict]:
     for archive, path in (("mcg", MCG_PAIRS), ("rasmr", RASMR_PAIRS)):
         for video, pair in (_json(path) or {}).items():
             post = str(pair.get("post", ""))
-            if not POST_ID.match(post):
+            if not POST_ID.fullmatch(post):
                 continue
             if pair.get("sections"):
                 clock = {"sections": pair["sections"]}
@@ -134,6 +199,13 @@ def shelf() -> dict[str, dict]:
             posts[post] = {"archive": "rasmr", "episode_id": row["id"],
                            "clock": {"offset": 0}, "title": row.get("title"),
                            "published_at": row.get("published_at")}
+
+    # Clips, and never over a post that is a whole recording: that one
+    # gets the whole recording's panel.
+    for post, clip in _clips().items():
+        if post not in posts:
+            posts[post] = {"archive": "podcast", "episode_id": clip["episode_id"],
+                           "kind": "clip", "clock": {}, "clip": clip}
     return posts
 
 
@@ -165,29 +237,74 @@ _CLOCK_OF_DAY = re.compile(
     re.I)
 
 
-def times_in(text: str, clock: dict) -> dict[str, int]:
-    """Every time written in `text`, to the X second it plays at.
-
-    Keyed by the time exactly as written, so the extension finds each one
-    by the characters it sees and never parses a clock itself. A time
-    whose minutes or seconds are 60 or more is not a time, and neither is
-    a time of day.
-    """
+def _written(text: str) -> dict[str, int]:
+    """Every moment of the recording written in `text`, as written, to
+    its second in the transcript. A time whose minutes or seconds are 60
+    or more is not a time, and neither is a time of day."""
     out: dict[str, int] = {}
     text = text or ""
+    # Every copy of a time of day stays words: the extension finds times
+    # by their characters, so "8:30" cannot be a button in one place and
+    # the clock in another.
     day_times = {f.group(1) for f in TIME.finditer(text)
                  if _CLOCK_OF_DAY.match(text, f.end())}
     for found in TIME.finditer(text):
         token = found.group(1)
-        if any(int(p) >= 60 for p in token.split(":")[1:]):
+        if token in day_times or any(int(p) >= 60 for p in token.split(":")[1:]):
             continue
-        # Every copy of a time of day stays words: the extension finds
-        # times by their characters, so "8:30" cannot be a button in one
-        # place and the clock in another.
-        at = to_x(_seconds(token), clock)
-        if at is not None and token not in day_times:
+        out[token] = _seconds(token)
+    return out
+
+
+def times_in(text: str, clock: dict) -> dict[str, int]:
+    """Every time written in `text`, to the X second it plays at.
+
+    Keyed by the time exactly as written, so the extension finds each one
+    by the characters it sees and never parses a clock itself.
+    """
+    out: dict[str, int] = {}
+    for token, seconds in _written(text).items():
+        at = to_x(seconds, clock)
+        if at is not None:
             out[token] = at
     return out
+
+
+def clock_text(seconds: int) -> str:
+    """1:39:53, the way the summaries write a time."""
+    return f"{seconds // 3600}:{seconds % 3600 // 60:02d}:{seconds % 60:02d}"
+
+
+def watch(episode_id: str, seconds: int) -> str | None:
+    """The whole show at this second, by the site's own link for it, or
+    None when the archive has no address for the show or the address is
+    not one of the three shapes LINK allows."""
+    row = _summaries().get(episode_id) or {}
+    url = podcast._deep_link(str(row.get("url") or ""), str(row.get("platform") or ""),
+                             seconds, episode_id)
+    return url if LINK.fullmatch(url) else None
+
+
+def marks(text: str, row: dict) -> tuple[dict[str, int], dict[str, str]]:
+    """(times that move the post's own player, times that open the whole
+    show), for every time written in `text`.
+
+    A recording has only the first kind. A clip has both: a time inside
+    it plays in the clip, and every time, inside or not, can open the
+    whole show there.
+    """
+    if row.get("kind") != "clip":
+        return times_in(text, row["clock"]), {}
+    clip = row["clip"]
+    times: dict[str, int] = {}
+    links: dict[str, str] = {}
+    for token, seconds in _written(text).items():
+        if clip["start"] <= seconds <= clip["end"] + CLIP_SLACK_SECONDS:
+            times[token] = seconds - clip["start"]
+        link = watch(row["episode_id"], seconds)
+        if link and SEEKS.fullmatch(link):
+            links[token] = link
+    return times, links
 
 
 def listing() -> dict[str, str]:
@@ -211,8 +328,10 @@ def describe(post: str) -> dict | None:
     archive, episode_id = row["archive"], row["episode_id"]
     summary = _summaries().get(episode_id) if archive == "podcast" else None
     text = (summary or {}).get("summary") or None
-    return {
+    times, links = marks(text or "", row)
+    out = {
         "post": post,
+        "kind": row.get("kind", "recording"),
         "archive": archive,
         "archive_name": ARCHIVE_NAMES[archive],
         "episode_id": episode_id,
@@ -221,7 +340,25 @@ def describe(post: str) -> dict | None:
         "published_at": ((summary or {}).get("published_at")
                          or row.get("published_at") or None),
         "summary": text,
-        "times": times_in(text or "", row["clock"]),
-        "seekable": bool(row["clock"]),
+        "times": times,
+        "links": links,
+        "seekable": bool(row["clock"]) or row.get("kind") == "clip",
         "page": page_for(archive, episode_id),
     }
+    clip = row.get("clip")
+    if clip:
+        after_at = clip["after_at"]
+        # The full recording either way; a time only where it seeks.
+        shown = watch(episode_id, clip["start"])
+        after = watch(episode_id, after_at) if after_at is not None else None
+        out["clip"] = {
+            "at": clock_text(clip["start"]),
+            "until": clock_text(clip["end"]),
+            "watch": shown,
+            "seeks": bool(shown and SEEKS.fullmatch(shown)),
+            "before": clip["before"],
+            "after": clip["after"],
+            "after_at": clock_text(after_at) if after_at is not None else None,
+            "after_watch": after if after and SEEKS.fullmatch(after) else None,
+        }
+    return out

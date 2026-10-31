@@ -426,3 +426,111 @@ test("a light X gets a light panel", { skip }, async () => {
     await browser.close();
   }
 });
+
+// A clip of a show: its own minute of video, and the whole show elsewhere.
+const CLIP = "2116428709150478840";
+const SHOW = "https://x.com/i/broadcasts/1dxYlaZbXWQJX";
+
+function clipReply(extra = {}) {
+  return postReply(CLIP, {
+    kind: "clip", title: "Market Bubble Episode 24", show: "", publishedAt: "2026-10-29",
+    clip: { at: "1:39:53", until: "1:41:12", watch: SHOW + "?t=5993",
+            before: "lab diamonds " + HOSTILE, after: "How does MicroStrategy look?",
+            afterAt: "1:41:18", afterWatch: SHOW + "?t=6078" },
+    summary: "**TL;DR** — the hack\n\n**Topics**\n- [0:04:31] macro\n- [1:40:05] the clip's moment\n" +
+             "- [2:00:00] a link that is not ours",
+    times: { "1:40:05": 12 },
+    links: { "0:04:31": SHOW + "?t=271", "1:40:05": SHOW + "?t=6005", "2:00:00": "javascript:window.pwned=1" },
+    ...extra });
+}
+
+test("a clip says where it is from and what came after the cut", { skip }, async t => {
+  const browser = await launch({ headless: true });
+  try {
+    const tab = await open(browser, article("clip", CLIP), {
+      shelf: { ok: true, data: { posts: { [CLIP]: "podcast" } } }, post: clipReply() });
+    await tab.locator("#clip [data-mbs-button] .btn").click();
+    await tab.locator("#clip .panel .title").waitFor();
+    const panel = tab.locator("#clip .panel");
+
+    await t.test("it names the show and the moment, linked to the whole show there", async () => {
+      assert.equal(await panel.locator(".from").textContent(), "This clip is from");
+      assert.equal(await panel.locator(".title").textContent(), "Market Bubble Episode 24");
+      const at = panel.locator(".at a.t");
+      assert.equal(await at.textContent(), "1:39:53");
+      assert.equal(await at.getAttribute("href"), SHOW + "?t=5993");
+      assert.equal(await at.getAttribute("target"), "_blank");
+      assert.equal(await at.getAttribute("rel"), "noopener noreferrer");
+      assert.match(await panel.locator(".at").textContent(), /^1:39:53 to 1:41:12 in the show\. /);
+      assert.equal(await panel.locator(".at a.watch").getAttribute("href"), SHOW + "?t=5993");
+    });
+
+    await t.test("what was said either side is shown as text", async () => {
+      assert.deepEqual((await panel.locator("h4").allTextContents()).slice(0, 2),
+        ["Just before the clip", "Right after the clip"]);
+      assert.ok((await panel.locator(".before").textContent()).includes("<img src=x"));
+      assert.equal(await tab.evaluate(() => window.pwned), undefined);
+      const after = panel.locator("p.said:not(.before)");
+      assert.equal(await after.locator("a.t").getAttribute("href"), SHOW + "?t=6078");
+      assert.equal(await after.textContent(), "1:41:18 How does MicroStrategy look?…");
+    });
+
+    await t.test("the episode's summary is folded away until asked for", async () => {
+      const whole = panel.locator("details");
+      assert.equal(await whole.evaluate(d => d.open), false);
+      await whole.locator("summary").click();
+      assert.equal(await whole.evaluate(d => d.open), true);
+      assert.deepEqual(await tab.evaluate(() => window.opened), []);
+    });
+
+    await t.test("a time inside the clip plays in the clip", async () => {
+      await panel.locator("details button.t", { hasText: "1:40:05" }).click();
+      await tab.waitForFunction(() => Math.abs(document.querySelector("#clip video").currentTime - 12) < 2,
+        null, { timeout: 8000 });
+    });
+
+    await t.test("a time outside it is a link to the show, and a bad link is only words", async () => {
+      assert.equal(await panel.locator("details a.t", { hasText: "0:04:31" }).getAttribute("href"),
+        SHOW + "?t=271");
+      assert.equal(await panel.locator("a[href^='javascript']").count(), 0);
+      assert.ok((await panel.locator("details").textContent()).includes("2:00:00 a link that is not ours"));
+    });
+
+    await t.test("a clip of an uploaded video opens it, and claims no second", async () => {
+      const upload = "https://x.com/blknoiz06/status/2115418459765113280?t=1719";
+      await tab.evaluate(r => { window.__replies.post = r; }, clipReply({
+        clip: { at: "0:28:39", until: "0:30:05", watch: upload, before: "b", after: "a",
+                afterAt: "0:30:09", afterWatch: "" }, links: {} }));
+      await tab.locator("#clip [data-mbs-button] .btn").click();
+      await tab.locator("#clip [data-mbs-button] .btn").click();
+      await tab.locator("#clip .panel .at").waitFor();
+      const at = tab.locator("#clip .panel .at");
+      assert.equal(await at.locator("a.t").count(), 0, "the time is words");
+      assert.equal(await at.locator("strong").textContent(), "0:28:39");
+      assert.equal(await at.locator("a.watch").textContent(), "Open the full video");
+      assert.equal(await at.locator("a.watch").getAttribute("href"), upload);
+      assert.equal(await tab.locator("#clip .panel p.said:not(.before) a").count(), 0);
+      await tab.evaluate(r => { window.__replies.post = r; }, clipReply());
+      await tab.locator("#clip [data-mbs-button] .btn").click();
+      await tab.locator("#clip [data-mbs-button] .btn").click();
+      await tab.locator("#clip .panel .at a.t").waitFor();
+    });
+
+    await t.test("the ask box asks about the episode", async () => {
+      assert.equal(await panel.locator("input").getAttribute("placeholder"), "Ask about the episode");
+      await tab.evaluate(show => {
+        window.__replies.ask = { ok: true, data: { answer: {
+          answer: "He said it at 1:40:05 and again at 2:41:30.", refused: false,
+          times: { "1:40:05": 12 }, links: { "2:41:30": show + "?t=9690" } } } };
+      }, SHOW);
+      await panel.locator("input").fill("what about bitcoin");
+      await panel.locator(".go").click();
+      await panel.locator(".answer").waitFor();
+      assert.deepEqual(await panel.locator(".answer button.t").allTextContents(), ["1:40:05"]);
+      assert.equal(await panel.locator(".answer a.t").getAttribute("href"), SHOW + "?t=9690");
+    });
+    await tab.close();
+  } finally {
+    await browser.close();
+  }
+});

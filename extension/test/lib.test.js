@@ -152,6 +152,70 @@ test("the panel shows no em or en dash, and keeps what they joined", () => {
   }
 });
 
+const SHOW = "https://x.com/i/broadcasts/1dxYlaZbXWQJX";
+
+test("a clip keeps where it is from, and only links of the three shapes", () => {
+  const post = MBS.cleanPost({
+    post: OURS, archive: "podcast", episode_id: "x-2115904746355851479", kind: "clip",
+    clip: { at: "1:39:53", until: "1:41:12", watch: SHOW + "?t=5993", before: "b".repeat(5000),
+            after: "a", after_at: "1:41:18", after_watch: "javascript:alert(1)" },
+    times: { "1:40:05": 12 },
+    links: { "0:04:31": SHOW + "?t=271", "2:00:00": "https://evil.example/?t=1",
+             "javascript": SHOW + "?t=1", "3:00:00": SHOW + "?t=10800\n" },
+  });
+  assert.equal(post.kind, "clip");
+  assert.deepEqual(post.clip, { at: "1:39:53", until: "1:41:12", watch: SHOW + "?t=5993",
+    before: "b".repeat(1500), after: "a", afterAt: "1:41:18", afterWatch: "" });
+  assert.deepEqual(post.links, { "0:04:31": SHOW + "?t=271" });
+  assert.deepEqual(post.times, { "1:40:05": 12 });
+});
+
+test("a clip with no valid start is shown as a plain post, not a clip", () => {
+  for (const clip of [null, "1:39:53", { at: "1:99:99x" }, { at: 5993 }, { watch: SHOW + "?t=1" }]) {
+    const post = MBS.cleanPost({ post: OURS, archive: "podcast", kind: "clip", clip });
+    assert.equal(post.kind, "recording", JSON.stringify(clip));
+    assert.equal(post.clip, null);
+  }
+  const notAClip = MBS.cleanPost({ post: OURS, archive: "podcast", clip: { at: "1:00" } });
+  assert.equal(notAClip.clip, null, "a clip block only counts on a post that is a clip");
+});
+
+test("the links allowed are exactly three shapes", () => {
+  for (const ok of [SHOW + "?t=5993", "https://x.com/MarketBubble/status/2115904746355851479?t=60",
+                    "https://www.youtube.com/watch?v=KcazozbZHd0&t=60s"]) {
+    assert.ok(MBS.LINK.test(ok), ok);
+  }
+  for (const bad of [SHOW + "?t=5993&x=1", SHOW, "http://x.com/i/broadcasts/1dxYlaZbXWQJX?t=1",
+                     "https://x.com.evil.example/i/broadcasts/1dxYlaZbXWQJX?t=1",
+                     "https://x.com/i/broadcasts/../../logout?t=1", "javascript:alert(1)",
+                     "https://www.youtube.com/watch?v=KcazozbZHd0&t=60s&list=x",
+                     "https://www.youtube.com.evil/watch?v=KcazozbZHd0&t=60s"]) {
+    assert.ok(!MBS.LINK.test(bad), bad);
+  }
+});
+
+test("a post's own video is never linked at a time: X starts it at 0:00", () => {
+  const upload = "https://x.com/blknoiz06/status/2115418459765113280?t=1719";
+  assert.ok(MBS.LINK.test(upload) && !MBS.seeks(upload));
+  assert.ok(MBS.seeks(SHOW + "?t=1") && MBS.seeks("https://www.youtube.com/watch?v=KcazozbZHd0&t=60s"));
+  const post = MBS.cleanPost({ post: OURS, archive: "podcast", kind: "clip",
+    clip: { at: "0:28:39", watch: upload, after_at: "0:30:09", after_watch: upload },
+    links: { "0:10:37": upload } });
+  assert.equal(post.clip.watch, upload, "the full video is still offered");
+  assert.equal(post.clip.afterWatch, "");
+  assert.deepEqual(post.links, {});
+});
+
+test("a time the clip holds plays in it; one it doesn't opens the show", () => {
+  const parts = MBS.pieces("at 1:40:05, then 0:04:31, and 5:00", { "1:40:05": 12 },
+    { "1:40:05": SHOW + "?t=6005", "0:04:31": SHOW + "?t=271" });
+  assert.deepEqual(parts.filter((p) => p.time), [
+    { time: "1:40:05", seconds: 12, bold: false },
+    { time: "0:04:31", link: SHOW + "?t=271", bold: false },
+  ]);
+  assert.deepEqual(MBS.cleanAnswer({ answer: "a", links: { "0:04:31": "data:text/html,x" } }).links, {});
+});
+
 test("a question is trimmed, flattened and capped", () => {
   assert.equal(MBS.cleanQuestion("  what   did\n ansem say "), "what did ansem say");
   assert.equal(MBS.cleanQuestion("q".repeat(900)).length, 500);
