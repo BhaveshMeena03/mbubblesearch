@@ -14,6 +14,7 @@ a worse one — retrieval quality is the product.
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -139,8 +140,18 @@ def test_each_archive_reads_its_own_index():
 
 
 def test_the_threadguy_index_holds_the_words_that_missed():
+    """Short words of letters and digits ("s1", "q3") were dropped before
+    the tokenizer learned to keep them, and searches for them missed.
+
+    It used to check "s1" itself, said in the S-1 stream. By 1 Nov 2026
+    three of his titles named the S-1 and it was in more than 60 windows:
+    a topic, not a rare word, so the df cap rightly drops it and search
+    finds it by meaning. What has to hold is the class reaching the
+    built index, not one member of it.
+    """
     raw = json.loads(gzip.decompress(path_for("threadguy").read_bytes()))
-    assert raw["terms"].get("s1"), "said as 'S1' in the S-1 stream"
+    mixed = [t for t in raw["terms"] if re.fullmatch(r"(?=.*\d)(?=.*[a-z])[a-z0-9]{2}", t)]
+    assert len(mixed) >= 5, mixed
     assert raw["terms"].get("bucket"), "Blurr's 'bucket shop'"
 
 
