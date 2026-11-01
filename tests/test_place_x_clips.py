@@ -97,7 +97,7 @@ def _got(**over):
     (_got(broadcast=True), "a broadcast"),
     (_got(duration=None), "no length"),
     (_got(duration=2729.0), "45 minutes long"),
-    (_got(caption=""), "no captions"),
+    (_got(caption=""), "no captions on X"),
     (_got(caption="nothing in the archive sounds anything like this " * 3), "not in the archive"),
 ])
 def test_what_is_not_a_placeable_clip_is_left_out_with_its_reason(got, said):
@@ -137,3 +137,73 @@ def test_only_post_ids_are_taken(monkeypatch):
     monkeypatch.setattr(sys, "argv", ["place_x_clips.py", "123456789", "../etc/passwd"])
     with pytest.raises(SystemExit, match="not post ids"):
         place.main()
+
+
+def test_the_clip_accounts_are_read_without_regard_to_case():
+    from app import x_posts
+    for handle in ("blknoiz06", "MarketBubble", "mbubbleSearch", "Kaiz_294", "KAIZ_294"):
+        assert x_posts.clip_account(handle), handle
+    for handle in ("kaiz294", "someclipper", "", None, 7):
+        assert not x_posts.clip_account(handle), handle
+
+
+def test_the_search_asks_only_for_their_own_videos():
+    q = place.search_query(frozenset({"blknoiz06", "kaiz_294"}))
+    assert q == "(from:blknoiz06 OR from:kaiz_294) has:videos -is:retweet -is:reply"
+
+
+def test_a_search_run_places_what_it_found_and_remembers_how_far_it_read(tmp_path, monkeypatch):
+    out, searched = tmp_path / "x_clips.json", tmp_path / "x_clips_search.json"
+    searched.write_text(json.dumps({"newest": "2000000000000000001"}))
+    asked = []
+
+    async def fake_search(since_id):
+        asked.append(since_id)
+        return ["2000000000000000003", "2000000000000000002"]
+    monkeypatch.setattr(place, "OUT", out)
+    monkeypatch.setattr(place, "SEARCHED", searched)
+    monkeypatch.setattr(place, "PAUSE_SECONDS", 0)
+    monkeypatch.setattr(place, "search", fake_search)
+    monkeypatch.setattr(place, "fetch", lambda post, workdir: _got(account="Kaiz_294"))
+    monkeypatch.setattr(place.episode_store, "load", lambda: [EPISODE])
+    monkeypatch.setattr(sys, "argv", ["place_x_clips.py", "--search"])
+    place.main()
+    assert asked == ["2000000000000000001"], "only what came after the newest read"
+    assert sorted(json.loads(out.read_text())) == ["2000000000000000002", "2000000000000000003"]
+    assert json.loads(searched.read_text()) == {"newest": "2000000000000000003"}
+
+
+def test_a_search_that_finds_nothing_keeps_its_place(tmp_path, monkeypatch):
+    out, searched = tmp_path / "x_clips.json", tmp_path / "x_clips_search.json"
+    searched.write_text(json.dumps({"newest": "2000000000000000009"}))
+
+    async def nothing(since_id):
+        return []
+    monkeypatch.setattr(place, "OUT", out)
+    monkeypatch.setattr(place, "SEARCHED", searched)
+    monkeypatch.setattr(place, "search", nothing)
+    monkeypatch.setattr(place.episode_store, "load", lambda: [EPISODE])
+    monkeypatch.setattr(sys, "argv", ["place_x_clips.py", "--search"])
+    place.main()
+    assert json.loads(searched.read_text()) == {"newest": "2000000000000000009"}
+
+
+def test_a_clip_without_captions_is_heard_only_when_it_is_worth_it():
+    assert place.needs_ears(_got(caption=""))
+    for got in (_got(), _got(caption="", duration=2729.0), _got(caption="", broadcast=True),
+                _got(caption="", account="someclipper"), _got(caption="", duration=None),
+                {"error": "x"}):
+        assert not place.needs_ears(got), got
+
+
+def test_a_heard_clip_is_placed_and_says_so(tmp_path, monkeypatch):
+    out = tmp_path / "x_clips.json"
+    monkeypatch.setattr(place, "OUT", out)
+    monkeypatch.setattr(place, "PAUSE_SECONDS", 0)
+    monkeypatch.setattr(place, "fetch", lambda post, workdir: _got(caption="", account="mbubbleSearch"))
+    monkeypatch.setattr(place, "listen", lambda post, workdir: CLIP)
+    monkeypatch.setattr(place.episode_store, "load", lambda: [EPISODE])
+    monkeypatch.setattr(sys, "argv", ["place_x_clips.py", "2000000000000000005"])
+    place.main()
+    entry = json.loads(out.read_text())["2000000000000000005"]
+    assert entry["heard_from"] == "audio" and entry["start"] == 40

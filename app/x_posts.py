@@ -77,10 +77,16 @@ SEEKS = re.compile(
     r"^https://(?:x\.com/i/broadcasts/[A-Za-z0-9]{8,20}\?t=[0-9]{1,6}"
     r"|www\.youtube\.com/watch\?v=[A-Za-z0-9_-]{11}&t=[0-9]{1,6}s)$")
 
-# Whose clips are placed: the show's own accounts. Anyone's audio can match
-# the archive, but the panel says "This clip is from" over the video, and
-# over a stranger's post that would vouch for whatever they cut around it.
-CLIP_ACCOUNTS = frozenset({"blknoiz06", "MarketBubble"})
+# Whose clips are placed: the show's own accounts, ours, and the clippers
+# we follow. Anyone's audio can match the archive, but the panel says "This
+# clip is from" over the video, and over a stranger's post that would vouch
+# for whatever they cut around it. Lowercase: X handles are not case
+# sensitive, and yt-dlp hands back whichever case the account chose.
+CLIP_ACCOUNTS = frozenset({"blknoiz06", "marketbubble", "mbubblesearch", "kaiz_294"})
+
+
+def clip_account(handle) -> bool:
+    return isinstance(handle, str) and handle.lower() in CLIP_ACCOUNTS
 
 # A clip's own player covers its words; a time a few seconds past the last
 # one is still the clip, a time beyond that is the whole show's.
@@ -189,7 +195,7 @@ def _clips() -> dict[str, dict]:
             continue
         start, end = _second(row.get("start")), _second(row.get("end"))
         after_at = row.get("after_at")
-        if (row.get("archive") != "podcast" or row.get("account") not in CLIP_ACCOUNTS
+        if (row.get("archive") != "podcast" or not clip_account(row.get("account"))
                 or not EPISODE_ID.fullmatch(str(row.get("episode_id", "")))
                 or start is None or end is None or end < start
                 or (after_at is not None and _second(after_at) is None)

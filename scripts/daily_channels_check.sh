@@ -154,6 +154,14 @@ echo "-- threadguy notes"
 echo "-- threadguy on x"
 .venv/bin/python -u scripts/pair_threadguy_broadcasts.py --search || status=1
 
+# Clips of the shows posted on X by Ansem, Market Bubble, us and Kaiz,
+# placed in the archive so the extension can say where each is from and
+# what was said after it. One X search for their new video posts (about
+# half a cent each, around 25 a day), then X's own captions, which are
+# free.
+echo "-- clips on x"
+.venv/bin/python -u scripts/place_x_clips.py --search || status=1
+
 # Notes for MCG's newest, the daily live show included: the extension
 # shows them on MCG Live's posts on X. Already-written ones are skipped.
 echo "-- mcg notes"
@@ -197,7 +205,8 @@ shelves=(data/threadguy_index.json data/mcg_index.json data/rasmr_index.json
 # Only once it is in the repo: git will not commit a path it has never
 # seen, and the refusal would take the shelves down with it.
 for kept in data/mcg_broadcast_links.json data/threadguy_broadcast_links.json \
-            data/threadguy_x_broadcasts.json data/mcg_summaries.json.gz; do
+            data/threadguy_x_broadcasts.json data/mcg_summaries.json.gz \
+            data/x_clips.json data/x_clips_search.json; do
   if git ls-files --error-unmatch "$kept" >/dev/null 2>&1; then
     shelves+=("$kept")
   fi

@@ -101,3 +101,10 @@ def test_mcg_gets_its_notes_every_morning_through_the_proxy_and_committed():
     assert SCRIPT.index("unset ANTHROPIC_BASE_URL") < notes
     assert notes < SCRIPT.index('git diff --quiet -- "${shelves[@]}"')
     assert "data/mcg_summaries.json.gz" in SCRIPT
+
+
+def test_new_clips_on_x_are_placed_every_morning_and_committed():
+    placed = SCRIPT.index("scripts/place_x_clips.py --search")
+    assert placed < SCRIPT.index('git diff --quiet -- "${shelves[@]}"')
+    for kept in ("data/x_clips.json", "data/x_clips_search.json"):
+        assert kept in SCRIPT
