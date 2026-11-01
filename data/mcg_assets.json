@@ -4,7 +4,7 @@
    "symbol": "SOL",
    "name": "Solana",
    "asset_class": "crypto",
-   "mentions": 2652,
+   "mentions": 2656,
    "analysis": 797,
    "moments": [
     {
@@ -20519,6 +20519,15 @@
      "note": "Speaker mentions making a quick swap on Solana."
     },
     {
+     "episode_id": "qz5qB0AgC0Q",
+     "episode_title": "Nate (Long / $AI Founder): Robinhood Chain Isn\u2019t Dead | Wallet Integration, Why Stock Tokens Win",
+     "start_seconds": 322.0,
+     "timestamp": "5:22",
+     "deep_link": "https://www.youtube.com/watch?v=qz5qB0AgC0Q&t=322s",
+     "kind": "mention",
+     "note": "Speaker mentions Eviar appeal versus Solana as a comparison."
+    },
+    {
      "episode_id": "r1_K_EuTlEg",
      "episode_title": "METALS DOWN, CRYPTO UP? BOTTOM IN?",
      "start_seconds": 1357.0,
@@ -23858,6 +23867,33 @@
      "note": "Speaker references Solana's onchain activity and the tools that underpin it."
     },
     {
+     "episode_id": "zqOYgV9pXxI",
+     "episode_title": "Former Robinhood Employee on What\u2019s Actually Happening at Robinhood Right Now..",
+     "start_seconds": 771.0,
+     "timestamp": "12:51",
+     "deep_link": "https://www.youtube.com/watch?v=zqOYgV9pXxI&t=771s",
+     "kind": "mention",
+     "note": "Solana mentioned as the cycle winner from the previous cycle before Ethereum."
+    },
+    {
+     "episode_id": "zqOYgV9pXxI",
+     "episode_title": "Former Robinhood Employee on What\u2019s Actually Happening at Robinhood Right Now..",
+     "start_seconds": 1215.0,
+     "timestamp": "20:15",
+     "deep_link": "https://www.youtube.com/watch?v=zqOYgV9pXxI&t=1215s",
+     "kind": "mention",
+     "note": "Named in passing as a comparison point when discussing ecosystem support and regulatory constraints compared to Robinhood."
+    },
+    {
+     "episode_id": "zqOYgV9pXxI",
+     "episode_title": "Former Robinhood Employee on What\u2019s Actually Happening at Robinhood Right Now..",
+     "start_seconds": 2224.0,
+     "timestamp": "37:04",
+     "deep_link": "https://www.youtube.com/watch?v=zqOYgV9pXxI&t=2224s",
+     "kind": "mention",
+     "note": "Speaker mentions people leaving to go back to Solana base but coming back now, referencing chain migration sentiment."
+    },
+    {
      "episode_id": "zr87xkXSUIM",
      "episode_title": "Marvin from $HEDGEMONY: Flywheel Trading Bot, $45M Volume, Burn Mechanism + More!",
      "start_seconds": 1037.0,
@@ -23876,15 +23912,15 @@
      "note": "Speaker discusses Solana price levels, noting a 20x move from 500K to current 8 million levels and speculating on future levels in another month."
     }
    ],
-   "episode_count": 537,
+   "episode_count": 539,
    "single_reference": false
   },
   {
    "symbol": "BTC",
    "name": "Bitcoin",
    "asset_class": "crypto",
-   "mentions": 1363,
-   "analysis": 739,
+   "mentions": 1364,
+   "analysis": 740,
    "moments": [
     {
      "episode_id": "-8z0M77EVZg",
@@ -36145,6 +36181,15 @@
      "note": "Speaker references Bitcoin bottoming out as a factor affecting potential returns for other tokens like Ondo."
     },
     {
+     "episode_id": "zqOYgV9pXxI",
+     "episode_title": "Former Robinhood Employee on What\u2019s Actually Happening at Robinhood Right Now..",
+     "start_seconds": 162.0,
+     "timestamp": "2:42",
+     "deep_link": "https://www.youtube.com/watch?v=zqOYgV9pXxI&t=162s",
+     "kind": "analysis",
+     "note": "Speaker analyzes Bitcoin chart showing a selloff of approximately seven percent amid market turmoil, noting crypto is performing better than traditional finance on this metric."
+    },
+    {
      "episode_id": "zr87xkXSUIM",
      "episode_title": "Marvin from $HEDGEMONY: Flywheel Trading Bot, $45M Volume, Burn Mechanism + More!",
      "start_seconds": 1207.0,
@@ -36154,14 +36199,14 @@
      "note": "Speaker mentions companies using treasuries to buy Bitcoin."
     }
    ],
-   "episode_count": 379,
+   "episode_count": 380,
    "single_reference": false
   },
   {
    "symbol": "ETH",
    "name": "Ethereum",
    "asset_class": "crypto",
-   "mentions": 974,
+   "mentions": 976,
    "analysis": 340,
    "moments": [
     {
@@ -44922,6 +44967,24 @@
      "note": "Referenced as historical context when discussing sniping and wallet blacklisting practices that occurred when ETH was popular."
     },
     {
+     "episode_id": "zqOYgV9pXxI",
+     "episode_title": "Former Robinhood Employee on What\u2019s Actually Happening at Robinhood Right Now..",
+     "start_seconds": 287.0,
+     "timestamp": "4:47",
+     "deep_link": "https://www.youtube.com/watch?v=zqOYgV9pXxI&t=287s",
+     "kind": "mention",
+     "note": "Speaker mentions ETH with questions around a specific vulnerability but does not elaborate further."
+    },
+    {
+     "episode_id": "zqOYgV9pXxI",
+     "episode_title": "Former Robinhood Employee on What\u2019s Actually Happening at Robinhood Right Now..",
+     "start_seconds": 771.0,
+     "timestamp": "12:51",
+     "deep_link": "https://www.youtube.com/watch?v=zqOYgV9pXxI&t=771s",
+     "kind": "mention",
+     "note": "Ethereum mentioned as the cycle winner before Solana."
+    },
+    {
      "episode_id": "zr87xkXSUIM",
      "episode_title": "Marvin from $HEDGEMONY: Flywheel Trading Bot, $45M Volume, Burn Mechanism + More!",
      "start_seconds": 1207.0,
@@ -44931,14 +44994,14 @@
      "note": "Speaker mentions Solana DATs and companies using treasuries to buy ETH."
     }
    ],
-   "episode_count": 358,
+   "episode_count": 359,
    "single_reference": false
   },
   {
    "symbol": "PUMP",
    "name": "Pump.fun",
    "asset_class": "other",
-   "mentions": 389,
+   "mentions": 390,
    "analysis": 239,
    "moments": [
     {
@@ -48002,6 +48065,15 @@
      "note": "Referenced as comparison point for valuation multiples; trades at 4x annualized buybacks at current market cap versus Ponds' 0.33-0.67x. Noted as having sustained revenues over the past year."
     },
     {
+     "episode_id": "qz5qB0AgC0Q",
+     "episode_title": "Nate (Long / $AI Founder): Robinhood Chain Isn\u2019t Dead | Wallet Integration, Why Stock Tokens Win",
+     "start_seconds": 1358.0,
+     "timestamp": "22:38",
+     "deep_link": "https://www.youtube.com/watch?v=qz5qB0AgC0Q&t=1358s",
+     "kind": "mention",
+     "note": "Named in passing as an example alongside Stonk."
+    },
+    {
      "episode_id": "r4Hl37ZycC4",
      "episode_title": "Rainy: $RAIN Automated Proof of Profit, AI-Powered Prediction Markets, C9 Launch + More!",
      "start_seconds": 766.0,
@@ -48443,14 +48515,14 @@
      "note": "Speaker stated they launched Pump Coin three to four months ago on their Riverboat platform."
     }
    ],
-   "episode_count": 204,
+   "episode_count": 205,
    "single_reference": false
   },
   {
    "symbol": "HYPE",
    "name": "Hyperliquid",
    "asset_class": "crypto",
-   "mentions": 349,
+   "mentions": 350,
    "analysis": 210,
    "moments": [
     {
@@ -51208,6 +51280,15 @@
      "note": "Mentioned as an EVM-based platform alongside Phoenix for delta-neutral trading strategies."
     },
     {
+     "episode_id": "qz5qB0AgC0Q",
+     "episode_title": "Nate (Long / $AI Founder): Robinhood Chain Isn\u2019t Dead | Wallet Integration, Why Stock Tokens Win",
+     "start_seconds": 2270.0,
+     "timestamp": "37:50",
+     "deep_link": "https://www.youtube.com/watch?v=qz5qB0AgC0Q&t=2270s",
+     "kind": "mention",
+     "note": "Hyperliquid mentioned hypothetically as a smart team that could potentially forecast technology developments, but technology can be forked whereas distribution cannot."
+    },
+    {
      "episode_id": "r1_K_EuTlEg",
      "episode_title": "METALS DOWN, CRYPTO UP? BOTTOM IN?",
      "start_seconds": 1590.0,
@@ -51595,15 +51676,15 @@
      "note": "A vault platform where trading activity is tracked and displayed; the speaker launched a vault on Sunday/Monday with 20x leverage, generating significant P&L over the first few days."
     }
    ],
-   "episode_count": 180,
+   "episode_count": 181,
    "single_reference": false
   },
   {
    "symbol": "HOOD",
    "name": "Robinhood",
    "asset_class": "stock",
-   "mentions": 270,
-   "analysis": 174,
+   "mentions": 276,
+   "analysis": 179,
    "moments": [
     {
      "episode_id": "0cdFekQht5w",
@@ -53622,6 +53703,24 @@
      "note": "Referenced as previously covered; Hood Rat NFT collection noted as nearly doubling in value since coverage."
     },
     {
+     "episode_id": "qz5qB0AgC0Q",
+     "episode_title": "Nate (Long / $AI Founder): Robinhood Chain Isn\u2019t Dead | Wallet Integration, Why Stock Tokens Win",
+     "start_seconds": 686.0,
+     "timestamp": "11:26",
+     "deep_link": "https://www.youtube.com/watch?v=qz5qB0AgC0Q&t=686s",
+     "kind": "analysis",
+     "note": "Discussion focused on Robinhood's strategic direction toward RWAs and sticky TVL rather than volume; Vlad mentioned confidence in RWA differentiation and support for TVL growth."
+    },
+    {
+     "episode_id": "qz5qB0AgC0Q",
+     "episode_title": "Nate (Long / $AI Founder): Robinhood Chain Isn\u2019t Dead | Wallet Integration, Why Stock Tokens Win",
+     "start_seconds": 2178.0,
+     "timestamp": "36:18",
+     "deep_link": "https://www.youtube.com/watch?v=qz5qB0AgC0Q&t=2178s",
+     "kind": "analysis",
+     "note": "Robinhood discussed as a platform that differentiated itself by onboarding deep pocket and IT OG type capital, with discussion of enabling 24/7 trading and using its chain as a sandbox for novel financial tooling."
+    },
+    {
      "episode_id": "rLNCBcSArEA",
      "episode_title": "Markets are going risk off w/- $STABLE - $AmberVibe - $META",
      "start_seconds": 1926.0,
@@ -54034,16 +54133,52 @@
      "deep_link": "https://www.youtube.com/watch?v=zTEsQqVVsZk&t=5588s",
      "kind": "mention",
      "note": "Mentioned in passing regarding what happened to Robinhood; no analysis provided."
+    },
+    {
+     "episode_id": "zqOYgV9pXxI",
+     "episode_title": "Former Robinhood Employee on What\u2019s Actually Happening at Robinhood Right Now..",
+     "start_seconds": 54.0,
+     "timestamp": "0:54",
+     "deep_link": "https://www.youtube.com/watch?v=zqOYgV9pXxI&t=54s",
+     "kind": "analysis",
+     "note": "Speaker discusses Robinhood Chain as likely to lead if entering a bull cycle, and mentions it is linked to Colorado and tokenized equities/stocks traded on Robinhood."
+    },
+    {
+     "episode_id": "zqOYgV9pXxI",
+     "episode_title": "Former Robinhood Employee on What\u2019s Actually Happening at Robinhood Right Now..",
+     "start_seconds": 355.0,
+     "timestamp": "5:55",
+     "deep_link": "https://www.youtube.com/watch?v=zqOYgV9pXxI&t=355s",
+     "kind": "mention",
+     "note": "Robinhood chain launches mentioned as a positive development marking the start of a risk-on season."
+    },
+    {
+     "episode_id": "zqOYgV9pXxI",
+     "episode_title": "Former Robinhood Employee on What\u2019s Actually Happening at Robinhood Right Now..",
+     "start_seconds": 761.0,
+     "timestamp": "12:41",
+     "deep_link": "https://www.youtube.com/watch?v=zqOYgV9pXxI&t=761s",
+     "kind": "analysis",
+     "note": "Robinhood is discussed as expected to be the cycle winner in crypto, compared to Solana and Ethereum from prior cycles, with earnings showing CEX revenues down and on-chain fee revenues up."
+    },
+    {
+     "episode_id": "zqOYgV9pXxI",
+     "episode_title": "Former Robinhood Employee on What\u2019s Actually Happening at Robinhood Right Now..",
+     "start_seconds": 1449.0,
+     "timestamp": "24:09",
+     "deep_link": "https://www.youtube.com/watch?v=zqOYgV9pXxI&t=1449s",
+     "kind": "analysis",
+     "note": "Discussion of Robinhood's product mix including options trading, prediction markets, managed portfolio strategies, wallet products, and on-chain services; speaker joined the company in 2021 after GameStop."
     }
    ],
-   "episode_count": 128,
+   "episode_count": 130,
    "single_reference": false
   },
   {
    "symbol": "USDC",
    "name": "USD Coin",
    "asset_class": "crypto",
-   "mentions": 502,
+   "mentions": 503,
    "analysis": 144,
    "moments": [
     {
@@ -58070,6 +58205,15 @@
      "note": "USDC on ETH is mentioned as part of the bridge process required to use prediction market products on Polygon."
     },
     {
+     "episode_id": "qz5qB0AgC0Q",
+     "episode_title": "Nate (Long / $AI Founder): Robinhood Chain Isn\u2019t Dead | Wallet Integration, Why Stock Tokens Win",
+     "start_seconds": 1978.0,
+     "timestamp": "32:58",
+     "deep_link": "https://www.youtube.com/watch?v=qz5qB0AgC0Q&t=1978s",
+     "kind": "mention",
+     "note": "Mentioned as Coinbase's involvement with stable coins in the context of future patterns in tokenized equities."
+    },
+    {
      "episode_id": "rQrWU3vhthc",
      "episode_title": "$ORY Orynth: Ecosystem of No-Code apps, High Potential Low market cap gems | MCG Show",
      "start_seconds": 2588.0,
@@ -58565,14 +58709,14 @@
      "note": "Mentioned as an asset users needed to send to Arbitrum to access perp platforms."
     }
    ],
-   "episode_count": 289,
+   "episode_count": 290,
    "single_reference": false
   },
   {
    "symbol": "UNI",
    "name": "Uniswap V4",
    "asset_class": "crypto",
-   "mentions": 244,
+   "mentions": 245,
    "analysis": 119,
    "moments": [
     {
@@ -60770,9 +60914,18 @@
      "deep_link": "https://www.youtube.com/watch?v=zWznxthbJNA&t=9049s",
      "kind": "mention",
      "note": "Gabriel mentions having done consulting work with Uniswap."
+    },
+    {
+     "episode_id": "zqOYgV9pXxI",
+     "episode_title": "Former Robinhood Employee on What\u2019s Actually Happening at Robinhood Right Now..",
+     "start_seconds": 1506.0,
+     "timestamp": "25:06",
+     "deep_link": "https://www.youtube.com/watch?v=zqOYgV9pXxI&t=1506s",
+     "kind": "mention",
+     "note": "Mentioned in context of ponds and V4 hooks, and as a way to trade on-chain via website."
     }
    ],
-   "episode_count": 116,
+   "episode_count": 117,
    "single_reference": false
   },
   {
@@ -81154,8 +81307,8 @@
    "symbol": "NVDA",
    "name": "Nvidia",
    "asset_class": "stock",
-   "mentions": 203,
-   "analysis": 51,
+   "mentions": 206,
+   "analysis": 52,
    "moments": [
     {
      "episode_id": "-NmeR-pjLN8",
@@ -82787,6 +82940,33 @@
      "note": "Mentioned as having 30-39 stories trending, with an earnings call expected later that month."
     },
     {
+     "episode_id": "qz5qB0AgC0Q",
+     "episode_title": "Nate (Long / $AI Founder): Robinhood Chain Isn\u2019t Dead | Wallet Integration, Why Stock Tokens Win",
+     "start_seconds": 333.0,
+     "timestamp": "5:33",
+     "deep_link": "https://www.youtube.com/watch?v=qz5qB0AgC0Q&t=333s",
+     "kind": "analysis",
+     "note": "Nvidia went to all-time high then crashed from 240 to approximately 205-208, described as early price levels."
+    },
+    {
+     "episode_id": "qz5qB0AgC0Q",
+     "episode_title": "Nate (Long / $AI Founder): Robinhood Chain Isn\u2019t Dead | Wallet Integration, Why Stock Tokens Win",
+     "start_seconds": 1113.0,
+     "timestamp": "18:33",
+     "deep_link": "https://www.youtube.com/watch?v=qz5qB0AgC0Q&t=1113s",
+     "kind": "mention",
+     "note": "Speaker mentions NVIDIA as an example of a stock with a DEX pool that went to 0% fee."
+    },
+    {
+     "episode_id": "qz5qB0AgC0Q",
+     "episode_title": "Nate (Long / $AI Founder): Robinhood Chain Isn\u2019t Dead | Wallet Integration, Why Stock Tokens Win",
+     "start_seconds": 1814.0,
+     "timestamp": "30:14",
+     "deep_link": "https://www.youtube.com/watch?v=qz5qB0AgC0Q&t=1814s",
+     "kind": "mention",
+     "note": "Mentioned as an example of a stock that could potentially be blocked on Robinhood in the context of discussing stock token models."
+    },
+    {
      "episode_id": "rFDkeRfajCc",
      "episode_title": "Trader Radio: Last 48 Hours, Crypto has changed, $4 Million dollar hackathon! w/@Ethanh141",
      "start_seconds": 4053.0,
@@ -82985,7 +83165,7 @@
      "note": "Speaker used Nvidia as an example of a tokenized stock that users could hold in their wallet through the FIRE protocol."
     }
    ],
-   "episode_count": 112,
+   "episode_count": 113,
    "single_reference": false
   },
   {
@@ -86184,8 +86364,8 @@
    "symbol": "FOMO",
    "name": "FOMO",
    "asset_class": "crypto",
-   "mentions": 91,
-   "analysis": 47,
+   "mentions": 93,
+   "analysis": 48,
    "moments": [
     {
      "episode_id": "2HsX_WCjApU",
@@ -86935,6 +87115,15 @@
      "note": "Referenced as a token with significant thesis discussion from Quantum Berry."
     },
     {
+     "episode_id": "qz5qB0AgC0Q",
+     "episode_title": "Nate (Long / $AI Founder): Robinhood Chain Isn\u2019t Dead | Wallet Integration, Why Stock Tokens Win",
+     "start_seconds": 2147.0,
+     "timestamp": "35:47",
+     "deep_link": "https://www.youtube.com/watch?v=qz5qB0AgC0Q&t=2147s",
+     "kind": "mention",
+     "note": "FOMO mentioned as one of the platforms making a large push towards retail alongside PumpFun."
+    },
+    {
      "episode_id": "r1_K_EuTlEg",
      "episode_title": "METALS DOWN, CRYPTO UP? BOTTOM IN?",
      "start_seconds": 7354.0,
@@ -87005,9 +87194,18 @@
      "deep_link": "https://www.youtube.com/watch?v=zTEsQqVVsZk&t=9528s",
      "kind": "mention",
      "note": "Mentioned as a project that did not have a token, contrasted with Omish which does have a token."
+    },
+    {
+     "episode_id": "zqOYgV9pXxI",
+     "episode_title": "Former Robinhood Employee on What\u2019s Actually Happening at Robinhood Right Now..",
+     "start_seconds": 1596.0,
+     "timestamp": "26:36",
+     "deep_link": "https://www.youtube.com/watch?v=zqOYgV9pXxI&t=1596s",
+     "kind": "analysis",
+     "note": "Discussed as a leading on-chain trading product with a good onboarding experience; speakers suggested it could be a natural acquisition target for Robinhood and praised its cultural impact and user experience."
     }
    ],
-   "episode_count": 64,
+   "episode_count": 66,
    "single_reference": false
   },
   {
@@ -92240,445 +92438,11 @@
    "single_reference": false
   },
   {
-   "symbol": "KARMA",
-   "name": "Karma",
-   "asset_class": "crypto",
-   "mentions": 47,
-   "analysis": 39,
-   "moments": [
-    {
-     "episode_id": "1goUsPTXEtQ",
-     "episode_title": "The crypto privacy revolution ft @dev_skill_issue founder of @ZeraLabs",
-     "start_seconds": 11394.0,
-     "timestamp": "3:09:54",
-     "deep_link": "https://www.youtube.com/watch?v=1goUsPTXEtQ&t=11394s",
-     "kind": "analysis",
-     "note": "Believe ecosystem native neo banking protocol with Visa debit cards; speaker already put on a position; believed to benefit from Avichi narrative."
-    },
-    {
-     "episode_id": "1goUsPTXEtQ",
-     "episode_title": "The crypto privacy revolution ft @dev_skill_issue founder of @ZeraLabs",
-     "start_seconds": 12299.0,
-     "timestamp": "3:24:59",
-     "deep_link": "https://www.youtube.com/watch?v=1goUsPTXEtQ&t=12299s",
-     "kind": "analysis",
-     "note": "Discussed as a play on the Belief ecosystem ahead of the Belief flywheel, with the speaker entering a 'liquid play' position in Karma as a strategy before the Avichi launch."
-    },
-    {
-     "episode_id": "2klkQwYAg0g",
-     "episode_title": "IKON Shop: Onchain Amazon, $60k Volume, Community Rewards + More!",
-     "start_seconds": 1102.0,
-     "timestamp": "18:22",
-     "deep_link": "https://www.youtube.com/watch?v=2klkQwYAg0g&t=1102s",
-     "kind": "analysis",
-     "note": "Cited as a case study of an onchain banking wallet project that built under the radar for months, then repriced from a low price to approximately four or five million after discovery about a week prior."
-    },
-    {
-     "episode_id": "56LF5PHOXms",
-     "episode_title": "huge $MET airdrop updates and the @MeteoriteCol @MeteoraAG incubated projects to watch",
-     "start_seconds": 866.0,
-     "timestamp": "14:26",
-     "deep_link": "https://www.youtube.com/watch?v=56LF5PHOXms&t=866s",
-     "kind": "mention",
-     "note": "Named as a project under the same umbrella as Help.fun."
-    },
-    {
-     "episode_id": "56LF5PHOXms",
-     "episode_title": "huge $MET airdrop updates and the @MeteoriteCol @MeteoraAG incubated projects to watch",
-     "start_seconds": 7553.0,
-     "timestamp": "2:05:53",
-     "deep_link": "https://www.youtube.com/watch?v=56LF5PHOXms&t=7553s",
-     "kind": "mention",
-     "note": "Neo banking-related token discussed in relation to its total addressable market and karma flywheel mechanics."
-    },
-    {
-     "episode_id": "56LF5PHOXms",
-     "episode_title": "huge $MET airdrop updates and the @MeteoriteCol @MeteoraAG incubated projects to watch",
-     "start_seconds": 7582.0,
-     "timestamp": "2:06:22",
-     "deep_link": "https://www.youtube.com/watch?v=56LF5PHOXms&t=7582s",
-     "kind": "analysis",
-     "note": "Discussed as a neo-banking protocol with a flywheel model involving fee generation, buybacks, and ecosystem incentives; market opportunity analysis and price action charting at ~2.5 million mentioned."
-    },
-    {
-     "episode_id": "BCNZjMSVbRM",
-     "episode_title": "$KARMA : $80K Volume In 1 Day, 1600 Users, Ownership Token Model? Cashback & Karma Points | MCG Show",
-     "start_seconds": 26.0,
-     "timestamp": "0:26",
-     "deep_link": "https://www.youtube.com/watch?v=BCNZjMSVbRM&t=26s",
-     "kind": "analysis",
-     "note": "The speakers discuss Karma's business, mentioning they cracked the code with nearly $80,000 in volume as a new record, and are building an all-in-one financial app combining banking, crypto trading, and card payments."
-    },
-    {
-     "episode_id": "BCNZjMSVbRM",
-     "episode_title": "$KARMA : $80K Volume In 1 Day, 1600 Users, Ownership Token Model? Cashback & Karma Points | MCG Show",
-     "start_seconds": 1988.0,
-     "timestamp": "33:08",
-     "deep_link": "https://www.youtube.com/watch?v=BCNZjMSVbRM&t=1988s",
-     "kind": "analysis",
-     "note": "Founders discuss Karma tokens and a KP system being announced in their app; users who hold tokens benefit from product growth and revenue; token holders would be involved in liquidation events; owning Karma tokens aligns incentives with using the Karma product."
-    },
-    {
-     "episode_id": "BCNZjMSVbRM",
-     "episode_title": "$KARMA : $80K Volume In 1 Day, 1600 Users, Ownership Token Model? Cashback & Karma Points | MCG Show",
-     "start_seconds": 2609.0,
-     "timestamp": "43:29",
-     "deep_link": "https://www.youtube.com/watch?v=BCNZjMSVbRM&t=2609s",
-     "kind": "analysis",
-     "note": "A token whose rewards pool is funded by revenue and shared via leaderboard gamification; karma tokens are earned through app usage with a multiplier based on token holdings, and the rewards pool is denominated in karma tokens."
-    },
-    {
-     "episode_id": "CLdi8F5YXUY",
-     "episode_title": "\ud83d\udd34 LIVE: Market risk from STRC depeg? Hot GameFi tokens | Live Market Updates + Onchain Positioning",
-     "start_seconds": 10579.0,
-     "timestamp": "2:56:19",
-     "deep_link": "https://www.youtube.com/watch?v=CLdi8F5YXUY&t=10579s",
-     "kind": "analysis",
-     "note": "Similar pump and dump pattern to VICI; pumped 100% but subsequently dumped."
-    },
-    {
-     "episode_id": "DBiioj5imnU",
-     "episode_title": "\ud83d\udd34 LIVE NOW: Nothing ever happens! The straight opened? | Market Updates + Onchain Alpha!",
-     "start_seconds": 10680.0,
-     "timestamp": "2:58:00",
-     "deep_link": "https://www.youtube.com/watch?v=DBiioj5imnU&t=10680s",
-     "kind": "analysis",
-     "note": "Karma built a trading terminal with fast execution and limiting features; speakers analyze its price action on 3-day chart, discuss potential integration with Karma wallet as a super app, and speculate on token utility mechanics like token-gated access or fee-based buybacks."
-    },
-    {
-     "episode_id": "GT9_xZ0Jfkk",
-     "episode_title": "Talking all things AI with @MetaInside and @atmdotday",
-     "start_seconds": 6346.0,
-     "timestamp": "1:45:46",
-     "deep_link": "https://www.youtube.com/watch?v=GT9_xZ0Jfkk&t=6346s",
-     "kind": "analysis",
-     "note": "Chart analyzed showing a breakout from a triangle structure."
-    },
-    {
-     "episode_id": "GT9_xZ0Jfkk",
-     "episode_title": "Talking all things AI with @MetaInside and @atmdotday",
-     "start_seconds": 6372.0,
-     "timestamp": "1:46:12",
-     "deep_link": "https://www.youtube.com/watch?v=GT9_xZ0Jfkk&t=6372s",
-     "kind": "analysis",
-     "note": "Described as a neo-banking play with competitive fees; whales were buying it according to the MOI/Mobi app; founder recently announced new website, mobile app in development, business API nearly finished, crypto cards in Q4, collateral system for long/short positions, cash back on/off ramps, and UAE entity setup in Dubai."
-    },
-    {
-     "episode_id": "IB_t2ZnOssE",
-     "episode_title": "market bouncing w/ @Cipherlabsx @Orithellama. Pre show: w/ $SOLO @Solomon_labs",
-     "start_seconds": 7777.0,
-     "timestamp": "2:09:37",
-     "deep_link": "https://www.youtube.com/watch?v=IB_t2ZnOssE&t=7777s",
-     "kind": "analysis",
-     "note": "A token that started its run around September 27th when Vichi reached its local top, and rose to 6.3 million in value."
-    },
-    {
-     "episode_id": "IL0OeBGGeaY",
-     "episode_title": "\ud83d\udd34 LIVE: Equities Top While Crypto Bottoms? | THE $SPCX EFFECT | Market Update + Founder Interviews",
-     "start_seconds": 675.0,
-     "timestamp": "11:15",
-     "deep_link": "https://www.youtube.com/watch?v=IL0OeBGGeaY&t=675s",
-     "kind": "analysis",
-     "note": "Described as a low-cap project with nice metrics that evolved from a neo bank into an everything app; scheduled for interview."
-    },
-    {
-     "episode_id": "IL0OeBGGeaY",
-     "episode_title": "\ud83d\udd34 LIVE: Equities Top While Crypto Bottoms? | THE $SPCX EFFECT | Market Update + Founder Interviews",
-     "start_seconds": 851.0,
-     "timestamp": "14:11",
-     "deep_link": "https://www.youtube.com/watch?v=IL0OeBGGeaY&t=851s",
-     "kind": "analysis",
-     "note": "Monthly all-time highs in volume reached 522,000; token economics discussed in relation to Karma app revenue generation model."
-    },
-    {
-     "episode_id": "IL0OeBGGeaY",
-     "episode_title": "\ud83d\udd34 LIVE: Equities Top While Crypto Bottoms? | THE $SPCX EFFECT | Market Update + Founder Interviews",
-     "start_seconds": 1533.0,
-     "timestamp": "25:33",
-     "deep_link": "https://www.youtube.com/watch?v=IL0OeBGGeaY&t=1533s",
-     "kind": "analysis",
-     "note": "Karma is a crypto app combining banking and trading with a social experience; speaker discusses its stages of development from idea to profitability to acquisition."
-    },
-    {
-     "episode_id": "IL0OeBGGeaY",
-     "episode_title": "\ud83d\udd34 LIVE: Equities Top While Crypto Bottoms? | THE $SPCX EFFECT | Market Update + Founder Interviews",
-     "start_seconds": 2259.0,
-     "timestamp": "37:39",
-     "deep_link": "https://www.youtube.com/watch?v=IL0OeBGGeaY&t=2259s",
-     "kind": "analysis",
-     "note": "The speaker's project being pitched; described as implementing a creator revenue-sharing model tied to trading fees, launching in the next week."
-    },
-    {
-     "episode_id": "IL0OeBGGeaY",
-     "episode_title": "\ud83d\udd34 LIVE: Equities Top While Crypto Bottoms? | THE $SPCX EFFECT | Market Update + Founder Interviews",
-     "start_seconds": 2547.0,
-     "timestamp": "42:27",
-     "deep_link": "https://www.youtube.com/watch?v=IL0OeBGGeaY&t=2547s",
-     "kind": "analysis",
-     "note": "Token that provides zero-fee trading utility, receives cashback from user trading fees, has planned token buyback mechanics, and is intended to receive a share of app revenue alongside creator rewards and OPEX allocation."
-    },
-    {
-     "episode_id": "IL0OeBGGeaY",
-     "episode_title": "\ud83d\udd34 LIVE: Equities Top While Crypto Bottoms? | THE $SPCX EFFECT | Market Update + Founder Interviews",
-     "start_seconds": 11130.0,
-     "timestamp": "3:05:30",
-     "deep_link": "https://www.youtube.com/watch?v=IL0OeBGGeaY&t=11130s",
-     "kind": "analysis",
-     "note": "Catching a bid; retraced entire move to all-time highs but still in buy zone, up approximately 2x on the day and almost 200% off the bottom; speaker mentioned bullish developments about the protocol shared during an interview."
-    },
-    {
-     "episode_id": "IL0OeBGGeaY",
-     "episode_title": "\ud83d\udd34 LIVE: Equities Top While Crypto Bottoms? | THE $SPCX EFFECT | Market Update + Founder Interviews",
-     "start_seconds": 13339.0,
-     "timestamp": "3:42:19",
-     "deep_link": "https://www.youtube.com/watch?v=IL0OeBGGeaY&t=13339s",
-     "kind": "mention",
-     "note": "Karma Wallet was interviewed on the stream; described as evolving from a neo bank to an 'everything app', now revenue positive with good metrics."
-    },
-    {
-     "episode_id": "LGLklvVmCTM",
-     "episode_title": "\ud83d\udd34LIVE: AI Agents with Serv | Will Printr Save the Trenches? | Market Updates + Founder Interviews",
-     "start_seconds": 10686.0,
-     "timestamp": "2:58:06",
-     "deep_link": "https://www.youtube.com/watch?v=LGLklvVmCTM&t=10686s",
-     "kind": "analysis",
-     "note": "Discussed with caution regarding holding support area; 16K volume noted as low; potential liquidity vacuum expected from Printer v2 launch makes it tougher for Karma."
-    },
-    {
-     "episode_id": "O4A8vFhlU2Q",
-     "episode_title": "\ud83d\udd34 LIVE: Saylor Selling | Onchain Cooking | Bear Market Update + Trader Radio",
-     "start_seconds": 8020.0,
-     "timestamp": "2:13:40",
-     "deep_link": "https://www.youtube.com/watch?v=O4A8vFhlU2Q&t=8020s",
-     "kind": "analysis",
-     "note": "Mentioned as another social trading app attempting to compete with FOMO, discussed as a beta product and analyzed in context of the competitive landscape of trading applications."
-    },
-    {
-     "episode_id": "O4A8vFhlU2Q",
-     "episode_title": "\ud83d\udd34 LIVE: Saylor Selling | Onchain Cooking | Bear Market Update + Trader Radio",
-     "start_seconds": 8367.0,
-     "timestamp": "2:19:27",
-     "deep_link": "https://www.youtube.com/watch?v=O4A8vFhlU2Q&t=8367s",
-     "kind": "analysis",
-     "note": "Trading platform with 300 active users (up 100% in 30 days), 6,669 total users (up 50%), 10,100 total transactions (up 182%), $359,000 in banking volume, and $1.1 million in trading volume (up 220%) over the last 30 days."
-    },
-    {
-     "episode_id": "SzXvuupwhCs",
-     "episode_title": "is $10 Billion in startups coming onchain? NEO Banking w/@sanafionchain, @Perkinsfund",
-     "start_seconds": 3507.0,
-     "timestamp": "58:27",
-     "deep_link": "https://www.youtube.com/watch?v=SzXvuupwhCs&t=3507s",
-     "kind": "mention",
-     "note": "Mentioned as potentially a beta play for Avichi alongside Santa."
-    },
-    {
-     "episode_id": "SzXvuupwhCs",
-     "episode_title": "is $10 Billion in startups coming onchain? NEO Banking w/@sanafionchain, @Perkinsfund",
-     "start_seconds": 10348.0,
-     "timestamp": "2:52:28",
-     "deep_link": "https://www.youtube.com/watch?v=SzXvuupwhCs&t=10348s",
-     "kind": "analysis",
-     "note": "Chart described as ranging, accumulating, and bouncing off the bottom of range in a positive way."
-    },
-    {
-     "episode_id": "YNbyFlm0-Kk",
-     "episode_title": "IS IT AN OWNERSHIP TOKEN? w/@LaunchOnSoar, @imtomcurry, @karmawallet on @MCGlive X @AssetDash",
-     "start_seconds": 9307.0,
-     "timestamp": "2:35:07",
-     "deep_link": "https://www.youtube.com/watch?v=YNbyFlm0-Kk&t=9307s",
-     "kind": "analysis",
-     "note": "Karma compared to Avichi; Karma valued at a million dollars with discussion of ownership tokens, community aspects, user retention, and founder stewardship positioning for long-term play."
-    },
-    {
-     "episode_id": "YNbyFlm0-Kk",
-     "episode_title": "IS IT AN OWNERSHIP TOKEN? w/@LaunchOnSoar, @imtomcurry, @karmawallet on @MCGlive X @AssetDash",
-     "start_seconds": 9631.0,
-     "timestamp": "2:40:31",
-     "deep_link": "https://www.youtube.com/watch?v=YNbyFlm0-Kk&t=9631s",
-     "kind": "analysis",
-     "note": "Discussed as undervalued with 1 million valued as a steal; potential acquisition target and repricing candidate if an ownership model is adopted similar to Avichi."
-    },
-    {
-     "episode_id": "YNbyFlm0-Kk",
-     "episode_title": "IS IT AN OWNERSHIP TOKEN? w/@LaunchOnSoar, @imtomcurry, @karmawallet on @MCGlive X @AssetDash",
-     "start_seconds": 19384.0,
-     "timestamp": "5:23:04",
-     "deep_link": "https://www.youtube.com/watch?v=YNbyFlm0-Kk&t=19384s",
-     "kind": "mention",
-     "note": "Mentioned as a platform with a Kled app on a user's phone, potentially cooking up a partnership; features hardware wallets, cold storage, low fees, insurance, and a karma points system similar to credit card rewards."
-    },
-    {
-     "episode_id": "YW3ArVrSUuo",
-     "episode_title": "POLYMARKET RECEIVES CFTC APPROVAL? w/@KAIO_xyz and @StreetFDN on @MCGlive X @assetdash",
-     "start_seconds": 5243.0,
-     "timestamp": "1:27:23",
-     "deep_link": "https://www.youtube.com/watch?v=YW3ArVrSUuo&t=5243s",
-     "kind": "analysis",
-     "note": "Discussed as a neo bank still in a price range, with the speaker expressing interest in buying at current levels."
-    },
-    {
-     "episode_id": "dm-ZpD-nWw8",
-     "episode_title": "\ud83d\udd34 LIVE: RWA Memes - Will They Last? | BTC Update + Interviews",
-     "start_seconds": 7547.0,
-     "timestamp": "2:05:47",
-     "deep_link": "https://www.youtube.com/watch?v=dm-ZpD-nWw8&t=7547s",
-     "kind": "analysis",
-     "note": "Speakers mention watching Karma as one of several tokens they are monitoring for potential oversold entry points during the liquidity suck."
-    },
-    {
-     "episode_id": "eLtX3KdYiZ0",
-     "episode_title": "Virtuals Day- Robinhood Ecosystem Project Spotlight",
-     "start_seconds": 6209.0,
-     "timestamp": "1:43:29",
-     "deep_link": "https://www.youtube.com/watch?v=eLtX3KdYiZ0&t=6209s",
-     "kind": "analysis",
-     "note": "Speakers discuss Karma as a crypto app with social feed features where users can publish trading theses and be rewarded when others trade based on their thesis, positioning it as a platform for creator revenue sharing."
-    },
-    {
-     "episode_id": "eLtX3KdYiZ0",
-     "episode_title": "Virtuals Day- Robinhood Ecosystem Project Spotlight",
-     "start_seconds": 6773.0,
-     "timestamp": "1:52:53",
-     "deep_link": "https://www.youtube.com/watch?v=eLtX3KdYiZ0&t=6773s",
-     "kind": "analysis",
-     "note": "Token economics and funding mechanism for Karma discussed, including ACF model with 25% tokens locked, team vest allocation at 25%, and 50% float with 40% reserved for fee holders; value accrual plan described with swap fee buybacks planned for first 90 days."
-    },
-    {
-     "episode_id": "eLtX3KdYiZ0",
-     "episode_title": "Virtuals Day- Robinhood Ecosystem Project Spotlight",
-     "start_seconds": 7118.0,
-     "timestamp": "1:58:38",
-     "deep_link": "https://www.youtube.com/watch?v=eLtX3KdYiZ0&t=7118s",
-     "kind": "analysis",
-     "note": "Metrics and growth data for Karma are publicly available on stats.karma.xyz; the app recently enabled trading which caused a big jump in volume; speakers discuss growth projections and implementing RWA experiments in the app."
-    },
-    {
-     "episode_id": "g53-nw_F_68",
-     "episode_title": "ICM micro caps and x402 updates w/ @WonderSitesCo, @SmartPracticeAI, @polyswipe_app, @PayAINetwork",
-     "start_seconds": 10345.0,
-     "timestamp": "2:52:25",
-     "deep_link": "https://www.youtube.com/watch?v=g53-nw_F_68&t=10345s",
-     "kind": "analysis",
-     "note": "Discussed as a neo-banking platform project with 2.2 million fully diluted market cap and 700 users, currently applying to Alliance DAO with potential for significant expansion if accepted."
-    },
-    {
-     "episode_id": "hE6LJHqZ56w",
-     "episode_title": "Karma Wallet: Neo-Bank Bill Pay Live, 1.1K Users, Europe Rollout & More! | MCG Show",
-     "start_seconds": 86.0,
-     "timestamp": "1:26",
-     "deep_link": "https://www.youtube.com/watch?v=hE6LJHqZ56w&t=86s",
-     "kind": "analysis",
-     "note": "Karma is a decentralized banking alternative that allows users to pay bills, rent, groceries, and manage finances with crypto directly from their wallet without selling."
-    },
-    {
-     "episode_id": "hE6LJHqZ56w",
-     "episode_title": "Karma Wallet: Neo-Bank Bill Pay Live, 1.1K Users, Europe Rollout & More! | MCG Show",
-     "start_seconds": 515.0,
-     "timestamp": "8:35",
-     "deep_link": "https://www.youtube.com/watch?v=hE6LJHqZ56w&t=515s",
-     "kind": "analysis",
-     "note": "Discussed as a token that provides fee benefits; holding Karma gives 0% swap fee and reduced overall fees on bill payments, with future goal to reduce fees further."
-    },
-    {
-     "episode_id": "hE6LJHqZ56w",
-     "episode_title": "Karma Wallet: Neo-Bank Bill Pay Live, 1.1K Users, Europe Rollout & More! | MCG Show",
-     "start_seconds": 1114.0,
-     "timestamp": "18:34",
-     "deep_link": "https://www.youtube.com/watch?v=hE6LJHqZ56w&t=1114s",
-     "kind": "analysis",
-     "note": "Discussed as a token with a rebate system where holding enough karma allows users to pay 0% fees, and as part of marketing campaigns; described as having a user base of karma holders."
-    },
-    {
-     "episode_id": "iPjJs8t8PIU",
-     "episode_title": "The Scrappy Founder Behind $KARMA: Viral Sticker Success,  Growing IBAN User Base + More!",
-     "start_seconds": 1876.0,
-     "timestamp": "31:16",
-     "deep_link": "https://www.youtube.com/watch?v=iPjJs8t8PIU&t=1876s",
-     "kind": "mention",
-     "note": "Discussed as a project building towards an onchain neo bank; ramping product mentioned as one of the first products to be released, with tokenomics and documentation coming in the coming days."
-    },
-    {
-     "episode_id": "mtKICofZcFU",
-     "episode_title": "OWNERSHIP. NOT A META. THE NEW STANDARD? w/@Foundational_AI @Cypher_HQ_ on @MCGlive X @AssetDash",
-     "start_seconds": 12021.0,
-     "timestamp": "3:20:21",
-     "deep_link": "https://www.youtube.com/watch?v=mtKICofZcFU&t=12021s",
-     "kind": "mention",
-     "note": "Karma Wallet is a neo-banking product featuring founder Amir; scheduled as a guest interview for Friday, December 10th."
-    },
-    {
-     "episode_id": "n0a_hPkNXpM",
-     "episode_title": "Bullish setup on this ICM privacy coin? On @MCGlive X @AssetDash w/@edeldotfinance @stardotfun",
-     "start_seconds": 14404.0,
-     "timestamp": "4:00:04",
-     "deep_link": "https://www.youtube.com/watch?v=n0a_hPkNXpM&t=14404s",
-     "kind": "analysis",
-     "note": "Karma is up 51% in the last 24 hours; described as a NEO bank meta token. Update on zero-fee feature introduced: users holding 1 million Karma tokens get zero-fee off-ramps with fee refunded in Karma tokens, while non-holders pay 0.5% fee."
-    },
-    {
-     "episode_id": "oqhVVvYHbpM",
-     "episode_title": "\ud83d\udd34 LIVE: Neobanks Are Back | Pumpcade Pumping | Time to Lock In? Market Updates",
-     "start_seconds": 7350.0,
-     "timestamp": "2:02:30",
-     "deep_link": "https://www.youtube.com/watch?v=oqhVVvYHbpM&t=7350s",
-     "kind": "mention",
-     "note": "Mentioned as a beta/trading option alongside Sonifi in the context of neobank activity."
-    },
-    {
-     "episode_id": "oqhVVvYHbpM",
-     "episode_title": "\ud83d\udd34 LIVE: Neobanks Are Back | Pumpcade Pumping | Time to Lock In? Market Updates",
-     "start_seconds": 11239.0,
-     "timestamp": "3:07:19",
-     "deep_link": "https://www.youtube.com/watch?v=oqhVVvYHbpM&t=11239s",
-     "kind": "analysis",
-     "note": "Presented as a beta trade to Vichi with 2 million in volume and 500k market cap; characterized as having more buzz than other neobank plays and as a potential follower if Vichi rises."
-    },
-    {
-     "episode_id": "siZ8uErRtiQ",
-     "episode_title": "Bob The reBuilt: Reveals Top 3 ICM Picks, Watchlist, Accounts to Follow + More!",
-     "start_seconds": 48.0,
-     "timestamp": "0:48",
-     "deep_link": "https://www.youtube.com/watch?v=siZ8uErRtiQ&t=48s",
-     "kind": "analysis",
-     "note": "Karma wallet is noted as having a 54% pump on the day."
-    },
-    {
-     "episode_id": "sx4XO5IjYQ0",
-     "episode_title": "Everyone leave for BNB? Talking quantum ft @qu_stream and prediction markets with @polyfactual",
-     "start_seconds": 7476.0,
-     "timestamp": "2:04:36",
-     "deep_link": "https://www.youtube.com/watch?v=sx4XO5IjYQ0&t=7476s",
-     "kind": "analysis",
-     "note": "Karma is up at 4.2 million market cap in the NEO banking narrative, with a strong chart that is holding well."
-    },
-    {
-     "episode_id": "wsTdtrlI2I8",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood launchpad war drama | Live Market Updates + Onchain Positioning",
-     "start_seconds": 7879.0,
-     "timestamp": "2:11:19",
-     "deep_link": "https://www.youtube.com/watch?v=wsTdtrlI2I8&t=7879s",
-     "kind": "analysis",
-     "note": "Speaker stated they like Karma because the narrative is strong and they will lean into RWAs, but noted it is probably not a leader for Robin Hood ecosystem launch."
-    },
-    {
-     "episode_id": "zTEsQqVVsZk",
-     "episode_title": "\ud83d\udd34 LIVE: Bear Market Ending? | RH Szn Continues | Market Update + Interviews",
-     "start_seconds": 9154.0,
-     "timestamp": "2:32:34",
-     "deep_link": "https://www.youtube.com/watch?v=zTEsQqVVsZk&t=9154s",
-     "kind": "analysis",
-     "note": "Described as looking good; was previously on Solana at sub-400K but now over 3 million after launching on Robinhood; discussed as having potential for further upside with growing volumes."
-    }
-   ],
-   "episode_count": 26,
-   "single_reference": false
-  },
-  {
    "symbol": "USDT",
    "name": "Tether",
    "asset_class": "crypto",
-   "mentions": 134,
-   "analysis": 38,
+   "mentions": 135,
+   "analysis": 39,
    "moments": [
     {
      "episode_id": "-Lbmo2D7630",
@@ -93752,6 +93516,15 @@
      "note": "USDT is supported as a stablecoin in RIA's lending protocol."
     },
     {
+     "episode_id": "qz5qB0AgC0Q",
+     "episode_title": "Nate (Long / $AI Founder): Robinhood Chain Isn\u2019t Dead | Wallet Integration, Why Stock Tokens Win",
+     "start_seconds": 1847.0,
+     "timestamp": "30:47",
+     "deep_link": "https://www.youtube.com/watch?v=qz5qB0AgC0Q&t=1847s",
+     "kind": "analysis",
+     "note": "Discussed as an SPV model for the dollar, with collateral in bonds and other assets, creating one-to-one backing with the U.S. dollar."
+    },
+    {
      "episode_id": "rQrWU3vhthc",
      "episode_title": "$ORY Orynth: Ecosystem of No-Code apps, High Potential Low market cap gems | MCG Show",
      "start_seconds": 2588.0,
@@ -93887,7 +93660,441 @@
      "note": "Mentioned briefly in reference to 'Tether FUD the other day' but not analyzed."
     }
    ],
-   "episode_count": 95,
+   "episode_count": 96,
+   "single_reference": false
+  },
+  {
+   "symbol": "KARMA",
+   "name": "Karma",
+   "asset_class": "crypto",
+   "mentions": 47,
+   "analysis": 39,
+   "moments": [
+    {
+     "episode_id": "1goUsPTXEtQ",
+     "episode_title": "The crypto privacy revolution ft @dev_skill_issue founder of @ZeraLabs",
+     "start_seconds": 11394.0,
+     "timestamp": "3:09:54",
+     "deep_link": "https://www.youtube.com/watch?v=1goUsPTXEtQ&t=11394s",
+     "kind": "analysis",
+     "note": "Believe ecosystem native neo banking protocol with Visa debit cards; speaker already put on a position; believed to benefit from Avichi narrative."
+    },
+    {
+     "episode_id": "1goUsPTXEtQ",
+     "episode_title": "The crypto privacy revolution ft @dev_skill_issue founder of @ZeraLabs",
+     "start_seconds": 12299.0,
+     "timestamp": "3:24:59",
+     "deep_link": "https://www.youtube.com/watch?v=1goUsPTXEtQ&t=12299s",
+     "kind": "analysis",
+     "note": "Discussed as a play on the Belief ecosystem ahead of the Belief flywheel, with the speaker entering a 'liquid play' position in Karma as a strategy before the Avichi launch."
+    },
+    {
+     "episode_id": "2klkQwYAg0g",
+     "episode_title": "IKON Shop: Onchain Amazon, $60k Volume, Community Rewards + More!",
+     "start_seconds": 1102.0,
+     "timestamp": "18:22",
+     "deep_link": "https://www.youtube.com/watch?v=2klkQwYAg0g&t=1102s",
+     "kind": "analysis",
+     "note": "Cited as a case study of an onchain banking wallet project that built under the radar for months, then repriced from a low price to approximately four or five million after discovery about a week prior."
+    },
+    {
+     "episode_id": "56LF5PHOXms",
+     "episode_title": "huge $MET airdrop updates and the @MeteoriteCol @MeteoraAG incubated projects to watch",
+     "start_seconds": 866.0,
+     "timestamp": "14:26",
+     "deep_link": "https://www.youtube.com/watch?v=56LF5PHOXms&t=866s",
+     "kind": "mention",
+     "note": "Named as a project under the same umbrella as Help.fun."
+    },
+    {
+     "episode_id": "56LF5PHOXms",
+     "episode_title": "huge $MET airdrop updates and the @MeteoriteCol @MeteoraAG incubated projects to watch",
+     "start_seconds": 7553.0,
+     "timestamp": "2:05:53",
+     "deep_link": "https://www.youtube.com/watch?v=56LF5PHOXms&t=7553s",
+     "kind": "mention",
+     "note": "Neo banking-related token discussed in relation to its total addressable market and karma flywheel mechanics."
+    },
+    {
+     "episode_id": "56LF5PHOXms",
+     "episode_title": "huge $MET airdrop updates and the @MeteoriteCol @MeteoraAG incubated projects to watch",
+     "start_seconds": 7582.0,
+     "timestamp": "2:06:22",
+     "deep_link": "https://www.youtube.com/watch?v=56LF5PHOXms&t=7582s",
+     "kind": "analysis",
+     "note": "Discussed as a neo-banking protocol with a flywheel model involving fee generation, buybacks, and ecosystem incentives; market opportunity analysis and price action charting at ~2.5 million mentioned."
+    },
+    {
+     "episode_id": "BCNZjMSVbRM",
+     "episode_title": "$KARMA : $80K Volume In 1 Day, 1600 Users, Ownership Token Model? Cashback & Karma Points | MCG Show",
+     "start_seconds": 26.0,
+     "timestamp": "0:26",
+     "deep_link": "https://www.youtube.com/watch?v=BCNZjMSVbRM&t=26s",
+     "kind": "analysis",
+     "note": "The speakers discuss Karma's business, mentioning they cracked the code with nearly $80,000 in volume as a new record, and are building an all-in-one financial app combining banking, crypto trading, and card payments."
+    },
+    {
+     "episode_id": "BCNZjMSVbRM",
+     "episode_title": "$KARMA : $80K Volume In 1 Day, 1600 Users, Ownership Token Model? Cashback & Karma Points | MCG Show",
+     "start_seconds": 1988.0,
+     "timestamp": "33:08",
+     "deep_link": "https://www.youtube.com/watch?v=BCNZjMSVbRM&t=1988s",
+     "kind": "analysis",
+     "note": "Founders discuss Karma tokens and a KP system being announced in their app; users who hold tokens benefit from product growth and revenue; token holders would be involved in liquidation events; owning Karma tokens aligns incentives with using the Karma product."
+    },
+    {
+     "episode_id": "BCNZjMSVbRM",
+     "episode_title": "$KARMA : $80K Volume In 1 Day, 1600 Users, Ownership Token Model? Cashback & Karma Points | MCG Show",
+     "start_seconds": 2609.0,
+     "timestamp": "43:29",
+     "deep_link": "https://www.youtube.com/watch?v=BCNZjMSVbRM&t=2609s",
+     "kind": "analysis",
+     "note": "A token whose rewards pool is funded by revenue and shared via leaderboard gamification; karma tokens are earned through app usage with a multiplier based on token holdings, and the rewards pool is denominated in karma tokens."
+    },
+    {
+     "episode_id": "CLdi8F5YXUY",
+     "episode_title": "\ud83d\udd34 LIVE: Market risk from STRC depeg? Hot GameFi tokens | Live Market Updates + Onchain Positioning",
+     "start_seconds": 10579.0,
+     "timestamp": "2:56:19",
+     "deep_link": "https://www.youtube.com/watch?v=CLdi8F5YXUY&t=10579s",
+     "kind": "analysis",
+     "note": "Similar pump and dump pattern to VICI; pumped 100% but subsequently dumped."
+    },
+    {
+     "episode_id": "DBiioj5imnU",
+     "episode_title": "\ud83d\udd34 LIVE NOW: Nothing ever happens! The straight opened? | Market Updates + Onchain Alpha!",
+     "start_seconds": 10680.0,
+     "timestamp": "2:58:00",
+     "deep_link": "https://www.youtube.com/watch?v=DBiioj5imnU&t=10680s",
+     "kind": "analysis",
+     "note": "Karma built a trading terminal with fast execution and limiting features; speakers analyze its price action on 3-day chart, discuss potential integration with Karma wallet as a super app, and speculate on token utility mechanics like token-gated access or fee-based buybacks."
+    },
+    {
+     "episode_id": "GT9_xZ0Jfkk",
+     "episode_title": "Talking all things AI with @MetaInside and @atmdotday",
+     "start_seconds": 6346.0,
+     "timestamp": "1:45:46",
+     "deep_link": "https://www.youtube.com/watch?v=GT9_xZ0Jfkk&t=6346s",
+     "kind": "analysis",
+     "note": "Chart analyzed showing a breakout from a triangle structure."
+    },
+    {
+     "episode_id": "GT9_xZ0Jfkk",
+     "episode_title": "Talking all things AI with @MetaInside and @atmdotday",
+     "start_seconds": 6372.0,
+     "timestamp": "1:46:12",
+     "deep_link": "https://www.youtube.com/watch?v=GT9_xZ0Jfkk&t=6372s",
+     "kind": "analysis",
+     "note": "Described as a neo-banking play with competitive fees; whales were buying it according to the MOI/Mobi app; founder recently announced new website, mobile app in development, business API nearly finished, crypto cards in Q4, collateral system for long/short positions, cash back on/off ramps, and UAE entity setup in Dubai."
+    },
+    {
+     "episode_id": "IB_t2ZnOssE",
+     "episode_title": "market bouncing w/ @Cipherlabsx @Orithellama. Pre show: w/ $SOLO @Solomon_labs",
+     "start_seconds": 7777.0,
+     "timestamp": "2:09:37",
+     "deep_link": "https://www.youtube.com/watch?v=IB_t2ZnOssE&t=7777s",
+     "kind": "analysis",
+     "note": "A token that started its run around September 27th when Vichi reached its local top, and rose to 6.3 million in value."
+    },
+    {
+     "episode_id": "IL0OeBGGeaY",
+     "episode_title": "\ud83d\udd34 LIVE: Equities Top While Crypto Bottoms? | THE $SPCX EFFECT | Market Update + Founder Interviews",
+     "start_seconds": 675.0,
+     "timestamp": "11:15",
+     "deep_link": "https://www.youtube.com/watch?v=IL0OeBGGeaY&t=675s",
+     "kind": "analysis",
+     "note": "Described as a low-cap project with nice metrics that evolved from a neo bank into an everything app; scheduled for interview."
+    },
+    {
+     "episode_id": "IL0OeBGGeaY",
+     "episode_title": "\ud83d\udd34 LIVE: Equities Top While Crypto Bottoms? | THE $SPCX EFFECT | Market Update + Founder Interviews",
+     "start_seconds": 851.0,
+     "timestamp": "14:11",
+     "deep_link": "https://www.youtube.com/watch?v=IL0OeBGGeaY&t=851s",
+     "kind": "analysis",
+     "note": "Monthly all-time highs in volume reached 522,000; token economics discussed in relation to Karma app revenue generation model."
+    },
+    {
+     "episode_id": "IL0OeBGGeaY",
+     "episode_title": "\ud83d\udd34 LIVE: Equities Top While Crypto Bottoms? | THE $SPCX EFFECT | Market Update + Founder Interviews",
+     "start_seconds": 1533.0,
+     "timestamp": "25:33",
+     "deep_link": "https://www.youtube.com/watch?v=IL0OeBGGeaY&t=1533s",
+     "kind": "analysis",
+     "note": "Karma is a crypto app combining banking and trading with a social experience; speaker discusses its stages of development from idea to profitability to acquisition."
+    },
+    {
+     "episode_id": "IL0OeBGGeaY",
+     "episode_title": "\ud83d\udd34 LIVE: Equities Top While Crypto Bottoms? | THE $SPCX EFFECT | Market Update + Founder Interviews",
+     "start_seconds": 2259.0,
+     "timestamp": "37:39",
+     "deep_link": "https://www.youtube.com/watch?v=IL0OeBGGeaY&t=2259s",
+     "kind": "analysis",
+     "note": "The speaker's project being pitched; described as implementing a creator revenue-sharing model tied to trading fees, launching in the next week."
+    },
+    {
+     "episode_id": "IL0OeBGGeaY",
+     "episode_title": "\ud83d\udd34 LIVE: Equities Top While Crypto Bottoms? | THE $SPCX EFFECT | Market Update + Founder Interviews",
+     "start_seconds": 2547.0,
+     "timestamp": "42:27",
+     "deep_link": "https://www.youtube.com/watch?v=IL0OeBGGeaY&t=2547s",
+     "kind": "analysis",
+     "note": "Token that provides zero-fee trading utility, receives cashback from user trading fees, has planned token buyback mechanics, and is intended to receive a share of app revenue alongside creator rewards and OPEX allocation."
+    },
+    {
+     "episode_id": "IL0OeBGGeaY",
+     "episode_title": "\ud83d\udd34 LIVE: Equities Top While Crypto Bottoms? | THE $SPCX EFFECT | Market Update + Founder Interviews",
+     "start_seconds": 11130.0,
+     "timestamp": "3:05:30",
+     "deep_link": "https://www.youtube.com/watch?v=IL0OeBGGeaY&t=11130s",
+     "kind": "analysis",
+     "note": "Catching a bid; retraced entire move to all-time highs but still in buy zone, up approximately 2x on the day and almost 200% off the bottom; speaker mentioned bullish developments about the protocol shared during an interview."
+    },
+    {
+     "episode_id": "IL0OeBGGeaY",
+     "episode_title": "\ud83d\udd34 LIVE: Equities Top While Crypto Bottoms? | THE $SPCX EFFECT | Market Update + Founder Interviews",
+     "start_seconds": 13339.0,
+     "timestamp": "3:42:19",
+     "deep_link": "https://www.youtube.com/watch?v=IL0OeBGGeaY&t=13339s",
+     "kind": "mention",
+     "note": "Karma Wallet was interviewed on the stream; described as evolving from a neo bank to an 'everything app', now revenue positive with good metrics."
+    },
+    {
+     "episode_id": "LGLklvVmCTM",
+     "episode_title": "\ud83d\udd34LIVE: AI Agents with Serv | Will Printr Save the Trenches? | Market Updates + Founder Interviews",
+     "start_seconds": 10686.0,
+     "timestamp": "2:58:06",
+     "deep_link": "https://www.youtube.com/watch?v=LGLklvVmCTM&t=10686s",
+     "kind": "analysis",
+     "note": "Discussed with caution regarding holding support area; 16K volume noted as low; potential liquidity vacuum expected from Printer v2 launch makes it tougher for Karma."
+    },
+    {
+     "episode_id": "O4A8vFhlU2Q",
+     "episode_title": "\ud83d\udd34 LIVE: Saylor Selling | Onchain Cooking | Bear Market Update + Trader Radio",
+     "start_seconds": 8020.0,
+     "timestamp": "2:13:40",
+     "deep_link": "https://www.youtube.com/watch?v=O4A8vFhlU2Q&t=8020s",
+     "kind": "analysis",
+     "note": "Mentioned as another social trading app attempting to compete with FOMO, discussed as a beta product and analyzed in context of the competitive landscape of trading applications."
+    },
+    {
+     "episode_id": "O4A8vFhlU2Q",
+     "episode_title": "\ud83d\udd34 LIVE: Saylor Selling | Onchain Cooking | Bear Market Update + Trader Radio",
+     "start_seconds": 8367.0,
+     "timestamp": "2:19:27",
+     "deep_link": "https://www.youtube.com/watch?v=O4A8vFhlU2Q&t=8367s",
+     "kind": "analysis",
+     "note": "Trading platform with 300 active users (up 100% in 30 days), 6,669 total users (up 50%), 10,100 total transactions (up 182%), $359,000 in banking volume, and $1.1 million in trading volume (up 220%) over the last 30 days."
+    },
+    {
+     "episode_id": "SzXvuupwhCs",
+     "episode_title": "is $10 Billion in startups coming onchain? NEO Banking w/@sanafionchain, @Perkinsfund",
+     "start_seconds": 3507.0,
+     "timestamp": "58:27",
+     "deep_link": "https://www.youtube.com/watch?v=SzXvuupwhCs&t=3507s",
+     "kind": "mention",
+     "note": "Mentioned as potentially a beta play for Avichi alongside Santa."
+    },
+    {
+     "episode_id": "SzXvuupwhCs",
+     "episode_title": "is $10 Billion in startups coming onchain? NEO Banking w/@sanafionchain, @Perkinsfund",
+     "start_seconds": 10348.0,
+     "timestamp": "2:52:28",
+     "deep_link": "https://www.youtube.com/watch?v=SzXvuupwhCs&t=10348s",
+     "kind": "analysis",
+     "note": "Chart described as ranging, accumulating, and bouncing off the bottom of range in a positive way."
+    },
+    {
+     "episode_id": "YNbyFlm0-Kk",
+     "episode_title": "IS IT AN OWNERSHIP TOKEN? w/@LaunchOnSoar, @imtomcurry, @karmawallet on @MCGlive X @AssetDash",
+     "start_seconds": 9307.0,
+     "timestamp": "2:35:07",
+     "deep_link": "https://www.youtube.com/watch?v=YNbyFlm0-Kk&t=9307s",
+     "kind": "analysis",
+     "note": "Karma compared to Avichi; Karma valued at a million dollars with discussion of ownership tokens, community aspects, user retention, and founder stewardship positioning for long-term play."
+    },
+    {
+     "episode_id": "YNbyFlm0-Kk",
+     "episode_title": "IS IT AN OWNERSHIP TOKEN? w/@LaunchOnSoar, @imtomcurry, @karmawallet on @MCGlive X @AssetDash",
+     "start_seconds": 9631.0,
+     "timestamp": "2:40:31",
+     "deep_link": "https://www.youtube.com/watch?v=YNbyFlm0-Kk&t=9631s",
+     "kind": "analysis",
+     "note": "Discussed as undervalued with 1 million valued as a steal; potential acquisition target and repricing candidate if an ownership model is adopted similar to Avichi."
+    },
+    {
+     "episode_id": "YNbyFlm0-Kk",
+     "episode_title": "IS IT AN OWNERSHIP TOKEN? w/@LaunchOnSoar, @imtomcurry, @karmawallet on @MCGlive X @AssetDash",
+     "start_seconds": 19384.0,
+     "timestamp": "5:23:04",
+     "deep_link": "https://www.youtube.com/watch?v=YNbyFlm0-Kk&t=19384s",
+     "kind": "mention",
+     "note": "Mentioned as a platform with a Kled app on a user's phone, potentially cooking up a partnership; features hardware wallets, cold storage, low fees, insurance, and a karma points system similar to credit card rewards."
+    },
+    {
+     "episode_id": "YW3ArVrSUuo",
+     "episode_title": "POLYMARKET RECEIVES CFTC APPROVAL? w/@KAIO_xyz and @StreetFDN on @MCGlive X @assetdash",
+     "start_seconds": 5243.0,
+     "timestamp": "1:27:23",
+     "deep_link": "https://www.youtube.com/watch?v=YW3ArVrSUuo&t=5243s",
+     "kind": "analysis",
+     "note": "Discussed as a neo bank still in a price range, with the speaker expressing interest in buying at current levels."
+    },
+    {
+     "episode_id": "dm-ZpD-nWw8",
+     "episode_title": "\ud83d\udd34 LIVE: RWA Memes - Will They Last? | BTC Update + Interviews",
+     "start_seconds": 7547.0,
+     "timestamp": "2:05:47",
+     "deep_link": "https://www.youtube.com/watch?v=dm-ZpD-nWw8&t=7547s",
+     "kind": "analysis",
+     "note": "Speakers mention watching Karma as one of several tokens they are monitoring for potential oversold entry points during the liquidity suck."
+    },
+    {
+     "episode_id": "eLtX3KdYiZ0",
+     "episode_title": "Virtuals Day- Robinhood Ecosystem Project Spotlight",
+     "start_seconds": 6209.0,
+     "timestamp": "1:43:29",
+     "deep_link": "https://www.youtube.com/watch?v=eLtX3KdYiZ0&t=6209s",
+     "kind": "analysis",
+     "note": "Speakers discuss Karma as a crypto app with social feed features where users can publish trading theses and be rewarded when others trade based on their thesis, positioning it as a platform for creator revenue sharing."
+    },
+    {
+     "episode_id": "eLtX3KdYiZ0",
+     "episode_title": "Virtuals Day- Robinhood Ecosystem Project Spotlight",
+     "start_seconds": 6773.0,
+     "timestamp": "1:52:53",
+     "deep_link": "https://www.youtube.com/watch?v=eLtX3KdYiZ0&t=6773s",
+     "kind": "analysis",
+     "note": "Token economics and funding mechanism for Karma discussed, including ACF model with 25% tokens locked, team vest allocation at 25%, and 50% float with 40% reserved for fee holders; value accrual plan described with swap fee buybacks planned for first 90 days."
+    },
+    {
+     "episode_id": "eLtX3KdYiZ0",
+     "episode_title": "Virtuals Day- Robinhood Ecosystem Project Spotlight",
+     "start_seconds": 7118.0,
+     "timestamp": "1:58:38",
+     "deep_link": "https://www.youtube.com/watch?v=eLtX3KdYiZ0&t=7118s",
+     "kind": "analysis",
+     "note": "Metrics and growth data for Karma are publicly available on stats.karma.xyz; the app recently enabled trading which caused a big jump in volume; speakers discuss growth projections and implementing RWA experiments in the app."
+    },
+    {
+     "episode_id": "g53-nw_F_68",
+     "episode_title": "ICM micro caps and x402 updates w/ @WonderSitesCo, @SmartPracticeAI, @polyswipe_app, @PayAINetwork",
+     "start_seconds": 10345.0,
+     "timestamp": "2:52:25",
+     "deep_link": "https://www.youtube.com/watch?v=g53-nw_F_68&t=10345s",
+     "kind": "analysis",
+     "note": "Discussed as a neo-banking platform project with 2.2 million fully diluted market cap and 700 users, currently applying to Alliance DAO with potential for significant expansion if accepted."
+    },
+    {
+     "episode_id": "hE6LJHqZ56w",
+     "episode_title": "Karma Wallet: Neo-Bank Bill Pay Live, 1.1K Users, Europe Rollout & More! | MCG Show",
+     "start_seconds": 86.0,
+     "timestamp": "1:26",
+     "deep_link": "https://www.youtube.com/watch?v=hE6LJHqZ56w&t=86s",
+     "kind": "analysis",
+     "note": "Karma is a decentralized banking alternative that allows users to pay bills, rent, groceries, and manage finances with crypto directly from their wallet without selling."
+    },
+    {
+     "episode_id": "hE6LJHqZ56w",
+     "episode_title": "Karma Wallet: Neo-Bank Bill Pay Live, 1.1K Users, Europe Rollout & More! | MCG Show",
+     "start_seconds": 515.0,
+     "timestamp": "8:35",
+     "deep_link": "https://www.youtube.com/watch?v=hE6LJHqZ56w&t=515s",
+     "kind": "analysis",
+     "note": "Discussed as a token that provides fee benefits; holding Karma gives 0% swap fee and reduced overall fees on bill payments, with future goal to reduce fees further."
+    },
+    {
+     "episode_id": "hE6LJHqZ56w",
+     "episode_title": "Karma Wallet: Neo-Bank Bill Pay Live, 1.1K Users, Europe Rollout & More! | MCG Show",
+     "start_seconds": 1114.0,
+     "timestamp": "18:34",
+     "deep_link": "https://www.youtube.com/watch?v=hE6LJHqZ56w&t=1114s",
+     "kind": "analysis",
+     "note": "Discussed as a token with a rebate system where holding enough karma allows users to pay 0% fees, and as part of marketing campaigns; described as having a user base of karma holders."
+    },
+    {
+     "episode_id": "iPjJs8t8PIU",
+     "episode_title": "The Scrappy Founder Behind $KARMA: Viral Sticker Success,  Growing IBAN User Base + More!",
+     "start_seconds": 1876.0,
+     "timestamp": "31:16",
+     "deep_link": "https://www.youtube.com/watch?v=iPjJs8t8PIU&t=1876s",
+     "kind": "mention",
+     "note": "Discussed as a project building towards an onchain neo bank; ramping product mentioned as one of the first products to be released, with tokenomics and documentation coming in the coming days."
+    },
+    {
+     "episode_id": "mtKICofZcFU",
+     "episode_title": "OWNERSHIP. NOT A META. THE NEW STANDARD? w/@Foundational_AI @Cypher_HQ_ on @MCGlive X @AssetDash",
+     "start_seconds": 12021.0,
+     "timestamp": "3:20:21",
+     "deep_link": "https://www.youtube.com/watch?v=mtKICofZcFU&t=12021s",
+     "kind": "mention",
+     "note": "Karma Wallet is a neo-banking product featuring founder Amir; scheduled as a guest interview for Friday, December 10th."
+    },
+    {
+     "episode_id": "n0a_hPkNXpM",
+     "episode_title": "Bullish setup on this ICM privacy coin? On @MCGlive X @AssetDash w/@edeldotfinance @stardotfun",
+     "start_seconds": 14404.0,
+     "timestamp": "4:00:04",
+     "deep_link": "https://www.youtube.com/watch?v=n0a_hPkNXpM&t=14404s",
+     "kind": "analysis",
+     "note": "Karma is up 51% in the last 24 hours; described as a NEO bank meta token. Update on zero-fee feature introduced: users holding 1 million Karma tokens get zero-fee off-ramps with fee refunded in Karma tokens, while non-holders pay 0.5% fee."
+    },
+    {
+     "episode_id": "oqhVVvYHbpM",
+     "episode_title": "\ud83d\udd34 LIVE: Neobanks Are Back | Pumpcade Pumping | Time to Lock In? Market Updates",
+     "start_seconds": 7350.0,
+     "timestamp": "2:02:30",
+     "deep_link": "https://www.youtube.com/watch?v=oqhVVvYHbpM&t=7350s",
+     "kind": "mention",
+     "note": "Mentioned as a beta/trading option alongside Sonifi in the context of neobank activity."
+    },
+    {
+     "episode_id": "oqhVVvYHbpM",
+     "episode_title": "\ud83d\udd34 LIVE: Neobanks Are Back | Pumpcade Pumping | Time to Lock In? Market Updates",
+     "start_seconds": 11239.0,
+     "timestamp": "3:07:19",
+     "deep_link": "https://www.youtube.com/watch?v=oqhVVvYHbpM&t=11239s",
+     "kind": "analysis",
+     "note": "Presented as a beta trade to Vichi with 2 million in volume and 500k market cap; characterized as having more buzz than other neobank plays and as a potential follower if Vichi rises."
+    },
+    {
+     "episode_id": "siZ8uErRtiQ",
+     "episode_title": "Bob The reBuilt: Reveals Top 3 ICM Picks, Watchlist, Accounts to Follow + More!",
+     "start_seconds": 48.0,
+     "timestamp": "0:48",
+     "deep_link": "https://www.youtube.com/watch?v=siZ8uErRtiQ&t=48s",
+     "kind": "analysis",
+     "note": "Karma wallet is noted as having a 54% pump on the day."
+    },
+    {
+     "episode_id": "sx4XO5IjYQ0",
+     "episode_title": "Everyone leave for BNB? Talking quantum ft @qu_stream and prediction markets with @polyfactual",
+     "start_seconds": 7476.0,
+     "timestamp": "2:04:36",
+     "deep_link": "https://www.youtube.com/watch?v=sx4XO5IjYQ0&t=7476s",
+     "kind": "analysis",
+     "note": "Karma is up at 4.2 million market cap in the NEO banking narrative, with a strong chart that is holding well."
+    },
+    {
+     "episode_id": "wsTdtrlI2I8",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood launchpad war drama | Live Market Updates + Onchain Positioning",
+     "start_seconds": 7879.0,
+     "timestamp": "2:11:19",
+     "deep_link": "https://www.youtube.com/watch?v=wsTdtrlI2I8&t=7879s",
+     "kind": "analysis",
+     "note": "Speaker stated they like Karma because the narrative is strong and they will lean into RWAs, but noted it is probably not a leader for Robin Hood ecosystem launch."
+    },
+    {
+     "episode_id": "zTEsQqVVsZk",
+     "episode_title": "\ud83d\udd34 LIVE: Bear Market Ending? | RH Szn Continues | Market Update + Interviews",
+     "start_seconds": 9154.0,
+     "timestamp": "2:32:34",
+     "deep_link": "https://www.youtube.com/watch?v=zTEsQqVVsZk&t=9154s",
+     "kind": "analysis",
+     "note": "Described as looking good; was previously on Solana at sub-400K but now over 3 million after launching on Robinhood; discussed as having potential for further upside with growing volumes."
+    }
+   ],
+   "episode_count": 26,
    "single_reference": false
   },
   {
@@ -107084,6 +107291,323 @@
    "single_reference": false
   },
   {
+   "symbol": "LONG",
+   "name": "Long.xyz",
+   "asset_class": "other",
+   "mentions": 34,
+   "analysis": 23,
+   "moments": [
+    {
+     "episode_id": "1UFlORh3zt0",
+     "episode_title": "\ud83d\udd34 LIVE: FOMC Day, Onchain Rotations...Next Leg Loading? | Market Update + Interviews",
+     "start_seconds": 5553.0,
+     "timestamp": "1:32:33",
+     "deep_link": "https://www.youtube.com/watch?v=1UFlORh3zt0&t=5553s",
+     "kind": "analysis",
+     "note": "Discussed as a major winner in meme stock pairs on-chain, noted for not just focusing on pairs or reflections but on underlying liquidity and community exposure; framed as the most sustainable player in the meme stock pair narrative."
+    },
+    {
+     "episode_id": "2NK_MBlFvtM",
+     "episode_title": "\ud83d\udd34 LIVE: So Early It Hurts | A Simple Strategy for Surviving a Sideways Crypto Market",
+     "start_seconds": 4291.0,
+     "timestamp": "1:11:31",
+     "deep_link": "https://www.youtube.com/watch?v=2NK_MBlFvtM&t=4291s",
+     "kind": "mention",
+     "note": "Named as a launchpad associated with RWA pairs."
+    },
+    {
+     "episode_id": "2NK_MBlFvtM",
+     "episode_title": "\ud83d\udd34 LIVE: So Early It Hurts | A Simple Strategy for Surviving a Sideways Crypto Market",
+     "start_seconds": 7843.0,
+     "timestamp": "2:10:43",
+     "deep_link": "https://www.youtube.com/watch?v=2NK_MBlFvtM&t=7843s",
+     "kind": "mention",
+     "note": "Long was integrated into Robinhood Wallet and uses iOS programmable service to bring attention to the chain."
+    },
+    {
+     "episode_id": "2NK_MBlFvtM",
+     "episode_title": "\ud83d\udd34 LIVE: So Early It Hurts | A Simple Strategy for Surviving a Sideways Crypto Market",
+     "start_seconds": 9498.0,
+     "timestamp": "2:38:18",
+     "deep_link": "https://www.youtube.com/watch?v=2NK_MBlFvtM&t=9498s",
+     "kind": "analysis",
+     "note": "Speaker mentioned Long.xyz was integrated into the Robinhood app and called this bullish for the Long.xyz ecosystem."
+    },
+    {
+     "episode_id": "5PNFmBrXJEs",
+     "episode_title": "$MOO: A memory chip stock meme coin on the Long ecosystem",
+     "start_seconds": 0.0,
+     "timestamp": "0:00",
+     "deep_link": "https://www.youtube.com/watch?v=5PNFmBrXJEs&t=0s",
+     "kind": "analysis",
+     "note": "Long XYZ ecosystem discussed as platform where MOO operates and as ecosystem asset discussed by AJC for capturing flows and onboarding new users to crypto."
+    },
+    {
+     "episode_id": "5PNFmBrXJEs",
+     "episode_title": "$MOO: A memory chip stock meme coin on the Long ecosystem",
+     "start_seconds": 384.0,
+     "timestamp": "6:24",
+     "deep_link": "https://www.youtube.com/watch?v=5PNFmBrXJEs&t=384s",
+     "kind": "analysis",
+     "note": "Described as a pioneer in creating RWA pairs and having sophisticated liquidity mechanisms; praised for deeper liquidity in memory/stock pairs compared to other launchpads by design."
+    },
+    {
+     "episode_id": "H4kImk1Y7KQ",
+     "episode_title": "\ud83d\udd34 LIVE: FOMC, AI Panic, Clarity Act Vote | Market Update + Interviews",
+     "start_seconds": 6515.0,
+     "timestamp": "1:48:35",
+     "deep_link": "https://www.youtube.com/watch?v=H4kImk1Y7KQ&t=6515s",
+     "kind": "analysis",
+     "note": "Speaker discusses long.xyz as an ecosystem and seeks additional exposure through it."
+    },
+    {
+     "episode_id": "IeKSAMWNmGs",
+     "episode_title": "\ud83d\udd34 LIVE: Hood Summit Day 2 | Is Robinhood Chain Dead? | Market Update + Interviews",
+     "start_seconds": 1516.0,
+     "timestamp": "25:16",
+     "deep_link": "https://www.youtube.com/watch?v=IeKSAMWNmGs&t=1516s",
+     "kind": "mention",
+     "note": "Referenced as a protocol involved in sub-pair exploration and automatic liquidity mechanisms."
+    },
+    {
+     "episode_id": "UM6A6v9BjQg",
+     "episode_title": "\ud83d\udd34 LIVE: Market Reset Incoming? | Fomo Friday | Market Update + Interviews",
+     "start_seconds": 3227.0,
+     "timestamp": "53:47",
+     "deep_link": "https://www.youtube.com/watch?v=UM6A6v9BjQg&t=3227s",
+     "kind": "analysis",
+     "note": "Discussed as offering RWA pairs and underlying infrastructure/tech stack; differentiated from competitors by hands-on support and tech development."
+    },
+    {
+     "episode_id": "UbKsP6WCsPs",
+     "episode_title": "\ud83d\udd34 LIVE: Market Cooling Off | Buy The Dip? | Market Update + Interviews",
+     "start_seconds": 3051.0,
+     "timestamp": "50:51",
+     "deep_link": "https://www.youtube.com/watch?v=UbKsP6WCsPs&t=3051s",
+     "kind": "analysis",
+     "note": "Speaker mentions Long ecosystem coins and holds positions under the thesis that Long and Ponds success are complementary, notes Long has been performing well."
+    },
+    {
+     "episode_id": "UbKsP6WCsPs",
+     "episode_title": "\ud83d\udd34 LIVE: Market Cooling Off | Buy The Dip? | Market Update + Interviews",
+     "start_seconds": 3295.0,
+     "timestamp": "54:55",
+     "deep_link": "https://www.youtube.com/watch?v=UbKsP6WCsPs&t=3295s",
+     "kind": "analysis",
+     "note": "LONG is a launchpad platform that the speaker bought MOO early on through; it takes a different approach to launchpads and aligns with Robinhood chain's vision."
+    },
+    {
+     "episode_id": "ZSBmoD9oLw8",
+     "episode_title": "\ud83d\udd34 LIVE: The Battle Of Blockchains | Solana vs Robinhood | Market Update + Interviews",
+     "start_seconds": 11699.0,
+     "timestamp": "3:14:59",
+     "deep_link": "https://www.youtube.com/watch?v=ZSBmoD9oLw8&t=11699s",
+     "kind": "mention",
+     "note": "Long launchpad ecosystem referenced in viewership and comparison context with Long XYZ."
+    },
+    {
+     "episode_id": "_Duv4CxaoI4",
+     "episode_title": "Mancer's Books | Back Traders Instead of Memecoins (Robinhood Chain)",
+     "start_seconds": 3227.0,
+     "timestamp": "53:47",
+     "deep_link": "https://www.youtube.com/watch?v=_Duv4CxaoI4&t=3227s",
+     "kind": "mention",
+     "note": "Long got integrated into Robinhood Wallet."
+    },
+    {
+     "episode_id": "ayJIM0WPyHs",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Bottom In? | Do This Before the Next Move",
+     "start_seconds": 3492.0,
+     "timestamp": "58:12",
+     "deep_link": "https://www.youtube.com/watch?v=ayJIM0WPyHs&t=3492s",
+     "kind": "analysis",
+     "note": "Discussed as an ecosystem with catalysts including Robinhood Wallet integration for trading stock tokens on Long; speaker mentions it reached high market cap for FDV meme, noted correlation with underlying stock tokens, and built extensions like vaults for capital efficiency."
+    },
+    {
+     "episode_id": "ayJIM0WPyHs",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Bottom In? | Do This Before the Next Move",
+     "start_seconds": 4854.0,
+     "timestamp": "1:20:54",
+     "deep_link": "https://www.youtube.com/watch?v=ayJIM0WPyHs&t=4854s",
+     "kind": "analysis",
+     "note": "Long is discussed as a launchpad platform with infrastructure that can be built on top of it, and features like LongX and baskets are highlighted as key mechanisms."
+    },
+    {
+     "episode_id": "ayJIM0WPyHs",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Bottom In? | Do This Before the Next Move",
+     "start_seconds": 5576.0,
+     "timestamp": "1:32:56",
+     "deep_link": "https://www.youtube.com/watch?v=ayJIM0WPyHs&t=5576s",
+     "kind": "analysis",
+     "note": "Speaker discusses Long as a newly launched crypto asset, mentioning it needs more new people and capital entering, and positioning current holders as seed investors who want to see growth."
+    },
+    {
+     "episode_id": "bckrJLRN_l0",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto Pulling Back...Buy the Dip? | Market Update + Interviews",
+     "start_seconds": 9963.0,
+     "timestamp": "2:46:03",
+     "deep_link": "https://www.youtube.com/watch?v=bckrJLRN_l0&t=9963s",
+     "kind": "analysis",
+     "note": "Described as the first bonded Hyperliquid token with long leverage pairing; speakers discuss it as having the most volume at 2.5 million."
+    },
+    {
+     "episode_id": "d-mQ25Dpn68",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Hits $85K | Bull Market Confirmed | Market Update + Interview",
+     "start_seconds": 6168.0,
+     "timestamp": "1:42:48",
+     "deep_link": "https://www.youtube.com/watch?v=d-mQ25Dpn68&t=6168s",
+     "kind": "mention",
+     "note": "Speaker mentions long.xyz as a potential opportunity for the remaining capital in a diversified 10k portfolio, and references giving a full update about it later."
+    },
+    {
+     "episode_id": "dIsFawgT6DQ",
+     "episode_title": "\ud83d\udd34 LIVE: FOMO App Dominating | Onchain is HOT | Creator Coins Back? + Market Update",
+     "start_seconds": 6578.0,
+     "timestamp": "1:49:38",
+     "deep_link": "https://www.youtube.com/watch?v=dIsFawgT6DQ&t=6578s",
+     "kind": "mention",
+     "note": "Named as a player in the Robinhood ecosystem that Uniswap has commented on and supported."
+    },
+    {
+     "episode_id": "dm-ZpD-nWw8",
+     "episode_title": "\ud83d\udd34 LIVE: RWA Memes - Will They Last? | BTC Update + Interviews",
+     "start_seconds": 1060.0,
+     "timestamp": "17:40",
+     "deep_link": "https://www.youtube.com/watch?v=dm-ZpD-nWw8&t=1060s",
+     "kind": "analysis",
+     "note": "Long.xyz was discussed as a competitor taking market share and volume from other platforms, with runners seen on the platform."
+    },
+    {
+     "episode_id": "lN2kZJ0CNZg",
+     "episode_title": "\ud83d\udfe2 LIVE: Robinhood Chain Rally Incoming? How to Position",
+     "start_seconds": 3467.0,
+     "timestamp": "57:47",
+     "deep_link": "https://www.youtube.com/watch?v=lN2kZJ0CNZg&t=3467s",
+     "kind": "mention",
+     "note": "A token that has reached $300 million in value and pairs stock tokens with meme coins to bootstrap liquidity for equities."
+    },
+    {
+     "episode_id": "lN2kZJ0CNZg",
+     "episode_title": "\ud83d\udfe2 LIVE: Robinhood Chain Rally Incoming? How to Position",
+     "start_seconds": 4772.0,
+     "timestamp": "1:19:32",
+     "deep_link": "https://www.youtube.com/watch?v=lN2kZJ0CNZg&t=4772s",
+     "kind": "analysis",
+     "note": "Compared as a competitor project; described as having significant current trading volume that feeds fees into community vault and liquidity pools, but questioned whether this fee-extraction approach is sustainable at billion-dollar valuations."
+    },
+    {
+     "episode_id": "q7hcCdzTTiI",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holds Above $83K | Uptober Incoming? | Market Update + Interviews",
+     "start_seconds": 8455.0,
+     "timestamp": "2:20:55",
+     "deep_link": "https://www.youtube.com/watch?v=q7hcCdzTTiI&t=8455s",
+     "kind": "analysis",
+     "note": "long.xyz is discussed as having a more investable long-term ecosystem where good utility projects are expected to launch, with Shiffy identified as the first utility iteration."
+    },
+    {
+     "episode_id": "qq_4gfyjN6s",
+     "episode_title": "\ud83d\udd34 LIVE: MonkeDAO Solana Product Spotlight + Trader Radio w/@ChillTRD | Market Updates",
+     "start_seconds": 13811.0,
+     "timestamp": "3:50:11",
+     "deep_link": "https://www.youtube.com/watch?v=qq_4gfyjN6s&t=13811s",
+     "kind": "mention",
+     "note": "Mentioned as a ticker to look at the ecosystem on, speakers reference long.xyz ecosystem."
+    },
+    {
+     "episode_id": "qz5qB0AgC0Q",
+     "episode_title": "Nate (Long / $AI Founder): Robinhood Chain Isn\u2019t Dead | Wallet Integration, Why Stock Tokens Win",
+     "start_seconds": 5.0,
+     "timestamp": "0:05",
+     "deep_link": "https://www.youtube.com/watch?v=qz5qB0AgC0Q&t=5s",
+     "kind": "analysis",
+     "note": "Discussed as part of Long XYZ ecosystem with catalysts including Robinhood Wallet integration, stock token functionality, and earnings call impact on Robinhood Chain support."
+    },
+    {
+     "episode_id": "qz5qB0AgC0Q",
+     "episode_title": "Nate (Long / $AI Founder): Robinhood Chain Isn\u2019t Dead | Wallet Integration, Why Stock Tokens Win",
+     "start_seconds": 1358.0,
+     "timestamp": "22:38",
+     "deep_link": "https://www.youtube.com/watch?v=qz5qB0AgC0Q&t=1358s",
+     "kind": "analysis",
+     "note": "Discussed as a platform with infrastructure builders, launchpads, new features, and composable smart contracts; speaker mentions LongX feature and Long 500 ecosystem alignment mechanism."
+    },
+    {
+     "episode_id": "qz5qB0AgC0Q",
+     "episode_title": "Nate (Long / $AI Founder): Robinhood Chain Isn\u2019t Dead | Wallet Integration, Why Stock Tokens Win",
+     "start_seconds": 2095.0,
+     "timestamp": "34:55",
+     "deep_link": "https://www.youtube.com/watch?v=qz5qB0AgC0Q&t=2095s",
+     "kind": "analysis",
+     "note": "Speaker discusses Long as a new asset expected to facilitate growth for current holders viewed as seed investors, with focus on distribution and bringing in net new capital."
+    },
+    {
+     "episode_id": "vBZ8pcgAzJY",
+     "episode_title": "\ud83d\udd34 LIVE: Solana Onchain Surges While Robinhood Chain Cools | What's the Trade?",
+     "start_seconds": 11533.0,
+     "timestamp": "3:12:13",
+     "deep_link": "https://www.youtube.com/watch?v=vBZ8pcgAzJY&t=11533s",
+     "kind": "mention",
+     "note": "Named as an example of a coin that everyone was bullish on with similar thesis to AI."
+    },
+    {
+     "episode_id": "vBZ8pcgAzJY",
+     "episode_title": "\ud83d\udd34 LIVE: Solana Onchain Surges While Robinhood Chain Cools | What's the Trade?",
+     "start_seconds": 13293.0,
+     "timestamp": "3:41:33",
+     "deep_link": "https://www.youtube.com/watch?v=vBZ8pcgAzJY&t=13293s",
+     "kind": "analysis",
+     "note": "Speaker is bullish on long.xyz and the AI token ecosystem, noting that as AI token recovers it lifts the entire long ecosystem."
+    },
+    {
+     "episode_id": "wsTdtrlI2I8",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood launchpad war drama | Live Market Updates + Onchain Positioning",
+     "start_seconds": 895.0,
+     "timestamp": "14:55",
+     "deep_link": "https://www.youtube.com/watch?v=wsTdtrlI2I8&t=895s",
+     "kind": "analysis",
+     "note": "Long discussed as a project by Nate focused on unique token pairings and stock token pairings, having a breakout moment."
+    },
+    {
+     "episode_id": "x7qRX-hWxg8",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding (Memes, V4 Hooks, Infra) | Market Update + Interviews",
+     "start_seconds": 8590.0,
+     "timestamp": "2:23:10",
+     "deep_link": "https://www.youtube.com/watch?v=x7qRX-hWxg8&t=8590s",
+     "kind": "analysis",
+     "note": "Long.xyz platform discussed as hosting meme tokenized stock pairs; entire long ecosystem described as looking quite good."
+    },
+    {
+     "episode_id": "x7qRX-hWxg8",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding (Memes, V4 Hooks, Infra) | Market Update + Interviews",
+     "start_seconds": 10836.0,
+     "timestamp": "3:00:36",
+     "deep_link": "https://www.youtube.com/watch?v=x7qRX-hWxg8&t=10836s",
+     "kind": "mention",
+     "note": "Mentioned as an example of a subsector someone could specialize in."
+    },
+    {
+     "episode_id": "zDMFsmfIkkM",
+     "episode_title": "\ud83d\udd34 LIVE: SEC Greenlights Onchain Stocks | Tokenization Supercycle | Market Update + Interviews",
+     "start_seconds": 829.0,
+     "timestamp": "13:49",
+     "deep_link": "https://www.youtube.com/watch?v=zDMFsmfIkkM&t=829s",
+     "kind": "analysis",
+     "note": "Named as the winner doing tokenized stock pairings within the Robinhood ecosystem."
+    },
+    {
+     "episode_id": "zTEsQqVVsZk",
+     "episode_title": "\ud83d\udd34 LIVE: Bear Market Ending? | RH Szn Continues | Market Update + Interviews",
+     "start_seconds": 6245.0,
+     "timestamp": "1:44:05",
+     "deep_link": "https://www.youtube.com/watch?v=zTEsQqVVsZk&t=6245s",
+     "kind": "analysis",
+     "note": "A platform that allows pairing tokens with stocks, enabling long and short positions; attracted attention from Uniswap founder, Vlad Tenev from Robinhood, and Robinhood's head of product and DeFi."
+    }
+   ],
+   "episode_count": 23,
+   "single_reference": false
+  },
+  {
    "symbol": "ORE",
    "name": "Ore",
    "asset_class": "crypto",
@@ -109110,7 +109634,7 @@
    "symbol": "USDG",
    "name": "USDG",
    "asset_class": "crypto",
-   "mentions": 55,
+   "mentions": 56,
    "analysis": 21,
    "moments": [
     {
@@ -109573,6 +110097,15 @@
      "note": "USDG vault mentioned as part of Bow protocol's fee distribution."
     },
     {
+     "episode_id": "qz5qB0AgC0Q",
+     "episode_title": "Nate (Long / $AI Founder): Robinhood Chain Isn\u2019t Dead | Wallet Integration, Why Stock Tokens Win",
+     "start_seconds": 802.0,
+     "timestamp": "13:22",
+     "deep_link": "https://www.youtube.com/watch?v=qz5qB0AgC0Q&t=802s",
+     "kind": "mention",
+     "note": "Mentioned as a potential asset for lending incentives and yield generation by Robinhood."
+    },
+    {
      "episode_id": "vBRvDqOdKwQ",
      "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
      "start_seconds": 7787.0,
@@ -109609,7 +110142,7 @@
      "note": "Described as used in a bonding mechanism where traders take USDG to buy NET, which adds to USD treasury."
     }
    ],
-   "episode_count": 40,
+   "episode_count": 41,
    "single_reference": false
   },
   {
@@ -110599,296 +111132,6 @@
     }
    ],
    "episode_count": 18,
-   "single_reference": false
-  },
-  {
-   "symbol": "LONG",
-   "name": "Long.xyz",
-   "asset_class": "other",
-   "mentions": 31,
-   "analysis": 20,
-   "moments": [
-    {
-     "episode_id": "1UFlORh3zt0",
-     "episode_title": "\ud83d\udd34 LIVE: FOMC Day, Onchain Rotations...Next Leg Loading? | Market Update + Interviews",
-     "start_seconds": 5553.0,
-     "timestamp": "1:32:33",
-     "deep_link": "https://www.youtube.com/watch?v=1UFlORh3zt0&t=5553s",
-     "kind": "analysis",
-     "note": "Discussed as a major winner in meme stock pairs on-chain, noted for not just focusing on pairs or reflections but on underlying liquidity and community exposure; framed as the most sustainable player in the meme stock pair narrative."
-    },
-    {
-     "episode_id": "2NK_MBlFvtM",
-     "episode_title": "\ud83d\udd34 LIVE: So Early It Hurts | A Simple Strategy for Surviving a Sideways Crypto Market",
-     "start_seconds": 4291.0,
-     "timestamp": "1:11:31",
-     "deep_link": "https://www.youtube.com/watch?v=2NK_MBlFvtM&t=4291s",
-     "kind": "mention",
-     "note": "Named as a launchpad associated with RWA pairs."
-    },
-    {
-     "episode_id": "2NK_MBlFvtM",
-     "episode_title": "\ud83d\udd34 LIVE: So Early It Hurts | A Simple Strategy for Surviving a Sideways Crypto Market",
-     "start_seconds": 7843.0,
-     "timestamp": "2:10:43",
-     "deep_link": "https://www.youtube.com/watch?v=2NK_MBlFvtM&t=7843s",
-     "kind": "mention",
-     "note": "Long was integrated into Robinhood Wallet and uses iOS programmable service to bring attention to the chain."
-    },
-    {
-     "episode_id": "2NK_MBlFvtM",
-     "episode_title": "\ud83d\udd34 LIVE: So Early It Hurts | A Simple Strategy for Surviving a Sideways Crypto Market",
-     "start_seconds": 9498.0,
-     "timestamp": "2:38:18",
-     "deep_link": "https://www.youtube.com/watch?v=2NK_MBlFvtM&t=9498s",
-     "kind": "analysis",
-     "note": "Speaker mentioned Long.xyz was integrated into the Robinhood app and called this bullish for the Long.xyz ecosystem."
-    },
-    {
-     "episode_id": "5PNFmBrXJEs",
-     "episode_title": "$MOO: A memory chip stock meme coin on the Long ecosystem",
-     "start_seconds": 0.0,
-     "timestamp": "0:00",
-     "deep_link": "https://www.youtube.com/watch?v=5PNFmBrXJEs&t=0s",
-     "kind": "analysis",
-     "note": "Long XYZ ecosystem discussed as platform where MOO operates and as ecosystem asset discussed by AJC for capturing flows and onboarding new users to crypto."
-    },
-    {
-     "episode_id": "5PNFmBrXJEs",
-     "episode_title": "$MOO: A memory chip stock meme coin on the Long ecosystem",
-     "start_seconds": 384.0,
-     "timestamp": "6:24",
-     "deep_link": "https://www.youtube.com/watch?v=5PNFmBrXJEs&t=384s",
-     "kind": "analysis",
-     "note": "Described as a pioneer in creating RWA pairs and having sophisticated liquidity mechanisms; praised for deeper liquidity in memory/stock pairs compared to other launchpads by design."
-    },
-    {
-     "episode_id": "H4kImk1Y7KQ",
-     "episode_title": "\ud83d\udd34 LIVE: FOMC, AI Panic, Clarity Act Vote | Market Update + Interviews",
-     "start_seconds": 6515.0,
-     "timestamp": "1:48:35",
-     "deep_link": "https://www.youtube.com/watch?v=H4kImk1Y7KQ&t=6515s",
-     "kind": "analysis",
-     "note": "Speaker discusses long.xyz as an ecosystem and seeks additional exposure through it."
-    },
-    {
-     "episode_id": "IeKSAMWNmGs",
-     "episode_title": "\ud83d\udd34 LIVE: Hood Summit Day 2 | Is Robinhood Chain Dead? | Market Update + Interviews",
-     "start_seconds": 1516.0,
-     "timestamp": "25:16",
-     "deep_link": "https://www.youtube.com/watch?v=IeKSAMWNmGs&t=1516s",
-     "kind": "mention",
-     "note": "Referenced as a protocol involved in sub-pair exploration and automatic liquidity mechanisms."
-    },
-    {
-     "episode_id": "UM6A6v9BjQg",
-     "episode_title": "\ud83d\udd34 LIVE: Market Reset Incoming? | Fomo Friday | Market Update + Interviews",
-     "start_seconds": 3227.0,
-     "timestamp": "53:47",
-     "deep_link": "https://www.youtube.com/watch?v=UM6A6v9BjQg&t=3227s",
-     "kind": "analysis",
-     "note": "Discussed as offering RWA pairs and underlying infrastructure/tech stack; differentiated from competitors by hands-on support and tech development."
-    },
-    {
-     "episode_id": "UbKsP6WCsPs",
-     "episode_title": "\ud83d\udd34 LIVE: Market Cooling Off | Buy The Dip? | Market Update + Interviews",
-     "start_seconds": 3051.0,
-     "timestamp": "50:51",
-     "deep_link": "https://www.youtube.com/watch?v=UbKsP6WCsPs&t=3051s",
-     "kind": "analysis",
-     "note": "Speaker mentions Long ecosystem coins and holds positions under the thesis that Long and Ponds success are complementary, notes Long has been performing well."
-    },
-    {
-     "episode_id": "UbKsP6WCsPs",
-     "episode_title": "\ud83d\udd34 LIVE: Market Cooling Off | Buy The Dip? | Market Update + Interviews",
-     "start_seconds": 3295.0,
-     "timestamp": "54:55",
-     "deep_link": "https://www.youtube.com/watch?v=UbKsP6WCsPs&t=3295s",
-     "kind": "analysis",
-     "note": "LONG is a launchpad platform that the speaker bought MOO early on through; it takes a different approach to launchpads and aligns with Robinhood chain's vision."
-    },
-    {
-     "episode_id": "ZSBmoD9oLw8",
-     "episode_title": "\ud83d\udd34 LIVE: The Battle Of Blockchains | Solana vs Robinhood | Market Update + Interviews",
-     "start_seconds": 11699.0,
-     "timestamp": "3:14:59",
-     "deep_link": "https://www.youtube.com/watch?v=ZSBmoD9oLw8&t=11699s",
-     "kind": "mention",
-     "note": "Long launchpad ecosystem referenced in viewership and comparison context with Long XYZ."
-    },
-    {
-     "episode_id": "_Duv4CxaoI4",
-     "episode_title": "Mancer's Books | Back Traders Instead of Memecoins (Robinhood Chain)",
-     "start_seconds": 3227.0,
-     "timestamp": "53:47",
-     "deep_link": "https://www.youtube.com/watch?v=_Duv4CxaoI4&t=3227s",
-     "kind": "mention",
-     "note": "Long got integrated into Robinhood Wallet."
-    },
-    {
-     "episode_id": "ayJIM0WPyHs",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Bottom In? | Do This Before the Next Move",
-     "start_seconds": 3492.0,
-     "timestamp": "58:12",
-     "deep_link": "https://www.youtube.com/watch?v=ayJIM0WPyHs&t=3492s",
-     "kind": "analysis",
-     "note": "Discussed as an ecosystem with catalysts including Robinhood Wallet integration for trading stock tokens on Long; speaker mentions it reached high market cap for FDV meme, noted correlation with underlying stock tokens, and built extensions like vaults for capital efficiency."
-    },
-    {
-     "episode_id": "ayJIM0WPyHs",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Bottom In? | Do This Before the Next Move",
-     "start_seconds": 4854.0,
-     "timestamp": "1:20:54",
-     "deep_link": "https://www.youtube.com/watch?v=ayJIM0WPyHs&t=4854s",
-     "kind": "analysis",
-     "note": "Long is discussed as a launchpad platform with infrastructure that can be built on top of it, and features like LongX and baskets are highlighted as key mechanisms."
-    },
-    {
-     "episode_id": "ayJIM0WPyHs",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Bottom In? | Do This Before the Next Move",
-     "start_seconds": 5576.0,
-     "timestamp": "1:32:56",
-     "deep_link": "https://www.youtube.com/watch?v=ayJIM0WPyHs&t=5576s",
-     "kind": "analysis",
-     "note": "Speaker discusses Long as a newly launched crypto asset, mentioning it needs more new people and capital entering, and positioning current holders as seed investors who want to see growth."
-    },
-    {
-     "episode_id": "bckrJLRN_l0",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto Pulling Back...Buy the Dip? | Market Update + Interviews",
-     "start_seconds": 9963.0,
-     "timestamp": "2:46:03",
-     "deep_link": "https://www.youtube.com/watch?v=bckrJLRN_l0&t=9963s",
-     "kind": "analysis",
-     "note": "Described as the first bonded Hyperliquid token with long leverage pairing; speakers discuss it as having the most volume at 2.5 million."
-    },
-    {
-     "episode_id": "d-mQ25Dpn68",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Hits $85K | Bull Market Confirmed | Market Update + Interview",
-     "start_seconds": 6168.0,
-     "timestamp": "1:42:48",
-     "deep_link": "https://www.youtube.com/watch?v=d-mQ25Dpn68&t=6168s",
-     "kind": "mention",
-     "note": "Speaker mentions long.xyz as a potential opportunity for the remaining capital in a diversified 10k portfolio, and references giving a full update about it later."
-    },
-    {
-     "episode_id": "dIsFawgT6DQ",
-     "episode_title": "\ud83d\udd34 LIVE: FOMO App Dominating | Onchain is HOT | Creator Coins Back? + Market Update",
-     "start_seconds": 6578.0,
-     "timestamp": "1:49:38",
-     "deep_link": "https://www.youtube.com/watch?v=dIsFawgT6DQ&t=6578s",
-     "kind": "mention",
-     "note": "Named as a player in the Robinhood ecosystem that Uniswap has commented on and supported."
-    },
-    {
-     "episode_id": "dm-ZpD-nWw8",
-     "episode_title": "\ud83d\udd34 LIVE: RWA Memes - Will They Last? | BTC Update + Interviews",
-     "start_seconds": 1060.0,
-     "timestamp": "17:40",
-     "deep_link": "https://www.youtube.com/watch?v=dm-ZpD-nWw8&t=1060s",
-     "kind": "analysis",
-     "note": "Long.xyz was discussed as a competitor taking market share and volume from other platforms, with runners seen on the platform."
-    },
-    {
-     "episode_id": "lN2kZJ0CNZg",
-     "episode_title": "\ud83d\udfe2 LIVE: Robinhood Chain Rally Incoming? How to Position",
-     "start_seconds": 3467.0,
-     "timestamp": "57:47",
-     "deep_link": "https://www.youtube.com/watch?v=lN2kZJ0CNZg&t=3467s",
-     "kind": "mention",
-     "note": "A token that has reached $300 million in value and pairs stock tokens with meme coins to bootstrap liquidity for equities."
-    },
-    {
-     "episode_id": "lN2kZJ0CNZg",
-     "episode_title": "\ud83d\udfe2 LIVE: Robinhood Chain Rally Incoming? How to Position",
-     "start_seconds": 4772.0,
-     "timestamp": "1:19:32",
-     "deep_link": "https://www.youtube.com/watch?v=lN2kZJ0CNZg&t=4772s",
-     "kind": "analysis",
-     "note": "Compared as a competitor project; described as having significant current trading volume that feeds fees into community vault and liquidity pools, but questioned whether this fee-extraction approach is sustainable at billion-dollar valuations."
-    },
-    {
-     "episode_id": "q7hcCdzTTiI",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holds Above $83K | Uptober Incoming? | Market Update + Interviews",
-     "start_seconds": 8455.0,
-     "timestamp": "2:20:55",
-     "deep_link": "https://www.youtube.com/watch?v=q7hcCdzTTiI&t=8455s",
-     "kind": "analysis",
-     "note": "long.xyz is discussed as having a more investable long-term ecosystem where good utility projects are expected to launch, with Shiffy identified as the first utility iteration."
-    },
-    {
-     "episode_id": "qq_4gfyjN6s",
-     "episode_title": "\ud83d\udd34 LIVE: MonkeDAO Solana Product Spotlight + Trader Radio w/@ChillTRD | Market Updates",
-     "start_seconds": 13811.0,
-     "timestamp": "3:50:11",
-     "deep_link": "https://www.youtube.com/watch?v=qq_4gfyjN6s&t=13811s",
-     "kind": "mention",
-     "note": "Mentioned as a ticker to look at the ecosystem on, speakers reference long.xyz ecosystem."
-    },
-    {
-     "episode_id": "vBZ8pcgAzJY",
-     "episode_title": "\ud83d\udd34 LIVE: Solana Onchain Surges While Robinhood Chain Cools | What's the Trade?",
-     "start_seconds": 11533.0,
-     "timestamp": "3:12:13",
-     "deep_link": "https://www.youtube.com/watch?v=vBZ8pcgAzJY&t=11533s",
-     "kind": "mention",
-     "note": "Named as an example of a coin that everyone was bullish on with similar thesis to AI."
-    },
-    {
-     "episode_id": "vBZ8pcgAzJY",
-     "episode_title": "\ud83d\udd34 LIVE: Solana Onchain Surges While Robinhood Chain Cools | What's the Trade?",
-     "start_seconds": 13293.0,
-     "timestamp": "3:41:33",
-     "deep_link": "https://www.youtube.com/watch?v=vBZ8pcgAzJY&t=13293s",
-     "kind": "analysis",
-     "note": "Speaker is bullish on long.xyz and the AI token ecosystem, noting that as AI token recovers it lifts the entire long ecosystem."
-    },
-    {
-     "episode_id": "wsTdtrlI2I8",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood launchpad war drama | Live Market Updates + Onchain Positioning",
-     "start_seconds": 895.0,
-     "timestamp": "14:55",
-     "deep_link": "https://www.youtube.com/watch?v=wsTdtrlI2I8&t=895s",
-     "kind": "analysis",
-     "note": "Long discussed as a project by Nate focused on unique token pairings and stock token pairings, having a breakout moment."
-    },
-    {
-     "episode_id": "x7qRX-hWxg8",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding (Memes, V4 Hooks, Infra) | Market Update + Interviews",
-     "start_seconds": 8590.0,
-     "timestamp": "2:23:10",
-     "deep_link": "https://www.youtube.com/watch?v=x7qRX-hWxg8&t=8590s",
-     "kind": "analysis",
-     "note": "Long.xyz platform discussed as hosting meme tokenized stock pairs; entire long ecosystem described as looking quite good."
-    },
-    {
-     "episode_id": "x7qRX-hWxg8",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding (Memes, V4 Hooks, Infra) | Market Update + Interviews",
-     "start_seconds": 10836.0,
-     "timestamp": "3:00:36",
-     "deep_link": "https://www.youtube.com/watch?v=x7qRX-hWxg8&t=10836s",
-     "kind": "mention",
-     "note": "Mentioned as an example of a subsector someone could specialize in."
-    },
-    {
-     "episode_id": "zDMFsmfIkkM",
-     "episode_title": "\ud83d\udd34 LIVE: SEC Greenlights Onchain Stocks | Tokenization Supercycle | Market Update + Interviews",
-     "start_seconds": 829.0,
-     "timestamp": "13:49",
-     "deep_link": "https://www.youtube.com/watch?v=zDMFsmfIkkM&t=829s",
-     "kind": "analysis",
-     "note": "Named as the winner doing tokenized stock pairings within the Robinhood ecosystem."
-    },
-    {
-     "episode_id": "zTEsQqVVsZk",
-     "episode_title": "\ud83d\udd34 LIVE: Bear Market Ending? | RH Szn Continues | Market Update + Interviews",
-     "start_seconds": 6245.0,
-     "timestamp": "1:44:05",
-     "deep_link": "https://www.youtube.com/watch?v=zTEsQqVVsZk&t=6245s",
-     "kind": "analysis",
-     "note": "A platform that allows pairing tokens with stocks, enabling long and short positions; attracted attention from Uniswap founder, Vlad Tenev from Robinhood, and Robinhood's head of product and DeFi."
-    }
-   ],
-   "episode_count": 22,
    "single_reference": false
   },
   {
@@ -115145,7 +115388,7 @@
    "symbol": "DOGE",
    "name": "Dogecoin",
    "asset_class": "crypto",
-   "mentions": 58,
+   "mentions": 59,
    "analysis": 16,
    "moments": [
     {
@@ -115669,9 +115912,18 @@
      "deep_link": "https://www.youtube.com/watch?v=zTEsQqVVsZk&t=6507s",
      "kind": "mention",
      "note": "Referenced as an example of a memecoin with established lore in the sector."
+    },
+    {
+     "episode_id": "zqOYgV9pXxI",
+     "episode_title": "Former Robinhood Employee on What\u2019s Actually Happening at Robinhood Right Now..",
+     "start_seconds": 1805.0,
+     "timestamp": "30:05",
+     "deep_link": "https://www.youtube.com/watch?v=zqOYgV9pXxI&t=1805s",
+     "kind": "mention",
+     "note": "Robinhood was described as being known for Dogecoin."
     }
    ],
-   "episode_count": 50,
+   "episode_count": 51,
    "single_reference": false
   },
   {
@@ -121564,6 +121816,224 @@
    "single_reference": false
   },
   {
+   "symbol": "PONS",
+   "name": "Pons",
+   "asset_class": "other",
+   "mentions": 23,
+   "analysis": 14,
+   "moments": [
+    {
+     "episode_id": "2NK_MBlFvtM",
+     "episode_title": "\ud83d\udd34 LIVE: So Early It Hurts | A Simple Strategy for Surviving a Sideways Crypto Market",
+     "start_seconds": 7876.0,
+     "timestamp": "2:11:16",
+     "deep_link": "https://www.youtube.com/watch?v=2NK_MBlFvtM&t=7876s",
+     "kind": "mention",
+     "note": "Pons was one of two OG protocols added to Robinhood Wallet alongside Long."
+    },
+    {
+     "episode_id": "4PlcWhQM96A",
+     "episode_title": "\ud83d\udd34 LIVE: Time To Log Off? | AI Fears, Debt Market Shutdown, Anthropic IPO",
+     "start_seconds": 9755.0,
+     "timestamp": "2:42:35",
+     "deep_link": "https://www.youtube.com/watch?v=4PlcWhQM96A&t=9755s",
+     "kind": "analysis",
+     "note": "Established launchpad with market cap around 160, compared as roughly 15x larger than Torchpad."
+    },
+    {
+     "episode_id": "H4kImk1Y7KQ",
+     "episode_title": "\ud83d\udd34 LIVE: FOMC, AI Panic, Clarity Act Vote | Market Update + Interviews",
+     "start_seconds": 1589.0,
+     "timestamp": "26:29",
+     "deep_link": "https://www.youtube.com/watch?v=H4kImk1Y7KQ&t=1589s",
+     "kind": "mention",
+     "note": "Named as one of the sustainable tokens selected for liquidity positions."
+    },
+    {
+     "episode_id": "LN_42fexqdw",
+     "episode_title": "$OURO - A fee generation protocol on Robinhood Chain",
+     "start_seconds": 826.0,
+     "timestamp": "13:46",
+     "deep_link": "https://www.youtube.com/watch?v=LN_42fexqdw&t=826s",
+     "kind": "mention",
+     "note": "Mentioned as one of the tokens the team considers safe and sustainable for LP positions."
+    },
+    {
+     "episode_id": "UbKsP6WCsPs",
+     "episode_title": "\ud83d\udd34 LIVE: Market Cooling Off | Buy The Dip? | Market Update + Interviews",
+     "start_seconds": 2938.0,
+     "timestamp": "48:58",
+     "deep_link": "https://www.youtube.com/watch?v=UbKsP6WCsPs&t=2938s",
+     "kind": "analysis",
+     "note": "Speaker discusses Ponds as a great opportunity realized through their crypto research background, mentions it as a major position with $2.5 million floating in it."
+    },
+    {
+     "episode_id": "XB71vFeU2zA",
+     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
+     "start_seconds": 6738.0,
+     "timestamp": "1:52:18",
+     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=6738s",
+     "kind": "analysis",
+     "note": "Speakers discuss Pons integration into Robinhood wallet, describing it as a significant development and surface area for innovation."
+    },
+    {
+     "episode_id": "Xf3MBXMtfD0",
+     "episode_title": "\ud83d\udd34 LIVE: Bottom is in | Opportunities everywhere | Market Update + Interviews",
+     "start_seconds": 1078.0,
+     "timestamp": "17:58",
+     "deep_link": "https://www.youtube.com/watch?v=Xf3MBXMtfD0&t=1078s",
+     "kind": "mention",
+     "note": "Referenced as an example of a protocol with a day-one fee switch that generated significant revenue and performed buybacks."
+    },
+    {
+     "episode_id": "Xf3MBXMtfD0",
+     "episode_title": "\ud83d\udd34 LIVE: Bottom is in | Opportunities everywhere | Market Update + Interviews",
+     "start_seconds": 5967.0,
+     "timestamp": "1:39:27",
+     "deep_link": "https://www.youtube.com/watch?v=Xf3MBXMtfD0&t=5967s",
+     "kind": "mention",
+     "note": "Named as one of the tokens for which liquidity support is being built on the Robinhood chain platform."
+    },
+    {
+     "episode_id": "aGXTzl3g_cI",
+     "episode_title": "\ud83d\udd34 LIVE: Uniswap Top Pons Bottom? | RWA Memes on Solana $Stonk | Market Update + Interviews",
+     "start_seconds": 7985.0,
+     "timestamp": "2:13:05",
+     "deep_link": "https://www.youtube.com/watch?v=aGXTzl3g_cI&t=7985s",
+     "kind": "analysis",
+     "note": "Discussed as a leading launchpad on Robinhood that reclaimed the number one spot from Pools, doing 100k in buybacks daily, with price-to-earnings at approximately 0.66 and coins like H and Nasdaq launching successfully on it."
+    },
+    {
+     "episode_id": "ayJIM0WPyHs",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Bottom In? | Do This Before the Next Move",
+     "start_seconds": 2960.0,
+     "timestamp": "49:20",
+     "deep_link": "https://www.youtube.com/watch?v=ayJIM0WPyHs&t=2960s",
+     "kind": "mention",
+     "note": "Speaker mentions Pons as an example of infrastructure for launch pads, noting it functions as an app store showing launches on different chains like Mosh and Orbeo."
+    },
+    {
+     "episode_id": "cGukRd5BGeA",
+     "episode_title": "$BUN on MCG | Exciting Launches & Many More",
+     "start_seconds": 876.0,
+     "timestamp": "14:36",
+     "deep_link": "https://www.youtube.com/watch?v=cGukRd5BGeA&t=876s",
+     "kind": "analysis",
+     "note": "Discussed as a launch pad platform that added bond pairs; hit a $700 million market cap and experienced liquidity rotation issues as scam deployers and bundlers entered the market."
+    },
+    {
+     "episode_id": "cHos0BsSoFM",
+     "episode_title": "\ud83d\udd34 LIVE: S&P New ATH, BTC Stuck at $86K | Crypto Uptober Canceled?",
+     "start_seconds": 3601.0,
+     "timestamp": "1:00:01",
+     "deep_link": "https://www.youtube.com/watch?v=cHos0BsSoFM&t=3601s",
+     "kind": "mention",
+     "note": "PONS is mentioned as receiving a cut of trading fees in the AUR fee-sharing structure."
+    },
+    {
+     "episode_id": "cHos0BsSoFM",
+     "episode_title": "\ud83d\udd34 LIVE: S&P New ATH, BTC Stuck at $86K | Crypto Uptober Canceled?",
+     "start_seconds": 8051.0,
+     "timestamp": "2:14:11",
+     "deep_link": "https://www.youtube.com/watch?v=cHos0BsSoFM&t=8051s",
+     "kind": "analysis",
+     "note": "PONS discussed as finding a bottom and similar to AI's chart; speaker notes if PONS rips out of this area it could lead on-chain trading back again, with revenues needing to return."
+    },
+    {
+     "episode_id": "ckSVVsCYrSI",
+     "episode_title": "\ud83d\udd34 LIVE: Uptober Turned Choptober | Bitcoin Holding $80K | What's Next?",
+     "start_seconds": 2723.0,
+     "timestamp": "45:23",
+     "deep_link": "https://www.youtube.com/watch?v=ckSVVsCYrSI&t=2723s",
+     "kind": "analysis",
+     "note": "Described as a blockchain platform where coins are launched; speakers demonstrate a dashboard showing all coins launched on Pons being scanned by agents for malicious injections."
+    },
+    {
+     "episode_id": "ct401gJf-as",
+     "episode_title": "\ud83d\udd34 LIVE: Hood summit day | Revenue coins dominating | Interviews + Positioning",
+     "start_seconds": 9719.0,
+     "timestamp": "2:41:59",
+     "deep_link": "https://www.youtube.com/watch?v=ct401gJf-as&t=9719s",
+     "kind": "analysis",
+     "note": "Mentioned as adopting the revenue meta, with charts showing upward price movement."
+    },
+    {
+     "episode_id": "gbKVGLAGcU8",
+     "episode_title": "\ud83d\udfe2 LIVE: Onchain Crypto Market Turning Bullish | How To Maximize Your Gains",
+     "start_seconds": 9145.0,
+     "timestamp": "2:32:25",
+     "deep_link": "https://www.youtube.com/watch?v=gbKVGLAGcU8&t=9145s",
+     "kind": "analysis",
+     "note": "Described as number one on Top 15 protocols by buybacks on Robinhood Chain, with 8.5 million in buybacks this year for a $44 million market cap token, representing approximately 20% of supply."
+    },
+    {
+     "episode_id": "q7hcCdzTTiI",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holds Above $83K | Uptober Incoming? | Market Update + Interviews",
+     "start_seconds": 6042.0,
+     "timestamp": "1:40:42",
+     "deep_link": "https://www.youtube.com/watch?v=q7hcCdzTTiI&t=6042s",
+     "kind": "analysis",
+     "note": "Launchpad platform discussed; hit $700 million market cap with high revenues; speakers note challenges at its current stage including scam deployers and liquidity rotation."
+    },
+    {
+     "episode_id": "q7hcCdzTTiI",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holds Above $83K | Uptober Incoming? | Market Update + Interviews",
+     "start_seconds": 6961.0,
+     "timestamp": "1:56:01",
+     "deep_link": "https://www.youtube.com/watch?v=q7hcCdzTTiI&t=6961s",
+     "kind": "mention",
+     "note": "Mentioned as a blockchain or platform that the speaker's product is built on top of; later discussed as a launchpad layer in the ecosystem with buybacks and liquidity provision."
+    },
+    {
+     "episode_id": "q7hcCdzTTiI",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holds Above $83K | Uptober Incoming? | Market Update + Interviews",
+     "start_seconds": 7117.0,
+     "timestamp": "1:58:37",
+     "deep_link": "https://www.youtube.com/watch?v=q7hcCdzTTiI&t=7117s",
+     "kind": "mention",
+     "note": "Pons is mentioned as a blockchain or platform where third-party developers can be successful, and where tokens launched on MOSH appear."
+    },
+    {
+     "episode_id": "q7hcCdzTTiI",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holds Above $83K | Uptober Incoming? | Market Update + Interviews",
+     "start_seconds": 7476.0,
+     "timestamp": "2:04:36",
+     "deep_link": "https://www.youtube.com/watch?v=q7hcCdzTTiI&t=7476s",
+     "kind": "analysis",
+     "note": "The speaker built on Pons because they were taking time, being disciplined, and not trying to vertically integrate everything."
+    },
+    {
+     "episode_id": "zDMFsmfIkkM",
+     "episode_title": "\ud83d\udd34 LIVE: SEC Greenlights Onchain Stocks | Tokenization Supercycle | Market Update + Interviews",
+     "start_seconds": 2065.0,
+     "timestamp": "34:25",
+     "deep_link": "https://www.youtube.com/watch?v=zDMFsmfIkkM&t=2065s",
+     "kind": "analysis",
+     "note": "PONS was dominating volume on Uniswap; Uniswap bought an undisclosed amount of PONS token supply and the two platforms are aligning on hooks and V4 pools to work together."
+    },
+    {
+     "episode_id": "zJsQAfBROiQ",
+     "episode_title": "$PONS on MCG | Discussing their beef with Uniswap\ud83d\udc40",
+     "start_seconds": 589.0,
+     "timestamp": "9:49",
+     "deep_link": "https://www.youtube.com/watch?v=zJsQAfBROiQ&t=589s",
+     "kind": "analysis",
+     "note": "Pons was dominating volume on Uniswap; Uniswap recently bought an undisclosed amount of Pons token supply as a vouch of support."
+    },
+    {
+     "episode_id": "zqOYgV9pXxI",
+     "episode_title": "Former Robinhood Employee on What\u2019s Actually Happening at Robinhood Right Now..",
+     "start_seconds": 1119.0,
+     "timestamp": "18:39",
+     "deep_link": "https://www.youtube.com/watch?v=zqOYgV9pXxI&t=1119s",
+     "kind": "analysis",
+     "note": "Discussed as a major project in the Robinhood ecosystem; speakers mention a panel with Carl from PONS and discuss PONS integration in the Robinhood wallet as a significant development."
+    }
+   ],
+   "episode_count": 18,
+   "single_reference": false
+  },
+  {
    "symbol": "SWARMS",
    "name": "Swarms",
    "asset_class": "crypto",
@@ -123413,215 +123883,6 @@
     }
    ],
    "episode_count": 50,
-   "single_reference": false
-  },
-  {
-   "symbol": "PONS",
-   "name": "Pons",
-   "asset_class": "other",
-   "mentions": 22,
-   "analysis": 13,
-   "moments": [
-    {
-     "episode_id": "2NK_MBlFvtM",
-     "episode_title": "\ud83d\udd34 LIVE: So Early It Hurts | A Simple Strategy for Surviving a Sideways Crypto Market",
-     "start_seconds": 7876.0,
-     "timestamp": "2:11:16",
-     "deep_link": "https://www.youtube.com/watch?v=2NK_MBlFvtM&t=7876s",
-     "kind": "mention",
-     "note": "Pons was one of two OG protocols added to Robinhood Wallet alongside Long."
-    },
-    {
-     "episode_id": "4PlcWhQM96A",
-     "episode_title": "\ud83d\udd34 LIVE: Time To Log Off? | AI Fears, Debt Market Shutdown, Anthropic IPO",
-     "start_seconds": 9755.0,
-     "timestamp": "2:42:35",
-     "deep_link": "https://www.youtube.com/watch?v=4PlcWhQM96A&t=9755s",
-     "kind": "analysis",
-     "note": "Established launchpad with market cap around 160, compared as roughly 15x larger than Torchpad."
-    },
-    {
-     "episode_id": "H4kImk1Y7KQ",
-     "episode_title": "\ud83d\udd34 LIVE: FOMC, AI Panic, Clarity Act Vote | Market Update + Interviews",
-     "start_seconds": 1589.0,
-     "timestamp": "26:29",
-     "deep_link": "https://www.youtube.com/watch?v=H4kImk1Y7KQ&t=1589s",
-     "kind": "mention",
-     "note": "Named as one of the sustainable tokens selected for liquidity positions."
-    },
-    {
-     "episode_id": "LN_42fexqdw",
-     "episode_title": "$OURO - A fee generation protocol on Robinhood Chain",
-     "start_seconds": 826.0,
-     "timestamp": "13:46",
-     "deep_link": "https://www.youtube.com/watch?v=LN_42fexqdw&t=826s",
-     "kind": "mention",
-     "note": "Mentioned as one of the tokens the team considers safe and sustainable for LP positions."
-    },
-    {
-     "episode_id": "UbKsP6WCsPs",
-     "episode_title": "\ud83d\udd34 LIVE: Market Cooling Off | Buy The Dip? | Market Update + Interviews",
-     "start_seconds": 2938.0,
-     "timestamp": "48:58",
-     "deep_link": "https://www.youtube.com/watch?v=UbKsP6WCsPs&t=2938s",
-     "kind": "analysis",
-     "note": "Speaker discusses Ponds as a great opportunity realized through their crypto research background, mentions it as a major position with $2.5 million floating in it."
-    },
-    {
-     "episode_id": "XB71vFeU2zA",
-     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
-     "start_seconds": 6738.0,
-     "timestamp": "1:52:18",
-     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=6738s",
-     "kind": "analysis",
-     "note": "Speakers discuss Pons integration into Robinhood wallet, describing it as a significant development and surface area for innovation."
-    },
-    {
-     "episode_id": "Xf3MBXMtfD0",
-     "episode_title": "\ud83d\udd34 LIVE: Bottom is in | Opportunities everywhere | Market Update + Interviews",
-     "start_seconds": 1078.0,
-     "timestamp": "17:58",
-     "deep_link": "https://www.youtube.com/watch?v=Xf3MBXMtfD0&t=1078s",
-     "kind": "mention",
-     "note": "Referenced as an example of a protocol with a day-one fee switch that generated significant revenue and performed buybacks."
-    },
-    {
-     "episode_id": "Xf3MBXMtfD0",
-     "episode_title": "\ud83d\udd34 LIVE: Bottom is in | Opportunities everywhere | Market Update + Interviews",
-     "start_seconds": 5967.0,
-     "timestamp": "1:39:27",
-     "deep_link": "https://www.youtube.com/watch?v=Xf3MBXMtfD0&t=5967s",
-     "kind": "mention",
-     "note": "Named as one of the tokens for which liquidity support is being built on the Robinhood chain platform."
-    },
-    {
-     "episode_id": "aGXTzl3g_cI",
-     "episode_title": "\ud83d\udd34 LIVE: Uniswap Top Pons Bottom? | RWA Memes on Solana $Stonk | Market Update + Interviews",
-     "start_seconds": 7985.0,
-     "timestamp": "2:13:05",
-     "deep_link": "https://www.youtube.com/watch?v=aGXTzl3g_cI&t=7985s",
-     "kind": "analysis",
-     "note": "Discussed as a leading launchpad on Robinhood that reclaimed the number one spot from Pools, doing 100k in buybacks daily, with price-to-earnings at approximately 0.66 and coins like H and Nasdaq launching successfully on it."
-    },
-    {
-     "episode_id": "ayJIM0WPyHs",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Bottom In? | Do This Before the Next Move",
-     "start_seconds": 2960.0,
-     "timestamp": "49:20",
-     "deep_link": "https://www.youtube.com/watch?v=ayJIM0WPyHs&t=2960s",
-     "kind": "mention",
-     "note": "Speaker mentions Pons as an example of infrastructure for launch pads, noting it functions as an app store showing launches on different chains like Mosh and Orbeo."
-    },
-    {
-     "episode_id": "cGukRd5BGeA",
-     "episode_title": "$BUN on MCG | Exciting Launches & Many More",
-     "start_seconds": 876.0,
-     "timestamp": "14:36",
-     "deep_link": "https://www.youtube.com/watch?v=cGukRd5BGeA&t=876s",
-     "kind": "analysis",
-     "note": "Discussed as a launch pad platform that added bond pairs; hit a $700 million market cap and experienced liquidity rotation issues as scam deployers and bundlers entered the market."
-    },
-    {
-     "episode_id": "cHos0BsSoFM",
-     "episode_title": "\ud83d\udd34 LIVE: S&P New ATH, BTC Stuck at $86K | Crypto Uptober Canceled?",
-     "start_seconds": 3601.0,
-     "timestamp": "1:00:01",
-     "deep_link": "https://www.youtube.com/watch?v=cHos0BsSoFM&t=3601s",
-     "kind": "mention",
-     "note": "PONS is mentioned as receiving a cut of trading fees in the AUR fee-sharing structure."
-    },
-    {
-     "episode_id": "cHos0BsSoFM",
-     "episode_title": "\ud83d\udd34 LIVE: S&P New ATH, BTC Stuck at $86K | Crypto Uptober Canceled?",
-     "start_seconds": 8051.0,
-     "timestamp": "2:14:11",
-     "deep_link": "https://www.youtube.com/watch?v=cHos0BsSoFM&t=8051s",
-     "kind": "analysis",
-     "note": "PONS discussed as finding a bottom and similar to AI's chart; speaker notes if PONS rips out of this area it could lead on-chain trading back again, with revenues needing to return."
-    },
-    {
-     "episode_id": "ckSVVsCYrSI",
-     "episode_title": "\ud83d\udd34 LIVE: Uptober Turned Choptober | Bitcoin Holding $80K | What's Next?",
-     "start_seconds": 2723.0,
-     "timestamp": "45:23",
-     "deep_link": "https://www.youtube.com/watch?v=ckSVVsCYrSI&t=2723s",
-     "kind": "analysis",
-     "note": "Described as a blockchain platform where coins are launched; speakers demonstrate a dashboard showing all coins launched on Pons being scanned by agents for malicious injections."
-    },
-    {
-     "episode_id": "ct401gJf-as",
-     "episode_title": "\ud83d\udd34 LIVE: Hood summit day | Revenue coins dominating | Interviews + Positioning",
-     "start_seconds": 9719.0,
-     "timestamp": "2:41:59",
-     "deep_link": "https://www.youtube.com/watch?v=ct401gJf-as&t=9719s",
-     "kind": "analysis",
-     "note": "Mentioned as adopting the revenue meta, with charts showing upward price movement."
-    },
-    {
-     "episode_id": "gbKVGLAGcU8",
-     "episode_title": "\ud83d\udfe2 LIVE: Onchain Crypto Market Turning Bullish | How To Maximize Your Gains",
-     "start_seconds": 9145.0,
-     "timestamp": "2:32:25",
-     "deep_link": "https://www.youtube.com/watch?v=gbKVGLAGcU8&t=9145s",
-     "kind": "analysis",
-     "note": "Described as number one on Top 15 protocols by buybacks on Robinhood Chain, with 8.5 million in buybacks this year for a $44 million market cap token, representing approximately 20% of supply."
-    },
-    {
-     "episode_id": "q7hcCdzTTiI",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holds Above $83K | Uptober Incoming? | Market Update + Interviews",
-     "start_seconds": 6042.0,
-     "timestamp": "1:40:42",
-     "deep_link": "https://www.youtube.com/watch?v=q7hcCdzTTiI&t=6042s",
-     "kind": "analysis",
-     "note": "Launchpad platform discussed; hit $700 million market cap with high revenues; speakers note challenges at its current stage including scam deployers and liquidity rotation."
-    },
-    {
-     "episode_id": "q7hcCdzTTiI",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holds Above $83K | Uptober Incoming? | Market Update + Interviews",
-     "start_seconds": 6961.0,
-     "timestamp": "1:56:01",
-     "deep_link": "https://www.youtube.com/watch?v=q7hcCdzTTiI&t=6961s",
-     "kind": "mention",
-     "note": "Mentioned as a blockchain or platform that the speaker's product is built on top of; later discussed as a launchpad layer in the ecosystem with buybacks and liquidity provision."
-    },
-    {
-     "episode_id": "q7hcCdzTTiI",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holds Above $83K | Uptober Incoming? | Market Update + Interviews",
-     "start_seconds": 7117.0,
-     "timestamp": "1:58:37",
-     "deep_link": "https://www.youtube.com/watch?v=q7hcCdzTTiI&t=7117s",
-     "kind": "mention",
-     "note": "Pons is mentioned as a blockchain or platform where third-party developers can be successful, and where tokens launched on MOSH appear."
-    },
-    {
-     "episode_id": "q7hcCdzTTiI",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holds Above $83K | Uptober Incoming? | Market Update + Interviews",
-     "start_seconds": 7476.0,
-     "timestamp": "2:04:36",
-     "deep_link": "https://www.youtube.com/watch?v=q7hcCdzTTiI&t=7476s",
-     "kind": "analysis",
-     "note": "The speaker built on Pons because they were taking time, being disciplined, and not trying to vertically integrate everything."
-    },
-    {
-     "episode_id": "zDMFsmfIkkM",
-     "episode_title": "\ud83d\udd34 LIVE: SEC Greenlights Onchain Stocks | Tokenization Supercycle | Market Update + Interviews",
-     "start_seconds": 2065.0,
-     "timestamp": "34:25",
-     "deep_link": "https://www.youtube.com/watch?v=zDMFsmfIkkM&t=2065s",
-     "kind": "analysis",
-     "note": "PONS was dominating volume on Uniswap; Uniswap bought an undisclosed amount of PONS token supply and the two platforms are aligning on hooks and V4 pools to work together."
-    },
-    {
-     "episode_id": "zJsQAfBROiQ",
-     "episode_title": "$PONS on MCG | Discussing their beef with Uniswap\ud83d\udc40",
-     "start_seconds": 589.0,
-     "timestamp": "9:49",
-     "deep_link": "https://www.youtube.com/watch?v=zJsQAfBROiQ&t=589s",
-     "kind": "analysis",
-     "note": "Pons was dominating volume on Uniswap; Uniswap recently bought an undisclosed amount of Pons token supply as a vouch of support."
-    }
-   ],
-   "episode_count": 17,
    "single_reference": false
   },
   {
@@ -131091,7 +131352,7 @@
    "symbol": "COIN",
    "name": "Coinbase",
    "asset_class": "stock",
-   "mentions": 46,
+   "mentions": 47,
    "analysis": 9,
    "moments": [
     {
@@ -131507,9 +131768,18 @@
      "deep_link": "https://www.youtube.com/watch?v=y4SqXgBAFFg&t=8706s",
      "kind": "mention",
      "note": "Compared to Robinhood; noted as having more global users total but lower active user engagement."
+    },
+    {
+     "episode_id": "zqOYgV9pXxI",
+     "episode_title": "Former Robinhood Employee on What\u2019s Actually Happening at Robinhood Right Now..",
+     "start_seconds": 1169.0,
+     "timestamp": "19:29",
+     "deep_link": "https://www.youtube.com/watch?v=zqOYgV9pXxI&t=1169s",
+     "kind": "mention",
+     "note": "Referenced as a company for comparison regarding regulatory constraints and legal/compliance processes relative to Robinhood."
     }
    ],
-   "episode_count": 36,
+   "episode_count": 37,
    "single_reference": false
   },
   {
@@ -158244,6 +158514,116 @@
    "single_reference": false
   },
   {
+   "symbol": "INTC",
+   "name": "Intel",
+   "asset_class": "stock",
+   "mentions": 11,
+   "analysis": 2,
+   "moments": [
+    {
+     "episode_id": "DhLaLq6NZJA",
+     "episode_title": "\ud83d\udd34 LIVE: On-chain crypto showing resilience | Pullback's to watch | Live Market Updates + Interviews",
+     "start_seconds": 2822.0,
+     "timestamp": "47:02",
+     "deep_link": "https://www.youtube.com/watch?v=DhLaLq6NZJA&t=2822s",
+     "kind": "mention",
+     "note": "Listed as one of the large-scale assets available to trade on the platform."
+    },
+    {
+     "episode_id": "JlFABCLweBc",
+     "episode_title": "NYSE A16Z PUSH TO CRYPTO, TRADERS WINNING WITH @MeteoraAG DLMM w/@MeteoraEco @KittyKunt_ @vesper792",
+     "start_seconds": 11310.0,
+     "timestamp": "3:08:30",
+     "deep_link": "https://www.youtube.com/watch?v=JlFABCLweBc&t=11310s",
+     "kind": "mention",
+     "note": "Fund manager has a large position in Intel; mentioned alongside hundreds of millions invested in energy and infrastructure."
+    },
+    {
+     "episode_id": "NAZzbIlnR9o",
+     "episode_title": "Sunrise: Every Asset, Tradable on Solana.",
+     "start_seconds": 357.0,
+     "timestamp": "5:57",
+     "deep_link": "https://www.youtube.com/watch?v=NAZzbIlnR9o&t=357s",
+     "kind": "mention",
+     "note": "Named as one of the stocks available on Solana through Backpack Securities, redeemable for the underlying stock."
+    },
+    {
+     "episode_id": "NAZzbIlnR9o",
+     "episode_title": "Sunrise: Every Asset, Tradable on Solana.",
+     "start_seconds": 958.0,
+     "timestamp": "15:58",
+     "deep_link": "https://www.youtube.com/watch?v=NAZzbIlnR9o&t=958s",
+     "kind": "analysis",
+     "note": "Intel was mentioned alongside SanDisk as an example of an asset listing timed strategically before an earnings call."
+    },
+    {
+     "episode_id": "NhprL-vncZ8",
+     "episode_title": "\ud83d\udd34 LIVE: State of Robinhood Chain | Jensen Huang X Debut | Market Update + Interviews",
+     "start_seconds": 793.0,
+     "timestamp": "13:13",
+     "deep_link": "https://www.youtube.com/watch?v=NhprL-vncZ8&t=793s",
+     "kind": "mention",
+     "note": "Named as having tokenized stock with approximately million-dollar market cap or higher volume on Robinhood."
+    },
+    {
+     "episode_id": "XB71vFeU2zA",
+     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
+     "start_seconds": 5826.0,
+     "timestamp": "1:37:06",
+     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=5826s",
+     "kind": "mention",
+     "note": "Intel opening down 30% on the day, cited as an example of crazy price swings in traditional finance."
+    },
+    {
+     "episode_id": "cNq_7YVmrLI",
+     "episode_title": "CITRINI RESEARCH 2028 WARNING, MARKETS SEARCHING FOR A BOTTOM w/@edendotgame, @omnipair",
+     "start_seconds": 13457.0,
+     "timestamp": "3:44:17",
+     "deep_link": "https://www.youtube.com/watch?v=cNq_7YVmrLI&t=13457s",
+     "kind": "mention",
+     "note": "Mentioned as doing well year-to-date among NASDAQ 100 leaders, with reference to chip performance."
+    },
+    {
+     "episode_id": "ct401gJf-as",
+     "episode_title": "\ud83d\udd34 LIVE: Hood summit day | Revenue coins dominating | Interviews + Positioning",
+     "start_seconds": 2403.0,
+     "timestamp": "40:03",
+     "deep_link": "https://www.youtube.com/watch?v=ct401gJf-as&t=2403s",
+     "kind": "mention",
+     "note": "Mentioned as part of the speaker's deep dive into compute markets, financing, CapEx, memory, and semis over six to eight months."
+    },
+    {
+     "episode_id": "fDRafP9v0Zw",
+     "episode_title": "\ud83d\udd34 LIVE: Market Research w/ Blockworks x MCG | Live Market Updates + Onchain Positioning",
+     "start_seconds": 2225.0,
+     "timestamp": "37:05",
+     "deep_link": "https://www.youtube.com/watch?v=fDRafP9v0Zw&t=2225s",
+     "kind": "mention",
+     "note": "Mentioned as an example of a publicly traded company in which sovereign wealth funds are taking stakes."
+    },
+    {
+     "episode_id": "n8w_k4atbMM",
+     "episode_title": "\ud83d\udd34 LIVE: Undervalued projects, Printr sale goes live, massive Week Onchain | Alpha + Market Updates",
+     "start_seconds": 11213.0,
+     "timestamp": "3:06:53",
+     "deep_link": "https://www.youtube.com/watch?v=n8w_k4atbMM&t=11213s",
+     "kind": "analysis",
+     "note": "Speaker discusses Intel going up significantly from rumors about US investment, noting it went from $22 to $20 range and saying they should have bought it instead of Galaxy."
+    },
+    {
+     "episode_id": "zqOYgV9pXxI",
+     "episode_title": "Former Robinhood Employee on What\u2019s Actually Happening at Robinhood Right Now..",
+     "start_seconds": 202.0,
+     "timestamp": "3:22",
+     "deep_link": "https://www.youtube.com/watch?v=zqOYgV9pXxI&t=202s",
+     "kind": "mention",
+     "note": "Speaker mentions Intel opening down 30 percent as an example of crazy price swings in traditional finance."
+    }
+   ],
+   "episode_count": 10,
+   "single_reference": false
+  },
+  {
    "symbol": "IBM",
    "name": "IBM",
    "asset_class": "stock",
@@ -158342,107 +158722,6 @@
     }
    ],
    "episode_count": 6,
-   "single_reference": false
-  },
-  {
-   "symbol": "INTC",
-   "name": "Intel",
-   "asset_class": "stock",
-   "mentions": 10,
-   "analysis": 2,
-   "moments": [
-    {
-     "episode_id": "DhLaLq6NZJA",
-     "episode_title": "\ud83d\udd34 LIVE: On-chain crypto showing resilience | Pullback's to watch | Live Market Updates + Interviews",
-     "start_seconds": 2822.0,
-     "timestamp": "47:02",
-     "deep_link": "https://www.youtube.com/watch?v=DhLaLq6NZJA&t=2822s",
-     "kind": "mention",
-     "note": "Listed as one of the large-scale assets available to trade on the platform."
-    },
-    {
-     "episode_id": "JlFABCLweBc",
-     "episode_title": "NYSE A16Z PUSH TO CRYPTO, TRADERS WINNING WITH @MeteoraAG DLMM w/@MeteoraEco @KittyKunt_ @vesper792",
-     "start_seconds": 11310.0,
-     "timestamp": "3:08:30",
-     "deep_link": "https://www.youtube.com/watch?v=JlFABCLweBc&t=11310s",
-     "kind": "mention",
-     "note": "Fund manager has a large position in Intel; mentioned alongside hundreds of millions invested in energy and infrastructure."
-    },
-    {
-     "episode_id": "NAZzbIlnR9o",
-     "episode_title": "Sunrise: Every Asset, Tradable on Solana.",
-     "start_seconds": 357.0,
-     "timestamp": "5:57",
-     "deep_link": "https://www.youtube.com/watch?v=NAZzbIlnR9o&t=357s",
-     "kind": "mention",
-     "note": "Named as one of the stocks available on Solana through Backpack Securities, redeemable for the underlying stock."
-    },
-    {
-     "episode_id": "NAZzbIlnR9o",
-     "episode_title": "Sunrise: Every Asset, Tradable on Solana.",
-     "start_seconds": 958.0,
-     "timestamp": "15:58",
-     "deep_link": "https://www.youtube.com/watch?v=NAZzbIlnR9o&t=958s",
-     "kind": "analysis",
-     "note": "Intel was mentioned alongside SanDisk as an example of an asset listing timed strategically before an earnings call."
-    },
-    {
-     "episode_id": "NhprL-vncZ8",
-     "episode_title": "\ud83d\udd34 LIVE: State of Robinhood Chain | Jensen Huang X Debut | Market Update + Interviews",
-     "start_seconds": 793.0,
-     "timestamp": "13:13",
-     "deep_link": "https://www.youtube.com/watch?v=NhprL-vncZ8&t=793s",
-     "kind": "mention",
-     "note": "Named as having tokenized stock with approximately million-dollar market cap or higher volume on Robinhood."
-    },
-    {
-     "episode_id": "XB71vFeU2zA",
-     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
-     "start_seconds": 5826.0,
-     "timestamp": "1:37:06",
-     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=5826s",
-     "kind": "mention",
-     "note": "Intel opening down 30% on the day, cited as an example of crazy price swings in traditional finance."
-    },
-    {
-     "episode_id": "cNq_7YVmrLI",
-     "episode_title": "CITRINI RESEARCH 2028 WARNING, MARKETS SEARCHING FOR A BOTTOM w/@edendotgame, @omnipair",
-     "start_seconds": 13457.0,
-     "timestamp": "3:44:17",
-     "deep_link": "https://www.youtube.com/watch?v=cNq_7YVmrLI&t=13457s",
-     "kind": "mention",
-     "note": "Mentioned as doing well year-to-date among NASDAQ 100 leaders, with reference to chip performance."
-    },
-    {
-     "episode_id": "ct401gJf-as",
-     "episode_title": "\ud83d\udd34 LIVE: Hood summit day | Revenue coins dominating | Interviews + Positioning",
-     "start_seconds": 2403.0,
-     "timestamp": "40:03",
-     "deep_link": "https://www.youtube.com/watch?v=ct401gJf-as&t=2403s",
-     "kind": "mention",
-     "note": "Mentioned as part of the speaker's deep dive into compute markets, financing, CapEx, memory, and semis over six to eight months."
-    },
-    {
-     "episode_id": "fDRafP9v0Zw",
-     "episode_title": "\ud83d\udd34 LIVE: Market Research w/ Blockworks x MCG | Live Market Updates + Onchain Positioning",
-     "start_seconds": 2225.0,
-     "timestamp": "37:05",
-     "deep_link": "https://www.youtube.com/watch?v=fDRafP9v0Zw&t=2225s",
-     "kind": "mention",
-     "note": "Mentioned as an example of a publicly traded company in which sovereign wealth funds are taking stakes."
-    },
-    {
-     "episode_id": "n8w_k4atbMM",
-     "episode_title": "\ud83d\udd34 LIVE: Undervalued projects, Printr sale goes live, massive Week Onchain | Alpha + Market Updates",
-     "start_seconds": 11213.0,
-     "timestamp": "3:06:53",
-     "deep_link": "https://www.youtube.com/watch?v=n8w_k4atbMM&t=11213s",
-     "kind": "analysis",
-     "note": "Speaker discusses Intel going up significantly from rumors about US investment, noting it went from $22 to $20 range and saying they should have bought it instead of Galaxy."
-    }
-   ],
-   "episode_count": 9,
    "single_reference": false
   },
   {
@@ -161291,6 +161570,44 @@
     }
    ],
    "episode_count": 2,
+   "single_reference": false
+  },
+  {
+   "symbol": "RDDT",
+   "name": "Reddit",
+   "asset_class": "stock",
+   "mentions": 3,
+   "analysis": 2,
+   "moments": [
+    {
+     "episode_id": "8qq6IeehT9Q",
+     "episode_title": "Wei Xie from $NRN: Reinventing Robotics Training, Hugging Face for Reinforcement Learning + More!",
+     "start_seconds": 4193.0,
+     "timestamp": "1:09:53",
+     "deep_link": "https://www.youtube.com/watch?v=8qq6IeehT9Q&t=4193s",
+     "kind": "mention",
+     "note": "Speaker mentioned Reddit as an example of a small-cap stock when discussing similarities between traditional markets and web3."
+    },
+    {
+     "episode_id": "XB71vFeU2zA",
+     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
+     "start_seconds": 5721.0,
+     "timestamp": "1:35:21",
+     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=5721s",
+     "kind": "analysis",
+     "note": "Speaker held a long-dated put position on Reddit due to being bearish on its valuation; Reddit tanked 30% on earnings the previous day, realizing a gain on the position."
+    },
+    {
+     "episode_id": "zqOYgV9pXxI",
+     "episode_title": "Former Robinhood Employee on What\u2019s Actually Happening at Robinhood Right Now..",
+     "start_seconds": 93.0,
+     "timestamp": "1:33",
+     "deep_link": "https://www.youtube.com/watch?v=zqOYgV9pXxI&t=93s",
+     "kind": "analysis",
+     "note": "Speaker discusses holding a long-dated put position on Reddit, noting long-term bearishness on valuation earlier in the year and that earnings caused stock to tank approximately 30 percent."
+    }
+   ],
+   "episode_count": 3,
    "single_reference": false
   },
   {
@@ -171799,35 +172116,6 @@
      "deep_link": "https://www.youtube.com/watch?v=Pzbesphbje4&t=7050s",
      "kind": "mention",
      "note": "Speaker mentioned Sana as an onchain token that inspired him to launch his own project."
-    }
-   ],
-   "episode_count": 2,
-   "single_reference": false
-  },
-  {
-   "symbol": "RDDT",
-   "name": "Reddit",
-   "asset_class": "stock",
-   "mentions": 2,
-   "analysis": 1,
-   "moments": [
-    {
-     "episode_id": "8qq6IeehT9Q",
-     "episode_title": "Wei Xie from $NRN: Reinventing Robotics Training, Hugging Face for Reinforcement Learning + More!",
-     "start_seconds": 4193.0,
-     "timestamp": "1:09:53",
-     "deep_link": "https://www.youtube.com/watch?v=8qq6IeehT9Q&t=4193s",
-     "kind": "mention",
-     "note": "Speaker mentioned Reddit as an example of a small-cap stock when discussing similarities between traditional markets and web3."
-    },
-    {
-     "episode_id": "XB71vFeU2zA",
-     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
-     "start_seconds": 5721.0,
-     "timestamp": "1:35:21",
-     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=5721s",
-     "kind": "analysis",
-     "note": "Speaker held a long-dated put position on Reddit due to being bearish on its valuation; Reddit tanked 30% on earnings the previous day, realizing a gain on the position."
     }
    ],
    "episode_count": 2,
@@ -187753,6 +188041,26 @@
    "single_reference": true
   },
   {
+   "symbol": "SHIFI",
+   "name": "Shiffy",
+   "asset_class": "crypto",
+   "mentions": 1,
+   "analysis": 1,
+   "moments": [
+    {
+     "episode_id": "qz5qB0AgC0Q",
+     "episode_title": "Nate (Long / $AI Founder): Robinhood Chain Isn\u2019t Dead | Wallet Integration, Why Stock Tokens Win",
+     "start_seconds": 1229.0,
+     "timestamp": "20:29",
+     "deep_link": "https://www.youtube.com/watch?v=qz5qB0AgC0Q&t=1229s",
+     "kind": "analysis",
+     "note": "Speakers discuss Shiffy as a leading token on a launch pad, note it as a unique project with strong founder and community, and mention it as capturing the GameFi/RWA category on the Longa platform."
+    }
+   ],
+   "episode_count": 1,
+   "single_reference": true
+  },
+  {
    "symbol": "SHELL",
    "name": "Shellmates",
    "asset_class": "crypto",
@@ -200876,6 +201184,26 @@
    "single_reference": true
   },
   {
+   "symbol": "AISK",
+   "name": "AI",
+   "asset_class": "other",
+   "mentions": 1,
+   "analysis": 0,
+   "moments": [
+    {
+     "episode_id": "qz5qB0AgC0Q",
+     "episode_title": "Nate (Long / $AI Founder): Robinhood Chain Isn\u2019t Dead | Wallet Integration, Why Stock Tokens Win",
+     "start_seconds": 1507.0,
+     "timestamp": "25:07",
+     "deep_link": "https://www.youtube.com/watch?v=qz5qB0AgC0Q&t=1507s",
+     "kind": "mention",
+     "note": "Referenced as the platform that was launched from AI's ascent to now."
+    }
+   ],
+   "episode_count": 1,
+   "single_reference": true
+  },
+  {
    "symbol": "CLANK",
    "name": "Clanker",
    "asset_class": "crypto",
@@ -202156,10 +202484,10 @@
    "single_reference": true
   }
  ],
- "total_hits": 19631,
+ "total_hits": 19665,
  "dropped_low_confidence": 2388,
- "dropped_not_an_asset": 2181,
- "episodes_processed": 678,
+ "dropped_not_an_asset": 2184,
+ "episodes_processed": 680,
  "episode_ids": [
   "-6Sccmoz7RQ",
   "-8z0M77EVZg",
@@ -202744,6 +203072,7 @@
   "qq_4gfyjN6s",
   "qsnmAOVdyj0",
   "qvB_Q4W2JgQ",
+  "qz5qB0AgC0Q",
   "r1_K_EuTlEg",
   "r4Hl37ZycC4",
   "rFDkeRfajCc",
@@ -202838,6 +203167,7 @@
   "zTEsQqVVsZk",
   "zWznxthbJNA",
   "zqLXbtTcyaQ",
+  "zqOYgV9pXxI",
   "zr87xkXSUIM"
  ]
 }
