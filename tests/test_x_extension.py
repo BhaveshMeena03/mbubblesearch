@@ -45,6 +45,8 @@ MCG_POST = "2115115665753518109"
 RASMR_PAIRED = "2090840111306936721"
 RASMR_X_ONLY = "2109683904819150927"
 TG_POST = "2116149081211048039"          # ThreadGuy's market open, 30 Oct
+LINK_POST = "2116946451729432772"        # ours: Mando on ThreadGuy's stream, at 1:40:07 on X
+MB_LINK_POST = "2116435942009430106"     # ours: Ansem on Episode 24, at 1:39:53
 
 
 # --- the shelf -------------------------------------------------------------
@@ -132,6 +134,14 @@ def files(tmp_path, monkeypatch):
         json.dump({"EOkDv8qm8ik": {"tldr": "The Binance hack, live.", "model": "m", "pinned": True,
                                    "topics": [{"t": 1, "text": "before X began"},
                                               {"t": 600, "text": "ten minutes in"}]}}, fh)
+    (tmp_path / "x_links.json").write_text(json.dumps({
+        LINK_POST: {"broadcast": "https://x.com/i/broadcasts/1pJdRDqeOYnKW", "t": 6007},
+        MB_LINK_POST: {"broadcast": "https://x.com/i/broadcasts/1dxYlaZbXWQJX", "t": 5993},
+        "2116000000000000010": {"broadcast": "https://x.com/i/broadcasts/1UnknownShow1", "t": 60},
+        "2116000000000000011": {"broadcast": "https://www.youtube.com/watch?v=EOkDv8qm8ik", "t": 60},
+        "2116000000000000012": {"broadcast": "https://evil.example/i/broadcasts/1pJdRDqeOYnKW", "t": 9},
+        "2116000000000000013": {"broadcast": "https://x.com/i/broadcasts/1pJdRDqeOYnKW", "t": "9"},
+        MB_POST: {"broadcast": "https://x.com/i/broadcasts/1dxYlaZbXWQJX", "t": 5}}))
     links = json.loads((tmp_path / "broadcast_links.json").read_text())
     monkeypatch.setattr(podcast, "_broadcast_players", lambda: links)
     for name, value in (("SUMMARIES", "summaries.json.gz"),
@@ -139,12 +149,12 @@ def files(tmp_path, monkeypatch):
                         ("MCG_PAIRS", "mcg.json"), ("RASMR_PAIRS", "rasmr.json"),
                         ("RASMR_SHELF", "rasmr_index.json"),
                         ("MCG_SHELF", "mcg_index.json"), ("CLIPS", "x_clips.json"),
-                        ("MCG_SUMMARIES", "mcg_summaries.json.gz"),
+                        ("MCG_SUMMARIES", "mcg_summaries.json.gz"), ("LINKS", "x_links.json"),
                         ("THREADGUY_PAIRS", "tg.json"), ("THREADGUY_SHELF", "threadguy_index.json"),
                         ("THREADGUY_SUMMARIES", "threadguy_summaries.json.gz")):
         monkeypatch.setattr(x_posts, name, tmp_path / value)
     caches = (x_posts.shelf, x_posts._summaries, x_posts._clips, x_posts._mcg_summaries,
-              x_posts._threadguy_summaries)
+              x_posts._threadguy_summaries, x_posts._links, x_posts._broadcasts)
     for cached in caches:
         cached.cache_clear()
     yield tmp_path
@@ -870,3 +880,57 @@ def test_search_console_can_see_the_sites_verification_file(client, path):
     r = client.get(path)
     assert r.status_code == 200
     assert r.text == "google-site-verification: google925ad965c5e0aab5.html"
+
+
+
+# --- our link posts ----------------------------------------------------------
+
+@pytest.mark.parametrize("seconds,clock,expected", [
+    (6007, {"offset": -3}, 6010),
+    (2, {"offset": 3}, None),                      # before the show began on X
+    (121, {"sections": [{"from": 0, "offset": -128, "to": 1418},
+                        {"from": 1961, "offset": -161, "to": None}]}, 249),
+    (1400, {"sections": [{"from": 0, "offset": -128, "to": 1418},
+                         {"from": 1961, "offset": -161, "to": None}]}, None),   # the gap
+    (3439, {"sections": [{"from": 0, "offset": -128, "to": 1418},
+                         {"from": 1961, "offset": -161, "to": None}]}, 3600),
+    (60, {}, None),
+])
+def test_a_second_on_x_back_to_the_transcript(seconds, clock, expected):
+    assert x_posts.from_x(seconds, clock) == expected
+    if expected is not None:
+        assert x_posts.to_x(expected, clock) == seconds, "the inverse of to_x"
+
+
+def test_a_link_post_points_at_its_show_and_second(files):
+    row = x_posts.describe(LINK_POST)
+    assert row["kind"] == "link" and row["archive"] == "threadguy"
+    assert row["episode_id"] == "EOkDv8qm8ik" and row["title"].startswith("MARKET OPEN")
+    assert row["link"] == {"at": "1:40:10",
+                           "watch": "https://x.com/i/broadcasts/1pJdRDqeOYnKW?t=6007"}
+    assert row["times"] == {}, "the card cannot start at a second; times open the broadcast"
+    assert row["links"] == {"0:10:00": "https://x.com/i/broadcasts/1pJdRDqeOYnKW?t=597"}
+    assert row["seekable"] is True
+
+
+def test_a_market_bubble_link_post_has_its_summary(files):
+    row = x_posts.describe(MB_LINK_POST)
+    assert row["episode_id"] == EP24 and row["link"]["at"] == "1:39:53"
+    assert row["summary"].startswith("**Topics**")
+    assert row["links"]["0:04:31"] == "https://x.com/i/broadcasts/1dxYlaZbXWQJX?t=271"
+
+
+def test_a_link_to_what_we_dont_hold_or_cant_place_gets_no_button(files):
+    shelf = x_posts.shelf()
+    for post in ("2116000000000000010", "2116000000000000011",
+                 "2116000000000000012", "2116000000000000013"):
+        assert post not in shelf, post
+    assert shelf[MB_POST].get("kind", "recording") == "recording", \
+        "a post that is the whole recording keeps that panel"
+
+
+def test_a_question_about_a_link_post_is_asked_of_its_show(client):
+    r = client.post("/v1/x/ask", json={"post": LINK_POST, "question": "what about mando"})
+    assert r.status_code == 200
+    assert client.app.state.threadguy.calls[-1]["episode_id"] == "EOkDv8qm8ik"
+    assert r.json()["links"] == {"0:10:00": "https://x.com/i/broadcasts/1pJdRDqeOYnKW?t=597"}

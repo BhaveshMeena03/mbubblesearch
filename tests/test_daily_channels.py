@@ -108,3 +108,10 @@ def test_new_clips_on_x_are_placed_every_morning_and_committed():
     assert placed < SCRIPT.index('git diff --quiet -- "${shelves[@]}"')
     for kept in ("data/x_clips.json", "data/x_clips_search.json"):
         assert kept in SCRIPT
+
+
+def test_our_link_posts_are_read_every_morning_and_committed():
+    read = SCRIPT.index("scripts/place_x_links.py --search")
+    assert read < SCRIPT.index('git diff --quiet -- "${shelves[@]}"')
+    for kept in ("data/x_links.json", "data/x_links_search.json"):
+        assert kept in SCRIPT

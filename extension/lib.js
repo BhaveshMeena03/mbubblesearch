@@ -103,6 +103,17 @@ var MBS = (function () {
     };
   }
 
+  // The moment a link post of ours points to: its time in the show and
+  // the broadcast there. Only a link that opens at the second counts; a
+  // post's own card cannot start at one, so without it there is nothing
+  // to point at.
+  function cleanMoment(value) {
+    if (!value || typeof value !== "object" || !TOKEN.test(value.at) || !seeks(value.watch)) {
+      return null;
+    }
+    return { at: value.at, watch: value.watch };
+  }
+
   function cleanShelf(value) {
     var posts = {};
     var given = value && value.posts;
@@ -130,10 +141,12 @@ var MBS = (function () {
     if (!isPostId(value.post) || ARCHIVES.indexOf(value.archive) === -1) return null;
     var episodeId = str(value.episode_id, 40);
     var clip = value.kind === "clip" ? cleanClip(value.clip) : null;
+    var moment = value.kind === "link" ? cleanMoment(value.link) : null;
     return {
       post: value.post,
-      kind: clip ? "clip" : "recording",
+      kind: clip ? "clip" : moment ? "link" : "recording",
       clip: clip,
+      link: moment,
       archive: value.archive,
       archiveName: str(value.archive_name, 40),
       title: str(value.title, MAX_TITLE),

@@ -242,3 +242,17 @@ test("a question cut at the cap never keeps half an emoji", () => {
   assert.equal(cut, "q".repeat(499));
   assert.doesNotMatch(cut, /[\uD800-\uDBFF]$/);
 });
+
+test("a link post points at a second only through a link that opens there", () => {
+  const ok = MBS.cleanPost({ post: OURS, archive: "threadguy", kind: "link",
+    link: { at: "1:40:10", watch: "https://x.com/i/broadcasts/1pJdRDqeOYnKW?t=6007" } });
+  assert.equal(ok.kind, "link");
+  assert.deepEqual(ok.link, { at: "1:40:10", watch: "https://x.com/i/broadcasts/1pJdRDqeOYnKW?t=6007" });
+  for (const link of [null, { at: "1:40:10" }, { at: "x", watch: "https://x.com/i/broadcasts/1pJdRDqeOYnKW?t=1" },
+                      { at: "1:40:10", watch: "https://x.com/notthreadguy/status/12345?t=1" },
+                      { at: "1:40:10", watch: "javascript:alert(1)" }]) {
+    const post = MBS.cleanPost({ post: OURS, archive: "threadguy", kind: "link", link });
+    assert.equal(post.kind, "recording", JSON.stringify(link));
+    assert.equal(post.link, null);
+  }
+});

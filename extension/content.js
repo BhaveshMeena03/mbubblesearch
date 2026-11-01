@@ -236,13 +236,28 @@
     return null;
   }
 
-  // Posts that could be ours: their own video, an action bar, an id. The
-  // shelf is not even asked for on a page without one.
+  // Our link posts: a quote and the show's X broadcast at the second. The
+  // post's video is the broadcast's card, which on a post's own page has
+  // no <video> until it is played, only its link. Checked on x.com on
+  // 2 Nov 2026: the card is a card.wrapper, not a div[role=link], so a
+  // quoted post's broadcast still never counts as this post's own.
+  function ownBroadcast(article) {
+    var found = article.querySelectorAll("a[href^='/i/broadcasts/']");
+    for (var i = 0; i < found.length; i++) if (ownPart(found[i])) return found[i];
+    return null;
+  }
+
+  function hasShow(article) {
+    return !!(ownVideo(article) || ownBroadcast(article));
+  }
+
+  // Posts that could be ours: their own video or broadcast, an action
+  // bar, an id. The shelf is not even asked for on a page without one.
   function candidates() {
     var out = [];
     document.querySelectorAll("article").forEach(function (article) {
       var bar = actionBar(article);
-      var post = bar && ownVideo(article) ? ownPostId(article) : null;
+      var post = bar && hasShow(article) ? ownPostId(article) : null;
       if (post) out.push({ article: article, bar: bar, post: post });
     });
     return out;
@@ -254,7 +269,7 @@
   // never looked at again: the old button stayed, and its panel's times
   // moved the new post's video (found in review on 1 Nov 2026).
   function still(article, post) {
-    return !!article && article.isConnected && ownPostId(article) === post && !!ownVideo(article);
+    return !!article && article.isConnected && ownPostId(article) === post && hasShow(article);
   }
 
   function sweep() {
@@ -406,6 +421,18 @@
     }
   }
 
+  // The second a link post points to, opening the broadcast there.
+  function renderMoment(target, moment) {
+    var at = el("p", "at");
+    at.appendChild(showLink(moment.at, moment.watch));
+    at.appendChild(document.createTextNode(" in the show. "));
+    var full = showLink("Watch it there", moment.watch);
+    full.className = "watch";
+    full.title = "Open the show on X at " + moment.at;
+    at.appendChild(full);
+    target.appendChild(at);
+  }
+
   function wrapBold(node) {
     var b = el("strong");
     b.appendChild(node);
@@ -457,6 +484,7 @@
       }
       var data = reply.data.post;
       if (data.clip) body.appendChild(el("div", "note from", "This clip is from"));
+      if (data.link) body.appendChild(el("div", "note from", "This post points to"));
       body.appendChild(el("div", "title", data.title || data.archiveName));
       var line = [data.show || data.archiveName, MBS.longDate(data.publishedAt)]
         .filter(Boolean).join(", ");
@@ -471,18 +499,21 @@
           render(whole, data.summary, data.times, data.links, article, status, post);
           body.appendChild(whole);
         }
-      } else if (data.summary) {
-        render(body, data.summary, data.times, data.links, article, status, post);
       } else {
-        body.appendChild(el("div", "note",
-          "No summary for this one yet. Ask anything about it below."));
+        if (data.link) renderMoment(body, data.link);
+        if (data.summary) {
+          render(body, data.summary, data.times, data.links, article, status, post);
+        } else {
+          body.appendChild(el("div", "note",
+            "No summary for this one yet. Ask anything about it below."));
+        }
       }
       if (!data.seekable) {
         body.appendChild(el("div", "note",
           "Times here can't be matched to this post's player, so they show as text."));
       }
       body.appendChild(askBox(post, article, status,
-        data.clip ? "Ask about the episode" : "Ask about this recording"));
+        data.clip || data.link ? "Ask about the episode" : "Ask about this recording"));
       var foot = el("div", "foot");
       var link = el("a", null, "open on search.lexthedev.com");
       link.href = data.page;

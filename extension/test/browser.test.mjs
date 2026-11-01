@@ -607,3 +607,49 @@ test("a page that steers the reader's clicks can't send a question they didn't t
     await browser.close();
   }
 });
+
+// Our link posts: a quote and the show's broadcast at the second, which X
+// draws as a card (card.wrapper) holding the broadcast's link, with no
+// <video> until it is played. Shaped from x.com on 2 Nov 2026.
+function linkPost(id, post, { quoted = false } = {}) {
+  const card = `<div data-testid="card.wrapper"><a role="link" href="/i/broadcasts/1pJdRDqeOYnKW">
+    <span>threadguy</span><span>MARKET OPEN: Binance after BIGGEST HACK EVER</span></a></div>`;
+  return `
+  <article data-testid="tweet" id="${id}">
+    <a role="link" href="/mbubbleSearch/status/${post}"><time datetime="2026-11-01T17:32:19.000Z">Nov 1</time></a>
+    <div data-testid="tweetText">mando can't see $150k bitcoin before quantum gets sorted.</div>
+    ${quoted ? `<div role="link" tabindex="0" class="card"><a role="link" href="/someone/status/1888888888888888888"><time>Nov 1</time></a>${card}</div>` : card}
+    <div role="group" aria-label="1 reply"><div data-testid="reply">r</div><div data-testid="like">l</div></div>
+  </article>`;
+}
+
+test("our link post gets the button and points at its moment", { skip }, async () => {
+  const LINKED = "2116946451729432772";
+  const QUOTER = "2116946451729439999";
+  const browser = await launch({ headless: true });
+  try {
+    const tab = await open(browser, linkPost("link", LINKED) + linkPost("quoter", QUOTER, { quoted: true }), {
+      shelf: { ok: true, data: { posts: { [LINKED]: "threadguy", [QUOTER]: "threadguy" } } },
+      post: postReply(LINKED, {
+        kind: "link", archive: "threadguy", archiveName: "ThreadGuy", title: "MARKET OPEN: Binance",
+        show: "", link: { at: "1:40:10", watch: "https://x.com/i/broadcasts/1pJdRDqeOYnKW?t=6007" },
+        summary: "**Topics**\n- [0:10:00] binance", times: {},
+        links: { "0:10:00": "https://x.com/i/broadcasts/1pJdRDqeOYnKW?t=597" } }) });
+    await tab.locator("#link [data-mbs-button] .btn").waitFor();
+    assert.equal(await tab.locator("#quoter [data-mbs-button]").count(), 0,
+      "a broadcast inside a quoted post is not the post's own");
+    await tab.locator("#link [data-mbs-button] .btn").click();
+    const panel = tab.locator("#link .panel");
+    await panel.locator(".title").waitFor();
+    assert.equal(await panel.locator(".from").textContent(), "This post points to");
+    assert.equal(await panel.locator(".at a.t").getAttribute("href"),
+      "https://x.com/i/broadcasts/1pJdRDqeOYnKW?t=6007");
+    assert.match(await panel.locator(".at").textContent(), /^1:40:10 in the show\. Watch it there$/);
+    assert.equal(await panel.locator("li a.t").getAttribute("href"),
+      "https://x.com/i/broadcasts/1pJdRDqeOYnKW?t=597");
+    assert.equal(await panel.locator("input").getAttribute("placeholder"), "Ask about the episode");
+    assert.deepEqual(await tab.evaluate(() => window.opened), []);
+  } finally {
+    await browser.close();
+  }
+});

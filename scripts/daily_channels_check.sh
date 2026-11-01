@@ -163,6 +163,12 @@ echo "-- threadguy on x"
 echo "-- clips on x"
 .venv/bin/python -u scripts/place_x_clips.py --search || status=1
 
+# Our own posts that link a show's broadcast at a second, so the extension
+# can name the moment on them. One X search for our new posts (about five
+# a day, half a cent each); the second is read off each link.
+echo "-- our link posts"
+.venv/bin/python -u scripts/place_x_links.py --search || status=1
+
 # Notes for MCG's newest, the daily live show included: the extension
 # shows them on MCG Live's posts on X. Already-written ones are skipped.
 echo "-- mcg notes"
@@ -207,7 +213,8 @@ shelves=(data/threadguy_index.json data/mcg_index.json data/rasmr_index.json
 # seen, and the refusal would take the shelves down with it.
 for kept in data/mcg_broadcast_links.json data/threadguy_broadcast_links.json \
             data/threadguy_x_broadcasts.json data/mcg_summaries.json.gz \
-            data/x_clips.json data/x_clips_search.json; do
+            data/x_clips.json data/x_clips_search.json \
+            data/x_links.json data/x_links_search.json; do
   if git ls-files --error-unmatch "$kept" >/dev/null 2>&1; then
     shelves+=("$kept")
   fi
