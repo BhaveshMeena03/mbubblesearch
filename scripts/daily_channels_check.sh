@@ -154,7 +154,8 @@ echo "-- threadguy notes"
 echo "-- threadguy on x"
 .venv/bin/python -u scripts/pair_threadguy_broadcasts.py --search || status=1
 
-# Clips of the shows posted on X by Ansem, Market Bubble, us and Kaiz,
+# Clips of the shows posted on X by Ansem, Market Bubble, us and the
+# clippers in x_posts.CLIP_ACCOUNTS,
 # placed in the archive so the extension can say where each is from and
 # what was said after it. One X search for their new video posts (about
 # half a cent each, around 25 a day), then X's own captions, which are

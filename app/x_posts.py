@@ -82,7 +82,11 @@ SEEKS = re.compile(
 # clip is from" over the video, and over a stranger's post that would vouch
 # for whatever they cut around it. Lowercase: X handles are not case
 # sensitive, and yt-dlp hands back whichever case the account chose.
-CLIP_ACCOUNTS = frozenset({"blknoiz06", "marketbubble", "mbubblesearch", "kaiz_294"})
+# The clippers were found on 2 Nov 2026 by testing every show-related video
+# from a week of X search against the archive: OrderBookShow had 4 that
+# matched, BullClips and insentosprime 1 each, all clip accounts by trade.
+CLIP_ACCOUNTS = frozenset({"blknoiz06", "marketbubble", "mbubblesearch", "kaiz_294",
+                           "orderbookshow", "bullclips", "insentosprime"})
 
 
 def clip_account(handle) -> bool:

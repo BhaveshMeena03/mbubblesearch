@@ -5,10 +5,11 @@
     .venv/bin/python scripts/place_x_clips.py --file ids.txt
 
 --search is what the morning job runs: one X search for the video posts
-the clip accounts (x_posts.CLIP_ACCOUNTS: Ansem, Market Bubble, ours and
-Kaiz) made since the newest one already read, then each is placed. X
-charges for each post the search returns, about half a cent, and the
-newest id is kept in data/x_clips_search.json so none is paid for twice.
+the clip accounts (x_posts.CLIP_ACCOUNTS: Ansem, Market Bubble, ours,
+Kaiz and the clippers) made since the newest one already read, then each
+is placed. X charges for each post the search returns, about half a
+cent, and the newest id is kept in data/x_clips_search.json so none is
+paid for twice.
 The search reaches back seven days, which is also how far a first run
 goes.
 
@@ -307,7 +308,7 @@ def main() -> None:
         try:
             found = asyncio.run(search(state.get("newest")))
         except Exception as exc:                                # noqa: BLE001
-            sys.exit(f"could not ask X: {redact(str(exc))[:200]}")
+            sys.exit(f"could not ask X: {type(exc).__name__}: {redact(str(exc))[:200]}")
         print(f"{len(found)} new video posts from {', '.join(sorted(x_posts.CLIP_ACCOUNTS))}")
         posts += found
         newest = max(found + ([state["newest"]] if state.get("newest") else []), key=int, default=None)

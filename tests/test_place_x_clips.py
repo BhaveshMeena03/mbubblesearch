@@ -141,7 +141,8 @@ def test_only_post_ids_are_taken(monkeypatch):
 
 def test_the_clip_accounts_are_read_without_regard_to_case():
     from app import x_posts
-    for handle in ("blknoiz06", "MarketBubble", "mbubbleSearch", "Kaiz_294", "KAIZ_294"):
+    for handle in ("blknoiz06", "MarketBubble", "mbubbleSearch", "Kaiz_294", "KAIZ_294",
+                   "OrderBookShow", "BullClips", "insentosprime"):
         assert x_posts.clip_account(handle), handle
     for handle in ("kaiz294", "someclipper", "", None, 7):
         assert not x_posts.clip_account(handle), handle

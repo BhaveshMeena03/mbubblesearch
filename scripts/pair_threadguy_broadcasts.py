@@ -204,7 +204,7 @@ def main() -> int:
         try:
             new = asyncio.run(search(newest))
         except Exception as exc:                                # noqa: BLE001
-            print(f"  could not ask X: {redact(str(exc))[:200]}")
+            print(f"  could not ask X: {type(exc).__name__}: {redact(str(exc))[:200]}")
             return 1
         casts = merge(casts, new)
         if not args.dry_run:
