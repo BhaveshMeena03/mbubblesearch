@@ -653,3 +653,60 @@ test("our link post gets the button and points at its moment", { skip }, async (
     await browser.close();
   }
 });
+
+// Our older link posts point at a show's YouTube copy. X draws the link as
+// a card whose <a> goes to t.co and is labelled "youtube.com <title>", or,
+// when it is not the post's card, as text reading youtube.com/watch?v=….
+// Shaped from x.com on 2 Nov 2026.
+function youTubePost(id, post, { label = "youtube.com BlackRock Told Tristan Thompson",
+                                 text = "", quoted = false } = {}) {
+  const card = label ? `<div data-testid="card.wrapper"><a role="link" href="https://t.co/VK7RKsYs4S"
+    aria-label="${label}"><span>BlackRock Told Tristan Thompson</span></a></div>
+    <a role="link" href="https://t.co/VK7RKsYs4S">From youtube.com</a>` : "";
+  return `
+  <article data-testid="tweet" id="${id}">
+    <a role="link" href="/mbubbleSearch/status/${post}"><time datetime="2026-09-26T18:46:00.000Z">Sep 26</time></a>
+    <div data-testid="tweetText">around 16:16 a guest recalled BlackRock ${text}</div>
+    ${quoted ? `<div role="link" tabindex="0" class="card"><a role="link" href="/someone/status/1888888888888888888"><time>Sep 26</time></a>${card}</div>` : card}
+    <div role="group" aria-label="1 reply"><div data-testid="reply">r</div><div data-testid="like">l</div></div>
+  </article>`;
+}
+
+test("our older posts that link YouTube get the button too", { skip }, async () => {
+  const CARD = "2103556826294079702";
+  const TEXT = "2103226841083564495";
+  const QUOTER = "2103556826294079999";
+  const ELSEWHERE = "2103556826294078888";
+  const browser = await launch({ headless: true });
+  try {
+    const tab = await open(browser,
+      youTubePost("card", CARD) +
+      youTubePost("text", TEXT, { label: "", text: '<a role="link" href="https://t.co/a">youtube.com/watch?v=FFFnEnXzgEY…</a>' }) +
+      youTubePost("quoter", QUOTER, { quoted: true }) +
+      youTubePost("elsewhere", ELSEWHERE, { label: "search.lexthedev.com MarketBubbleSearch" }), {
+        shelf: { ok: true, data: { posts: { [CARD]: "podcast", [TEXT]: "podcast",
+                                            [QUOTER]: "podcast", [ELSEWHERE]: "podcast" } } },
+        post: postReply(CARD, {
+          kind: "link", title: "Market Bubble Episode 12", show: "",
+          link: { at: "0:16:16", watch: "https://x.com/i/broadcasts/1dxYlaZbXWQJX?t=976" },
+          summary: "**Topics**\n- [0:10:00] macro", times: {},
+          links: { "0:10:00": "https://www.youtube.com/watch?v=wksdB2BgW3g&t=600s" } }) });
+    await tab.locator("#card [data-mbs-button] .btn").waitFor();
+    await tab.locator("#text [data-mbs-button] .btn").waitFor();
+    assert.equal(await tab.locator("#quoter [data-mbs-button]").count(), 0,
+      "a YouTube card inside a quoted post is not the post's own");
+    assert.equal(await tab.locator("#elsewhere [data-mbs-button]").count(), 0,
+      "a card to anywhere but YouTube is not a show");
+    await tab.locator("#card [data-mbs-button] .btn").click();
+    const panel = tab.locator("#card .panel");
+    await panel.locator(".title").waitFor();
+    assert.equal(await panel.locator(".from").textContent(), "This post points to");
+    assert.equal(await panel.locator(".at a.t").getAttribute("href"),
+      "https://x.com/i/broadcasts/1dxYlaZbXWQJX?t=976");
+    assert.equal(await panel.locator("li a.t").getAttribute("href"),
+      "https://www.youtube.com/watch?v=wksdB2BgW3g&t=600s");
+    assert.deepEqual(await tab.evaluate(() => window.opened), []);
+  } finally {
+    await browser.close();
+  }
+});

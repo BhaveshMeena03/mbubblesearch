@@ -31,7 +31,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 import app.main as main_module
-from app import podcast, x_posts
+from app import podcast, x_posts, youtube_map
 from app.config import get_settings
 from app.schemas import PodcastHit, PodcastSearchResponse
 
@@ -47,6 +47,10 @@ RASMR_X_ONLY = "2109683904819150927"
 TG_POST = "2116149081211048039"          # ThreadGuy's market open, 30 Oct
 LINK_POST = "2116946451729432772"        # ours: Mando on ThreadGuy's stream, at 1:40:07 on X
 MB_LINK_POST = "2116435942009430106"     # ours: Ansem on Episode 24, at 1:39:53
+YT_MB_POST = "2103226841083564495"       # ours, before October: Episode 24's upload
+YT_TG_POST = "2116000000000000020"       # a YouTube link to a show paired with X
+YT_MCG_POST = "2116000000000000021"      # a YouTube link to a show never paired
+YT_YOUTUBE_EP = "2116000000000000022"    # a Market Bubble episode held only from YouTube
 
 
 # --- the shelf -------------------------------------------------------------
@@ -88,7 +92,8 @@ def files(tmp_path, monkeypatch):
          "published_at": "2026-10-12", "seconds": 7539},
         {"id": "2bev0UDp79Y", "title": "a paired stream", "published_at": "2026-08-21"}]))
     (tmp_path / "mcg_index.json").write_text(json.dumps([
-        {"id": "2NK_MBlFvtM", "title": "MCG Live: Binance", "published_at": "2026-10-27"}]))
+        {"id": "2NK_MBlFvtM", "title": "MCG Live: Binance", "published_at": "2026-10-27"},
+        {"id": "pwhvqgCGV0w", "title": "This Trader Caught $ORBIO", "published_at": "2026-10-01"}]))
     (tmp_path / "x_clips.json").write_text(json.dumps({
         CLIP_POST: {"account": "blknoiz06", "archive": "podcast", "episode_id": EP24,
                     "start": 5993, "end": 6072, "before": "lab diamonds.",
@@ -141,7 +146,19 @@ def files(tmp_path, monkeypatch):
         "2116000000000000011": {"broadcast": "https://www.youtube.com/watch?v=EOkDv8qm8ik", "t": 60},
         "2116000000000000012": {"broadcast": "https://evil.example/i/broadcasts/1pJdRDqeOYnKW", "t": 9},
         "2116000000000000013": {"broadcast": "https://x.com/i/broadcasts/1pJdRDqeOYnKW", "t": "9"},
-        MB_POST: {"broadcast": "https://x.com/i/broadcasts/1dxYlaZbXWQJX", "t": 5}}))
+        MB_POST: {"broadcast": "https://x.com/i/broadcasts/1dxYlaZbXWQJX", "t": 5},
+        YT_MB_POST: {"youtube": "Ep24onYTube", "t": 5805},
+        YT_TG_POST: {"youtube": "EOkDv8qm8ik", "t": 600},
+        YT_MCG_POST: {"youtube": "pwhvqgCGV0w", "t": 754},
+        YT_YOUTUBE_EP: {"youtube": "KcazozbZHd0", "t": 30},
+        "2116000000000000014": {"youtube": "O4wBUysNe2k", "t": 1129},    # Rogan: Elon's, left out
+        "2116000000000000015": {"youtube": "Ep24onYTube", "t": 9000},    # past the last anchor
+        "2116000000000000016": {"youtube": "../../etc/x", "t": 5},
+        "2116000000000000017": {"youtube": "EOkDv8qm8ik", "t": -1}}))
+    (tmp_path / "youtube_map.json").write_text(json.dumps({
+        EP24: [[5900.0, "Ep24onYTube", 5800.0], [5910.0, "Ep24onYTube", 5810.0],
+               [5920.0, "Ep24onYTube", 5821.0]]}))
+    monkeypatch.setattr(youtube_map, "_PATH", tmp_path / "youtube_map.json")
     links = json.loads((tmp_path / "broadcast_links.json").read_text())
     monkeypatch.setattr(podcast, "_broadcast_players", lambda: links)
     for name, value in (("SUMMARIES", "summaries.json.gz"),
@@ -154,7 +171,8 @@ def files(tmp_path, monkeypatch):
                         ("THREADGUY_SUMMARIES", "threadguy_summaries.json.gz")):
         monkeypatch.setattr(x_posts, name, tmp_path / value)
     caches = (x_posts.shelf, x_posts._summaries, x_posts._clips, x_posts._mcg_summaries,
-              x_posts._threadguy_summaries, x_posts._links, x_posts._broadcasts)
+              x_posts._threadguy_summaries, x_posts._links, x_posts._broadcasts,
+              youtube_map._anchors)
     for cached in caches:
         cached.cache_clear()
     yield tmp_path
@@ -193,8 +211,9 @@ def test_a_pair_with_no_measured_clock_gets_a_button_and_no_seeking(files):
 def test_one_broken_file_costs_only_its_own_archive(files):
     (files / "mcg.json").write_text("{ not json")
     x_posts.shelf.cache_clear()
-    archives = set(x_posts.listing().values())
-    assert "mcg" not in archives and {"podcast", "rasmr"} <= archives
+    listing = x_posts.listing()
+    assert MCG_POST not in listing and {"podcast", "rasmr"} <= set(listing.values())
+    assert listing[YT_MCG_POST] == "mcg", "a YouTube link needs MCG's shelf, not its pairs"
 
 
 # --- the clocks ------------------------------------------------------------
@@ -909,7 +928,9 @@ def test_a_link_post_points_at_its_show_and_second(files):
     assert row["link"] == {"at": "1:40:10",
                            "watch": "https://x.com/i/broadcasts/1pJdRDqeOYnKW?t=6007"}
     assert row["times"] == {}, "the card cannot start at a second; times open the broadcast"
-    assert row["links"] == {"0:10:00": "https://x.com/i/broadcasts/1pJdRDqeOYnKW?t=597"}
+    assert row["links"] == {"0:10:00": "https://x.com/i/broadcasts/1pJdRDqeOYnKW?t=597",
+                            "0:00:01": "https://www.youtube.com/watch?v=EOkDv8qm8ik&t=1s"}, \
+        "said before X's stream began: it still opens, on the YouTube copy"
     assert row["seekable"] is True
 
 
@@ -920,10 +941,48 @@ def test_a_market_bubble_link_post_has_its_summary(files):
     assert row["links"]["0:04:31"] == "https://x.com/i/broadcasts/1dxYlaZbXWQJX?t=271"
 
 
+def test_an_old_youtube_link_to_market_bubble_opens_on_x_at_the_same_words(files):
+    """Before October we linked the upload. The upload is cut from the
+    broadcast, so the second moves back onto X's clock through the map:
+    5805 on YouTube is 5905 on X here."""
+    row = x_posts.describe(YT_MB_POST)
+    assert row["kind"] == "link" and row["archive"] == "podcast" and row["episode_id"] == EP24
+    assert row["link"] == {"at": "1:38:25",
+                           "watch": "https://x.com/i/broadcasts/1dxYlaZbXWQJX?t=5905"}
+    assert row["summary"].startswith("**Topics**")
+    assert row["links"]["0:04:31"] == "https://x.com/i/broadcasts/1dxYlaZbXWQJX?t=271"
+
+
+def test_a_youtube_link_to_a_show_paired_with_x_opens_on_x(files):
+    row = x_posts.describe(YT_TG_POST)
+    assert row["archive"] == "threadguy" and row["episode_id"] == "EOkDv8qm8ik"
+    assert row["link"] == {"at": "0:10:00",
+                           "watch": "https://x.com/i/broadcasts/1pJdRDqeOYnKW?t=597"}
+    assert row["summary"].startswith("**TL;DR** The Binance hack")
+
+
+def test_a_youtube_link_to_a_show_that_never_aired_on_x_stays_on_youtube(files):
+    row = x_posts.describe(YT_MCG_POST)
+    assert row["archive"] == "mcg" and row["title"] == "This Trader Caught $ORBIO"
+    assert row["link"] == {"at": "0:12:34",
+                           "watch": "https://www.youtube.com/watch?v=pwhvqgCGV0w&t=754s"}
+    assert row["summary"] is None and row["seekable"] is True
+    _, links = x_posts.marks("around 0:05:00 he said", x_posts.shelf()[YT_MCG_POST])
+    assert links == {"0:05:00": "https://www.youtube.com/watch?v=pwhvqgCGV0w&t=300s"}
+
+
+def test_a_market_bubble_episode_held_only_from_youtube_plays_there(files):
+    row = x_posts.describe(YT_YOUTUBE_EP)
+    assert row["archive"] == "podcast" and row["episode_id"] == "KcazozbZHd0"
+    assert row["link"]["watch"] == "https://www.youtube.com/watch?v=KcazozbZHd0&t=30s"
+
+
 def test_a_link_to_what_we_dont_hold_or_cant_place_gets_no_button(files):
     shelf = x_posts.shelf()
     for post in ("2116000000000000010", "2116000000000000011",
-                 "2116000000000000012", "2116000000000000013"):
+                 "2116000000000000012", "2116000000000000013",
+                 "2116000000000000014", "2116000000000000015",
+                 "2116000000000000016", "2116000000000000017"):
         assert post not in shelf, post
     assert shelf[MB_POST].get("kind", "recording") == "recording", \
         "a post that is the whole recording keeps that panel"

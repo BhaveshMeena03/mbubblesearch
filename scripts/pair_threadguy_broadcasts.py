@@ -3,6 +3,7 @@
     .venv/bin/python scripts/pair_threadguy_broadcasts.py --search
     .venv/bin/python scripts/pair_threadguy_broadcasts.py --dry-run
     .venv/bin/python scripts/pair_threadguy_broadcasts.py --only 1pJdRDqeOYnKW
+    .venv/bin/python scripts/pair_threadguy_broadcasts.py --pair <video id> <broadcast link>
 
 He goes live from @notthreadguy on X and YouTube at once, the market open
 every weekday and the interviews, and the archive is the YouTube copy.
@@ -26,6 +27,10 @@ same clock and reads nothing back out of Pinecone. His streams have no
 caption track (checked 1 Nov 2026: "has no automatic captions"), so for
 those the transcript comes back out of the index, one episode's passages,
 as the MCG and rasmr pairing scripts read theirs: about 200 KB a show.
+
+--pair measures one show against one broadcast found some other way, such
+as one of our own posts linking a show from before October. It reads
+nothing from X; the audio still decides.
 
 Writes data/threadguy_broadcast_links.json, {youtube id: {broadcast,
 offset or sections, post}}, where X second = YouTube second + offset.
@@ -190,13 +195,41 @@ def write(pairs: dict) -> None:
     OUT.write_text(json.dumps(pairs, indent=1, sort_keys=True) + "\n")
 
 
+_BROADCAST = re.compile(r"https://x\.com/i/broadcasts/[A-Za-z0-9]{8,20}")
+
+
+def pair_by_hand(video: str, broadcast: str, dry_run: bool = False) -> int:
+    url = broadcast.split("?", 1)[0]
+    if not _BROADCAST.fullmatch(url):
+        print(f"  {broadcast[:80]} is not an X broadcast link")
+        return 1
+    row = next((r for r in json.loads(SHELF.read_text()) if r.get("id") == video), None)
+    if row is None:
+        print(f"  {video} is not on the ThreadGuy shelf")
+        return 1
+    pairs = json.loads(OUT.read_text()) if OUT.exists() else {}
+    clocks = measure(url, row)
+    if not clocks:
+        print(f"  {video}: {url} is not this show by ear; left alone")
+        return 1
+    pairs[video] = {"broadcast": url, **clocks}
+    print(f"  {video} = {url.rsplit('/', 1)[-1]}  {described(clocks)}  {row['title'][:50]}")
+    if not dry_run:
+        write(pairs)
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--search", action="store_true", help="ask X for new broadcasts first")
     ap.add_argument("--dry-run", action="store_true", help="measure, write nothing")
     ap.add_argument("--only", nargs="+", default=[], metavar="BROADCAST",
                     help="pair only these broadcast ids")
+    ap.add_argument("--pair", nargs=2, metavar=("VIDEO", "BROADCAST"),
+                    help="measure this show against this broadcast; no X reads")
     args = ap.parse_args()
+    if args.pair:
+        return pair_by_hand(*args.pair, dry_run=args.dry_run)
 
     casts = json.loads(BROADCASTS.read_text())["broadcasts"] if BROADCASTS.exists() else []
     if args.search:

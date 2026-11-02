@@ -66,3 +66,26 @@ def test_summary_timestamps_map_where_they_can(monkeypatch):
     _use(monkeypatch)
     got = youtube_map.summary_moments("x-live", "[0:05:05] one [0:10:05] two [0:30:00] three")
     assert got == {"305": ["YT1", 195]}
+
+
+# The other way, for our old posts that linked the upload: the broadcast's
+# second for a second of YouTube. Here the upload drops X's 590s to 800s.
+CUT = {"x-live": [[t, "YT1", t - 110] for t in range(100, 600, 10)]
+                 + [[t, "YT1", t - 300] for t in range(800, 1200, 10)]}
+
+
+def test_a_second_of_the_upload_maps_back_onto_the_broadcast(monkeypatch):
+    monkeypatch.setattr(youtube_map, "_anchors", lambda: CUT)
+    assert youtube_map.live_moment("YT1", 195) == ("x-live", 305)
+    assert youtube_map.live_moment("YT1", 700) == ("x-live", 1000)
+    assert youtube_map.youtube_moment(*youtube_map.live_moment("YT1", 195)) == ("YT1", 195)
+
+
+def test_the_upload_refuses_at_a_cut_outside_the_anchors_and_for_other_videos(monkeypatch):
+    """480 and 500 on YouTube are 590 and 800 on X: the second between them
+    could be either side of the cut."""
+    monkeypatch.setattr(youtube_map, "_anchors", lambda: CUT)
+    assert youtube_map.live_moment("YT1", 490) is None
+    assert youtube_map.live_moment("YT1", -50) is None
+    assert youtube_map.live_moment("YT1", 950) is None
+    assert youtube_map.live_moment("YT2", 195) is None

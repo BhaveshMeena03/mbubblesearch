@@ -73,6 +73,35 @@ def youtube_moment(episode_id: str, second: float) -> tuple[str, int] | None:
     return before[1], max(0, int(round(second + offset_before)))
 
 
+def live_moment(video_id: str, second: float) -> tuple[str, int] | None:
+    """youtube_moment the other way: (episode_id, second) in the live
+    broadcast for a second of its YouTube upload, or None.
+
+    The same rule from the other side. Two anchors next to each other on
+    YouTube's clock bracket the second only if they are close and agree on
+    the offset; across a cut they do not, because the upload runs straight
+    on where the broadcast skipped ahead.
+    """
+    for episode_id, rows in _anchors().items():
+        mine = sorted((r for r in rows if r[1] == video_id), key=lambda r: r[2])
+        if not mine:
+            continue
+        # An upload is cut from one broadcast, so the first episode that
+        # has its anchors is the only one.
+        keys = [r[2] for r in mine]
+        i = bisect.bisect_right(keys, second)
+        if i == 0 or i == len(mine):
+            return None
+        before, after = mine[i - 1], mine[i]
+        if after[2] - before[2] > _MAX_GAP:
+            return None
+        offset_before, offset_after = before[2] - before[0], after[2] - after[0]
+        if abs(offset_before - offset_after) > _SAME_OFFSET:
+            return None
+        return episode_id, max(0, int(round(second - offset_before)))
+    return None
+
+
 # How far into a passage a citation can fall. A passage is about two and a
 # half minutes of speech; the whole of it has to be on YouTube before the
 # passage plays there, or a citation near its end lands in a cut.

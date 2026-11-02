@@ -70,7 +70,7 @@ Adds a button to X posts that are recordings in the MarketBubbleSearch archive, 
 the host access the content script implies:
 
 ```
-The button and panel are added to posts on x.com, so the content script has to run there and nowhere else. On the page it reads only each post's own id and whether the post has a video, to decide which posts get a button. That decision is made in the browser; nothing about the page is sent anywhere until the user clicks.
+The button and panel are added to posts on x.com, so the content script has to run there and nowhere else. On the page it reads only each post's own id and whether the post has a video or links a show on X or YouTube, to decide which posts get a button. That decision is made in the browser; nothing about the page is sent anywhere until the user clicks.
 ```
 
 **Remote code**: No, I am not using remote code. (Every script is in the package. The server

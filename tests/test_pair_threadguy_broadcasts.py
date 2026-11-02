@@ -65,3 +65,34 @@ def test_a_retitled_upload_is_found_by_its_day_nearest_first():
 def test_a_show_with_no_date_is_never_a_near_one():
     cast = {"title": "x", "posted": "2026-10-30T00:00:00Z"}
     assert tg.candidates(cast, [{"id": "nodate", "title": "y"}], {}) == []
+
+
+def test_pairing_by_hand_takes_only_an_x_broadcast_and_a_shelved_show(tmp_path, monkeypatch, capsys):
+    """It listens to whatever it is given, so what it is given is checked
+    first. Nothing here reaches the network."""
+    import json
+
+    shelf = tmp_path / "shelf.json"
+    shelf.write_text(json.dumps([{"id": "B8A-Gf9Strs", "title": "MARKET OPEN"}]))
+    monkeypatch.setattr(tg, "SHELF", shelf)
+    monkeypatch.setattr(tg, "OUT", tmp_path / "pairs.json")
+    monkeypatch.setattr(tg, "measure", lambda url, row: {"offset": 4})
+    assert tg.pair_by_hand("B8A-Gf9Strs", "https://evil.example/i/broadcasts/1MJgNbOYoZkGL") == 1
+    assert tg.pair_by_hand("B8A-Gf9Strs", "file:///etc/passwd") == 1
+    assert tg.pair_by_hand("notshelved0", "https://x.com/i/broadcasts/1MJgNbOYoZkGL") == 1
+    assert not (tmp_path / "pairs.json").exists()
+    assert tg.pair_by_hand("B8A-Gf9Strs", "https://x.com/i/broadcasts/1MJgNbOYoZkGL?t=5") == 0
+    assert json.loads((tmp_path / "pairs.json").read_text()) == {
+        "B8A-Gf9Strs": {"broadcast": "https://x.com/i/broadcasts/1MJgNbOYoZkGL", "offset": 4}}
+
+
+def test_a_broadcast_that_is_not_the_show_by_ear_is_left_alone(tmp_path, monkeypatch):
+    import json
+
+    shelf = tmp_path / "shelf.json"
+    shelf.write_text(json.dumps([{"id": "B8A-Gf9Strs", "title": "MARKET OPEN"}]))
+    monkeypatch.setattr(tg, "SHELF", shelf)
+    monkeypatch.setattr(tg, "OUT", tmp_path / "pairs.json")
+    monkeypatch.setattr(tg, "measure", lambda url, row: None)
+    assert tg.pair_by_hand("B8A-Gf9Strs", "https://x.com/i/broadcasts/1MJgNbOYoZkGL") == 1
+    assert not (tmp_path / "pairs.json").exists()

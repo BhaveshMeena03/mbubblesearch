@@ -13,8 +13,8 @@ Click it and you get:
 X can't open a posted video at a time from a link. The extension sets the player's clock directly,
 so 1:39:33 lands on 1:39:33.
 
-It also works on our own posts that link a show's broadcast at a second: the button names the
-moment and the show, with its summary and the ask box. And it works on clips. Ansem posts a minute of the show several times a day; for each one the
+It also works on our own posts that link a show at a second, on X or YouTube: the button names the
+moment and the show, with its summary and the ask box, and opens it on X wherever the show aired there. And it works on clips. Ansem posts a minute of the show several times a day; for each one the
 archive holds, the button says where it is from ("Episode 24, 1:39:53 to 1:41:12"), shows what was
 said just before it and right after the cut, and links to the full show at that second. Clips are
 placed ahead of time by `scripts/place_x_clips.py`, from X's own captions, so a clip the archive
@@ -33,10 +33,10 @@ Until it is on the Chrome Web Store:
 
 What it sends, and what it doesn't:
 
-- **On a page with a video post, or a post linking a show's broadcast**, it downloads the list
+- **On a page with a video post, or a post linking a show's broadcast or a YouTube video**, it downloads the list
   of post ids the archive holds
   (`/v1/x/shelf`), at most once an hour. Which posts get a button is decided in your browser against
-  that list. Nothing about what you scroll past is sent anywhere, and on a page with no video post
+  that list. Nothing about what you scroll past is sent anywhere, and on a page with none of those
   it sends nothing at all.
 - **When you click the button**, it sends that one post's id, to get its summary.
 - **When you ask a question**, it sends the post id and the question. Questions are answered by a

@@ -247,12 +247,31 @@
     return null;
   }
 
-  function hasShow(article) {
-    return !!(ownVideo(article) || ownBroadcast(article));
+  // Our link posts to a show's YouTube copy, most of what we posted before
+  // October. The card's link is a t.co one, so where it goes shows only in
+  // its label, "youtube.com <title>" (checked on x.com on 2 Nov 2026). A
+  // YouTube link that is not the card is in the text, written as
+  // youtube.com/watch?v=… or youtu.be/….
+  var YOUTUBE_TEXT = /^(?:www\.|m\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)/;
+
+  function ownYouTube(article) {
+    var found = article.querySelectorAll(
+      "[data-testid='card.wrapper'] a[aria-label^='youtube.com '],[data-testid='tweetText'] a");
+    for (var i = 0; i < found.length; i++) {
+      var a = found[i];
+      if (!ownPart(a)) continue;
+      if (a.hasAttribute("aria-label") || YOUTUBE_TEXT.test((a.textContent || "").trim())) return a;
+    }
+    return null;
   }
 
-  // Posts that could be ours: their own video or broadcast, an action
-  // bar, an id. The shelf is not even asked for on a page without one.
+  function hasShow(article) {
+    return !!(ownVideo(article) || ownBroadcast(article) || ownYouTube(article));
+  }
+
+  // Posts that could be ours: their own video, a show's broadcast or a
+  // YouTube link, an action bar, an id. The shelf is not even asked for on
+  // a page without one.
   function candidates() {
     var out = [];
     document.querySelectorAll("article").forEach(function (article) {

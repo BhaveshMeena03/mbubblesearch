@@ -163,9 +163,10 @@ echo "-- threadguy on x"
 echo "-- clips on x"
 .venv/bin/python -u scripts/place_x_clips.py --search || status=1
 
-# Our own posts that link a show's broadcast at a second, so the extension
-# can name the moment on them. One X search for our new posts (about five
-# a day, half a cent each); the second is read off each link.
+# Our own posts that link a show at a second, on X or YouTube, so the
+# extension can name the moment on them. Our timeline since yesterday's
+# newest post, replies included (about twenty a day, a tenth of a cent
+# each); the second is read off each link.
 echo "-- our link posts"
 .venv/bin/python -u scripts/place_x_links.py --search || status=1
 

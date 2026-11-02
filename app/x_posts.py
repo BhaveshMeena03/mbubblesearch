@@ -25,10 +25,11 @@ placed in the archive by its own words (scripts/place_x_clips.py, written
 to data/x_clips.json) gets a panel saying where it is from and what was
 said right after the cut. A time inside the clip moves the clip's player;
 any other opens the whole show at that second. And link posts: ours,
-which link a show's X broadcast at the second rather than upload a clip
-(scripts/place_x_links.py reads the second off each link, written to
-data/x_links.json). The panel names the moment and the show, and every
-time in it opens the broadcast there.
+which link a show at the second rather than upload a clip, its X
+broadcast since October and its YouTube copy before (scripts/place_x_links.py
+reads the second off each link, written to data/x_links.json). The panel
+names the moment and the show, and every time in it opens the show
+there: on X where it aired, else on YouTube.
 
 Every time the extension shows is converted here, never in the browser,
 so there is one copy of the clock arithmetic and it is the one the bot's
@@ -44,7 +45,7 @@ import re
 from functools import lru_cache
 from pathlib import Path
 
-from . import mcg_on_x, podcast
+from . import mcg_on_x, podcast, youtube_map
 
 logger = logging.getLogger(__name__)
 
@@ -65,6 +66,7 @@ THREADGUY_SUMMARIES = _DATA / "threadguy_summaries.json.gz"
 POST_ID = re.compile(r"^[0-9]{5,25}$")
 BROADCAST = re.compile(r"^https://x\.com/i/broadcasts/([A-Za-z0-9]{8,20})$")
 EPISODE_ID = re.compile(r"^[A-Za-z0-9_-]{1,40}$")
+YOUTUBE_ID = re.compile(r"^[A-Za-z0-9_-]{11}$")
 
 # The whole show at a second, in the three shapes the site's own links take
 # for this archive: X's broadcast player, an X post, a YouTube video. Any
@@ -224,8 +226,13 @@ def _clips() -> dict[str, dict]:
 def shelf() -> dict[str, dict]:
     """Post id to what it is: archive, episode, and the clock to X."""
     posts: dict[str, dict] = {}
-    titled = {str(r.get("id")): r for path in (MCG_SHELF, RASMR_SHELF, THREADGUY_SHELF)
-              for r in _rows(path)}
+    # Each show the archive holds from YouTube, by its id: which archive,
+    # and its row for the title.
+    held = {str(r.get("id")): (archive, r)
+            for archive, path in (("mcg", MCG_SHELF), ("rasmr", RASMR_SHELF),
+                                  ("threadguy", THREADGUY_SHELF))
+            for r in _rows(path)}
+    titled = {video: row for video, (_, row) in held.items()}
 
     # Market Bubble: every episode indexed from X. The summaries file has
     # each one with its title; the broadcast list catches any without.
@@ -272,21 +279,88 @@ def shelf() -> dict[str, dict]:
             posts[post] = {"archive": "podcast", "episode_id": clip["episode_id"],
                            "kind": "clip", "clock": {}, "clip": clip}
 
-    # Link posts, last: a broadcast this archive knows, at a second that
-    # maps onto its transcript. A link to a show we don't hold, or into
-    # minutes X's stream missed, gets no button.
+    # Link posts, last: a show at a second, on X or on YouTube, that maps
+    # onto a transcript this archive holds. A link to a show we don't hold,
+    # or into minutes the transcript doesn't have, gets no button.
     shows = _broadcasts()
+    on_x = {show["episode_id"]: show for show in shows.values()}
     for post, link in _links().items():
+        row = None if post in posts else _link_row(link, shows, on_x, held)
+        if row:
+            posts[post] = row
+    return posts
+
+
+def _link_row(link: dict, shows: dict[str, dict], on_x: dict[str, dict],
+              held: dict[str, tuple[str, dict]]) -> dict | None:
+    """A link post's shelf row, or None when it points at nothing held.
+
+    A broadcast link is placed by the broadcast's own clock. A YouTube link
+    is placed on the copy the archive was indexed from: a Market Bubble
+    upload is cut from the X broadcast, so its second is moved back onto
+    the broadcast's (app/youtube_map.py); an MCG, ThreadGuy or rasmr show
+    was indexed from YouTube, so its second is already the transcript's.
+    Elon and The Record are left out until they are wanted.
+    """
+    if "id" in link:
         show = shows.get(link["id"])
         at = from_x(link["t"], show["clock"]) if show else None
-        if post in posts or at is None:
-            continue
-        shown = titled.get(show["episode_id"], {})
-        posts[post] = {"archive": show["archive"], "episode_id": show["episode_id"],
-                       "kind": "link", "clock": show["clock"],
-                       "title": shown.get("title"), "published_at": shown.get("published_at"),
-                       "link": {"broadcast": show["url"], "t": link["t"], "at": at}}
-    return posts
+        if at is None:
+            return None
+        watch = f"{show['url']}?t={link['t']}"
+    else:
+        show, at = _youtube_show(link["youtube"], link["t"], on_x, held)
+        if show is None:
+            return None
+        watch = None
+    episode_id = show["episode_id"]
+    shown = held.get(episode_id, ("", {}))[1]
+    row = {"archive": show["archive"], "episode_id": episode_id, "kind": "link",
+           "clock": show["clock"], "title": shown.get("title"),
+           "published_at": shown.get("published_at"),
+           "link": {"broadcast": show.get("url"), "youtube": show.get("youtube"), "at": at}}
+    row["link"]["watch"] = watch or _moment(row, at)
+    return row if row["link"]["watch"] and SEEKS.fullmatch(row["link"]["watch"]) else None
+
+
+def _youtube_show(video: str, t: int, on_x: dict[str, dict],
+                  held: dict[str, tuple[str, dict]]) -> tuple[dict | None, int]:
+    """The show a YouTube link points into and the second of its transcript.
+    X wins where the show aired there: the same moment opens on X."""
+    live = youtube_map.live_moment(video, t)
+    if live and _post_of(live[0]) and (live[0] in _summaries() or live[0] in on_x):
+        episode_id, at = live
+        return {"archive": "podcast", "episode_id": episode_id, "clock": {"offset": 0},
+                "url": on_x.get(episode_id, {}).get("url")}, at
+    if video in held:
+        paired = on_x.get(video, {})
+        return {"archive": held[video][0], "episode_id": video, "youtube": video,
+                "clock": paired.get("clock", {}), "url": paired.get("url")}, t
+    if (_summaries().get(video) or {}).get("platform") == "youtube":
+        return {"archive": "podcast", "episode_id": video, "youtube": video,
+                "clock": {}, "url": None}, t
+    return None, t
+
+
+def _moment(row: dict, seconds: int) -> str | None:
+    """The whole show at a second of its transcript: on X where it aired
+    there and the two clocks agree, else on YouTube, at the same words.
+
+    YouTube is the stream's own copy for MCG, ThreadGuy and rasmr, so the
+    transcript's second is YouTube's; for a Market Bubble episode indexed
+    from X it is the upload, through the map. A moment X's stream missed,
+    said before it began or in a gap where the clocks moved, still opens.
+    """
+    link = row["link"]
+    at = to_x(seconds, row["clock"]) if link.get("broadcast") else None
+    if at is not None:
+        url = f"{link['broadcast']}?t={at}"
+    elif link.get("youtube"):
+        url = f"https://www.youtube.com/watch?v={link['youtube']}&t={seconds}s"
+    else:
+        found = youtube_map.youtube_moment(row["episode_id"], seconds)
+        url = f"https://www.youtube.com/watch?v={found[0]}&t={found[1]}s" if found else ""
+    return url if SEEKS.fullmatch(url) else None
 
 
 def _broadcast_id(url) -> str | None:
@@ -318,23 +392,31 @@ def _broadcasts() -> dict[str, dict]:
             bid = _broadcast_id(pair.get("broadcast") if isinstance(pair, dict) else None)
             clock = _clock_of(pair) if bid else {}
             if bid and clock:
+                # The pair is keyed by the YouTube copy, the transcript's own
+                # clock, so a moment X's stream missed can still open there.
                 out[bid] = {"archive": archive, "episode_id": video, "clock": clock,
-                            "url": f"https://x.com/i/broadcasts/{bid}"}
+                            "url": f"https://x.com/i/broadcasts/{bid}",
+                            "youtube": video if YOUTUBE_ID.fullmatch(video) else None}
     return out
 
 
 @lru_cache(maxsize=1)
 def _links() -> dict[str, dict]:
-    """data/x_links.json, each row checked: post id to the broadcast it
-    links and the second it links to."""
+    """data/x_links.json, each row checked: post id to the broadcast or
+    YouTube video it links and the second it links to."""
     out: dict[str, dict] = {}
     given = _json(LINKS) or {}
     for post, row in (given.items() if isinstance(given, dict) else ()):
         if not (POST_ID.fullmatch(str(post)) and isinstance(row, dict)):
             continue
-        bid, t = _broadcast_id(row.get("broadcast")), _second(row.get("t"))
-        if bid and t is not None:
+        t = _second(row.get("t"))
+        bid, video = _broadcast_id(row.get("broadcast")), str(row.get("youtube") or "")
+        if t is None:
+            continue
+        if bid:
             out[str(post)] = {"id": bid, "t": t}
+        elif YOUTUBE_ID.fullmatch(video):
+            out[str(post)] = {"youtube": video, "t": t}
     return out
 
 
@@ -440,13 +522,12 @@ def marks(text: str, row: dict) -> tuple[dict[str, int], dict[str, str]]:
     whole show there.
     """
     if row.get("kind") == "link":
-        # The post's own video is the broadcast card, which X does not
-        # let a link start at a second; every time opens the broadcast.
+        # The post's own video is a card, which X does not let a link start
+        # at a second; every time opens the show.
         links = {}
         for token, seconds in _written(text).items():
-            at = to_x(seconds, row["clock"])
-            link = f"{row['link']['broadcast']}?t={at}" if at is not None else ""
-            if SEEKS.fullmatch(link):
+            link = _moment(row, seconds)
+            if link:
                 links[token] = link
         return {}, links
     if row.get("kind") != "clip":
@@ -507,9 +588,7 @@ def describe(post: str) -> dict | None:
     }
     link = row.get("link")
     if link:
-        watch_at = f"{link['broadcast']}?t={link['t']}"
-        out["link"] = {"at": clock_text(link["at"]),
-                       "watch": watch_at if SEEKS.fullmatch(watch_at) else None}
+        out["link"] = {"at": clock_text(link["at"]), "watch": link["watch"]}
     clip = row.get("clip")
     if clip:
         after_at = clip["after_at"]
