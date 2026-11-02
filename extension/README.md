@@ -22,7 +22,10 @@ doesn't hold gets no button rather than a guess.
 
 ## Install
 
-Until it is on the Chrome Web Store:
+From the Chrome Web Store:
+[MarketBubbleSearch for X](https://chromewebstore.google.com/detail/marketbubblesearch-for-x/jhimkclbaiekgidpjiaggganflddejke).
+
+Or from this folder, to run what is here before the store has it:
 
 1. Download this folder (or the zip from the releases).
 2. Open `chrome://extensions` and turn on **Developer mode**.

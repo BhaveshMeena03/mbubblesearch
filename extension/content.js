@@ -32,20 +32,40 @@
     unknown: "This post isn't in the archive.",
     slow: "That took too long. Try again.",
     offline: "Couldn't reach search.lexthedev.com.",
+    stale: "The extension was updated. Refresh this page to use it.",
     failed: "Something went wrong. Try again."
   };
 
+  // An update, a reload or a removal leaves this script running in the tabs
+  // that were already open, with no extension behind it: chrome.runtime.id
+  // is gone and sendMessage throws. Only reloading the page brings the new
+  // one in, so that is what the reader is told (seen on x.com on 2 Nov
+  // 2026, where it read "Something went wrong").
+  function orphaned() {
+    try {
+      return !chrome.runtime || !chrome.runtime.id;
+    } catch (e) {
+      return true;
+    }
+  }
+
   function send(message) {
     return new Promise(function (resolve) {
+      if (orphaned()) {
+        resolve({ ok: false, code: "stale" });
+        return;
+      }
       try {
         chrome.runtime.sendMessage(message, function (reply) {
-          // A reloaded or removed extension leaves this script running with
-          // no one to talk to; that is a failure, not an exception.
-          if (chrome.runtime.lastError || !reply) resolve({ ok: false, code: "failed" });
-          else resolve(reply);
+          // With no one to talk to, that is a failure, not an exception.
+          if (chrome.runtime.lastError || !reply) {
+            resolve({ ok: false, code: orphaned() ? "stale" : "failed" });
+          } else {
+            resolve(reply);
+          }
         });
       } catch (e) {
-        resolve({ ok: false, code: "failed" });
+        resolve({ ok: false, code: orphaned() ? "stale" : "failed" });
       }
     });
   }

@@ -115,6 +115,7 @@ const CHROME_SHIM = `
   window.__sent = [];
   window.__replies = {};
   window.chrome = { runtime: {
+    id: "mbs-test",
     lastError: undefined,
     sendMessage(message, callback) {
       window.__sent.push(message);
@@ -371,6 +372,26 @@ test("the content script on an X-shaped page", { skip }, async t => {
       await button("ownquote").click();
       await tab.locator("#ownquote .panel .err", { hasText: "Something went wrong" }).waitFor();
       await tab.locator("#ownquote .panel .x").click();
+    });
+
+    await t.test("after the extension updates, the old script says to refresh", async () => {
+      // What an update leaves in a tab that was open: no id, and a
+      // sendMessage that throws.
+      await tab.evaluate(() => {
+        window.__send = window.chrome.runtime.sendMessage;
+        window.chrome.runtime.id = undefined;
+        window.chrome.runtime.sendMessage = () => {
+          throw new Error("Extension context invalidated.");
+        };
+      });
+      await button("ownquote").click();
+      await tab.locator("#ownquote .panel .err", { hasText: "Refresh this page" }).waitFor();
+      assert.equal(await tab.locator("#ownquote .panel .err", { hasText: "Something went wrong" }).count(), 0);
+      await tab.locator("#ownquote .panel .x").click();
+      await tab.evaluate(() => {
+        window.chrome.runtime.id = "mbs-test";
+        window.chrome.runtime.sendMessage = window.__send;
+      });
     });
 
     await t.test("the site link is the one built from the archive", async () => {

@@ -42,6 +42,12 @@ sourced from a Tesla interview.
 - **The X bot.** Tag [@mbubbleSearch](https://x.com/mbubbleSearch) with a
   question and it answers in public, with the quote and a link to the
   moment.
+- **On X itself.** The
+  [MarketBubbleSearch for X](https://chromewebstore.google.com/detail/marketbubblesearch-for-x/jhimkclbaiekgidpjiaggganflddejke)
+  Chrome extension puts a summary button under the shows' posts on X: the
+  summary, a box to ask about the recording, and every time plays at that
+  second in X's own player. On a clip it says which episode it is from.
+  The code is in [extension/](extension/).
 - **An open API.** JSON, no key, answers streamed as they are written.
   [llms.txt](https://search.lexthedev.com/llms.txt) says what is indexed and
   how to ask.
