@@ -80,6 +80,7 @@ SLICE = 90         # seconds of the broadcast listened to at each point
 # waiting on a stream that never sent another byte, and the rasmr
 # pairing run behind it never finished.
 HEAR_TIMEOUT = 300
+HEAR_TRIES = 2
 WITHIN = 5.0       # a run agrees if it is this close to the median
 ENOUGH = 20        # shared runs needed before a slice counts as evidence
 AGREE = 0.9        # and this share of them must agree
@@ -209,6 +210,14 @@ def stretches(found: list[tuple[int, float | None]]) -> list[dict] | None:
     one offset always did, unless a slice that was not the show stands
     before or after it. Between two stretches is where the clocks moved,
     somewhere in the minutes `chart` narrowed it to, so no link lands there.
+
+    It is the show only if two neighbouring slices, twenty minutes apart
+    or narrowed between, agree on one offset. Slices that each match on
+    their own, at a different offset every time, are a clip the show plays
+    over and over: on 29 Oct 2026 the looping intro MCG opens every show
+    with was heard four times near the end of the 28th's broadcast, and
+    four ninety-second stretches of the 29th's opening were stored as its
+    pair. Every link into the 29th then opened the 28th.
     """
     if sum(gap is not None for _, gap in found) < 2:
         return None
@@ -221,6 +230,8 @@ def stretches(found: list[tuple[int, float | None]]) -> list[dict] | None:
             runs[-1].append((at, gap))
         else:
             runs.append([(at, gap)])
+    if not any(len(run) >= 2 for run in runs):
+        return None
     out = []
     for run in runs:
         shift = round(statistics.median(gap for _, gap in run))
@@ -252,22 +263,33 @@ def hear(broadcast: str, at: int, work: Path) -> list[dict]:
     from scripts.ingest_mcg import groq_key, transcribe_via_groq
 
     target = work / f"x_{at}.mp3"
-    # Its own process group, so a timeout takes ffmpeg down with yt-dlp.
-    # Killing only yt-dlp left the ffmpeg under it running, still holding
-    # the connection, after the run that started it was gone.
-    proc = subprocess.Popen(
-        [str(ROOT / ".venv" / "bin" / "yt-dlp"), "--no-warnings", "-q",
-         "-f", "bestaudio/worst", "--download-sections", f"*{at}-{at + SLICE}",
-         "-x", "--audio-format", "mp3", "--audio-quality", "7",
-         "-o", str(work / f"x_{at}.%(ext)s"), broadcast],
-        stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
-        start_new_session=True)
-    try:
-        _, stderr = proc.communicate(timeout=HEAR_TIMEOUT)
-    except subprocess.TimeoutExpired:
-        os.killpg(proc.pid, signal.SIGKILL)
-        proc.communicate()
-        raise RuntimeError(f"no audio from {at}s after {HEAR_TIMEOUT}s") from None
+    # A stall is X's replay, not the show, and it passes: on 2 Nov 2026
+    # the 29 and 30 Oct broadcasts both stalled at 2400s in the morning
+    # job and were heard whole by hand an hour later. So a stalled slice
+    # is fetched once more before the show is given up on.
+    for _ in range(HEAR_TRIES):
+        for left in work.glob(f"x_{at}.*"):
+            left.unlink()
+        # Its own process group, so a timeout takes ffmpeg down with
+        # yt-dlp. Killing only yt-dlp left the ffmpeg under it running,
+        # still holding the connection, after the run that started it
+        # was gone.
+        proc = subprocess.Popen(
+            [str(ROOT / ".venv" / "bin" / "yt-dlp"), "--no-warnings", "-q",
+             "-f", "bestaudio/worst", "--download-sections", f"*{at}-{at + SLICE}",
+             "-x", "--audio-format", "mp3", "--audio-quality", "7",
+             "-o", str(work / f"x_{at}.%(ext)s"), broadcast],
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
+            start_new_session=True)
+        try:
+            _, stderr = proc.communicate(timeout=HEAR_TIMEOUT)
+            break
+        except subprocess.TimeoutExpired:
+            os.killpg(proc.pid, signal.SIGKILL)
+            proc.communicate()
+    else:
+        raise RuntimeError(f"no audio from {at}s after {HEAR_TIMEOUT}s, "
+                           f"{HEAR_TRIES} times") from None
     if not target.exists():
         raise RuntimeError((stderr.strip().splitlines() or ["no audio"])[-1][:200])
     return transcribe_via_groq(target, groq_key())

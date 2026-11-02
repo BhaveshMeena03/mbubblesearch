@@ -239,6 +239,15 @@ def test_one_slice_that_matches_is_not_enough_to_call_it_the_show():
     assert stretches([(1200, None), (9000, None)]) is None
 
 
+def test_a_clip_heard_again_and_again_at_new_offsets_is_not_the_show():
+    """29 Oct 2026: MCG's looping intro, heard four times near the end of
+    the 28th's broadcast, each at its own offset, was stored as the 29th's
+    pair. No two neighbouring slices agreed; that is not the show."""
+    found = [(1200, None), (2400, None), (11700, 11698.0), (12000, 11998.0),
+             (12316, 12314.0), (12632, 12630.0)]
+    assert stretches(found) is None
+
+
 def test_a_show_heard_as_something_else_at_the_start_does_not_open_at_zero():
     sections = stretches([(1200, None), (2400, -3.0), (3600, -3.0)])
     assert sections == [{"from": 2403, "to": None, "offset": -3}]
@@ -336,5 +345,42 @@ def test_a_stalled_download_is_given_up_on_and_takes_ffmpeg_with_it(tmp_path, mo
     monkeypatch.setattr(pair.os, "killpg", lambda pid, sig: killed.append((pid, sig)))
     with pytest.raises(RuntimeError, match="no audio"):
         pair.hear("https://x.com/i/broadcasts/abc", 600, tmp_path)
-    assert killed == [(4242, signal.SIGKILL)]
-    assert pair.HEAR_TIMEOUT <= 600
+    assert killed == [(4242, signal.SIGKILL)] * pair.HEAR_TRIES, "every try is killed whole"
+    assert pair.HEAR_TIMEOUT <= 600 and pair.HEAR_TRIES == 2
+
+
+def test_a_slice_that_stalls_once_is_fetched_again(tmp_path, monkeypatch):
+    """2 Nov 2026: the 29 and 30 Oct broadcasts stalled at 2400s in the
+    morning job and were heard whole by hand an hour later. One stall no
+    longer costs the whole show."""
+    import subprocess
+
+    import scripts.ingest_mcg as ingest
+    import scripts.pair_mcg_broadcasts as pair
+
+    tries = []
+
+    class Flaky:
+        pid = 4242
+
+        def __init__(self, cmd, **kwargs):
+            tries.append(cmd)
+            self.out = cmd[cmd.index("-o") + 1].replace("%(ext)s", "mp3")
+
+        def communicate(self, timeout=None):
+            if len(tries) == 1 and timeout:
+                (tmp_path / "x_600.mp3.part").write_text("half")
+                raise subprocess.TimeoutExpired("yt-dlp", timeout)
+            if len(tries) > 1:
+                Path(self.out).write_text("audio")
+            return "", ""
+
+    monkeypatch.setattr(pair.subprocess, "Popen", Flaky)
+    monkeypatch.setattr(pair.os, "killpg", lambda pid, sig: None)
+    monkeypatch.setattr(ingest, "groq_key", lambda: "k")
+    monkeypatch.setattr(ingest, "transcribe_via_groq",
+                        lambda path, key: [{"start": 0, "end": 8, "text": "heard"}])
+    assert pair.hear("https://x.com/i/broadcasts/abc", 600, tmp_path) == \
+        [{"start": 0, "end": 8, "text": "heard"}]
+    assert len(tries) == 2
+    assert not (tmp_path / "x_600.mp3.part").exists(), "the half fetch is not resumed"
