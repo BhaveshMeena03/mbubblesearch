@@ -13,6 +13,7 @@ data/.asset_cache/
 # back out (app/local_cache.py). Refilled by scripts/seed_local_caches.py.
 data/.hits_cache/
 data/.windows_cache/
+data/.lines_cache/
 # What the model proposed for the calls board, per show. Regenerable.
 data/.calls_cache/
 

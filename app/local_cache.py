@@ -24,6 +24,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 HITS = ROOT / "data" / ".hits_cache"
 WINDOWS = ROOT / "data" / ".windows_cache"
+LINES = ROOT / "data" / ".lines_cache"
 
 
 def _safe(episode_id: str) -> str:
@@ -80,9 +81,32 @@ def load_windows(archive: str, episode_id: str) -> list[dict]:
     return json.loads(gzip.decompress(path.read_bytes()))
 
 
+# --- lines: one episode's transcript, every line with its second ---------
+
+def put_lines(archive: str, episode_id: str, lines: list[dict]) -> Path:
+    """lines: [{"t", "text"}], as mcg_transcript.rebuild gives them back.
+    The windows above hold the text without the times, and placing a clip
+    needs the times."""
+    folder = LINES / archive
+    folder.mkdir(parents=True, exist_ok=True)
+    path = folder / f"{_safe(episode_id)}.json.gz"
+    path.write_bytes(gzip.compress(
+        json.dumps(lines, separators=(",", ":")).encode(), mtime=0))
+    return path
+
+
+def load_lines(archive: str, episode_id: str) -> list[dict] | None:
+    """None when this Mac has never read them, so the caller knows to."""
+    path = LINES / archive / f"{_safe(episode_id)}.json.gz"
+    if not path.is_file():
+        return None
+    return json.loads(gzip.decompress(path.read_bytes()))
+
+
 def forget(archive: str, episode_id: str) -> None:
     """An episode taken out of the index comes out of here too, or a
     re-transcription would sit beside its own broken copy."""
     for path in (HITS / archive / f"{_safe(episode_id)}.json",
-                 WINDOWS / archive / f"{_safe(episode_id)}.json.gz"):
+                 WINDOWS / archive / f"{_safe(episode_id)}.json.gz",
+                 LINES / archive / f"{_safe(episode_id)}.json.gz"):
         path.unlink(missing_ok=True)

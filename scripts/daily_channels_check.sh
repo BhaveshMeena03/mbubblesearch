@@ -154,12 +154,14 @@ echo "-- threadguy notes"
 echo "-- threadguy on x"
 .venv/bin/python -u scripts/pair_threadguy_broadcasts.py --search || status=1
 
-# Clips of the shows posted on X by Ansem, Market Bubble, us and the
-# clippers in x_posts.CLIP_ACCOUNTS,
+# Clips of the shows posted on X by Ansem, Market Bubble, MCG Live,
+# ThreadGuy, us and the clippers in x_posts.CLIP_ACCOUNTS,
 # placed in the archive so the extension can say where each is from and
 # what was said after it. One X search for their new video posts (about
-# half a cent each, around 25 a day), then X's own captions, which are
-# free.
+# half a cent each, around 35 a day), then X's own captions, which are
+# free. After the MCG and ThreadGuy ingests above, so a clip of this
+# morning's show finds it; each new show's lines are read back from
+# Pinecone once, about half a megabyte.
 echo "-- clips on x"
 .venv/bin/python -u scripts/place_x_clips.py --search || status=1
 

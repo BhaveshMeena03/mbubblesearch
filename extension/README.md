@@ -14,11 +14,12 @@ X can't open a posted video at a time from a link. The extension sets the player
 so 1:39:33 lands on 1:39:33.
 
 It also works on our own posts that link a show at a second, on X or YouTube: the button names the
-moment and the show, with its summary and the ask box, and opens it on X wherever the show aired there. And it works on clips. Ansem posts a minute of the show several times a day; for each one the
-archive holds, the button says where it is from ("Episode 24, 1:39:53 to 1:41:12"), shows what was
-said just before it and right after the cut, and links to the full show at that second. Clips are
-placed ahead of time by `scripts/place_x_clips.py`, from X's own captions, so a clip the archive
-doesn't hold gets no button rather than a guess.
+moment and the show, with its summary and the ask box, and opens it on X wherever the show aired there. And it works on clips. Ansem posts a minute of the show several times a day, and MCG Live
+clips its own show about ten times a day; for each one the archive holds, the button says where it
+is from ("Episode 24, 1:39:53 to 1:41:12"), shows what was said just before it and right after the
+cut, and links to the full show at that second, on X where the show aired there. Clips are placed
+ahead of time by `scripts/place_x_clips.py`, from X's own captions, so a clip the archive doesn't
+hold gets no button rather than a guess.
 
 ## Install
 

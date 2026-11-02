@@ -51,6 +51,8 @@ YT_MB_POST = "2103226841083564495"       # ours, before October: Episode 24's up
 YT_TG_POST = "2116000000000000020"       # a YouTube link to a show paired with X
 YT_MCG_POST = "2116000000000000021"      # a YouTube link to a show never paired
 YT_YOUTUBE_EP = "2116000000000000022"    # a Market Bubble episode held only from YouTube
+TG_CLIP = "2116000000000000030"          # ThreadGuy's clip of his 30 Oct open, paired with X
+MCG_CLIP = "2116000000000000031"         # MCG's clip of a show never on X
 
 
 # --- the shelf -------------------------------------------------------------
@@ -118,7 +120,17 @@ def files(tmp_path, monkeypatch):
                                 "after_at": -5},
         "not-a-post": {"archive": "podcast", "episode_id": EP24, "start": 1, "end": 2},
         "2116000000000000009": {"account": "someclipper", "archive": "podcast",
-                                "episode_id": EP24, "start": 5993, "end": 6072}}))
+                                "episode_id": EP24, "start": 5993, "end": 6072},
+        TG_CLIP: {"account": "notthreadguy", "archive": "threadguy", "episode_id": "EOkDv8qm8ik",
+                  "start": 590, "end": 640, "before": "b", "after": "a", "after_at": 645},
+        MCG_CLIP: {"account": "MCGlive", "archive": "mcg", "episode_id": "pwhvqgCGV0w",
+                   "start": 754, "end": 800, "before": "b", "after": "a", "after_at": 802},
+        "2116000000000000032": {"account": "MCGlive", "archive": "mcg",
+                                "episode_id": "EOkDv8qm8ik", "start": 1, "end": 2},
+        "2116000000000000033": {"account": "MCGlive", "archive": "mcg",
+                                "episode_id": "notOnShelf1", "start": 1, "end": 2},
+        "2116000000000000034": {"account": "MCGlive", "archive": "rasmr",
+                                "episode_id": "2bev0UDp79Y", "start": 1, "end": 2}}))
     with gzip.open(tmp_path / "mcg_summaries.json.gz", "wt") as fh:
         json.dump({"2NK_MBlFvtM": {"tldr": "Bitcoin held 75.2K.", "model": "m", "pinned": True,
                                    "topics": [{"t": 249, "text": "the chart"},
@@ -368,6 +380,36 @@ def test_a_clip_of_a_youtube_copy_opens_youtube_at_the_second(files):
     row = x_posts.describe("2116000000000000001")
     assert row["clip"]["watch"] == "https://www.youtube.com/watch?v=KcazozbZHd0&t=60s"
     assert row["clip"]["after_at"] is None and row["clip"]["after_watch"] is None
+
+
+def test_a_threadguy_clip_opens_his_show_on_x_through_the_pair(files):
+    """Indexed from YouTube, so the clip's seconds are YouTube's; the show
+    aired on X too, three seconds behind, and opens there."""
+    row = x_posts.describe(TG_CLIP)
+    assert (row["kind"], row["archive_name"]) == ("clip", "ThreadGuy")
+    assert row["title"].startswith("MARKET OPEN") and row["published_at"] == "2026-10-30"
+    on_x = "https://x.com/i/broadcasts/1pJdRDqeOYnKW"
+    assert row["clip"]["watch"] == f"{on_x}?t=587" and row["clip"]["seeks"] is True
+    assert row["clip"]["after_watch"] == f"{on_x}?t=642"
+    assert row["times"] == {"0:10:00": 10}, "inside the clip, its own second"
+    assert row["links"] == {"0:10:00": f"{on_x}?t=597",
+                            "0:00:01": "https://www.youtube.com/watch?v=EOkDv8qm8ik&t=1s"}, \
+        "said before X began: YouTube, at the same words"
+    assert x_posts.listing()[TG_CLIP] == "threadguy"
+
+
+def test_an_mcg_clip_of_a_show_never_on_x_opens_youtube(files):
+    row = x_posts.describe(MCG_CLIP)
+    assert (row["archive_name"], row["title"]) == ("MCG Live", "This Trader Caught $ORBIO")
+    assert row["clip"]["watch"] == "https://www.youtube.com/watch?v=pwhvqgCGV0w&t=754s"
+    assert row["clip"]["after_watch"] == "https://www.youtube.com/watch?v=pwhvqgCGV0w&t=802s"
+
+
+def test_a_clip_is_only_shown_from_a_show_its_own_archive_holds(files):
+    shelf = x_posts.shelf()
+    assert "2116000000000000032" not in shelf, "ThreadGuy's show, filed as MCG's"
+    assert "2116000000000000033" not in shelf, "a show the archive doesn't hold"
+    assert "2116000000000000034" not in shelf, "rasmr's streams aren't placed as clips"
 
 
 def test_a_clip_of_an_uploaded_video_promises_no_second_it_cannot_open(files):

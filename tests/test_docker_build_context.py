@@ -142,6 +142,7 @@ _NOT_SHIPPED = {
     # site serves the committed reports instead.
     ".hits_cache": "laptop only; the site serves the committed reports",
     ".windows_cache": "laptop only; the exact-word index is built on the laptop",
+    ".lines_cache": "laptop only; clips are placed on the laptop and shipped in x_clips.json",
     "episodes.json": "shipped gzipped as episodes.json.gz",
     "elon_episodes.json": "shipped gzipped as elon_episodes.json.gz",
     "tradfi_episodes.json": "shipped gzipped as tradfi_episodes.json.gz",

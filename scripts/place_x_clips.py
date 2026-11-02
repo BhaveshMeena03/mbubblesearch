@@ -24,7 +24,11 @@ archive has the rest. For each post this:
      among them. Those are heard instead: the clip's audio, a minute or
      two, through Groq's Whisper, the archive's own transcriber.
   2. places it with app.clipmatch, the same unique eight-word runs the bot
-     was going to use, against every episode in data/episodes.json.
+     was going to use, against every episode in data/episodes.json, and
+     against the MCG Live and ThreadGuy shows of the week before the post.
+     Those two archives keep their lines only in Pinecone, so each show is
+     read back once (app.mcg_transcript.rebuild, one metadata query) and
+     kept on this Mac (app.local_cache), never read twice.
   3. keeps what was said just before the clip and just after it, and
      writes the lot to data/x_clips.json, which the service ships.
 
@@ -52,13 +56,19 @@ import subprocess
 import sys
 import tempfile
 import time
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from app import clipmatch, episode_store, x_posts  # noqa: E402
+from app import (  # noqa: E402
+    clipmatch,
+    episode_store,
+    local_cache,
+    mcg_transcript,
+    x_posts,
+)
 
 OUT = ROOT / "data" / "x_clips.json"
 SEARCHED = ROOT / "data" / "x_clips_search.json"
@@ -74,6 +84,94 @@ BEFORE_SECONDS, BEFORE_WORDS = 30, 70
 AFTER_SECONDS, AFTER_WORDS = 90, 230
 
 PAUSE_SECONDS = 2.0
+
+# MCG Live and ThreadGuy: the shows a clip is matched against, and the X
+# pairs that say which of them aired on X. A clip goes up within days of
+# its show; a week back, and a day ahead for time zones.
+SHOWS = {"mcg": ROOT / "data" / "mcg_index.json",
+         "threadguy": ROOT / "data" / "threadguy_index.json"}
+PAIRS = {"mcg": ROOT / "data" / "mcg_broadcast_links.json",
+         "threadguy": ROOT / "data" / "threadguy_broadcast_links.json"}
+LOOKBACK_DAYS = 7
+X_EPOCH_MS = 1288834974657
+
+
+def posted_on(post: str) -> date:
+    """The day a post went up, from its id: X ids carry their own time."""
+    return datetime.fromtimestamp(((int(post) >> 22) + X_EPOCH_MS) / 1000, UTC).date()
+
+
+def _json_rows(path: Path) -> list[dict]:
+    rows = json.loads(path.read_text()) if path.exists() else []
+    rows = rows if isinstance(rows, list) else rows.get("episodes", [])
+    return [r for r in rows if isinstance(r, dict) and r.get("id")]
+
+
+class Shows:
+    """The MCG Live and ThreadGuy shows a clip could be from, with their
+    lines, read from the index only the first time one is asked for."""
+
+    def __init__(self) -> None:
+        self.rows = {archive: _json_rows(path) for archive, path in SHOWS.items()}
+        self.paired = {video for path in PAIRS.values() if path.exists()
+                       for video, pair in json.loads(path.read_text()).items()
+                       if isinstance(pair, dict) and pair.get("broadcast")
+                       and (pair.get("sections") or "offset" in pair)}
+        self.unread: set[str] = set()
+        self.missed = False             # a show the last before() needed was unreadable
+        self._lines: dict[tuple[str, str], list[dict]] = {}
+        self._index: dict[str, object] = {}
+
+    def before(self, day: date) -> list[dict]:
+        """Every show of the week up to `day`, as clipmatch wants them."""
+        lo = (day - timedelta(days=LOOKBACK_DAYS)).isoformat()
+        hi = (day + timedelta(days=1)).isoformat()
+        out = []
+        for archive, rows in self.rows.items():
+            for row in rows:
+                if not lo <= str(row.get("published_at") or "")[:10] <= hi:
+                    continue
+                lines = self.lines(archive, str(row["id"]))
+                self.missed |= str(row["id"]) in self.unread
+                if lines:
+                    out.append({"episode_id": str(row["id"]), "title": row.get("title", ""),
+                                "archive": archive, "segments": lines})
+        return out
+
+    def lines(self, archive: str, video: str) -> list[dict]:
+        key = (archive, video)
+        if key not in self._lines:
+            got = local_cache.load_lines(archive, video)
+            if got is None:
+                try:
+                    got = self._read(archive, video)
+                except Exception as exc:                        # noqa: BLE001
+                    from app.config import redact
+                    self.unread.add(video)
+                    print(f"     {archive} {video} could not be read: "
+                          f"{type(exc).__name__}: {redact(str(exc))[:120]}")
+                    got = []
+                else:
+                    if got:
+                        local_cache.put_lines(archive, video, got)
+            self._lines[key] = got
+        return self._lines[key]
+
+    def _read(self, archive: str, video: str) -> list[dict]:
+        from app.config import get_settings
+        from app.podcast import PodcastIndex
+
+        settings = get_settings()
+        namespace = settings.mcg_namespace if archive == "mcg" else settings.threadguy_namespace
+        if archive not in self._index:
+            # MCG has an index of its own; ThreadGuy is a namespace in the
+            # default one, the same split summarize_mcg.py and
+            # summarize_threadguy.py open them with.
+            self._index[archive] = (
+                PodcastIndex(namespace=namespace, index_name=settings.mcg_pinecone_index).index
+                if archive == "mcg" else PodcastIndex(namespace=namespace).index)
+        return mcg_transcript.rebuild(self._index[archive], namespace,
+                                      settings.embedding_dimension, video)
 
 
 def caption_text(vtt: str) -> str:
@@ -92,17 +190,21 @@ def caption_text(vtt: str) -> str:
     return " ".join(w for w in out if w)
 
 
-def choose(found: list[dict]) -> dict | None:
+def choose(found: list[dict], paired: set[str] = frozenset()) -> dict | None:
     """Which copy of the show to point at.
 
     Every candidate passed both of clipmatch's gates, so they are the same
     tape held twice (see clipmatch.candidates). The copy indexed from X
     wins: its times open the X broadcast at the second, where the show
-    aired. YouTube only when X has no copy.
+    aired. Then a YouTube show paired with its X broadcast, over a cut of
+    it uploaded on its own: MCG posts each interview that way, so a clip
+    of one matches the daily show and the cut alike. YouTube only when X
+    has no copy.
     """
     if not found:
         return None
-    on_x = [c for c in found if c["episode_id"].startswith("x-")]
+    on_x = ([c for c in found if c["episode_id"].startswith("x-")]
+            or [c for c in found if c["episode_id"] in paired])
     return (on_x or found)[0]
 
 
@@ -211,8 +313,13 @@ def listen(post: str, workdir: Path) -> str:
         return ""
 
 
-def place_one(post: str, got: dict, episodes: list[dict]) -> tuple[dict | None, str]:
-    """(the entry for x_clips.json, or None; what happened, for the log)."""
+def place_one(post: str, got: dict, episodes, paired: set[str] = frozenset()
+              ) -> tuple[dict | None, str]:
+    """(the entry for x_clips.json, or None; what happened, for the log).
+
+    `episodes` is the list, or a function giving it, called only once the
+    post is known to be a clip worth placing, so a broadcast or a stranger's
+    post never costs a read of the index."""
     if got.get("error"):
         return None, got["error"]
     if not x_posts.clip_account(got.get("account")):
@@ -226,17 +333,18 @@ def place_one(post: str, got: dict, episodes: list[dict]) -> tuple[dict | None, 
         return None, f"{duration / 60:.0f} minutes long, a whole recording rather than a clip"
     if not got.get("caption"):
         return None, "no captions on X, and its audio could not be heard"
-    found = clipmatch.candidates(got["caption"], episodes, duration)
-    best = choose(found)
+    pool = episodes() if callable(episodes) else episodes
+    found = clipmatch.candidates(got["caption"], pool, duration)
+    best = choose(found, paired)
     if best is None:
         return None, "not in the archive"
-    episode = next(e for e in episodes if e.get("episode_id") == best["episode_id"])
+    episode = next(e for e in pool if e.get("episode_id") == best["episode_id"])
     where = context(episode, got["caption"], best["start"], duration)
     if where is None:
         return None, "placed, but its words could not be lined up"
     entry = {
         "account": got.get("account", ""),
-        "archive": "podcast",
+        "archive": episode.get("archive", "podcast"),
         "episode_id": best["episode_id"],
         **where,
         "duration": round(duration, 1),
@@ -318,7 +426,8 @@ def main() -> None:
     if bad:
         sys.exit(f"not post ids: {bad[:5]}")
 
-    episodes = episode_store.load()
+    episodes = [dict(e, archive="podcast") for e in episode_store.load()]
+    shows = Shows()
     clips = json.loads(OUT.read_text()) if OUT.exists() else {}
     placed = 0
     with tempfile.TemporaryDirectory() as tmp:
@@ -328,15 +437,18 @@ def main() -> None:
             got = fetch(post, Path(tmp))
             if needs_ears(got):
                 got["caption"], got["heard"] = listen(post, Path(tmp)), True
-            entry, said = place_one(post, got, episodes)
+            shows.missed = False
+            entry, said = place_one(
+                post, got, lambda post=post: episodes + shows.before(posted_on(post)), shows.paired)
             print(f"{post}  {said}")
             if entry:
                 clips[post] = entry
                 placed += 1
-            elif not got.get("error"):
+            elif not got.get("error") and not shows.missed:
                 # Placed before and not now means the archive changed under
                 # it; an old answer must not outlive the reason for it. A
-                # failed download says nothing either way, so it keeps it.
+                # failed download, or a show that could not be read, says
+                # nothing either way, so it keeps it.
                 clips.pop(post, None)
     OUT.write_text(json.dumps(dict(sorted(clips.items())), indent=1, ensure_ascii=False) + "\n")
     if newest:

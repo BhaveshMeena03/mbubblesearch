@@ -30,6 +30,27 @@ ELSEWHERE = {"episode_id": "x-1", "title": "another show",
 # A clip that starts and stops in the middle of segments: words 103 to 157.
 CLIP = " ".join(WORDS[103:158])
 
+# MCG Live's daily show on YouTube, paired with its X broadcast, and the
+# interview MCG cut from it and uploaded on its own: the same words twice.
+DAILY = {**EPISODE, "episode_id": "XB71vFeU2zA", "title": "LIVE: Largest Crypto Hack Ever",
+         "archive": "mcg"}
+CUT = {**EPISODE, "episode_id": "zqOYgV9pXxI", "title": "Former Robinhood Employee",
+       "archive": "mcg"}
+
+
+@pytest.fixture(autouse=True)
+def offline(tmp_path, monkeypatch):
+    """No test here reads Pinecone: MCG Live's and ThreadGuy's shelves are
+    empty unless a test writes one, and a read of the index fails loudly."""
+    monkeypatch.setattr(place, "SHOWS", {"mcg": tmp_path / "no_mcg.json",
+                                         "threadguy": tmp_path / "no_tg.json"})
+    monkeypatch.setattr(place, "PAIRS", {"mcg": tmp_path / "no_mcg_pairs.json"})
+    monkeypatch.setattr(place.local_cache, "LINES", tmp_path / "lines")
+
+    def no_reads(*args):
+        raise AssertionError("read the index in a test")
+    monkeypatch.setattr(place.mcg_transcript, "rebuild", no_reads)
+
 
 # X's own track for a real clip, 31 Oct 2026, shortened.
 VTT = """WEBVTT
@@ -58,6 +79,15 @@ def test_the_copy_on_x_is_pointed_at_over_the_youtube_one():
     assert place.choose(found)["episode_id"] == "x-2113369914467864972"
     assert place.choose(found[:1])["episode_id"] == "KcazozbZHd0"
     assert place.choose([]) is None
+
+
+def test_the_show_that_aired_on_x_is_pointed_at_over_a_cut_of_it():
+    found = [{"episode_id": "zqOYgV9pXxI", "matches": 200},
+             {"episode_id": "XB71vFeU2zA", "matches": 150}]
+    assert place.choose(found, {"XB71vFeU2zA"})["episode_id"] == "XB71vFeU2zA"
+    assert place.choose(found)["episode_id"] == "zqOYgV9pXxI", "neither on X: the strongest"
+    on_x = found + [{"episode_id": "x-2116199181912285508", "matches": 90}]
+    assert place.choose(on_x, {"XB71vFeU2zA"})["episode_id"] == "x-2116199181912285508"
 
 
 def test_a_clip_begins_and_ends_on_its_own_words():
@@ -113,6 +143,82 @@ def test_a_clip_is_placed_with_where_it_sits_and_both_sides():
     assert entry["account"] == "blknoiz06" and "0:00:40" in why
 
 
+def test_an_mcg_clip_is_placed_on_the_show_that_aired_on_x():
+    entry, why = place.place_one("2116528233193886171", _got(account="MCGlive"),
+                                 [CUT, DAILY, ELSEWHERE], {"XB71vFeU2zA"})
+    assert entry["archive"] == "mcg" and entry["episode_id"] == "XB71vFeU2zA"
+    assert entry["copies"] == 2 and entry["account"] == "MCGlive"
+    assert (entry["start"], entry["end"]) == (40, 60)
+
+
+def test_what_is_not_a_clip_never_costs_a_read_of_the_index():
+    def shows():
+        raise AssertionError("asked for the shows")
+    for got in ({"error": "X would not give the post: 404"}, _got(account="someclipper"),
+                _got(broadcast=True), _got(duration=2729.0), _got(caption="")):
+        entry, _ = place.place_one("2116528233193886171", got, shows)
+        assert entry is None
+
+
+def test_a_post_id_says_the_day_it_went_up():
+    assert place.posted_on("2116199181912285508").isoformat() == "2026-10-30"
+    assert place.posted_on("2117301468357177471").isoformat() == "2026-11-02"
+
+
+def _shelf(tmp_path, monkeypatch, rows, pairs=None):
+    (tmp_path / "mcg.json").write_text(json.dumps(rows))
+    (tmp_path / "mcg_pairs.json").write_text(json.dumps(pairs or {}))
+    monkeypatch.setattr(place, "SHOWS", {"mcg": tmp_path / "mcg.json"})
+    monkeypatch.setattr(place, "PAIRS", {"mcg": tmp_path / "mcg_pairs.json"})
+
+
+def test_only_the_week_before_a_clip_is_read_and_each_show_only_once(tmp_path, monkeypatch):
+    _shelf(tmp_path, monkeypatch, [
+        {"id": "XB71vFeU2zA", "title": "30 Oct", "published_at": "2026-10-30"},
+        {"id": "oldShow0001", "title": "a month back", "published_at": "2026-10-01"},
+        {"id": "nextWeek001", "title": "after the clip", "published_at": "2026-11-09"}],
+        {"XB71vFeU2zA": {"broadcast": "https://x.com/i/broadcasts/1oKMvNPOzejGQ",
+                         "offset": -2, "post": "2116199181912285508"},
+         "unclocked01": {"broadcast": "https://x.com/i/broadcasts/1abc"}})
+    read = []
+
+    def rebuild(index, namespace, dimension, video):
+        read.append(video)
+        return DAILY["segments"]
+    monkeypatch.setattr(place.mcg_transcript, "rebuild", rebuild)
+    monkeypatch.setattr(place.Shows, "_read",
+                        lambda self, archive, video: rebuild(None, "", 0, video))
+    shows = place.Shows()
+    assert shows.paired == {"XB71vFeU2zA"}, "paired means a broadcast and a clock"
+    got = shows.before(place.posted_on("2116528233193886171"))           # 31 Oct
+    assert [(e["episode_id"], e["archive"]) for e in got] == [("XB71vFeU2zA", "mcg")]
+    shows.before(place.posted_on("2116528233193886171"))
+    assert read == ["XB71vFeU2zA"], "read once a run"
+    again = place.Shows().before(place.posted_on("2116528233193886171"))
+    assert read == ["XB71vFeU2zA"], "and kept on this Mac after that"
+    assert again[0]["segments"] == DAILY["segments"]
+
+
+def test_a_show_that_cannot_be_read_is_not_kept_and_takes_no_placement_away(tmp_path, monkeypatch):
+    _shelf(tmp_path, monkeypatch, [
+        {"id": "XB71vFeU2zA", "title": "30 Oct", "published_at": "2026-10-30"}])
+
+    def down(self, archive, video):
+        raise ConnectionError("pinecone is down, key=pcsk_secret")
+    monkeypatch.setattr(place.Shows, "_read", down)
+    out = tmp_path / "x_clips.json"
+    out.write_text(json.dumps({"2116528233193886171": {"old": True}}))
+    monkeypatch.setattr(place, "OUT", out)
+    monkeypatch.setattr(place, "PAUSE_SECONDS", 0)
+    monkeypatch.setattr(place, "fetch", lambda post, workdir: _got(account="MCGlive",
+                                                                     caption="not ours " * 9))
+    monkeypatch.setattr(place.episode_store, "load", lambda: [EPISODE])
+    monkeypatch.setattr(sys, "argv", ["place_x_clips.py", "2116528233193886171"])
+    place.main()
+    assert json.loads(out.read_text()) == {"2116528233193886171": {"old": True}}
+    assert place.local_cache.load_lines("mcg", "XB71vFeU2zA") is None
+
+
 def test_a_run_keeps_old_placements_through_a_failed_download(tmp_path, monkeypatch):
     out = tmp_path / "x_clips.json"
     out.write_text(json.dumps({"2000000000000000001": {"old": True},
@@ -142,7 +248,7 @@ def test_only_post_ids_are_taken(monkeypatch):
 def test_the_clip_accounts_are_read_without_regard_to_case():
     from app import x_posts
     for handle in ("blknoiz06", "MarketBubble", "mbubbleSearch", "Kaiz_294", "KAIZ_294",
-                   "OrderBookShow", "BullClips", "insentosprime"):
+                   "MCGlive", "notthreadguy", "OrderBookShow", "BullClips", "insentosprime"):
         assert x_posts.clip_account(handle), handle
     for handle in ("kaiz294", "someclipper", "", None, 7):
         assert not x_posts.clip_account(handle), handle

@@ -20,11 +20,12 @@ Three kinds of post, all from files the service already ships:
                        as "x-<post>" like Market Bubble's.
 
 And two that are not a whole recording. Clips: Ansem posts a minute
-of Market Bubble or of his own videos several times a day. Each one
-placed in the archive by its own words (scripts/place_x_clips.py, written
-to data/x_clips.json) gets a panel saying where it is from and what was
-said right after the cut. A time inside the clip moves the clip's player;
-any other opens the whole show at that second. And link posts: ours,
+of Market Bubble or of his own videos several times a day, and MCG Live
+clips its own show about ten times. Each one placed in the archive by its
+own words (scripts/place_x_clips.py, written to data/x_clips.json) gets a
+panel saying where it is from and what was said right after the cut. A
+time inside the clip moves the clip's player; any other opens the whole
+show at that second, on X where it aired there. And link posts: ours,
 which link a show at the second rather than upload a clip, its X
 broadcast since October and its YouTube copy before (scripts/place_x_links.py
 reads the second off each link, written to data/x_links.json). The panel
@@ -93,8 +94,16 @@ SEEKS = re.compile(
 # The clippers were found on 2 Nov 2026 by testing every show-related video
 # from a week of X search against the archive: OrderBookShow had 4 that
 # matched, BullClips and insentosprime 1 each, all clip accounts by trade.
+# MCG Live and ThreadGuy, on 3 Nov 2026: MCG's profile is mostly clips of
+# its own show, about ten a day, and none had a button.
 CLIP_ACCOUNTS = frozenset({"blknoiz06", "marketbubble", "mbubblesearch", "kaiz_294",
+                           "mcglive", "notthreadguy",
                            "orderbookshow", "bullclips", "insentosprime"})
+
+# The archives a clip can be placed in. Market Bubble's episodes ship with
+# their lines; MCG Live's and ThreadGuy's are read back per show by the
+# script that places clips.
+CLIP_ARCHIVES = ("podcast", "mcg", "threadguy")
 
 
 def clip_account(handle) -> bool:
@@ -207,7 +216,7 @@ def _clips() -> dict[str, dict]:
             continue
         start, end = _second(row.get("start")), _second(row.get("end"))
         after_at = row.get("after_at")
-        if (row.get("archive") != "podcast" or not clip_account(row.get("account"))
+        if (row.get("archive") not in CLIP_ARCHIVES or not clip_account(row.get("account"))
                 or not EPISODE_ID.fullmatch(str(row.get("episode_id", "")))
                 or start is None or end is None or end < start
                 or (after_at is not None and _second(after_at) is None)
@@ -215,7 +224,8 @@ def _clips() -> dict[str, dict]:
                 or not isinstance(row.get("after", ""), str)):
             logger.warning("x posts: clip %s is malformed, left out", post)
             continue
-        out[str(post)] = {"episode_id": row["episode_id"], "start": start, "end": end,
+        out[str(post)] = {"archive": row["archive"],
+                          "episode_id": row["episode_id"], "start": start, "end": end,
                           "before": row.get("before", "")[:1500],
                           "after": row.get("after", "")[:3000],
                           "after_at": after_at}
@@ -274,16 +284,29 @@ def shelf() -> dict[str, dict]:
 
     # Clips, and never over a post that is a whole recording: that one
     # gets the whole recording's panel.
+    shows = _broadcasts()
+    on_x = {show["episode_id"]: show for show in shows.values()}
     for post, clip in _clips().items():
-        if post not in posts:
-            posts[post] = {"archive": "podcast", "episode_id": clip["episode_id"],
-                           "kind": "clip", "clock": {}, "clip": clip}
+        if post in posts:
+            continue
+        episode_id = clip["episode_id"]
+        row = {"archive": clip["archive"], "episode_id": episode_id,
+               "kind": "clip", "clock": {}, "clip": clip}
+        if clip["archive"] != "podcast":
+            # Indexed from YouTube, so the clip's seconds are YouTube's;
+            # the whole show opens on X through the pair where it aired.
+            if held.get(episode_id, ("",))[0] != clip["archive"]:
+                continue
+            paired = on_x.get(episode_id, {})
+            row["full"] = {"broadcast": paired.get("url"), "youtube": episode_id,
+                           "clock": paired.get("clock", {})}
+            row["title"] = held[episode_id][1].get("title")
+            row["published_at"] = held[episode_id][1].get("published_at")
+        posts[post] = row
 
     # Link posts, last: a show at a second, on X or on YouTube, that maps
     # onto a transcript this archive holds. A link to a show we don't hold,
     # or into minutes the transcript doesn't have, gets no button.
-    shows = _broadcasts()
-    on_x = {show["episode_id"]: show for show in shows.values()}
     for post, link in _links().items():
         row = None if post in posts else _link_row(link, shows, on_x, held)
         if row:
@@ -351,14 +374,17 @@ def _moment(row: dict, seconds: int) -> str | None:
     from X it is the upload, through the map. A moment X's stream missed,
     said before it began or in a gap where the clocks moved, still opens.
     """
-    link = row["link"]
-    at = to_x(seconds, row["clock"]) if link.get("broadcast") else None
+    return _show_at(row["link"], row["clock"], row["episode_id"], seconds)
+
+
+def _show_at(link: dict, clock: dict, episode_id: str, seconds: int) -> str | None:
+    at = to_x(seconds, clock) if link.get("broadcast") else None
     if at is not None:
         url = f"{link['broadcast']}?t={at}"
     elif link.get("youtube"):
         url = f"https://www.youtube.com/watch?v={link['youtube']}&t={seconds}s"
     else:
-        found = youtube_map.youtube_moment(row["episode_id"], seconds)
+        found = youtube_map.youtube_moment(episode_id, seconds)
         url = f"https://www.youtube.com/watch?v={found[0]}&t={found[1]}s" if found else ""
     return url if SEEKS.fullmatch(url) else None
 
@@ -513,6 +539,15 @@ def watch(episode_id: str, seconds: int) -> str | None:
     return url if LINK.fullmatch(url) else None
 
 
+def _full_show(row: dict, seconds: int) -> str | None:
+    """A clip's whole show at a second: Market Bubble's by the site's own
+    link, an MCG Live or ThreadGuy show by its pair."""
+    full = row.get("full")
+    if full is None:
+        return watch(row["episode_id"], seconds)
+    return _show_at(full, full["clock"], row["episode_id"], seconds)
+
+
 def marks(text: str, row: dict) -> tuple[dict[str, int], dict[str, str]]:
     """(times that move the post's own player, times that open the whole
     show), for every time written in `text`.
@@ -538,7 +573,7 @@ def marks(text: str, row: dict) -> tuple[dict[str, int], dict[str, str]]:
     for token, seconds in _written(text).items():
         if clip["start"] <= seconds <= clip["end"] + CLIP_SLACK_SECONDS:
             times[token] = seconds - clip["start"]
-        link = watch(row["episode_id"], seconds)
+        link = _full_show(row, seconds)
         if link and SEEKS.fullmatch(link):
             links[token] = link
     return times, links
@@ -593,8 +628,8 @@ def describe(post: str) -> dict | None:
     if clip:
         after_at = clip["after_at"]
         # The full recording either way; a time only where it seeks.
-        shown = watch(episode_id, clip["start"])
-        after = watch(episode_id, after_at) if after_at is not None else None
+        shown = _full_show(row, clip["start"])
+        after = _full_show(row, after_at) if after_at is not None else None
         out["clip"] = {
             "at": clock_text(clip["start"]),
             "until": clock_text(clip["end"]),
