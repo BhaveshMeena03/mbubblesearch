@@ -53,6 +53,7 @@ YT_MCG_POST = "2116000000000000021"      # a YouTube link to a show never paired
 YT_YOUTUBE_EP = "2116000000000000022"    # a Market Bubble episode held only from YouTube
 TG_CLIP = "2116000000000000030"          # ThreadGuy's clip of his 30 Oct open, paired with X
 MCG_CLIP = "2116000000000000031"         # MCG's clip of a show never on X
+STITCHED_CLIP = "2115681447856030045"    # Ansem's upload cut from parts of a show
 
 
 # --- the shelf -------------------------------------------------------------
@@ -123,6 +124,11 @@ def files(tmp_path, monkeypatch):
                                 "episode_id": EP24, "start": 5993, "end": 6072},
         TG_CLIP: {"account": "notthreadguy", "archive": "threadguy", "episode_id": "EOkDv8qm8ik",
                   "start": 590, "end": 640, "before": "b", "after": "a", "after_at": 645},
+        STITCHED_CLIP: {"account": "blknoiz06", "archive": "podcast", "episode_id": EP24,
+                        "start": 271, "end": 7200, "before": "b", "after": "a",
+                        "after_at": 7205, "stitched": True},
+        "2116000000000000035": {"account": "blknoiz06", "archive": "podcast", "episode_id": EP24,
+                                "start": 1, "end": 2, "stitched": "yes"},
         MCG_CLIP: {"account": "MCGlive", "archive": "mcg", "episode_id": "pwhvqgCGV0w",
                    "start": 754, "end": 800, "before": "b", "after": "a", "after_at": 802},
         "2116000000000000032": {"account": "MCGlive", "archive": "mcg",
@@ -403,6 +409,17 @@ def test_an_mcg_clip_of_a_show_never_on_x_opens_youtube(files):
     assert (row["archive_name"], row["title"]) == ("MCG Live", "This Trader Caught $ORBIO")
     assert row["clip"]["watch"] == "https://www.youtube.com/watch?v=pwhvqgCGV0w&t=754s"
     assert row["clip"]["after_watch"] == "https://www.youtube.com/watch?v=pwhvqgCGV0w&t=802s"
+
+
+def test_a_stitched_upload_names_its_show_and_plays_nothing_on_its_own_clock(files):
+    """Cut together from several parts, so a time in the show is no second
+    of the upload: every time opens the show, none plays in the post."""
+    row = x_posts.describe(STITCHED_CLIP)
+    assert row["kind"] == "clip" and row["title"] == "Market Bubble Episode 24"
+    assert row["times"] == {}
+    assert row["links"]["0:04:31"] == f"{BROADCAST}?t=271"
+    assert row["clip"]["at"] == "0:04:31" and row["clip"]["until"] == ""
+    assert "2116000000000000035" not in x_posts.shelf(), "stitched is true or false, nothing else"
 
 
 def test_a_clip_is_only_shown_from_a_show_its_own_archive_holds(files):

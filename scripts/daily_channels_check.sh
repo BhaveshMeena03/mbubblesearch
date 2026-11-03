@@ -154,6 +154,21 @@ echo "-- threadguy notes"
 echo "-- threadguy on x"
 .venv/bin/python -u scripts/pair_threadguy_broadcasts.py --search || status=1
 
+# rasmr's broadcasts on X, the same way: his new broadcast posts (one a
+# stream), then the last week's unpaired ones heard against his indexed
+# streams, so a stream whose YouTube copy came late is paired tomorrow.
+echo "-- rasmr on x"
+.venv/bin/python -u scripts/pair_rasmr_broadcasts.py --search || status=1
+
+# What Market Bubble and Ansem post on X that the archive doesn't hold:
+# his own videos, and the broadcasts and uploads that aren't the Thursday
+# show the Friday watcher indexes. One X search (half a cent a post, a few a
+# day); a cut of a show already held is left to the clips below, and each
+# new recording goes through add_broadcast.py on Groq, minutes apiece.
+# Before the clips, so a clip of one indexed now finds it this morning.
+echo "-- recordings on x"
+caffeinate -i .venv/bin/python -u scripts/add_x_recordings.py --search || status=1
+
 # Clips of the shows posted on X by Ansem, Market Bubble, MCG Live,
 # ThreadGuy, us and the clippers in x_posts.CLIP_ACCOUNTS,
 # placed in the archive so the extension can say where each is from and
@@ -214,10 +229,16 @@ shelves=(data/threadguy_index.json data/mcg_index.json data/rasmr_index.json
          data/mcg_assets.json data/threadguy_assets.json)
 # Only once it is in the repo: git will not commit a path it has never
 # seen, and the refusal would take the shelves down with it.
+# Market Bubble's own files, for what add_x_recordings.py indexed. Not
+# data/speaker_map.json: rebuilding it moves other episodes' labels, and
+# a person merges the new entry by hand.
 for kept in data/mcg_broadcast_links.json data/threadguy_broadcast_links.json \
             data/threadguy_x_broadcasts.json data/mcg_summaries.json.gz \
             data/x_clips.json data/x_clips_search.json \
-            data/x_links.json data/x_links_search.json; do
+            data/x_links.json data/x_links_search.json \
+            data/x_recordings.json data/episodes.json.gz data/broadcast_links.json \
+            data/rasmr_broadcast_links.json data/rasmr_x_broadcasts.json \
+            data/term_index.json data/highlights.json; do
   if git ls-files --error-unmatch "$kept" >/dev/null 2>&1; then
     shelves+=("$kept")
   fi

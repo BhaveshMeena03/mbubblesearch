@@ -59,6 +59,15 @@ MIN_IN_SPAN = 0.80
 # under fifteen seconds on a known-good pair.
 SPAN_SLACK_SECONDS = 20.0
 
+# A long upload can be a show cut together from several parts of it.
+# Ansem's "Market Bubble ep.24" (29 Oct 2026) is 45 minutes of Episode 23
+# in pieces: 5,063 of its runs are held once each in that episode, 58% of
+# them, spread over more than its own length, so candidates() rightly
+# refuses to call it one stretch. Asking "is this already in the archive"
+# needs no single stretch: an episode holding a third of an upload's runs
+# is where it came from, and coincidence holds a handful.
+MIN_HELD_SHARE = 0.30
+
 
 def words(text: str) -> list[str]:
     return re.findall(r"[a-z0-9']+", (text or "").lower())
@@ -192,6 +201,9 @@ def candidates(transcript: str, episodes: list[dict],
             "start": start,
             "end": end,
             "share_in_span": share,
+            # How much of the clip this episode holds, for a long upload,
+            # whose clip-length window is too wide to judge by on its own.
+            "share": len(times) / len(asked),
         })
     scored.sort(key=lambda row: row["matches"], reverse=True)
     return scored
@@ -215,3 +227,25 @@ def place(transcript: str, episodes: list[dict],
     # the caller gets the strongest one and how far ahead it was.
     best["runner_up"] = scored[1]["matches"] if len(scored) > 1 else 0
     return best
+
+
+def held_in(transcript: str, episodes: list[dict]) -> list[dict]:
+    """Every episode holding at least MIN_HELD_SHARE of this transcript's
+    runs, each found exactly once in it wherever in the episode, largest
+    share first. Not a placement: "start" and "end" are the first and last
+    of those runs, which for a stitched upload cover more than it does."""
+    wanted = runs(transcript)
+    if len(wanted) < MIN_UNIQUE_RUNS:
+        return []
+    asked = set(wanted)
+    found: list[dict] = []
+    for episode in episodes:
+        index = _index(episode, asked)
+        times = [index[run][0] for run in asked if len(index.get(run, ())) == 1]
+        share = len(times) / len(asked)
+        if len(times) >= MIN_UNIQUE_RUNS and share >= MIN_HELD_SHARE:
+            found.append({"episode_id": episode.get("episode_id", ""),
+                          "title": episode.get("title", ""), "matches": len(times),
+                          "share": share, "start": min(times), "end": max(times)})
+    found.sort(key=lambda row: row["share"], reverse=True)
+    return found

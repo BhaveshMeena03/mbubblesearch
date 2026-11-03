@@ -115,3 +115,28 @@ def test_our_link_posts_are_read_every_morning_and_committed():
     assert read < SCRIPT.index('git diff --quiet -- "${shelves[@]}"')
     for kept in ("data/x_links.json", "data/x_links_search.json"):
         assert kept in SCRIPT
+
+
+def test_market_bubble_and_ansem_recordings_are_indexed_before_the_clips():
+    """Every new recording of theirs gets the extension's button the next
+    morning, and a clip of it is placed the same run."""
+    indexed = SCRIPT.index("scripts/add_x_recordings.py --search")
+    assert indexed < SCRIPT.index("scripts/place_x_clips.py --search")
+    assert indexed < SCRIPT.index("scripts/pack_summaries.py")
+    for kept in ("data/x_recordings.json", "data/episodes.json.gz", "data/broadcast_links.json",
+                 "data/term_index.json", "data/highlights.json"):
+        assert kept in SCRIPT
+
+
+def test_the_speaker_map_is_never_committed_unattended():
+    """Rebuilding it moved 49 other episodes' labels when Episode 24 went in."""
+    code = [line for line in SCRIPT.splitlines() if not line.lstrip().startswith("#")]
+    assert not any("speaker_map" in line for line in code)
+
+
+def test_rasmrs_x_broadcasts_are_paired_every_morning_and_committed():
+    paired = SCRIPT.index("scripts/pair_rasmr_broadcasts.py --search")
+    assert SCRIPT.index("for archive in threadguy mcg rasmr; do") < paired
+    assert paired < SCRIPT.index("scripts/place_x_clips.py --search")
+    for kept in ("data/rasmr_broadcast_links.json", "data/rasmr_x_broadcasts.json"):
+        assert kept in SCRIPT

@@ -92,8 +92,9 @@ def as_broadcast(post: dict) -> dict | None:
             "posted": post.get("created_at", ""), "title": title_of(post.get("text", ""))}
 
 
-async def search(since_id: str | None) -> list[dict]:
-    """Every broadcast post from 1 Oct, or after since_id, oldest first."""
+async def search(since_id: str | None, query: str = QUERY) -> list[dict]:
+    """Every broadcast post from 1 Oct, or after since_id, oldest first:
+    his, or the account `query` names (pair_rasmr_broadcasts.py)."""
     settings = get_settings()
     cred = XCredentials(settings.x_api_key, settings.x_api_secret,
                         settings.x_access_token, settings.x_access_secret)
@@ -102,7 +103,7 @@ async def search(since_id: str | None) -> list[dict]:
     token = None
     async with httpx.AsyncClient(timeout=30) as http:
         for _ in range(10):                     # 1,000 posts at most, ever
-            params = {"query": QUERY, "max_results": "100",
+            params = {"query": query, "max_results": "100",
                       "tweet.fields": "created_at,entities"}
             if since_id:
                 params["since_id"] = since_id

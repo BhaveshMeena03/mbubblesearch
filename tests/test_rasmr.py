@@ -85,6 +85,49 @@ def test_only_names_the_broadcasts_to_listen_for():
     assert ids(wanted(casts, taken, ["new2", "new1", "done"])) == ["new1", "new2"]
 
 
+def test_since_keeps_only_the_recent_broadcasts():
+    from scripts.pair_rasmr_broadcasts import wanted
+    casts = [cast("new", "2026-10-28T15:53:35Z"), cast("old", "2026-09-10T16:00:00Z")]
+    assert [c["broadcast"][-3:] for c in wanted(casts, set(), [], "2026-10-27")] == ["new"]
+
+
+def test_a_search_adds_new_broadcasts_and_listens_only_for_the_last_week(tmp_path, monkeypatch):
+    """The morning job runs --search. A month-old broadcast that never
+    matched (an X-only show) is not heard again every day."""
+    import sys
+    from datetime import UTC, datetime, timedelta
+    from types import SimpleNamespace
+
+    from scripts import pair_rasmr_broadcasts as pairing
+    from scripts import pair_threadguy_broadcasts as threadguy
+    today = datetime.now(UTC).date()
+    month_ago = (today - timedelta(days=30)).isoformat() + "T16:00:00Z"
+    yesterday = (today - timedelta(days=1)).isoformat() + "T16:00:00Z"
+    casts = tmp_path / "casts.json"
+    casts.write_text(json.dumps({"read": "by hand", "broadcasts": [
+        {**cast("monthold", month_ago), "post": "2100000000000000000", "title": ""}]}))
+    (tmp_path / "shelf.json").write_text("[]")
+    monkeypatch.setattr(pairing, "BROADCASTS", casts)
+    monkeypatch.setattr(pairing, "SHELF", tmp_path / "shelf.json")
+    monkeypatch.setattr(pairing, "OUT", tmp_path / "pairs.json")
+    monkeypatch.setattr(pairing, "Pinecone", lambda api_key: SimpleNamespace(Index=lambda name: None))
+    asked, heard = [], []
+
+    async def search(since_id, query):
+        asked.append((since_id, query))
+        return [{**cast("fresh", yesterday), "post": "2117000000000000000", "title": "LIVE"}]
+    monkeypatch.setattr(threadguy, "search", search)
+    monkeypatch.setattr(pairing, "candidates",
+                        lambda c, streams, pairs: heard.append(c["broadcast"][-5:]) or [])
+    monkeypatch.setattr(sys, "argv", ["pair_rasmr_broadcasts.py", "--search"])
+    assert pairing.main() == 0
+    kept = json.loads(casts.read_text())
+    assert kept["read"] == "by hand"
+    assert [c["post"] for c in kept["broadcasts"]] == ["2100000000000000000", "2117000000000000000"]
+    assert asked == [("2100000000000000000", pairing.QUERY)]
+    assert heard == ["fresh"]
+
+
 def test_a_broadcast_is_paired_only_when_two_slices_are_the_show(monkeypatch):
     """3971cc4 replaced settle() in the MCG pairing, and this script still
     imported it, so it could not start until it measured the same way."""

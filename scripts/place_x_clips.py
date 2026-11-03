@@ -39,9 +39,11 @@ nothing, and gets no button.
 Placed on 31 Oct 2026: 9 of Ansem's last 10 clips, every one to the line.
 The tenth was his Halloween video, which isn't in the archive.
 
-Longer posts (full conversations, whole broadcasts) are not clips: X has
-no captions for most of them, and the panel for a whole recording is the
-summary one. They are reported and skipped.
+A broadcast is not a clip: the panel for a whole recording is the summary
+one. A long upload is placed like any clip when it is a cut of a show the
+archive holds: MCG posts every interview from its daily show on its own,
+11 to 65 minutes, and on 3 Nov 2026 Ansem posted 34 minutes of Episode 24
+as "Market Bubble ep.25". One the archive doesn't hold matches nothing.
 
 One post at a time with a pause between, the same courtesy the YouTube
 lookups get.
@@ -74,8 +76,13 @@ OUT = ROOT / "data" / "x_clips.json"
 SEARCHED = ROOT / "data" / "x_clips_search.json"
 POST_ID = re.compile(r"^[0-9]{5,25}$")
 
-# Longer than this is a whole recording posted, not a clip.
-MAX_CLIP_SECONDS = 600
+# Longer than this is not a cut of any show the archive holds; the longest
+# Market Bubble episode runs under four hours.
+MAX_CLIP_SECONDS = 4 * 3600
+
+# Longer than this, an upload may be stitched from several parts of a show
+# (clipmatch.held_in). A clip this short is one stretch or nothing.
+STITCHED_FROM_SECONDS = 600
 
 # How much of the archive to keep either side. "Before" is a lead-in, so
 # a sentence or two; "after" is the point of the panel, the part the
@@ -266,13 +273,16 @@ def fetch(post: str, workdir: Path) -> dict:
     # Ansem's clips often quote the whole video they were cut from, and
     # reading the second one placed a 34-minute recording as the clip.
     # --no-simulate: --print alone downloads nothing, captions included.
-    run = subprocess.run(
-        [str(ROOT / ".venv" / "bin" / "yt-dlp"), "--socket-timeout", "30",
-         "--no-warnings", "--playlist-items", "1", "--no-simulate", "--skip-download",
-         "--write-subs", "--sub-langs", "en", "--sub-format", "vtt",
-         "-o", str(workdir / f"{post}.%(ext)s"),
-         "--print", "%(duration)s\t%(uploader_id)s\t%(extractor)s", url],
-        capture_output=True, text=True, timeout=180)
+    try:
+        run = subprocess.run(
+            [str(ROOT / ".venv" / "bin" / "yt-dlp"), "--socket-timeout", "30",
+             "--no-warnings", "--playlist-items", "1", "--no-simulate", "--skip-download",
+             "--write-subs", "--sub-langs", "en", "--sub-format", "vtt",
+             "-o", str(workdir / f"{post}.%(ext)s"),
+             "--print", "%(duration)s\t%(uploader_id)s\t%(extractor)s", url],
+            capture_output=True, text=True, timeout=180)
+    except subprocess.TimeoutExpired:
+        return {"error": "X would not give the post: no answer in three minutes"}
     if run.returncode != 0:
         return {"error": "X would not give the post: " + (run.stderr.strip().splitlines() or ["?"])[-1][:160]}
     duration, account, extractor = (run.stdout.strip().splitlines() or ["\t\t"])[-1].split("\t")
@@ -294,16 +304,23 @@ def needs_ears(got: dict) -> bool:
             and 0 < duration <= MAX_CLIP_SECONDS)
 
 
-def listen(post: str, workdir: Path) -> str:
-    """The clip's words, from its audio, or "" when it can't be had."""
+def listen(post: str, workdir: Path, seconds: float | None = None) -> str:
+    """The clip's words, from its audio, or "" when it can't be had.
+
+    The download is given five minutes plus the video's own length: a
+    40-minute MCG upload took longer than five minutes on 3 Nov 2026, and
+    the timeout, not caught then, ended the run before it wrote anything."""
     from scripts.ingest_mcg import groq_key, transcribe_via_groq
 
-    run = subprocess.run(
-        [str(ROOT / ".venv" / "bin" / "yt-dlp"), "--socket-timeout", "30", "--no-warnings",
-         "-q", "--playlist-items", "1", "-f", "bestaudio/best", "-x", "--audio-format", "mp3",
-         "--audio-quality", "7", "-o", str(workdir / f"{post}-audio.%(ext)s"),
-         f"https://x.com/i/status/{post}"],
-        capture_output=True, text=True, timeout=300)
+    try:
+        run = subprocess.run(
+            [str(ROOT / ".venv" / "bin" / "yt-dlp"), "--socket-timeout", "30", "--no-warnings",
+             "-q", "--playlist-items", "1", "-f", "bestaudio/best", "-x", "--audio-format", "mp3",
+             "--audio-quality", "7", "-o", str(workdir / f"{post}-audio.%(ext)s"),
+             f"https://x.com/i/status/{post}"],
+            capture_output=True, text=True, timeout=300 + (seconds or 0))
+    except subprocess.TimeoutExpired:
+        return ""
     audio = workdir / f"{post}-audio.mp3"
     if run.returncode != 0 or not audio.exists():
         return ""
@@ -311,6 +328,21 @@ def listen(post: str, workdir: Path) -> str:
         return " ".join(s.get("text", "") for s in transcribe_via_groq(audio, groq_key())).strip()
     except Exception:                                           # noqa: BLE001
         return ""
+
+
+def where_from(caption: str, pool: list[dict], duration: float) -> tuple[list[dict], bool]:
+    """(every copy of a show this post is from, strongest first; whether it
+    is stitched from several parts of it).
+
+    A long upload has to be mostly the show. Its clip-length window is as
+    wide as the upload, so a dozen runs inside it prove nothing: on 3 Nov
+    2026 Ansem's own 37-minute video matched ThreadGuy's 29 Oct market open
+    on 25 runs, the Hyperliquid announcement both of them played on air."""
+    found = clipmatch.candidates(caption, pool, duration)
+    if duration <= STITCHED_FROM_SECONDS:
+        return found, False
+    found = [row for row in found if row["share"] >= clipmatch.MIN_HELD_SHARE]
+    return (found, False) if found else (clipmatch.held_in(caption, pool), True)
 
 
 def place_one(post: str, got: dict, episodes, paired: set[str] = frozenset()
@@ -334,12 +366,16 @@ def place_one(post: str, got: dict, episodes, paired: set[str] = frozenset()
     if not got.get("caption"):
         return None, "no captions on X, and its audio could not be heard"
     pool = episodes() if callable(episodes) else episodes
-    found = clipmatch.candidates(got["caption"], pool, duration)
+    if any(e.get("episode_id") == f"x-{post}" for e in pool):
+        return None, "the whole recording, indexed as itself"
+    found, stitched = where_from(got["caption"], pool, duration)
     best = choose(found, paired)
     if best is None:
         return None, "not in the archive"
     episode = next(e for e in pool if e.get("episode_id") == best["episode_id"])
-    where = context(episode, got["caption"], best["start"], duration)
+    # A stitched upload's words run from its first piece to its last.
+    where = context(episode, got["caption"], best["start"],
+                    best["end"] - best["start"] if stitched else duration)
     if where is None:
         return None, "placed, but its words could not be lined up"
     entry = {
@@ -351,9 +387,12 @@ def place_one(post: str, got: dict, episodes, paired: set[str] = frozenset()
         "matches": best["matches"],
         "copies": len(found),
         "heard_from": "audio" if got.get("heard") else "captions",
+        # Its own clock is not the show's: no time inside it plays in it.
+        **({"stitched": True} if stitched else {}),
         "placed": datetime.now(UTC).strftime("%Y-%m-%d"),
     }
-    return entry, f"{best['episode_id']} at {_clock(where['start'])}, {best['matches']} runs"
+    return entry, (f"{best['episode_id']} at {_clock(where['start'])}, {best['matches']} runs"
+                   + (", stitched from several parts" if stitched else ""))
 
 
 def search_query(accounts=x_posts.CLIP_ACCOUNTS) -> str:
@@ -363,8 +402,9 @@ def search_query(accounts=x_posts.CLIP_ACCOUNTS) -> str:
     return f"({who}) has:videos -is:retweet -is:reply"
 
 
-async def search(since_id: str | None) -> list[str]:
-    """Post ids from X's recent search, oldest first."""
+async def search(since_id: str | None, query: str | None = None) -> list[str]:
+    """Post ids from X's recent search, oldest first: the clip accounts'
+    videos, or what `query` asks for (add_x_recordings.py)."""
     import httpx
 
     from app.config import get_settings
@@ -378,7 +418,7 @@ async def search(since_id: str | None) -> list[str]:
     token = None
     async with httpx.AsyncClient(timeout=30) as http:
         for _ in range(5):                       # 500 posts at most a run
-            params = {"query": search_query(), "max_results": "100"}
+            params = {"query": query or search_query(), "max_results": "100"}
             if since_id:
                 params["since_id"] = since_id
             if token:
@@ -436,7 +476,7 @@ def main() -> None:
                 time.sleep(PAUSE_SECONDS)
             got = fetch(post, Path(tmp))
             if needs_ears(got):
-                got["caption"], got["heard"] = listen(post, Path(tmp)), True
+                got["caption"], got["heard"] = listen(post, Path(tmp), got.get("duration")), True
             shows.missed = False
             entry, said = place_one(
                 post, got, lambda post=post: episodes + shows.before(posted_on(post)), shows.paired)

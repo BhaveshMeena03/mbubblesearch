@@ -221,14 +221,18 @@ def _clips() -> dict[str, dict]:
                 or start is None or end is None or end < start
                 or (after_at is not None and _second(after_at) is None)
                 or not isinstance(row.get("before", ""), str)
-                or not isinstance(row.get("after", ""), str)):
+                or not isinstance(row.get("after", ""), str)
+                or not isinstance(row.get("stitched", False), bool)):
             logger.warning("x posts: clip %s is malformed, left out", post)
             continue
         out[str(post)] = {"archive": row["archive"],
                           "episode_id": row["episode_id"], "start": start, "end": end,
                           "before": row.get("before", "")[:1500],
                           "after": row.get("after", "")[:3000],
-                          "after_at": after_at}
+                          "after_at": after_at,
+                          # Cut together from several parts of the show, so
+                          # its own clock is not the show's.
+                          "stitched": row.get("stitched", False)}
     return out
 
 
@@ -571,7 +575,8 @@ def marks(text: str, row: dict) -> tuple[dict[str, int], dict[str, str]]:
     times: dict[str, int] = {}
     links: dict[str, str] = {}
     for token, seconds in _written(text).items():
-        if clip["start"] <= seconds <= clip["end"] + CLIP_SLACK_SECONDS:
+        if (not clip["stitched"]
+                and clip["start"] <= seconds <= clip["end"] + CLIP_SLACK_SECONDS):
             times[token] = seconds - clip["start"]
         link = _full_show(row, seconds)
         if link and SEEKS.fullmatch(link):
@@ -632,7 +637,8 @@ def describe(post: str) -> dict | None:
         after = _full_show(row, after_at) if after_at is not None else None
         out["clip"] = {
             "at": clock_text(clip["start"]),
-            "until": clock_text(clip["end"]),
+            # A stitched upload spans more of the show than it holds.
+            "until": "" if clip["stitched"] else clock_text(clip["end"]),
             "watch": shown,
             "seeks": bool(shown and SEEKS.fullmatch(shown)),
             "before": clip["before"],

@@ -126,7 +126,7 @@ def _got(**over):
     (_got(account=""), "not one of the show's accounts"),
     (_got(broadcast=True), "a broadcast"),
     (_got(duration=None), "no length"),
-    (_got(duration=2729.0), "45 minutes long"),
+    (_got(duration=5 * 3600.0), "300 minutes long"),
     (_got(caption=""), "no captions on X"),
     (_got(caption="nothing in the archive sounds anything like this " * 3), "not in the archive"),
 ])
@@ -151,11 +151,51 @@ def test_an_mcg_clip_is_placed_on_the_show_that_aired_on_x():
     assert (entry["start"], entry["end"]) == (40, 60)
 
 
+def test_a_long_cut_of_a_show_is_placed_like_a_clip():
+    """MCG uploads each interview from its daily show, and Ansem posted 34
+    minutes of Episode 24 as "Market Bubble ep.25": cuts, at any length."""
+    entry, why = place.place_one("2117423871154589732", _got(duration=2046.8),
+                                 [YOUTUBE, ELSEWHERE, EPISODE])
+    assert entry["episode_id"] == "x-2115904746355851479" and "0:00:40" in why
+
+
+def test_a_long_upload_stitched_from_parts_of_a_show_is_placed_without_its_clock():
+    # The same words a line a minute: 50 minutes of show. Two pieces 40
+    # minutes apart, cut into a 12-minute upload.
+    long_show = {**EPISODE, "segments": [{**seg, "t": 60.0 * n}
+                                         for n, seg in enumerate(EPISODE["segments"])]}
+    stitched = " ".join(WORDS[0:60] + WORDS[400:460])
+    entry, why = place.place_one("2115681447856030045", _got(duration=720.0, caption=stitched),
+                                 [long_show, ELSEWHERE])
+    assert entry["stitched"] is True and "stitched from several parts" in why
+    assert (entry["start"], entry["end"]) == (0, 2700)
+    short, why = place.place_one("2115681447856030045", _got(duration=48.0, caption=stitched),
+                                 [long_show, ELSEWHERE])
+    assert short is None and "not in the archive" in why, "a short clip is one stretch or nothing"
+
+
+def test_a_long_video_sharing_a_moment_with_a_show_is_not_a_cut_of_it():
+    """Ansem's own 37-minute video and ThreadGuy's stream both played the
+    Hyperliquid announcement: 25 runs in common, and nothing else."""
+    own = " ".join([f"own{i}" for i in range(5000)] + WORDS[100:140])
+    entry, why = place.place_one("2116134237971915020", _got(duration=2205.7, caption=own),
+                                 [EPISODE, ELSEWHERE])
+    assert entry is None and "not in the archive" in why
+    assert place.place_one("2116134237971915020", _got(duration=95.0, caption=" ".join(WORDS[100:140])),
+                           [EPISODE])[0] is not None, "a short clip of that moment still is one"
+
+
+def test_a_recording_is_never_placed_as_a_clip_of_itself():
+    itself = {**EPISODE, "episode_id": "x-2116220650058846455"}
+    entry, why = place.place_one("2116220650058846455", _got(duration=980.0), [itself])
+    assert entry is None and "indexed as itself" in why
+
+
 def test_what_is_not_a_clip_never_costs_a_read_of_the_index():
     def shows():
         raise AssertionError("asked for the shows")
     for got in ({"error": "X would not give the post: 404"}, _got(account="someclipper"),
-                _got(broadcast=True), _got(duration=2729.0), _got(caption="")):
+                _got(broadcast=True), _got(duration=5 * 3600.0), _got(caption="")):
         entry, _ = place.place_one("2116528233193886171", got, shows)
         assert entry is None
 
@@ -297,7 +337,8 @@ def test_a_search_that_finds_nothing_keeps_its_place(tmp_path, monkeypatch):
 
 def test_a_clip_without_captions_is_heard_only_when_it_is_worth_it():
     assert place.needs_ears(_got(caption=""))
-    for got in (_got(), _got(caption="", duration=2729.0), _got(caption="", broadcast=True),
+    assert place.needs_ears(_got(caption="", duration=2729.0)), "a long cut, heard too"
+    for got in (_got(), _got(caption="", duration=5 * 3600.0), _got(caption="", broadcast=True),
                 _got(caption="", account="someclipper"), _got(caption="", duration=None),
                 {"error": "x"}):
         assert not place.needs_ears(got), got
@@ -308,9 +349,26 @@ def test_a_heard_clip_is_placed_and_says_so(tmp_path, monkeypatch):
     monkeypatch.setattr(place, "OUT", out)
     monkeypatch.setattr(place, "PAUSE_SECONDS", 0)
     monkeypatch.setattr(place, "fetch", lambda post, workdir: _got(caption="", account="mbubbleSearch"))
-    monkeypatch.setattr(place, "listen", lambda post, workdir: CLIP)
+    monkeypatch.setattr(place, "listen", lambda post, workdir, seconds=None: CLIP)
     monkeypatch.setattr(place.episode_store, "load", lambda: [EPISODE])
     monkeypatch.setattr(sys, "argv", ["place_x_clips.py", "2000000000000000005"])
     place.main()
     entry = json.loads(out.read_text())["2000000000000000005"]
     assert entry["heard_from"] == "audio" and entry["start"] == 40
+
+
+def test_x_not_answering_costs_one_post_not_the_run(monkeypatch, tmp_path):
+    """3 Nov 2026: a 40-minute upload's audio took longer than the five
+    minutes allowed, and the uncaught timeout ended the run before it wrote
+    the twelve clips it had placed."""
+    import subprocess
+
+    asked = []
+
+    def slow(cmd, **kw):
+        asked.append(kw.get("timeout"))
+        raise subprocess.TimeoutExpired(cmd, kw.get("timeout"))
+    monkeypatch.setattr(place.subprocess, "run", slow)
+    assert "no answer" in place.fetch("2115537742235152750", tmp_path)["error"]
+    assert place.listen("2115537742235152750", tmp_path, 2400.0) == ""
+    assert asked == [180, 2700], "the download gets the video's own length on top"

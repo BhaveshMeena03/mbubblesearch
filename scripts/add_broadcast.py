@@ -182,6 +182,12 @@ async def main() -> int:
                     help="leave the unprompted-answer pool as it is")
     ap.add_argument("--force", action="store_true",
                     help="index it even if it looks like it is still live")
+    # The speaker map is rebuilt whole for every new episode, and when
+    # Episode 24 went in that moved 49 other episodes' labels: a person
+    # merges the new episode's entry by hand. Unattended runs
+    # (add_x_recordings.py) leave labels for that person.
+    ap.add_argument("--no-labels", action="store_true",
+                    help="skip working out who is speaking; label it later by hand")
     # 28 Oct 2026: Ansem posted 34 minutes of "Q4 market thoughts" as a
     # plain video. Not an episode, so it goes in the way his appearances
     # on other shows did: tagged with a show, out of the episode count.
@@ -243,9 +249,10 @@ async def main() -> int:
     # transcript with names in it produces "Ansem argued X and Banks pushed
     # back" instead of "the hosts discussed X". Never fatal: an episode
     # without labels is the episode everything before tonight had.
-    step(3, 10, "working out who is speaking")
+    step(3, 10, "working out who is speaking"
+         + (" -- skipped, --no-labels" if args.no_labels else ""))
     speaker_map: dict[str, dict[str, str]] = {}
-    for episode in parsed:
+    for episode in ([] if args.no_labels else parsed):
         if his_own(episode.show):
             # One voice: every line is his, with no fingerprinting and no
             # rebuild of the whole map (apply_speaker_labels.own_video_labels).

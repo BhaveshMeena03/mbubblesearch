@@ -288,3 +288,28 @@ class TestTheEvidenceFloor:
         what a short clip can supply, and real clips start being refused."""
         got = clipmatch.place(self.ENOUGH, ARCHIVE, duration_seconds=30.0)
         assert got is not None and got["episode_id"] == "x-19"
+
+
+class TestAStitchedUploadIsStillHeld:
+    """Ansem's "Market Bubble ep.24" (29 Oct 2026) is 45 minutes of Episode
+    23 in pieces. One stretch it is not, so candidates() refuses it; held_in
+    still says where it came from, so it is never indexed again as new."""
+
+    # 600 words, ten to a line, a line every 4 seconds: 240 seconds of show.
+    SHOW = episode("x-23", "Market Bubble Episode 23",
+                   [(4.0 * n, " ".join(f"w{i}" for i in range(n * 10, n * 10 + 10)))
+                    for n in range(60)])
+    # Two pieces three minutes apart, cut together.
+    UPLOAD = " ".join([f"w{i}" for i in range(0, 60)] + [f"w{i}" for i in range(500, 560)])
+
+    def test_one_stretch_it_is_not(self):
+        assert clipmatch.candidates(self.UPLOAD, [self.SHOW], duration_seconds=48.0) == []
+
+    def test_but_the_show_holds_it(self):
+        found = clipmatch.held_in(self.UPLOAD, [self.SHOW, OTHER])
+        assert [row["episode_id"] for row in found] == ["x-23"]
+        assert found[0]["share"] > 0.8 and (found[0]["start"], found[0]["end"]) == (0.0, 220.0)
+
+    def test_a_few_shared_phrases_are_not_a_show(self):
+        mostly_new = " ".join([f"n{i}" for i in range(300)] + [f"w{i}" for i in range(0, 30)])
+        assert clipmatch.held_in(mostly_new, [self.SHOW]) == []
