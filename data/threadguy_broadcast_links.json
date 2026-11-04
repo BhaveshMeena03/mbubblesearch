@@ -47,6 +47,32 @@
    }
   ]
  },
+ "2XwsEzCz-ag": {
+  "broadcast": "https://x.com/i/broadcasts/2EmWQAAaAZyAAW",
+  "post": "2117611853199122863",
+  "sections": [
+   {
+    "from": 0,
+    "offset": -5,
+    "to": 1895
+   },
+   {
+    "from": 2405,
+    "offset": -5,
+    "to": 2945
+   },
+   {
+    "from": 3757,
+    "offset": -7,
+    "to": 5797
+   },
+   {
+    "from": 6002,
+    "offset": -2,
+    "to": null
+   }
+  ]
+ },
  "5-6QFnh7k0o": {
   "broadcast": "https://x.com/i/broadcasts/1AKEmvApMERKL",
   "offset": -4,

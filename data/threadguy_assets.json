@@ -4,7 +4,7 @@
    "symbol": "BTC",
    "name": "Bitcoin",
    "asset_class": "crypto",
-   "mentions": 2787,
+   "mentions": 2791,
    "analysis": 1582,
    "moments": [
     {
@@ -1392,6 +1392,42 @@
      "deep_link": "https://www.youtube.com/watch?v=2X7XwuNJi2M&t=668s",
      "kind": "analysis",
      "note": "Had a sick day, broke above a 71-day range, speaker notes reward-to-risk still looks good and mentions selling at 75k for taxes."
+    },
+    {
+     "episode_id": "2XwsEzCz-ag",
+     "episode_title": "MARKET OPEN: Trying ANCIENT MREs, Midterms AREN'T LOOKING GOOD, The NEXT AI TRADE",
+     "start_seconds": 3772.0,
+     "timestamp": "1:02:52",
+     "deep_link": "https://www.youtube.com/watch?v=2XwsEzCz-ag&t=3772s",
+     "kind": "mention",
+     "note": "Bitcoin trading at 77.2 (thousands)."
+    },
+    {
+     "episode_id": "2XwsEzCz-ag",
+     "episode_title": "MARKET OPEN: Trying ANCIENT MREs, Midterms AREN'T LOOKING GOOD, The NEXT AI TRADE",
+     "start_seconds": 4418.0,
+     "timestamp": "1:13:38",
+     "deep_link": "https://www.youtube.com/watch?v=2XwsEzCz-ag&t=4418s",
+     "kind": "mention",
+     "note": "Speaker suggests doing Bitcoin analysis on stream."
+    },
+    {
+     "episode_id": "2XwsEzCz-ag",
+     "episode_title": "MARKET OPEN: Trying ANCIENT MREs, Midterms AREN'T LOOKING GOOD, The NEXT AI TRADE",
+     "start_seconds": 5788.0,
+     "timestamp": "1:36:28",
+     "deep_link": "https://www.youtube.com/watch?v=2XwsEzCz-ag&t=5788s",
+     "kind": "mention",
+     "note": "Speaker mentions caring about the Bitcoin price in the context of not being interested in politics."
+    },
+    {
+     "episode_id": "2XwsEzCz-ag",
+     "episode_title": "MARKET OPEN: Trying ANCIENT MREs, Midterms AREN'T LOOKING GOOD, The NEXT AI TRADE",
+     "start_seconds": 5844.0,
+     "timestamp": "1:37:24",
+     "deep_link": "https://www.youtube.com/watch?v=2XwsEzCz-ag&t=5844s",
+     "kind": "mention",
+     "note": "Speaker mentions BTC and asks 'what is it doing it going up' in a dismissive context about education and understanding."
     },
     {
      "episode_id": "2ZNszJURUls",
@@ -25091,14 +25127,14 @@
      "note": "Named in passing when speaker says 'before we even talk about anything with btc we got to get out of here' and mentions needing to 'get out of 73'."
     }
    ],
-   "episode_count": 528,
+   "episode_count": 529,
    "single_reference": false
   },
   {
    "symbol": "SOL",
    "name": "Solana",
    "asset_class": "crypto",
-   "mentions": 1220,
+   "mentions": 1221,
    "analysis": 580,
    "moments": [
     {
@@ -25793,6 +25829,15 @@
      "deep_link": "https://www.youtube.com/watch?v=2X7XwuNJi2M&t=768s",
      "kind": "analysis",
      "note": "Has no juice right now, speaker not interested in taking large positions or shorting it."
+    },
+    {
+     "episode_id": "2XwsEzCz-ag",
+     "episode_title": "MARKET OPEN: Trying ANCIENT MREs, Midterms AREN'T LOOKING GOOD, The NEXT AI TRADE",
+     "start_seconds": 3788.0,
+     "timestamp": "1:03:08",
+     "deep_link": "https://www.youtube.com/watch?v=2XwsEzCz-ag&t=3788s",
+     "kind": "mention",
+     "note": "Sol is still 93 (dollars)."
     },
     {
      "episode_id": "2ZNszJURUls",
@@ -36082,15 +36127,15 @@
      "note": "Speaker mentions buying Solana in passing while discussing market downturn."
     }
    ],
-   "episode_count": 428,
+   "episode_count": 429,
    "single_reference": false
   },
   {
    "symbol": "ZEC",
    "name": "Zcash",
    "asset_class": "crypto",
-   "mentions": 895,
-   "analysis": 508,
+   "mentions": 896,
+   "analysis": 509,
    "moments": [
     {
      "episode_id": "-IboaV4KXK8",
@@ -36397,6 +36442,15 @@
      "deep_link": "https://www.youtube.com/watch?v=2X7XwuNJi2M&t=1096s",
      "kind": "analysis",
      "note": "Used as a comparison point for SanDisk's chart performance, described as going way higher and longer than expected."
+    },
+    {
+     "episode_id": "2XwsEzCz-ag",
+     "episode_title": "MARKET OPEN: Trying ANCIENT MREs, Midterms AREN'T LOOKING GOOD, The NEXT AI TRADE",
+     "start_seconds": 3722.0,
+     "timestamp": "1:02:02",
+     "deep_link": "https://www.youtube.com/watch?v=2XwsEzCz-ag&t=3722s",
+     "kind": "analysis",
+     "note": "Speaker hopes Zcash goes really high; later states it is their best idea and up 5 percent today after a tweet announcement, with thesis that it could be the next Bitcoin."
     },
     {
      "episode_id": "2_9rEE4GvhQ",
@@ -44148,14 +44202,14 @@
      "note": "Speaker closed a Zcash trade for a million dollars, closed around half of the position and described it as a sick trade."
     }
    ],
-   "episode_count": 284,
+   "episode_count": 285,
    "single_reference": false
   },
   {
    "symbol": "HYPE",
    "name": "Hyperliquid",
    "asset_class": "crypto",
-   "mentions": 772,
+   "mentions": 773,
    "analysis": 502,
    "moments": [
     {
@@ -44481,6 +44535,15 @@
      "deep_link": "https://www.youtube.com/watch?v=2X7XwuNJi2M&t=783s",
      "kind": "analysis",
      "note": "Chart is described as very pretty, discussed as an all-in-one exchange for trading new tokens immediately."
+    },
+    {
+     "episode_id": "2XwsEzCz-ag",
+     "episode_title": "MARKET OPEN: Trying ANCIENT MREs, Midterms AREN'T LOOKING GOOD, The NEXT AI TRADE",
+     "start_seconds": 3777.0,
+     "timestamp": "1:02:57",
+     "deep_link": "https://www.youtube.com/watch?v=2XwsEzCz-ag&t=3777s",
+     "kind": "mention",
+     "note": "Hype is $87 after the announcement of the CFTC."
     },
     {
      "episode_id": "2_9rEE4GvhQ",
@@ -51107,14 +51170,14 @@
      "note": "Speaker references going to hyperliquid and questions whether there is much volume there."
     }
    ],
-   "episode_count": 324,
+   "episode_count": 325,
    "single_reference": false
   },
   {
    "symbol": "ETH",
    "name": "Ethereum",
    "asset_class": "crypto",
-   "mentions": 1015,
+   "mentions": 1016,
    "analysis": 463,
    "moments": [
     {
@@ -51719,6 +51782,15 @@
      "deep_link": "https://www.youtube.com/watch?v=2X7XwuNJi2M&t=745s",
      "kind": "analysis",
      "note": "Looks solid, speaker notes avoiding shorting despite public crypto Twitter calls for ETH shorts."
+    },
+    {
+     "episode_id": "2XwsEzCz-ag",
+     "episode_title": "MARKET OPEN: Trying ANCIENT MREs, Midterms AREN'T LOOKING GOOD, The NEXT AI TRADE",
+     "start_seconds": 3775.0,
+     "timestamp": "1:02:55",
+     "deep_link": "https://www.youtube.com/watch?v=2XwsEzCz-ag&t=3775s",
+     "kind": "mention",
+     "note": "ETH trading at 22.85 (hundreds)."
     },
     {
      "episode_id": "2ZNszJURUls",
@@ -60253,14 +60325,14 @@
      "note": "Referenced alongside Bitcoin as comparison for altcoin behavior."
     }
    ],
-   "episode_count": 395,
+   "episode_count": 396,
    "single_reference": false
   },
   {
    "symbol": "PUMP",
    "name": "Pump.fun",
    "asset_class": "crypto",
-   "mentions": 518,
+   "mentions": 519,
    "analysis": 405,
    "moments": [
     {
@@ -60406,6 +60478,15 @@
      "deep_link": "https://www.youtube.com/watch?v=1ahQTWKI5XM&t=1728s",
      "kind": "mention",
      "note": "Mentioned as one of the top apps in the app store that emerged in crypto."
+    },
+    {
+     "episode_id": "2XwsEzCz-ag",
+     "episode_title": "MARKET OPEN: Trying ANCIENT MREs, Midterms AREN'T LOOKING GOOD, The NEXT AI TRADE",
+     "start_seconds": 3786.0,
+     "timestamp": "1:03:06",
+     "deep_link": "https://www.youtube.com/watch?v=2XwsEzCz-ag&t=3786s",
+     "kind": "mention",
+     "note": "Pump is up 6 percent."
     },
     {
      "episode_id": "2_9rEE4GvhQ",
@@ -64926,14 +65007,14 @@
      "note": "Mentioned in passing as transitioning from pump fun to AI trades."
     }
    ],
-   "episode_count": 220,
+   "episode_count": 221,
    "single_reference": false
   },
   {
    "symbol": "CL",
    "name": "Crude Oil / WTI",
    "asset_class": "commodity",
-   "mentions": 288,
+   "mentions": 289,
    "analysis": 229,
    "moments": [
     {
@@ -65079,6 +65160,15 @@
      "deep_link": "https://www.youtube.com/watch?v=2X7XwuNJi2M&t=1273s",
      "kind": "analysis",
      "note": "Market pumped on Trump's posts regarding Iran tensions; traders including crude oil trader 'crude oil 231' made significant positions on crude longs with reported $15 million PnL."
+    },
+    {
+     "episode_id": "2XwsEzCz-ag",
+     "episode_title": "MARKET OPEN: Trying ANCIENT MREs, Midterms AREN'T LOOKING GOOD, The NEXT AI TRADE",
+     "start_seconds": 3910.0,
+     "timestamp": "1:05:10",
+     "deep_link": "https://www.youtube.com/watch?v=2XwsEzCz-ag&t=3910s",
+     "kind": "mention",
+     "note": "Crude Oil is down 0.12 percent."
     },
     {
      "episode_id": "3VUoLudQz5M",
@@ -67529,7 +67619,7 @@
      "note": "Speakers discuss how oil prices move with the stock market during military conflicts, and note oil jumping above $105 per barrel following Russia's Ukraine attack."
     }
    ],
-   "episode_count": 149,
+   "episode_count": 150,
    "single_reference": false
   },
   {
@@ -93476,7 +93566,7 @@
    "symbol": "SPY",
    "name": "SPDR S&P 500 ETF Trust",
    "asset_class": "index",
-   "mentions": 256,
+   "mentions": 257,
    "analysis": 93,
    "moments": [
     {
@@ -93631,6 +93721,15 @@
      "deep_link": "https://www.youtube.com/watch?v=2X7XwuNJi2M&t=584s",
      "kind": "analysis",
      "note": "Closed at 711 up 1%, speaker describes the chart as insane and wanting to go up."
+    },
+    {
+     "episode_id": "2XwsEzCz-ag",
+     "episode_title": "MARKET OPEN: Trying ANCIENT MREs, Midterms AREN'T LOOKING GOOD, The NEXT AI TRADE",
+     "start_seconds": 3669.0,
+     "timestamp": "1:01:09",
+     "deep_link": "https://www.youtube.com/watch?v=2XwsEzCz-ag&t=3669s",
+     "kind": "mention",
+     "note": "SPY opens up 0.24 percent."
     },
     {
      "episode_id": "2oMv5OFqRCg",
@@ -95784,7 +95883,7 @@
      "note": "Speaker hypothesizes their strategy would work even if SPY goes down 10 percent."
     }
    ],
-   "episode_count": 159,
+   "episode_count": 160,
    "single_reference": false
   },
   {
@@ -100250,7 +100349,7 @@
    "symbol": "QQQ",
    "name": "Invesco QQQ Trust",
    "asset_class": "index",
-   "mentions": 226,
+   "mentions": 227,
    "analysis": 83,
    "moments": [
     {
@@ -100405,6 +100504,15 @@
      "deep_link": "https://www.youtube.com/watch?v=2X7XwuNJi2M&t=632s",
      "kind": "analysis",
      "note": "Up almost 2% today, described as a monster chart."
+    },
+    {
+     "episode_id": "2XwsEzCz-ag",
+     "episode_title": "MARKET OPEN: Trying ANCIENT MREs, Midterms AREN'T LOOKING GOOD, The NEXT AI TRADE",
+     "start_seconds": 3706.0,
+     "timestamp": "1:01:46",
+     "deep_link": "https://www.youtube.com/watch?v=2XwsEzCz-ag&t=3706s",
+     "kind": "mention",
+     "note": "NASDAQ is up 0.4 percent."
     },
     {
      "episode_id": "2oMv5OFqRCg",
@@ -102288,7 +102396,7 @@
      "note": "QQQ up 1.3%."
     }
    ],
-   "episode_count": 156,
+   "episode_count": 157,
    "single_reference": false
   },
   {
@@ -106072,7 +106180,7 @@
    "symbol": "XMR",
    "name": "Monero",
    "asset_class": "crypto",
-   "mentions": 192,
+   "mentions": 193,
    "analysis": 72,
    "moments": [
     {
@@ -106164,6 +106272,15 @@
      "deep_link": "https://www.youtube.com/watch?v=2X7XwuNJi2M&t=823s",
      "kind": "analysis",
      "note": "Looks really good and has juice, contrasted favorably with Zcash which doesn't have juice."
+    },
+    {
+     "episode_id": "2XwsEzCz-ag",
+     "episode_title": "MARKET OPEN: Trying ANCIENT MREs, Midterms AREN'T LOOKING GOOD, The NEXT AI TRADE",
+     "start_seconds": 3794.0,
+     "timestamp": "1:03:14",
+     "deep_link": "https://www.youtube.com/watch?v=2XwsEzCz-ag&t=3794s",
+     "kind": "mention",
+     "note": "Monero is 620 (dollars)."
     },
     {
      "episode_id": "3EfAMQA0HN0",
@@ -107804,7 +107921,7 @@
      "note": "Speaker compares Monero favorably as fully private with no optional privacy, but then expresses concern that Monero's supply cannot be fully verified and could have bugs causing undetectable inflation."
     }
    ],
-   "episode_count": 121,
+   "episode_count": 122,
    "single_reference": false
   },
   {
@@ -109478,7 +109595,7 @@
    "symbol": "GLD",
    "name": "Gold",
    "asset_class": "commodity",
-   "mentions": 126,
+   "mentions": 127,
    "analysis": 68,
    "moments": [
     {
@@ -109516,6 +109633,15 @@
      "deep_link": "https://www.youtube.com/watch?v=28UU8BO_ta4&t=1602s",
      "kind": "mention",
      "note": "Gold down 3.6 percent."
+    },
+    {
+     "episode_id": "2XwsEzCz-ag",
+     "episode_title": "MARKET OPEN: Trying ANCIENT MREs, Midterms AREN'T LOOKING GOOD, The NEXT AI TRADE",
+     "start_seconds": 3794.0,
+     "timestamp": "1:03:14",
+     "deep_link": "https://www.youtube.com/watch?v=2XwsEzCz-ag&t=3794s",
+     "kind": "mention",
+     "note": "Gold is flat."
     },
     {
      "episode_id": "3In1m6tg9Fk",
@@ -110616,7 +110742,7 @@
      "note": "Gold up 1.3%."
     }
    ],
-   "episode_count": 98,
+   "episode_count": 99,
    "single_reference": false
   },
   {
@@ -122089,7 +122215,7 @@
    "symbol": "NEAR",
    "name": "Near",
    "asset_class": "crypto",
-   "mentions": 121,
+   "mentions": 122,
    "analysis": 48,
    "moments": [
     {
@@ -122154,6 +122280,15 @@
      "deep_link": "https://www.youtube.com/watch?v=28UU8BO_ta4&t=2300s",
      "kind": "mention",
      "note": "Speaker lists 'near all on three and a half' in market movements and mentions 'near dex'."
+    },
+    {
+     "episode_id": "2XwsEzCz-ag",
+     "episode_title": "MARKET OPEN: Trying ANCIENT MREs, Midterms AREN'T LOOKING GOOD, The NEXT AI TRADE",
+     "start_seconds": 3785.0,
+     "timestamp": "1:03:05",
+     "deep_link": "https://www.youtube.com/watch?v=2XwsEzCz-ag&t=3785s",
+     "kind": "mention",
+     "note": "Near is flat."
     },
     {
      "episode_id": "2_9rEE4GvhQ",
@@ -123182,14 +123317,14 @@
      "note": "Near mentioned alongside Uniswap as a larger-cap token that funds prefer to size into."
     }
    ],
-   "episode_count": 64,
+   "episode_count": 65,
    "single_reference": false
   },
   {
    "symbol": "XRP",
    "name": "XRP",
    "asset_class": "crypto",
-   "mentions": 119,
+   "mentions": 120,
    "analysis": 47,
    "moments": [
     {
@@ -123245,6 +123380,15 @@
      "deep_link": "https://www.youtube.com/watch?v=28UU8BO_ta4&t=1610s",
      "kind": "mention",
      "note": "XRP green on the day."
+    },
+    {
+     "episode_id": "2XwsEzCz-ag",
+     "episode_title": "MARKET OPEN: Trying ANCIENT MREs, Midterms AREN'T LOOKING GOOD, The NEXT AI TRADE",
+     "start_seconds": 3804.0,
+     "timestamp": "1:03:24",
+     "deep_link": "https://www.youtube.com/watch?v=2XwsEzCz-ag&t=3804s",
+     "kind": "mention",
+     "note": "XRP is up 2.3 percent."
     },
     {
      "episode_id": "2_9rEE4GvhQ",
@@ -124264,7 +124408,7 @@
      "note": "Mentioned when asking where XRP is on the market."
     }
    ],
-   "episode_count": 81,
+   "episode_count": 82,
    "single_reference": false
   },
   {
@@ -130252,8 +130396,8 @@
    "symbol": "BNB",
    "name": "Binance Coin",
    "asset_class": "crypto",
-   "mentions": 103,
-   "analysis": 42,
+   "mentions": 104,
+   "analysis": 43,
    "moments": [
     {
      "episode_id": "0cocnhGklPs",
@@ -130263,6 +130407,15 @@
      "deep_link": "https://www.youtube.com/watch?v=0cocnhGklPs&t=1978s",
      "kind": "mention",
      "note": "Briefly mentioned regarding a market for GPT 5.0; speaker expresses disinterest."
+    },
+    {
+     "episode_id": "2XwsEzCz-ag",
+     "episode_title": "MARKET OPEN: Trying ANCIENT MREs, Midterms AREN'T LOOKING GOOD, The NEXT AI TRADE",
+     "start_seconds": 4434.0,
+     "timestamp": "1:13:54",
+     "deep_link": "https://www.youtube.com/watch?v=2XwsEzCz-ag&t=4434s",
+     "kind": "analysis",
+     "note": "Binance experienced a security breach involving hackers using fake job interviews to gain access to internal crypto wallets, resulting in $6.34 billion being exploited."
     },
     {
      "episode_id": "3TtLaaHnfTY",
@@ -131183,7 +131336,7 @@
      "note": "Mentioned as a comparison for the trade structure of Hyperliquid."
     }
    ],
-   "episode_count": 66,
+   "episode_count": 67,
    "single_reference": false
   },
   {
@@ -149461,7 +149614,7 @@
    "symbol": "SLV",
    "name": "Silver",
    "asset_class": "commodity",
-   "mentions": 48,
+   "mentions": 49,
    "analysis": 22,
    "moments": [
     {
@@ -149490,6 +149643,15 @@
      "deep_link": "https://www.youtube.com/watch?v=26OMKKehM8A&t=1596s",
      "kind": "analysis",
      "note": "Silver is at $78 and trading decent."
+    },
+    {
+     "episode_id": "2XwsEzCz-ag",
+     "episode_title": "MARKET OPEN: Trying ANCIENT MREs, Midterms AREN'T LOOKING GOOD, The NEXT AI TRADE",
+     "start_seconds": 3787.0,
+     "timestamp": "1:03:07",
+     "deep_link": "https://www.youtube.com/watch?v=2XwsEzCz-ag&t=3787s",
+     "kind": "mention",
+     "note": "Silver is down 1 percent."
     },
     {
      "episode_id": "3In1m6tg9Fk",
@@ -149897,7 +150059,7 @@
      "note": "Trading at $72.90; speaker characterized as looking terrible, rough, and a gnarly fakeout; expressed no interest."
     }
    ],
-   "episode_count": 44,
+   "episode_count": 45,
    "single_reference": false
   },
   {
@@ -171657,11 +171819,20 @@
   },
   {
    "symbol": "DIA",
-   "name": "Dow Jones Industrial Average",
+   "name": "SPDR Dow Jones Industrial Average ETF",
    "asset_class": "index",
-   "mentions": 28,
+   "mentions": 29,
    "analysis": 8,
    "moments": [
+    {
+     "episode_id": "2XwsEzCz-ag",
+     "episode_title": "MARKET OPEN: Trying ANCIENT MREs, Midterms AREN'T LOOKING GOOD, The NEXT AI TRADE",
+     "start_seconds": 3748.0,
+     "timestamp": "1:02:28",
+     "deep_link": "https://www.youtube.com/watch?v=2XwsEzCz-ag&t=3748s",
+     "kind": "mention",
+     "note": "The Dow is down 0.5 percent."
+    },
     {
      "episode_id": "3In1m6tg9Fk",
      "episode_title": "MARKET OPEN: Crypto Onchain BULL MARKET, AI PSYCHOSIS, Is the US Going BACK TO WAR?",
@@ -171915,7 +172086,7 @@
      "note": "Up 0.2 percent at market open."
     }
    ],
-   "episode_count": 28,
+   "episode_count": 29,
    "single_reference": false
   },
   {
@@ -188804,6 +188975,71 @@
    "single_reference": false
   },
   {
+   "symbol": "LITE",
+   "name": "Litecoin",
+   "asset_class": "crypto",
+   "mentions": 6,
+   "analysis": 3,
+   "moments": [
+    {
+     "episode_id": "2XwsEzCz-ag",
+     "episode_title": "MARKET OPEN: Trying ANCIENT MREs, Midterms AREN'T LOOKING GOOD, The NEXT AI TRADE",
+     "start_seconds": 3784.0,
+     "timestamp": "1:03:04",
+     "deep_link": "https://www.youtube.com/watch?v=2XwsEzCz-ag&t=3784s",
+     "kind": "mention",
+     "note": "Lighter is up 6 percent."
+    },
+    {
+     "episode_id": "BVNmzfUxYrg",
+     "episode_title": "Semiconductors Just Changed FOREVER.. [Stream Recap]",
+     "start_seconds": 1031.0,
+     "timestamp": "17:11",
+     "deep_link": "https://www.youtube.com/watch?v=BVNmzfUxYrg&t=1031s",
+     "kind": "mention",
+     "note": "Lite was down 8% as part of the Serenity list."
+    },
+    {
+     "episode_id": "DRGcwILmfuE",
+     "episode_title": "LIVE: Bitcoin Is Going To ZERO!! Jensen Pumps MRVL, Stocks Are HOT! Trump Is MAD!?",
+     "start_seconds": 9135.0,
+     "timestamp": "2:32:15",
+     "deep_link": "https://www.youtube.com/watch?v=DRGcwILmfuE&t=9135s",
+     "kind": "analysis",
+     "note": "Speaker discusses Lighter as a protocol with strong metrics, mentions it is up 16%, and notes it is starting to paint a nice chart despite showing weakness elsewhere."
+    },
+    {
+     "episode_id": "JR8mPLTmyzk",
+     "episode_title": "MARKET OPEN: Stocks Are RIPPING! The Problem With Memecoins... + Josh Kushner & Lakers Scandal!?",
+     "start_seconds": 7935.0,
+     "timestamp": "2:12:15",
+     "deep_link": "https://www.youtube.com/watch?v=JR8mPLTmyzk&t=7935s",
+     "kind": "mention",
+     "note": "Named and noted as not being on a referenced list, described as green and up 6% on the day."
+    },
+    {
+     "episode_id": "RS_Hoi2t7pQ",
+     "episode_title": "LIVE: MARKET OPEN. WW3 drags on. bitcoin is ripping. PULL Up",
+     "start_seconds": 2961.0,
+     "timestamp": "49:21",
+     "deep_link": "https://www.youtube.com/watch?v=RS_Hoi2t7pQ&t=2961s",
+     "kind": "analysis",
+     "note": "Stock chart discussed; noted as Leopold Ashenbrenner's favorite and liked by Chris Camilla."
+    },
+    {
+     "episode_id": "im56NguHosw",
+     "episode_title": "Why Are All Celebrities Scamming & The Value of The Hero Trade",
+     "start_seconds": 1463.0,
+     "timestamp": "24:23",
+     "deep_link": "https://www.youtube.com/watch?v=im56NguHosw&t=1463s",
+     "kind": "analysis",
+     "note": "Speaker holds $500,000 in Lumentum, describes it as one of NVIDIA's investments and an emerging leader in laser chips with over 100% annual revenue growth and a 26-27 forward PE."
+    }
+   ],
+   "episode_count": 6,
+   "single_reference": false
+  },
+  {
    "symbol": "QSR",
    "name": "Restaurant Brands International (QSR)",
    "asset_class": "stock",
@@ -189347,62 +189583,6 @@
      "deep_link": "https://www.youtube.com/watch?v=pVYFgn3_OC4&t=96s",
      "kind": "analysis",
      "note": "Stock has been down since an early August advertisement controversy involving a head of content who was fired."
-    }
-   ],
-   "episode_count": 5,
-   "single_reference": false
-  },
-  {
-   "symbol": "LITE",
-   "name": "Lumentum Holdings",
-   "asset_class": "stock",
-   "mentions": 5,
-   "analysis": 3,
-   "moments": [
-    {
-     "episode_id": "BVNmzfUxYrg",
-     "episode_title": "Semiconductors Just Changed FOREVER.. [Stream Recap]",
-     "start_seconds": 1031.0,
-     "timestamp": "17:11",
-     "deep_link": "https://www.youtube.com/watch?v=BVNmzfUxYrg&t=1031s",
-     "kind": "mention",
-     "note": "Lite was down 8% as part of the Serenity list."
-    },
-    {
-     "episode_id": "DRGcwILmfuE",
-     "episode_title": "LIVE: Bitcoin Is Going To ZERO!! Jensen Pumps MRVL, Stocks Are HOT! Trump Is MAD!?",
-     "start_seconds": 9135.0,
-     "timestamp": "2:32:15",
-     "deep_link": "https://www.youtube.com/watch?v=DRGcwILmfuE&t=9135s",
-     "kind": "analysis",
-     "note": "Speaker discusses Lighter as a protocol with strong metrics, mentions it is up 16%, and notes it is starting to paint a nice chart despite showing weakness elsewhere."
-    },
-    {
-     "episode_id": "JR8mPLTmyzk",
-     "episode_title": "MARKET OPEN: Stocks Are RIPPING! The Problem With Memecoins... + Josh Kushner & Lakers Scandal!?",
-     "start_seconds": 7935.0,
-     "timestamp": "2:12:15",
-     "deep_link": "https://www.youtube.com/watch?v=JR8mPLTmyzk&t=7935s",
-     "kind": "mention",
-     "note": "Named and noted as not being on a referenced list, described as green and up 6% on the day."
-    },
-    {
-     "episode_id": "RS_Hoi2t7pQ",
-     "episode_title": "LIVE: MARKET OPEN. WW3 drags on. bitcoin is ripping. PULL Up",
-     "start_seconds": 2961.0,
-     "timestamp": "49:21",
-     "deep_link": "https://www.youtube.com/watch?v=RS_Hoi2t7pQ&t=2961s",
-     "kind": "analysis",
-     "note": "Stock chart discussed; noted as Leopold Ashenbrenner's favorite and liked by Chris Camilla."
-    },
-    {
-     "episode_id": "im56NguHosw",
-     "episode_title": "Why Are All Celebrities Scamming & The Value of The Hero Trade",
-     "start_seconds": 1463.0,
-     "timestamp": "24:23",
-     "deep_link": "https://www.youtube.com/watch?v=im56NguHosw&t=1463s",
-     "kind": "analysis",
-     "note": "Speaker holds $500,000 in Lumentum, describes it as one of NVIDIA's investments and an emerging leader in laser chips with over 100% annual revenue growth and a 26-27 forward PE."
     }
    ],
    "episode_count": 5,
@@ -193545,6 +193725,62 @@
    "single_reference": false
   },
   {
+   "symbol": "WLF",
+   "name": "World Liberty Financial",
+   "asset_class": "other",
+   "mentions": 5,
+   "analysis": 2,
+   "moments": [
+    {
+     "episode_id": "2XwsEzCz-ag",
+     "episode_title": "MARKET OPEN: Trying ANCIENT MREs, Midterms AREN'T LOOKING GOOD, The NEXT AI TRADE",
+     "start_seconds": 7292.0,
+     "timestamp": "2:01:32",
+     "deep_link": "https://www.youtube.com/watch?v=2XwsEzCz-ag&t=7292s",
+     "kind": "mention",
+     "note": "Mentioned in context of crypto lawsuits and subpoenas related to Trump; discussed as potential focus of impeachment."
+    },
+    {
+     "episode_id": "DC1f4o0Q_mI",
+     "episode_title": "Diogenes: Networking in Crypto, Perps, $USDH and More | TG Podcast",
+     "start_seconds": 3396.0,
+     "timestamp": "56:36",
+     "deep_link": "https://www.youtube.com/watch?v=DC1f4o0Q_mI&t=3396s",
+     "kind": "mention",
+     "note": "Speaker mentions World Liberty Financial is live and has a perp offering."
+    },
+    {
+     "episode_id": "jLTt7ivTWnE",
+     "episode_title": "LIVE: Trump Is PUMPING Memory..!? META Is SAVED! Will The Bull Market Last FOREVER!?!?!",
+     "start_seconds": 2714.0,
+     "timestamp": "45:14",
+     "deep_link": "https://www.youtube.com/watch?v=jLTt7ivTWnE&t=2714s",
+     "kind": "mention",
+     "note": "Speaker referenced Trump making $1 billion off World Liberty Fi while the coin dropped 99%."
+    },
+    {
+     "episode_id": "rXJ2IfbP4y4",
+     "episode_title": "The Economy is COOKED.. [Stream Recap]",
+     "start_seconds": 1971.0,
+     "timestamp": "32:51",
+     "deep_link": "https://www.youtube.com/watch?v=rXJ2IfbP4y4&t=1971s",
+     "kind": "analysis",
+     "note": "Speaker discusses a detailed post about World Liberty Financial's meme coin launch; 600,000 wallets purchased the token and lost 3.87 billion dollars total, while the family collected 350 million in trading fees."
+    },
+    {
+     "episode_id": "rXJ2IfbP4y4",
+     "episode_title": "The Economy is COOKED.. [Stream Recap]",
+     "start_seconds": 2242.0,
+     "timestamp": "37:22",
+     "deep_link": "https://www.youtube.com/watch?v=rXJ2IfbP4y4&t=2242s",
+     "kind": "analysis",
+     "note": "Described as a crypto operation with governance and control issues; Justin Sun was the number one investor putting in $80 million; a single Guardian EOA has unilateral power to freeze token holders' assets."
+    }
+   ],
+   "episode_count": 4,
+   "single_reference": false
+  },
+  {
    "symbol": "IMAX",
    "name": "IMAX",
    "asset_class": "stock",
@@ -194583,53 +194819,6 @@
     }
    ],
    "episode_count": 4,
-   "single_reference": false
-  },
-  {
-   "symbol": "WLF",
-   "name": "World Liberty Financial",
-   "asset_class": "crypto",
-   "mentions": 4,
-   "analysis": 2,
-   "moments": [
-    {
-     "episode_id": "DC1f4o0Q_mI",
-     "episode_title": "Diogenes: Networking in Crypto, Perps, $USDH and More | TG Podcast",
-     "start_seconds": 3396.0,
-     "timestamp": "56:36",
-     "deep_link": "https://www.youtube.com/watch?v=DC1f4o0Q_mI&t=3396s",
-     "kind": "mention",
-     "note": "Speaker mentions World Liberty Financial is live and has a perp offering."
-    },
-    {
-     "episode_id": "jLTt7ivTWnE",
-     "episode_title": "LIVE: Trump Is PUMPING Memory..!? META Is SAVED! Will The Bull Market Last FOREVER!?!?!",
-     "start_seconds": 2714.0,
-     "timestamp": "45:14",
-     "deep_link": "https://www.youtube.com/watch?v=jLTt7ivTWnE&t=2714s",
-     "kind": "mention",
-     "note": "Speaker referenced Trump making $1 billion off World Liberty Fi while the coin dropped 99%."
-    },
-    {
-     "episode_id": "rXJ2IfbP4y4",
-     "episode_title": "The Economy is COOKED.. [Stream Recap]",
-     "start_seconds": 1971.0,
-     "timestamp": "32:51",
-     "deep_link": "https://www.youtube.com/watch?v=rXJ2IfbP4y4&t=1971s",
-     "kind": "analysis",
-     "note": "Speaker discusses a detailed post about World Liberty Financial's meme coin launch; 600,000 wallets purchased the token and lost 3.87 billion dollars total, while the family collected 350 million in trading fees."
-    },
-    {
-     "episode_id": "rXJ2IfbP4y4",
-     "episode_title": "The Economy is COOKED.. [Stream Recap]",
-     "start_seconds": 2242.0,
-     "timestamp": "37:22",
-     "deep_link": "https://www.youtube.com/watch?v=rXJ2IfbP4y4&t=2242s",
-     "kind": "analysis",
-     "note": "Described as a crypto operation with governance and control issues; Justin Sun was the number one investor putting in $80 million; a single Guardian EOA has unilateral power to freeze token holders' assets."
-    }
-   ],
-   "episode_count": 3,
    "single_reference": false
   },
   {
@@ -201196,6 +201385,44 @@
    "single_reference": false
   },
   {
+   "symbol": "PERP",
+   "name": "Perpetual Futures (CFTC Approval)",
+   "asset_class": "other",
+   "mentions": 3,
+   "analysis": 1,
+   "moments": [
+    {
+     "episode_id": "2XwsEzCz-ag",
+     "episode_title": "MARKET OPEN: Trying ANCIENT MREs, Midterms AREN'T LOOKING GOOD, The NEXT AI TRADE",
+     "start_seconds": 1503.0,
+     "timestamp": "25:03",
+     "deep_link": "https://www.youtube.com/watch?v=2XwsEzCz-ag&t=1503s",
+     "kind": "mention",
+     "note": "Speaker mentions PERP approval happening, noting CFTC approves first equity perpetual future contract for trading on U.S. exchanges."
+    },
+    {
+     "episode_id": "KkEohub0bw8",
+     "episode_title": "Amit Kukreja - How to BEAT the Stock Market..",
+     "start_seconds": 2038.0,
+     "timestamp": "33:58",
+     "deep_link": "https://www.youtube.com/watch?v=KkEohub0bw8&t=2038s",
+     "kind": "analysis",
+     "note": "Discussed as a perpetual futures platform that has been a golden child of crypto in 2024, with analysis of leverage risks and market innovation."
+    },
+    {
+     "episode_id": "xFNpcQjcuVE",
+     "episode_title": "LIVE: Hyperliquid Is LEGAL!!! SAAS is BACK... Stocks Are RIPPINGGGG!!!!!!! Trump RUGGED War..!?",
+     "start_seconds": 8055.0,
+     "timestamp": "2:14:15",
+     "deep_link": "https://www.youtube.com/watch?v=xFNpcQjcuVE&t=8055s",
+     "kind": "mention",
+     "note": "Mentioned as 'perp coin' that the speaker recalls owning in a wallet."
+    }
+   ],
+   "episode_count": 3,
+   "single_reference": false
+  },
+  {
    "symbol": "HUM",
    "name": "Humana",
    "asset_class": "stock",
@@ -202439,6 +202666,35 @@
      "deep_link": "https://www.youtube.com/watch?v=5InXzZkSEgE&t=3384s",
      "kind": "analysis",
      "note": "Speaker discussed Monster Beverage as a potential IRL long trade related to in-real-life activities and experiences."
+    }
+   ],
+   "episode_count": 2,
+   "single_reference": false
+  },
+  {
+   "symbol": "BRN",
+   "name": "Brent Crude",
+   "asset_class": "commodity",
+   "mentions": 2,
+   "analysis": 1,
+   "moments": [
+    {
+     "episode_id": "2XwsEzCz-ag",
+     "episode_title": "MARKET OPEN: Trying ANCIENT MREs, Midterms AREN'T LOOKING GOOD, The NEXT AI TRADE",
+     "start_seconds": 3901.0,
+     "timestamp": "1:05:01",
+     "deep_link": "https://www.youtube.com/watch?v=2XwsEzCz-ag&t=3901s",
+     "kind": "mention",
+     "note": "Brent is down 0.5 percent."
+    },
+    {
+     "episode_id": "i9ry1Uqdn20",
+     "episode_title": "LIVE: THE ANDREW YANG INTERVIEW",
+     "start_seconds": 8590.0,
+     "timestamp": "2:23:10",
+     "deep_link": "https://www.youtube.com/watch?v=i9ry1Uqdn20&t=8590s",
+     "kind": "analysis",
+     "note": "Speaker discusses holding Brent and compares it to WTI; mentions getting 'vamped' by the oil spread and having a position entry around 104 with a 103 stop loss."
     }
    ],
    "episode_count": 2,
@@ -203805,35 +204061,6 @@
     }
    ],
    "episode_count": 1,
-   "single_reference": false
-  },
-  {
-   "symbol": "PERP",
-   "name": "Perpetual Protocol",
-   "asset_class": "crypto",
-   "mentions": 2,
-   "analysis": 1,
-   "moments": [
-    {
-     "episode_id": "KkEohub0bw8",
-     "episode_title": "Amit Kukreja - How to BEAT the Stock Market..",
-     "start_seconds": 2038.0,
-     "timestamp": "33:58",
-     "deep_link": "https://www.youtube.com/watch?v=KkEohub0bw8&t=2038s",
-     "kind": "analysis",
-     "note": "Discussed as a perpetual futures platform that has been a golden child of crypto in 2024, with analysis of leverage risks and market innovation."
-    },
-    {
-     "episode_id": "xFNpcQjcuVE",
-     "episode_title": "LIVE: Hyperliquid Is LEGAL!!! SAAS is BACK... Stocks Are RIPPINGGGG!!!!!!! Trump RUGGED War..!?",
-     "start_seconds": 8055.0,
-     "timestamp": "2:14:15",
-     "deep_link": "https://www.youtube.com/watch?v=xFNpcQjcuVE&t=8055s",
-     "kind": "mention",
-     "note": "Mentioned as 'perp coin' that the speaker recalls owning in a wallet."
-    }
-   ],
-   "episode_count": 2,
    "single_reference": false
   },
   {
@@ -212780,26 +213007,6 @@
    "single_reference": true
   },
   {
-   "symbol": "BRN",
-   "name": "Brent crude oil",
-   "asset_class": "commodity",
-   "mentions": 1,
-   "analysis": 1,
-   "moments": [
-    {
-     "episode_id": "i9ry1Uqdn20",
-     "episode_title": "LIVE: THE ANDREW YANG INTERVIEW",
-     "start_seconds": 8590.0,
-     "timestamp": "2:23:10",
-     "deep_link": "https://www.youtube.com/watch?v=i9ry1Uqdn20&t=8590s",
-     "kind": "analysis",
-     "note": "Speaker discusses holding Brent and compares it to WTI; mentions getting 'vamped' by the oil spread and having a position entry around 104 with a 103 stop loss."
-    }
-   ],
-   "episode_count": 1,
-   "single_reference": true
-  },
-  {
    "symbol": "PK",
    "name": "Park Hotels and Resorts",
    "asset_class": "stock",
@@ -219835,6 +220042,26 @@
      "deep_link": "https://www.youtube.com/watch?v=2K4E-rrEioc&t=2431s",
      "kind": "mention",
      "note": "Referenced as a hack agent that discovered an exploit on Virtuals and received a ten thousand dollar bug bounty payment."
+    }
+   ],
+   "episode_count": 1,
+   "single_reference": true
+  },
+  {
+   "symbol": "HGU",
+   "name": "Copper",
+   "asset_class": "commodity",
+   "mentions": 1,
+   "analysis": 0,
+   "moments": [
+    {
+     "episode_id": "2XwsEzCz-ag",
+     "episode_title": "MARKET OPEN: Trying ANCIENT MREs, Midterms AREN'T LOOKING GOOD, The NEXT AI TRADE",
+     "start_seconds": 3794.0,
+     "timestamp": "1:03:14",
+     "deep_link": "https://www.youtube.com/watch?v=2XwsEzCz-ag&t=3794s",
+     "kind": "mention",
+     "note": "Copper is down 1.6 percent."
     }
    ],
    "episode_count": 1,
@@ -229901,10 +230128,10 @@
    "single_reference": true
   }
  ],
- "total_hits": 23243,
- "dropped_low_confidence": 1790,
- "dropped_not_an_asset": 1382,
- "episodes_processed": 646,
+ "total_hits": 23267,
+ "dropped_low_confidence": 1791,
+ "dropped_not_an_asset": 1385,
+ "episodes_processed": 647,
  "episode_ids": [
   "-A0rmPYG0s0",
   "-CYcuGbAnpI",
@@ -229948,6 +230175,7 @@
   "28UU8BO_ta4",
   "2K4E-rrEioc",
   "2X7XwuNJi2M",
+  "2XwsEzCz-ag",
   "2ZNszJURUls",
   "2_9rEE4GvhQ",
   "2eQUuGJvBLU",
