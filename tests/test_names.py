@@ -50,6 +50,8 @@ class TestTheManglingsThatWerePosted:
         ("z cash is at all-time highs", "Zcash is at all-time highs"),
         ("Corweave is up 10x", "CoreWeave is up 10x"),
         ("Lucanets coming on the show", "Luca Netz coming on the show"),
+        ("Tulu King says Eli Lilly is his largest position",
+         "Tulip King says Eli Lilly is his largest position"),
     ])
     def test_it_is_corrected(self, mangled, correct):
         assert correct in fix(mangled)[0]

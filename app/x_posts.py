@@ -46,7 +46,7 @@ import re
 from functools import lru_cache
 from pathlib import Path
 
-from . import mcg_on_x, podcast, youtube_map
+from . import mcg_on_x, names, podcast, youtube_map
 
 logger = logging.getLogger(__name__)
 
@@ -225,10 +225,12 @@ def _clips() -> dict[str, dict]:
                 or not isinstance(row.get("stitched", False), bool)):
             logger.warning("x posts: clip %s is malformed, left out", post)
             continue
+        # The transcript's own words, so its misheard names too: the same
+        # corrections the answers get (app/names.py).
         out[str(post)] = {"archive": row["archive"],
                           "episode_id": row["episode_id"], "start": start, "end": end,
-                          "before": row.get("before", "")[:1500],
-                          "after": row.get("after", "")[:3000],
+                          "before": names.fix(row.get("before", ""))[0][:1500],
+                          "after": names.fix(row.get("after", ""))[0][:3000],
                           "after_at": after_at,
                           # Cut together from several parts of the show, so
                           # its own clock is not the show's.

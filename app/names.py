@@ -73,6 +73,10 @@ _ALIASES: dict[str, str] = {
     # AnsemHack winner would be announced, the archive answered from an
     # August episode and said nobody had given a date.
     "anthem hack": "AnsemHack",
+    # Market Bubble Episode 24 at 1:41:38, the one line of 29 about him
+    # the transcript got wrong. It was in the extension's panel under
+    # Ansem's clip of that show on 4 Nov 2026, the first thing Lex saw.
+    "tulu king": "Tulip King",
     "answer hack": "AnsemHack",
 }
 

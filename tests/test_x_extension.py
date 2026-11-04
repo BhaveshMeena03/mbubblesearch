@@ -99,8 +99,9 @@ def files(tmp_path, monkeypatch):
         {"id": "pwhvqgCGV0w", "title": "This Trader Caught $ORBIO", "published_at": "2026-10-01"}]))
     (tmp_path / "x_clips.json").write_text(json.dumps({
         CLIP_POST: {"account": "blknoiz06", "archive": "podcast", "episode_id": EP24,
-                    "start": 5993, "end": 6072, "before": "lab diamonds.",
-                    "after": "How does MicroStrategy look?", "after_at": 6078},
+                    "start": 5993, "end": 6072, "before": "lab diamonds on Salana.",
+                    "after": "How does MicroStrategy look? Tulu King says Eli Lilly.",
+                    "after_at": 6078},
         "2116000000000000001": {"account": "MarketBubble", "archive": "podcast",
                                 "episode_id": "KcazozbZHd0",
                                 "start": 60, "end": 90, "before": "", "after": "a",
@@ -342,8 +343,10 @@ def test_a_placed_clip_says_where_it_is_from_and_what_came_after(files):
     assert row["title"] == "Market Bubble Episode 24" and row["seekable"] is True
     assert row["clip"] == {
         "at": "1:39:53", "until": "1:41:12", "watch": f"{BROADCAST}?t=5993", "seeks": True,
-        "before": "lab diamonds.", "after": "How does MicroStrategy look?",
-        "after_at": "1:41:18", "after_watch": f"{BROADCAST}?t=6078"}
+        "before": "lab diamonds on Solana.",
+        "after": "How does MicroStrategy look? Tulip King says Eli Lilly.",
+        "after_at": "1:41:18", "after_watch": f"{BROADCAST}?t=6078"}, \
+        "the transcript's misheard names are spelled right, as in the answers"
 
 
 def test_a_time_inside_the_clip_plays_in_it_and_every_time_opens_the_show(files):
