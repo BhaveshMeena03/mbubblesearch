@@ -2341,5 +2341,21 @@
   "copies": 1,
   "heard_from": "audio",
   "placed": "2026-11-04"
+ },
+ "2117963620554616973": {
+  "account": "blknoiz06",
+  "archive": "podcast",
+  "episode_id": "x-2115904746355851479",
+  "start": 271,
+  "end": 10711,
+  "before": "So, I think there's, like, there's, like, there's, like, some uncertainty with",
+  "after": "Oh, I had a druid? Yeah, bro. My WoW characters were tough. I'm not going to lie. I played hella World of Warcraft. Hella World of Warcraft. Paper trade positioning is alpha. Yo, it is. It is alpha. That's a good leak. You know some shit, bro. It's actually a lot of alpha. A lot. A lot. Did they really predict Black October? Oh, pretty production will DM you after the show. Yeah, yeah, yeah. Production will DM you after the show. Yeah. Like, bro, what is this day, bro? Like, what's happening? What's happening?",
+  "after_at": 10715,
+  "duration": 3564.7,
+  "matches": 5431,
+  "copies": 1,
+  "heard_from": "captions",
+  "stitched": true,
+  "placed": "2026-11-04"
  }
 }
