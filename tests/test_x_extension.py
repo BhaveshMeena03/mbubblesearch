@@ -54,6 +54,7 @@ YT_YOUTUBE_EP = "2116000000000000022"    # a Market Bubble episode held only fro
 TG_CLIP = "2116000000000000030"          # ThreadGuy's clip of his 30 Oct open, paired with X
 MCG_CLIP = "2116000000000000031"         # MCG's clip of a show never on X
 STITCHED_CLIP = "2115681447856030045"    # Ansem's upload cut from parts of a show
+ANSEM_COPY = "2115904745818996865"       # Ansem's own broadcast of Episode 24
 
 
 # --- the shelf -------------------------------------------------------------
@@ -138,6 +139,23 @@ def files(tmp_path, monkeypatch):
                                 "episode_id": "notOnShelf1", "start": 1, "end": 2},
         "2116000000000000034": {"account": "MCGlive", "archive": "rasmr",
                                 "episode_id": "2bev0UDp79Y", "start": 1, "end": 2}}))
+    copy = {"account": "blknoiz06", "episode_id": EP24,
+            "broadcast": "https://x.com/i/broadcasts/1PJqrNvWzwexb"}
+    (tmp_path / "x_copies.json").write_text(json.dumps({
+        # Market Bubble's lost a minute at 1:40 that his kept.
+        ANSEM_COPY: {**copy, "sections": [{"from": 0, "to": 6000, "offset": 0},
+                                          {"from": 6060, "to": None, "offset": 63}]},
+        "2116000000000000040": {**copy, "offset": "0"},
+        "2116000000000000041": {**copy, "offset": 0,
+                                "broadcast": "https://evil.example/i/broadcasts/1PJqrNvWzwexb"},
+        "2116000000000000042": {**copy, "offset": 0, "episode_id": "x-2199999999999999999"},
+        "2116000000000000043": {**copy, "sections": [{"from": 0, "to": None, "offset": 1.5}]},
+        "2116000000000000044": {**copy},
+        "2116000000000000045": {**copy, "sections": [{"to": None, "offset": 0}]},
+        "2116000000000000046": {**copy, "offset": True},
+        "2116000000000000047": {**copy, "offset": 0, "episode_id": "KcazozbZHd0"},
+        "2115904746355851479": {**copy, "offset": 50},
+        "not-a-post": {**copy, "offset": 0}}))
     with gzip.open(tmp_path / "mcg_summaries.json.gz", "wt") as fh:
         json.dump({"2NK_MBlFvtM": {"tldr": "Bitcoin held 75.2K.", "model": "m", "pinned": True,
                                    "topics": [{"t": 249, "text": "the chart"},
@@ -187,11 +205,12 @@ def files(tmp_path, monkeypatch):
                         ("MCG_SHELF", "mcg_index.json"), ("CLIPS", "x_clips.json"),
                         ("MCG_SUMMARIES", "mcg_summaries.json.gz"), ("LINKS", "x_links.json"),
                         ("THREADGUY_PAIRS", "tg.json"), ("THREADGUY_SHELF", "threadguy_index.json"),
-                        ("THREADGUY_SUMMARIES", "threadguy_summaries.json.gz")):
+                        ("THREADGUY_SUMMARIES", "threadguy_summaries.json.gz"),
+                        ("COPIES", "x_copies.json")):
         monkeypatch.setattr(x_posts, name, tmp_path / value)
     caches = (x_posts.shelf, x_posts._summaries, x_posts._clips, x_posts._mcg_summaries,
               x_posts._threadguy_summaries, x_posts._links, x_posts._broadcasts,
-              youtube_map._anchors)
+              x_posts._copies, youtube_map._anchors)
     for cached in caches:
         cached.cache_clear()
     yield tmp_path
@@ -214,6 +233,31 @@ def test_a_stream_indexed_from_x_wins_over_its_youtube_pair(files):
     """Its transcript is on X's clock already: offset 0, not the pair's -40."""
     row = x_posts.shelf()[RASMR_X_ONLY]
     assert row["episode_id"] == f"x-{RASMR_X_ONLY}" and row["clock"] == {"offset": 0}
+
+
+def test_ansems_copy_of_an_episode_opens_its_panel_on_his_own_clock(files):
+    """He goes live with every Market Bubble episode from his own account
+    as Market Bubble does, under a broadcast id of its own: Episode 24 is
+    2115904745818996865 on his profile. Until 4 Nov 2026 none had a button."""
+    row = x_posts.describe(ANSEM_COPY)
+    assert row["episode_id"] == EP24 and row["kind"] == "recording" and row["seekable"]
+    assert row["title"] == "Market Bubble Episode 24"
+    assert row["summary"].startswith("**Topics**")
+    assert row["times"]["0:04:31"] == 271
+    assert row["times"]["2:00:00"] == 7263, "past the minute his copy kept and theirs lost"
+    assert "1:40:05" not in row["times"], "in the stretch neither clock was heard"
+    assert x_posts.listing()[ANSEM_COPY] == "podcast"
+
+
+def test_a_copy_row_wrong_in_any_way_is_left_out_whole(files):
+    shelf = x_posts.shelf()
+    for post in range(2116000000000000040, 2116000000000000048):
+        assert str(post) not in shelf, post
+    assert "not-a-post" not in shelf
+
+
+def test_a_copy_never_takes_over_the_episodes_own_post(files):
+    assert x_posts.shelf()["2115904746355851479"]["clock"] == {"offset": 0}
 
 
 def test_ids_that_are_not_post_ids_never_reach_the_shelf(files):

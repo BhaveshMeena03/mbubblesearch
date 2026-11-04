@@ -123,7 +123,7 @@ def test_market_bubble_and_ansem_recordings_are_indexed_before_the_clips():
     indexed = SCRIPT.index("scripts/add_x_recordings.py --search")
     assert indexed < SCRIPT.index("scripts/place_x_clips.py --search")
     assert indexed < SCRIPT.index("scripts/pack_summaries.py")
-    for kept in ("data/x_recordings.json", "data/episodes.json.gz", "data/broadcast_links.json",
+    for kept in ("data/x_recordings.json", "data/x_copies.json", "data/episodes.json.gz", "data/broadcast_links.json",
                  "data/term_index.json", "data/highlights.json"):
         assert kept in SCRIPT
 

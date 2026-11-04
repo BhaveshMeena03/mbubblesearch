@@ -18,6 +18,11 @@ Three kinds of post, all from files the service already ships:
                        far X's clock is from YouTube's (app/mcg_on_x.py).
   rasmr X-only         streams that never reached YouTube, indexed from X
                        as "x-<post>" like Market Bubble's.
+  Ansem's copies       his own broadcast of each Market Bubble episode,
+                       started with Market Bubble's under a broadcast id of
+                       its own; the same feed, so the episode's panel, on a
+                       clock heard against it (scripts/same_feed.py,
+                       written to data/x_copies.json).
 
 And two that are not a whole recording. Clips: Ansem posts a minute
 of Market Bubble or of his own videos several times a day, and MCG Live
@@ -59,6 +64,7 @@ RASMR_SHELF = _DATA / "rasmr_index.json"
 MCG_SHELF = _DATA / "mcg_index.json"
 CLIPS = _DATA / "x_clips.json"
 LINKS = _DATA / "x_links.json"
+COPIES = _DATA / "x_copies.json"
 MCG_SUMMARIES = _DATA / "mcg_summaries.json.gz"
 THREADGUY_PAIRS = _DATA / "threadguy_broadcast_links.json"
 THREADGUY_SHELF = _DATA / "threadguy_index.json"
@@ -239,6 +245,41 @@ def _clips() -> dict[str, dict]:
 
 
 @lru_cache(maxsize=1)
+def _copies() -> dict[str, dict]:
+    """data/x_copies.json, each row checked: a post that carries one of
+    Market Bubble's episodes on a broadcast of its own, and the clock
+    between the two. A row with no clock it can read is left out, so the
+    post has no button rather than times that land on the wrong second."""
+    out: dict[str, dict] = {}
+    given = _json(COPIES) or {}
+    for post, row in (given.items() if isinstance(given, dict) else ()):
+        if not (POST_ID.fullmatch(str(post)) and isinstance(row, dict)):
+            continue
+        episode_id = str(row.get("episode_id", ""))
+        bid = _broadcast_id(row.get("broadcast"))
+        clock = _clock_of(row)
+        if not (_post_of(episode_id) and bid and _readable(clock)):
+            logger.warning("x posts: copy %s is malformed, left out", post)
+            continue
+        out[str(post)] = {"episode_id": episode_id, "broadcast": bid, "clock": clock}
+    return out
+
+
+def _readable(clock: dict) -> bool:
+    """A clock from_x and to_x can use: a whole number of seconds, or
+    sections that each say where they start and how far off they are."""
+    def seconds(value) -> bool:
+        return isinstance(value, int) and not isinstance(value, bool)
+    if "sections" in clock:
+        stretches = clock["sections"]
+        return (isinstance(stretches, list) and bool(stretches)
+                and all(isinstance(s, dict) and seconds(s.get("from")) and seconds(s.get("offset"))
+                        and (s.get("to") is None or seconds(s.get("to")))
+                        for s in stretches))
+    return seconds(clock.get("offset"))
+
+
+@lru_cache(maxsize=1)
 def shelf() -> dict[str, dict]:
     """Post id to what it is: archive, episode, and the clock to X."""
     posts: dict[str, dict] = {}
@@ -258,6 +299,11 @@ def shelf() -> dict[str, dict]:
         if post:
             posts[post] = {"archive": "podcast", "episode_id": episode_id,
                            "clock": {"offset": 0}}
+    # Ansem's broadcast of the same episode: its panel, on his clock.
+    for post, copy in _copies().items():
+        if copy["episode_id"] in known and post not in posts:
+            posts[post] = {"archive": "podcast", "episode_id": copy["episode_id"],
+                           "clock": copy["clock"]}
 
     for archive, path in (("mcg", MCG_PAIRS), ("rasmr", RASMR_PAIRS),
                           ("threadguy", THREADGUY_PAIRS)):

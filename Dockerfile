@@ -131,6 +131,8 @@ COPY data/mcg_guests.json ./data/mcg_guests.json
 COPY data/x_clips.json ./data/x_clips.json
 # Our posts that link a show's broadcast at a second.
 COPY data/x_links.json ./data/x_links.json
+# Ansem's own broadcast of each Market Bubble episode, and its clock.
+COPY data/x_copies.json ./data/x_copies.json
 # Which of ThreadGuy's X broadcasts is which show, and its clock.
 COPY data/threadguy_broadcast_links.json ./data/threadguy_broadcast_links.json
 COPY widget ./widget

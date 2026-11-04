@@ -236,7 +236,8 @@ for kept in data/mcg_broadcast_links.json data/threadguy_broadcast_links.json \
             data/threadguy_x_broadcasts.json data/mcg_summaries.json.gz \
             data/x_clips.json data/x_clips_search.json \
             data/x_links.json data/x_links_search.json \
-            data/x_recordings.json data/episodes.json.gz data/broadcast_links.json \
+            data/x_recordings.json data/x_copies.json \
+            data/episodes.json.gz data/broadcast_links.json \
             data/rasmr_broadcast_links.json data/rasmr_x_broadcasts.json \
             data/term_index.json data/highlights.json; do
   if git ls-files --error-unmatch "$kept" >/dev/null 2>&1; then

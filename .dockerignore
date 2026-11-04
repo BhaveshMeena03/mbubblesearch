@@ -69,6 +69,7 @@ data/
 # The extension's placed clips.
 !data/x_clips.json
 !data/x_links.json
+!data/x_copies.json
 !data/threadguy_broadcast_links.json
 redteam_report.md
 PITCH_PREP.md

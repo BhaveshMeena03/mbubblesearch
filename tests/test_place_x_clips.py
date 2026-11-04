@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import sys
+from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -372,3 +373,70 @@ def test_x_not_answering_costs_one_post_not_the_run(monkeypatch, tmp_path):
     assert "no answer" in place.fetch("2115537742235152750", tmp_path)["error"]
     assert place.listen("2115537742235152750", tmp_path, 2400.0) == ""
     assert asked == [180, 2700], "the download gets the video's own length on top"
+
+
+def _search_world(tmp_path, monkeypatch, state, found, replies, episodes):
+    out, searched = tmp_path / "x_clips.json", tmp_path / "x_clips_search.json"
+    searched.write_text(json.dumps(state))
+    read = []
+
+    async def fake_search(since_id):
+        return list(found)
+
+    def fetch(post, workdir):
+        read.append(post)
+        return dict(replies[post])
+    monkeypatch.setattr(place, "OUT", out)
+    monkeypatch.setattr(place, "SEARCHED", searched)
+    monkeypatch.setattr(place, "PAUSE_SECONDS", 0)
+    monkeypatch.setattr(place, "search", fake_search)
+    monkeypatch.setattr(place, "fetch", fetch)
+    monkeypatch.setattr(place.episode_store, "load", lambda: list(episodes))
+    monkeypatch.setattr(sys, "argv", ["place_x_clips.py", "--search"])
+    place.main()
+    return read, json.loads(searched.read_text()), json.loads(out.read_text())
+
+
+NEW_CLIP = "2117000000000000001"         # 3 Nov 2026
+OTHER_SHOW = {**EPISODE, "episode_id": "x-2117000000000000099", "segments": []}
+
+
+def test_his_clip_of_a_show_not_yet_indexed_waits_for_it(tmp_path, monkeypatch):
+    """Two of Ansem's 30 Oct clips were refused because the video they were
+    cut from went in three days later, and stayed refused until a hand run."""
+    monkeypatch.setattr(place, "_today", lambda: date(2026, 11, 4))
+    stranger = _got(caption="not ours at all " * 5)
+    replies = {NEW_CLIP: stranger}
+    read, state, clips = _search_world(tmp_path, monkeypatch, {"newest": "1"}, [NEW_CLIP],
+                                       replies, [OTHER_SHOW])
+    assert state["unplaced"] == {NEW_CLIP: {"held": 1}} and clips == {}
+
+    read, state, _ = _search_world(tmp_path, monkeypatch, state, [], replies, [OTHER_SHOW])
+    assert read == [], "the archive has not grown: not read again"
+
+    replies[NEW_CLIP] = _got()
+    read, state, clips = _search_world(tmp_path, monkeypatch, state, [], replies,
+                                       [OTHER_SHOW, EPISODE])
+    assert read == [NEW_CLIP] and clips[NEW_CLIP]["start"] == 40
+    assert "unplaced" not in state and state["newest"] == NEW_CLIP
+
+
+def test_only_the_shows_own_accounts_wait_and_only_for_a_week(tmp_path, monkeypatch):
+    monkeypatch.setattr(place, "_today", lambda: date(2026, 11, 20))
+    stranger = "not ours at all " * 5
+    replies = {"2117000000000000002": _got(account="Kaiz_294", caption=stranger),
+               "2117000000000000003": _got(caption=stranger)}
+    _, state, _ = _search_world(
+        tmp_path, monkeypatch,
+        {"newest": "1", "unplaced": {NEW_CLIP: {"held": 0}}}, list(replies), replies, [OTHER_SHOW])
+    assert state["unplaced"] == {"2117000000000000003": {"held": 1}}, \
+        "Kaiz clips every show there is; a 3 Nov clip is past its week"
+
+
+def test_a_failed_download_keeps_its_place_in_the_queue(tmp_path, monkeypatch):
+    monkeypatch.setattr(place, "_today", lambda: date(2026, 11, 4))
+    replies = {NEW_CLIP: {"error": "X would not give the post: timeout"}}
+    _, state, _ = _search_world(tmp_path, monkeypatch,
+                                {"newest": "1", "unplaced": {NEW_CLIP: {"held": 0}}},
+                                [], replies, [OTHER_SHOW])
+    assert state["unplaced"] == {NEW_CLIP: {"held": 0}}

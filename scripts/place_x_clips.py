@@ -101,6 +101,19 @@ PAIRS = {"mcg": ROOT / "data" / "mcg_broadcast_links.json",
          "threadguy": ROOT / "data" / "threadguy_broadcast_links.json"}
 LOOKBACK_DAYS = 7
 X_EPOCH_MS = 1288834974657
+# A clip posted before what it is from was indexed: two of Ansem's 30 Oct
+# clips were cut from his Hyperliquid x ICE video, indexed on 3 Nov, and
+# were refused on the 1st and never looked at again. Ansem clips Thursday's
+# show the night it airs, before the Friday watcher may have it, so this
+# would keep happening. The clips of the two accounts whose own recordings
+# the archive indexes are tried again for a week, on any run after the
+# archive has grown, and on no other.
+RETRY_ACCOUNTS = frozenset({"blknoiz06", "marketbubble"})
+RETRY_DAYS = 7
+
+
+def _today() -> date:
+    return datetime.now(UTC).date()
 
 
 def posted_on(post: str) -> date:
@@ -448,6 +461,7 @@ def main() -> None:
     args = ap.parse_args()
     posts = list(args.posts)
     newest = None
+    state: dict = {}
     if args.search:
         import asyncio
 
@@ -467,6 +481,16 @@ def main() -> None:
         sys.exit(f"not post ids: {bad[:5]}")
 
     episodes = [dict(e, archive="podcast") for e in episode_store.load()]
+    held = len(episodes)
+    today = _today()
+    waiting = {post: row for post, row in (state.get("unplaced") or {}).items()
+               if POST_ID.match(post) and isinstance(row, dict)
+               and (today - posted_on(post)).days <= RETRY_DAYS}
+    again = [post for post, row in waiting.items()
+             if row.get("held", 0) < held and post not in posts]
+    if again:
+        print(f"{len(again)} refused before the archive grew, tried again")
+    posts = again + posts
     shows = Shows()
     clips = json.loads(OUT.read_text()) if OUT.exists() else {}
     placed = 0
@@ -481,6 +505,12 @@ def main() -> None:
             entry, said = place_one(
                 post, got, lambda post=post: episodes + shows.before(posted_on(post)), shows.paired)
             print(f"{post}  {said}")
+            # A failed download leaves it waiting as it was.
+            if entry:
+                waiting.pop(post, None)
+            elif said == "not in the archive" and \
+                    str(got.get("account") or "").lower() in RETRY_ACCOUNTS:
+                waiting[post] = {"held": held}
             if entry:
                 clips[post] = entry
                 placed += 1
@@ -491,9 +521,11 @@ def main() -> None:
                 # nothing either way, so it keeps it.
                 clips.pop(post, None)
     OUT.write_text(json.dumps(dict(sorted(clips.items())), indent=1, ensure_ascii=False) + "\n")
-    if newest:
+    if args.search and (newest or waiting):
         # After the placing, so a run that dies partway reads them again.
-        SEARCHED.write_text(json.dumps({"newest": newest}) + "\n")
+        SEARCHED.write_text(json.dumps(
+            {"newest": newest or state.get("newest"),
+             **({"unplaced": dict(sorted(waiting.items()))} if waiting else {})}) + "\n")
     print(f"\n{placed} of {len(dict.fromkeys(posts))} placed; {len(clips)} clips in {OUT.name}")
 
 
