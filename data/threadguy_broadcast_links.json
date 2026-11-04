@@ -117,6 +117,27 @@
   "broadcast": "https://x.com/i/broadcasts/1RJjpznODeRKw",
   "offset": -177
  },
+ "ENYJVZngi5I": {
+  "broadcast": "https://x.com/i/broadcasts/2nQYlRvNqoEyOV",
+  "post": "2117250901115109378",
+  "sections": [
+   {
+    "from": 0,
+    "offset": -1,
+    "to": 2191
+   },
+   {
+    "from": 2256,
+    "offset": -6,
+    "to": 3396
+   },
+   {
+    "from": 3604,
+    "offset": -4,
+    "to": null
+   }
+  ]
+ },
  "EOkDv8qm8ik": {
   "broadcast": "https://x.com/i/broadcasts/1pJdRDqeOYnKW",
   "offset": -3,

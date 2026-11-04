@@ -70,6 +70,22 @@
    }
   ]
  },
+ "3EoyxkUDpdY": {
+  "broadcast": "https://x.com/i/broadcasts/2jPBeWJdXAXboW",
+  "post": "2117664908984610910",
+  "sections": [
+   {
+    "from": 0,
+    "offset": -2,
+    "to": 1592
+   },
+   {
+    "from": 1679,
+    "offset": -29,
+    "to": null
+   }
+  ]
+ },
  "4PlcWhQM96A": {
   "broadcast": "https://x.com/i/broadcasts/1DxLdZzgDnLxm",
   "post": "2114751097718145346",

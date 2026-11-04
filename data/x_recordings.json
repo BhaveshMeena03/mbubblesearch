@@ -1,11 +1,41 @@
 {
- "newest": "2117441633713082652",
+ "newest": "2117744881804185707",
  "posts": {
   "2116134237971915020": {
    "account": "blknoiz06",
    "at": "2026-11-03",
    "what": "indexed",
    "why": "indexed"
+  },
+  "2117593142824436045": {
+   "account": "blknoiz06",
+   "at": "2026-11-04",
+   "what": "leave",
+   "why": "a clip, placed by place_x_clips.py"
+  },
+  "2117647818009780228": {
+   "account": "MarketBubble",
+   "at": "2026-11-04",
+   "what": "leave",
+   "why": "a clip, placed by place_x_clips.py"
+  },
+  "2117666234439467072": {
+   "account": "blknoiz06",
+   "at": "2026-11-04",
+   "what": "leave",
+   "why": "a clip, placed by place_x_clips.py"
+  },
+  "2117710404558442877": {
+   "account": "blknoiz06",
+   "at": "2026-11-04",
+   "what": "leave",
+   "why": "a clip, placed by place_x_clips.py"
+  },
+  "2117744881804185707": {
+   "account": "blknoiz06",
+   "at": "2026-11-04",
+   "what": "leave",
+   "why": "a clip, placed by place_x_clips.py"
   }
  }
 }
