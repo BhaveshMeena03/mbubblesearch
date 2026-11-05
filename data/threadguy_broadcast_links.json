@@ -179,6 +179,22 @@
   "offset": -4,
   "post": "2115060673713762765"
  },
+ "JQWpvmU9SFQ": {
+  "broadcast": "https://x.com/i/broadcasts/2WXKzvANlyagmO",
+  "post": "2117974056305602607",
+  "sections": [
+   {
+    "from": 0,
+    "offset": 1,
+    "to": 2189
+   },
+   {
+    "from": 2255,
+    "offset": -5,
+    "to": null
+   }
+  ]
+ },
  "JSKPV5Qp4ZA": {
   "broadcast": "https://x.com/i/broadcasts/1nJOLQMngaExR",
   "post": "2115502455136133622",

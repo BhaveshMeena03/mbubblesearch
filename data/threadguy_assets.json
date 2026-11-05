@@ -4,8 +4,8 @@
    "symbol": "BTC",
    "name": "Bitcoin",
    "asset_class": "crypto",
-   "mentions": 2791,
-   "analysis": 1582,
+   "mentions": 2796,
+   "analysis": 1584,
    "moments": [
     {
      "episode_id": "-A0rmPYG0s0",
@@ -8835,6 +8835,51 @@
      "deep_link": "https://www.youtube.com/watch?v=IwVx3sbCK5o&t=2393s",
      "kind": "analysis",
      "note": "Speaker predicts continuous upside for bitcoin until treasure companies or institutions stop caring about it."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 880.0,
+     "timestamp": "14:40",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=880s",
+     "kind": "analysis",
+     "note": "Speaker discusses being a single-issue voter on Bitcoin price and mentions Trump as 'the crypto president' who promised to fire Gary Gensler and support Bitcoin."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 1720.0,
+     "timestamp": "28:40",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=1720s",
+     "kind": "mention",
+     "note": "Referenced as having problems that Zcash positions itself against."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 3709.0,
+     "timestamp": "1:01:49",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=3709s",
+     "kind": "analysis",
+     "note": "Bitcoin discussed at price of 78.5k, with ongoing analysis of price movements and chart patterns throughout the excerpt."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 4125.0,
+     "timestamp": "1:08:45",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=4125s",
+     "kind": "mention",
+     "note": "Someone is long 80 BTC worth $6.3 million, up 800K."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 4642.0,
+     "timestamp": "1:17:22",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=4642s",
+     "kind": "mention",
+     "note": "Speaker mentions being 'on BTC'."
     },
     {
      "episode_id": "JR4M9v9_2zE",
@@ -25127,15 +25172,15 @@
      "note": "Named in passing when speaker says 'before we even talk about anything with btc we got to get out of here' and mentions needing to 'get out of 73'."
     }
    ],
-   "episode_count": 529,
+   "episode_count": 530,
    "single_reference": false
   },
   {
    "symbol": "SOL",
    "name": "Solana",
    "asset_class": "crypto",
-   "mentions": 1221,
-   "analysis": 580,
+   "mentions": 1223,
+   "analysis": 581,
    "moments": [
     {
      "episode_id": "-A0rmPYG0s0",
@@ -28997,6 +29042,24 @@
      "deep_link": "https://www.youtube.com/watch?v=IZpidHFUTaQ&t=3987s",
      "kind": "analysis",
      "note": "Referenced multiple times; speaker mentions being short 50k SOL and discusses it alongside other crypto positions."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 3832.0,
+     "timestamp": "1:03:52",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=3832s",
+     "kind": "analysis",
+     "note": "Solana Doomer trader is long Solana."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 4180.0,
+     "timestamp": "1:09:40",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=4180s",
+     "kind": "mention",
+     "note": "Solana is up 2%."
     },
     {
      "episode_id": "JR4M9v9_2zE",
@@ -36127,15 +36190,15 @@
      "note": "Speaker mentions buying Solana in passing while discussing market downturn."
     }
    ],
-   "episode_count": 429,
+   "episode_count": 430,
    "single_reference": false
   },
   {
    "symbol": "ZEC",
    "name": "Zcash",
    "asset_class": "crypto",
-   "mentions": 896,
-   "analysis": 509,
+   "mentions": 898,
+   "analysis": 510,
    "moments": [
     {
      "episode_id": "-IboaV4KXK8",
@@ -39079,6 +39142,24 @@
      "deep_link": "https://www.youtube.com/watch?v=IZpidHFUTaQ&t=4762s",
      "kind": "mention",
      "note": "ZEC listed among trader's holdings."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 1714.0,
+     "timestamp": "28:34",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=1714s",
+     "kind": "mention",
+     "note": "Mentioned as an analogy where Zcash is compared to Bitcoin as 'the opposite' that doesn't have Bitcoin's problems."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 3673.0,
+     "timestamp": "1:01:13",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=3673s",
+     "kind": "analysis",
+     "note": "Speaker analyzes Zcash's three-day chart, describes it as 'go time,' calls it 'a buy,' and states they bought it that morning on spot."
     },
     {
      "episode_id": "JR8mPLTmyzk",
@@ -44202,7 +44283,7 @@
      "note": "Speaker closed a Zcash trade for a million dollars, closed around half of the position and described it as a sick trade."
     }
    ],
-   "episode_count": 285,
+   "episode_count": 286,
    "single_reference": false
   },
   {
@@ -65014,8 +65095,8 @@
    "symbol": "CL",
    "name": "Crude Oil / WTI",
    "asset_class": "commodity",
-   "mentions": 289,
-   "analysis": 229,
+   "mentions": 291,
+   "analysis": 230,
    "moments": [
     {
      "episode_id": "-N2lQXilxUI",
@@ -66078,6 +66159,24 @@
      "deep_link": "https://www.youtube.com/watch?v=IoFYFQOKIIc&t=2029s",
      "kind": "analysis",
      "note": "Speaker has a long position with 2x leverage starting at entry 84, discussing the geopolitical impact of the Strait closure on oil supply disruptions and price implications."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 1239.0,
+     "timestamp": "20:39",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=1239s",
+     "kind": "analysis",
+     "note": "Speaker discusses oil price volatility in response to geopolitical events, mentioning threats to bomb Iran causing oil to skyrocket, then potential peace deals causing oil to drop again."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 2663.0,
+     "timestamp": "44:23",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=2663s",
+     "kind": "mention",
+     "note": "Speaker mentions 'Oil's back' as part of a list of recent news topics."
     },
     {
      "episode_id": "JSKPV5Qp4ZA",
@@ -67619,15 +67718,15 @@
      "note": "Speakers discuss how oil prices move with the stock market during military conflicts, and note oil jumping above $105 per barrel following Russia's Ukraine attack."
     }
    ],
-   "episode_count": 150,
+   "episode_count": 151,
    "single_reference": false
   },
   {
    "symbol": "NVDA",
    "name": "NVIDIA",
    "asset_class": "stock",
-   "mentions": 541,
-   "analysis": 220,
+   "mentions": 542,
+   "analysis": 221,
    "moments": [
     {
      "episode_id": "-QwoqW8T3js",
@@ -69464,6 +69563,15 @@
      "deep_link": "https://www.youtube.com/watch?v=IZpidHFUTaQ&t=6629s",
      "kind": "mention",
      "note": "Mentioned as comparison point for Anthropic's cash pile; Anthropic has more cash than NVIDIA."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 3884.0,
+     "timestamp": "1:04:44",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=3884s",
+     "kind": "analysis",
+     "note": "NVIDIA short position was closed with a gain of plus 212."
     },
     {
      "episode_id": "JR8mPLTmyzk",
@@ -72499,7 +72607,7 @@
      "note": "Speaker gives a shout-out to NVIDIA in closing remarks."
     }
    ],
-   "episode_count": 258,
+   "episode_count": 259,
    "single_reference": false
   },
   {
@@ -87629,8 +87737,8 @@
    "symbol": "INTC",
    "name": "Intel",
    "asset_class": "stock",
-   "mentions": 232,
-   "analysis": 95,
+   "mentions": 234,
+   "analysis": 96,
    "moments": [
     {
      "episode_id": "-IboaV4KXK8",
@@ -88279,6 +88387,24 @@
      "deep_link": "https://www.youtube.com/watch?v=HkKHhQDPqy0&t=2549s",
      "kind": "mention",
      "note": "Listed as having earnings today."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 3873.0,
+     "timestamp": "1:04:33",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=3873s",
+     "kind": "mention",
+     "note": "Intel mentioned with unclear position (short or long)."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 4929.0,
+     "timestamp": "1:22:09",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=4929s",
+     "kind": "analysis",
+     "note": "Speaker states '10x long intel from here', indicating a position and price target."
     },
     {
      "episode_id": "LDykU1HsoZI",
@@ -89721,7 +89847,7 @@
      "note": "Announced an upsized $20 billion common stock offering at $95 per share, up from the original $15 billion."
     }
    ],
-   "episode_count": 129,
+   "episode_count": 130,
    "single_reference": false
   },
   {
@@ -95890,7 +96016,7 @@
    "symbol": "GOOGL",
    "name": "Google",
    "asset_class": "stock",
-   "mentions": 258,
+   "mentions": 260,
    "analysis": 90,
    "moments": [
     {
@@ -96792,6 +96918,24 @@
      "deep_link": "https://www.youtube.com/watch?v=IytzLWBD3A4&t=740s",
      "kind": "mention",
      "note": "Waymo mentioned as scanning everything as part of broader privacy concerns."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 3594.0,
+     "timestamp": "59:54",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=3594s",
+     "kind": "mention",
+     "note": "Google announced $15 billion in Malaysia data center investment."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 4139.0,
+     "timestamp": "1:08:59",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=4139s",
+     "kind": "mention",
+     "note": "MK is long Google, up 40K."
     },
     {
      "episode_id": "JR8mPLTmyzk",
@@ -98216,14 +98360,14 @@
      "note": "Speaker mentioned Google as flat."
     }
    ],
-   "episode_count": 145,
+   "episode_count": 146,
    "single_reference": false
   },
   {
    "symbol": "TSLA",
    "name": "Tesla",
    "asset_class": "stock",
-   "mentions": 235,
+   "mentions": 236,
    "analysis": 85,
    "moments": [
     {
@@ -98981,6 +99125,15 @@
      "deep_link": "https://www.youtube.com/watch?v=IytzLWBD3A4&t=2157s",
      "kind": "analysis",
      "note": "Tesla has declined less than other software companies because it makes scarce hardware, though down somewhat from prior levels."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 3717.0,
+     "timestamp": "1:01:57",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=3717s",
+     "kind": "mention",
+     "note": "Tesla mentioned briefly in context of stock price movements."
     },
     {
      "episode_id": "JR4M9v9_2zE",
@@ -100342,14 +100495,14 @@
      "note": "Used as an example of an asset people want to trade on-chain over the weekend."
     }
    ],
-   "episode_count": 151,
+   "episode_count": 152,
    "single_reference": false
   },
   {
    "symbol": "QQQ",
    "name": "Invesco QQQ Trust",
    "asset_class": "index",
-   "mentions": 227,
+   "mentions": 228,
    "analysis": 83,
    "moments": [
     {
@@ -101170,6 +101323,15 @@
      "deep_link": "https://www.youtube.com/watch?v=HkKHhQDPqy0&t=3441s",
      "kind": "mention",
      "note": "Mentioned as almost down two percent."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 4295.0,
+     "timestamp": "1:11:35",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=4295s",
+     "kind": "mention",
+     "note": "Queues (Nasdaq 100) almost at 700."
     },
     {
      "episode_id": "JR8mPLTmyzk",
@@ -102396,7 +102558,7 @@
      "note": "QQQ up 1.3%."
     }
    ],
-   "episode_count": 157,
+   "episode_count": 158,
    "single_reference": false
   },
   {
@@ -116636,7 +116798,7 @@
    "symbol": "AMZN",
    "name": "Amazon",
    "asset_class": "stock",
-   "mentions": 196,
+   "mentions": 197,
    "analysis": 54,
    "moments": [
     {
@@ -117205,6 +117367,15 @@
      "deep_link": "https://www.youtube.com/watch?v=IZpidHFUTaQ&t=6629s",
      "kind": "mention",
      "note": "Mentioned as comparison point for Anthropic's cash pile; Anthropic has more cash than Amazon."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 3987.0,
+     "timestamp": "1:06:27",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=3987s",
+     "kind": "mention",
+     "note": "Amazon mentioned as leading up seven percent."
     },
     {
      "episode_id": "JYJaILBFtF4",
@@ -118404,14 +118575,14 @@
      "note": "Speaker mentioned Amazon down 0.75 percent."
     }
    ],
-   "episode_count": 127,
+   "episode_count": 128,
    "single_reference": false
   },
   {
    "symbol": "MSFT",
    "name": "Microsoft",
    "asset_class": "stock",
-   "mentions": 171,
+   "mentions": 172,
    "analysis": 54,
    "moments": [
     {
@@ -118818,6 +118989,15 @@
      "deep_link": "https://www.youtube.com/watch?v=IZpidHFUTaQ&t=6629s",
      "kind": "mention",
      "note": "Mentioned as comparison point for Anthropic's cash pile; Anthropic has more cash than Microsoft."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 3873.0,
+     "timestamp": "1:04:33",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=3873s",
+     "kind": "mention",
+     "note": "Microsoft mentioned in trader position updates; short position noted."
     },
     {
      "episode_id": "JR8mPLTmyzk",
@@ -119954,7 +120134,7 @@
      "note": "Mentioned in passing as the subject of trolling on late-night television."
     }
    ],
-   "episode_count": 118,
+   "episode_count": 119,
    "single_reference": false
   },
   {
@@ -122215,7 +122395,7 @@
    "symbol": "NEAR",
    "name": "Near",
    "asset_class": "crypto",
-   "mentions": 122,
+   "mentions": 123,
    "analysis": 48,
    "moments": [
     {
@@ -122631,6 +122811,15 @@
      "deep_link": "https://www.youtube.com/watch?v=IZpidHFUTaQ&t=4112s",
      "kind": "analysis",
      "note": "Long position mentioned; speaker notes being up $12 million on NEAR and states they will not close it."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 4266.0,
+     "timestamp": "1:11:06",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=4266s",
+     "kind": "mention",
+     "note": "NEAR bumped up as crypto is getting a little rally."
     },
     {
      "episode_id": "LDykU1HsoZI",
@@ -123317,14 +123506,14 @@
      "note": "Near mentioned alongside Uniswap as a larger-cap token that funds prefer to size into."
     }
    ],
-   "episode_count": 65,
+   "episode_count": 66,
    "single_reference": false
   },
   {
    "symbol": "XRP",
    "name": "XRP",
    "asset_class": "crypto",
-   "mentions": 120,
+   "mentions": 121,
    "analysis": 47,
    "moments": [
     {
@@ -123614,6 +123803,15 @@
      "deep_link": "https://www.youtube.com/watch?v=IwVx3sbCK5o&t=2754s",
      "kind": "analysis",
      "note": "Speaker states he is most exposed to XRP and describes a breakout above 3 as a play, noting it has been the best performing altcoin chart over the past two years, outperforming Bitcoin."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 4187.0,
+     "timestamp": "1:09:47",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=4187s",
+     "kind": "mention",
+     "note": "Someone is long XRP and short oil."
     },
     {
      "episode_id": "JSKPV5Qp4ZA",
@@ -124408,7 +124606,7 @@
      "note": "Mentioned when asking where XRP is on the market."
     }
    ],
-   "episode_count": 82,
+   "episode_count": 83,
    "single_reference": false
   },
   {
@@ -126734,7 +126932,7 @@
    "symbol": "COIN",
    "name": "Coinbase",
    "asset_class": "stock",
-   "mentions": 154,
+   "mentions": 155,
    "analysis": 44,
    "moments": [
     {
@@ -127213,6 +127411,15 @@
      "deep_link": "https://www.youtube.com/watch?v=IZpidHFUTaQ&t=2619s",
      "kind": "mention",
      "note": "Referenced as a crypto exchange that has leaked customer data frequently over the past decade with new breaches occurring monthly."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 4336.0,
+     "timestamp": "1:12:16",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=4336s",
+     "kind": "mention",
+     "note": "Coinbase listed a coin yesterday."
     },
     {
      "episode_id": "MR0m9cL6NSk",
@@ -128124,7 +128331,7 @@
      "note": "Down 3% in the market overview."
     }
    ],
-   "episode_count": 112,
+   "episode_count": 113,
    "single_reference": false
   },
   {
@@ -149054,7 +149261,7 @@
    "symbol": "DELL",
    "name": "Dell",
    "asset_class": "stock",
-   "mentions": 61,
+   "mentions": 62,
    "analysis": 22,
    "moments": [
     {
@@ -149355,6 +149562,15 @@
      "note": "Speaker discusses Dell as a Trump-pumped stock; notes Michael Dell submitted $10 billion to Trump and Trump declared it a Trump stock; stock is up 94%."
     },
     {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 3717.0,
+     "timestamp": "1:01:57",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=3717s",
+     "kind": "mention",
+     "note": "Dell mentioned as bouncing slightly."
+    },
+    {
      "episode_id": "JSKPV5Qp4ZA",
      "episode_title": "LIVE: REACTING TO FOMC",
      "start_seconds": 1837.0,
@@ -149607,7 +149823,7 @@
      "note": "Dell stock was up 33% today; speaker noted Donald Trump tweeted telling people to buy Dell, resulting in a 79% pump over 21 days, and speaker expressed agreement with buying it."
     }
    ],
-   "episode_count": 51,
+   "episode_count": 52,
    "single_reference": false
   },
   {
@@ -160507,7 +160723,7 @@
    "symbol": "MONAD",
    "name": "Monad",
    "asset_class": "crypto",
-   "mentions": 49,
+   "mentions": 50,
    "analysis": 13,
    "moments": [
     {
@@ -160680,6 +160896,15 @@
      "deep_link": "https://www.youtube.com/watch?v=IRlkCLZWF0g&t=9345s",
      "kind": "mention",
      "note": "Mentioned in passing when speaker says 'Look at Monad' and later notes 'Monad looks insane'."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 4234.0,
+     "timestamp": "1:10:34",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=4234s",
+     "kind": "mention",
+     "note": "Monad is up 3%."
     },
     {
      "episode_id": "JR4M9v9_2zE",
@@ -160952,7 +161177,7 @@
      "note": "Monad is mentioned as one of Dragonfly's investments."
     }
    ],
-   "episode_count": 42,
+   "episode_count": 43,
    "single_reference": false
   },
   {
@@ -172656,6 +172881,134 @@
    "single_reference": false
   },
   {
+   "symbol": "NEBS",
+   "name": "Nebius",
+   "asset_class": "stock",
+   "mentions": 13,
+   "analysis": 8,
+   "moments": [
+    {
+     "episode_id": "Bdr495HLGxk",
+     "episode_title": "MARKET OPEN: Anthropic S-1 TODAY, Elon KILLS Neoclouds, SOMEBODY SAVE CRYPTO",
+     "start_seconds": 4528.0,
+     "timestamp": "1:15:28",
+     "deep_link": "https://www.youtube.com/watch?v=Bdr495HLGxk&t=4528s",
+     "kind": "analysis",
+     "note": "Nebius is down five percent, the lowest since Leopold lows; down 77 on Shaws from the top."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 4306.0,
+     "timestamp": "1:11:46",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=4306s",
+     "kind": "mention",
+     "note": "If Nebius goes back to 250 anytime soon, speaker thinks people will turn Democrat."
+    },
+    {
+     "episode_id": "JR8mPLTmyzk",
+     "episode_title": "MARKET OPEN: Stocks Are RIPPING! The Problem With Memecoins... + Josh Kushner & Lakers Scandal!?",
+     "start_seconds": 6458.0,
+     "timestamp": "1:47:38",
+     "deep_link": "https://www.youtube.com/watch?v=JR8mPLTmyzk&t=6458s",
+     "kind": "analysis",
+     "note": "Speaker discussed owning Nebius at $250-260 per share but expressed concern about the amount of debt the company takes on; mentioned not owning it personally but acknowledged it as a good stock."
+    },
+    {
+     "episode_id": "Zc7gZiQkwNA",
+     "episode_title": "MARKET OPEN: Meta Muse SAVED AI, Crypto is in a BULL MARKET, Bitcoin BREAKS $86K",
+     "start_seconds": 5870.0,
+     "timestamp": "1:37:50",
+     "deep_link": "https://www.youtube.com/watch?v=Zc7gZiQkwNA&t=5870s",
+     "kind": "analysis",
+     "note": "Trader mentions hitting on a Nebius trade, which occurred right before the previous conversation."
+    },
+    {
+     "episode_id": "al1M7HzuL_k",
+     "episode_title": "MARKET OPEN: Crypto REFUSES to Die... The Memory Trade is Back. AI Took Over Runescape..!?",
+     "start_seconds": 4535.0,
+     "timestamp": "1:15:35",
+     "deep_link": "https://www.youtube.com/watch?v=al1M7HzuL_k&t=4535s",
+     "kind": "analysis",
+     "note": "Speaker mentions selling Nebius for RAM, down 1.5% today."
+    },
+    {
+     "episode_id": "gKJ-BygczS0",
+     "episode_title": "What happened to Leopold Aschenbrenner? : The FLOOD Interview",
+     "start_seconds": 1464.0,
+     "timestamp": "24:24",
+     "deep_link": "https://www.youtube.com/watch?v=gKJ-BygczS0&t=1464s",
+     "kind": "mention",
+     "note": "Named as one of Leopold's holdings that was bouncing on the day of discussion."
+    },
+    {
+     "episode_id": "im56NguHosw",
+     "episode_title": "Why Are All Celebrities Scamming & The Value of The Hero Trade",
+     "start_seconds": 1658.0,
+     "timestamp": "27:38",
+     "deep_link": "https://www.youtube.com/watch?v=im56NguHosw&t=1658s",
+     "kind": "analysis",
+     "note": "Speaker states they did not own Nebius but discusses avoiding it due to high debt levels relative to valuation of $250-260, preferring other semi-chip suppliers instead."
+    },
+    {
+     "episode_id": "pWUa7CEpw-M",
+     "episode_title": "MARKET OPEN: Onchain BULL MARKET, The MEMORY TRADE is BACK, Anthropic S-1",
+     "start_seconds": 3227.0,
+     "timestamp": "53:47",
+     "deep_link": "https://www.youtube.com/watch?v=pWUa7CEpw-M&t=3227s",
+     "kind": "analysis",
+     "note": "Biggest gainer up six percent, trading at 240."
+    },
+    {
+     "episode_id": "qdNT1PbcWcI",
+     "episode_title": "MARKET OPEN: Will STOCKS finally recover? The KOSPI is LIMIT DOWN again. FOMC today. What is PipeDog",
+     "start_seconds": 3724.0,
+     "timestamp": "1:02:04",
+     "deep_link": "https://www.youtube.com/watch?v=qdNT1PbcWcI&t=3724s",
+     "kind": "analysis",
+     "note": "Stock trading at 165, described as cheapest since May 2026, previously made a 90 move in about a week, characterized as looking terrible."
+    },
+    {
+     "episode_id": "qp6GP4MspAg",
+     "episode_title": "Jensen Huang Just SAVED The Stock Market... [Stream Recap]",
+     "start_seconds": 1106.0,
+     "timestamp": "18:26",
+     "deep_link": "https://www.youtube.com/watch?v=qp6GP4MspAg&t=1106s",
+     "kind": "mention",
+     "note": "Nebius down 4%."
+    },
+    {
+     "episode_id": "xl5iN1U2yN4",
+     "episode_title": "MARKET OPEN: onchain is HOT, Korean Stocks CRASHING Still, Kevin Warsh was a Mistake...",
+     "start_seconds": 4159.0,
+     "timestamp": "1:09:19",
+     "deep_link": "https://www.youtube.com/watch?v=xl5iN1U2yN4&t=4159s",
+     "kind": "mention",
+     "note": "Nebius up 26% and later mentioned at 20% gain."
+    },
+    {
+     "episode_id": "zJfP45Uag1E",
+     "episode_title": "LIVE: Saylor Is In TROUBLE.. Leopold Buying MICROCAPS!? Stablecoins Are Back.. Trenches Are INSANE!!",
+     "start_seconds": 4120.0,
+     "timestamp": "1:08:40",
+     "deep_link": "https://www.youtube.com/watch?v=zJfP45Uag1E&t=4120s",
+     "kind": "analysis",
+     "note": "Leopold Aschenbrenner announced a 5% stake on May 27th; stock ripped up 30% following the announcement."
+    },
+    {
+     "episode_id": "zJfP45Uag1E",
+     "episode_title": "LIVE: Saylor Is In TROUBLE.. Leopold Buying MICROCAPS!? Stablecoins Are Back.. Trenches Are INSANE!!",
+     "start_seconds": 5985.0,
+     "timestamp": "1:39:45",
+     "deep_link": "https://www.youtube.com/watch?v=zJfP45Uag1E&t=5985s",
+     "kind": "mention",
+     "note": "Speaker noted Nebius leads the way among consumer name SaaS stocks."
+    }
+   ],
+   "episode_count": 12,
+   "single_reference": false
+  },
+  {
    "symbol": "FART",
    "name": "Fart Coin",
    "asset_class": "crypto",
@@ -172769,125 +173122,6 @@
      "deep_link": "https://www.youtube.com/watch?v=Ua3fzBOuN-4&t=2802s",
      "kind": "analysis",
      "note": "Speakers discuss Fartcoin as a meme coin; one speaker mentions buying it near the top and believing it could potentially flip gold, though noting drawdowns are normal in crypto."
-    }
-   ],
-   "episode_count": 11,
-   "single_reference": false
-  },
-  {
-   "symbol": "NEBS",
-   "name": "Nebius",
-   "asset_class": "stock",
-   "mentions": 12,
-   "analysis": 8,
-   "moments": [
-    {
-     "episode_id": "Bdr495HLGxk",
-     "episode_title": "MARKET OPEN: Anthropic S-1 TODAY, Elon KILLS Neoclouds, SOMEBODY SAVE CRYPTO",
-     "start_seconds": 4528.0,
-     "timestamp": "1:15:28",
-     "deep_link": "https://www.youtube.com/watch?v=Bdr495HLGxk&t=4528s",
-     "kind": "analysis",
-     "note": "Nebius is down five percent, the lowest since Leopold lows; down 77 on Shaws from the top."
-    },
-    {
-     "episode_id": "JR8mPLTmyzk",
-     "episode_title": "MARKET OPEN: Stocks Are RIPPING! The Problem With Memecoins... + Josh Kushner & Lakers Scandal!?",
-     "start_seconds": 6458.0,
-     "timestamp": "1:47:38",
-     "deep_link": "https://www.youtube.com/watch?v=JR8mPLTmyzk&t=6458s",
-     "kind": "analysis",
-     "note": "Speaker discussed owning Nebius at $250-260 per share but expressed concern about the amount of debt the company takes on; mentioned not owning it personally but acknowledged it as a good stock."
-    },
-    {
-     "episode_id": "Zc7gZiQkwNA",
-     "episode_title": "MARKET OPEN: Meta Muse SAVED AI, Crypto is in a BULL MARKET, Bitcoin BREAKS $86K",
-     "start_seconds": 5870.0,
-     "timestamp": "1:37:50",
-     "deep_link": "https://www.youtube.com/watch?v=Zc7gZiQkwNA&t=5870s",
-     "kind": "analysis",
-     "note": "Trader mentions hitting on a Nebius trade, which occurred right before the previous conversation."
-    },
-    {
-     "episode_id": "al1M7HzuL_k",
-     "episode_title": "MARKET OPEN: Crypto REFUSES to Die... The Memory Trade is Back. AI Took Over Runescape..!?",
-     "start_seconds": 4535.0,
-     "timestamp": "1:15:35",
-     "deep_link": "https://www.youtube.com/watch?v=al1M7HzuL_k&t=4535s",
-     "kind": "analysis",
-     "note": "Speaker mentions selling Nebius for RAM, down 1.5% today."
-    },
-    {
-     "episode_id": "gKJ-BygczS0",
-     "episode_title": "What happened to Leopold Aschenbrenner? : The FLOOD Interview",
-     "start_seconds": 1464.0,
-     "timestamp": "24:24",
-     "deep_link": "https://www.youtube.com/watch?v=gKJ-BygczS0&t=1464s",
-     "kind": "mention",
-     "note": "Named as one of Leopold's holdings that was bouncing on the day of discussion."
-    },
-    {
-     "episode_id": "im56NguHosw",
-     "episode_title": "Why Are All Celebrities Scamming & The Value of The Hero Trade",
-     "start_seconds": 1658.0,
-     "timestamp": "27:38",
-     "deep_link": "https://www.youtube.com/watch?v=im56NguHosw&t=1658s",
-     "kind": "analysis",
-     "note": "Speaker states they did not own Nebius but discusses avoiding it due to high debt levels relative to valuation of $250-260, preferring other semi-chip suppliers instead."
-    },
-    {
-     "episode_id": "pWUa7CEpw-M",
-     "episode_title": "MARKET OPEN: Onchain BULL MARKET, The MEMORY TRADE is BACK, Anthropic S-1",
-     "start_seconds": 3227.0,
-     "timestamp": "53:47",
-     "deep_link": "https://www.youtube.com/watch?v=pWUa7CEpw-M&t=3227s",
-     "kind": "analysis",
-     "note": "Biggest gainer up six percent, trading at 240."
-    },
-    {
-     "episode_id": "qdNT1PbcWcI",
-     "episode_title": "MARKET OPEN: Will STOCKS finally recover? The KOSPI is LIMIT DOWN again. FOMC today. What is PipeDog",
-     "start_seconds": 3724.0,
-     "timestamp": "1:02:04",
-     "deep_link": "https://www.youtube.com/watch?v=qdNT1PbcWcI&t=3724s",
-     "kind": "analysis",
-     "note": "Stock trading at 165, described as cheapest since May 2026, previously made a 90 move in about a week, characterized as looking terrible."
-    },
-    {
-     "episode_id": "qp6GP4MspAg",
-     "episode_title": "Jensen Huang Just SAVED The Stock Market... [Stream Recap]",
-     "start_seconds": 1106.0,
-     "timestamp": "18:26",
-     "deep_link": "https://www.youtube.com/watch?v=qp6GP4MspAg&t=1106s",
-     "kind": "mention",
-     "note": "Nebius down 4%."
-    },
-    {
-     "episode_id": "xl5iN1U2yN4",
-     "episode_title": "MARKET OPEN: onchain is HOT, Korean Stocks CRASHING Still, Kevin Warsh was a Mistake...",
-     "start_seconds": 4159.0,
-     "timestamp": "1:09:19",
-     "deep_link": "https://www.youtube.com/watch?v=xl5iN1U2yN4&t=4159s",
-     "kind": "mention",
-     "note": "Nebius up 26% and later mentioned at 20% gain."
-    },
-    {
-     "episode_id": "zJfP45Uag1E",
-     "episode_title": "LIVE: Saylor Is In TROUBLE.. Leopold Buying MICROCAPS!? Stablecoins Are Back.. Trenches Are INSANE!!",
-     "start_seconds": 4120.0,
-     "timestamp": "1:08:40",
-     "deep_link": "https://www.youtube.com/watch?v=zJfP45Uag1E&t=4120s",
-     "kind": "analysis",
-     "note": "Leopold Aschenbrenner announced a 5% stake on May 27th; stock ripped up 30% following the announcement."
-    },
-    {
-     "episode_id": "zJfP45Uag1E",
-     "episode_title": "LIVE: Saylor Is In TROUBLE.. Leopold Buying MICROCAPS!? Stablecoins Are Back.. Trenches Are INSANE!!",
-     "start_seconds": 5985.0,
-     "timestamp": "1:39:45",
-     "deep_link": "https://www.youtube.com/watch?v=zJfP45Uag1E&t=5985s",
-     "kind": "mention",
-     "note": "Speaker noted Nebius leads the way among consumer name SaaS stocks."
     }
    ],
    "episode_count": 11,
@@ -173821,6 +174055,206 @@
     }
    ],
    "episode_count": 22,
+   "single_reference": false
+  },
+  {
+   "symbol": "DKNG",
+   "name": "DraftKings",
+   "asset_class": "stock",
+   "mentions": 21,
+   "analysis": 7,
+   "moments": [
+    {
+     "episode_id": "-goMJvTOlqE",
+     "episode_title": "The Stock Market Just Changed Forever.. [Stream Recap]",
+     "start_seconds": 1101.0,
+     "timestamp": "18:21",
+     "deep_link": "https://www.youtube.com/watch?v=-goMJvTOlqE&t=1101s",
+     "kind": "mention",
+     "note": "Named in a passing list of stocks."
+    },
+    {
+     "episode_id": "0PtfPucd17E",
+     "episode_title": "The Ansem Interview, the Semiconductor Crash, and the LeBron Economy",
+     "start_seconds": 855.0,
+     "timestamp": "14:15",
+     "deep_link": "https://www.youtube.com/watch?v=0PtfPucd17E&t=855s",
+     "kind": "mention",
+     "note": "DraftKings was flat."
+    },
+    {
+     "episode_id": "47cWlP98gu4",
+     "episode_title": "i quit therapy to become a gambling addict",
+     "start_seconds": 219.0,
+     "timestamp": "3:39",
+     "deep_link": "https://www.youtube.com/watch?v=47cWlP98gu4&t=219s",
+     "kind": "mention",
+     "note": "Mentioned as a retail sportsbook alongside FanDuel, noted as having patterns where bettors get banned if they sniff smart bet patterns."
+    },
+    {
+     "episode_id": "47cWlP98gu4",
+     "episode_title": "i quit therapy to become a gambling addict",
+     "start_seconds": 302.0,
+     "timestamp": "5:02",
+     "deep_link": "https://www.youtube.com/watch?v=47cWlP98gu4&t=302s",
+     "kind": "analysis",
+     "note": "Discussed as a sports betting book that bans sharp bettors quickly and houses counterparty risk for bets placed on their platform."
+    },
+    {
+     "episode_id": "47cWlP98gu4",
+     "episode_title": "i quit therapy to become a gambling addict",
+     "start_seconds": 749.0,
+     "timestamp": "12:29",
+     "deep_link": "https://www.youtube.com/watch?v=47cWlP98gu4&t=749s",
+     "kind": "analysis",
+     "note": "Speaker discussed how quickly they could get banned from DraftKings as a winning player, noting that retail sportsbooks ban sharp bettors."
+    },
+    {
+     "episode_id": "5su0qkG5ye0",
+     "episode_title": "LIVE: Jensen Is PUMPING All Over!!! Trump Wants To END The War!? Trading NBA Finals, World Cup, F1..",
+     "start_seconds": 1613.0,
+     "timestamp": "26:53",
+     "deep_link": "https://www.youtube.com/watch?v=5su0qkG5ye0&t=1613s",
+     "kind": "analysis",
+     "note": "Discussed whether DraftKings stock would go up as a result of sports betting platform pumping; noted it was down that day."
+    },
+    {
+     "episode_id": "60AzVdev5hU",
+     "episode_title": "Zcash Is the Only 10x Left - Rekt Mando",
+     "start_seconds": 3177.0,
+     "timestamp": "52:57",
+     "deep_link": "https://www.youtube.com/watch?v=60AzVdev5hU&t=3177s",
+     "kind": "mention",
+     "note": "Speaker mentions a trader is in DraftKings related to Calci drama; speaker expresses bullish sentiment on gambling stocks."
+    },
+    {
+     "episode_id": "EKxm903EQAQ",
+     "episode_title": "MARKET OPEN: Dean Ball/Kimi, Is MEMORY Back? PUMP.FUN & CRYPTO Are RIPPING",
+     "start_seconds": 9231.0,
+     "timestamp": "2:33:51",
+     "deep_link": "https://www.youtube.com/watch?v=EKxm903EQAQ&t=9231s",
+     "kind": "mention",
+     "note": "DraftKings mentioned with a question of whether it is a sleeper and speculation that DK is up."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 3602.0,
+     "timestamp": "1:00:02",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=3602s",
+     "kind": "analysis",
+     "note": "Speaker discusses DraftKings' political donations and strategic positioning regarding prediction markets regulation, describing it as an 'ironclad thesis' and 'nice trade.'"
+    },
+    {
+     "episode_id": "Z8PbXmkpyPI",
+     "episode_title": "MARKET OPEN: Robinhood Chain is ON FIRE, WAR & RATE HIKES, BITCOIN is in TROUBLE",
+     "start_seconds": 3584.0,
+     "timestamp": "59:44",
+     "deep_link": "https://www.youtube.com/watch?v=Z8PbXmkpyPI&t=3584s",
+     "kind": "analysis",
+     "note": "Up 5%, with discussion about possible lawsuit involvement; later mentioned as launching SkyPix free play experience with Delta Airlines for domestic flights."
+    },
+    {
+     "episode_id": "Zc7gZiQkwNA",
+     "episode_title": "MARKET OPEN: Meta Muse SAVED AI, Crypto is in a BULL MARKET, Bitcoin BREAKS $86K",
+     "start_seconds": 5594.0,
+     "timestamp": "1:33:14",
+     "deep_link": "https://www.youtube.com/watch?v=Zc7gZiQkwNA&t=5594s",
+     "kind": "mention",
+     "note": "Speaker mentions 'draft kings up decent' and calls it 'a pretty good' trade idea."
+    },
+    {
+     "episode_id": "dSIFM2ZrLyM",
+     "episode_title": "Korea's Leverage Wipeout, SpaceX is Crashing Fast, and is Crypto Bottomed?",
+     "start_seconds": 1211.0,
+     "timestamp": "20:11",
+     "deep_link": "https://www.youtube.com/watch?v=dSIFM2ZrLyM&t=1211s",
+     "kind": "mention",
+     "note": "DraftKings mentioned as up 3.5% during market open."
+    },
+    {
+     "episode_id": "gMxsYjDkxCk",
+     "episode_title": "MARKET OPEN: South Korea Crashes the Stock Market, Elon vs Sam Altman, Robinhood is Saving Crypto?",
+     "start_seconds": 4266.0,
+     "timestamp": "1:11:06",
+     "deep_link": "https://www.youtube.com/watch?v=gMxsYjDkxCk&t=4266s",
+     "kind": "mention",
+     "note": "Up three and a half percent."
+    },
+    {
+     "episode_id": "mkHoYlTb5hQ",
+     "episode_title": "MARKET OPEN: FOMC TODAY, Anthropic SAVED the AI & Crypto Trade, BIG NEWS DAY",
+     "start_seconds": 3580.0,
+     "timestamp": "59:40",
+     "deep_link": "https://www.youtube.com/watch?v=mkHoYlTb5hQ&t=3580s",
+     "kind": "analysis",
+     "note": "Up half a percent; discussed as probably a buy with commentary that the whole world is a casino now; noted to have P/E around 15-16."
+    },
+    {
+     "episode_id": "sPwXxkImq7I",
+     "episode_title": "The Chinese Semiconductor Moment, Onchain Spots, and Celebrity Traders",
+     "start_seconds": 797.0,
+     "timestamp": "13:17",
+     "deep_link": "https://www.youtube.com/watch?v=sPwXxkImq7I&t=797s",
+     "kind": "mention",
+     "note": "Up 2%."
+    },
+    {
+     "episode_id": "sUGKofP6Q5g",
+     "episode_title": "The Rise of Heightmaxxing, No Crying in the Casino, and Why Leopold Runs the Market",
+     "start_seconds": 799.0,
+     "timestamp": "13:19",
+     "deep_link": "https://www.youtube.com/watch?v=sUGKofP6Q5g&t=799s",
+     "kind": "analysis",
+     "note": "Discussed as a retail sportsbook platform that bans users with smart betting patterns and only accepts recreational bettors; contrasted with sharps-friendly models."
+    },
+    {
+     "episode_id": "sUGKofP6Q5g",
+     "episode_title": "The Rise of Heightmaxxing, No Crying in the Casino, and Why Leopold Runs the Market",
+     "start_seconds": 2299.0,
+     "timestamp": "38:19",
+     "deep_link": "https://www.youtube.com/watch?v=sUGKofP6Q5g&t=2299s",
+     "kind": "mention",
+     "note": "Down two percent in market rundown."
+    },
+    {
+     "episode_id": "v1QRNLI0C80",
+     "episode_title": "This FOMC Changes Everything... [Stream Recap]",
+     "start_seconds": 2021.0,
+     "timestamp": "33:41",
+     "deep_link": "https://www.youtube.com/watch?v=v1QRNLI0C80&t=2021s",
+     "kind": "mention",
+     "note": "Down 8%."
+    },
+    {
+     "episode_id": "xkYHBboXqd8",
+     "episode_title": "MARKET OPEN: I SOLD ZCASH, The GUARANTEED 4-Year Cycle Bottom is in TWO DAYS, The Pope vs Anthropic",
+     "start_seconds": 3507.0,
+     "timestamp": "58:27",
+     "deep_link": "https://www.youtube.com/watch?v=xkYHBboXqd8&t=3507s",
+     "kind": "mention",
+     "note": "Listed as biggest gainer in crypto stocks."
+    },
+    {
+     "episode_id": "zJfP45Uag1E",
+     "episode_title": "LIVE: Saylor Is In TROUBLE.. Leopold Buying MICROCAPS!? Stablecoins Are Back.. Trenches Are INSANE!!",
+     "start_seconds": 2465.0,
+     "timestamp": "41:05",
+     "deep_link": "https://www.youtube.com/watch?v=zJfP45Uag1E&t=2465s",
+     "kind": "mention",
+     "note": "Mentioned as a retail sports betting platform that bans users with smart betting patterns."
+    },
+    {
+     "episode_id": "zJfP45Uag1E",
+     "episode_title": "LIVE: Saylor Is In TROUBLE.. Leopold Buying MICROCAPS!? Stablecoins Are Back.. Trenches Are INSANE!!",
+     "start_seconds": 2612.0,
+     "timestamp": "43:32",
+     "deep_link": "https://www.youtube.com/watch?v=zJfP45Uag1E&t=2612s",
+     "kind": "mention",
+     "note": "Speaker discusses DraftKings as a sportsbook counterparty that houses customer risk, contrasting it with prediction markets."
+    }
+   ],
+   "episode_count": 17,
    "single_reference": false
   },
   {
@@ -176312,197 +176746,6 @@
     }
    ],
    "episode_count": 21,
-   "single_reference": false
-  },
-  {
-   "symbol": "DKNG",
-   "name": "DraftKings",
-   "asset_class": "stock",
-   "mentions": 20,
-   "analysis": 6,
-   "moments": [
-    {
-     "episode_id": "-goMJvTOlqE",
-     "episode_title": "The Stock Market Just Changed Forever.. [Stream Recap]",
-     "start_seconds": 1101.0,
-     "timestamp": "18:21",
-     "deep_link": "https://www.youtube.com/watch?v=-goMJvTOlqE&t=1101s",
-     "kind": "mention",
-     "note": "Named in a passing list of stocks."
-    },
-    {
-     "episode_id": "0PtfPucd17E",
-     "episode_title": "The Ansem Interview, the Semiconductor Crash, and the LeBron Economy",
-     "start_seconds": 855.0,
-     "timestamp": "14:15",
-     "deep_link": "https://www.youtube.com/watch?v=0PtfPucd17E&t=855s",
-     "kind": "mention",
-     "note": "DraftKings was flat."
-    },
-    {
-     "episode_id": "47cWlP98gu4",
-     "episode_title": "i quit therapy to become a gambling addict",
-     "start_seconds": 219.0,
-     "timestamp": "3:39",
-     "deep_link": "https://www.youtube.com/watch?v=47cWlP98gu4&t=219s",
-     "kind": "mention",
-     "note": "Mentioned as a retail sportsbook alongside FanDuel, noted as having patterns where bettors get banned if they sniff smart bet patterns."
-    },
-    {
-     "episode_id": "47cWlP98gu4",
-     "episode_title": "i quit therapy to become a gambling addict",
-     "start_seconds": 302.0,
-     "timestamp": "5:02",
-     "deep_link": "https://www.youtube.com/watch?v=47cWlP98gu4&t=302s",
-     "kind": "analysis",
-     "note": "Discussed as a sports betting book that bans sharp bettors quickly and houses counterparty risk for bets placed on their platform."
-    },
-    {
-     "episode_id": "47cWlP98gu4",
-     "episode_title": "i quit therapy to become a gambling addict",
-     "start_seconds": 749.0,
-     "timestamp": "12:29",
-     "deep_link": "https://www.youtube.com/watch?v=47cWlP98gu4&t=749s",
-     "kind": "analysis",
-     "note": "Speaker discussed how quickly they could get banned from DraftKings as a winning player, noting that retail sportsbooks ban sharp bettors."
-    },
-    {
-     "episode_id": "5su0qkG5ye0",
-     "episode_title": "LIVE: Jensen Is PUMPING All Over!!! Trump Wants To END The War!? Trading NBA Finals, World Cup, F1..",
-     "start_seconds": 1613.0,
-     "timestamp": "26:53",
-     "deep_link": "https://www.youtube.com/watch?v=5su0qkG5ye0&t=1613s",
-     "kind": "analysis",
-     "note": "Discussed whether DraftKings stock would go up as a result of sports betting platform pumping; noted it was down that day."
-    },
-    {
-     "episode_id": "60AzVdev5hU",
-     "episode_title": "Zcash Is the Only 10x Left - Rekt Mando",
-     "start_seconds": 3177.0,
-     "timestamp": "52:57",
-     "deep_link": "https://www.youtube.com/watch?v=60AzVdev5hU&t=3177s",
-     "kind": "mention",
-     "note": "Speaker mentions a trader is in DraftKings related to Calci drama; speaker expresses bullish sentiment on gambling stocks."
-    },
-    {
-     "episode_id": "EKxm903EQAQ",
-     "episode_title": "MARKET OPEN: Dean Ball/Kimi, Is MEMORY Back? PUMP.FUN & CRYPTO Are RIPPING",
-     "start_seconds": 9231.0,
-     "timestamp": "2:33:51",
-     "deep_link": "https://www.youtube.com/watch?v=EKxm903EQAQ&t=9231s",
-     "kind": "mention",
-     "note": "DraftKings mentioned with a question of whether it is a sleeper and speculation that DK is up."
-    },
-    {
-     "episode_id": "Z8PbXmkpyPI",
-     "episode_title": "MARKET OPEN: Robinhood Chain is ON FIRE, WAR & RATE HIKES, BITCOIN is in TROUBLE",
-     "start_seconds": 3584.0,
-     "timestamp": "59:44",
-     "deep_link": "https://www.youtube.com/watch?v=Z8PbXmkpyPI&t=3584s",
-     "kind": "analysis",
-     "note": "Up 5%, with discussion about possible lawsuit involvement; later mentioned as launching SkyPix free play experience with Delta Airlines for domestic flights."
-    },
-    {
-     "episode_id": "Zc7gZiQkwNA",
-     "episode_title": "MARKET OPEN: Meta Muse SAVED AI, Crypto is in a BULL MARKET, Bitcoin BREAKS $86K",
-     "start_seconds": 5594.0,
-     "timestamp": "1:33:14",
-     "deep_link": "https://www.youtube.com/watch?v=Zc7gZiQkwNA&t=5594s",
-     "kind": "mention",
-     "note": "Speaker mentions 'draft kings up decent' and calls it 'a pretty good' trade idea."
-    },
-    {
-     "episode_id": "dSIFM2ZrLyM",
-     "episode_title": "Korea's Leverage Wipeout, SpaceX is Crashing Fast, and is Crypto Bottomed?",
-     "start_seconds": 1211.0,
-     "timestamp": "20:11",
-     "deep_link": "https://www.youtube.com/watch?v=dSIFM2ZrLyM&t=1211s",
-     "kind": "mention",
-     "note": "DraftKings mentioned as up 3.5% during market open."
-    },
-    {
-     "episode_id": "gMxsYjDkxCk",
-     "episode_title": "MARKET OPEN: South Korea Crashes the Stock Market, Elon vs Sam Altman, Robinhood is Saving Crypto?",
-     "start_seconds": 4266.0,
-     "timestamp": "1:11:06",
-     "deep_link": "https://www.youtube.com/watch?v=gMxsYjDkxCk&t=4266s",
-     "kind": "mention",
-     "note": "Up three and a half percent."
-    },
-    {
-     "episode_id": "mkHoYlTb5hQ",
-     "episode_title": "MARKET OPEN: FOMC TODAY, Anthropic SAVED the AI & Crypto Trade, BIG NEWS DAY",
-     "start_seconds": 3580.0,
-     "timestamp": "59:40",
-     "deep_link": "https://www.youtube.com/watch?v=mkHoYlTb5hQ&t=3580s",
-     "kind": "analysis",
-     "note": "Up half a percent; discussed as probably a buy with commentary that the whole world is a casino now; noted to have P/E around 15-16."
-    },
-    {
-     "episode_id": "sPwXxkImq7I",
-     "episode_title": "The Chinese Semiconductor Moment, Onchain Spots, and Celebrity Traders",
-     "start_seconds": 797.0,
-     "timestamp": "13:17",
-     "deep_link": "https://www.youtube.com/watch?v=sPwXxkImq7I&t=797s",
-     "kind": "mention",
-     "note": "Up 2%."
-    },
-    {
-     "episode_id": "sUGKofP6Q5g",
-     "episode_title": "The Rise of Heightmaxxing, No Crying in the Casino, and Why Leopold Runs the Market",
-     "start_seconds": 799.0,
-     "timestamp": "13:19",
-     "deep_link": "https://www.youtube.com/watch?v=sUGKofP6Q5g&t=799s",
-     "kind": "analysis",
-     "note": "Discussed as a retail sportsbook platform that bans users with smart betting patterns and only accepts recreational bettors; contrasted with sharps-friendly models."
-    },
-    {
-     "episode_id": "sUGKofP6Q5g",
-     "episode_title": "The Rise of Heightmaxxing, No Crying in the Casino, and Why Leopold Runs the Market",
-     "start_seconds": 2299.0,
-     "timestamp": "38:19",
-     "deep_link": "https://www.youtube.com/watch?v=sUGKofP6Q5g&t=2299s",
-     "kind": "mention",
-     "note": "Down two percent in market rundown."
-    },
-    {
-     "episode_id": "v1QRNLI0C80",
-     "episode_title": "This FOMC Changes Everything... [Stream Recap]",
-     "start_seconds": 2021.0,
-     "timestamp": "33:41",
-     "deep_link": "https://www.youtube.com/watch?v=v1QRNLI0C80&t=2021s",
-     "kind": "mention",
-     "note": "Down 8%."
-    },
-    {
-     "episode_id": "xkYHBboXqd8",
-     "episode_title": "MARKET OPEN: I SOLD ZCASH, The GUARANTEED 4-Year Cycle Bottom is in TWO DAYS, The Pope vs Anthropic",
-     "start_seconds": 3507.0,
-     "timestamp": "58:27",
-     "deep_link": "https://www.youtube.com/watch?v=xkYHBboXqd8&t=3507s",
-     "kind": "mention",
-     "note": "Listed as biggest gainer in crypto stocks."
-    },
-    {
-     "episode_id": "zJfP45Uag1E",
-     "episode_title": "LIVE: Saylor Is In TROUBLE.. Leopold Buying MICROCAPS!? Stablecoins Are Back.. Trenches Are INSANE!!",
-     "start_seconds": 2465.0,
-     "timestamp": "41:05",
-     "deep_link": "https://www.youtube.com/watch?v=zJfP45Uag1E&t=2465s",
-     "kind": "mention",
-     "note": "Mentioned as a retail sports betting platform that bans users with smart betting patterns."
-    },
-    {
-     "episode_id": "zJfP45Uag1E",
-     "episode_title": "LIVE: Saylor Is In TROUBLE.. Leopold Buying MICROCAPS!? Stablecoins Are Back.. Trenches Are INSANE!!",
-     "start_seconds": 2612.0,
-     "timestamp": "43:32",
-     "deep_link": "https://www.youtube.com/watch?v=zJfP45Uag1E&t=2612s",
-     "kind": "mention",
-     "note": "Speaker discusses DraftKings as a sportsbook counterparty that houses customer risk, contrasting it with prediction markets."
-    }
-   ],
-   "episode_count": 16,
    "single_reference": false
   },
   {
@@ -216595,6 +216838,44 @@
    "single_reference": false
   },
   {
+   "symbol": "MONERO",
+   "name": "Monero",
+   "asset_class": "crypto",
+   "mentions": 3,
+   "analysis": 0,
+   "moments": [
+    {
+     "episode_id": "28UU8BO_ta4",
+     "episode_title": "I Love Rare Books, The SEC Legalizes Crypto, and Why Price Targets Are Too Low",
+     "start_seconds": 2300.0,
+     "timestamp": "38:20",
+     "deep_link": "https://www.youtube.com/watch?v=28UU8BO_ta4&t=2300s",
+     "kind": "mention",
+     "note": "Speaker lists 'monero down three' in market movements."
+    },
+    {
+     "episode_id": "3In1m6tg9Fk",
+     "episode_title": "MARKET OPEN: Crypto Onchain BULL MARKET, AI PSYCHOSIS, Is the US Going BACK TO WAR?",
+     "start_seconds": 9294.0,
+     "timestamp": "2:34:54",
+     "deep_link": "https://www.youtube.com/watch?v=3In1m6tg9Fk&t=9294s",
+     "kind": "mention",
+     "note": "Mentioned in context of coins expected to appreciate due to surveillance concerns and privacy-focused buyer interest."
+    },
+    {
+     "episode_id": "JQWpvmU9SFQ",
+     "episode_title": "MARKET OPEN: Democrats SWEEP the Midterms, Crypto is FINISHED, A NEW WAR BEGINS",
+     "start_seconds": 4224.0,
+     "timestamp": "1:10:24",
+     "deep_link": "https://www.youtube.com/watch?v=JQWpvmU9SFQ&t=4224s",
+     "kind": "mention",
+     "note": "Monero is up 2%."
+    }
+   ],
+   "episode_count": 3,
+   "single_reference": false
+  },
+  {
    "symbol": "MNT",
    "name": "Mantle",
    "asset_class": "crypto",
@@ -217579,35 +217860,6 @@
      "deep_link": "https://www.youtube.com/watch?v=emHb4ZZjUFM&t=1051s",
      "kind": "mention",
      "note": "Nasdaq mentioned as more volatile than S&P 500."
-    }
-   ],
-   "episode_count": 2,
-   "single_reference": false
-  },
-  {
-   "symbol": "MONERO",
-   "name": "Monero",
-   "asset_class": "crypto",
-   "mentions": 2,
-   "analysis": 0,
-   "moments": [
-    {
-     "episode_id": "28UU8BO_ta4",
-     "episode_title": "I Love Rare Books, The SEC Legalizes Crypto, and Why Price Targets Are Too Low",
-     "start_seconds": 2300.0,
-     "timestamp": "38:20",
-     "deep_link": "https://www.youtube.com/watch?v=28UU8BO_ta4&t=2300s",
-     "kind": "mention",
-     "note": "Speaker lists 'monero down three' in market movements."
-    },
-    {
-     "episode_id": "3In1m6tg9Fk",
-     "episode_title": "MARKET OPEN: Crypto Onchain BULL MARKET, AI PSYCHOSIS, Is the US Going BACK TO WAR?",
-     "start_seconds": 9294.0,
-     "timestamp": "2:34:54",
-     "deep_link": "https://www.youtube.com/watch?v=3In1m6tg9Fk&t=9294s",
-     "kind": "mention",
-     "note": "Mentioned in context of coins expected to appreciate due to surveillance concerns and privacy-focused buyer interest."
     }
    ],
    "episode_count": 2,
@@ -230128,10 +230380,10 @@
    "single_reference": true
   }
  ],
- "total_hits": 23267,
- "dropped_low_confidence": 1791,
- "dropped_not_an_asset": 1385,
- "episodes_processed": 647,
+ "total_hits": 23295,
+ "dropped_low_confidence": 1798,
+ "dropped_not_an_asset": 1386,
+ "episodes_processed": 648,
  "episode_ids": [
   "-A0rmPYG0s0",
   "-CYcuGbAnpI",
@@ -230353,6 +230605,7 @@
   "IoFYFQOKIIc",
   "IwVx3sbCK5o",
   "IytzLWBD3A4",
+  "JQWpvmU9SFQ",
   "JR4M9v9_2zE",
   "JR8mPLTmyzk",
   "JSKPV5Qp4ZA",

@@ -1,5 +1,5 @@
 {
- "newest": "2117744881804185707",
+ "newest": "2118050057803198957",
  "posts": {
   "2052486417465627019": {
    "account": "blknoiz06",
@@ -180,9 +180,21 @@
   },
   "2117963620554616973": {
    "account": "blknoiz06",
-   "at": "2026-11-04",
+   "at": "2026-11-05",
    "what": "leave",
    "why": "a cut of x-2115904746355851479, placed as a clip"
+  },
+  "2117999750540644787": {
+   "account": "MarketBubble",
+   "at": "2026-11-05",
+   "what": "leave",
+   "why": "a clip, placed by place_x_clips.py"
+  },
+  "2118050057803198957": {
+   "account": "blknoiz06",
+   "at": "2026-11-05",
+   "what": "leave",
+   "why": "a clip, placed by place_x_clips.py"
   }
  }
 }
