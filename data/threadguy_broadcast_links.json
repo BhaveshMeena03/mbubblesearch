@@ -352,6 +352,22 @@
    }
   ]
  },
+ "seP-cbLnSvU": {
+  "broadcast": "https://x.com/i/broadcasts/2JQXRyljKgWBKL",
+  "post": "2118337595285356578",
+  "sections": [
+   {
+    "from": 0,
+    "offset": 5,
+    "to": 6085
+   },
+   {
+    "from": 6152,
+    "offset": -2,
+    "to": null
+   }
+  ]
+ },
  "tysAvH2KfWI": {
   "broadcast": "https://x.com/i/broadcasts/1dKrPrqDRROJX",
   "post": "2107813103874506895",
