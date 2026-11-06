@@ -34,6 +34,7 @@ def _got(**over):
 @pytest.mark.parametrize("got,cut,on_air,watcher,what,why", [
     ({"error": "X would not give the post: timeout"}, None, False, False, "wait", "timeout"),
     (_got(account="kaiz_294"), None, False, False, "leave", "@kaiz_294"),
+    (_got(account="", broadcast=True, duration=None), None, False, False, "wait", "who posted"),
     (_got(duration=95.0), None, False, False, "leave", "a clip"),
     (_got(duration=None), None, False, False, "wait", "no length"),
     (_got(), {"episode_id": "x-2115904746355851479"}, False, False, "leave", "a cut of"),
@@ -105,6 +106,12 @@ def world(tmp_path, monkeypatch):
     monkeypatch.setattr(rec.episode_store, "load", lambda: list(store))
     monkeypatch.setattr(rec.clips, "fetch", lambda post, workdir: dict(replies[post]))
     monkeypatch.setattr(rec.clips, "Shows", NoShows)
+
+    # X's search is paid for by the bot's credit, and a test once read 34
+    # real posts through it. A test that searches says what X answers.
+    async def no_x(since_id, query):
+        raise AssertionError("a test asked X's search")
+    monkeypatch.setattr(rec.clips, "search", no_x)
     monkeypatch.setattr(rec, "live_status", lambda post: "was_live")
     monkeypatch.setattr(rec, "watcher_running", lambda: False)
     monkeypatch.setattr(rec.subprocess, "run", run)
@@ -260,6 +267,28 @@ def test_his_copy_found_before_their_post_in_one_run_waits_for_it(world, monkeyp
     assert world["heard"] == [(new_copy, new_mb)]
     posts = json.loads(world["state"].read_text())["posts"]
     assert posts[new_mb]["what"] == "indexed" and posts[new_copy]["what"] == "copy"
+
+
+def test_a_show_and_its_copy_that_came_back_nameless_are_taken_the_next_morning(world, monkeypatch):
+    """6 Nov 2026: Episode 25 and Ansem's copy, 8 ms apart, both came back
+    from X without an account and were left for good as somebody else's."""
+    world["store"].clear()
+    ep25, copy = "2118457515969032365", "2118457507681124421"
+    world["replies"][copy] = _copy(account="", clock={"broadcast": "https://x.com/i/broadcasts/1b", "offset": 0})
+    world["replies"][ep25] = _copy(account="")
+    _main(monkeypatch, copy, ep25)
+    posts = json.loads(world["state"].read_text())["posts"]
+    assert [posts[p]["what"] for p in (copy, ep25)] == ["wait", "wait"] and world["ran"] == []
+    world["replies"][copy]["account"] = "blknoiz06"
+    world["replies"][ep25]["account"] = "MarketBubble"
+
+    async def nothing_new(since_id, query):
+        return []
+    monkeypatch.setattr(rec.clips, "search", nothing_new)
+    _main(monkeypatch, "--search")
+    posts = json.loads(world["state"].read_text())["posts"]
+    assert posts[ep25]["what"] == "indexed" and posts[copy]["what"] == "copy"
+    assert world["heard"] == [(copy, ep25)]
 
 
 def test_a_copy_that_cannot_be_heard_is_tried_again(world, monkeypatch):

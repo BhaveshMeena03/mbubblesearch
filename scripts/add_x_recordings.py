@@ -102,6 +102,11 @@ def verdict(post: str, got: dict, held: set[str], cut: dict | None,
     if got.get("error"):
         return "wait", got["error"]
     account = str(got.get("account") or "").lower()
+    # Not knowing who posted it is not knowing it was someone else: the
+    # search only returns the two accounts' posts, and Episode 25 came back
+    # with no account on its first morning.
+    if not account:
+        return "wait", "X did not say who posted it"
     if account not in ACCOUNTS:
         return "leave", f"posted by @{got.get('account') or '?'}"
     if f"x-{post}" in held:

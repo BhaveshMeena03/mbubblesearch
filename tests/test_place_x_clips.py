@@ -375,6 +375,70 @@ def test_x_not_answering_costs_one_post_not_the_run(monkeypatch, tmp_path):
     assert asked == [180, 2700], "the download gets the video's own length on top"
 
 
+class _Ran:
+    def __init__(self, stdout):
+        self.returncode, self.stdout, self.stderr = 0, stdout, ""
+
+
+def test_a_broadcast_that_comes_back_without_its_account_is_named_by_the_embed(monkeypatch, tmp_path):
+    """6 Nov 2026: X sent Market Bubble Episode 25's broadcast with no
+    account. yt-dlp printed NA, which passed for a handle, and the show was
+    left as somebody else's."""
+    asked = []
+    monkeypatch.setattr(place.subprocess, "run", lambda cmd, **kw: _Ran("\t\ttwitter:broadcast\n"))
+    monkeypatch.setattr(place, "author", lambda post: asked.append(post) or "MarketBubble")
+    got = place.fetch("2118457515969032365", tmp_path)
+    assert got["account"] == "MarketBubble" and got["broadcast"] and got["duration"] is None
+    assert asked == ["2118457515969032365"]
+
+
+def test_the_embed_is_only_asked_when_yt_dlp_gives_no_account(monkeypatch, tmp_path):
+    monkeypatch.setattr(place.subprocess, "run", lambda cmd, **kw: _Ran("NA\tMarketBubble\ttwitter:broadcast\n"))
+    monkeypatch.setattr(place, "author", lambda post: pytest.fail("not needed"))
+    assert place.fetch("2115904746355851479", tmp_path)["account"] == "MarketBubble"
+
+
+def test_yt_dlp_is_asked_for_nothing_rather_than_na_where_a_field_is_missing(monkeypatch, tmp_path):
+    seen = []
+    monkeypatch.setattr(place.subprocess, "run", lambda cmd, **kw: seen.append(cmd) or _Ran("\t\tx\n"))
+    monkeypatch.setattr(place, "author", lambda post: "")
+    assert place.fetch("2118457515969032365", tmp_path)["account"] == ""
+    assert "%(duration|)s\t%(uploader_id|)s\t%(extractor)s" in seen[0]
+
+
+class _Reply:
+    def __init__(self, body: bytes):
+        self.body = body
+
+    def read(self, limit):
+        return self.body[:limit]
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        return False
+
+
+@pytest.mark.parametrize("body,name", [
+    (b'{"user": {"screen_name": "MarketBubble"}}', "MarketBubble"),
+    (b'{"user": {"screen_name": "not a handle"}}', ""),
+    (b'{"user": null}', ""),
+    (b'[]', ""),
+    (b'<html>rate limited</html>', ""),
+])
+def test_the_embed_names_the_author_or_nobody(monkeypatch, body, name):
+    monkeypatch.setattr(place.urllib.request, "urlopen", lambda url, timeout: _Reply(body))
+    assert place.author("2118457515969032365") == name
+
+
+def test_the_embed_not_answering_is_nobody(monkeypatch):
+    def down(url, timeout):
+        raise OSError("no route")
+    monkeypatch.setattr(place.urllib.request, "urlopen", down)
+    assert place.author("2118457515969032365") == ""
+
+
 def _search_world(tmp_path, monkeypatch, state, found, replies, episodes):
     out, searched = tmp_path / "x_clips.json", tmp_path / "x_clips_search.json"
     searched.write_text(json.dumps(state))

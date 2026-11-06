@@ -58,6 +58,7 @@ import subprocess
 import sys
 import tempfile
 import time
+import urllib.request
 from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 
@@ -75,6 +76,9 @@ from app import (  # noqa: E402
 OUT = ROOT / "data" / "x_clips.json"
 SEARCHED = ROOT / "data" / "x_clips_search.json"
 POST_ID = re.compile(r"^[0-9]{5,25}$")
+HANDLE = re.compile(r"^[A-Za-z0-9_]{1,15}$")
+EMBED = "https://cdn.syndication.twimg.com/tweet-result"
+MAX_EMBED_BYTES = 1_000_000
 
 # Longer than this is not a cut of any show the archive holds; the longest
 # Market Bubble episode runs under four hours.
@@ -278,6 +282,23 @@ def context(episode: dict, caption: str, start: float, duration: float) -> dict 
     }
 
 
+def author(post: str) -> str:
+    """Who posted it, from X's embed endpoint, or "" when that won't say.
+
+    yt-dlp reads a broadcast's account off the broadcast, and on 6 Nov 2026
+    X sent Market Bubble Episode 25's without one. yt-dlp printed NA, which
+    passed for a handle, and the show and Ansem's copy of it were both left
+    as somebody else's. The embed endpoint costs nothing and names the
+    post's author whatever kind of post it is."""
+    try:
+        with urllib.request.urlopen(f"{EMBED}?id={post}&token=x", timeout=30) as reply:  # noqa: S310
+            body = json.loads(reply.read(MAX_EMBED_BYTES))
+    except (OSError, ValueError):
+        return ""
+    name = str(((body if isinstance(body, dict) else {}).get("user") or {}).get("screen_name") or "")
+    return name if HANDLE.match(name) else ""
+
+
 def fetch(post: str, workdir: Path) -> dict:
     """The clip's caption, length and account, from X through yt-dlp."""
     url = f"https://x.com/i/status/{post}"
@@ -292,17 +313,21 @@ def fetch(post: str, workdir: Path) -> dict:
              "--no-warnings", "--playlist-items", "1", "--no-simulate", "--skip-download",
              "--write-subs", "--sub-langs", "en", "--sub-format", "vtt",
              "-o", str(workdir / f"{post}.%(ext)s"),
-             "--print", "%(duration)s\t%(uploader_id)s\t%(extractor)s", url],
+             "--print", "%(duration|)s\t%(uploader_id|)s\t%(extractor)s", url],
             capture_output=True, text=True, timeout=180)
     except subprocess.TimeoutExpired:
         return {"error": "X would not give the post: no answer in three minutes"}
     if run.returncode != 0:
         return {"error": "X would not give the post: " + (run.stderr.strip().splitlines() or ["?"])[-1][:160]}
-    duration, account, extractor = (run.stdout.strip().splitlines() or ["\t\t"])[-1].split("\t")
+    # Strip line ends only: a blank length and account print as leading tabs.
+    last = (run.stdout.strip("\r\n").splitlines() or [""])[-1]
+    duration, account, extractor = (last.split("\t") + ["", "", ""])[:3]
+    if not HANDLE.match(account):
+        account = author(post)
     vtt = workdir / f"{post}.en.vtt"
     return {
         "duration": float(duration) if re.match(r"^\d+(\.\d+)?$", duration) else None,
-        "account": account if re.match(r"^[A-Za-z0-9_]{1,15}$", account) else "",
+        "account": account if HANDLE.match(account) else "",
         "broadcast": extractor.endswith("broadcast"),
         "caption": caption_text(vtt.read_text()) if vtt.exists() else "",
     }
