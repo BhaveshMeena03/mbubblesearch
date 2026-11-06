@@ -157,6 +157,10 @@ SOURCES = [
     # above, asked for by Lex on 16 Oct 2026. Other people speak on that
     # stage, so the voice labels are what keep their lines off Elon.
     ("qt5p-_tE8d0", "Tesla", "2026-10-16", "Roadster Event"),
+    ("jrUNnrcmFCU", "CGTN", "2026-09-26",
+     "Exclusive CMG interview with Tesla CEO Elon Musk"),
+    ("AQnwQHMnCrE", "The Builders with Walter Isaacson", "2026-10-20",
+     "Elon Musk: The End of Work, the Death of Money, and a World Run by AI"),
 ]
 
 

@@ -134,6 +134,9 @@ PUBLISHERS = frozenset({
     # the same searches also returned re-uploads of every one of them.
     "World Economic Forum", "Peter H. Diamandis", "Katie Miller Pod",
     "Baron Capital",
+    # Walter Isaacson's own show, and China Media Group's English channel
+    # for the interview CMG recorded. Checked by channel on 6 Nov 2026.
+    "The Builders with Walter Isaacson", "CGTN",
 })
 
 
