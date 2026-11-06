@@ -203,16 +203,16 @@
    "why": "a clip, placed by place_x_clips.py"
   },
   "2118457507681124421": {
-   "account": "NA",
+   "account": "blknoiz06",
    "at": "2026-11-06",
-   "what": "leave",
-   "why": "posted by @NA"
+   "what": "copy",
+   "why": "the same feed as x-2118457515969032365, offset 2s"
   },
   "2118457515969032365": {
-   "account": "NA",
+   "account": "MarketBubble",
    "at": "2026-11-06",
    "what": "leave",
-   "why": "posted by @NA"
+   "why": "already indexed"
   },
   "2118479625009721663": {
    "account": "blknoiz06",

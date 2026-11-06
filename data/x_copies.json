@@ -181,5 +181,12 @@
    }
   ],
   "measured": "2026-11-04"
+ },
+ "2118457507681124421": {
+  "account": "blknoiz06",
+  "episode_id": "x-2118457515969032365",
+  "broadcast": "https://x.com/i/broadcasts/2WXEErayLJRVMR",
+  "offset": 2,
+  "measured": "2026-11-06"
  }
 }
