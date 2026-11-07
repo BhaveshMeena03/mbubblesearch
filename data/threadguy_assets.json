@@ -4,7 +4,7 @@
    "symbol": "BTC",
    "name": "Bitcoin",
    "asset_class": "crypto",
-   "mentions": 2809,
+   "mentions": 2814,
    "analysis": 1590,
    "moments": [
     {
@@ -20303,6 +20303,51 @@
      "note": "Tuttle Jones holds Bitcoin exposure through the iShares Bitcoin ETF at a price of $124,000."
     },
     {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 706.0,
+     "timestamp": "11:46",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=706s",
+     "kind": "mention",
+     "note": "Mentioned as 'not really doing anything' during the market event discussed."
+    },
+    {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 843.0,
+     "timestamp": "14:03",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=843s",
+     "kind": "mention",
+     "note": "Bitcoin mentioned in context of new highs and price targets by end of year."
+    },
+    {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 1693.0,
+     "timestamp": "28:13",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=1693s",
+     "kind": "mention",
+     "note": "Speaker suggests Bitcoin could get 'demolished' in the current market conditions."
+    },
+    {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 2278.0,
+     "timestamp": "37:58",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=2278s",
+     "kind": "mention",
+     "note": "Speaker mentioned BTC candle hitting 73 and referenced it in passing during price action discussion."
+    },
+    {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 2382.0,
+     "timestamp": "39:42",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=2382s",
+     "kind": "mention",
+     "note": "Bitcoin mentioned at 72k price point."
+    },
+    {
      "episode_id": "pAO7oihWzX4",
      "episode_title": "LIVE: Bitcoin To ZERO!!! Quantum IPO Is CRAZY! Can Trump Save Us?! SpaceX! AAAAAAA",
      "start_seconds": 792.0,
@@ -25289,14 +25334,14 @@
      "note": "Named in passing when speaker says 'before we even talk about anything with btc we got to get out of here' and mentions needing to 'get out of 73'."
     }
    ],
-   "episode_count": 531,
+   "episode_count": 532,
    "single_reference": false
   },
   {
    "symbol": "SOL",
    "name": "Solana",
    "asset_class": "crypto",
-   "mentions": 1226,
+   "mentions": 1227,
    "analysis": 581,
    "moments": [
     {
@@ -34318,6 +34363,15 @@
      "note": "Sol is at 75."
     },
     {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 688.0,
+     "timestamp": "11:28",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=688s",
+     "kind": "mention",
+     "note": "Described as 'green' on the daily chart."
+    },
+    {
      "episode_id": "pAO7oihWzX4",
      "episode_title": "LIVE: Bitcoin To ZERO!!! Quantum IPO Is CRAZY! Can Trump Save Us?! SpaceX! AAAAAAA",
      "start_seconds": 3773.0,
@@ -36334,15 +36388,15 @@
      "note": "Speaker mentions buying Solana in passing while discussing market downturn."
     }
    ],
-   "episode_count": 431,
+   "episode_count": 432,
    "single_reference": false
   },
   {
    "symbol": "ZEC",
    "name": "Zcash",
    "asset_class": "crypto",
-   "mentions": 904,
-   "analysis": 514,
+   "mentions": 906,
+   "analysis": 515,
    "moments": [
     {
      "episode_id": "-IboaV4KXK8",
@@ -43149,6 +43203,24 @@
      "note": "Zcash is up 5%."
     },
     {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 927.0,
+     "timestamp": "15:27",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=927s",
+     "kind": "mention",
+     "note": "Speaker questions what is happening to Zcash, noting it has moved to 1318-1320 price level."
+    },
+    {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 2002.0,
+     "timestamp": "33:22",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=2002s",
+     "kind": "analysis",
+     "note": "Speaker discussed price action of Zec, noting it was up and observing chart patterns describing ranges and potential moves toward 1400 plus."
+    },
+    {
      "episode_id": "pAO7oihWzX4",
      "episode_title": "LIVE: Bitcoin To ZERO!!! Quantum IPO Is CRAZY! Can Trump Save Us?! SpaceX! AAAAAAA",
      "start_seconds": 703.0,
@@ -44481,7 +44553,7 @@
      "note": "Speaker closed a Zcash trade for a million dollars, closed around half of the position and described it as a sick trade."
     }
    ],
-   "episode_count": 287,
+   "episode_count": 288,
    "single_reference": false
   },
   {
@@ -88025,7 +88097,7 @@
    "symbol": "INTC",
    "name": "Intel",
    "asset_class": "stock",
-   "mentions": 237,
+   "mentions": 238,
    "analysis": 96,
    "moments": [
     {
@@ -89865,6 +89937,15 @@
      "note": "Nancy Pelosi bought five million shares of Intel; stock mentioned as performing well."
     },
     {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 984.0,
+     "timestamp": "16:24",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=984s",
+     "kind": "mention",
+     "note": "Long Intel position mentioned in Flood portfolio."
+    },
+    {
      "episode_id": "pAO7oihWzX4",
      "episode_title": "LIVE: Bitcoin To ZERO!!! Quantum IPO Is CRAZY! Can Trump Save Us?! SpaceX! AAAAAAA",
      "start_seconds": 2124.0,
@@ -90162,7 +90243,7 @@
      "note": "Announced an upsized $20 billion common stock offering at $95 per share, up from the original $15 billion."
     }
    ],
-   "episode_count": 131,
+   "episode_count": 132,
    "single_reference": false
   },
   {
@@ -96367,7 +96448,7 @@
    "symbol": "GOOGL",
    "name": "Google",
    "asset_class": "stock",
-   "mentions": 262,
+   "mentions": 263,
    "analysis": 91,
    "moments": [
     {
@@ -98414,6 +98495,15 @@
      "note": "Berkshire Hathaway bought a large position with an estimated average buy price of $350, holding $28 billion of Google and increasing its position by 24 million shares (45%)."
     },
     {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 1823.0,
+     "timestamp": "30:23",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=1823s",
+     "kind": "mention",
+     "note": "Speaker mentions Google formally announcing 17 billion data centers in Wyoming and using clean energy."
+    },
+    {
      "episode_id": "pDUwR75CG6s",
      "episode_title": "Why OpenAI Is The Next Amazon - GoodAlexander",
      "start_seconds": 966.0,
@@ -98729,7 +98819,7 @@
      "note": "Speaker mentioned Google as flat."
     }
    ],
-   "episode_count": 147,
+   "episode_count": 148,
    "single_reference": false
   },
   {
@@ -105575,7 +105665,7 @@
    "symbol": "GOLD",
    "name": "Gold",
    "asset_class": "commodity",
-   "mentions": 132,
+   "mentions": 133,
    "analysis": 75,
    "moments": [
     {
@@ -106488,6 +106578,15 @@
      "note": "Speaker compares gold as 'the better trade' versus being long debasement."
     },
     {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 692.0,
+     "timestamp": "11:32",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=692s",
+     "kind": "mention",
+     "note": "Noted as looking 'fine' during the market discussion."
+    },
+    {
      "episode_id": "pPn3lsVD8iA",
      "episode_title": "The REAL Reason Bitcoin is Pumping... (Mando)",
      "start_seconds": 383.0,
@@ -106767,7 +106866,7 @@
      "note": "Referenced as trading parabolic like meme coins; noted as potentially holding value long-term despite short-term momentum-driven trading."
     }
    ],
-   "episode_count": 84,
+   "episode_count": 85,
    "single_reference": false
   },
   {
@@ -119077,7 +119176,7 @@
    "symbol": "MSFT",
    "name": "Microsoft",
    "asset_class": "stock",
-   "mentions": 174,
+   "mentions": 175,
    "analysis": 54,
    "moments": [
     {
@@ -120395,6 +120494,15 @@
      "note": "Mentioned as an analogy for service-based value comparison to Bitcoin; noted that Microsoft charges subscription whereas Bitcoin is accessed by purchase."
     },
     {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 984.0,
+     "timestamp": "16:24",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=984s",
+     "kind": "mention",
+     "note": "Short Microsoft position mentioned in Flood portfolio."
+    },
+    {
      "episode_id": "pWUa7CEpw-M",
      "episode_title": "MARKET OPEN: Onchain BULL MARKET, The MEMORY TRADE is BACK, Anthropic S-1",
      "start_seconds": 6650.0,
@@ -120647,7 +120755,7 @@
      "note": "Mentioned in passing as the subject of trolling on late-night television."
     }
    ],
-   "episode_count": 120,
+   "episode_count": 121,
    "single_reference": false
   },
   {
@@ -137247,6 +137355,647 @@
    "single_reference": false
   },
   {
+   "symbol": "SK",
+   "name": "SK Hynix",
+   "asset_class": "stock",
+   "mentions": 70,
+   "analysis": 35,
+   "moments": [
+    {
+     "episode_id": "-uarB5g12aY",
+     "episode_title": "MARKET OPEN: Russian PLAGUE OUTBREAK, I BOUGHT ZCASH BACK, Michael Burry vs the BULL MARKET",
+     "start_seconds": 8804.0,
+     "timestamp": "2:26:44",
+     "deep_link": "https://www.youtube.com/watch?v=-uarB5g12aY&t=8804s",
+     "kind": "mention",
+     "note": "SK Hynix noted as biggest loser."
+    },
+    {
+     "episode_id": "0yg1kc_WEUs",
+     "episode_title": "Flood - Inside the Biggest AI Fund Blowup Ever",
+     "start_seconds": 2373.0,
+     "timestamp": "39:33",
+     "deep_link": "https://www.youtube.com/watch?v=0yg1kc_WEUs&t=2373s",
+     "kind": "analysis",
+     "note": "Speaker compares SK Hynix's situation where they either beat earnings and get punished or miss and get hammered; mentions company did a $27 billion offering."
+    },
+    {
+     "episode_id": "1pEuDm7eYN8",
+     "episode_title": "MARKET OPEN: Anthropic ARR is BAD, Markets in TROUBLE, Where Does Crypto Go NEXT?, Based16z TODAY",
+     "start_seconds": 713.0,
+     "timestamp": "11:53",
+     "deep_link": "https://www.youtube.com/watch?v=1pEuDm7eYN8&t=713s",
+     "kind": "analysis",
+     "note": "Speaker discusses investing $200,000 in SK Hynix and mentions Samsung and Hynix 5th year, suggesting it was a significant investment early on."
+    },
+    {
+     "episode_id": "1yrQSSU4nV0",
+     "episode_title": "Anti-AI Backlash Goes Mainstream and AMC Fumbling the Trade of the Year [Stream Recap]",
+     "start_seconds": 1877.0,
+     "timestamp": "31:17",
+     "deep_link": "https://www.youtube.com/watch?v=1yrQSSU4nV0&t=1877s",
+     "kind": "analysis",
+     "note": "Discussed as overtaking Samsung in market capitalization, interpreted as a market top signal; ADR listing delay in U.S. and trading delays mentioned as factors in market decline."
+    },
+    {
+     "episode_id": "3mbHm1CJVho",
+     "episode_title": "How Crypto Came Back From The Dead... [Stream Recap]",
+     "start_seconds": 1176.0,
+     "timestamp": "19:36",
+     "deep_link": "https://www.youtube.com/watch?v=3mbHm1CJVho&t=1176s",
+     "kind": "mention",
+     "note": "Named alongside other South Korean stocks as part of branching out from semiconductor AI bottlenecks into other sectors."
+    },
+    {
+     "episode_id": "45iOeIwp5tE",
+     "episode_title": "LIVE: Bitcoin Is BLOWING UP... Is The MEMORY TRADE Over? IRL IS BACK! - RektMando On At 4:30PM EST!",
+     "start_seconds": 3055.0,
+     "timestamp": "50:55",
+     "deep_link": "https://www.youtube.com/watch?v=45iOeIwp5tE&t=3055s",
+     "kind": "mention",
+     "note": "Speaker mentions SK Hynix vests and merchandise as trendy status symbols, comparing them to luxury brands."
+    },
+    {
+     "episode_id": "45iOeIwp5tE",
+     "episode_title": "LIVE: Bitcoin Is BLOWING UP... Is The MEMORY TRADE Over? IRL IS BACK! - RektMando On At 4:30PM EST!",
+     "start_seconds": 8693.0,
+     "timestamp": "2:24:53",
+     "deep_link": "https://www.youtube.com/watch?v=45iOeIwp5tE&t=8693s",
+     "kind": "analysis",
+     "note": "Speaker describes SK Hynix as an incredible trade with incredible earnings, though notes it may be crowded."
+    },
+    {
+     "episode_id": "4ZLZNApjRZY",
+     "episode_title": "The PONS Short Prisoner's Dilemma, the AI DOOM Case, and Talking About PNL",
+     "start_seconds": 959.0,
+     "timestamp": "15:59",
+     "deep_link": "https://www.youtube.com/watch?v=4ZLZNApjRZY&t=959s",
+     "kind": "mention",
+     "note": "SK Hynix mentioned as down five percent."
+    },
+    {
+     "episode_id": "5InXzZkSEgE",
+     "episode_title": "LIVE: Stocks Are CRASHING!!!!!! AMC Rugged.. GG. TRUMP PUMPS QUANTUM! IBM! USA vs CUBA!?!?!?! WTFFF",
+     "start_seconds": 5448.0,
+     "timestamp": "1:30:48",
+     "deep_link": "https://www.youtube.com/watch?v=5InXzZkSEgE&t=5448s",
+     "kind": "analysis",
+     "note": "Asked if anyone is long SK Hynix; mentioned as overtaking Samsung in market capitalization being read as a market top signal; discussed regarding delay in ADR listing in the U.S."
+    },
+    {
+     "episode_id": "5InXzZkSEgE",
+     "episode_title": "LIVE: Stocks Are CRASHING!!!!!! AMC Rugged.. GG. TRUMP PUMPS QUANTUM! IBM! USA vs CUBA!?!?!?! WTFFF",
+     "start_seconds": 5614.0,
+     "timestamp": "1:33:34",
+     "deep_link": "https://www.youtube.com/watch?v=5InXzZkSEgE&t=5614s",
+     "kind": "analysis",
+     "note": "SK Hynix is shifting focus to commodity DRAM production while slowing HBM4 expansion, reallocating resources from high-bandwidth memory to maximize near-term profits from commodity DRAM where supply is short."
+    },
+    {
+     "episode_id": "5InXzZkSEgE",
+     "episode_title": "LIVE: Stocks Are CRASHING!!!!!! AMC Rugged.. GG. TRUMP PUMPS QUANTUM! IBM! USA vs CUBA!?!?!?! WTFFF",
+     "start_seconds": 9149.0,
+     "timestamp": "2:32:29",
+     "deep_link": "https://www.youtube.com/watch?v=5InXzZkSEgE&t=9149s",
+     "kind": "mention",
+     "note": "SK Hynix was mentioned in the context of Taiwan market discussion."
+    },
+    {
+     "episode_id": "5pHRLKS-UqA",
+     "episode_title": "LIVE: Korean Stocks Are F**KED!!! Anthropic WON..? Trump's FAVORITE Stock (oh no)",
+     "start_seconds": 6821.0,
+     "timestamp": "1:53:41",
+     "deep_link": "https://www.youtube.com/watch?v=5pHRLKS-UqA&t=6821s",
+     "kind": "analysis",
+     "note": "Speaker discussed SK Hynix extensively, noting it is basically at all-time highs and a key driving force in Korea's stock market rally, with significant leverage financing and margin lending activity."
+    },
+    {
+     "episode_id": "5pHRLKS-UqA",
+     "episode_title": "LIVE: Korean Stocks Are F**KED!!! Anthropic WON..? Trump's FAVORITE Stock (oh no)",
+     "start_seconds": 7133.0,
+     "timestamp": "1:58:53",
+     "deep_link": "https://www.youtube.com/watch?v=5pHRLKS-UqA&t=7133s",
+     "kind": "analysis",
+     "note": "Koreans are surrendering life insurance policies to buy SK Hynix; the stock has risen 1,300% since November 2024 and trades at a forward PE of 6, making it significantly cheaper than comparable US semiconductor stocks."
+    },
+    {
+     "episode_id": "8ePuL0cxNnA",
+     "episode_title": "MARKET OPEN: AI DOOM, Stocks are PANICKING, Dario Has LOST IT, Crypto CLARITY Coming Soon",
+     "start_seconds": 3982.0,
+     "timestamp": "1:06:22",
+     "deep_link": "https://www.youtube.com/watch?v=8ePuL0cxNnA&t=3982s",
+     "kind": "mention",
+     "note": "SK Hynix listed as one of the names reportedly purchased by Leopold in AI and memory stocks."
+    },
+    {
+     "episode_id": "B4oxWYTiULI",
+     "episode_title": "Good Alexander - Why Hyperliquid Really Pumped",
+     "start_seconds": 391.0,
+     "timestamp": "6:31",
+     "deep_link": "https://www.youtube.com/watch?v=B4oxWYTiULI&t=391s",
+     "kind": "mention",
+     "note": "Named as one of the memory companies crushing it due to AI capex and three-year deals forcing commitment."
+    },
+    {
+     "episode_id": "Bdr495HLGxk",
+     "episode_title": "MARKET OPEN: Anthropic S-1 TODAY, Elon KILLS Neoclouds, SOMEBODY SAVE CRYPTO",
+     "start_seconds": 4118.0,
+     "timestamp": "1:08:38",
+     "deep_link": "https://www.youtube.com/watch?v=Bdr495HLGxk&t=4118s",
+     "kind": "mention",
+     "note": "SK Hynix stock up 3%."
+    },
+    {
+     "episode_id": "DMroSwBCuEs",
+     "episode_title": "LIVE: Cerebras IPO!  Hyperliquid is INSANE!? Trump is in CHINA! Airmass at 5PM EST!!",
+     "start_seconds": 4057.0,
+     "timestamp": "1:07:37",
+     "deep_link": "https://www.youtube.com/watch?v=DMroSwBCuEs&t=4057s",
+     "kind": "mention",
+     "note": "SK Hynix mentioned in comparison of valuation and price of sales multiples."
+    },
+    {
+     "episode_id": "DQQlasUd-mU",
+     "episode_title": "MARKET OPEN: FOMC TODAY, Crypto CLARITY FAILED, Kevin Warsh Has the WORLD AT HIS MERCY",
+     "start_seconds": 3264.0,
+     "timestamp": "54:24",
+     "deep_link": "https://www.youtube.com/watch?v=DQQlasUd-mU&t=3264s",
+     "kind": "mention",
+     "note": "SK Hynix is up 4%."
+    },
+    {
+     "episode_id": "DVtajNNR6js",
+     "episode_title": "MARKET OPEN: Memory stocks are DUMPING. BRIAN vs VLAD. Kimi/deepseek part 2.",
+     "start_seconds": 399.0,
+     "timestamp": "6:39",
+     "deep_link": "https://www.youtube.com/watch?v=DVtajNNR6js&t=399s",
+     "kind": "mention",
+     "note": "Speaker mentions SK Hynix US in pre-market, describing it as down but not significantly."
+    },
+    {
+     "episode_id": "DVtajNNR6js",
+     "episode_title": "MARKET OPEN: Memory stocks are DUMPING. BRIAN vs VLAD. Kimi/deepseek part 2.",
+     "start_seconds": 1867.0,
+     "timestamp": "31:07",
+     "deep_link": "https://www.youtube.com/watch?v=DVtajNNR6js&t=1867s",
+     "kind": "mention",
+     "note": "SK Hynix mentioned in context of broader market decline."
+    },
+    {
+     "episode_id": "DVtajNNR6js",
+     "episode_title": "MARKET OPEN: Memory stocks are DUMPING. BRIAN vs VLAD. Kimi/deepseek part 2.",
+     "start_seconds": 1872.0,
+     "timestamp": "31:12",
+     "deep_link": "https://www.youtube.com/watch?v=DVtajNNR6js&t=1872s",
+     "kind": "mention",
+     "note": "Named in price action listing at 13-1."
+    },
+    {
+     "episode_id": "EOkDv8qm8ik",
+     "episode_title": "MARKET OPEN: Binance Suffers the BIGGEST HACK EVER, Stocks are in EVEN WORSE SHAPE, HAPPY FRIDAY",
+     "start_seconds": 6104.0,
+     "timestamp": "1:41:44",
+     "deep_link": "https://www.youtube.com/watch?v=EOkDv8qm8ik&t=6104s",
+     "kind": "analysis",
+     "note": "Named as one of two main memory stocks to consider buying, alongside Micron."
+    },
+    {
+     "episode_id": "ESO8QpCTuts",
+     "episode_title": "The Kimi Moment, Hedge Funds Save the Market, and Trump MEV",
+     "start_seconds": 442.0,
+     "timestamp": "7:22",
+     "deep_link": "https://www.youtube.com/watch?v=ESO8QpCTuts&t=442s",
+     "kind": "mention",
+     "note": "SK Hynix is mentioned as being up."
+    },
+    {
+     "episode_id": "ESO8QpCTuts",
+     "episode_title": "The Kimi Moment, Hedge Funds Save the Market, and Trump MEV",
+     "start_seconds": 1704.0,
+     "timestamp": "28:24",
+     "deep_link": "https://www.youtube.com/watch?v=ESO8QpCTuts&t=1704s",
+     "kind": "analysis",
+     "note": "SK Hynix falls below $149 listing price for the first time."
+    },
+    {
+     "episode_id": "GkjEZWs_o58",
+     "episode_title": "Pumpfun is Going Multicycle, Follower Count Doesn't Matter, and It's Time To Start A Family",
+     "start_seconds": 1005.0,
+     "timestamp": "16:45",
+     "deep_link": "https://www.youtube.com/watch?v=GkjEZWs_o58&t=1005s",
+     "kind": "mention",
+     "note": "Gavin Baker mentioned as owning SK Hynix as an example of influential people having their own assets."
+    },
+    {
+     "episode_id": "HkKHhQDPqy0",
+     "episode_title": "MARKET OPEN: Hyperliquid & ICE SAVED CRYPTO, Google KILLED the AI Trade... NOW WHAT?",
+     "start_seconds": 2825.0,
+     "timestamp": "47:05",
+     "deep_link": "https://www.youtube.com/watch?v=HkKHhQDPqy0&t=2825s",
+     "kind": "mention",
+     "note": "Mentioned in position discussion."
+    },
+    {
+     "episode_id": "HkKHhQDPqy0",
+     "episode_title": "MARKET OPEN: Hyperliquid & ICE SAVED CRYPTO, Google KILLED the AI Trade... NOW WHAT?",
+     "start_seconds": 5411.0,
+     "timestamp": "1:30:11",
+     "deep_link": "https://www.youtube.com/watch?v=HkKHhQDPqy0&t=5411s",
+     "kind": "analysis",
+     "note": "SK Hynix came out with very strong earnings with a ton of pricing power and extensions for multi-year pricing contracts."
+    },
+    {
+     "episode_id": "Nbbb-Dhr3U0",
+     "episode_title": "Apple Just Raised Prices, China Is Dropshipping Claude and the IRL Trade",
+     "start_seconds": 883.0,
+     "timestamp": "14:43",
+     "deep_link": "https://www.youtube.com/watch?v=Nbbb-Dhr3U0&t=883s",
+     "kind": "analysis",
+     "note": "Speaker discusses SK Hynix merchandise as a trendy luxury item and compares its stock chart to LVMH, suggesting tech company branding is replacing traditional luxury."
+    },
+    {
+     "episode_id": "PO0CKvK3zrY",
+     "episode_title": "EasyEats - $30 HOOD Call, Polymarket Edge & Peptides",
+     "start_seconds": 1015.0,
+     "timestamp": "16:55",
+     "deep_link": "https://www.youtube.com/watch?v=PO0CKvK3zrY&t=1015s",
+     "kind": "mention",
+     "note": "SK Hynix is mentioned in passing as something the 'bitcoin chair' in the corner watches."
+    },
+    {
+     "episode_id": "QAFaJP0b4xA",
+     "episode_title": "MARKET OPEN: The FAILED AI EXPERIMENT, Meta Goes DIRECT, Crypto is ALL WE HAVE LEFT",
+     "start_seconds": 3304.0,
+     "timestamp": "55:04",
+     "deep_link": "https://www.youtube.com/watch?v=QAFaJP0b4xA&t=3304s",
+     "kind": "mention",
+     "note": "SK Hynix last night was up 1.2 percent."
+    },
+    {
+     "episode_id": "QNtYdSvvcz4",
+     "episode_title": "LIVE: Stocks UP, Crypto DOWN! How To Trade Every BLACK SWAN Event... Everyone Is Getting RICH?",
+     "start_seconds": 3499.0,
+     "timestamp": "58:19",
+     "deep_link": "https://www.youtube.com/watch?v=QNtYdSvvcz4&t=3499s",
+     "kind": "mention",
+     "note": "Korean stock mentioned as basically flat at all-time high; discussed in context of employees moving between companies and receiving bonuses."
+    },
+    {
+     "episode_id": "QnCS6QQ-828",
+     "episode_title": "LIVE: The GoodAlexander Interview",
+     "start_seconds": 898.0,
+     "timestamp": "14:58",
+     "deep_link": "https://www.youtube.com/watch?v=QnCS6QQ-828&t=898s",
+     "kind": "mention",
+     "note": "Speaker identifies SK Hynix as crushing it among memory companies due to fixed contractual AI CapEx commitments."
+    },
+    {
+     "episode_id": "QnCS6QQ-828",
+     "episode_title": "LIVE: The GoodAlexander Interview",
+     "start_seconds": 3307.0,
+     "timestamp": "55:07",
+     "deep_link": "https://www.youtube.com/watch?v=QnCS6QQ-828&t=3307s",
+     "kind": "mention",
+     "note": "Mentioned that people have been hurt by SK Hynix and are ready to speculate on something new."
+    },
+    {
+     "episode_id": "SPO1-Oj6sJk",
+     "episode_title": "MARKET OPEN: The LEOPOLD Aftermath. AI Stocks Are BACK... What Happens NEXT? LAST Stream for a WEEK",
+     "start_seconds": 2366.0,
+     "timestamp": "39:26",
+     "deep_link": "https://www.youtube.com/watch?v=SPO1-Oj6sJk&t=2366s",
+     "kind": "mention",
+     "note": "Named as one of distress-sold stocks being crushed in the market."
+    },
+    {
+     "episode_id": "UxKnMBWB77E",
+     "episode_title": "LIVE: WW3 CONTINUES.. - Bitcoin is $75K!? - The AI Bubble is GROWING. - Market Updates & News",
+     "start_seconds": 5461.0,
+     "timestamp": "1:31:01",
+     "deep_link": "https://www.youtube.com/watch?v=UxKnMBWB77E&t=5461s",
+     "kind": "analysis",
+     "note": "Speaker discusses memory stocks and Hynix specifically, noting it trades at 4x earnings with compressed multiples, potentially indicating market concern about earnings sustainability in future years."
+    },
+    {
+     "episode_id": "UxKnMBWB77E",
+     "episode_title": "LIVE: WW3 CONTINUES.. - Bitcoin is $75K!? - The AI Bubble is GROWING. - Market Updates & News",
+     "start_seconds": 11149.0,
+     "timestamp": "3:05:49",
+     "deep_link": "https://www.youtube.com/watch?v=UxKnMBWB77E&t=11149s",
+     "kind": "analysis",
+     "note": "SK Hynix gapped down significantly, hit circuit breakers twice, down over 20%; up 370% in one year; discussed as a major memory chip maker with huge share in high bandwidth memory."
+    },
+    {
+     "episode_id": "VwzVPobrVdQ",
+     "episode_title": "LIVE: Bitcoin & Saylor Are TUMBLING... Micron Earnings Today (HUGE)!! Fear Is Rising... oh no.",
+     "start_seconds": 4988.0,
+     "timestamp": "1:23:08",
+     "deep_link": "https://www.youtube.com/watch?v=VwzVPobrVdQ&t=4988s",
+     "kind": "mention",
+     "note": "Mentioned as one of three stocks a trader has historically traded; the trader was up $5 million on SK Hynix."
+    },
+    {
+     "episode_id": "Z5aDmNKIHAc",
+     "episode_title": "why memecoins survive every single crypto cycle",
+     "start_seconds": 724.0,
+     "timestamp": "12:04",
+     "deep_link": "https://www.youtube.com/watch?v=Z5aDmNKIHAc&t=724s",
+     "kind": "mention",
+     "note": "Speaker mentions Gavin Baker has SK Hynix as an example of individuals having their own speculative asset."
+    },
+    {
+     "episode_id": "aJxtFxmCh2o",
+     "episode_title": "LIVE: Market OPEN! Saylor SOLD Bitcoin.. Ansem is at 400M WTF?! Is Crypto Finally BACK!!!",
+     "start_seconds": 4426.0,
+     "timestamp": "1:13:46",
+     "deep_link": "https://www.youtube.com/watch?v=aJxtFxmCh2o&t=4426s",
+     "kind": "analysis",
+     "note": "Offering 18 million common shares in US IPO that is well oversubscribed; Leopold Aschenbrenner reported to be buying $7 billion over market price; discussants note there is huge demand for SK Hynix despite it being down a little bit, with NASDAQ listing on Friday expected to raise about $28 billion."
+    },
+    {
+     "episode_id": "aJxtFxmCh2o",
+     "episode_title": "LIVE: Market OPEN! Saylor SOLD Bitcoin.. Ansem is at 400M WTF?! Is Crypto Finally BACK!!!",
+     "start_seconds": 7051.0,
+     "timestamp": "1:57:31",
+     "deep_link": "https://www.youtube.com/watch?v=aJxtFxmCh2o&t=7051s",
+     "kind": "analysis",
+     "note": "SK Hynix is going live in NASDAQ 100 on Friday with shares giga oversubscribed; current price is $141.0, and Leopold Ashenbrener is trying to buy $8 billion worth at $158.1, representing an 12% premium."
+    },
+    {
+     "episode_id": "b0x7_u0f8hg",
+     "episode_title": "The Robinhood Supercycle, Onchain Trading, and Are The Clippers Dead",
+     "start_seconds": 985.0,
+     "timestamp": "16:25",
+     "deep_link": "https://www.youtube.com/watch?v=b0x7_u0f8hg&t=985s",
+     "kind": "analysis",
+     "note": "SK Hynix described as getting crushed, with speaker noting that memory is getting crushed."
+    },
+    {
+     "episode_id": "dQZXhx0Q8x8",
+     "episode_title": "LIVE: The Market is CRASHING! - Trump's TACO Failed.. USA vs IRAN's Meme War",
+     "start_seconds": 4737.0,
+     "timestamp": "1:18:57",
+     "deep_link": "https://www.youtube.com/watch?v=dQZXhx0Q8x8&t=4737s",
+     "kind": "mention",
+     "note": "A participant mentioned SK Hynix (also called SP Hynix in the transcript)."
+    },
+    {
+     "episode_id": "dWOTopcDSEE",
+     "episode_title": "Explaining Korean Stocks and the AI Memory Trade - Rekt Mando",
+     "start_seconds": 506.0,
+     "timestamp": "8:26",
+     "deep_link": "https://www.youtube.com/watch?v=dWOTopcDSEE&t=506s",
+     "kind": "analysis",
+     "note": "SK Square owns 20% of SK Hynix; discussed as an example of the Korean conglomerate ownership structure."
+    },
+    {
+     "episode_id": "dWOTopcDSEE",
+     "episode_title": "Explaining Korean Stocks and the AI Memory Trade - Rekt Mando",
+     "start_seconds": 3058.0,
+     "timestamp": "50:58",
+     "deep_link": "https://www.youtube.com/watch?v=dWOTopcDSEE&t=3058s",
+     "kind": "analysis",
+     "note": "Speaker concludes South Korea felt like the right time and place to be long, noting they are effectively long SK Hynix or Samsung."
+    },
+    {
+     "episode_id": "dWOTopcDSEE",
+     "episode_title": "Explaining Korean Stocks and the AI Memory Trade - Rekt Mando",
+     "start_seconds": 3072.0,
+     "timestamp": "51:12",
+     "deep_link": "https://www.youtube.com/watch?v=dWOTopcDSEE&t=3072s",
+     "kind": "analysis",
+     "note": "Compared to Mag 7 stocks; described as a pure memory play where memory is only about 50% of business, with less risk of oversupply than competitors."
+    },
+    {
+     "episode_id": "eciXnEh0gMQ",
+     "episode_title": "GoodAlexander - Why Anthropic Isn\u2019t Worth $1.5 Trillion",
+     "start_seconds": 433.0,
+     "timestamp": "7:13",
+     "deep_link": "https://www.youtube.com/watch?v=eciXnEh0gMQ&t=433s",
+     "kind": "analysis",
+     "note": "Came out with very strong earnings and has pricing power with extensions for multi-year pricing contracts."
+    },
+    {
+     "episode_id": "fmnTwBg3UbY",
+     "episode_title": "China just K*LLED Claude AI.. - GoodAlexander & David Choi",
+     "start_seconds": 1162.0,
+     "timestamp": "19:22",
+     "deep_link": "https://www.youtube.com/watch?v=fmnTwBg3UbY&t=1162s",
+     "kind": "mention",
+     "note": "Speaker mentions SK Hynix alongside Samsung and other Korean stocks as examples of equities that are up significantly and expected to earn their entire market cap in the next three to five years."
+    },
+    {
+     "episode_id": "fnxJrCOtr6w",
+     "episode_title": "Saylor Sold Again, China Gates Its AI, Trump Is At War With Burry, and Ansem-Mania",
+     "start_seconds": 3010.0,
+     "timestamp": "50:10",
+     "deep_link": "https://www.youtube.com/watch?v=fnxJrCOtr6w&t=3010s",
+     "kind": "analysis",
+     "note": "SK Hynix is going live on NASDAQ 100 on Friday with shares giga oversubscribed; current price $1,410 with biggest bidder Leopold Asherbetter trying to buy $8 billion worth at $1,581 premium."
+    },
+    {
+     "episode_id": "gKJ-BygczS0",
+     "episode_title": "What happened to Leopold Aschenbrenner? : The FLOOD Interview",
+     "start_seconds": 2159.0,
+     "timestamp": "35:59",
+     "deep_link": "https://www.youtube.com/watch?v=gKJ-BygczS0&t=2159s",
+     "kind": "mention",
+     "note": "SK Hynix mentioned as up 20 percent in portfolio context."
+    },
+    {
+     "episode_id": "gKJ-BygczS0",
+     "episode_title": "What happened to Leopold Aschenbrenner? : The FLOOD Interview",
+     "start_seconds": 2851.0,
+     "timestamp": "47:31",
+     "deep_link": "https://www.youtube.com/watch?v=gKJ-BygczS0&t=2851s",
+     "kind": "analysis",
+     "note": "Compared to Micron as a memory chip competitor; discussed missing earnings expectations and issuing a $27 billion offering in response to market sentiment turning negative."
+    },
+    {
+     "episode_id": "gMnqctdvBgk",
+     "episode_title": "Fake PumpFun Hate, Dario vs The World, and Onchain Analysis",
+     "start_seconds": 1627.0,
+     "timestamp": "27:07",
+     "deep_link": "https://www.youtube.com/watch?v=gMnqctdvBgk&t=1627s",
+     "kind": "mention",
+     "note": "Named as one of several semiconductor stocks that Leopold was reportedly buying."
+    },
+    {
+     "episode_id": "gMxsYjDkxCk",
+     "episode_title": "MARKET OPEN: South Korea Crashes the Stock Market, Elon vs Sam Altman, Robinhood is Saving Crypto?",
+     "start_seconds": 345.0,
+     "timestamp": "5:45",
+     "deep_link": "https://www.youtube.com/watch?v=gMxsYjDkxCk&t=345s",
+     "kind": "mention",
+     "note": "SK Hynix is down 17%."
+    },
+    {
+     "episode_id": "gMxsYjDkxCk",
+     "episode_title": "MARKET OPEN: South Korea Crashes the Stock Market, Elon vs Sam Altman, Robinhood is Saving Crypto?",
+     "start_seconds": 2559.0,
+     "timestamp": "42:39",
+     "deep_link": "https://www.youtube.com/watch?v=gMxsYjDkxCk&t=2559s",
+     "kind": "analysis",
+     "note": "SK Hynix chairman discussed US ADR listing of $26.5 billion; company was acquired 15 years ago and is seeking US capital market access; chairman expects multiple rounds of ADRs and notes that Hyperliquid listing gave US access; stock discussed as down ~12% in pre-market."
+    },
+    {
+     "episode_id": "gMxsYjDkxCk",
+     "episode_title": "MARKET OPEN: South Korea Crashes the Stock Market, Elon vs Sam Altman, Robinhood is Saving Crypto?",
+     "start_seconds": 4742.0,
+     "timestamp": "1:19:02",
+     "deep_link": "https://www.youtube.com/watch?v=gMxsYjDkxCk&t=4742s",
+     "kind": "analysis",
+     "note": "Stock described as worthless at $900 billion valuation; a 1x short ETF being launched tomorrow."
+    },
+    {
+     "episode_id": "gRFE903_eGQ",
+     "episode_title": "LEOPOLD LIQUIDATED LIVE: Ken Griffin is The Grim Reaper, Uniswap V4 Hooks, and a Postmortem",
+     "start_seconds": 344.0,
+     "timestamp": "5:44",
+     "deep_link": "https://www.youtube.com/watch?v=gRFE903_eGQ&t=344s",
+     "kind": "analysis",
+     "note": "SK Hynix was a Leopold position; reportedly Leopold was trying to buy the ADR and allegedly was looking to put $10 billion into it."
+    },
+    {
+     "episode_id": "gT2a1f9B9DY",
+     "episode_title": "The Stock Market Doesn't Care About WW3... [Stream Recap]",
+     "start_seconds": 1923.0,
+     "timestamp": "32:03",
+     "deep_link": "https://www.youtube.com/watch?v=gT2a1f9B9DY&t=1923s",
+     "kind": "mention",
+     "note": "Mentioned as a trade pitch because SK Square owns 20 percent of SK Hynix."
+    },
+    {
+     "episode_id": "hWBNn_tgLvw",
+     "episode_title": "Why Memecoins Never Die, AI CapEx Will Continue, and GTA 6 is Too Cheap",
+     "start_seconds": 65.0,
+     "timestamp": "1:05",
+     "deep_link": "https://www.youtube.com/watch?v=hWBNn_tgLvw&t=65s",
+     "kind": "analysis",
+     "note": "US listing mentioned as a factor in memory-related market concerns; discussed as tomorrow's event."
+    },
+    {
+     "episode_id": "iCu6ULgJ3Jo",
+     "episode_title": "LIVE: Market Open, OIL gets REKT, USA v IRAN, Bitcoin is 70k?!",
+     "start_seconds": 1220.0,
+     "timestamp": "20:20",
+     "deep_link": "https://www.youtube.com/watch?v=iCu6ULgJ3Jo&t=1220s",
+     "kind": "analysis",
+     "note": "Korean stock showing limit up, limit down, limit up price action; described as disgusting."
+    },
+    {
+     "episode_id": "iO9lnSx2tac",
+     "episode_title": "MARKET OPEN: ChatGPT Just Escaped\u2026 Google Earnings Today! Is Crypto\u2019s Bull Market Here?",
+     "start_seconds": 5250.0,
+     "timestamp": "1:27:30",
+     "deep_link": "https://www.youtube.com/watch?v=iO9lnSx2tac&t=5250s",
+     "kind": "analysis",
+     "note": "Speaker is short SK Hynix; SK Hynix is up $170."
+    },
+    {
+     "episode_id": "ipaybZY8BHw",
+     "episode_title": "AI Traders, Legal Perps & Tokenized Stocks - Lighter Founder Vlad Novakovski",
+     "start_seconds": 503.0,
+     "timestamp": "8:23",
+     "deep_link": "https://www.youtube.com/watch?v=ipaybZY8BHw&t=503s",
+     "kind": "mention",
+     "note": "SK Hynix is mentioned as part of South Korea's memory trade sector that is currently hot."
+    },
+    {
+     "episode_id": "mQVrGThKfnU",
+     "episode_title": "LIVE: USA vs Iran FAKE NEWS! New IPOs are CRAZY!! Oil is Going UP... + GPT 5.5?",
+     "start_seconds": 6124.0,
+     "timestamp": "1:42:04",
+     "deep_link": "https://www.youtube.com/watch?v=mQVrGThKfnU&t=6124s",
+     "kind": "mention",
+     "note": "SK Hynix mentioned alongside Samsung as Korean stocks that are up significantly and expected to earn their entire market cap in three to five years."
+    },
+    {
+     "episode_id": "mWsvUgJbS4o",
+     "episode_title": "MARKET OPEN: Will US Ban China AI? Clarity Act Incoming? Did stocks bottom?",
+     "start_seconds": 4875.0,
+     "timestamp": "1:21:15",
+     "deep_link": "https://www.youtube.com/watch?v=mWsvUgJbS4o&t=4875s",
+     "kind": "mention",
+     "note": "Listed as a long position held by trader Loracle."
+    },
+    {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 516.0,
+     "timestamp": "8:36",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=516s",
+     "kind": "analysis",
+     "note": "Identified as making up approximately 80 percent of the Korea index; described as 'capex dependent exclusively'; noted as down 11.7% with significant three-day chart movement; speakers discussed its price action from January to June with a 135-point move followed by a decline."
+    },
+    {
+     "episode_id": "qdNT1PbcWcI",
+     "episode_title": "MARKET OPEN: Will STOCKS finally recover? The KOSPI is LIMIT DOWN again. FOMC today. What is PipeDog",
+     "start_seconds": 423.0,
+     "timestamp": "7:03",
+     "deep_link": "https://www.youtube.com/watch?v=qdNT1PbcWcI&t=423s",
+     "kind": "analysis",
+     "note": "SK Hynix had incredible earnings but missed devious expectations, causing stock decline."
+    },
+    {
+     "episode_id": "wCEKxW669KU",
+     "episode_title": "WTF is crypto doing!? Are we BACK..? AI taking our jobs? - Market Updates & News (LIVE)",
+     "start_seconds": 7172.0,
+     "timestamp": "1:59:32",
+     "deep_link": "https://www.youtube.com/watch?v=wCEKxW669KU&t=7172s",
+     "kind": "mention",
+     "note": "Speaker mentioned SK Hynix stock price went vertical due to sudden demand and supply squeeze in memory chips."
+    },
+    {
+     "episode_id": "wjdbUVtGxmI",
+     "episode_title": "The MicroStrategy Endgame... - Rekt Mando",
+     "start_seconds": 2286.0,
+     "timestamp": "38:06",
+     "deep_link": "https://www.youtube.com/watch?v=wjdbUVtGxmI&t=2286s",
+     "kind": "analysis",
+     "note": "Speaker describes SK Hynix as an incredible trade in the United States; notes the Korea position is crowded, cheap but crowded, prone to 20% moves."
+    },
+    {
+     "episode_id": "xl5iN1U2yN4",
+     "episode_title": "MARKET OPEN: onchain is HOT, Korean Stocks CRASHING Still, Kevin Warsh was a Mistake...",
+     "start_seconds": 4133.0,
+     "timestamp": "1:08:53",
+     "deep_link": "https://www.youtube.com/watch?v=xl5iN1U2yN4&t=4133s",
+     "kind": "analysis",
+     "note": "Speaker states they are buying SK Hynix in size; later noted as up 12% from bottom and up like a thousand percent year to date despite recent fund losses."
+    },
+    {
+     "episode_id": "xl5iN1U2yN4",
+     "episode_title": "MARKET OPEN: onchain is HOT, Korean Stocks CRASHING Still, Kevin Warsh was a Mistake...",
+     "start_seconds": 6888.0,
+     "timestamp": "1:54:48",
+     "deep_link": "https://www.youtube.com/watch?v=xl5iN1U2yN4&t=6888s",
+     "kind": "mention",
+     "note": "SK Hynix mentioned as being purchased in size by someone."
+    },
+    {
+     "episode_id": "xl5iN1U2yN4",
+     "episode_title": "MARKET OPEN: onchain is HOT, Korean Stocks CRASHING Still, Kevin Warsh was a Mistake...",
+     "start_seconds": 7038.0,
+     "timestamp": "1:57:18",
+     "deep_link": "https://www.youtube.com/watch?v=xl5iN1U2yN4&t=7038s",
+     "kind": "analysis",
+     "note": "Speaker mentioned buying SK Hynix this morning and described it as a decent trade."
+    },
+    {
+     "episode_id": "xl5iN1U2yN4",
+     "episode_title": "MARKET OPEN: onchain is HOT, Korean Stocks CRASHING Still, Kevin Warsh was a Mistake...",
+     "start_seconds": 7451.0,
+     "timestamp": "2:04:11",
+     "deep_link": "https://www.youtube.com/watch?v=xl5iN1U2yN4&t=7451s",
+     "kind": "analysis",
+     "note": "Discussed as semiconductor stock with open interest going down despite price being up; speaker noted it trading at four times earnings at the bottom with a five times move over the last year."
+    }
+   ],
+   "episode_count": 51,
+   "single_reference": false
+  },
+  {
    "symbol": "MRVL",
    "name": "Marvell",
    "asset_class": "stock",
@@ -138083,638 +138832,6 @@
     }
    ],
    "episode_count": 60,
-   "single_reference": false
-  },
-  {
-   "symbol": "SK",
-   "name": "SK Hynix",
-   "asset_class": "stock",
-   "mentions": 69,
-   "analysis": 34,
-   "moments": [
-    {
-     "episode_id": "-uarB5g12aY",
-     "episode_title": "MARKET OPEN: Russian PLAGUE OUTBREAK, I BOUGHT ZCASH BACK, Michael Burry vs the BULL MARKET",
-     "start_seconds": 8804.0,
-     "timestamp": "2:26:44",
-     "deep_link": "https://www.youtube.com/watch?v=-uarB5g12aY&t=8804s",
-     "kind": "mention",
-     "note": "SK Hynix noted as biggest loser."
-    },
-    {
-     "episode_id": "0yg1kc_WEUs",
-     "episode_title": "Flood - Inside the Biggest AI Fund Blowup Ever",
-     "start_seconds": 2373.0,
-     "timestamp": "39:33",
-     "deep_link": "https://www.youtube.com/watch?v=0yg1kc_WEUs&t=2373s",
-     "kind": "analysis",
-     "note": "Speaker compares SK Hynix's situation where they either beat earnings and get punished or miss and get hammered; mentions company did a $27 billion offering."
-    },
-    {
-     "episode_id": "1pEuDm7eYN8",
-     "episode_title": "MARKET OPEN: Anthropic ARR is BAD, Markets in TROUBLE, Where Does Crypto Go NEXT?, Based16z TODAY",
-     "start_seconds": 713.0,
-     "timestamp": "11:53",
-     "deep_link": "https://www.youtube.com/watch?v=1pEuDm7eYN8&t=713s",
-     "kind": "analysis",
-     "note": "Speaker discusses investing $200,000 in SK Hynix and mentions Samsung and Hynix 5th year, suggesting it was a significant investment early on."
-    },
-    {
-     "episode_id": "1yrQSSU4nV0",
-     "episode_title": "Anti-AI Backlash Goes Mainstream and AMC Fumbling the Trade of the Year [Stream Recap]",
-     "start_seconds": 1877.0,
-     "timestamp": "31:17",
-     "deep_link": "https://www.youtube.com/watch?v=1yrQSSU4nV0&t=1877s",
-     "kind": "analysis",
-     "note": "Discussed as overtaking Samsung in market capitalization, interpreted as a market top signal; ADR listing delay in U.S. and trading delays mentioned as factors in market decline."
-    },
-    {
-     "episode_id": "3mbHm1CJVho",
-     "episode_title": "How Crypto Came Back From The Dead... [Stream Recap]",
-     "start_seconds": 1176.0,
-     "timestamp": "19:36",
-     "deep_link": "https://www.youtube.com/watch?v=3mbHm1CJVho&t=1176s",
-     "kind": "mention",
-     "note": "Named alongside other South Korean stocks as part of branching out from semiconductor AI bottlenecks into other sectors."
-    },
-    {
-     "episode_id": "45iOeIwp5tE",
-     "episode_title": "LIVE: Bitcoin Is BLOWING UP... Is The MEMORY TRADE Over? IRL IS BACK! - RektMando On At 4:30PM EST!",
-     "start_seconds": 3055.0,
-     "timestamp": "50:55",
-     "deep_link": "https://www.youtube.com/watch?v=45iOeIwp5tE&t=3055s",
-     "kind": "mention",
-     "note": "Speaker mentions SK Hynix vests and merchandise as trendy status symbols, comparing them to luxury brands."
-    },
-    {
-     "episode_id": "45iOeIwp5tE",
-     "episode_title": "LIVE: Bitcoin Is BLOWING UP... Is The MEMORY TRADE Over? IRL IS BACK! - RektMando On At 4:30PM EST!",
-     "start_seconds": 8693.0,
-     "timestamp": "2:24:53",
-     "deep_link": "https://www.youtube.com/watch?v=45iOeIwp5tE&t=8693s",
-     "kind": "analysis",
-     "note": "Speaker describes SK Hynix as an incredible trade with incredible earnings, though notes it may be crowded."
-    },
-    {
-     "episode_id": "4ZLZNApjRZY",
-     "episode_title": "The PONS Short Prisoner's Dilemma, the AI DOOM Case, and Talking About PNL",
-     "start_seconds": 959.0,
-     "timestamp": "15:59",
-     "deep_link": "https://www.youtube.com/watch?v=4ZLZNApjRZY&t=959s",
-     "kind": "mention",
-     "note": "SK Hynix mentioned as down five percent."
-    },
-    {
-     "episode_id": "5InXzZkSEgE",
-     "episode_title": "LIVE: Stocks Are CRASHING!!!!!! AMC Rugged.. GG. TRUMP PUMPS QUANTUM! IBM! USA vs CUBA!?!?!?! WTFFF",
-     "start_seconds": 5448.0,
-     "timestamp": "1:30:48",
-     "deep_link": "https://www.youtube.com/watch?v=5InXzZkSEgE&t=5448s",
-     "kind": "analysis",
-     "note": "Asked if anyone is long SK Hynix; mentioned as overtaking Samsung in market capitalization being read as a market top signal; discussed regarding delay in ADR listing in the U.S."
-    },
-    {
-     "episode_id": "5InXzZkSEgE",
-     "episode_title": "LIVE: Stocks Are CRASHING!!!!!! AMC Rugged.. GG. TRUMP PUMPS QUANTUM! IBM! USA vs CUBA!?!?!?! WTFFF",
-     "start_seconds": 5614.0,
-     "timestamp": "1:33:34",
-     "deep_link": "https://www.youtube.com/watch?v=5InXzZkSEgE&t=5614s",
-     "kind": "analysis",
-     "note": "SK Hynix is shifting focus to commodity DRAM production while slowing HBM4 expansion, reallocating resources from high-bandwidth memory to maximize near-term profits from commodity DRAM where supply is short."
-    },
-    {
-     "episode_id": "5InXzZkSEgE",
-     "episode_title": "LIVE: Stocks Are CRASHING!!!!!! AMC Rugged.. GG. TRUMP PUMPS QUANTUM! IBM! USA vs CUBA!?!?!?! WTFFF",
-     "start_seconds": 9149.0,
-     "timestamp": "2:32:29",
-     "deep_link": "https://www.youtube.com/watch?v=5InXzZkSEgE&t=9149s",
-     "kind": "mention",
-     "note": "SK Hynix was mentioned in the context of Taiwan market discussion."
-    },
-    {
-     "episode_id": "5pHRLKS-UqA",
-     "episode_title": "LIVE: Korean Stocks Are F**KED!!! Anthropic WON..? Trump's FAVORITE Stock (oh no)",
-     "start_seconds": 6821.0,
-     "timestamp": "1:53:41",
-     "deep_link": "https://www.youtube.com/watch?v=5pHRLKS-UqA&t=6821s",
-     "kind": "analysis",
-     "note": "Speaker discussed SK Hynix extensively, noting it is basically at all-time highs and a key driving force in Korea's stock market rally, with significant leverage financing and margin lending activity."
-    },
-    {
-     "episode_id": "5pHRLKS-UqA",
-     "episode_title": "LIVE: Korean Stocks Are F**KED!!! Anthropic WON..? Trump's FAVORITE Stock (oh no)",
-     "start_seconds": 7133.0,
-     "timestamp": "1:58:53",
-     "deep_link": "https://www.youtube.com/watch?v=5pHRLKS-UqA&t=7133s",
-     "kind": "analysis",
-     "note": "Koreans are surrendering life insurance policies to buy SK Hynix; the stock has risen 1,300% since November 2024 and trades at a forward PE of 6, making it significantly cheaper than comparable US semiconductor stocks."
-    },
-    {
-     "episode_id": "8ePuL0cxNnA",
-     "episode_title": "MARKET OPEN: AI DOOM, Stocks are PANICKING, Dario Has LOST IT, Crypto CLARITY Coming Soon",
-     "start_seconds": 3982.0,
-     "timestamp": "1:06:22",
-     "deep_link": "https://www.youtube.com/watch?v=8ePuL0cxNnA&t=3982s",
-     "kind": "mention",
-     "note": "SK Hynix listed as one of the names reportedly purchased by Leopold in AI and memory stocks."
-    },
-    {
-     "episode_id": "B4oxWYTiULI",
-     "episode_title": "Good Alexander - Why Hyperliquid Really Pumped",
-     "start_seconds": 391.0,
-     "timestamp": "6:31",
-     "deep_link": "https://www.youtube.com/watch?v=B4oxWYTiULI&t=391s",
-     "kind": "mention",
-     "note": "Named as one of the memory companies crushing it due to AI capex and three-year deals forcing commitment."
-    },
-    {
-     "episode_id": "Bdr495HLGxk",
-     "episode_title": "MARKET OPEN: Anthropic S-1 TODAY, Elon KILLS Neoclouds, SOMEBODY SAVE CRYPTO",
-     "start_seconds": 4118.0,
-     "timestamp": "1:08:38",
-     "deep_link": "https://www.youtube.com/watch?v=Bdr495HLGxk&t=4118s",
-     "kind": "mention",
-     "note": "SK Hynix stock up 3%."
-    },
-    {
-     "episode_id": "DMroSwBCuEs",
-     "episode_title": "LIVE: Cerebras IPO!  Hyperliquid is INSANE!? Trump is in CHINA! Airmass at 5PM EST!!",
-     "start_seconds": 4057.0,
-     "timestamp": "1:07:37",
-     "deep_link": "https://www.youtube.com/watch?v=DMroSwBCuEs&t=4057s",
-     "kind": "mention",
-     "note": "SK Hynix mentioned in comparison of valuation and price of sales multiples."
-    },
-    {
-     "episode_id": "DQQlasUd-mU",
-     "episode_title": "MARKET OPEN: FOMC TODAY, Crypto CLARITY FAILED, Kevin Warsh Has the WORLD AT HIS MERCY",
-     "start_seconds": 3264.0,
-     "timestamp": "54:24",
-     "deep_link": "https://www.youtube.com/watch?v=DQQlasUd-mU&t=3264s",
-     "kind": "mention",
-     "note": "SK Hynix is up 4%."
-    },
-    {
-     "episode_id": "DVtajNNR6js",
-     "episode_title": "MARKET OPEN: Memory stocks are DUMPING. BRIAN vs VLAD. Kimi/deepseek part 2.",
-     "start_seconds": 399.0,
-     "timestamp": "6:39",
-     "deep_link": "https://www.youtube.com/watch?v=DVtajNNR6js&t=399s",
-     "kind": "mention",
-     "note": "Speaker mentions SK Hynix US in pre-market, describing it as down but not significantly."
-    },
-    {
-     "episode_id": "DVtajNNR6js",
-     "episode_title": "MARKET OPEN: Memory stocks are DUMPING. BRIAN vs VLAD. Kimi/deepseek part 2.",
-     "start_seconds": 1867.0,
-     "timestamp": "31:07",
-     "deep_link": "https://www.youtube.com/watch?v=DVtajNNR6js&t=1867s",
-     "kind": "mention",
-     "note": "SK Hynix mentioned in context of broader market decline."
-    },
-    {
-     "episode_id": "DVtajNNR6js",
-     "episode_title": "MARKET OPEN: Memory stocks are DUMPING. BRIAN vs VLAD. Kimi/deepseek part 2.",
-     "start_seconds": 1872.0,
-     "timestamp": "31:12",
-     "deep_link": "https://www.youtube.com/watch?v=DVtajNNR6js&t=1872s",
-     "kind": "mention",
-     "note": "Named in price action listing at 13-1."
-    },
-    {
-     "episode_id": "EOkDv8qm8ik",
-     "episode_title": "MARKET OPEN: Binance Suffers the BIGGEST HACK EVER, Stocks are in EVEN WORSE SHAPE, HAPPY FRIDAY",
-     "start_seconds": 6104.0,
-     "timestamp": "1:41:44",
-     "deep_link": "https://www.youtube.com/watch?v=EOkDv8qm8ik&t=6104s",
-     "kind": "analysis",
-     "note": "Named as one of two main memory stocks to consider buying, alongside Micron."
-    },
-    {
-     "episode_id": "ESO8QpCTuts",
-     "episode_title": "The Kimi Moment, Hedge Funds Save the Market, and Trump MEV",
-     "start_seconds": 442.0,
-     "timestamp": "7:22",
-     "deep_link": "https://www.youtube.com/watch?v=ESO8QpCTuts&t=442s",
-     "kind": "mention",
-     "note": "SK Hynix is mentioned as being up."
-    },
-    {
-     "episode_id": "ESO8QpCTuts",
-     "episode_title": "The Kimi Moment, Hedge Funds Save the Market, and Trump MEV",
-     "start_seconds": 1704.0,
-     "timestamp": "28:24",
-     "deep_link": "https://www.youtube.com/watch?v=ESO8QpCTuts&t=1704s",
-     "kind": "analysis",
-     "note": "SK Hynix falls below $149 listing price for the first time."
-    },
-    {
-     "episode_id": "GkjEZWs_o58",
-     "episode_title": "Pumpfun is Going Multicycle, Follower Count Doesn't Matter, and It's Time To Start A Family",
-     "start_seconds": 1005.0,
-     "timestamp": "16:45",
-     "deep_link": "https://www.youtube.com/watch?v=GkjEZWs_o58&t=1005s",
-     "kind": "mention",
-     "note": "Gavin Baker mentioned as owning SK Hynix as an example of influential people having their own assets."
-    },
-    {
-     "episode_id": "HkKHhQDPqy0",
-     "episode_title": "MARKET OPEN: Hyperliquid & ICE SAVED CRYPTO, Google KILLED the AI Trade... NOW WHAT?",
-     "start_seconds": 2825.0,
-     "timestamp": "47:05",
-     "deep_link": "https://www.youtube.com/watch?v=HkKHhQDPqy0&t=2825s",
-     "kind": "mention",
-     "note": "Mentioned in position discussion."
-    },
-    {
-     "episode_id": "HkKHhQDPqy0",
-     "episode_title": "MARKET OPEN: Hyperliquid & ICE SAVED CRYPTO, Google KILLED the AI Trade... NOW WHAT?",
-     "start_seconds": 5411.0,
-     "timestamp": "1:30:11",
-     "deep_link": "https://www.youtube.com/watch?v=HkKHhQDPqy0&t=5411s",
-     "kind": "analysis",
-     "note": "SK Hynix came out with very strong earnings with a ton of pricing power and extensions for multi-year pricing contracts."
-    },
-    {
-     "episode_id": "Nbbb-Dhr3U0",
-     "episode_title": "Apple Just Raised Prices, China Is Dropshipping Claude and the IRL Trade",
-     "start_seconds": 883.0,
-     "timestamp": "14:43",
-     "deep_link": "https://www.youtube.com/watch?v=Nbbb-Dhr3U0&t=883s",
-     "kind": "analysis",
-     "note": "Speaker discusses SK Hynix merchandise as a trendy luxury item and compares its stock chart to LVMH, suggesting tech company branding is replacing traditional luxury."
-    },
-    {
-     "episode_id": "PO0CKvK3zrY",
-     "episode_title": "EasyEats - $30 HOOD Call, Polymarket Edge & Peptides",
-     "start_seconds": 1015.0,
-     "timestamp": "16:55",
-     "deep_link": "https://www.youtube.com/watch?v=PO0CKvK3zrY&t=1015s",
-     "kind": "mention",
-     "note": "SK Hynix is mentioned in passing as something the 'bitcoin chair' in the corner watches."
-    },
-    {
-     "episode_id": "QAFaJP0b4xA",
-     "episode_title": "MARKET OPEN: The FAILED AI EXPERIMENT, Meta Goes DIRECT, Crypto is ALL WE HAVE LEFT",
-     "start_seconds": 3304.0,
-     "timestamp": "55:04",
-     "deep_link": "https://www.youtube.com/watch?v=QAFaJP0b4xA&t=3304s",
-     "kind": "mention",
-     "note": "SK Hynix last night was up 1.2 percent."
-    },
-    {
-     "episode_id": "QNtYdSvvcz4",
-     "episode_title": "LIVE: Stocks UP, Crypto DOWN! How To Trade Every BLACK SWAN Event... Everyone Is Getting RICH?",
-     "start_seconds": 3499.0,
-     "timestamp": "58:19",
-     "deep_link": "https://www.youtube.com/watch?v=QNtYdSvvcz4&t=3499s",
-     "kind": "mention",
-     "note": "Korean stock mentioned as basically flat at all-time high; discussed in context of employees moving between companies and receiving bonuses."
-    },
-    {
-     "episode_id": "QnCS6QQ-828",
-     "episode_title": "LIVE: The GoodAlexander Interview",
-     "start_seconds": 898.0,
-     "timestamp": "14:58",
-     "deep_link": "https://www.youtube.com/watch?v=QnCS6QQ-828&t=898s",
-     "kind": "mention",
-     "note": "Speaker identifies SK Hynix as crushing it among memory companies due to fixed contractual AI CapEx commitments."
-    },
-    {
-     "episode_id": "QnCS6QQ-828",
-     "episode_title": "LIVE: The GoodAlexander Interview",
-     "start_seconds": 3307.0,
-     "timestamp": "55:07",
-     "deep_link": "https://www.youtube.com/watch?v=QnCS6QQ-828&t=3307s",
-     "kind": "mention",
-     "note": "Mentioned that people have been hurt by SK Hynix and are ready to speculate on something new."
-    },
-    {
-     "episode_id": "SPO1-Oj6sJk",
-     "episode_title": "MARKET OPEN: The LEOPOLD Aftermath. AI Stocks Are BACK... What Happens NEXT? LAST Stream for a WEEK",
-     "start_seconds": 2366.0,
-     "timestamp": "39:26",
-     "deep_link": "https://www.youtube.com/watch?v=SPO1-Oj6sJk&t=2366s",
-     "kind": "mention",
-     "note": "Named as one of distress-sold stocks being crushed in the market."
-    },
-    {
-     "episode_id": "UxKnMBWB77E",
-     "episode_title": "LIVE: WW3 CONTINUES.. - Bitcoin is $75K!? - The AI Bubble is GROWING. - Market Updates & News",
-     "start_seconds": 5461.0,
-     "timestamp": "1:31:01",
-     "deep_link": "https://www.youtube.com/watch?v=UxKnMBWB77E&t=5461s",
-     "kind": "analysis",
-     "note": "Speaker discusses memory stocks and Hynix specifically, noting it trades at 4x earnings with compressed multiples, potentially indicating market concern about earnings sustainability in future years."
-    },
-    {
-     "episode_id": "UxKnMBWB77E",
-     "episode_title": "LIVE: WW3 CONTINUES.. - Bitcoin is $75K!? - The AI Bubble is GROWING. - Market Updates & News",
-     "start_seconds": 11149.0,
-     "timestamp": "3:05:49",
-     "deep_link": "https://www.youtube.com/watch?v=UxKnMBWB77E&t=11149s",
-     "kind": "analysis",
-     "note": "SK Hynix gapped down significantly, hit circuit breakers twice, down over 20%; up 370% in one year; discussed as a major memory chip maker with huge share in high bandwidth memory."
-    },
-    {
-     "episode_id": "VwzVPobrVdQ",
-     "episode_title": "LIVE: Bitcoin & Saylor Are TUMBLING... Micron Earnings Today (HUGE)!! Fear Is Rising... oh no.",
-     "start_seconds": 4988.0,
-     "timestamp": "1:23:08",
-     "deep_link": "https://www.youtube.com/watch?v=VwzVPobrVdQ&t=4988s",
-     "kind": "mention",
-     "note": "Mentioned as one of three stocks a trader has historically traded; the trader was up $5 million on SK Hynix."
-    },
-    {
-     "episode_id": "Z5aDmNKIHAc",
-     "episode_title": "why memecoins survive every single crypto cycle",
-     "start_seconds": 724.0,
-     "timestamp": "12:04",
-     "deep_link": "https://www.youtube.com/watch?v=Z5aDmNKIHAc&t=724s",
-     "kind": "mention",
-     "note": "Speaker mentions Gavin Baker has SK Hynix as an example of individuals having their own speculative asset."
-    },
-    {
-     "episode_id": "aJxtFxmCh2o",
-     "episode_title": "LIVE: Market OPEN! Saylor SOLD Bitcoin.. Ansem is at 400M WTF?! Is Crypto Finally BACK!!!",
-     "start_seconds": 4426.0,
-     "timestamp": "1:13:46",
-     "deep_link": "https://www.youtube.com/watch?v=aJxtFxmCh2o&t=4426s",
-     "kind": "analysis",
-     "note": "Offering 18 million common shares in US IPO that is well oversubscribed; Leopold Aschenbrenner reported to be buying $7 billion over market price; discussants note there is huge demand for SK Hynix despite it being down a little bit, with NASDAQ listing on Friday expected to raise about $28 billion."
-    },
-    {
-     "episode_id": "aJxtFxmCh2o",
-     "episode_title": "LIVE: Market OPEN! Saylor SOLD Bitcoin.. Ansem is at 400M WTF?! Is Crypto Finally BACK!!!",
-     "start_seconds": 7051.0,
-     "timestamp": "1:57:31",
-     "deep_link": "https://www.youtube.com/watch?v=aJxtFxmCh2o&t=7051s",
-     "kind": "analysis",
-     "note": "SK Hynix is going live in NASDAQ 100 on Friday with shares giga oversubscribed; current price is $141.0, and Leopold Ashenbrener is trying to buy $8 billion worth at $158.1, representing an 12% premium."
-    },
-    {
-     "episode_id": "b0x7_u0f8hg",
-     "episode_title": "The Robinhood Supercycle, Onchain Trading, and Are The Clippers Dead",
-     "start_seconds": 985.0,
-     "timestamp": "16:25",
-     "deep_link": "https://www.youtube.com/watch?v=b0x7_u0f8hg&t=985s",
-     "kind": "analysis",
-     "note": "SK Hynix described as getting crushed, with speaker noting that memory is getting crushed."
-    },
-    {
-     "episode_id": "dQZXhx0Q8x8",
-     "episode_title": "LIVE: The Market is CRASHING! - Trump's TACO Failed.. USA vs IRAN's Meme War",
-     "start_seconds": 4737.0,
-     "timestamp": "1:18:57",
-     "deep_link": "https://www.youtube.com/watch?v=dQZXhx0Q8x8&t=4737s",
-     "kind": "mention",
-     "note": "A participant mentioned SK Hynix (also called SP Hynix in the transcript)."
-    },
-    {
-     "episode_id": "dWOTopcDSEE",
-     "episode_title": "Explaining Korean Stocks and the AI Memory Trade - Rekt Mando",
-     "start_seconds": 506.0,
-     "timestamp": "8:26",
-     "deep_link": "https://www.youtube.com/watch?v=dWOTopcDSEE&t=506s",
-     "kind": "analysis",
-     "note": "SK Square owns 20% of SK Hynix; discussed as an example of the Korean conglomerate ownership structure."
-    },
-    {
-     "episode_id": "dWOTopcDSEE",
-     "episode_title": "Explaining Korean Stocks and the AI Memory Trade - Rekt Mando",
-     "start_seconds": 3058.0,
-     "timestamp": "50:58",
-     "deep_link": "https://www.youtube.com/watch?v=dWOTopcDSEE&t=3058s",
-     "kind": "analysis",
-     "note": "Speaker concludes South Korea felt like the right time and place to be long, noting they are effectively long SK Hynix or Samsung."
-    },
-    {
-     "episode_id": "dWOTopcDSEE",
-     "episode_title": "Explaining Korean Stocks and the AI Memory Trade - Rekt Mando",
-     "start_seconds": 3072.0,
-     "timestamp": "51:12",
-     "deep_link": "https://www.youtube.com/watch?v=dWOTopcDSEE&t=3072s",
-     "kind": "analysis",
-     "note": "Compared to Mag 7 stocks; described as a pure memory play where memory is only about 50% of business, with less risk of oversupply than competitors."
-    },
-    {
-     "episode_id": "eciXnEh0gMQ",
-     "episode_title": "GoodAlexander - Why Anthropic Isn\u2019t Worth $1.5 Trillion",
-     "start_seconds": 433.0,
-     "timestamp": "7:13",
-     "deep_link": "https://www.youtube.com/watch?v=eciXnEh0gMQ&t=433s",
-     "kind": "analysis",
-     "note": "Came out with very strong earnings and has pricing power with extensions for multi-year pricing contracts."
-    },
-    {
-     "episode_id": "fmnTwBg3UbY",
-     "episode_title": "China just K*LLED Claude AI.. - GoodAlexander & David Choi",
-     "start_seconds": 1162.0,
-     "timestamp": "19:22",
-     "deep_link": "https://www.youtube.com/watch?v=fmnTwBg3UbY&t=1162s",
-     "kind": "mention",
-     "note": "Speaker mentions SK Hynix alongside Samsung and other Korean stocks as examples of equities that are up significantly and expected to earn their entire market cap in the next three to five years."
-    },
-    {
-     "episode_id": "fnxJrCOtr6w",
-     "episode_title": "Saylor Sold Again, China Gates Its AI, Trump Is At War With Burry, and Ansem-Mania",
-     "start_seconds": 3010.0,
-     "timestamp": "50:10",
-     "deep_link": "https://www.youtube.com/watch?v=fnxJrCOtr6w&t=3010s",
-     "kind": "analysis",
-     "note": "SK Hynix is going live on NASDAQ 100 on Friday with shares giga oversubscribed; current price $1,410 with biggest bidder Leopold Asherbetter trying to buy $8 billion worth at $1,581 premium."
-    },
-    {
-     "episode_id": "gKJ-BygczS0",
-     "episode_title": "What happened to Leopold Aschenbrenner? : The FLOOD Interview",
-     "start_seconds": 2159.0,
-     "timestamp": "35:59",
-     "deep_link": "https://www.youtube.com/watch?v=gKJ-BygczS0&t=2159s",
-     "kind": "mention",
-     "note": "SK Hynix mentioned as up 20 percent in portfolio context."
-    },
-    {
-     "episode_id": "gKJ-BygczS0",
-     "episode_title": "What happened to Leopold Aschenbrenner? : The FLOOD Interview",
-     "start_seconds": 2851.0,
-     "timestamp": "47:31",
-     "deep_link": "https://www.youtube.com/watch?v=gKJ-BygczS0&t=2851s",
-     "kind": "analysis",
-     "note": "Compared to Micron as a memory chip competitor; discussed missing earnings expectations and issuing a $27 billion offering in response to market sentiment turning negative."
-    },
-    {
-     "episode_id": "gMnqctdvBgk",
-     "episode_title": "Fake PumpFun Hate, Dario vs The World, and Onchain Analysis",
-     "start_seconds": 1627.0,
-     "timestamp": "27:07",
-     "deep_link": "https://www.youtube.com/watch?v=gMnqctdvBgk&t=1627s",
-     "kind": "mention",
-     "note": "Named as one of several semiconductor stocks that Leopold was reportedly buying."
-    },
-    {
-     "episode_id": "gMxsYjDkxCk",
-     "episode_title": "MARKET OPEN: South Korea Crashes the Stock Market, Elon vs Sam Altman, Robinhood is Saving Crypto?",
-     "start_seconds": 345.0,
-     "timestamp": "5:45",
-     "deep_link": "https://www.youtube.com/watch?v=gMxsYjDkxCk&t=345s",
-     "kind": "mention",
-     "note": "SK Hynix is down 17%."
-    },
-    {
-     "episode_id": "gMxsYjDkxCk",
-     "episode_title": "MARKET OPEN: South Korea Crashes the Stock Market, Elon vs Sam Altman, Robinhood is Saving Crypto?",
-     "start_seconds": 2559.0,
-     "timestamp": "42:39",
-     "deep_link": "https://www.youtube.com/watch?v=gMxsYjDkxCk&t=2559s",
-     "kind": "analysis",
-     "note": "SK Hynix chairman discussed US ADR listing of $26.5 billion; company was acquired 15 years ago and is seeking US capital market access; chairman expects multiple rounds of ADRs and notes that Hyperliquid listing gave US access; stock discussed as down ~12% in pre-market."
-    },
-    {
-     "episode_id": "gMxsYjDkxCk",
-     "episode_title": "MARKET OPEN: South Korea Crashes the Stock Market, Elon vs Sam Altman, Robinhood is Saving Crypto?",
-     "start_seconds": 4742.0,
-     "timestamp": "1:19:02",
-     "deep_link": "https://www.youtube.com/watch?v=gMxsYjDkxCk&t=4742s",
-     "kind": "analysis",
-     "note": "Stock described as worthless at $900 billion valuation; a 1x short ETF being launched tomorrow."
-    },
-    {
-     "episode_id": "gRFE903_eGQ",
-     "episode_title": "LEOPOLD LIQUIDATED LIVE: Ken Griffin is The Grim Reaper, Uniswap V4 Hooks, and a Postmortem",
-     "start_seconds": 344.0,
-     "timestamp": "5:44",
-     "deep_link": "https://www.youtube.com/watch?v=gRFE903_eGQ&t=344s",
-     "kind": "analysis",
-     "note": "SK Hynix was a Leopold position; reportedly Leopold was trying to buy the ADR and allegedly was looking to put $10 billion into it."
-    },
-    {
-     "episode_id": "gT2a1f9B9DY",
-     "episode_title": "The Stock Market Doesn't Care About WW3... [Stream Recap]",
-     "start_seconds": 1923.0,
-     "timestamp": "32:03",
-     "deep_link": "https://www.youtube.com/watch?v=gT2a1f9B9DY&t=1923s",
-     "kind": "mention",
-     "note": "Mentioned as a trade pitch because SK Square owns 20 percent of SK Hynix."
-    },
-    {
-     "episode_id": "hWBNn_tgLvw",
-     "episode_title": "Why Memecoins Never Die, AI CapEx Will Continue, and GTA 6 is Too Cheap",
-     "start_seconds": 65.0,
-     "timestamp": "1:05",
-     "deep_link": "https://www.youtube.com/watch?v=hWBNn_tgLvw&t=65s",
-     "kind": "analysis",
-     "note": "US listing mentioned as a factor in memory-related market concerns; discussed as tomorrow's event."
-    },
-    {
-     "episode_id": "iCu6ULgJ3Jo",
-     "episode_title": "LIVE: Market Open, OIL gets REKT, USA v IRAN, Bitcoin is 70k?!",
-     "start_seconds": 1220.0,
-     "timestamp": "20:20",
-     "deep_link": "https://www.youtube.com/watch?v=iCu6ULgJ3Jo&t=1220s",
-     "kind": "analysis",
-     "note": "Korean stock showing limit up, limit down, limit up price action; described as disgusting."
-    },
-    {
-     "episode_id": "iO9lnSx2tac",
-     "episode_title": "MARKET OPEN: ChatGPT Just Escaped\u2026 Google Earnings Today! Is Crypto\u2019s Bull Market Here?",
-     "start_seconds": 5250.0,
-     "timestamp": "1:27:30",
-     "deep_link": "https://www.youtube.com/watch?v=iO9lnSx2tac&t=5250s",
-     "kind": "analysis",
-     "note": "Speaker is short SK Hynix; SK Hynix is up $170."
-    },
-    {
-     "episode_id": "ipaybZY8BHw",
-     "episode_title": "AI Traders, Legal Perps & Tokenized Stocks - Lighter Founder Vlad Novakovski",
-     "start_seconds": 503.0,
-     "timestamp": "8:23",
-     "deep_link": "https://www.youtube.com/watch?v=ipaybZY8BHw&t=503s",
-     "kind": "mention",
-     "note": "SK Hynix is mentioned as part of South Korea's memory trade sector that is currently hot."
-    },
-    {
-     "episode_id": "mQVrGThKfnU",
-     "episode_title": "LIVE: USA vs Iran FAKE NEWS! New IPOs are CRAZY!! Oil is Going UP... + GPT 5.5?",
-     "start_seconds": 6124.0,
-     "timestamp": "1:42:04",
-     "deep_link": "https://www.youtube.com/watch?v=mQVrGThKfnU&t=6124s",
-     "kind": "mention",
-     "note": "SK Hynix mentioned alongside Samsung as Korean stocks that are up significantly and expected to earn their entire market cap in three to five years."
-    },
-    {
-     "episode_id": "mWsvUgJbS4o",
-     "episode_title": "MARKET OPEN: Will US Ban China AI? Clarity Act Incoming? Did stocks bottom?",
-     "start_seconds": 4875.0,
-     "timestamp": "1:21:15",
-     "deep_link": "https://www.youtube.com/watch?v=mWsvUgJbS4o&t=4875s",
-     "kind": "mention",
-     "note": "Listed as a long position held by trader Loracle."
-    },
-    {
-     "episode_id": "qdNT1PbcWcI",
-     "episode_title": "MARKET OPEN: Will STOCKS finally recover? The KOSPI is LIMIT DOWN again. FOMC today. What is PipeDog",
-     "start_seconds": 423.0,
-     "timestamp": "7:03",
-     "deep_link": "https://www.youtube.com/watch?v=qdNT1PbcWcI&t=423s",
-     "kind": "analysis",
-     "note": "SK Hynix had incredible earnings but missed devious expectations, causing stock decline."
-    },
-    {
-     "episode_id": "wCEKxW669KU",
-     "episode_title": "WTF is crypto doing!? Are we BACK..? AI taking our jobs? - Market Updates & News (LIVE)",
-     "start_seconds": 7172.0,
-     "timestamp": "1:59:32",
-     "deep_link": "https://www.youtube.com/watch?v=wCEKxW669KU&t=7172s",
-     "kind": "mention",
-     "note": "Speaker mentioned SK Hynix stock price went vertical due to sudden demand and supply squeeze in memory chips."
-    },
-    {
-     "episode_id": "wjdbUVtGxmI",
-     "episode_title": "The MicroStrategy Endgame... - Rekt Mando",
-     "start_seconds": 2286.0,
-     "timestamp": "38:06",
-     "deep_link": "https://www.youtube.com/watch?v=wjdbUVtGxmI&t=2286s",
-     "kind": "analysis",
-     "note": "Speaker describes SK Hynix as an incredible trade in the United States; notes the Korea position is crowded, cheap but crowded, prone to 20% moves."
-    },
-    {
-     "episode_id": "xl5iN1U2yN4",
-     "episode_title": "MARKET OPEN: onchain is HOT, Korean Stocks CRASHING Still, Kevin Warsh was a Mistake...",
-     "start_seconds": 4133.0,
-     "timestamp": "1:08:53",
-     "deep_link": "https://www.youtube.com/watch?v=xl5iN1U2yN4&t=4133s",
-     "kind": "analysis",
-     "note": "Speaker states they are buying SK Hynix in size; later noted as up 12% from bottom and up like a thousand percent year to date despite recent fund losses."
-    },
-    {
-     "episode_id": "xl5iN1U2yN4",
-     "episode_title": "MARKET OPEN: onchain is HOT, Korean Stocks CRASHING Still, Kevin Warsh was a Mistake...",
-     "start_seconds": 6888.0,
-     "timestamp": "1:54:48",
-     "deep_link": "https://www.youtube.com/watch?v=xl5iN1U2yN4&t=6888s",
-     "kind": "mention",
-     "note": "SK Hynix mentioned as being purchased in size by someone."
-    },
-    {
-     "episode_id": "xl5iN1U2yN4",
-     "episode_title": "MARKET OPEN: onchain is HOT, Korean Stocks CRASHING Still, Kevin Warsh was a Mistake...",
-     "start_seconds": 7038.0,
-     "timestamp": "1:57:18",
-     "deep_link": "https://www.youtube.com/watch?v=xl5iN1U2yN4&t=7038s",
-     "kind": "analysis",
-     "note": "Speaker mentioned buying SK Hynix this morning and described it as a decent trade."
-    },
-    {
-     "episode_id": "xl5iN1U2yN4",
-     "episode_title": "MARKET OPEN: onchain is HOT, Korean Stocks CRASHING Still, Kevin Warsh was a Mistake...",
-     "start_seconds": 7451.0,
-     "timestamp": "2:04:11",
-     "deep_link": "https://www.youtube.com/watch?v=xl5iN1U2yN4&t=7451s",
-     "kind": "analysis",
-     "note": "Discussed as semiconductor stock with open interest going down despite price being up; speaker noted it trading at four times earnings at the bottom with a five times move over the last year."
-    }
-   ],
-   "episode_count": 50,
    "single_reference": false
   },
   {
@@ -143572,7 +143689,7 @@
    "symbol": "KOSPI",
    "name": "South Korea Session Index",
    "asset_class": "index",
-   "mentions": 57,
+   "mentions": 58,
    "analysis": 30,
    "moments": [
     {
@@ -144026,6 +144143,15 @@
      "note": "KOSPI last trading session was up 3.5%, described as a pretty nice green day."
     },
     {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 1105.0,
+     "timestamp": "18:25",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=1105s",
+     "kind": "mention",
+     "note": "Speaker comments negatively on the KOSPI chart, describing it as ugly."
+    },
+    {
      "episode_id": "pAO7oihWzX4",
      "episode_title": "LIVE: Bitcoin To ZERO!!! Quantum IPO Is CRAZY! Can Trump Save Us?! SpaceX! AAAAAAA",
      "start_seconds": 2363.0,
@@ -144089,7 +144215,7 @@
      "note": "Korean index (Samsung and SK Hynix) down 40% in 41 days; was up 135% between December 25 and June 26, making it the world's sixth largest stock market."
     }
    ],
-   "episode_count": 49,
+   "episode_count": 50,
    "single_reference": false
   },
   {
@@ -156452,6 +156578,323 @@
    "single_reference": false
   },
   {
+   "symbol": "SOXL",
+   "name": "Direxion Daily Semiconductor Bull 3X Shares",
+   "asset_class": "index",
+   "mentions": 34,
+   "analysis": 18,
+   "moments": [
+    {
+     "episode_id": "2_9rEE4GvhQ",
+     "episode_title": "Meta Muse is Incredible, Mando Shares Alpha, and Plumbers Take Over",
+     "start_seconds": 141.0,
+     "timestamp": "2:21",
+     "deep_link": "https://www.youtube.com/watch?v=2_9rEE4GvhQ&t=141s",
+     "kind": "mention",
+     "note": "SOXL described as triple leverage SOX semiconductor ETF; trader lost $100k by margin calling while shorting SOXL."
+    },
+    {
+     "episode_id": "4Msu_Vl-ZbM",
+     "episode_title": "MARKET OPEN: BITCOIN Above $64K, NVDA Financing Deal FALLING APART, Everyone\u2019s in the SAME TRADE",
+     "start_seconds": 3314.0,
+     "timestamp": "55:14",
+     "deep_link": "https://www.youtube.com/watch?v=4Msu_Vl-ZbM&t=3314s",
+     "kind": "analysis",
+     "note": "Down 11% on the day; high timeframe chart reviewed."
+    },
+    {
+     "episode_id": "5th9NXKEnW0",
+     "episode_title": "MARKET OPEN: GTA Trailer is MID, JACKSON HOLE TODAY, Crypto & Stocks in a BULL MARKET",
+     "start_seconds": 4216.0,
+     "timestamp": "1:10:16",
+     "deep_link": "https://www.youtube.com/watch?v=5th9NXKEnW0&t=4216s",
+     "kind": "mention",
+     "note": "Described as not bad."
+    },
+    {
+     "episode_id": "5y1bWYcLljc",
+     "episode_title": "Will Quantum Computing K*LL Bitcoin Forever..? [Stream Recap]",
+     "start_seconds": 348.0,
+     "timestamp": "5:48",
+     "deep_link": "https://www.youtube.com/watch?v=5y1bWYcLljc&t=348s",
+     "kind": "analysis",
+     "note": "Noted as up four thousand dollars, with discussion about not selling it despite consideration."
+    },
+    {
+     "episode_id": "6WP7HN3NYIg",
+     "episode_title": "MARKET OPEN: Did PumpFun SAVE ONCHAIN?, I BOUGHT CRYPTO BACK, Citrini, BIO & the Future of BALDING",
+     "start_seconds": 3102.0,
+     "timestamp": "51:42",
+     "deep_link": "https://www.youtube.com/watch?v=6WP7HN3NYIg&t=3102s",
+     "kind": "mention",
+     "note": "SOXL opened up 6.5% and green on the open."
+    },
+    {
+     "episode_id": "AJHhuA7tn_s",
+     "episode_title": "MARKET OPEN: Anthropic S-1 is UHHH, Crypto is SAVED, The KEL INTERVIEW TODAY",
+     "start_seconds": 2668.0,
+     "timestamp": "44:28",
+     "deep_link": "https://www.youtube.com/watch?v=AJHhuA7tn_s&t=2668s",
+     "kind": "analysis",
+     "note": "The Soxel triple leverage semiconductor ETF is up 4.23%."
+    },
+    {
+     "episode_id": "AfpZSSx5hMg",
+     "episode_title": "Market Open: AMC tokenized stock, crypto is EUPHORIA, we done with ai.",
+     "start_seconds": 3482.0,
+     "timestamp": "58:02",
+     "deep_link": "https://www.youtube.com/watch?v=AfpZSSx5hMg&t=3482s",
+     "kind": "mention",
+     "note": "Speaker stated SOXO is up 3%."
+    },
+    {
+     "episode_id": "AnkbghJYh50",
+     "episode_title": "Market Open: Crypto is on FIRE. CXMT IPO. China vs USA AI. and everything else",
+     "start_seconds": 7004.0,
+     "timestamp": "1:56:44",
+     "deep_link": "https://www.youtube.com/watch?v=AnkbghJYh50&t=7004s",
+     "kind": "analysis",
+     "note": "Speaker discussed SOXL at 120, down 12%, and referenced it multiple times as having a significant decline."
+    },
+    {
+     "episode_id": "CmJiQ8vp1xo",
+     "episode_title": "MARKET OPEN: The LEOPOLD INDEX is RIPPING, PumpFun Keeps CLIMBING, Everyone is LEAVING Anthropic",
+     "start_seconds": 3369.0,
+     "timestamp": "56:09",
+     "deep_link": "https://www.youtube.com/watch?v=CmJiQ8vp1xo&t=3369s",
+     "kind": "mention",
+     "note": "Triple leverage semiconductor index up."
+    },
+    {
+     "episode_id": "CmJiQ8vp1xo",
+     "episode_title": "MARKET OPEN: The LEOPOLD INDEX is RIPPING, PumpFun Keeps CLIMBING, Everyone is LEAVING Anthropic",
+     "start_seconds": 6313.0,
+     "timestamp": "1:45:13",
+     "deep_link": "https://www.youtube.com/watch?v=CmJiQ8vp1xo&t=6313s",
+     "kind": "mention",
+     "note": "Speaker mentions SOXO is up 5 percent in market closing summary."
+    },
+    {
+     "episode_id": "DVtajNNR6js",
+     "episode_title": "MARKET OPEN: Memory stocks are DUMPING. BRIAN vs VLAD. Kimi/deepseek part 2.",
+     "start_seconds": 1482.0,
+     "timestamp": "24:42",
+     "deep_link": "https://www.youtube.com/watch?v=DVtajNNR6js&t=1482s",
+     "kind": "analysis",
+     "note": "SOXL declined from 301 to 125 in pre-market, part of broader market carnage."
+    },
+    {
+     "episode_id": "Dp86i0ijSBU",
+     "episode_title": "the reason im buying crypto again",
+     "start_seconds": 335.0,
+     "timestamp": "5:35",
+     "deep_link": "https://www.youtube.com/watch?v=Dp86i0ijSBU&t=335s",
+     "kind": "mention",
+     "note": "Speaker noted Soxel (semiconductor index proxy) is down 45-50% as a bellwether asset for the AI trade."
+    },
+    {
+     "episode_id": "ESO8QpCTuts",
+     "episode_title": "The Kimi Moment, Hedge Funds Save the Market, and Trump MEV",
+     "start_seconds": 28.0,
+     "timestamp": "0:28",
+     "deep_link": "https://www.youtube.com/watch?v=ESO8QpCTuts&t=28s",
+     "kind": "analysis",
+     "note": "SOXL (referred to as SoxSoul) down 12%, declining from 301 to 125 in the pre-market."
+    },
+    {
+     "episode_id": "G4JBjXx5IMc",
+     "episode_title": "MARKET OPEN: Crypto Onchain is HOT, NVDA\u2019s $500B DEAL, Unitree IPO",
+     "start_seconds": 4340.0,
+     "timestamp": "1:12:20",
+     "deep_link": "https://www.youtube.com/watch?v=G4JBjXx5IMc&t=4340s",
+     "kind": "analysis",
+     "note": "SOXL was up 2.8 percent and described as losing it."
+    },
+    {
+     "episode_id": "JSKPV5Qp4ZA",
+     "episode_title": "LIVE: REACTING TO FOMC",
+     "start_seconds": 2464.0,
+     "timestamp": "41:04",
+     "deep_link": "https://www.youtube.com/watch?v=JSKPV5Qp4ZA&t=2464s",
+     "kind": "mention",
+     "note": "SOXL mentioned in passing with a number."
+    },
+    {
+     "episode_id": "LDykU1HsoZI",
+     "episode_title": "MARKET OPEN: FOMC TODAY, Crypto CLARITY FAILED, Kevin Warsh Has the WORLD AT HIS MERCY",
+     "start_seconds": 329.0,
+     "timestamp": "5:29",
+     "deep_link": "https://www.youtube.com/watch?v=LDykU1HsoZI&t=329s",
+     "kind": "mention",
+     "note": "Soxel is up 10% in pre-market trading."
+    },
+    {
+     "episode_id": "UmoZRdw_IxE",
+     "episode_title": "MARKET OPEN: Stocks Are DUMPING, rate hikes, China Is Making Memory, Crypto Is Holding On For Life",
+     "start_seconds": 3323.0,
+     "timestamp": "55:23",
+     "deep_link": "https://www.youtube.com/watch?v=UmoZRdw_IxE&t=3323s",
+     "kind": "analysis",
+     "note": "SOXL triple leverage semiconductor ETF is drilling and sits at 111."
+    },
+    {
+     "episode_id": "UmoZRdw_IxE",
+     "episode_title": "MARKET OPEN: Stocks Are DUMPING, rate hikes, China Is Making Memory, Crypto Is Holding On For Life",
+     "start_seconds": 4061.0,
+     "timestamp": "1:07:41",
+     "deep_link": "https://www.youtube.com/watch?v=UmoZRdw_IxE&t=4061s",
+     "kind": "analysis",
+     "note": "Down 18% on the day."
+    },
+    {
+     "episode_id": "Zc7gZiQkwNA",
+     "episode_title": "MARKET OPEN: Meta Muse SAVED AI, Crypto is in a BULL MARKET, Bitcoin BREAKS $86K",
+     "start_seconds": 1061.0,
+     "timestamp": "17:41",
+     "deep_link": "https://www.youtube.com/watch?v=Zc7gZiQkwNA&t=1061s",
+     "kind": "mention",
+     "note": "A user margin called shorting SOXL (triple leverage semiconductor ETF) after losing $100k in savings."
+    },
+    {
+     "episode_id": "bX6sTpFxkJs",
+     "episode_title": "MARKET OPEN: Robinhood Summit DESTROYS Onchain, SF Real Estate is MOONING, Is America an AI LAB?",
+     "start_seconds": 4450.0,
+     "timestamp": "1:14:10",
+     "deep_link": "https://www.youtube.com/watch?v=bX6sTpFxkJs&t=4450s",
+     "kind": "mention",
+     "note": "SOXL goes red."
+    },
+    {
+     "episode_id": "emHb4ZZjUFM",
+     "episode_title": "MARKET OPEN: BLACK TUESDAY for AI Stocks, The $1M+ Pok\u00e9mon Card HEIST, What's NEXT for Crypto?",
+     "start_seconds": 651.0,
+     "timestamp": "10:51",
+     "deep_link": "https://www.youtube.com/watch?v=emHb4ZZjUFM&t=651s",
+     "kind": "mention",
+     "note": "Speaker references Soxel being down 12% as context for recent nasty market days."
+    },
+    {
+     "episode_id": "emHb4ZZjUFM",
+     "episode_title": "MARKET OPEN: BLACK TUESDAY for AI Stocks, The $1M+ Pok\u00e9mon Card HEIST, What's NEXT for Crypto?",
+     "start_seconds": 1075.0,
+     "timestamp": "17:55",
+     "deep_link": "https://www.youtube.com/watch?v=emHb4ZZjUFM&t=1075s",
+     "kind": "analysis",
+     "note": "Triple leverage ETF of semiconductor index discussed as the more volatile alternative to SOX."
+    },
+    {
+     "episode_id": "mWsvUgJbS4o",
+     "episode_title": "MARKET OPEN: Will US Ban China AI? Clarity Act Incoming? Did stocks bottom?",
+     "start_seconds": 3414.0,
+     "timestamp": "56:54",
+     "deep_link": "https://www.youtube.com/watch?v=mWsvUgJbS4o&t=3414s",
+     "kind": "analysis",
+     "note": "SOXL was up 15% on the open, described as a daily semi bull 3X leverage ETF."
+    },
+    {
+     "episode_id": "mWsvUgJbS4o",
+     "episode_title": "MARKET OPEN: Will US Ban China AI? Clarity Act Incoming? Did stocks bottom?",
+     "start_seconds": 5609.0,
+     "timestamp": "1:33:29",
+     "deep_link": "https://www.youtube.com/watch?v=mWsvUgJbS4o&t=5609s",
+     "kind": "mention",
+     "note": "Speaker noted Soxel showing red candles."
+    },
+    {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 430.0,
+     "timestamp": "7:10",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=430s",
+     "kind": "mention",
+     "note": "Mentioned as having 10x leverage applied to it, described as 'crazy'."
+    },
+    {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 957.0,
+     "timestamp": "15:57",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=957s",
+     "kind": "analysis",
+     "note": "Flood portfolio is long 1.3 million of SOXL and down 290k, down 179% on the position."
+    },
+    {
+     "episode_id": "pWUa7CEpw-M",
+     "episode_title": "MARKET OPEN: Onchain BULL MARKET, The MEMORY TRADE is BACK, Anthropic S-1",
+     "start_seconds": 1364.0,
+     "timestamp": "22:44",
+     "deep_link": "https://www.youtube.com/watch?v=pWUa7CEpw-M&t=1364s",
+     "kind": "mention",
+     "note": "Speaker mentioned Soxel (likely SOXL) up 7% as part of pre-stream market check."
+    },
+    {
+     "episode_id": "qdNT1PbcWcI",
+     "episode_title": "MARKET OPEN: Will STOCKS finally recover? The KOSPI is LIMIT DOWN again. FOMC today. What is PipeDog",
+     "start_seconds": 1265.0,
+     "timestamp": "21:05",
+     "deep_link": "https://www.youtube.com/watch?v=qdNT1PbcWcI&t=1265s",
+     "kind": "analysis",
+     "note": "Speaker cites SOXL at 107 off an all-time high of 302 and describes it as a 66% triple leverage semiconductor ETF."
+    },
+    {
+     "episode_id": "qdNT1PbcWcI",
+     "episode_title": "MARKET OPEN: Will STOCKS finally recover? The KOSPI is LIMIT DOWN again. FOMC today. What is PipeDog",
+     "start_seconds": 7300.0,
+     "timestamp": "2:01:40",
+     "deep_link": "https://www.youtube.com/watch?v=qdNT1PbcWcI&t=7300s",
+     "kind": "analysis",
+     "note": "SOXL, a triple leverage semiconductor ETF, is down 67% and is described as being heavily drilled down; the ETF holds companies like Micron, AMD, NVIDIA, Intel, and Broadcom."
+    },
+    {
+     "episode_id": "wAnAq1M0mDM",
+     "episode_title": "Gen-Z Entrepreneurship, The Reality of China's AI, and Why Crypto Looks Good Again",
+     "start_seconds": 1231.0,
+     "timestamp": "20:31",
+     "deep_link": "https://www.youtube.com/watch?v=wAnAq1M0mDM&t=1231s",
+     "kind": "analysis",
+     "note": "Triple-leveraged semiconductor ETF up 15% on the open; speaker references Nick's post about it from the day before."
+    },
+    {
+     "episode_id": "xl5iN1U2yN4",
+     "episode_title": "MARKET OPEN: onchain is HOT, Korean Stocks CRASHING Still, Kevin Warsh was a Mistake...",
+     "start_seconds": 4729.0,
+     "timestamp": "1:18:49",
+     "deep_link": "https://www.youtube.com/watch?v=xl5iN1U2yN4&t=4729s",
+     "kind": "analysis",
+     "note": "Semiconductor ETF noted as up 24 percent during the market move."
+    },
+    {
+     "episode_id": "xl5iN1U2yN4",
+     "episode_title": "MARKET OPEN: onchain is HOT, Korean Stocks CRASHING Still, Kevin Warsh was a Mistake...",
+     "start_seconds": 6388.0,
+     "timestamp": "1:46:28",
+     "deep_link": "https://www.youtube.com/watch?v=xl5iN1U2yN4&t=6388s",
+     "kind": "mention",
+     "note": "Soxel (SOXL), a triple leverage semi index, gapped down approximately 32%."
+    },
+    {
+     "episode_id": "yyt3TGWuluw",
+     "episode_title": "Trump's Secret Escape, Italian Cheese Financial Crisis, & The Stakes of PUMP",
+     "start_seconds": 1356.0,
+     "timestamp": "22:36",
+     "deep_link": "https://www.youtube.com/watch?v=yyt3TGWuluw&t=1356s",
+     "kind": "analysis",
+     "note": "Up 2.2 percent; speaker notes high timeframes look uninspiring and boring, possibly consolidating from another pop."
+    },
+    {
+     "episode_id": "zJALUEwRrWo",
+     "episode_title": "MARKET OPEN: PumpFun Revenue is SURGING, NBIS CRUSHES Earnings, CPI TODAY",
+     "start_seconds": 842.0,
+     "timestamp": "14:02",
+     "deep_link": "https://www.youtube.com/watch?v=zJALUEwRrWo&t=842s",
+     "kind": "analysis",
+     "note": "SOXL triple leverage semiconductor ETF is up 10% pre-market."
+    }
+   ],
+   "episode_count": 27,
+   "single_reference": false
+  },
+  {
    "symbol": "CRWV",
    "name": "CoreWeave",
    "asset_class": "other",
@@ -157552,305 +157995,6 @@
      "deep_link": "https://www.youtube.com/watch?v=r1dkV28CCcw&t=3515s",
      "kind": "mention",
      "note": "Mentioned as having been a momentum trade that 'ripped pretty hard' about a month prior, cited as an example of a news-driven trade suitable for perpetuals trading."
-    }
-   ],
-   "episode_count": 26,
-   "single_reference": false
-  },
-  {
-   "symbol": "SOXL",
-   "name": "Direxion Daily Semiconductor Bull 3X Shares",
-   "asset_class": "index",
-   "mentions": 32,
-   "analysis": 17,
-   "moments": [
-    {
-     "episode_id": "2_9rEE4GvhQ",
-     "episode_title": "Meta Muse is Incredible, Mando Shares Alpha, and Plumbers Take Over",
-     "start_seconds": 141.0,
-     "timestamp": "2:21",
-     "deep_link": "https://www.youtube.com/watch?v=2_9rEE4GvhQ&t=141s",
-     "kind": "mention",
-     "note": "SOXL described as triple leverage SOX semiconductor ETF; trader lost $100k by margin calling while shorting SOXL."
-    },
-    {
-     "episode_id": "4Msu_Vl-ZbM",
-     "episode_title": "MARKET OPEN: BITCOIN Above $64K, NVDA Financing Deal FALLING APART, Everyone\u2019s in the SAME TRADE",
-     "start_seconds": 3314.0,
-     "timestamp": "55:14",
-     "deep_link": "https://www.youtube.com/watch?v=4Msu_Vl-ZbM&t=3314s",
-     "kind": "analysis",
-     "note": "Down 11% on the day; high timeframe chart reviewed."
-    },
-    {
-     "episode_id": "5th9NXKEnW0",
-     "episode_title": "MARKET OPEN: GTA Trailer is MID, JACKSON HOLE TODAY, Crypto & Stocks in a BULL MARKET",
-     "start_seconds": 4216.0,
-     "timestamp": "1:10:16",
-     "deep_link": "https://www.youtube.com/watch?v=5th9NXKEnW0&t=4216s",
-     "kind": "mention",
-     "note": "Described as not bad."
-    },
-    {
-     "episode_id": "5y1bWYcLljc",
-     "episode_title": "Will Quantum Computing K*LL Bitcoin Forever..? [Stream Recap]",
-     "start_seconds": 348.0,
-     "timestamp": "5:48",
-     "deep_link": "https://www.youtube.com/watch?v=5y1bWYcLljc&t=348s",
-     "kind": "analysis",
-     "note": "Noted as up four thousand dollars, with discussion about not selling it despite consideration."
-    },
-    {
-     "episode_id": "6WP7HN3NYIg",
-     "episode_title": "MARKET OPEN: Did PumpFun SAVE ONCHAIN?, I BOUGHT CRYPTO BACK, Citrini, BIO & the Future of BALDING",
-     "start_seconds": 3102.0,
-     "timestamp": "51:42",
-     "deep_link": "https://www.youtube.com/watch?v=6WP7HN3NYIg&t=3102s",
-     "kind": "mention",
-     "note": "SOXL opened up 6.5% and green on the open."
-    },
-    {
-     "episode_id": "AJHhuA7tn_s",
-     "episode_title": "MARKET OPEN: Anthropic S-1 is UHHH, Crypto is SAVED, The KEL INTERVIEW TODAY",
-     "start_seconds": 2668.0,
-     "timestamp": "44:28",
-     "deep_link": "https://www.youtube.com/watch?v=AJHhuA7tn_s&t=2668s",
-     "kind": "analysis",
-     "note": "The Soxel triple leverage semiconductor ETF is up 4.23%."
-    },
-    {
-     "episode_id": "AfpZSSx5hMg",
-     "episode_title": "Market Open: AMC tokenized stock, crypto is EUPHORIA, we done with ai.",
-     "start_seconds": 3482.0,
-     "timestamp": "58:02",
-     "deep_link": "https://www.youtube.com/watch?v=AfpZSSx5hMg&t=3482s",
-     "kind": "mention",
-     "note": "Speaker stated SOXO is up 3%."
-    },
-    {
-     "episode_id": "AnkbghJYh50",
-     "episode_title": "Market Open: Crypto is on FIRE. CXMT IPO. China vs USA AI. and everything else",
-     "start_seconds": 7004.0,
-     "timestamp": "1:56:44",
-     "deep_link": "https://www.youtube.com/watch?v=AnkbghJYh50&t=7004s",
-     "kind": "analysis",
-     "note": "Speaker discussed SOXL at 120, down 12%, and referenced it multiple times as having a significant decline."
-    },
-    {
-     "episode_id": "CmJiQ8vp1xo",
-     "episode_title": "MARKET OPEN: The LEOPOLD INDEX is RIPPING, PumpFun Keeps CLIMBING, Everyone is LEAVING Anthropic",
-     "start_seconds": 3369.0,
-     "timestamp": "56:09",
-     "deep_link": "https://www.youtube.com/watch?v=CmJiQ8vp1xo&t=3369s",
-     "kind": "mention",
-     "note": "Triple leverage semiconductor index up."
-    },
-    {
-     "episode_id": "CmJiQ8vp1xo",
-     "episode_title": "MARKET OPEN: The LEOPOLD INDEX is RIPPING, PumpFun Keeps CLIMBING, Everyone is LEAVING Anthropic",
-     "start_seconds": 6313.0,
-     "timestamp": "1:45:13",
-     "deep_link": "https://www.youtube.com/watch?v=CmJiQ8vp1xo&t=6313s",
-     "kind": "mention",
-     "note": "Speaker mentions SOXO is up 5 percent in market closing summary."
-    },
-    {
-     "episode_id": "DVtajNNR6js",
-     "episode_title": "MARKET OPEN: Memory stocks are DUMPING. BRIAN vs VLAD. Kimi/deepseek part 2.",
-     "start_seconds": 1482.0,
-     "timestamp": "24:42",
-     "deep_link": "https://www.youtube.com/watch?v=DVtajNNR6js&t=1482s",
-     "kind": "analysis",
-     "note": "SOXL declined from 301 to 125 in pre-market, part of broader market carnage."
-    },
-    {
-     "episode_id": "Dp86i0ijSBU",
-     "episode_title": "the reason im buying crypto again",
-     "start_seconds": 335.0,
-     "timestamp": "5:35",
-     "deep_link": "https://www.youtube.com/watch?v=Dp86i0ijSBU&t=335s",
-     "kind": "mention",
-     "note": "Speaker noted Soxel (semiconductor index proxy) is down 45-50% as a bellwether asset for the AI trade."
-    },
-    {
-     "episode_id": "ESO8QpCTuts",
-     "episode_title": "The Kimi Moment, Hedge Funds Save the Market, and Trump MEV",
-     "start_seconds": 28.0,
-     "timestamp": "0:28",
-     "deep_link": "https://www.youtube.com/watch?v=ESO8QpCTuts&t=28s",
-     "kind": "analysis",
-     "note": "SOXL (referred to as SoxSoul) down 12%, declining from 301 to 125 in the pre-market."
-    },
-    {
-     "episode_id": "G4JBjXx5IMc",
-     "episode_title": "MARKET OPEN: Crypto Onchain is HOT, NVDA\u2019s $500B DEAL, Unitree IPO",
-     "start_seconds": 4340.0,
-     "timestamp": "1:12:20",
-     "deep_link": "https://www.youtube.com/watch?v=G4JBjXx5IMc&t=4340s",
-     "kind": "analysis",
-     "note": "SOXL was up 2.8 percent and described as losing it."
-    },
-    {
-     "episode_id": "JSKPV5Qp4ZA",
-     "episode_title": "LIVE: REACTING TO FOMC",
-     "start_seconds": 2464.0,
-     "timestamp": "41:04",
-     "deep_link": "https://www.youtube.com/watch?v=JSKPV5Qp4ZA&t=2464s",
-     "kind": "mention",
-     "note": "SOXL mentioned in passing with a number."
-    },
-    {
-     "episode_id": "LDykU1HsoZI",
-     "episode_title": "MARKET OPEN: FOMC TODAY, Crypto CLARITY FAILED, Kevin Warsh Has the WORLD AT HIS MERCY",
-     "start_seconds": 329.0,
-     "timestamp": "5:29",
-     "deep_link": "https://www.youtube.com/watch?v=LDykU1HsoZI&t=329s",
-     "kind": "mention",
-     "note": "Soxel is up 10% in pre-market trading."
-    },
-    {
-     "episode_id": "UmoZRdw_IxE",
-     "episode_title": "MARKET OPEN: Stocks Are DUMPING, rate hikes, China Is Making Memory, Crypto Is Holding On For Life",
-     "start_seconds": 3323.0,
-     "timestamp": "55:23",
-     "deep_link": "https://www.youtube.com/watch?v=UmoZRdw_IxE&t=3323s",
-     "kind": "analysis",
-     "note": "SOXL triple leverage semiconductor ETF is drilling and sits at 111."
-    },
-    {
-     "episode_id": "UmoZRdw_IxE",
-     "episode_title": "MARKET OPEN: Stocks Are DUMPING, rate hikes, China Is Making Memory, Crypto Is Holding On For Life",
-     "start_seconds": 4061.0,
-     "timestamp": "1:07:41",
-     "deep_link": "https://www.youtube.com/watch?v=UmoZRdw_IxE&t=4061s",
-     "kind": "analysis",
-     "note": "Down 18% on the day."
-    },
-    {
-     "episode_id": "Zc7gZiQkwNA",
-     "episode_title": "MARKET OPEN: Meta Muse SAVED AI, Crypto is in a BULL MARKET, Bitcoin BREAKS $86K",
-     "start_seconds": 1061.0,
-     "timestamp": "17:41",
-     "deep_link": "https://www.youtube.com/watch?v=Zc7gZiQkwNA&t=1061s",
-     "kind": "mention",
-     "note": "A user margin called shorting SOXL (triple leverage semiconductor ETF) after losing $100k in savings."
-    },
-    {
-     "episode_id": "bX6sTpFxkJs",
-     "episode_title": "MARKET OPEN: Robinhood Summit DESTROYS Onchain, SF Real Estate is MOONING, Is America an AI LAB?",
-     "start_seconds": 4450.0,
-     "timestamp": "1:14:10",
-     "deep_link": "https://www.youtube.com/watch?v=bX6sTpFxkJs&t=4450s",
-     "kind": "mention",
-     "note": "SOXL goes red."
-    },
-    {
-     "episode_id": "emHb4ZZjUFM",
-     "episode_title": "MARKET OPEN: BLACK TUESDAY for AI Stocks, The $1M+ Pok\u00e9mon Card HEIST, What's NEXT for Crypto?",
-     "start_seconds": 651.0,
-     "timestamp": "10:51",
-     "deep_link": "https://www.youtube.com/watch?v=emHb4ZZjUFM&t=651s",
-     "kind": "mention",
-     "note": "Speaker references Soxel being down 12% as context for recent nasty market days."
-    },
-    {
-     "episode_id": "emHb4ZZjUFM",
-     "episode_title": "MARKET OPEN: BLACK TUESDAY for AI Stocks, The $1M+ Pok\u00e9mon Card HEIST, What's NEXT for Crypto?",
-     "start_seconds": 1075.0,
-     "timestamp": "17:55",
-     "deep_link": "https://www.youtube.com/watch?v=emHb4ZZjUFM&t=1075s",
-     "kind": "analysis",
-     "note": "Triple leverage ETF of semiconductor index discussed as the more volatile alternative to SOX."
-    },
-    {
-     "episode_id": "mWsvUgJbS4o",
-     "episode_title": "MARKET OPEN: Will US Ban China AI? Clarity Act Incoming? Did stocks bottom?",
-     "start_seconds": 3414.0,
-     "timestamp": "56:54",
-     "deep_link": "https://www.youtube.com/watch?v=mWsvUgJbS4o&t=3414s",
-     "kind": "analysis",
-     "note": "SOXL was up 15% on the open, described as a daily semi bull 3X leverage ETF."
-    },
-    {
-     "episode_id": "mWsvUgJbS4o",
-     "episode_title": "MARKET OPEN: Will US Ban China AI? Clarity Act Incoming? Did stocks bottom?",
-     "start_seconds": 5609.0,
-     "timestamp": "1:33:29",
-     "deep_link": "https://www.youtube.com/watch?v=mWsvUgJbS4o&t=5609s",
-     "kind": "mention",
-     "note": "Speaker noted Soxel showing red candles."
-    },
-    {
-     "episode_id": "pWUa7CEpw-M",
-     "episode_title": "MARKET OPEN: Onchain BULL MARKET, The MEMORY TRADE is BACK, Anthropic S-1",
-     "start_seconds": 1364.0,
-     "timestamp": "22:44",
-     "deep_link": "https://www.youtube.com/watch?v=pWUa7CEpw-M&t=1364s",
-     "kind": "mention",
-     "note": "Speaker mentioned Soxel (likely SOXL) up 7% as part of pre-stream market check."
-    },
-    {
-     "episode_id": "qdNT1PbcWcI",
-     "episode_title": "MARKET OPEN: Will STOCKS finally recover? The KOSPI is LIMIT DOWN again. FOMC today. What is PipeDog",
-     "start_seconds": 1265.0,
-     "timestamp": "21:05",
-     "deep_link": "https://www.youtube.com/watch?v=qdNT1PbcWcI&t=1265s",
-     "kind": "analysis",
-     "note": "Speaker cites SOXL at 107 off an all-time high of 302 and describes it as a 66% triple leverage semiconductor ETF."
-    },
-    {
-     "episode_id": "qdNT1PbcWcI",
-     "episode_title": "MARKET OPEN: Will STOCKS finally recover? The KOSPI is LIMIT DOWN again. FOMC today. What is PipeDog",
-     "start_seconds": 7300.0,
-     "timestamp": "2:01:40",
-     "deep_link": "https://www.youtube.com/watch?v=qdNT1PbcWcI&t=7300s",
-     "kind": "analysis",
-     "note": "SOXL, a triple leverage semiconductor ETF, is down 67% and is described as being heavily drilled down; the ETF holds companies like Micron, AMD, NVIDIA, Intel, and Broadcom."
-    },
-    {
-     "episode_id": "wAnAq1M0mDM",
-     "episode_title": "Gen-Z Entrepreneurship, The Reality of China's AI, and Why Crypto Looks Good Again",
-     "start_seconds": 1231.0,
-     "timestamp": "20:31",
-     "deep_link": "https://www.youtube.com/watch?v=wAnAq1M0mDM&t=1231s",
-     "kind": "analysis",
-     "note": "Triple-leveraged semiconductor ETF up 15% on the open; speaker references Nick's post about it from the day before."
-    },
-    {
-     "episode_id": "xl5iN1U2yN4",
-     "episode_title": "MARKET OPEN: onchain is HOT, Korean Stocks CRASHING Still, Kevin Warsh was a Mistake...",
-     "start_seconds": 4729.0,
-     "timestamp": "1:18:49",
-     "deep_link": "https://www.youtube.com/watch?v=xl5iN1U2yN4&t=4729s",
-     "kind": "analysis",
-     "note": "Semiconductor ETF noted as up 24 percent during the market move."
-    },
-    {
-     "episode_id": "xl5iN1U2yN4",
-     "episode_title": "MARKET OPEN: onchain is HOT, Korean Stocks CRASHING Still, Kevin Warsh was a Mistake...",
-     "start_seconds": 6388.0,
-     "timestamp": "1:46:28",
-     "deep_link": "https://www.youtube.com/watch?v=xl5iN1U2yN4&t=6388s",
-     "kind": "mention",
-     "note": "Soxel (SOXL), a triple leverage semi index, gapped down approximately 32%."
-    },
-    {
-     "episode_id": "yyt3TGWuluw",
-     "episode_title": "Trump's Secret Escape, Italian Cheese Financial Crisis, & The Stakes of PUMP",
-     "start_seconds": 1356.0,
-     "timestamp": "22:36",
-     "deep_link": "https://www.youtube.com/watch?v=yyt3TGWuluw&t=1356s",
-     "kind": "analysis",
-     "note": "Up 2.2 percent; speaker notes high timeframes look uninspiring and boring, possibly consolidating from another pop."
-    },
-    {
-     "episode_id": "zJALUEwRrWo",
-     "episode_title": "MARKET OPEN: PumpFun Revenue is SURGING, NBIS CRUSHES Earnings, CPI TODAY",
-     "start_seconds": 842.0,
-     "timestamp": "14:02",
-     "deep_link": "https://www.youtube.com/watch?v=zJALUEwRrWo&t=842s",
-     "kind": "analysis",
-     "note": "SOXL triple leverage semiconductor ETF is up 10% pre-market."
     }
    ],
    "episode_count": 26,
@@ -160024,6 +160168,278 @@
    "single_reference": false
   },
   {
+   "symbol": "NBIS",
+   "name": "Nebius",
+   "asset_class": "stock",
+   "mentions": 29,
+   "analysis": 15,
+   "moments": [
+    {
+     "episode_id": "-uarB5g12aY",
+     "episode_title": "MARKET OPEN: Russian PLAGUE OUTBREAK, I BOUGHT ZCASH BACK, Michael Burry vs the BULL MARKET",
+     "start_seconds": 8815.0,
+     "timestamp": "2:26:55",
+     "deep_link": "https://www.youtube.com/watch?v=-uarB5g12aY&t=8815s",
+     "kind": "mention",
+     "note": "Nebius noted as biggest gainer on consumer SaaS side."
+    },
+    {
+     "episode_id": "0yg1kc_WEUs",
+     "episode_title": "Flood - Inside the Biggest AI Fund Blowup Ever",
+     "start_seconds": 982.0,
+     "timestamp": "16:22",
+     "deep_link": "https://www.youtube.com/watch?v=0yg1kc_WEUs&t=982s",
+     "kind": "analysis",
+     "note": "Leopold held Nebius as one of the positions that was bouncing alongside Bloom and Sandisk."
+    },
+    {
+     "episode_id": "2oMv5OFqRCg",
+     "episode_title": "MARKET OPEN: Memory stocks are back. ChatGPT bottomed the market. Robinhood chain & Crypto.",
+     "start_seconds": 8884.0,
+     "timestamp": "2:28:04",
+     "deep_link": "https://www.youtube.com/watch?v=2oMv5OFqRCg&t=8884s",
+     "kind": "mention",
+     "note": "Speaker notes Nebius up 18% and identifies it as a former Bitcoin miner turned AI compute company."
+    },
+    {
+     "episode_id": "64dorl6n2V4",
+     "episode_title": "Ejaaz: EXPOSING The AI Bubble, Sam Altman, Nvidia vs Google and More | TG Podcast",
+     "start_seconds": 664.0,
+     "timestamp": "11:04",
+     "deep_link": "https://www.youtube.com/watch?v=64dorl6n2V4&t=664s",
+     "kind": "analysis",
+     "note": "Speaker discusses Nebius as an AI cloud provider that re-signed 10,000 to 30,000 five-year-old GPUs two quarters ahead of time, demonstrating strong demand for compute capacity."
+    },
+    {
+     "episode_id": "CmJiQ8vp1xo",
+     "episode_title": "MARKET OPEN: The LEOPOLD INDEX is RIPPING, PumpFun Keeps CLIMBING, Everyone is LEAVING Anthropic",
+     "start_seconds": 2833.0,
+     "timestamp": "47:13",
+     "deep_link": "https://www.youtube.com/watch?v=CmJiQ8vp1xo&t=2833s",
+     "kind": "analysis",
+     "note": "Nebius was Leopold Aschenbrenner's largest holding at 38% of his portfolio with 5% company ownership; he had an average buy price around 197 and was forced to sell; the stock rose 35% the day after he sold and is up 57% since his sale."
+    },
+    {
+     "episode_id": "CmJiQ8vp1xo",
+     "episode_title": "MARKET OPEN: The LEOPOLD INDEX is RIPPING, PumpFun Keeps CLIMBING, Everyone is LEAVING Anthropic",
+     "start_seconds": 2912.0,
+     "timestamp": "48:32",
+     "deep_link": "https://www.youtube.com/watch?v=CmJiQ8vp1xo&t=2912s",
+     "kind": "mention",
+     "note": "Referenced as a holding that was up significantly in value before being forced to be sold."
+    },
+    {
+     "episode_id": "CmJiQ8vp1xo",
+     "episode_title": "MARKET OPEN: The LEOPOLD INDEX is RIPPING, PumpFun Keeps CLIMBING, Everyone is LEAVING Anthropic",
+     "start_seconds": 8636.0,
+     "timestamp": "2:23:56",
+     "deep_link": "https://www.youtube.com/watch?v=CmJiQ8vp1xo&t=8636s",
+     "kind": "mention",
+     "note": "Speaker mentioned Nebius is up but has retraced a bunch."
+    },
+    {
+     "episode_id": "G4JBjXx5IMc",
+     "episode_title": "MARKET OPEN: Crypto Onchain is HOT, NVDA\u2019s $500B DEAL, Unitree IPO",
+     "start_seconds": 7052.0,
+     "timestamp": "1:57:32",
+     "deep_link": "https://www.youtube.com/watch?v=G4JBjXx5IMc&t=7052s",
+     "kind": "mention",
+     "note": "Nebius mentioned as losing value."
+    },
+    {
+     "episode_id": "JSKPV5Qp4ZA",
+     "episode_title": "LIVE: REACTING TO FOMC",
+     "start_seconds": 1880.0,
+     "timestamp": "31:20",
+     "deep_link": "https://www.youtube.com/watch?v=JSKPV5Qp4ZA&t=1880s",
+     "kind": "mention",
+     "note": "Noted as up 3% in response to Oracle's CapEx news."
+    },
+    {
+     "episode_id": "KkEohub0bw8",
+     "episode_title": "Amit Kukreja - How to BEAT the Stock Market..",
+     "start_seconds": 3142.0,
+     "timestamp": "52:22",
+     "deep_link": "https://www.youtube.com/watch?v=KkEohub0bw8&t=3142s",
+     "kind": "mention",
+     "note": "Speaker listed Nebius as part of portfolio holdings."
+    },
+    {
+     "episode_id": "NfVBxX1uULM",
+     "episode_title": "Eli Lilly Goes To War, the End of Healthmaxxing, and Social Trading",
+     "start_seconds": 724.0,
+     "timestamp": "12:04",
+     "deep_link": "https://www.youtube.com/watch?v=NfVBxX1uULM&t=724s",
+     "kind": "analysis",
+     "note": "Leopold Aschenbrenner's largest holding at 38% of portfolio with 5% company ownership; sold at average buy price around $197 with actual sale price discussed; stock up 35% the day after forced sale, then up 57% in following weeks."
+    },
+    {
+     "episode_id": "RBJyIBbu_gY",
+     "episode_title": "MARKET OPEN: Memecoins Are BACK. Google's HUGE CapEx Bet. TSLA/SPCX in TROUBLE...",
+     "start_seconds": 4191.0,
+     "timestamp": "1:09:51",
+     "deep_link": "https://www.youtube.com/watch?v=RBJyIBbu_gY&t=4191s",
+     "kind": "mention",
+     "note": "Speaker mentions being long on Nebius."
+    },
+    {
+     "episode_id": "UjwkzYYvFvI",
+     "episode_title": "Memecoin Stocks Short Squeeze, Robinhood is Unstoppable, and How AJC Made $2mil",
+     "start_seconds": 897.0,
+     "timestamp": "14:57",
+     "deep_link": "https://www.youtube.com/watch?v=UjwkzYYvFvI&t=897s",
+     "kind": "mention",
+     "note": "Referenced as a $50 billion company in a hypothetical example about owning 5% and shilling it."
+    },
+    {
+     "episode_id": "Z8PbXmkpyPI",
+     "episode_title": "MARKET OPEN: Robinhood Chain is ON FIRE, WAR & RATE HIKES, BITCOIN is in TROUBLE",
+     "start_seconds": 2069.0,
+     "timestamp": "34:29",
+     "deep_link": "https://www.youtube.com/watch?v=Z8PbXmkpyPI&t=2069s",
+     "kind": "mention",
+     "note": "Referenced as a $50 billion company example in discussion of shilling positions at different market caps."
+    },
+    {
+     "episode_id": "al1M7HzuL_k",
+     "episode_title": "MARKET OPEN: Crypto REFUSES to Die... The Memory Trade is Back. AI Took Over Runescape..!?",
+     "start_seconds": 7442.0,
+     "timestamp": "2:04:02",
+     "deep_link": "https://www.youtube.com/watch?v=al1M7HzuL_k&t=7442s",
+     "kind": "mention",
+     "note": "Leopold Ashenbrenner held 6% of portfolio."
+    },
+    {
+     "episode_id": "gRFE903_eGQ",
+     "episode_title": "LEOPOLD LIQUIDATED LIVE: Ken Griffin is The Grim Reaper, Uniswap V4 Hooks, and a Postmortem",
+     "start_seconds": 317.0,
+     "timestamp": "5:17",
+     "deep_link": "https://www.youtube.com/watch?v=gRFE903_eGQ&t=317s",
+     "kind": "analysis",
+     "note": "Nebius down 50%; Leopold Ashenbrenner owned 5% of Nebius."
+    },
+    {
+     "episode_id": "h7Rit9dS-KI",
+     "episode_title": "LIVE: SpaceX IPO!! War Is OVER... Elon Is A TRILLIONAIRE!? Touching Grass Is BACK...",
+     "start_seconds": 1926.0,
+     "timestamp": "32:06",
+     "deep_link": "https://www.youtube.com/watch?v=h7Rit9dS-KI&t=1926s",
+     "kind": "mention",
+     "note": "Listed as a long position."
+    },
+    {
+     "episode_id": "i2ArP1s0pOw",
+     "episode_title": "LIVE: Bitcoin\u2019s Over $81K! Crypto is HOT..?! Stocks are RIPPING & War is still going??",
+     "start_seconds": 8970.0,
+     "timestamp": "2:29:30",
+     "deep_link": "https://www.youtube.com/watch?v=i2ArP1s0pOw&t=8970s",
+     "kind": "analysis",
+     "note": "Chart discussed with a range held for half a year; a 25% move was caught from 136 before getting stopped out at 13-14% on a pullback."
+    },
+    {
+     "episode_id": "iO9lnSx2tac",
+     "episode_title": "MARKET OPEN: ChatGPT Just Escaped\u2026 Google Earnings Today! Is Crypto\u2019s Bull Market Here?",
+     "start_seconds": 4291.0,
+     "timestamp": "1:11:31",
+     "deep_link": "https://www.youtube.com/watch?v=iO9lnSx2tac&t=4291s",
+     "kind": "analysis",
+     "note": "Discussed as benefiting from shift in compute demand toward infrastructure layer; price noted at 223-224.5, up significantly."
+    },
+    {
+     "episode_id": "kgpIpp9rYU4",
+     "episode_title": "LIVE: Stock Market ATH! + AMIT INTERVIEW + Allbirds is an AI Company!?",
+     "start_seconds": 11182.0,
+     "timestamp": "3:06:22",
+     "deep_link": "https://www.youtube.com/watch?v=kgpIpp9rYU4&t=11182s",
+     "kind": "mention",
+     "note": "Speaker mentions Nebius is in the portfolio."
+    },
+    {
+     "episode_id": "mWsvUgJbS4o",
+     "episode_title": "MARKET OPEN: Will US Ban China AI? Clarity Act Incoming? Did stocks bottom?",
+     "start_seconds": 6422.0,
+     "timestamp": "1:47:02",
+     "deep_link": "https://www.youtube.com/watch?v=mWsvUgJbS4o&t=6422s",
+     "kind": "analysis",
+     "note": "Speaker suggests shorting Nebius because it cannot provide compute rental services to China due to restrictions."
+    },
+    {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 1630.0,
+     "timestamp": "27:10",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=1630s",
+     "kind": "analysis",
+     "note": "Speaker notes Lone Pine Capital holds a significant position in Nebius valued around 1-2 billion dollars, and mentions it is down 15% today."
+    },
+    {
+     "episode_id": "pWUa7CEpw-M",
+     "episode_title": "MARKET OPEN: Onchain BULL MARKET, The MEMORY TRADE is BACK, Anthropic S-1",
+     "start_seconds": 3984.0,
+     "timestamp": "1:06:24",
+     "deep_link": "https://www.youtube.com/watch?v=pWUa7CEpw-M&t=3984s",
+     "kind": "mention",
+     "note": "Mentioned as up five percent, with regret about not buying it."
+    },
+    {
+     "episode_id": "seP-cbLnSvU",
+     "episode_title": "MARKET OPEN: The AI Trade is FINISHED, PRIVACY is the ONLY WAY OUT, MIDTERMS UPDATE",
+     "start_seconds": 7938.0,
+     "timestamp": "2:12:18",
+     "deep_link": "https://www.youtube.com/watch?v=seP-cbLnSvU&t=7938s",
+     "kind": "analysis",
+     "note": "Down 20% in heavy selloff."
+    },
+    {
+     "episode_id": "t-l-LcoG8uA",
+     "episode_title": "MARKET OPEN: Unitree IPO, GTA VI LEAKS, Moderna CURING CANCER??",
+     "start_seconds": 4336.0,
+     "timestamp": "1:12:16",
+     "deep_link": "https://www.youtube.com/watch?v=t-l-LcoG8uA&t=4336s",
+     "kind": "analysis",
+     "note": "Nebius was noted as a short position with positive sentiment about the trade."
+    },
+    {
+     "episode_id": "tBnm4WwZn_Y",
+     "episode_title": "LIVE: Defi is DEAD. Stocks Are MEH. Meta is BACK!? Vance Dropping Out!?? | Interviewing Nic Carter",
+     "start_seconds": 9393.0,
+     "timestamp": "2:36:33",
+     "deep_link": "https://www.youtube.com/watch?v=tBnm4WwZn_Y&t=9393s",
+     "kind": "analysis",
+     "note": "Provides infrastructure to AI builders worldwide, offers Nebius AI and AI-centered cloud services, large-scale GPU centers, clusters, and developer tools; up 15 percent after hours and at an all-time high."
+    },
+    {
+     "episode_id": "xl5iN1U2yN4",
+     "episode_title": "MARKET OPEN: onchain is HOT, Korean Stocks CRASHING Still, Kevin Warsh was a Mistake...",
+     "start_seconds": 1210.0,
+     "timestamp": "20:10",
+     "deep_link": "https://www.youtube.com/watch?v=xl5iN1U2yN4&t=1210s",
+     "kind": "analysis",
+     "note": "Leopold's biggest holding with 5% ownership, down 50% on the chart discussed."
+    },
+    {
+     "episode_id": "yNeYiDI9C5w",
+     "episode_title": "MARKET OPEN: CLARITY ACT TODAY, Dario vs TRUMP vs the NEW COLD WAR, FOMC TOMORROW",
+     "start_seconds": 4134.0,
+     "timestamp": "1:08:54",
+     "deep_link": "https://www.youtube.com/watch?v=yNeYiDI9C5w&t=4134s",
+     "kind": "analysis",
+     "note": "Nebius is up 1.5%."
+    },
+    {
+     "episode_id": "zJALUEwRrWo",
+     "episode_title": "MARKET OPEN: PumpFun Revenue is SURGING, NBIS CRUSHES Earnings, CPI TODAY",
+     "start_seconds": 4322.0,
+     "timestamp": "1:12:02",
+     "deep_link": "https://www.youtube.com/watch?v=zJALUEwRrWo&t=4322s",
+     "kind": "analysis",
+     "note": "Speaker discussed the chart and indicated they would buy it at a certain level but have a pattern of buying after 30% moves."
+    }
+   ],
+   "episode_count": 27,
+   "single_reference": false
+  },
+  {
    "symbol": "ELIZA",
    "name": "ELIZA",
    "asset_class": "crypto",
@@ -161352,269 +161768,6 @@
     }
    ],
    "episode_count": 14,
-   "single_reference": false
-  },
-  {
-   "symbol": "NBIS",
-   "name": "Nebius",
-   "asset_class": "stock",
-   "mentions": 28,
-   "analysis": 14,
-   "moments": [
-    {
-     "episode_id": "-uarB5g12aY",
-     "episode_title": "MARKET OPEN: Russian PLAGUE OUTBREAK, I BOUGHT ZCASH BACK, Michael Burry vs the BULL MARKET",
-     "start_seconds": 8815.0,
-     "timestamp": "2:26:55",
-     "deep_link": "https://www.youtube.com/watch?v=-uarB5g12aY&t=8815s",
-     "kind": "mention",
-     "note": "Nebius noted as biggest gainer on consumer SaaS side."
-    },
-    {
-     "episode_id": "0yg1kc_WEUs",
-     "episode_title": "Flood - Inside the Biggest AI Fund Blowup Ever",
-     "start_seconds": 982.0,
-     "timestamp": "16:22",
-     "deep_link": "https://www.youtube.com/watch?v=0yg1kc_WEUs&t=982s",
-     "kind": "analysis",
-     "note": "Leopold held Nebius as one of the positions that was bouncing alongside Bloom and Sandisk."
-    },
-    {
-     "episode_id": "2oMv5OFqRCg",
-     "episode_title": "MARKET OPEN: Memory stocks are back. ChatGPT bottomed the market. Robinhood chain & Crypto.",
-     "start_seconds": 8884.0,
-     "timestamp": "2:28:04",
-     "deep_link": "https://www.youtube.com/watch?v=2oMv5OFqRCg&t=8884s",
-     "kind": "mention",
-     "note": "Speaker notes Nebius up 18% and identifies it as a former Bitcoin miner turned AI compute company."
-    },
-    {
-     "episode_id": "64dorl6n2V4",
-     "episode_title": "Ejaaz: EXPOSING The AI Bubble, Sam Altman, Nvidia vs Google and More | TG Podcast",
-     "start_seconds": 664.0,
-     "timestamp": "11:04",
-     "deep_link": "https://www.youtube.com/watch?v=64dorl6n2V4&t=664s",
-     "kind": "analysis",
-     "note": "Speaker discusses Nebius as an AI cloud provider that re-signed 10,000 to 30,000 five-year-old GPUs two quarters ahead of time, demonstrating strong demand for compute capacity."
-    },
-    {
-     "episode_id": "CmJiQ8vp1xo",
-     "episode_title": "MARKET OPEN: The LEOPOLD INDEX is RIPPING, PumpFun Keeps CLIMBING, Everyone is LEAVING Anthropic",
-     "start_seconds": 2833.0,
-     "timestamp": "47:13",
-     "deep_link": "https://www.youtube.com/watch?v=CmJiQ8vp1xo&t=2833s",
-     "kind": "analysis",
-     "note": "Nebius was Leopold Aschenbrenner's largest holding at 38% of his portfolio with 5% company ownership; he had an average buy price around 197 and was forced to sell; the stock rose 35% the day after he sold and is up 57% since his sale."
-    },
-    {
-     "episode_id": "CmJiQ8vp1xo",
-     "episode_title": "MARKET OPEN: The LEOPOLD INDEX is RIPPING, PumpFun Keeps CLIMBING, Everyone is LEAVING Anthropic",
-     "start_seconds": 2912.0,
-     "timestamp": "48:32",
-     "deep_link": "https://www.youtube.com/watch?v=CmJiQ8vp1xo&t=2912s",
-     "kind": "mention",
-     "note": "Referenced as a holding that was up significantly in value before being forced to be sold."
-    },
-    {
-     "episode_id": "CmJiQ8vp1xo",
-     "episode_title": "MARKET OPEN: The LEOPOLD INDEX is RIPPING, PumpFun Keeps CLIMBING, Everyone is LEAVING Anthropic",
-     "start_seconds": 8636.0,
-     "timestamp": "2:23:56",
-     "deep_link": "https://www.youtube.com/watch?v=CmJiQ8vp1xo&t=8636s",
-     "kind": "mention",
-     "note": "Speaker mentioned Nebius is up but has retraced a bunch."
-    },
-    {
-     "episode_id": "G4JBjXx5IMc",
-     "episode_title": "MARKET OPEN: Crypto Onchain is HOT, NVDA\u2019s $500B DEAL, Unitree IPO",
-     "start_seconds": 7052.0,
-     "timestamp": "1:57:32",
-     "deep_link": "https://www.youtube.com/watch?v=G4JBjXx5IMc&t=7052s",
-     "kind": "mention",
-     "note": "Nebius mentioned as losing value."
-    },
-    {
-     "episode_id": "JSKPV5Qp4ZA",
-     "episode_title": "LIVE: REACTING TO FOMC",
-     "start_seconds": 1880.0,
-     "timestamp": "31:20",
-     "deep_link": "https://www.youtube.com/watch?v=JSKPV5Qp4ZA&t=1880s",
-     "kind": "mention",
-     "note": "Noted as up 3% in response to Oracle's CapEx news."
-    },
-    {
-     "episode_id": "KkEohub0bw8",
-     "episode_title": "Amit Kukreja - How to BEAT the Stock Market..",
-     "start_seconds": 3142.0,
-     "timestamp": "52:22",
-     "deep_link": "https://www.youtube.com/watch?v=KkEohub0bw8&t=3142s",
-     "kind": "mention",
-     "note": "Speaker listed Nebius as part of portfolio holdings."
-    },
-    {
-     "episode_id": "NfVBxX1uULM",
-     "episode_title": "Eli Lilly Goes To War, the End of Healthmaxxing, and Social Trading",
-     "start_seconds": 724.0,
-     "timestamp": "12:04",
-     "deep_link": "https://www.youtube.com/watch?v=NfVBxX1uULM&t=724s",
-     "kind": "analysis",
-     "note": "Leopold Aschenbrenner's largest holding at 38% of portfolio with 5% company ownership; sold at average buy price around $197 with actual sale price discussed; stock up 35% the day after forced sale, then up 57% in following weeks."
-    },
-    {
-     "episode_id": "RBJyIBbu_gY",
-     "episode_title": "MARKET OPEN: Memecoins Are BACK. Google's HUGE CapEx Bet. TSLA/SPCX in TROUBLE...",
-     "start_seconds": 4191.0,
-     "timestamp": "1:09:51",
-     "deep_link": "https://www.youtube.com/watch?v=RBJyIBbu_gY&t=4191s",
-     "kind": "mention",
-     "note": "Speaker mentions being long on Nebius."
-    },
-    {
-     "episode_id": "UjwkzYYvFvI",
-     "episode_title": "Memecoin Stocks Short Squeeze, Robinhood is Unstoppable, and How AJC Made $2mil",
-     "start_seconds": 897.0,
-     "timestamp": "14:57",
-     "deep_link": "https://www.youtube.com/watch?v=UjwkzYYvFvI&t=897s",
-     "kind": "mention",
-     "note": "Referenced as a $50 billion company in a hypothetical example about owning 5% and shilling it."
-    },
-    {
-     "episode_id": "Z8PbXmkpyPI",
-     "episode_title": "MARKET OPEN: Robinhood Chain is ON FIRE, WAR & RATE HIKES, BITCOIN is in TROUBLE",
-     "start_seconds": 2069.0,
-     "timestamp": "34:29",
-     "deep_link": "https://www.youtube.com/watch?v=Z8PbXmkpyPI&t=2069s",
-     "kind": "mention",
-     "note": "Referenced as a $50 billion company example in discussion of shilling positions at different market caps."
-    },
-    {
-     "episode_id": "al1M7HzuL_k",
-     "episode_title": "MARKET OPEN: Crypto REFUSES to Die... The Memory Trade is Back. AI Took Over Runescape..!?",
-     "start_seconds": 7442.0,
-     "timestamp": "2:04:02",
-     "deep_link": "https://www.youtube.com/watch?v=al1M7HzuL_k&t=7442s",
-     "kind": "mention",
-     "note": "Leopold Ashenbrenner held 6% of portfolio."
-    },
-    {
-     "episode_id": "gRFE903_eGQ",
-     "episode_title": "LEOPOLD LIQUIDATED LIVE: Ken Griffin is The Grim Reaper, Uniswap V4 Hooks, and a Postmortem",
-     "start_seconds": 317.0,
-     "timestamp": "5:17",
-     "deep_link": "https://www.youtube.com/watch?v=gRFE903_eGQ&t=317s",
-     "kind": "analysis",
-     "note": "Nebius down 50%; Leopold Ashenbrenner owned 5% of Nebius."
-    },
-    {
-     "episode_id": "h7Rit9dS-KI",
-     "episode_title": "LIVE: SpaceX IPO!! War Is OVER... Elon Is A TRILLIONAIRE!? Touching Grass Is BACK...",
-     "start_seconds": 1926.0,
-     "timestamp": "32:06",
-     "deep_link": "https://www.youtube.com/watch?v=h7Rit9dS-KI&t=1926s",
-     "kind": "mention",
-     "note": "Listed as a long position."
-    },
-    {
-     "episode_id": "i2ArP1s0pOw",
-     "episode_title": "LIVE: Bitcoin\u2019s Over $81K! Crypto is HOT..?! Stocks are RIPPING & War is still going??",
-     "start_seconds": 8970.0,
-     "timestamp": "2:29:30",
-     "deep_link": "https://www.youtube.com/watch?v=i2ArP1s0pOw&t=8970s",
-     "kind": "analysis",
-     "note": "Chart discussed with a range held for half a year; a 25% move was caught from 136 before getting stopped out at 13-14% on a pullback."
-    },
-    {
-     "episode_id": "iO9lnSx2tac",
-     "episode_title": "MARKET OPEN: ChatGPT Just Escaped\u2026 Google Earnings Today! Is Crypto\u2019s Bull Market Here?",
-     "start_seconds": 4291.0,
-     "timestamp": "1:11:31",
-     "deep_link": "https://www.youtube.com/watch?v=iO9lnSx2tac&t=4291s",
-     "kind": "analysis",
-     "note": "Discussed as benefiting from shift in compute demand toward infrastructure layer; price noted at 223-224.5, up significantly."
-    },
-    {
-     "episode_id": "kgpIpp9rYU4",
-     "episode_title": "LIVE: Stock Market ATH! + AMIT INTERVIEW + Allbirds is an AI Company!?",
-     "start_seconds": 11182.0,
-     "timestamp": "3:06:22",
-     "deep_link": "https://www.youtube.com/watch?v=kgpIpp9rYU4&t=11182s",
-     "kind": "mention",
-     "note": "Speaker mentions Nebius is in the portfolio."
-    },
-    {
-     "episode_id": "mWsvUgJbS4o",
-     "episode_title": "MARKET OPEN: Will US Ban China AI? Clarity Act Incoming? Did stocks bottom?",
-     "start_seconds": 6422.0,
-     "timestamp": "1:47:02",
-     "deep_link": "https://www.youtube.com/watch?v=mWsvUgJbS4o&t=6422s",
-     "kind": "analysis",
-     "note": "Speaker suggests shorting Nebius because it cannot provide compute rental services to China due to restrictions."
-    },
-    {
-     "episode_id": "pWUa7CEpw-M",
-     "episode_title": "MARKET OPEN: Onchain BULL MARKET, The MEMORY TRADE is BACK, Anthropic S-1",
-     "start_seconds": 3984.0,
-     "timestamp": "1:06:24",
-     "deep_link": "https://www.youtube.com/watch?v=pWUa7CEpw-M&t=3984s",
-     "kind": "mention",
-     "note": "Mentioned as up five percent, with regret about not buying it."
-    },
-    {
-     "episode_id": "seP-cbLnSvU",
-     "episode_title": "MARKET OPEN: The AI Trade is FINISHED, PRIVACY is the ONLY WAY OUT, MIDTERMS UPDATE",
-     "start_seconds": 7938.0,
-     "timestamp": "2:12:18",
-     "deep_link": "https://www.youtube.com/watch?v=seP-cbLnSvU&t=7938s",
-     "kind": "analysis",
-     "note": "Down 20% in heavy selloff."
-    },
-    {
-     "episode_id": "t-l-LcoG8uA",
-     "episode_title": "MARKET OPEN: Unitree IPO, GTA VI LEAKS, Moderna CURING CANCER??",
-     "start_seconds": 4336.0,
-     "timestamp": "1:12:16",
-     "deep_link": "https://www.youtube.com/watch?v=t-l-LcoG8uA&t=4336s",
-     "kind": "analysis",
-     "note": "Nebius was noted as a short position with positive sentiment about the trade."
-    },
-    {
-     "episode_id": "tBnm4WwZn_Y",
-     "episode_title": "LIVE: Defi is DEAD. Stocks Are MEH. Meta is BACK!? Vance Dropping Out!?? | Interviewing Nic Carter",
-     "start_seconds": 9393.0,
-     "timestamp": "2:36:33",
-     "deep_link": "https://www.youtube.com/watch?v=tBnm4WwZn_Y&t=9393s",
-     "kind": "analysis",
-     "note": "Provides infrastructure to AI builders worldwide, offers Nebius AI and AI-centered cloud services, large-scale GPU centers, clusters, and developer tools; up 15 percent after hours and at an all-time high."
-    },
-    {
-     "episode_id": "xl5iN1U2yN4",
-     "episode_title": "MARKET OPEN: onchain is HOT, Korean Stocks CRASHING Still, Kevin Warsh was a Mistake...",
-     "start_seconds": 1210.0,
-     "timestamp": "20:10",
-     "deep_link": "https://www.youtube.com/watch?v=xl5iN1U2yN4&t=1210s",
-     "kind": "analysis",
-     "note": "Leopold's biggest holding with 5% ownership, down 50% on the chart discussed."
-    },
-    {
-     "episode_id": "yNeYiDI9C5w",
-     "episode_title": "MARKET OPEN: CLARITY ACT TODAY, Dario vs TRUMP vs the NEW COLD WAR, FOMC TOMORROW",
-     "start_seconds": 4134.0,
-     "timestamp": "1:08:54",
-     "deep_link": "https://www.youtube.com/watch?v=yNeYiDI9C5w&t=4134s",
-     "kind": "analysis",
-     "note": "Nebius is up 1.5%."
-    },
-    {
-     "episode_id": "zJALUEwRrWo",
-     "episode_title": "MARKET OPEN: PumpFun Revenue is SURGING, NBIS CRUSHES Earnings, CPI TODAY",
-     "start_seconds": 4322.0,
-     "timestamp": "1:12:02",
-     "deep_link": "https://www.youtube.com/watch?v=zJALUEwRrWo&t=4322s",
-     "kind": "analysis",
-     "note": "Speaker discussed the chart and indicated they would buy it at a certain level but have a pattern of buying after 30% moves."
-    }
-   ],
-   "episode_count": 26,
    "single_reference": false
   },
   {
@@ -164782,7 +164935,7 @@
    "symbol": "SSNLF",
    "name": "SK Hynix",
    "asset_class": "stock",
-   "mentions": 25,
+   "mentions": 26,
    "analysis": 12,
    "moments": [
     {
@@ -165002,6 +165155,15 @@
      "note": "Samsung mentioned as one of the Korean stocks experiencing massive gains, expected to earn their entire market cap in three to five years."
     },
     {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 506.0,
+     "timestamp": "8:26",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=506s",
+     "kind": "mention",
+     "note": "Named as a major component of the South Korean index, comprising a significant percentage alongside SK Hynix."
+    },
+    {
      "episode_id": "tvh4AcdvYgA",
      "episode_title": "LIVE: Cerebras IPO! HIMS Earnings Reveal!!! - David Hoffman Interview TODAY...",
      "start_seconds": 3787.0,
@@ -165011,7 +165173,7 @@
      "note": "Speaker describes Samsung Electronics as behaving in a remarkably similar manner to its 2000 behavior, noting it was the number two position in speaker's fund a year ago and is up almost 4x in the last year."
     }
    ],
-   "episode_count": 21,
+   "episode_count": 22,
    "single_reference": false
   },
   {
@@ -170180,7 +170342,7 @@
    "symbol": "ASML",
    "name": "ASML",
    "asset_class": "stock",
-   "mentions": 25,
+   "mentions": 26,
    "analysis": 9,
    "moments": [
     {
@@ -170400,6 +170562,15 @@
      "note": "Leopold Aschenbrenner sold out of ASML."
     },
     {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 1630.0,
+     "timestamp": "27:10",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=1630s",
+     "kind": "mention",
+     "note": "Named as part of Lone Pine Capital's holdings."
+    },
+    {
      "episode_id": "xFNpcQjcuVE",
      "episode_title": "LIVE: Hyperliquid Is LEGAL!!! SAAS is BACK... Stocks Are RIPPINGGGG!!!!!!! Trump RUGGED War..!?",
      "start_seconds": 3484.0,
@@ -170409,7 +170580,7 @@
      "note": "Up a percent."
     }
    ],
-   "episode_count": 22,
+   "episode_count": 23,
    "single_reference": false
   },
   {
@@ -172137,7 +172308,7 @@
    "symbol": "UST",
    "name": "Terra USD",
    "asset_class": "crypto",
-   "mentions": 10,
+   "mentions": 11,
    "analysis": 9,
    "moments": [
     {
@@ -172204,6 +172375,15 @@
      "note": "Speaker discussed how UST was being packaged and sold as a hedge fund, noting the bubble was obviously unsustainable and would break at some point."
     },
     {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 2702.0,
+     "timestamp": "45:02",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=2702s",
+     "kind": "mention",
+     "note": "UST mentioned as an algorithmic stablecoin example of a failed confidence game."
+    },
+    {
      "episode_id": "pAO7oihWzX4",
      "episode_title": "LIVE: Bitcoin To ZERO!!! Quantum IPO Is CRAZY! Can Trump Save Us?! SpaceX! AAAAAAA",
      "start_seconds": 2087.0,
@@ -172231,7 +172411,7 @@
      "note": "Discussed in context of potential policy changes and capital flow dynamics; speakers discuss yields going down and bonds being bought forcefully."
     }
    ],
-   "episode_count": 9,
+   "episode_count": 10,
    "single_reference": false
   },
   {
@@ -175460,7 +175640,7 @@
    "symbol": "CVNA",
    "name": "Carvana",
    "asset_class": "stock",
-   "mentions": 20,
+   "mentions": 21,
    "analysis": 7,
    "moments": [
     {
@@ -175590,6 +175770,15 @@
      "note": "Speaker mentioned shorting one share of Carvana."
     },
     {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 1630.0,
+     "timestamp": "27:10",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=1630s",
+     "kind": "mention",
+     "note": "Named as part of Lone Pine Capital's holdings."
+    },
+    {
      "episode_id": "sPwXxkImq7I",
      "episode_title": "The Chinese Semiconductor Moment, Onchain Spots, and Celebrity Traders",
      "start_seconds": 778.0,
@@ -175644,7 +175833,7 @@
      "note": "Speaker noted Carvana up three percent."
     }
    ],
-   "episode_count": 18,
+   "episode_count": 19,
    "single_reference": false
   },
   {
@@ -185041,6 +185230,107 @@
    "single_reference": false
   },
   {
+   "symbol": "NEBU",
+   "name": "Nebius",
+   "asset_class": "stock",
+   "mentions": 10,
+   "analysis": 4,
+   "moments": [
+    {
+     "episode_id": "5su0qkG5ye0",
+     "episode_title": "LIVE: Jensen Is PUMPING All Over!!! Trump Wants To END The War!? Trading NBA Finals, World Cup, F1..",
+     "start_seconds": 7059.0,
+     "timestamp": "1:57:39",
+     "deep_link": "https://www.youtube.com/watch?v=5su0qkG5ye0&t=7059s",
+     "kind": "analysis",
+     "note": "Leopold Aschenbrenner believed to own approximately 5% stake; described as having been an unbelievable trade despite recent small declines."
+    },
+    {
+     "episode_id": "8ePuL0cxNnA",
+     "episode_title": "MARKET OPEN: AI DOOM, Stocks are PANICKING, Dario Has LOST IT, Crypto CLARITY Coming Soon",
+     "start_seconds": 3929.0,
+     "timestamp": "1:05:29",
+     "deep_link": "https://www.youtube.com/watch?v=8ePuL0cxNnA&t=3929s",
+     "kind": "mention",
+     "note": "Nebius mentioned; up 1.3% on the day."
+    },
+    {
+     "episode_id": "G4JBjXx5IMc",
+     "episode_title": "MARKET OPEN: Crypto Onchain is HOT, NVDA\u2019s $500B DEAL, Unitree IPO",
+     "start_seconds": 5645.0,
+     "timestamp": "1:34:05",
+     "deep_link": "https://www.youtube.com/watch?v=G4JBjXx5IMc&t=5645s",
+     "kind": "analysis",
+     "note": "Discussed as a major gainer and beneficiary of data center compute financing; speaker took a position this morning; earnings tomorrow."
+    },
+    {
+     "episode_id": "XnhxH4Y5dI8",
+     "episode_title": "LIVE: Stocks ATH!! Saylor SOLD Bitcoin..!? Anthropic IPO Is Here!!!! HYPE to $100!?",
+     "start_seconds": 3539.0,
+     "timestamp": "58:59",
+     "deep_link": "https://www.youtube.com/watch?v=XnhxH4Y5dI8&t=3539s",
+     "kind": "analysis",
+     "note": "Biggest gainer up 15%; Leopold Ashenbrenner owns five percent of the company; noted as being up consistently."
+    },
+    {
+     "episode_id": "YA-Qb3r1O-g",
+     "episode_title": "Everything is a Memecoin Now, Base Drama Recap, and PumpFun is Here to Stay",
+     "start_seconds": 1406.0,
+     "timestamp": "23:26",
+     "deep_link": "https://www.youtube.com/watch?v=YA-Qb3r1O-g&t=1406s",
+     "kind": "mention",
+     "note": "Down five."
+    },
+    {
+     "episode_id": "iO9lnSx2tac",
+     "episode_title": "MARKET OPEN: ChatGPT Just Escaped\u2026 Google Earnings Today! Is Crypto\u2019s Bull Market Here?",
+     "start_seconds": 1475.0,
+     "timestamp": "24:35",
+     "deep_link": "https://www.youtube.com/watch?v=iO9lnSx2tac&t=1475s",
+     "kind": "mention",
+     "note": "Speaker mentions that everybody needs Nebius as part of underlying compute infrastructure."
+    },
+    {
+     "episode_id": "kgpIpp9rYU4",
+     "episode_title": "LIVE: Stock Market ATH! + AMIT INTERVIEW + Allbirds is an AI Company!?",
+     "start_seconds": 12269.0,
+     "timestamp": "3:24:29",
+     "deep_link": "https://www.youtube.com/watch?v=kgpIpp9rYU4&t=12269s",
+     "kind": "mention",
+     "note": "Mentioned as a stock that Amit likes and has been discussed, with the speaker noting the chart looks unfavorable."
+    },
+    {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 764.0,
+     "timestamp": "12:44",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=764s",
+     "kind": "mention",
+     "note": "A chat participant mentioned getting 'smoked' on this position."
+    },
+    {
+     "episode_id": "seP-cbLnSvU",
+     "episode_title": "MARKET OPEN: The AI Trade is FINISHED, PRIVACY is the ONLY WAY OUT, MIDTERMS UPDATE",
+     "start_seconds": 3592.0,
+     "timestamp": "59:52",
+     "deep_link": "https://www.youtube.com/watch?v=seP-cbLnSvU&t=3592s",
+     "kind": "mention",
+     "note": "Nebius down 10%."
+    },
+    {
+     "episode_id": "zJALUEwRrWo",
+     "episode_title": "MARKET OPEN: PumpFun Revenue is SURGING, NBIS CRUSHES Earnings, CPI TODAY",
+     "start_seconds": 611.0,
+     "timestamp": "10:11",
+     "deep_link": "https://www.youtube.com/watch?v=zJALUEwRrWo&t=611s",
+     "kind": "analysis",
+     "note": "Nebius had earnings right before the stream and crushed them; a trader named Mando made a +200K trade on a long Nebius position."
+    }
+   ],
+   "episode_count": 10,
+   "single_reference": false
+  },
+  {
    "symbol": "JTO",
    "name": "Jito",
    "asset_class": "crypto",
@@ -185516,98 +185806,6 @@
     }
    ],
    "episode_count": 7,
-   "single_reference": false
-  },
-  {
-   "symbol": "NEBU",
-   "name": "Nebius",
-   "asset_class": "stock",
-   "mentions": 9,
-   "analysis": 4,
-   "moments": [
-    {
-     "episode_id": "5su0qkG5ye0",
-     "episode_title": "LIVE: Jensen Is PUMPING All Over!!! Trump Wants To END The War!? Trading NBA Finals, World Cup, F1..",
-     "start_seconds": 7059.0,
-     "timestamp": "1:57:39",
-     "deep_link": "https://www.youtube.com/watch?v=5su0qkG5ye0&t=7059s",
-     "kind": "analysis",
-     "note": "Leopold Aschenbrenner believed to own approximately 5% stake; described as having been an unbelievable trade despite recent small declines."
-    },
-    {
-     "episode_id": "8ePuL0cxNnA",
-     "episode_title": "MARKET OPEN: AI DOOM, Stocks are PANICKING, Dario Has LOST IT, Crypto CLARITY Coming Soon",
-     "start_seconds": 3929.0,
-     "timestamp": "1:05:29",
-     "deep_link": "https://www.youtube.com/watch?v=8ePuL0cxNnA&t=3929s",
-     "kind": "mention",
-     "note": "Nebius mentioned; up 1.3% on the day."
-    },
-    {
-     "episode_id": "G4JBjXx5IMc",
-     "episode_title": "MARKET OPEN: Crypto Onchain is HOT, NVDA\u2019s $500B DEAL, Unitree IPO",
-     "start_seconds": 5645.0,
-     "timestamp": "1:34:05",
-     "deep_link": "https://www.youtube.com/watch?v=G4JBjXx5IMc&t=5645s",
-     "kind": "analysis",
-     "note": "Discussed as a major gainer and beneficiary of data center compute financing; speaker took a position this morning; earnings tomorrow."
-    },
-    {
-     "episode_id": "XnhxH4Y5dI8",
-     "episode_title": "LIVE: Stocks ATH!! Saylor SOLD Bitcoin..!? Anthropic IPO Is Here!!!! HYPE to $100!?",
-     "start_seconds": 3539.0,
-     "timestamp": "58:59",
-     "deep_link": "https://www.youtube.com/watch?v=XnhxH4Y5dI8&t=3539s",
-     "kind": "analysis",
-     "note": "Biggest gainer up 15%; Leopold Ashenbrenner owns five percent of the company; noted as being up consistently."
-    },
-    {
-     "episode_id": "YA-Qb3r1O-g",
-     "episode_title": "Everything is a Memecoin Now, Base Drama Recap, and PumpFun is Here to Stay",
-     "start_seconds": 1406.0,
-     "timestamp": "23:26",
-     "deep_link": "https://www.youtube.com/watch?v=YA-Qb3r1O-g&t=1406s",
-     "kind": "mention",
-     "note": "Down five."
-    },
-    {
-     "episode_id": "iO9lnSx2tac",
-     "episode_title": "MARKET OPEN: ChatGPT Just Escaped\u2026 Google Earnings Today! Is Crypto\u2019s Bull Market Here?",
-     "start_seconds": 1475.0,
-     "timestamp": "24:35",
-     "deep_link": "https://www.youtube.com/watch?v=iO9lnSx2tac&t=1475s",
-     "kind": "mention",
-     "note": "Speaker mentions that everybody needs Nebius as part of underlying compute infrastructure."
-    },
-    {
-     "episode_id": "kgpIpp9rYU4",
-     "episode_title": "LIVE: Stock Market ATH! + AMIT INTERVIEW + Allbirds is an AI Company!?",
-     "start_seconds": 12269.0,
-     "timestamp": "3:24:29",
-     "deep_link": "https://www.youtube.com/watch?v=kgpIpp9rYU4&t=12269s",
-     "kind": "mention",
-     "note": "Mentioned as a stock that Amit likes and has been discussed, with the speaker noting the chart looks unfavorable."
-    },
-    {
-     "episode_id": "seP-cbLnSvU",
-     "episode_title": "MARKET OPEN: The AI Trade is FINISHED, PRIVACY is the ONLY WAY OUT, MIDTERMS UPDATE",
-     "start_seconds": 3592.0,
-     "timestamp": "59:52",
-     "deep_link": "https://www.youtube.com/watch?v=seP-cbLnSvU&t=3592s",
-     "kind": "mention",
-     "note": "Nebius down 10%."
-    },
-    {
-     "episode_id": "zJALUEwRrWo",
-     "episode_title": "MARKET OPEN: PumpFun Revenue is SURGING, NBIS CRUSHES Earnings, CPI TODAY",
-     "start_seconds": 611.0,
-     "timestamp": "10:11",
-     "deep_link": "https://www.youtube.com/watch?v=zJALUEwRrWo&t=611s",
-     "kind": "analysis",
-     "note": "Nebius had earnings right before the stream and crushed them; a trader named Mando made a +200K trade on a long Nebius position."
-    }
-   ],
-   "episode_count": 9,
    "single_reference": false
   },
   {
@@ -188041,7 +188239,7 @@
    "symbol": "FTT",
    "name": "FTX Token",
    "asset_class": "crypto",
-   "mentions": 14,
+   "mentions": 15,
    "analysis": 3,
    "moments": [
     {
@@ -188135,6 +188333,15 @@
      "note": "Speakers discussed creating a 'derug' joke for FTT holders after FTX crashed, noting that a snapshot was already taken and warning people not to buy the token expecting to receive anything."
     },
     {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 2702.0,
+     "timestamp": "45:02",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=2702s",
+     "kind": "mention",
+     "note": "FTT referenced as example of a confidence game where it was bid at $22."
+    },
+    {
      "episode_id": "rXJ2IfbP4y4",
      "episode_title": "The Economy is COOKED.. [Stream Recap]",
      "start_seconds": 1258.0,
@@ -188171,7 +188378,7 @@
      "note": "FTT mentioned in context of Ken Griffin purchasing all FTT at $22 during a hypothetical scenario involving Leopold's liquidations."
     }
    ],
-   "episode_count": 12,
+   "episode_count": 13,
    "single_reference": false
   },
   {
@@ -199812,6 +200019,35 @@
    "single_reference": false
   },
   {
+   "symbol": "VAR",
+   "name": "Variational",
+   "asset_class": "crypto",
+   "mentions": 2,
+   "analysis": 2,
+   "moments": [
+    {
+     "episode_id": "QAFaJP0b4xA",
+     "episode_title": "MARKET OPEN: The FAILED AI EXPERIMENT, Meta Goes DIRECT, Crypto is ALL WE HAVE LEFT",
+     "start_seconds": 7259.0,
+     "timestamp": "2:00:59",
+     "deep_link": "https://www.youtube.com/watch?v=QAFaJP0b4xA&t=7259s",
+     "kind": "analysis",
+     "note": "Variational announced tokenomics with TGE set for Q4 2026, Genesis airdrop of 32%, and points-based distribution to traders."
+    },
+    {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 1428.0,
+     "timestamp": "23:48",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=1428s",
+     "kind": "analysis",
+     "note": "Hedge fund Vara plunged 33% in October for AI stocks; lost 33% in October but was still up 13% year-to-date by end of month."
+    }
+   ],
+   "episode_count": 2,
+   "single_reference": false
+  },
+  {
    "symbol": "MO",
    "name": "Altria",
    "asset_class": "stock",
@@ -204554,6 +204790,35 @@
    "single_reference": false
   },
   {
+   "symbol": "KR200",
+   "name": "KOSPI 200",
+   "asset_class": "index",
+   "mentions": 2,
+   "analysis": 1,
+   "moments": [
+    {
+     "episode_id": "AnZoDRy4RUk",
+     "episode_title": "MARKET OPEN: Crypto BULL MARKET is RAGING, Bessent\u2019s $1T INTERVENTION, MEMORY TRADE is OVER",
+     "start_seconds": 4426.0,
+     "timestamp": "1:13:46",
+     "deep_link": "https://www.youtube.com/watch?v=AnZoDRy4RUk&t=4426s",
+     "kind": "mention",
+     "note": "Referenced as an index being discussed; speakers note that Koreans are going to have a bad week."
+    },
+    {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 419.0,
+     "timestamp": "6:59",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=419s",
+     "kind": "analysis",
+     "note": "Discussed as the Korea index; identified as comprised primarily of Samsung and SK Hynix (approximately 80% of the index); speakers noted significant recent volatility and price action over the higher timeframe."
+    }
+   ],
+   "episode_count": 2,
+   "single_reference": false
+  },
+  {
    "symbol": "ARKG",
    "name": "ARK Genomics Index",
    "asset_class": "index",
@@ -206520,6 +206785,35 @@
      "deep_link": "https://www.youtube.com/watch?v=t-l-LcoG8uA&t=5449s",
      "kind": "mention",
      "note": "Speaker mentions using HLF as collateral but does not develop a thesis on the asset itself."
+    }
+   ],
+   "episode_count": 2,
+   "single_reference": false
+  },
+  {
+   "symbol": "SGT",
+   "name": "Seagate",
+   "asset_class": "stock",
+   "mentions": 2,
+   "analysis": 1,
+   "moments": [
+    {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 1630.0,
+     "timestamp": "27:10",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=1630s",
+     "kind": "mention",
+     "note": "Named as part of Lone Pine Capital's holdings."
+    },
+    {
+     "episode_id": "qdNT1PbcWcI",
+     "episode_title": "MARKET OPEN: Will STOCKS finally recover? The KOSPI is LIMIT DOWN again. FOMC today. What is PipeDog",
+     "start_seconds": 3802.0,
+     "timestamp": "1:03:22",
+     "deep_link": "https://www.youtube.com/watch?v=qdNT1PbcWcI&t=3802s",
+     "kind": "analysis",
+     "note": "Chip stock showing positive reaction to earnings unlike other chip names, with strong guidance and commercial business performance."
     }
    ],
    "episode_count": 2,
@@ -211100,26 +211394,6 @@
    "single_reference": true
   },
   {
-   "symbol": "VAR",
-   "name": "Variational",
-   "asset_class": "crypto",
-   "mentions": 1,
-   "analysis": 1,
-   "moments": [
-    {
-     "episode_id": "QAFaJP0b4xA",
-     "episode_title": "MARKET OPEN: The FAILED AI EXPERIMENT, Meta Goes DIRECT, Crypto is ALL WE HAVE LEFT",
-     "start_seconds": 7259.0,
-     "timestamp": "2:00:59",
-     "deep_link": "https://www.youtube.com/watch?v=QAFaJP0b4xA&t=7259s",
-     "kind": "analysis",
-     "note": "Variational announced tokenomics with TGE set for Q4 2026, Genesis airdrop of 32%, and points-based distribution to traders."
-    }
-   ],
-   "episode_count": 1,
-   "single_reference": true
-  },
-  {
    "symbol": "STEEL",
    "name": "Steel",
    "asset_class": "commodity",
@@ -215660,26 +215934,6 @@
    "single_reference": true
   },
   {
-   "symbol": "SGT",
-   "name": "Seagate",
-   "asset_class": "stock",
-   "mentions": 1,
-   "analysis": 1,
-   "moments": [
-    {
-     "episode_id": "qdNT1PbcWcI",
-     "episode_title": "MARKET OPEN: Will STOCKS finally recover? The KOSPI is LIMIT DOWN again. FOMC today. What is PipeDog",
-     "start_seconds": 3802.0,
-     "timestamp": "1:03:22",
-     "deep_link": "https://www.youtube.com/watch?v=qdNT1PbcWcI&t=3802s",
-     "kind": "analysis",
-     "note": "Chip stock showing positive reaction to earnings unlike other chip names, with strong guidance and commercial business performance."
-    }
-   ],
-   "episode_count": 1,
-   "single_reference": true
-  },
-  {
    "symbol": "FRSH",
    "name": "Affirm (Firm)",
    "asset_class": "stock",
@@ -218637,6 +218891,44 @@
    "single_reference": false
   },
   {
+   "symbol": "HD",
+   "name": "Home Depot",
+   "asset_class": "stock",
+   "mentions": 3,
+   "analysis": 0,
+   "moments": [
+    {
+     "episode_id": "OwGrgbAL1XQ",
+     "episode_title": "How To Make $1,000,000 If The World Is Ending",
+     "start_seconds": 905.0,
+     "timestamp": "15:05",
+     "deep_link": "https://www.youtube.com/watch?v=OwGrgbAL1XQ&t=905s",
+     "kind": "mention",
+     "note": "Mentioned as a potential long position following a California mega earthquake scenario."
+    },
+    {
+     "episode_id": "QNtYdSvvcz4",
+     "episode_title": "LIVE: Stocks UP, Crypto DOWN! How To Trade Every BLACK SWAN Event... Everyone Is Getting RICH?",
+     "start_seconds": 6794.0,
+     "timestamp": "1:53:14",
+     "deep_link": "https://www.youtube.com/watch?v=QNtYdSvvcz4&t=6794s",
+     "kind": "mention",
+     "note": "Speaker discusses Home Depot as a potential beneficiary in reconstruction following a California mega-earthquake."
+    },
+    {
+     "episode_id": "p3l6WLQin7A",
+     "episode_title": "KOSPI AND KOREA MARKET CRASH: EMERGENCY STREAM",
+     "start_seconds": 1630.0,
+     "timestamp": "27:10",
+     "deep_link": "https://www.youtube.com/watch?v=p3l6WLQin7A&t=1630s",
+     "kind": "mention",
+     "note": "Named as part of Lone Pine Capital's holdings."
+    }
+   ],
+   "episode_count": 3,
+   "single_reference": false
+  },
+  {
    "symbol": "PENDLE",
    "name": "Pendle",
    "asset_class": "crypto",
@@ -220175,35 +220467,6 @@
      "deep_link": "https://www.youtube.com/watch?v=rXJ2IfbP4y4&t=2174s",
      "kind": "mention",
      "note": "Hut8 is the mining partner for American Bitcoin, founded in Canada."
-    }
-   ],
-   "episode_count": 2,
-   "single_reference": false
-  },
-  {
-   "symbol": "HD",
-   "name": "Home Depot",
-   "asset_class": "stock",
-   "mentions": 2,
-   "analysis": 0,
-   "moments": [
-    {
-     "episode_id": "OwGrgbAL1XQ",
-     "episode_title": "How To Make $1,000,000 If The World Is Ending",
-     "start_seconds": 905.0,
-     "timestamp": "15:05",
-     "deep_link": "https://www.youtube.com/watch?v=OwGrgbAL1XQ&t=905s",
-     "kind": "mention",
-     "note": "Mentioned as a potential long position following a California mega earthquake scenario."
-    },
-    {
-     "episode_id": "QNtYdSvvcz4",
-     "episode_title": "LIVE: Stocks UP, Crypto DOWN! How To Trade Every BLACK SWAN Event... Everyone Is Getting RICH?",
-     "start_seconds": 6794.0,
-     "timestamp": "1:53:14",
-     "deep_link": "https://www.youtube.com/watch?v=QNtYdSvvcz4&t=6794s",
-     "kind": "mention",
-     "note": "Speaker discusses Home Depot as a potential beneficiary in reconstruction following a California mega-earthquake."
     }
    ],
    "episode_count": 2,
@@ -223113,26 +223376,6 @@
      "deep_link": "https://www.youtube.com/watch?v=AnZoDRy4RUk&t=3915s",
      "kind": "mention",
      "note": "Cardano (card) at 77."
-    }
-   ],
-   "episode_count": 1,
-   "single_reference": true
-  },
-  {
-   "symbol": "KR200",
-   "name": "KOSPI 200",
-   "asset_class": "index",
-   "mentions": 1,
-   "analysis": 0,
-   "moments": [
-    {
-     "episode_id": "AnZoDRy4RUk",
-     "episode_title": "MARKET OPEN: Crypto BULL MARKET is RAGING, Bessent\u2019s $1T INTERVENTION, MEMORY TRADE is OVER",
-     "start_seconds": 4426.0,
-     "timestamp": "1:13:46",
-     "deep_link": "https://www.youtube.com/watch?v=AnZoDRy4RUk&t=4426s",
-     "kind": "mention",
-     "note": "Referenced as an index being discussed; speakers note that Koreans are going to have a bad week."
     }
    ],
    "episode_count": 1,
@@ -231419,10 +231662,10 @@
    "single_reference": true
   }
  ],
- "total_hits": 23408,
- "dropped_low_confidence": 1805,
+ "total_hits": 23435,
+ "dropped_low_confidence": 1806,
  "dropped_not_an_asset": 1391,
- "episodes_processed": 649,
+ "episodes_processed": 650,
  "episode_ids": [
   "-A0rmPYG0s0",
   "-CYcuGbAnpI",
@@ -231945,6 +232188,7 @@
   "oSFVhGBs7qw",
   "otzUJFfC2Lo",
   "p38LjZJ1xWw",
+  "p3l6WLQin7A",
   "pAO7oihWzX4",
   "pDUwR75CG6s",
   "pEPTBDpqPvk",

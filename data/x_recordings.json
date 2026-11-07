@@ -1,5 +1,5 @@
 {
- "newest": "2118641196163797264",
+ "newest": "2119091505004720275",
  "posts": {
   "2052486417465627019": {
    "account": "blknoiz06",
@@ -259,6 +259,36 @@
   "2118641196163797264": {
    "account": "blknoiz06",
    "at": "2026-11-06",
+   "what": "leave",
+   "why": "a clip, placed by place_x_clips.py"
+  },
+  "2118662789355168232": {
+   "account": "blknoiz06",
+   "at": "2026-11-07",
+   "what": "leave",
+   "why": "a cut of x-2118457515969032365, placed as a clip"
+  },
+  "2118748641817153640": {
+   "account": "blknoiz06",
+   "at": "2026-11-07",
+   "what": "leave",
+   "why": "a clip, placed by place_x_clips.py"
+  },
+  "2118757947274830028": {
+   "account": "blknoiz06",
+   "at": "2026-11-07",
+   "what": "leave",
+   "why": "a clip, placed by place_x_clips.py"
+  },
+  "2119035932133535783": {
+   "account": "blknoiz06",
+   "at": "2026-11-07",
+   "what": "leave",
+   "why": "a cut of x-2118457515969032365, placed as a clip"
+  },
+  "2119091505004720275": {
+   "account": "blknoiz06",
+   "at": "2026-11-07",
    "what": "leave",
    "why": "a clip, placed by place_x_clips.py"
   }
