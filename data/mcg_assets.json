@@ -24324,8 +24324,8 @@
    "symbol": "BTC",
    "name": "Bitcoin",
    "asset_class": "crypto",
-   "mentions": 1445,
-   "analysis": 789,
+   "mentions": 1447,
+   "analysis": 791,
    "moments": [
     {
      "episode_id": "-8z0M77EVZg",
@@ -24407,6 +24407,24 @@
      "deep_link": "https://www.youtube.com/watch?v=03VnXSHNLkE&t=10114s",
      "kind": "analysis",
      "note": "Speakers discuss alleged Jane Street market manipulation involving massive Bitcoin positions and market selling to print on shorts; they note a 40% drop from a recent peak and compare the pattern to Silver."
+    },
+    {
+     "episode_id": "0VrjCXFXCA4",
+     "episode_title": "Wake Up! The Next 90 Days Will Change Everything in Crypto | Chill's Filter Ep-3",
+     "start_seconds": 23.0,
+     "timestamp": "0:23",
+     "deep_link": "https://www.youtube.com/watch?v=0VrjCXFXCA4&t=23s",
+     "kind": "analysis",
+     "note": "Speaker discusses Bitcoin's breakout in August, current position at bottom of daily range with liquidity sweep at 74.9K, expects bounce to 90K+, and notes bullish structure remains intact despite macro headwinds."
+    },
+    {
+     "episode_id": "0VrjCXFXCA4",
+     "episode_title": "Wake Up! The Next 90 Days Will Change Everything in Crypto | Chill's Filter Ep-3",
+     "start_seconds": 457.0,
+     "timestamp": "7:37",
+     "deep_link": "https://www.youtube.com/watch?v=0VrjCXFXCA4&t=457s",
+     "kind": "analysis",
+     "note": "Speaker discusses Bitcoin price action, noting that Robinhood launched at the recent Bitcoin bottom and expects a local top to form before correction, with plans to take profits around that local top in December."
     },
     {
      "episode_id": "0cdFekQht5w",
@@ -37333,7 +37351,7 @@
      "note": "Speaker mentions companies using treasuries to buy Bitcoin."
     }
    ],
-   "episode_count": 387,
+   "episode_count": 388,
    "single_reference": false
   },
   {
@@ -49899,8 +49917,8 @@
    "symbol": "HYPE",
    "name": "Hyperliquid",
    "asset_class": "crypto",
-   "mentions": 381,
-   "analysis": 238,
+   "mentions": 383,
+   "analysis": 239,
    "moments": [
     {
      "episode_id": "-iilkByxBa8",
@@ -49928,6 +49946,24 @@
      "deep_link": "https://www.youtube.com/watch?v=03VnXSHNLkE&t=2749s",
      "kind": "analysis",
      "note": "Mentioned as showing outperformance; part of the investment basket being discussed."
+    },
+    {
+     "episode_id": "0VrjCXFXCA4",
+     "episode_title": "Wake Up! The Next 90 Days Will Change Everything in Crypto | Chill's Filter Ep-3",
+     "start_seconds": 150.0,
+     "timestamp": "2:30",
+     "deep_link": "https://www.youtube.com/watch?v=0VrjCXFXCA4&t=150s",
+     "kind": "mention",
+     "note": "Named as an altcoin looking good and already bouncing."
+    },
+    {
+     "episode_id": "0VrjCXFXCA4",
+     "episode_title": "Wake Up! The Next 90 Days Will Change Everything in Crypto | Chill's Filter Ep-3",
+     "start_seconds": 486.0,
+     "timestamp": "8:06",
+     "deep_link": "https://www.youtube.com/watch?v=0VrjCXFXCA4&t=486s",
+     "kind": "analysis",
+     "note": "Speaker discusses Hyperliquid as aligned with the Elysium chain and encourages supporters to back both projects, noting that whales staking bags on Hyperliquid would benefit from Elysium's buy-and-burn mechanism that supports Hyperliquid's token value."
     },
     {
      "episode_id": "0c0Z0kvup2U",
@@ -53332,7 +53368,7 @@
      "note": "A vault platform where trading activity is tracked and displayed; the speaker launched a vault on Sunday/Monday with 20x leverage, generating significant P&L over the first few days."
     }
    ],
-   "episode_count": 187,
+   "episode_count": 188,
    "single_reference": false
   },
   {
@@ -85734,6 +85770,1187 @@
    "single_reference": false
   },
   {
+   "symbol": "ARB",
+   "name": "Arbitrum",
+   "asset_class": "crypto",
+   "mentions": 130,
+   "analysis": 51,
+   "moments": [
+    {
+     "episode_id": "0VrjCXFXCA4",
+     "episode_title": "Wake Up! The Next 90 Days Will Change Everything in Crypto | Chill's Filter Ep-3",
+     "start_seconds": 150.0,
+     "timestamp": "2:30",
+     "deep_link": "https://www.youtube.com/watch?v=0VrjCXFXCA4&t=150s",
+     "kind": "analysis",
+     "note": "Speaker discusses Arbitrum holding its lows with a stop-loss flush to the bottom, describes it as forming a higher low in a higher low/higher high structure pattern."
+    },
+    {
+     "episode_id": "0bmVQog1A4U",
+     "episode_title": "Chief $CHOP cooking?",
+     "start_seconds": 1336.0,
+     "timestamp": "22:16",
+     "deep_link": "https://www.youtube.com/watch?v=0bmVQog1A4U&t=1336s",
+     "kind": "mention",
+     "note": "Mentioned as an event (Arbitrum event) where Robinhood was a guest."
+    },
+    {
+     "episode_id": "0cdFekQht5w",
+     "episode_title": "\ud83d\udd34 LIVE: Collector Crypt Pokemon Market Review, Solana securing onchain Defi | Macro + Watchlists",
+     "start_seconds": 6677.0,
+     "timestamp": "1:51:17",
+     "deep_link": "https://www.youtube.com/watch?v=0cdFekQht5w&t=6677s",
+     "kind": "mention",
+     "note": "Listed as an EVM-compatible machine that can work within Fluent's unified execution environment."
+    },
+    {
+     "episode_id": "1UFlORh3zt0",
+     "episode_title": "\ud83d\udd34 LIVE: FOMC Day, Onchain Rotations...Next Leg Loading? | Market Update + Interviews",
+     "start_seconds": 237.0,
+     "timestamp": "3:57",
+     "deep_link": "https://www.youtube.com/watch?v=1UFlORh3zt0&t=237s",
+     "kind": "analysis",
+     "note": "Discussed as part of rotation strategies; mentioned as a chain that people have been trading and chasing, with comparisons to Solana regarding market attention."
+    },
+    {
+     "episode_id": "1UFlORh3zt0",
+     "episode_title": "\ud83d\udd34 LIVE: FOMC Day, Onchain Rotations...Next Leg Loading? | Market Update + Interviews",
+     "start_seconds": 836.0,
+     "timestamp": "13:56",
+     "deep_link": "https://www.youtube.com/watch?v=1UFlORh3zt0&t=836s",
+     "kind": "mention",
+     "note": "Speaker gave a call on ARB the other day."
+    },
+    {
+     "episode_id": "1UFlORh3zt0",
+     "episode_title": "\ud83d\udd34 LIVE: FOMC Day, Onchain Rotations...Next Leg Loading? | Market Update + Interviews",
+     "start_seconds": 10752.0,
+     "timestamp": "2:59:12",
+     "deep_link": "https://www.youtube.com/watch?v=1UFlORh3zt0&t=10752s",
+     "kind": "analysis",
+     "note": "The speaker stated their ARB long position is 'absolutely printing' from Monday."
+    },
+    {
+     "episode_id": "2NK_MBlFvtM",
+     "episode_title": "\ud83d\udd34 LIVE: So Early It Hurts | A Simple Strategy for Surviving a Sideways Crypto Market",
+     "start_seconds": 3302.0,
+     "timestamp": "55:02",
+     "deep_link": "https://www.youtube.com/watch?v=2NK_MBlFvtM&t=3302s",
+     "kind": "mention",
+     "note": "Arbitrum Relay listed in Robinhood Wallet Web3 applications."
+    },
+    {
+     "episode_id": "4PlcWhQM96A",
+     "episode_title": "\ud83d\udd34 LIVE: Time To Log Off? | AI Fears, Debt Market Shutdown, Anthropic IPO",
+     "start_seconds": 3729.0,
+     "timestamp": "1:02:09",
+     "deep_link": "https://www.youtube.com/watch?v=4PlcWhQM96A&t=3729s",
+     "kind": "mention",
+     "note": "Mentioned as an EVM chain with existing work done, referenced in context of chain expansion possibilities."
+    },
+    {
+     "episode_id": "4PlcWhQM96A",
+     "episode_title": "\ud83d\udd34 LIVE: Time To Log Off? | AI Fears, Debt Market Shutdown, Anthropic IPO",
+     "start_seconds": 4699.0,
+     "timestamp": "1:18:19",
+     "deep_link": "https://www.youtube.com/watch?v=4PlcWhQM96A&t=4699s",
+     "kind": "mention",
+     "note": "Arbitrum event mentioned where Robinhood was a guest."
+    },
+    {
+     "episode_id": "4PlcWhQM96A",
+     "episode_title": "\ud83d\udd34 LIVE: Time To Log Off? | AI Fears, Debt Market Shutdown, Anthropic IPO",
+     "start_seconds": 8215.0,
+     "timestamp": "2:16:55",
+     "deep_link": "https://www.youtube.com/watch?v=4PlcWhQM96A&t=8215s",
+     "kind": "mention",
+     "note": "Mentioned as upcoming topic for discussion regarding an Arbitrum event."
+    },
+    {
+     "episode_id": "4PlcWhQM96A",
+     "episode_title": "\ud83d\udd34 LIVE: Time To Log Off? | AI Fears, Debt Market Shutdown, Anthropic IPO",
+     "start_seconds": 8254.0,
+     "timestamp": "2:17:34",
+     "deep_link": "https://www.youtube.com/watch?v=4PlcWhQM96A&t=8254s",
+     "kind": "mention",
+     "note": "Arbitrum event was happening in Singapore in collaboration with Robinhood chain; described as an event where Robinhood team had minimal presence and support."
+    },
+    {
+     "episode_id": "50P-rICrUfs",
+     "episode_title": "\ud83d\udd34 LIVE: Launchpad Wars On Robinhood | Original $ANSEM Dev Interview | Onchain Update",
+     "start_seconds": 5235.0,
+     "timestamp": "1:27:15",
+     "deep_link": "https://www.youtube.com/watch?v=50P-rICrUfs&t=5235s",
+     "kind": "mention",
+     "note": "Speaker references working in onchain perpetuals since the very beginning of Arbitum in 2021."
+    },
+    {
+     "episode_id": "50P-rICrUfs",
+     "episode_title": "\ud83d\udd34 LIVE: Launchpad Wars On Robinhood | Original $ANSEM Dev Interview | Onchain Update",
+     "start_seconds": 6237.0,
+     "timestamp": "1:43:57",
+     "deep_link": "https://www.youtube.com/watch?v=50P-rICrUfs&t=6237s",
+     "kind": "mention",
+     "note": "Speaker mentioned seeing Arbitrum talk about Programmable."
+    },
+    {
+     "episode_id": "B2cg6LWD60g",
+     "episode_title": "\ud83d\udd34 LIVE: BTC Erases Rally | $870M+ Longs Liquidated | Time to Exit?",
+     "start_seconds": 10084.0,
+     "timestamp": "2:48:04",
+     "deep_link": "https://www.youtube.com/watch?v=B2cg6LWD60g&t=10084s",
+     "kind": "analysis",
+     "note": "Speaker notes Arb has not yet gotten down to their target zone."
+    },
+    {
+     "episode_id": "Ck1DT4ivFl8",
+     "episode_title": "\ud83d\udd34 LIVE: Top Picks w/@FloodCapital, More IPO's on Solana,  Intro to Internet Rounds!",
+     "start_seconds": 11481.0,
+     "timestamp": "3:11:21",
+     "deep_link": "https://www.youtube.com/watch?v=Ck1DT4ivFl8&t=11481s",
+     "kind": "analysis",
+     "note": "Speaker discusses Arbitrum's flawed DAO funding model, noting token price fell from $1-2 to 9 cents after unsuccessful GameFi spending; discusses potential upside from Robin Hood partnership with 10% of platform fees going to Arbitum, with current circulating market cap of 580 million."
+    },
+    {
+     "episode_id": "Ck1DT4ivFl8",
+     "episode_title": "\ud83d\udd34 LIVE: Top Picks w/@FloodCapital, More IPO's on Solana,  Intro to Internet Rounds!",
+     "start_seconds": 11693.0,
+     "timestamp": "3:14:53",
+     "deep_link": "https://www.youtube.com/watch?v=Ck1DT4ivFl8&t=11693s",
+     "kind": "mention",
+     "note": "Named as part of a Robin Hood basket of tokens."
+    },
+    {
+     "episode_id": "DCxwABH6umU",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto + Robinhood Chain Bottom In? | Elysium Launch Incoming | Exact 90-Day Plan",
+     "start_seconds": 9413.0,
+     "timestamp": "2:36:53",
+     "deep_link": "https://www.youtube.com/watch?v=DCxwABH6umU&t=9413s",
+     "kind": "analysis",
+     "note": "Arbitrum is working with Robinhood to distribute $1.8 million in grants to builders."
+    },
+    {
+     "episode_id": "DCxwABH6umU",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto + Robinhood Chain Bottom In? | Elysium Launch Incoming | Exact 90-Day Plan",
+     "start_seconds": 10271.0,
+     "timestamp": "2:51:11",
+     "deep_link": "https://www.youtube.com/watch?v=DCxwABH6umU&t=10271s",
+     "kind": "mention",
+     "note": "Mentioned in context of a $1.8 million grant program partnership with Robinhood Chain."
+    },
+    {
+     "episode_id": "DCxwABH6umU",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto + Robinhood Chain Bottom In? | Elysium Launch Incoming | Exact 90-Day Plan",
+     "start_seconds": 11506.0,
+     "timestamp": "3:11:46",
+     "deep_link": "https://www.youtube.com/watch?v=DCxwABH6umU&t=11506s",
+     "kind": "analysis",
+     "note": "Speaker discusses Arbitrum holding its lows, notes an SFP (sweep of fair price) at the downside, and analyzes the structure as forming a higher low within a higher low/higher high pattern."
+    },
+    {
+     "episode_id": "EHhZRRHMZQM",
+     "episode_title": "\ud83d\udd34 LIVE: Markets ripping |  RHC leading | Market Update + Founder Interview",
+     "start_seconds": 10568.0,
+     "timestamp": "2:56:08",
+     "deep_link": "https://www.youtube.com/watch?v=EHhZRRHMZQM&t=10568s",
+     "kind": "analysis",
+     "note": "Arbitrum is described as down in a certain range."
+    },
+    {
+     "episode_id": "ElhoMK0uH4M",
+     "episode_title": "\ud83d\udd34 LIVE: Bearish Headlines Strike Again | More Chop or Bottom Signal?",
+     "start_seconds": 2847.0,
+     "timestamp": "47:27",
+     "deep_link": "https://www.youtube.com/watch?v=ElhoMK0uH4M&t=2847s",
+     "kind": "mention",
+     "note": "The speaker mentions applying to the Arbitrum Security Program for funding support."
+    },
+    {
+     "episode_id": "FJkrRgAnHDU",
+     "episode_title": "\ud83d\udd34 LIVE: How to Spot 5-10x Crypto Setups Before They Run | Full Strategy Breakdown",
+     "start_seconds": 1853.0,
+     "timestamp": "30:53",
+     "deep_link": "https://www.youtube.com/watch?v=FJkrRgAnHDU&t=1853s",
+     "kind": "analysis",
+     "note": "Speaker notes an SFP on the 12-hour chart and wants to see it come down, reload, then break through resistance above."
+    },
+    {
+     "episode_id": "FVSdhpK8Lvs",
+     "episode_title": "ICM.Run: Internet Capital Markets, Tokenization, Incubator Vision & More",
+     "start_seconds": 486.0,
+     "timestamp": "8:06",
+     "deep_link": "https://www.youtube.com/watch?v=FVSdhpK8Lvs&t=486s",
+     "kind": "mention",
+     "note": "Speaker references arbitrum as one of the big Ethereum building blocks that pump took allocations to."
+    },
+    {
+     "episode_id": "G2WvWGMaOag",
+     "episode_title": "SlabzMcAllister from DLMM: Onchain Hedge Fund, 16x Growth, Multi-Chain Yield Strategies + More!",
+     "start_seconds": 88.0,
+     "timestamp": "1:28",
+     "deep_link": "https://www.youtube.com/watch?v=G2WvWGMaOag&t=88s",
+     "kind": "mention",
+     "note": "Referenced regarding an airdrop that preceded the founder's work on projects like Camelot."
+    },
+    {
+     "episode_id": "GJ6FjrBDviM",
+     "episode_title": "The Blockchain Arcade for Graded Cards",
+     "start_seconds": 2904.0,
+     "timestamp": "48:24",
+     "deep_link": "https://www.youtube.com/watch?v=GJ6FjrBDviM&t=2904s",
+     "kind": "analysis",
+     "note": "Speaker discusses Arbitrum as an alternative EVM chain for building, stating it has the best tech, best people, best team, and is undervalued."
+    },
+    {
+     "episode_id": "H4kImk1Y7KQ",
+     "episode_title": "\ud83d\udd34 LIVE: FOMC, AI Panic, Clarity Act Vote | Market Update + Interviews",
+     "start_seconds": 233.0,
+     "timestamp": "3:53",
+     "deep_link": "https://www.youtube.com/watch?v=H4kImk1Y7KQ&t=233s",
+     "kind": "mention",
+     "note": "Host mentions an 'arc on chain rotation' happening, referring to an opportunity to position on Arbitrum rather than chasing on-chain assets."
+    },
+    {
+     "episode_id": "H4kImk1Y7KQ",
+     "episode_title": "\ud83d\udd34 LIVE: FOMC, AI Panic, Clarity Act Vote | Market Update + Interviews",
+     "start_seconds": 9133.0,
+     "timestamp": "2:32:13",
+     "deep_link": "https://www.youtube.com/watch?v=H4kImk1Y7KQ&t=9133s",
+     "kind": "analysis",
+     "note": "Speaker discussed technical entry on Arbitrum for a long position with SFP and OTE references."
+    },
+    {
+     "episode_id": "H4kImk1Y7KQ",
+     "episode_title": "\ud83d\udd34 LIVE: FOMC, AI Panic, Clarity Act Vote | Market Update + Interviews",
+     "start_seconds": 9974.0,
+     "timestamp": "2:46:14",
+     "deep_link": "https://www.youtube.com/watch?v=H4kImk1Y7KQ&t=9974s",
+     "kind": "analysis",
+     "note": "Speaker mentions using ARB and discusses Arbitrum narrative with Robinhood integration potentially driving an Arbitrum season."
+    },
+    {
+     "episode_id": "H4kImk1Y7KQ",
+     "episode_title": "\ud83d\udd34 LIVE: FOMC, AI Panic, Clarity Act Vote | Market Update + Interviews",
+     "start_seconds": 10184.0,
+     "timestamp": "2:49:44",
+     "deep_link": "https://www.youtube.com/watch?v=H4kImk1Y7KQ&t=10184s",
+     "kind": "analysis",
+     "note": "Speaker identifies Arbitrum as a beneficiary of the Robin Hood narrative and provides detailed technical analysis including Fibonacci entries, fair value gap trading, order block identification, and a long position with a target of 20 cents."
+    },
+    {
+     "episode_id": "H4kImk1Y7KQ",
+     "episode_title": "\ud83d\udd34 LIVE: FOMC, AI Panic, Clarity Act Vote | Market Update + Interviews",
+     "start_seconds": 10871.0,
+     "timestamp": "3:01:11",
+     "deep_link": "https://www.youtube.com/watch?v=H4kImk1Y7KQ&t=10871s",
+     "kind": "analysis",
+     "note": "Speaker describes ARB as having one of the cleanest technical setups recently seen and expresses bullish sentiment on it."
+    },
+    {
+     "episode_id": "Hm-JTnBqB4Q",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood here to stay, war is off? | Market Update + Interviews",
+     "start_seconds": 4397.0,
+     "timestamp": "1:13:17",
+     "deep_link": "https://www.youtube.com/watch?v=Hm-JTnBqB4Q&t=4397s",
+     "kind": "analysis",
+     "note": "Identified as a primary beneficiary of Robinhood chain success; Robinhood chain is built on Arbitrum as an L2, and 10% of Robinhood chain fees accrue to Arbitrum (8% to treasury, 2% to development), projected to generate ~$15 million annualized."
+    },
+    {
+     "episode_id": "Hm-JTnBqB4Q",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood here to stay, war is off? | Market Update + Interviews",
+     "start_seconds": 4534.0,
+     "timestamp": "1:15:34",
+     "deep_link": "https://www.youtube.com/watch?v=Hm-JTnBqB4Q&t=4534s",
+     "kind": "analysis",
+     "note": "Discussed as a beta play to Robinhood's crypto division; keeps 8% of fees with 10% going to DAO, trading at $555M market cap/$871M FDV; up 13% on the day; generates ~$15M annually from Robinhood; compared to Base as analogous play."
+    },
+    {
+     "episode_id": "Hm-JTnBqB4Q",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood here to stay, war is off? | Market Update + Interviews",
+     "start_seconds": 4948.0,
+     "timestamp": "1:22:28",
+     "deep_link": "https://www.youtube.com/watch?v=Hm-JTnBqB4Q&t=4948s",
+     "kind": "analysis",
+     "note": "Discussed as a layer 2 that would receive 10% of Robinhood chain's revenue; speakers analyzed its price-to-earnings ratio, called it 'beat down', and noted it controls 8% of transaction fees going to the ARB DAO treasury."
+    },
+    {
+     "episode_id": "Hm-JTnBqB4Q",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood here to stay, war is off? | Market Update + Interviews",
+     "start_seconds": 5390.0,
+     "timestamp": "1:29:50",
+     "deep_link": "https://www.youtube.com/watch?v=Hm-JTnBqB4Q&t=5390s",
+     "kind": "analysis",
+     "note": "Discussion of Arbitrum as a beta to Robinhood success, with general chain success benefiting from Morpho capital conversion on the platform."
+    },
+    {
+     "episode_id": "IcdWxSsHJno",
+     "episode_title": "Perps.fun: Launch perps, own fees on Hyperliquid",
+     "start_seconds": 2145.0,
+     "timestamp": "35:45",
+     "deep_link": "https://www.youtube.com/watch?v=IcdWxSsHJno&t=2145s",
+     "kind": "mention",
+     "note": "Speaker mentions having worked on early derivative protocols on Arbitrum."
+    },
+    {
+     "episode_id": "IdN9O-XqlnQ",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto Rebounds After Midterms | What to Do Now",
+     "start_seconds": 1068.0,
+     "timestamp": "17:48",
+     "deep_link": "https://www.youtube.com/watch?v=IdN9O-XqlnQ&t=1068s",
+     "kind": "analysis",
+     "note": "Speaker expressed visceral anger about lack of support for an Arbitrum grant; later mentioned Arbitrum partnering with Robinhood Chain on OpenHouse with $1.8 million in grants."
+    },
+    {
+     "episode_id": "IdN9O-XqlnQ",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto Rebounds After Midterms | What to Do Now",
+     "start_seconds": 1975.0,
+     "timestamp": "32:55",
+     "deep_link": "https://www.youtube.com/watch?v=IdN9O-XqlnQ&t=1975s",
+     "kind": "mention",
+     "note": "Referenced in relation to when the speaker last remembers being bullish on an L2, around the time of the Arbitrum airdrop."
+    },
+    {
+     "episode_id": "IdN9O-XqlnQ",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto Rebounds After Midterms | What to Do Now",
+     "start_seconds": 9422.0,
+     "timestamp": "2:37:02",
+     "deep_link": "https://www.youtube.com/watch?v=IdN9O-XqlnQ&t=9422s",
+     "kind": "mention",
+     "note": "Arbitrum is mentioned as a blockchain that WTH is now integrating with; Arbitrum is noted as offering $1.8 million in grants to builders."
+    },
+    {
+     "episode_id": "IdN9O-XqlnQ",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto Rebounds After Midterms | What to Do Now",
+     "start_seconds": 11093.0,
+     "timestamp": "3:04:53",
+     "deep_link": "https://www.youtube.com/watch?v=IdN9O-XqlnQ&t=11093s",
+     "kind": "mention",
+     "note": "Mentioned as having deep ties and relationships with Stockbrokers and supporting the ecosystem."
+    },
+    {
+     "episode_id": "IdN9O-XqlnQ",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto Rebounds After Midterms | What to Do Now",
+     "start_seconds": 11442.0,
+     "timestamp": "3:10:42",
+     "deep_link": "https://www.youtube.com/watch?v=IdN9O-XqlnQ&t=11442s",
+     "kind": "mention",
+     "note": "Speaker mentions Arbitrum in context of Robinhood being recognized as a leading builder and receiving grants."
+    },
+    {
+     "episode_id": "IiXJRXVECBo",
+     "episode_title": "The Rise Of Soby: FOMO's Top Trader, $158K/Day, Sneak disses @Orangie Web3",
+     "start_seconds": 411.0,
+     "timestamp": "6:51",
+     "deep_link": "https://www.youtube.com/watch?v=IiXJRXVECBo&t=411s",
+     "kind": "mention",
+     "note": "Speaker built Xai Games with the Arbitrum team and launched the airdrop on the Arbitrum network."
+    },
+    {
+     "episode_id": "KXE20DkATGI",
+     "episode_title": "\ud83d\udd34 LIVE: Onchain is RIPPING! Base Szn + Memes Pumping | Market Alpha & Updates",
+     "start_seconds": 10527.0,
+     "timestamp": "2:55:27",
+     "deep_link": "https://www.youtube.com/watch?v=KXE20DkATGI&t=10527s",
+     "kind": "mention",
+     "note": "Arbitrum listed as a top chain for inflows and outflows."
+    },
+    {
+     "episode_id": "KrTdbeBZMCA",
+     "episode_title": "PyroBuzz Interview: On-Chain Tracking, Viral Campaigns, Web3 Tools + More!",
+     "start_seconds": 21.0,
+     "timestamp": "0:21",
+     "deep_link": "https://www.youtube.com/watch?v=KrTdbeBZMCA&t=21s",
+     "kind": "mention",
+     "note": "Speaker mentioned involvement in the Arbitrum DeFi ecosystem in early crypto days around 2021-2022."
+    },
+    {
+     "episode_id": "LNC5N-W785g",
+     "episode_title": "\ud83d\udd34 LIVE: Pullbacks in a Bull Market | 3 Rules to Stay Profitable",
+     "start_seconds": 10388.0,
+     "timestamp": "2:53:08",
+     "deep_link": "https://www.youtube.com/watch?v=LNC5N-W785g&t=10388s",
+     "kind": "mention",
+     "note": "Arbitrum announced a new grant program and mentorship program in partnership with Robinhood Crypto, offering a 100k prize for demo day competition."
+    },
+    {
+     "episode_id": "LpwKHoAJu2Q",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood DEX volume at ATH's | Pennie stocks on Solana? | Market Update + Interviews",
+     "start_seconds": 10378.0,
+     "timestamp": "2:52:58",
+     "deep_link": "https://www.youtube.com/watch?v=LpwKHoAJu2Q&t=10378s",
+     "kind": "mention",
+     "note": "Mentioned as developer partner behind Robinhood chain."
+    },
+    {
+     "episode_id": "Mwp0GbhnqLI",
+     "episode_title": "\ud83d\udd34 LIVE: No bailouts for crypto, Clarity Act In Days? | Founder Interviews + Market Updates",
+     "start_seconds": 10375.0,
+     "timestamp": "2:52:55",
+     "deep_link": "https://www.youtube.com/watch?v=Mwp0GbhnqLI&t=10375s",
+     "kind": "mention",
+     "note": "Speaker speculates Arbitrum may get a pop from Robin Hood adoption."
+    },
+    {
+     "episode_id": "N0q17BVEOtQ",
+     "episode_title": "\ud83d\udd34 LIVE: HOOD Summit Approaches | Robinhood vs Solana | Market Update + Interviews",
+     "start_seconds": 7176.0,
+     "timestamp": "1:59:36",
+     "deep_link": "https://www.youtube.com/watch?v=N0q17BVEOtQ&t=7176s",
+     "kind": "analysis",
+     "note": "Speaker mentions an ARB long position discussed on Wednesday with entry at $21 and stop at $21, noting strong risk-reward ratio and noting it is in profit."
+    },
+    {
+     "episode_id": "N0q17BVEOtQ",
+     "episode_title": "\ud83d\udd34 LIVE: HOOD Summit Approaches | Robinhood vs Solana | Market Update + Interviews",
+     "start_seconds": 9625.0,
+     "timestamp": "2:40:25",
+     "deep_link": "https://www.youtube.com/watch?v=N0q17BVEOtQ&t=9625s",
+     "kind": "mention",
+     "note": "Arbitrum mentioned in passing as one of several environment options alongside Solana, Robinhood, Base, and NEAR."
+    },
+    {
+     "episode_id": "N0q17BVEOtQ",
+     "episode_title": "\ud83d\udd34 LIVE: HOOD Summit Approaches | Robinhood vs Solana | Market Update + Interviews",
+     "start_seconds": 11557.0,
+     "timestamp": "3:12:37",
+     "deep_link": "https://www.youtube.com/watch?v=N0q17BVEOtQ&t=11557s",
+     "kind": "mention",
+     "note": "Speaker mentioned giving a long setup on Arbitrum and a re-entry long on Arbitrum on Wednesday."
+    },
+    {
+     "episode_id": "O6XwfJE42O0",
+     "episode_title": "DOW TO HIT 100K, $2,000 STIMULUS w/@0xzak @jasonkneen @EmpulserTech @official_taches on @MCGlive",
+     "start_seconds": 13690.0,
+     "timestamp": "3:48:10",
+     "deep_link": "https://www.youtube.com/watch?v=O6XwfJE42O0&t=13690s",
+     "kind": "mention",
+     "note": "Speakers describe Arbitrum as 'cooked' and discuss skepticism about projects being built on it."
+    },
+    {
+     "episode_id": "OH897TGmghc",
+     "episode_title": "Ranger Finance: 90-Day Exit Guarantee + 32x Team Unlocks on MetaDAO | MCG Show",
+     "start_seconds": 393.0,
+     "timestamp": "6:33",
+     "deep_link": "https://www.youtube.com/watch?v=OH897TGmghc&t=393s",
+     "kind": "mention",
+     "note": "Named as one of the chains where roughly 50 billion in daily derivative volumes trade."
+    },
+    {
+     "episode_id": "OvLPWlcdXew",
+     "episode_title": "\ud83d\udd34 LIVE: Onchain is Bullish! Equities \u2192 Crypto Rotation? | Market Updates + Founder Interviews",
+     "start_seconds": 8675.0,
+     "timestamp": "2:24:35",
+     "deep_link": "https://www.youtube.com/watch?v=OvLPWlcdXew&t=8675s",
+     "kind": "mention",
+     "note": "Speaker noted that Chip is deployed on Arbitrum in addition to Solana."
+    },
+    {
+     "episode_id": "QSRP-rTwfYE",
+     "episode_title": "\ud83d\udd34 LIVE: Calm Before the Storm | Onchain Weekly Recap",
+     "start_seconds": 4566.0,
+     "timestamp": "1:16:06",
+     "deep_link": "https://www.youtube.com/watch?v=QSRP-rTwfYE&t=4566s",
+     "kind": "mention",
+     "note": "Speaker discusses their history on Arbitrum One where they started trading options and built products; mentions strong relationship with Arbitrum One team."
+    },
+    {
+     "episode_id": "RLS5bDw7pYg",
+     "episode_title": "\ud83d\udd34 LIVE: Clarity Act Vote...What Next? | Market Update + Interviews",
+     "start_seconds": 3238.0,
+     "timestamp": "53:58",
+     "deep_link": "https://www.youtube.com/watch?v=RLS5bDw7pYg&t=3238s",
+     "kind": "mention",
+     "note": "Mentioned as having a trade that is performing well ('ripping')."
+    },
+    {
+     "episode_id": "RLS5bDw7pYg",
+     "episode_title": "\ud83d\udd34 LIVE: Clarity Act Vote...What Next? | Market Update + Interviews",
+     "start_seconds": 3727.0,
+     "timestamp": "1:02:07",
+     "deep_link": "https://www.youtube.com/watch?v=RLS5bDw7pYg&t=3727s",
+     "kind": "analysis",
+     "note": "Speaker launched XAI Games on Arbitrum, did a huge airdrop to the community, and built it with the Arbitrum team."
+    },
+    {
+     "episode_id": "RufYrYmMVwU",
+     "episode_title": "\ud83d\udd34 LIVE: Onchain Market Bottom Forming | Q4 Rally Setup + How to Maximize Returns",
+     "start_seconds": 1215.0,
+     "timestamp": "20:15",
+     "deep_link": "https://www.youtube.com/watch?v=RufYrYmMVwU&t=1215s",
+     "kind": "mention",
+     "note": "ARB still has some work to do on the charts."
+    },
+    {
+     "episode_id": "T9GYHi0teKI",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Below $60K...Is it Bottoming or Breaking? | Market Update + Interviews",
+     "start_seconds": 9641.0,
+     "timestamp": "2:40:41",
+     "deep_link": "https://www.youtube.com/watch?v=T9GYHi0teKI&t=9641s",
+     "kind": "mention",
+     "note": "Speakers mentioned Robinhood is working with Arbitrum on pre-IPO companies."
+    },
+    {
+     "episode_id": "UbKsP6WCsPs",
+     "episode_title": "\ud83d\udd34 LIVE: Market Cooling Off | Buy The Dip? | Market Update + Interviews",
+     "start_seconds": 8708.0,
+     "timestamp": "2:25:08",
+     "deep_link": "https://www.youtube.com/watch?v=UbKsP6WCsPs&t=8708s",
+     "kind": "analysis",
+     "note": "Speaker indicates Arbitrum will probably go much higher and discusses it as performing well when the Arbitrum chain does well."
+    },
+    {
+     "episode_id": "XB71vFeU2zA",
+     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
+     "start_seconds": 786.0,
+     "timestamp": "13:06",
+     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=786s",
+     "kind": "mention",
+     "note": "Arbitrum froze 8,000 ETH worth about $75 million."
+    },
+    {
+     "episode_id": "XB71vFeU2zA",
+     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
+     "start_seconds": 1603.0,
+     "timestamp": "26:43",
+     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=1603s",
+     "kind": "mention",
+     "note": "Referenced as the chain where Camelot DEX was built and achieved significant value; speaker mentioned being in Camelot on ARB."
+    },
+    {
+     "episode_id": "XB71vFeU2zA",
+     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
+     "start_seconds": 9736.0,
+     "timestamp": "2:42:16",
+     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=9736s",
+     "kind": "analysis",
+     "note": "Speaker noted ARB was being watched for forming a low and discussed specific price levels around 20 cents where bearish SFPs formed, mentioning missed shorting opportunities."
+    },
+    {
+     "episode_id": "XB71vFeU2zA",
+     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
+     "start_seconds": 9944.0,
+     "timestamp": "2:45:44",
+     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=9944s",
+     "kind": "analysis",
+     "note": "Speaker expects ARB could potentially make a move and discusses a bullish order block; suggests it could drift lower to tag the order block and target local highs."
+    },
+    {
+     "episode_id": "XxlT7dtD9JY",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Under $81K | Is This the 10/10 Crash All Over Again?",
+     "start_seconds": 7142.0,
+     "timestamp": "1:59:02",
+     "deep_link": "https://www.youtube.com/watch?v=XxlT7dtD9JY&t=7142s",
+     "kind": "analysis",
+     "note": "Arb started its run in August and has been up for about 40 days as part of a broader altcoin rally."
+    },
+    {
+     "episode_id": "XxlT7dtD9JY",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Under $81K | Is This the 10/10 Crash All Over Again?",
+     "start_seconds": 7680.0,
+     "timestamp": "2:08:00",
+     "deep_link": "https://www.youtube.com/watch?v=XxlT7dtD9JY&t=7680s",
+     "kind": "mention",
+     "note": "Speaker cited Arbitrum as one of several altcoins that have shown readiness to run."
+    },
+    {
+     "episode_id": "XxlT7dtD9JY",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Under $81K | Is This the 10/10 Crash All Over Again?",
+     "start_seconds": 8536.0,
+     "timestamp": "2:22:16",
+     "deep_link": "https://www.youtube.com/watch?v=XxlT7dtD9JY&t=8536s",
+     "kind": "mention",
+     "note": "Arbitrum mentioned in reference to a setup seen a few weeks ago, but no specific analysis provided."
+    },
+    {
+     "episode_id": "XxlT7dtD9JY",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Under $81K | Is This the 10/10 Crash All Over Again?",
+     "start_seconds": 9131.0,
+     "timestamp": "2:32:11",
+     "deep_link": "https://www.youtube.com/watch?v=XxlT7dtD9JY&t=9131s",
+     "kind": "analysis",
+     "note": "Speaker discusses being unsure where ARB will settle but notes that significant liquidity has been grabbed and the situation has been discussed for some time."
+    },
+    {
+     "episode_id": "XxlT7dtD9JY",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Under $81K | Is This the 10/10 Crash All Over Again?",
+     "start_seconds": 9241.0,
+     "timestamp": "2:34:01",
+     "deep_link": "https://www.youtube.com/watch?v=XxlT7dtD9JY&t=9241s",
+     "kind": "analysis",
+     "note": "Speaker identified a Symmetrical Flag Pattern (SFP) formation on the 8-hour chart for ARB, marking it as a potential trade setup and expressing intent to monitor it for a higher low formation."
+    },
+    {
+     "episode_id": "XxlT7dtD9JY",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Under $81K | Is This the 10/10 Crash All Over Again?",
+     "start_seconds": 10322.0,
+     "timestamp": "2:52:02",
+     "deep_link": "https://www.youtube.com/watch?v=XxlT7dtD9JY&t=10322s",
+     "kind": "analysis",
+     "note": "Chart analysis was discussed to explain why altcoins shouldn't scare investors during Bitcoin pullbacks; the speaker examined Arbitrum's weekly price action showing a downtrend pattern."
+    },
+    {
+     "episode_id": "YQWB9LmC_Yc",
+     "episode_title": "\ud83d\udd34 LIVE NOW: Hyperliquid Hits New ATH | Solana Utility Szn + Market Updates",
+     "start_seconds": 9958.0,
+     "timestamp": "2:45:58",
+     "deep_link": "https://www.youtube.com/watch?v=YQWB9LmC_Yc&t=9958s",
+     "kind": "mention",
+     "note": "Speaker mentions Arbitrum as a trading chain alongside Hyperliquid."
+    },
+    {
+     "episode_id": "YxXBgD90fYg",
+     "episode_title": "Long: Memecoins Paired With Real Stocks on Robinhood Chain",
+     "start_seconds": 483.0,
+     "timestamp": "8:03",
+     "deep_link": "https://www.youtube.com/watch?v=YxXBgD90fYg&t=483s",
+     "kind": "mention",
+     "note": "Arbitrum mentioned as one of the different Layer 2 alternatives in crypto."
+    },
+    {
+     "episode_id": "_8vSxBK6kO8",
+     "episode_title": "\ud83d\udd34 LIVE: Meme Stocks PUMPING | STONK New ATH | Market Update + Interviews",
+     "start_seconds": 1015.0,
+     "timestamp": "16:55",
+     "deep_link": "https://www.youtube.com/watch?v=_8vSxBK6kO8&t=1015s",
+     "kind": "analysis",
+     "note": "Chart analysis shown with a rally approaching range highs; speaker mentions calling out ARB as a beneficiary because Uniswap was being built on Arbitrum stack and receives revenue share."
+    },
+    {
+     "episode_id": "__DYw4iUAQ0",
+     "episode_title": "\ud83d\udd34 LIVE: Don\u2019t Panic Sell the Quantum Scare | Do This Instead",
+     "start_seconds": 255.0,
+     "timestamp": "4:15",
+     "deep_link": "https://www.youtube.com/watch?v=__DYw4iUAQ0&t=255s",
+     "kind": "mention",
+     "note": "Speaker mentioned having ARB chart up but then switched to Bitcoin chart instead."
+    },
+    {
+     "episode_id": "_bXn26hfpJA",
+     "episode_title": "\ud83d\udd34 LIVE: No Sleep Szn is Here | Market Update + Interviews",
+     "start_seconds": 9967.0,
+     "timestamp": "2:46:07",
+     "deep_link": "https://www.youtube.com/watch?v=_bXn26hfpJA&t=9967s",
+     "kind": "analysis",
+     "note": "Discussed as entering a season of excitement; a protocol called Otis is ripping on Arbitrum and appears to be a launchpad with upcoming updates and communication with the Arbitrum team."
+    },
+    {
+     "episode_id": "_bXn26hfpJA",
+     "episode_title": "\ud83d\udd34 LIVE: No Sleep Szn is Here | Market Update + Interviews",
+     "start_seconds": 10202.0,
+     "timestamp": "2:50:02",
+     "deep_link": "https://www.youtube.com/watch?v=_bXn26hfpJA&t=10202s",
+     "kind": "analysis",
+     "note": "Discussed as a neutral EVM builder chain not controlled by a centralized entity, positioned as the only viable alternative to corporate chains like Base (Coinbase), Binance (BNB), and Robinhood, with thesis that it could catch bids and power future Fortune 500 company chains."
+    },
+    {
+     "episode_id": "_bXn26hfpJA",
+     "episode_title": "\ud83d\udd34 LIVE: No Sleep Szn is Here | Market Update + Interviews",
+     "start_seconds": 10512.0,
+     "timestamp": "2:55:12",
+     "deep_link": "https://www.youtube.com/watch?v=_bXn26hfpJA&t=10512s",
+     "kind": "analysis",
+     "note": "Discussed as an ecosystem that benefits from revenue flows and chain launches building on top of it; speakers note the token has been 'down incredibly bad' and some Discord members were bullish on ARB token."
+    },
+    {
+     "episode_id": "_bXn26hfpJA",
+     "episode_title": "\ud83d\udd34 LIVE: No Sleep Szn is Here | Market Update + Interviews",
+     "start_seconds": 10977.0,
+     "timestamp": "3:02:57",
+     "deep_link": "https://www.youtube.com/watch?v=_bXn26hfpJA&t=10977s",
+     "kind": "analysis",
+     "note": "Arbitrum had approximately half the DEX volume of Robin Hood chain; speaker suggested it could grow to 5-6% of total DEX volume and beat Hyperliquid, and it leads all blockchains in tokenized ETF market cap growth over 24 hours."
+    },
+    {
+     "episode_id": "_bXn26hfpJA",
+     "episode_title": "\ud83d\udd34 LIVE: No Sleep Szn is Here | Market Update + Interviews",
+     "start_seconds": 11954.0,
+     "timestamp": "3:19:14",
+     "deep_link": "https://www.youtube.com/watch?v=_bXn26hfpJA&t=11954s",
+     "kind": "analysis",
+     "note": "Described as top three in market cap growth of tokenized stocks, adding around five million in the past 17 days."
+    },
+    {
+     "episode_id": "_bXn26hfpJA",
+     "episode_title": "\ud83d\udd34 LIVE: No Sleep Szn is Here | Market Update + Interviews",
+     "start_seconds": 12535.0,
+     "timestamp": "3:28:55",
+     "deep_link": "https://www.youtube.com/watch?v=_bXn26hfpJA&t=12535s",
+     "kind": "mention",
+     "note": "Mentioned as fourth largest blockchain by tokenized ETF market cap, behind Ethereum, Binance Chain, and Solana."
+    },
+    {
+     "episode_id": "_bXn26hfpJA",
+     "episode_title": "\ud83d\udd34 LIVE: No Sleep Szn is Here | Market Update + Interviews",
+     "start_seconds": 14746.0,
+     "timestamp": "4:05:46",
+     "deep_link": "https://www.youtube.com/watch?v=_bXn26hfpJA&t=14746s",
+     "kind": "mention",
+     "note": "Mentioned as one of the chains covered on the show."
+    },
+    {
+     "episode_id": "aJfO9HXg8Fs",
+     "episode_title": "Interfold: $FOLD let competing companies or complete strangers compute together on sensitive data",
+     "start_seconds": 1836.0,
+     "timestamp": "30:36",
+     "deep_link": "https://www.youtube.com/watch?v=aJfO9HXg8Fs&t=1836s",
+     "kind": "mention",
+     "note": "Named as a layer 2 network that is 'really hot right now' and considered for multi-chain deployment strategy."
+    },
+    {
+     "episode_id": "aRTfgGvV4W8",
+     "episode_title": "Reviewing $MET: Soju Says \"There is no equity, only the token\", MET Updates Potential $5Bn Valuation",
+     "start_seconds": 750.0,
+     "timestamp": "12:30",
+     "deep_link": "https://www.youtube.com/watch?v=aRTfgGvV4W8&t=750s",
+     "kind": "analysis",
+     "note": "Speaker compares Arbitrum's historical price action (airdrop selloff followed by 200% recovery in 2023) to Meteora's current pattern."
+    },
+    {
+     "episode_id": "akxWR63zdtk",
+     "episode_title": "The Hot $STONKBROKER Dev Appeared on MCG!",
+     "start_seconds": 1386.0,
+     "timestamp": "23:06",
+     "deep_link": "https://www.youtube.com/watch?v=akxWR63zdtk&t=1386s",
+     "kind": "mention",
+     "note": "Speaker mentions starting in crypto and trading options on Arbitrum One, where they traded on Dopex and later Strike, and received a grant from the Arbitrum One team."
+    },
+    {
+     "episode_id": "ayJIM0WPyHs",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Bottom In? | Do This Before the Next Move",
+     "start_seconds": 1736.0,
+     "timestamp": "28:56",
+     "deep_link": "https://www.youtube.com/watch?v=ayJIM0WPyHs&t=1736s",
+     "kind": "mention",
+     "note": "Arbitrum is mentioned as a blockchain where Simple Pharma was previously building options infrastructure before moving to Robinhood chain."
+    },
+    {
+     "episode_id": "bWdkiIDu_Jg",
+     "episode_title": "\ud83d\udd34 LIVE: Bottom Signals Everywhere, Solana leading the charge! Here's he Plan",
+     "start_seconds": 1260.0,
+     "timestamp": "21:00",
+     "deep_link": "https://www.youtube.com/watch?v=bWdkiIDu_Jg&t=1260s",
+     "kind": "mention",
+     "note": "Speaker mentions that Railgun deploys on ARB, where existing assets can be shielded."
+    },
+    {
+     "episode_id": "bckrJLRN_l0",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto Pulling Back...Buy the Dip? | Market Update + Interviews",
+     "start_seconds": 11167.0,
+     "timestamp": "3:06:07",
+     "deep_link": "https://www.youtube.com/watch?v=bckrJLRN_l0&t=11167s",
+     "kind": "mention",
+     "note": "Arbitrum mentioned as a chain through which Uniswap was generating material revenue."
+    },
+    {
+     "episode_id": "bckrJLRN_l0",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto Pulling Back...Buy the Dip? | Market Update + Interviews",
+     "start_seconds": 11663.0,
+     "timestamp": "3:14:23",
+     "deep_link": "https://www.youtube.com/watch?v=bckrJLRN_l0&t=11663s",
+     "kind": "mention",
+     "note": "Liquidity was swept on Arbitrum along with several other assets."
+    },
+    {
+     "episode_id": "ckSVVsCYrSI",
+     "episode_title": "\ud83d\udd34 LIVE: Uptober Turned Choptober | Bitcoin Holding $80K | What's Next?",
+     "start_seconds": 1137.0,
+     "timestamp": "18:57",
+     "deep_link": "https://www.youtube.com/watch?v=ckSVVsCYrSI&t=1137s",
+     "kind": "analysis",
+     "note": "Speaker notes Arbitrum had a daily SFP looking to form at 173 (17.3), and while they wanted lower prices, the chart looks good."
+    },
+    {
+     "episode_id": "ct401gJf-as",
+     "episode_title": "\ud83d\udd34 LIVE: Hood summit day | Revenue coins dominating | Interviews + Positioning",
+     "start_seconds": 2531.0,
+     "timestamp": "42:11",
+     "deep_link": "https://www.youtube.com/watch?v=ct401gJf-as&t=2531s",
+     "kind": "mention",
+     "note": "Mentioned as an EVM blockchain where similar apps already exist."
+    },
+    {
+     "episode_id": "d-mQ25Dpn68",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Hits $85K | Bull Market Confirmed | Market Update + Interview",
+     "start_seconds": 1425.0,
+     "timestamp": "23:45",
+     "deep_link": "https://www.youtube.com/watch?v=d-mQ25Dpn68&t=1425s",
+     "kind": "analysis",
+     "note": "Speaker mentioned discussing Arbitrum last week and expects it to break out above key resistance, potentially generating decent trades, with potential for 10x to all-time high."
+    },
+    {
+     "episode_id": "d-mQ25Dpn68",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Hits $85K | Bull Market Confirmed | Market Update + Interview",
+     "start_seconds": 1579.0,
+     "timestamp": "26:19",
+     "deep_link": "https://www.youtube.com/watch?v=d-mQ25Dpn68&t=1579s",
+     "kind": "analysis",
+     "note": "Described as having a 10x to all-time high and compared to Uniswap in terms of resistance levels."
+    },
+    {
+     "episode_id": "d-mQ25Dpn68",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Hits $85K | Bull Market Confirmed | Market Update + Interview",
+     "start_seconds": 6892.0,
+     "timestamp": "1:54:52",
+     "deep_link": "https://www.youtube.com/watch?v=d-mQ25Dpn68&t=6892s",
+     "kind": "mention",
+     "note": "Referenced as a comparison to Uniswap's chart pattern that broke through resistance."
+    },
+    {
+     "episode_id": "d-mQ25Dpn68",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Hits $85K | Bull Market Confirmed | Market Update + Interview",
+     "start_seconds": 7435.0,
+     "timestamp": "2:03:55",
+     "deep_link": "https://www.youtube.com/watch?v=d-mQ25Dpn68&t=7435s",
+     "kind": "mention",
+     "note": "Mentioned as a previous trade analysis performed by the speaker last week, compared to XRP analysis being done this week."
+    },
+    {
+     "episode_id": "d-mQ25Dpn68",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Hits $85K | Bull Market Confirmed | Market Update + Interview",
+     "start_seconds": 7865.0,
+     "timestamp": "2:11:05",
+     "deep_link": "https://www.youtube.com/watch?v=d-mQ25Dpn68&t=7865s",
+     "kind": "analysis",
+     "note": "Speaker mentions Arbitrum had insane weekly candles and is up 2-3x from the bottom, references a previous Arbitrum trade from last week that was closed for steep profit."
+    },
+    {
+     "episode_id": "dRGMUoqXkic",
+     "episode_title": "Liminal $LIL: AI-Native Banking Stack \"Nim\", Tokenized Stocks Soon, 14-Month Runway | MCG Show",
+     "start_seconds": 380.0,
+     "timestamp": "6:20",
+     "deep_link": "https://www.youtube.com/watch?v=dRGMUoqXkic&t=380s",
+     "kind": "mention",
+     "note": "Mentioned as a blockchain where stablecoins could be deployed, discussed in context of platform abstraction."
+    },
+    {
+     "episode_id": "eLtX3KdYiZ0",
+     "episode_title": "Virtuals Day- Robinhood Ecosystem Project Spotlight",
+     "start_seconds": 8098.0,
+     "timestamp": "2:14:58",
+     "deep_link": "https://www.youtube.com/watch?v=eLtX3KdYiZ0&t=8098s",
+     "kind": "mention",
+     "note": "Speaker discusses potential ties to Arbitrum and mentions it received support during product launch."
+    },
+    {
+     "episode_id": "eLtX3KdYiZ0",
+     "episode_title": "Virtuals Day- Robinhood Ecosystem Project Spotlight",
+     "start_seconds": 8433.0,
+     "timestamp": "2:20:33",
+     "deep_link": "https://www.youtube.com/watch?v=eLtX3KdYiZ0&t=8433s",
+     "kind": "mention",
+     "note": "Arbitrum mentioned as one of 40 chains supported by Vex."
+    },
+    {
+     "episode_id": "eWiZUQvzYOo",
+     "episode_title": "SOAR:DRP Cross-Chain, Ex-Amazon/Indiegogo Help With Onboarding Campaign, Platform Upgrade | MCG Show",
+     "start_seconds": 2006.0,
+     "timestamp": "33:26",
+     "deep_link": "https://www.youtube.com/watch?v=eWiZUQvzYOo&t=2006s",
+     "kind": "mention",
+     "note": "Andrew Saunders, who worked on the ex-CMO role at Arbitrum and was responsible for its early marketing hype, is now working with the team on their mobile app strategy."
+    },
+    {
+     "episode_id": "gAbaYj44bNs",
+     "episode_title": "The Algorithm That Prints Money | Fraudsworth",
+     "start_seconds": 2554.0,
+     "timestamp": "42:34",
+     "deep_link": "https://www.youtube.com/watch?v=gAbaYj44bNs&t=2554s",
+     "kind": "mention",
+     "note": "Mentioned in context of ARB community-based bots receiving fees from a protocol."
+    },
+    {
+     "episode_id": "gQU9V7n-cRM",
+     "episode_title": "\ud83d\udd34 LIVE: BTC cools while Alts show strength | RHC recovery? | Market update + Interviews",
+     "start_seconds": 1231.0,
+     "timestamp": "20:31",
+     "deep_link": "https://www.youtube.com/watch?v=gQU9V7n-cRM&t=1231s",
+     "kind": "analysis",
+     "note": "Speaker says Arbitrum looks cheap and is lagging behind many alts despite Robinhood being built on the chain; likes it and calls for dips as a long opportunity."
+    },
+    {
+     "episode_id": "gTl0GwRHeAU",
+     "episode_title": "\ud83d\udd34 LIVE: Bears Are Cooked | $600M BTC Shorts Liquidated | Market Update + Interviews",
+     "start_seconds": 908.0,
+     "timestamp": "15:08",
+     "deep_link": "https://www.youtube.com/watch?v=gTl0GwRHeAU&t=908s",
+     "kind": "analysis",
+     "note": "Arbitrum on a bit of a dip, described as a big benefactor of the Robinhood chain and something to buy on dips."
+    },
+    {
+     "episode_id": "gTl0GwRHeAU",
+     "episode_title": "\ud83d\udd34 LIVE: Bears Are Cooked | $600M BTC Shorts Liquidated | Market Update + Interviews",
+     "start_seconds": 12133.0,
+     "timestamp": "3:22:13",
+     "deep_link": "https://www.youtube.com/watch?v=gTl0GwRHeAU&t=12133s",
+     "kind": "mention",
+     "note": "Speaker mentioned they called out Arbitrum."
+    },
+    {
+     "episode_id": "j7kHMGQ1Lyw",
+     "episode_title": "\ud83d\udd34 LIVE: Will $60 SOL Hold? Rotation back into Solana ? | Market Update + Founder Interview",
+     "start_seconds": 5776.0,
+     "timestamp": "1:36:16",
+     "deep_link": "https://www.youtube.com/watch?v=j7kHMGQ1Lyw&t=5776s",
+     "kind": "analysis",
+     "note": "Pulled back the entire Arbitrum or Robinhood pump."
+    },
+    {
+     "episode_id": "jvn-CbwG-8A",
+     "episode_title": "DREAM & x402: Building the Future of AI Agent Commerce & Micro-Payments | MCG Podcast",
+     "start_seconds": 152.0,
+     "timestamp": "2:32",
+     "deep_link": "https://www.youtube.com/watch?v=jvn-CbwG-8A&t=152s",
+     "kind": "analysis",
+     "note": "Speaker discussed building fully on-chain games on Arbitrum, noting the EVM infrastructure wasn't adequate for their needs due to computational limitations."
+    },
+    {
+     "episode_id": "kEIuk-Is0sg",
+     "episode_title": "Watch $HOOKR on MCG | Uniswap v4 whitelisted, King of pools EXCLUSIVE Launch, $WTH Integration",
+     "start_seconds": 471.0,
+     "timestamp": "7:51",
+     "deep_link": "https://www.youtube.com/watch?v=kEIuk-Is0sg&t=471s",
+     "kind": "mention",
+     "note": "Mentioned as 'ARB recap protection' being enabled by default for pools and launches."
+    },
+    {
+     "episode_id": "kEIuk-Is0sg",
+     "episode_title": "Watch $HOOKR on MCG | Uniswap v4 whitelisted, King of pools EXCLUSIVE Launch, $WTH Integration",
+     "start_seconds": 1685.0,
+     "timestamp": "28:05",
+     "deep_link": "https://www.youtube.com/watch?v=kEIuk-Is0sg&t=1685s",
+     "kind": "mention",
+     "note": "ARB recaps are generated as part of the Pool of Kings daily competition mechanic where fees are captured from arbitrage opportunities."
+    },
+    {
+     "episode_id": "kEIuk-Is0sg",
+     "episode_title": "Watch $HOOKR on MCG | Uniswap v4 whitelisted, King of pools EXCLUSIVE Launch, $WTH Integration",
+     "start_seconds": 2018.0,
+     "timestamp": "33:38",
+     "deep_link": "https://www.youtube.com/watch?v=kEIuk-Is0sg&t=2018s",
+     "kind": "mention",
+     "note": "ARB activity mentioned in the context of fee accumulation mechanics."
+    },
+    {
+     "episode_id": "lN2kZJ0CNZg",
+     "episode_title": "\ud83d\udfe2 LIVE: Robinhood Chain Rally Incoming? How to Position",
+     "start_seconds": 3012.0,
+     "timestamp": "50:12",
+     "deep_link": "https://www.youtube.com/watch?v=lN2kZJ0CNZg&t=3012s",
+     "kind": "mention",
+     "note": "Speaker mentions working on projects on Arbitrum and discusses multiple Arbitrum-based protocols."
+    },
+    {
+     "episode_id": "miXTiMNMDCc",
+     "episode_title": "\ud83d\udd34 LIVE: Onchain Volume Falling Across the Board | Why Stay Bullish?",
+     "start_seconds": 9957.0,
+     "timestamp": "2:45:57",
+     "deep_link": "https://www.youtube.com/watch?v=miXTiMNMDCc&t=9957s",
+     "kind": "mention",
+     "note": "Referenced as a blockchain platform being compared to EVM for infrastructure capabilities."
+    },
+    {
+     "episode_id": "oI9Hv_D6UFk",
+     "episode_title": "\ud83d\udd34LIVE: HyperEVM, SOL, RH, or Base? Bulls In Control | Time to Lock In | Market Update + Interview",
+     "start_seconds": 7347.0,
+     "timestamp": "2:02:27",
+     "deep_link": "https://www.youtube.com/watch?v=oI9Hv_D6UFk&t=7347s",
+     "kind": "mention",
+     "note": "Referenced as 'Robin Hood' (apparent nickname), named as one of four notable ecosystems."
+    },
+    {
+     "episode_id": "p1DZ7LSLlNM",
+     "episode_title": "\ud83d\udd34 LIVE: Trading with onchain w/SPAWN Agents, MCG Trader Radio",
+     "start_seconds": 1904.0,
+     "timestamp": "31:44",
+     "deep_link": "https://www.youtube.com/watch?v=p1DZ7LSLlNM&t=1904s",
+     "kind": "mention",
+     "note": "Mentioned as a bridge destination for users seeking DEX trading, with speaker joking it is primarily used for accessing Hyperliquid."
+    },
+    {
+     "episode_id": "q2zmdT9CnNA",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto Pulling Back... What's Next? | Market Update + Interviews",
+     "start_seconds": 7610.0,
+     "timestamp": "2:06:50",
+     "deep_link": "https://www.youtube.com/watch?v=q2zmdT9CnNA&t=7610s",
+     "kind": "analysis",
+     "note": "Arbitrum partnered with Robin Hood and will receive 10% of the revenue from Robin Hood chain; speakers discuss whether Arbitrum will reach all-time highs and its beta relationship to the Robin Hood ecosystem."
+    },
+    {
+     "episode_id": "qDr3pkTC7KM",
+     "episode_title": "Programmable: A launch platform for Uniswap v4 products",
+     "start_seconds": 1482.0,
+     "timestamp": "24:42",
+     "deep_link": "https://www.youtube.com/watch?v=qDr3pkTC7KM&t=1482s",
+     "kind": "mention",
+     "note": "Speaker mentions that the launchpad could work on Arbitrum as well as other chains."
+    },
+    {
+     "episode_id": "qHavUGBG56A",
+     "episode_title": "\ud83d\udd34 LIVE: Black Monday Overblown? | Staying Bullish | Market Update",
+     "start_seconds": 470.0,
+     "timestamp": "7:50",
+     "deep_link": "https://www.youtube.com/watch?v=qHavUGBG56A&t=470s",
+     "kind": "analysis",
+     "note": "Speaker states they feel like longing Arbitrum."
+    },
+    {
+     "episode_id": "qq_4gfyjN6s",
+     "episode_title": "\ud83d\udd34 LIVE: MonkeDAO Solana Product Spotlight + Trader Radio w/@ChillTRD | Market Updates",
+     "start_seconds": 4810.0,
+     "timestamp": "1:20:10",
+     "deep_link": "https://www.youtube.com/watch?v=qq_4gfyjN6s&t=4810s",
+     "kind": "mention",
+     "note": "Named as the blockchain where the speaker built the first delta neutral vault."
+    },
+    {
+     "episode_id": "siZ8uErRtiQ",
+     "episode_title": "Bob The reBuilt: Reveals Top 3 ICM Picks, Watchlist, Accounts to Follow + More!",
+     "start_seconds": 534.0,
+     "timestamp": "8:54",
+     "deep_link": "https://www.youtube.com/watch?v=siZ8uErRtiQ&t=534s",
+     "kind": "analysis",
+     "note": "Speakers reference an Arbitrum governance proposal from 2023 that allocated approximately 20 million tokens for gaming incentives, but the distribution criteria was loose and tokens were primarily acquired by people who gamed the system and sold them."
+    },
+    {
+     "episode_id": "t46W9kf1m90",
+     "episode_title": "\ud83d\udd34 LIVE: Welcome to the Onchain Bull Market | Market Update + Interviews",
+     "start_seconds": 770.0,
+     "timestamp": "12:50",
+     "deep_link": "https://www.youtube.com/watch?v=t46W9kf1m90&t=770s",
+     "kind": "analysis",
+     "note": "Speaker mentions catching an ARB long earlier in the week with a massive move on Arbitrum, and notes it coming into a nice area of resistance."
+    },
+    {
+     "episode_id": "t46W9kf1m90",
+     "episode_title": "\ud83d\udd34 LIVE: Welcome to the Onchain Bull Market | Market Update + Interviews",
+     "start_seconds": 7736.0,
+     "timestamp": "2:08:56",
+     "deep_link": "https://www.youtube.com/watch?v=t46W9kf1m90&t=7736s",
+     "kind": "analysis",
+     "note": "Up roughly 4x off the bottom; described as having higher to go with potential for much larger moves if it flips a key resistance level, after which the ecosystem would rocket."
+    },
+    {
+     "episode_id": "urLmYepetQI",
+     "episode_title": "\ud83d\udd34 LIVE: WTF is a V4 hook | $ETH bottom in? | Market Update + Interviews",
+     "start_seconds": 885.0,
+     "timestamp": "14:45",
+     "deep_link": "https://www.youtube.com/watch?v=urLmYepetQI&t=885s",
+     "kind": "mention",
+     "note": "Arbitrum mentioned as receiving 10% of all fees from Robin Hood."
+    },
+    {
+     "episode_id": "vBRvDqOdKwQ",
+     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
+     "start_seconds": 995.0,
+     "timestamp": "16:35",
+     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=995s",
+     "kind": "mention",
+     "note": "Mentioned as a blockchain stack that other companies might use to run a playbook similar to Robinhood."
+    },
+    {
+     "episode_id": "vqOeJKpQ61E",
+     "episode_title": "A Conversation with Sonder: Trading the Crypto Trenches",
+     "start_seconds": 246.0,
+     "timestamp": "4:06",
+     "deep_link": "https://www.youtube.com/watch?v=vqOeJKpQ61E&t=246s",
+     "kind": "mention",
+     "note": "Mentioned as the underlying blockchain on which Robin Hood L2 is built."
+    },
+    {
+     "episode_id": "vqOeJKpQ61E",
+     "episode_title": "A Conversation with Sonder: Trading the Crypto Trenches",
+     "start_seconds": 3609.0,
+     "timestamp": "1:00:09",
+     "deep_link": "https://www.youtube.com/watch?v=vqOeJKpQ61E&t=3609s",
+     "kind": "analysis",
+     "note": "Speaker identifies Arbitum as receiving 10% of Robin Hood fees and as a beneficiary."
+    },
+    {
+     "episode_id": "wJVIpoVLTsk",
+     "episode_title": "\ud83d\udd34 LIVE: Is This The Perfect Time To Be In Crypto? | Founder Interviews + Market Updates",
+     "start_seconds": 5053.0,
+     "timestamp": "1:24:13",
+     "deep_link": "https://www.youtube.com/watch?v=wJVIpoVLTsk&t=5053s",
+     "kind": "mention",
+     "note": "Arbitrum Foundation reached out to the team and they are working closely with them."
+    },
+    {
+     "episode_id": "wVRcD_oqkz8",
+     "episode_title": "Vantis: Tokenizing hundreds of vertical AI products into a single utility token",
+     "start_seconds": 1384.0,
+     "timestamp": "23:04",
+     "deep_link": "https://www.youtube.com/watch?v=wVRcD_oqkz8&t=1384s",
+     "kind": "mention",
+     "note": "Arbitrum listed as one of five chains supported for card top-ups."
+    },
+    {
+     "episode_id": "wsTdtrlI2I8",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood launchpad war drama | Live Market Updates + Onchain Positioning",
+     "start_seconds": 809.0,
+     "timestamp": "13:29",
+     "deep_link": "https://www.youtube.com/watch?v=wsTdtrlI2I8&t=809s",
+     "kind": "analysis",
+     "note": "Arbitrum described as holding nicely with a good-looking chart, receiving 10% of all Robin Hood fees, forming a bull flag pattern."
+    },
+    {
+     "episode_id": "wsTdtrlI2I8",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood launchpad war drama | Live Market Updates + Onchain Positioning",
+     "start_seconds": 4109.0,
+     "timestamp": "1:08:29",
+     "deep_link": "https://www.youtube.com/watch?v=wsTdtrlI2I8&t=4109s",
+     "kind": "mention",
+     "note": "Mentioned as the chain where the speaker entered the Arbitrum One hackathon in January."
+    },
+    {
+     "episode_id": "wsTdtrlI2I8",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood launchpad war drama | Live Market Updates + Onchain Positioning",
+     "start_seconds": 6461.0,
+     "timestamp": "1:47:41",
+     "deep_link": "https://www.youtube.com/watch?v=wsTdtrlI2I8&t=6461s",
+     "kind": "analysis",
+     "note": "Extensively discussed as an L2 solution chosen by Robinhood Chain for its security, speed, cost-efficiency, and regulatory engagement; described as playing a long-term strategy successfully."
+    },
+    {
+     "episode_id": "y4SqXgBAFFg",
+     "episode_title": "\ud83d\udd34 LIVE: RobinHood Chain Exploding! | War Back!?!? | Market Updates + Founder Interviews",
+     "start_seconds": 534.0,
+     "timestamp": "8:54",
+     "deep_link": "https://www.youtube.com/watch?v=y4SqXgBAFFg&t=534s",
+     "kind": "mention",
+     "note": "Mentioned as the blockchain infrastructure used when Robinhood offered private companies on-chain."
+    },
+    {
+     "episode_id": "zDMFsmfIkkM",
+     "episode_title": "\ud83d\udd34 LIVE: SEC Greenlights Onchain Stocks | Tokenization Supercycle | Market Update + Interviews",
+     "start_seconds": 1202.0,
+     "timestamp": "20:02",
+     "deep_link": "https://www.youtube.com/watch?v=zDMFsmfIkkM&t=1202s",
+     "kind": "mention",
+     "note": "Arbitrum up 4% on the day."
+    },
+    {
+     "episode_id": "zHkjSfxUyVU",
+     "episode_title": "THERAPY IS IN SESSION: FOR TRADERS w/@hurupayapp $HURU @surfcashx $SURF @Official_taches $GSD",
+     "start_seconds": 2866.0,
+     "timestamp": "47:46",
+     "deep_link": "https://www.youtube.com/watch?v=zHkjSfxUyVU&t=2866s",
+     "kind": "mention",
+     "note": "Named as an example of L2 tokens whose viability is questioned due to Vitalik's negative comments on L2s."
+    },
+    {
+     "episode_id": "zWznxthbJNA",
+     "episode_title": "\ud83d\udd34 LIVE: MSTR STRC gets crushed. P2P Cash, onchain startups | Live Market Updates",
+     "start_seconds": 7035.0,
+     "timestamp": "1:57:15",
+     "deep_link": "https://www.youtube.com/watch?v=zWznxthbJNA&t=7035s",
+     "kind": "mention",
+     "note": "Mentioned as a chain where users traditionally needed to bridge to and hold ETH to access perp trading platforms."
+    }
+   ],
+   "episode_count": 80,
+   "single_reference": false
+  },
+  {
    "symbol": "BONK",
    "name": "Bonk",
    "asset_class": "crypto",
@@ -87209,1178 +88426,6 @@
     }
    ],
    "episode_count": 97,
-   "single_reference": false
-  },
-  {
-   "symbol": "ARB",
-   "name": "Arbitrum",
-   "asset_class": "crypto",
-   "mentions": 129,
-   "analysis": 50,
-   "moments": [
-    {
-     "episode_id": "0bmVQog1A4U",
-     "episode_title": "Chief $CHOP cooking?",
-     "start_seconds": 1336.0,
-     "timestamp": "22:16",
-     "deep_link": "https://www.youtube.com/watch?v=0bmVQog1A4U&t=1336s",
-     "kind": "mention",
-     "note": "Mentioned as an event (Arbitrum event) where Robinhood was a guest."
-    },
-    {
-     "episode_id": "0cdFekQht5w",
-     "episode_title": "\ud83d\udd34 LIVE: Collector Crypt Pokemon Market Review, Solana securing onchain Defi | Macro + Watchlists",
-     "start_seconds": 6677.0,
-     "timestamp": "1:51:17",
-     "deep_link": "https://www.youtube.com/watch?v=0cdFekQht5w&t=6677s",
-     "kind": "mention",
-     "note": "Listed as an EVM-compatible machine that can work within Fluent's unified execution environment."
-    },
-    {
-     "episode_id": "1UFlORh3zt0",
-     "episode_title": "\ud83d\udd34 LIVE: FOMC Day, Onchain Rotations...Next Leg Loading? | Market Update + Interviews",
-     "start_seconds": 237.0,
-     "timestamp": "3:57",
-     "deep_link": "https://www.youtube.com/watch?v=1UFlORh3zt0&t=237s",
-     "kind": "analysis",
-     "note": "Discussed as part of rotation strategies; mentioned as a chain that people have been trading and chasing, with comparisons to Solana regarding market attention."
-    },
-    {
-     "episode_id": "1UFlORh3zt0",
-     "episode_title": "\ud83d\udd34 LIVE: FOMC Day, Onchain Rotations...Next Leg Loading? | Market Update + Interviews",
-     "start_seconds": 836.0,
-     "timestamp": "13:56",
-     "deep_link": "https://www.youtube.com/watch?v=1UFlORh3zt0&t=836s",
-     "kind": "mention",
-     "note": "Speaker gave a call on ARB the other day."
-    },
-    {
-     "episode_id": "1UFlORh3zt0",
-     "episode_title": "\ud83d\udd34 LIVE: FOMC Day, Onchain Rotations...Next Leg Loading? | Market Update + Interviews",
-     "start_seconds": 10752.0,
-     "timestamp": "2:59:12",
-     "deep_link": "https://www.youtube.com/watch?v=1UFlORh3zt0&t=10752s",
-     "kind": "analysis",
-     "note": "The speaker stated their ARB long position is 'absolutely printing' from Monday."
-    },
-    {
-     "episode_id": "2NK_MBlFvtM",
-     "episode_title": "\ud83d\udd34 LIVE: So Early It Hurts | A Simple Strategy for Surviving a Sideways Crypto Market",
-     "start_seconds": 3302.0,
-     "timestamp": "55:02",
-     "deep_link": "https://www.youtube.com/watch?v=2NK_MBlFvtM&t=3302s",
-     "kind": "mention",
-     "note": "Arbitrum Relay listed in Robinhood Wallet Web3 applications."
-    },
-    {
-     "episode_id": "4PlcWhQM96A",
-     "episode_title": "\ud83d\udd34 LIVE: Time To Log Off? | AI Fears, Debt Market Shutdown, Anthropic IPO",
-     "start_seconds": 3729.0,
-     "timestamp": "1:02:09",
-     "deep_link": "https://www.youtube.com/watch?v=4PlcWhQM96A&t=3729s",
-     "kind": "mention",
-     "note": "Mentioned as an EVM chain with existing work done, referenced in context of chain expansion possibilities."
-    },
-    {
-     "episode_id": "4PlcWhQM96A",
-     "episode_title": "\ud83d\udd34 LIVE: Time To Log Off? | AI Fears, Debt Market Shutdown, Anthropic IPO",
-     "start_seconds": 4699.0,
-     "timestamp": "1:18:19",
-     "deep_link": "https://www.youtube.com/watch?v=4PlcWhQM96A&t=4699s",
-     "kind": "mention",
-     "note": "Arbitrum event mentioned where Robinhood was a guest."
-    },
-    {
-     "episode_id": "4PlcWhQM96A",
-     "episode_title": "\ud83d\udd34 LIVE: Time To Log Off? | AI Fears, Debt Market Shutdown, Anthropic IPO",
-     "start_seconds": 8215.0,
-     "timestamp": "2:16:55",
-     "deep_link": "https://www.youtube.com/watch?v=4PlcWhQM96A&t=8215s",
-     "kind": "mention",
-     "note": "Mentioned as upcoming topic for discussion regarding an Arbitrum event."
-    },
-    {
-     "episode_id": "4PlcWhQM96A",
-     "episode_title": "\ud83d\udd34 LIVE: Time To Log Off? | AI Fears, Debt Market Shutdown, Anthropic IPO",
-     "start_seconds": 8254.0,
-     "timestamp": "2:17:34",
-     "deep_link": "https://www.youtube.com/watch?v=4PlcWhQM96A&t=8254s",
-     "kind": "mention",
-     "note": "Arbitrum event was happening in Singapore in collaboration with Robinhood chain; described as an event where Robinhood team had minimal presence and support."
-    },
-    {
-     "episode_id": "50P-rICrUfs",
-     "episode_title": "\ud83d\udd34 LIVE: Launchpad Wars On Robinhood | Original $ANSEM Dev Interview | Onchain Update",
-     "start_seconds": 5235.0,
-     "timestamp": "1:27:15",
-     "deep_link": "https://www.youtube.com/watch?v=50P-rICrUfs&t=5235s",
-     "kind": "mention",
-     "note": "Speaker references working in onchain perpetuals since the very beginning of Arbitum in 2021."
-    },
-    {
-     "episode_id": "50P-rICrUfs",
-     "episode_title": "\ud83d\udd34 LIVE: Launchpad Wars On Robinhood | Original $ANSEM Dev Interview | Onchain Update",
-     "start_seconds": 6237.0,
-     "timestamp": "1:43:57",
-     "deep_link": "https://www.youtube.com/watch?v=50P-rICrUfs&t=6237s",
-     "kind": "mention",
-     "note": "Speaker mentioned seeing Arbitrum talk about Programmable."
-    },
-    {
-     "episode_id": "B2cg6LWD60g",
-     "episode_title": "\ud83d\udd34 LIVE: BTC Erases Rally | $870M+ Longs Liquidated | Time to Exit?",
-     "start_seconds": 10084.0,
-     "timestamp": "2:48:04",
-     "deep_link": "https://www.youtube.com/watch?v=B2cg6LWD60g&t=10084s",
-     "kind": "analysis",
-     "note": "Speaker notes Arb has not yet gotten down to their target zone."
-    },
-    {
-     "episode_id": "Ck1DT4ivFl8",
-     "episode_title": "\ud83d\udd34 LIVE: Top Picks w/@FloodCapital, More IPO's on Solana,  Intro to Internet Rounds!",
-     "start_seconds": 11481.0,
-     "timestamp": "3:11:21",
-     "deep_link": "https://www.youtube.com/watch?v=Ck1DT4ivFl8&t=11481s",
-     "kind": "analysis",
-     "note": "Speaker discusses Arbitrum's flawed DAO funding model, noting token price fell from $1-2 to 9 cents after unsuccessful GameFi spending; discusses potential upside from Robin Hood partnership with 10% of platform fees going to Arbitum, with current circulating market cap of 580 million."
-    },
-    {
-     "episode_id": "Ck1DT4ivFl8",
-     "episode_title": "\ud83d\udd34 LIVE: Top Picks w/@FloodCapital, More IPO's on Solana,  Intro to Internet Rounds!",
-     "start_seconds": 11693.0,
-     "timestamp": "3:14:53",
-     "deep_link": "https://www.youtube.com/watch?v=Ck1DT4ivFl8&t=11693s",
-     "kind": "mention",
-     "note": "Named as part of a Robin Hood basket of tokens."
-    },
-    {
-     "episode_id": "DCxwABH6umU",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto + Robinhood Chain Bottom In? | Elysium Launch Incoming | Exact 90-Day Plan",
-     "start_seconds": 9413.0,
-     "timestamp": "2:36:53",
-     "deep_link": "https://www.youtube.com/watch?v=DCxwABH6umU&t=9413s",
-     "kind": "analysis",
-     "note": "Arbitrum is working with Robinhood to distribute $1.8 million in grants to builders."
-    },
-    {
-     "episode_id": "DCxwABH6umU",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto + Robinhood Chain Bottom In? | Elysium Launch Incoming | Exact 90-Day Plan",
-     "start_seconds": 10271.0,
-     "timestamp": "2:51:11",
-     "deep_link": "https://www.youtube.com/watch?v=DCxwABH6umU&t=10271s",
-     "kind": "mention",
-     "note": "Mentioned in context of a $1.8 million grant program partnership with Robinhood Chain."
-    },
-    {
-     "episode_id": "DCxwABH6umU",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto + Robinhood Chain Bottom In? | Elysium Launch Incoming | Exact 90-Day Plan",
-     "start_seconds": 11506.0,
-     "timestamp": "3:11:46",
-     "deep_link": "https://www.youtube.com/watch?v=DCxwABH6umU&t=11506s",
-     "kind": "analysis",
-     "note": "Speaker discusses Arbitrum holding its lows, notes an SFP (sweep of fair price) at the downside, and analyzes the structure as forming a higher low within a higher low/higher high pattern."
-    },
-    {
-     "episode_id": "EHhZRRHMZQM",
-     "episode_title": "\ud83d\udd34 LIVE: Markets ripping |  RHC leading | Market Update + Founder Interview",
-     "start_seconds": 10568.0,
-     "timestamp": "2:56:08",
-     "deep_link": "https://www.youtube.com/watch?v=EHhZRRHMZQM&t=10568s",
-     "kind": "analysis",
-     "note": "Arbitrum is described as down in a certain range."
-    },
-    {
-     "episode_id": "ElhoMK0uH4M",
-     "episode_title": "\ud83d\udd34 LIVE: Bearish Headlines Strike Again | More Chop or Bottom Signal?",
-     "start_seconds": 2847.0,
-     "timestamp": "47:27",
-     "deep_link": "https://www.youtube.com/watch?v=ElhoMK0uH4M&t=2847s",
-     "kind": "mention",
-     "note": "The speaker mentions applying to the Arbitrum Security Program for funding support."
-    },
-    {
-     "episode_id": "FJkrRgAnHDU",
-     "episode_title": "\ud83d\udd34 LIVE: How to Spot 5-10x Crypto Setups Before They Run | Full Strategy Breakdown",
-     "start_seconds": 1853.0,
-     "timestamp": "30:53",
-     "deep_link": "https://www.youtube.com/watch?v=FJkrRgAnHDU&t=1853s",
-     "kind": "analysis",
-     "note": "Speaker notes an SFP on the 12-hour chart and wants to see it come down, reload, then break through resistance above."
-    },
-    {
-     "episode_id": "FVSdhpK8Lvs",
-     "episode_title": "ICM.Run: Internet Capital Markets, Tokenization, Incubator Vision & More",
-     "start_seconds": 486.0,
-     "timestamp": "8:06",
-     "deep_link": "https://www.youtube.com/watch?v=FVSdhpK8Lvs&t=486s",
-     "kind": "mention",
-     "note": "Speaker references arbitrum as one of the big Ethereum building blocks that pump took allocations to."
-    },
-    {
-     "episode_id": "G2WvWGMaOag",
-     "episode_title": "SlabzMcAllister from DLMM: Onchain Hedge Fund, 16x Growth, Multi-Chain Yield Strategies + More!",
-     "start_seconds": 88.0,
-     "timestamp": "1:28",
-     "deep_link": "https://www.youtube.com/watch?v=G2WvWGMaOag&t=88s",
-     "kind": "mention",
-     "note": "Referenced regarding an airdrop that preceded the founder's work on projects like Camelot."
-    },
-    {
-     "episode_id": "GJ6FjrBDviM",
-     "episode_title": "The Blockchain Arcade for Graded Cards",
-     "start_seconds": 2904.0,
-     "timestamp": "48:24",
-     "deep_link": "https://www.youtube.com/watch?v=GJ6FjrBDviM&t=2904s",
-     "kind": "analysis",
-     "note": "Speaker discusses Arbitrum as an alternative EVM chain for building, stating it has the best tech, best people, best team, and is undervalued."
-    },
-    {
-     "episode_id": "H4kImk1Y7KQ",
-     "episode_title": "\ud83d\udd34 LIVE: FOMC, AI Panic, Clarity Act Vote | Market Update + Interviews",
-     "start_seconds": 233.0,
-     "timestamp": "3:53",
-     "deep_link": "https://www.youtube.com/watch?v=H4kImk1Y7KQ&t=233s",
-     "kind": "mention",
-     "note": "Host mentions an 'arc on chain rotation' happening, referring to an opportunity to position on Arbitrum rather than chasing on-chain assets."
-    },
-    {
-     "episode_id": "H4kImk1Y7KQ",
-     "episode_title": "\ud83d\udd34 LIVE: FOMC, AI Panic, Clarity Act Vote | Market Update + Interviews",
-     "start_seconds": 9133.0,
-     "timestamp": "2:32:13",
-     "deep_link": "https://www.youtube.com/watch?v=H4kImk1Y7KQ&t=9133s",
-     "kind": "analysis",
-     "note": "Speaker discussed technical entry on Arbitrum for a long position with SFP and OTE references."
-    },
-    {
-     "episode_id": "H4kImk1Y7KQ",
-     "episode_title": "\ud83d\udd34 LIVE: FOMC, AI Panic, Clarity Act Vote | Market Update + Interviews",
-     "start_seconds": 9974.0,
-     "timestamp": "2:46:14",
-     "deep_link": "https://www.youtube.com/watch?v=H4kImk1Y7KQ&t=9974s",
-     "kind": "analysis",
-     "note": "Speaker mentions using ARB and discusses Arbitrum narrative with Robinhood integration potentially driving an Arbitrum season."
-    },
-    {
-     "episode_id": "H4kImk1Y7KQ",
-     "episode_title": "\ud83d\udd34 LIVE: FOMC, AI Panic, Clarity Act Vote | Market Update + Interviews",
-     "start_seconds": 10184.0,
-     "timestamp": "2:49:44",
-     "deep_link": "https://www.youtube.com/watch?v=H4kImk1Y7KQ&t=10184s",
-     "kind": "analysis",
-     "note": "Speaker identifies Arbitrum as a beneficiary of the Robin Hood narrative and provides detailed technical analysis including Fibonacci entries, fair value gap trading, order block identification, and a long position with a target of 20 cents."
-    },
-    {
-     "episode_id": "H4kImk1Y7KQ",
-     "episode_title": "\ud83d\udd34 LIVE: FOMC, AI Panic, Clarity Act Vote | Market Update + Interviews",
-     "start_seconds": 10871.0,
-     "timestamp": "3:01:11",
-     "deep_link": "https://www.youtube.com/watch?v=H4kImk1Y7KQ&t=10871s",
-     "kind": "analysis",
-     "note": "Speaker describes ARB as having one of the cleanest technical setups recently seen and expresses bullish sentiment on it."
-    },
-    {
-     "episode_id": "Hm-JTnBqB4Q",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood here to stay, war is off? | Market Update + Interviews",
-     "start_seconds": 4397.0,
-     "timestamp": "1:13:17",
-     "deep_link": "https://www.youtube.com/watch?v=Hm-JTnBqB4Q&t=4397s",
-     "kind": "analysis",
-     "note": "Identified as a primary beneficiary of Robinhood chain success; Robinhood chain is built on Arbitrum as an L2, and 10% of Robinhood chain fees accrue to Arbitrum (8% to treasury, 2% to development), projected to generate ~$15 million annualized."
-    },
-    {
-     "episode_id": "Hm-JTnBqB4Q",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood here to stay, war is off? | Market Update + Interviews",
-     "start_seconds": 4534.0,
-     "timestamp": "1:15:34",
-     "deep_link": "https://www.youtube.com/watch?v=Hm-JTnBqB4Q&t=4534s",
-     "kind": "analysis",
-     "note": "Discussed as a beta play to Robinhood's crypto division; keeps 8% of fees with 10% going to DAO, trading at $555M market cap/$871M FDV; up 13% on the day; generates ~$15M annually from Robinhood; compared to Base as analogous play."
-    },
-    {
-     "episode_id": "Hm-JTnBqB4Q",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood here to stay, war is off? | Market Update + Interviews",
-     "start_seconds": 4948.0,
-     "timestamp": "1:22:28",
-     "deep_link": "https://www.youtube.com/watch?v=Hm-JTnBqB4Q&t=4948s",
-     "kind": "analysis",
-     "note": "Discussed as a layer 2 that would receive 10% of Robinhood chain's revenue; speakers analyzed its price-to-earnings ratio, called it 'beat down', and noted it controls 8% of transaction fees going to the ARB DAO treasury."
-    },
-    {
-     "episode_id": "Hm-JTnBqB4Q",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood here to stay, war is off? | Market Update + Interviews",
-     "start_seconds": 5390.0,
-     "timestamp": "1:29:50",
-     "deep_link": "https://www.youtube.com/watch?v=Hm-JTnBqB4Q&t=5390s",
-     "kind": "analysis",
-     "note": "Discussion of Arbitrum as a beta to Robinhood success, with general chain success benefiting from Morpho capital conversion on the platform."
-    },
-    {
-     "episode_id": "IcdWxSsHJno",
-     "episode_title": "Perps.fun: Launch perps, own fees on Hyperliquid",
-     "start_seconds": 2145.0,
-     "timestamp": "35:45",
-     "deep_link": "https://www.youtube.com/watch?v=IcdWxSsHJno&t=2145s",
-     "kind": "mention",
-     "note": "Speaker mentions having worked on early derivative protocols on Arbitrum."
-    },
-    {
-     "episode_id": "IdN9O-XqlnQ",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto Rebounds After Midterms | What to Do Now",
-     "start_seconds": 1068.0,
-     "timestamp": "17:48",
-     "deep_link": "https://www.youtube.com/watch?v=IdN9O-XqlnQ&t=1068s",
-     "kind": "analysis",
-     "note": "Speaker expressed visceral anger about lack of support for an Arbitrum grant; later mentioned Arbitrum partnering with Robinhood Chain on OpenHouse with $1.8 million in grants."
-    },
-    {
-     "episode_id": "IdN9O-XqlnQ",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto Rebounds After Midterms | What to Do Now",
-     "start_seconds": 1975.0,
-     "timestamp": "32:55",
-     "deep_link": "https://www.youtube.com/watch?v=IdN9O-XqlnQ&t=1975s",
-     "kind": "mention",
-     "note": "Referenced in relation to when the speaker last remembers being bullish on an L2, around the time of the Arbitrum airdrop."
-    },
-    {
-     "episode_id": "IdN9O-XqlnQ",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto Rebounds After Midterms | What to Do Now",
-     "start_seconds": 9422.0,
-     "timestamp": "2:37:02",
-     "deep_link": "https://www.youtube.com/watch?v=IdN9O-XqlnQ&t=9422s",
-     "kind": "mention",
-     "note": "Arbitrum is mentioned as a blockchain that WTH is now integrating with; Arbitrum is noted as offering $1.8 million in grants to builders."
-    },
-    {
-     "episode_id": "IdN9O-XqlnQ",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto Rebounds After Midterms | What to Do Now",
-     "start_seconds": 11093.0,
-     "timestamp": "3:04:53",
-     "deep_link": "https://www.youtube.com/watch?v=IdN9O-XqlnQ&t=11093s",
-     "kind": "mention",
-     "note": "Mentioned as having deep ties and relationships with Stockbrokers and supporting the ecosystem."
-    },
-    {
-     "episode_id": "IdN9O-XqlnQ",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto Rebounds After Midterms | What to Do Now",
-     "start_seconds": 11442.0,
-     "timestamp": "3:10:42",
-     "deep_link": "https://www.youtube.com/watch?v=IdN9O-XqlnQ&t=11442s",
-     "kind": "mention",
-     "note": "Speaker mentions Arbitrum in context of Robinhood being recognized as a leading builder and receiving grants."
-    },
-    {
-     "episode_id": "IiXJRXVECBo",
-     "episode_title": "The Rise Of Soby: FOMO's Top Trader, $158K/Day, Sneak disses @Orangie Web3",
-     "start_seconds": 411.0,
-     "timestamp": "6:51",
-     "deep_link": "https://www.youtube.com/watch?v=IiXJRXVECBo&t=411s",
-     "kind": "mention",
-     "note": "Speaker built Xai Games with the Arbitrum team and launched the airdrop on the Arbitrum network."
-    },
-    {
-     "episode_id": "KXE20DkATGI",
-     "episode_title": "\ud83d\udd34 LIVE: Onchain is RIPPING! Base Szn + Memes Pumping | Market Alpha & Updates",
-     "start_seconds": 10527.0,
-     "timestamp": "2:55:27",
-     "deep_link": "https://www.youtube.com/watch?v=KXE20DkATGI&t=10527s",
-     "kind": "mention",
-     "note": "Arbitrum listed as a top chain for inflows and outflows."
-    },
-    {
-     "episode_id": "KrTdbeBZMCA",
-     "episode_title": "PyroBuzz Interview: On-Chain Tracking, Viral Campaigns, Web3 Tools + More!",
-     "start_seconds": 21.0,
-     "timestamp": "0:21",
-     "deep_link": "https://www.youtube.com/watch?v=KrTdbeBZMCA&t=21s",
-     "kind": "mention",
-     "note": "Speaker mentioned involvement in the Arbitrum DeFi ecosystem in early crypto days around 2021-2022."
-    },
-    {
-     "episode_id": "LNC5N-W785g",
-     "episode_title": "\ud83d\udd34 LIVE: Pullbacks in a Bull Market | 3 Rules to Stay Profitable",
-     "start_seconds": 10388.0,
-     "timestamp": "2:53:08",
-     "deep_link": "https://www.youtube.com/watch?v=LNC5N-W785g&t=10388s",
-     "kind": "mention",
-     "note": "Arbitrum announced a new grant program and mentorship program in partnership with Robinhood Crypto, offering a 100k prize for demo day competition."
-    },
-    {
-     "episode_id": "LpwKHoAJu2Q",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood DEX volume at ATH's | Pennie stocks on Solana? | Market Update + Interviews",
-     "start_seconds": 10378.0,
-     "timestamp": "2:52:58",
-     "deep_link": "https://www.youtube.com/watch?v=LpwKHoAJu2Q&t=10378s",
-     "kind": "mention",
-     "note": "Mentioned as developer partner behind Robinhood chain."
-    },
-    {
-     "episode_id": "Mwp0GbhnqLI",
-     "episode_title": "\ud83d\udd34 LIVE: No bailouts for crypto, Clarity Act In Days? | Founder Interviews + Market Updates",
-     "start_seconds": 10375.0,
-     "timestamp": "2:52:55",
-     "deep_link": "https://www.youtube.com/watch?v=Mwp0GbhnqLI&t=10375s",
-     "kind": "mention",
-     "note": "Speaker speculates Arbitrum may get a pop from Robin Hood adoption."
-    },
-    {
-     "episode_id": "N0q17BVEOtQ",
-     "episode_title": "\ud83d\udd34 LIVE: HOOD Summit Approaches | Robinhood vs Solana | Market Update + Interviews",
-     "start_seconds": 7176.0,
-     "timestamp": "1:59:36",
-     "deep_link": "https://www.youtube.com/watch?v=N0q17BVEOtQ&t=7176s",
-     "kind": "analysis",
-     "note": "Speaker mentions an ARB long position discussed on Wednesday with entry at $21 and stop at $21, noting strong risk-reward ratio and noting it is in profit."
-    },
-    {
-     "episode_id": "N0q17BVEOtQ",
-     "episode_title": "\ud83d\udd34 LIVE: HOOD Summit Approaches | Robinhood vs Solana | Market Update + Interviews",
-     "start_seconds": 9625.0,
-     "timestamp": "2:40:25",
-     "deep_link": "https://www.youtube.com/watch?v=N0q17BVEOtQ&t=9625s",
-     "kind": "mention",
-     "note": "Arbitrum mentioned in passing as one of several environment options alongside Solana, Robinhood, Base, and NEAR."
-    },
-    {
-     "episode_id": "N0q17BVEOtQ",
-     "episode_title": "\ud83d\udd34 LIVE: HOOD Summit Approaches | Robinhood vs Solana | Market Update + Interviews",
-     "start_seconds": 11557.0,
-     "timestamp": "3:12:37",
-     "deep_link": "https://www.youtube.com/watch?v=N0q17BVEOtQ&t=11557s",
-     "kind": "mention",
-     "note": "Speaker mentioned giving a long setup on Arbitrum and a re-entry long on Arbitrum on Wednesday."
-    },
-    {
-     "episode_id": "O6XwfJE42O0",
-     "episode_title": "DOW TO HIT 100K, $2,000 STIMULUS w/@0xzak @jasonkneen @EmpulserTech @official_taches on @MCGlive",
-     "start_seconds": 13690.0,
-     "timestamp": "3:48:10",
-     "deep_link": "https://www.youtube.com/watch?v=O6XwfJE42O0&t=13690s",
-     "kind": "mention",
-     "note": "Speakers describe Arbitrum as 'cooked' and discuss skepticism about projects being built on it."
-    },
-    {
-     "episode_id": "OH897TGmghc",
-     "episode_title": "Ranger Finance: 90-Day Exit Guarantee + 32x Team Unlocks on MetaDAO | MCG Show",
-     "start_seconds": 393.0,
-     "timestamp": "6:33",
-     "deep_link": "https://www.youtube.com/watch?v=OH897TGmghc&t=393s",
-     "kind": "mention",
-     "note": "Named as one of the chains where roughly 50 billion in daily derivative volumes trade."
-    },
-    {
-     "episode_id": "OvLPWlcdXew",
-     "episode_title": "\ud83d\udd34 LIVE: Onchain is Bullish! Equities \u2192 Crypto Rotation? | Market Updates + Founder Interviews",
-     "start_seconds": 8675.0,
-     "timestamp": "2:24:35",
-     "deep_link": "https://www.youtube.com/watch?v=OvLPWlcdXew&t=8675s",
-     "kind": "mention",
-     "note": "Speaker noted that Chip is deployed on Arbitrum in addition to Solana."
-    },
-    {
-     "episode_id": "QSRP-rTwfYE",
-     "episode_title": "\ud83d\udd34 LIVE: Calm Before the Storm | Onchain Weekly Recap",
-     "start_seconds": 4566.0,
-     "timestamp": "1:16:06",
-     "deep_link": "https://www.youtube.com/watch?v=QSRP-rTwfYE&t=4566s",
-     "kind": "mention",
-     "note": "Speaker discusses their history on Arbitrum One where they started trading options and built products; mentions strong relationship with Arbitrum One team."
-    },
-    {
-     "episode_id": "RLS5bDw7pYg",
-     "episode_title": "\ud83d\udd34 LIVE: Clarity Act Vote...What Next? | Market Update + Interviews",
-     "start_seconds": 3238.0,
-     "timestamp": "53:58",
-     "deep_link": "https://www.youtube.com/watch?v=RLS5bDw7pYg&t=3238s",
-     "kind": "mention",
-     "note": "Mentioned as having a trade that is performing well ('ripping')."
-    },
-    {
-     "episode_id": "RLS5bDw7pYg",
-     "episode_title": "\ud83d\udd34 LIVE: Clarity Act Vote...What Next? | Market Update + Interviews",
-     "start_seconds": 3727.0,
-     "timestamp": "1:02:07",
-     "deep_link": "https://www.youtube.com/watch?v=RLS5bDw7pYg&t=3727s",
-     "kind": "analysis",
-     "note": "Speaker launched XAI Games on Arbitrum, did a huge airdrop to the community, and built it with the Arbitrum team."
-    },
-    {
-     "episode_id": "RufYrYmMVwU",
-     "episode_title": "\ud83d\udd34 LIVE: Onchain Market Bottom Forming | Q4 Rally Setup + How to Maximize Returns",
-     "start_seconds": 1215.0,
-     "timestamp": "20:15",
-     "deep_link": "https://www.youtube.com/watch?v=RufYrYmMVwU&t=1215s",
-     "kind": "mention",
-     "note": "ARB still has some work to do on the charts."
-    },
-    {
-     "episode_id": "T9GYHi0teKI",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Below $60K...Is it Bottoming or Breaking? | Market Update + Interviews",
-     "start_seconds": 9641.0,
-     "timestamp": "2:40:41",
-     "deep_link": "https://www.youtube.com/watch?v=T9GYHi0teKI&t=9641s",
-     "kind": "mention",
-     "note": "Speakers mentioned Robinhood is working with Arbitrum on pre-IPO companies."
-    },
-    {
-     "episode_id": "UbKsP6WCsPs",
-     "episode_title": "\ud83d\udd34 LIVE: Market Cooling Off | Buy The Dip? | Market Update + Interviews",
-     "start_seconds": 8708.0,
-     "timestamp": "2:25:08",
-     "deep_link": "https://www.youtube.com/watch?v=UbKsP6WCsPs&t=8708s",
-     "kind": "analysis",
-     "note": "Speaker indicates Arbitrum will probably go much higher and discusses it as performing well when the Arbitrum chain does well."
-    },
-    {
-     "episode_id": "XB71vFeU2zA",
-     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
-     "start_seconds": 786.0,
-     "timestamp": "13:06",
-     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=786s",
-     "kind": "mention",
-     "note": "Arbitrum froze 8,000 ETH worth about $75 million."
-    },
-    {
-     "episode_id": "XB71vFeU2zA",
-     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
-     "start_seconds": 1603.0,
-     "timestamp": "26:43",
-     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=1603s",
-     "kind": "mention",
-     "note": "Referenced as the chain where Camelot DEX was built and achieved significant value; speaker mentioned being in Camelot on ARB."
-    },
-    {
-     "episode_id": "XB71vFeU2zA",
-     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
-     "start_seconds": 9736.0,
-     "timestamp": "2:42:16",
-     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=9736s",
-     "kind": "analysis",
-     "note": "Speaker noted ARB was being watched for forming a low and discussed specific price levels around 20 cents where bearish SFPs formed, mentioning missed shorting opportunities."
-    },
-    {
-     "episode_id": "XB71vFeU2zA",
-     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
-     "start_seconds": 9944.0,
-     "timestamp": "2:45:44",
-     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=9944s",
-     "kind": "analysis",
-     "note": "Speaker expects ARB could potentially make a move and discusses a bullish order block; suggests it could drift lower to tag the order block and target local highs."
-    },
-    {
-     "episode_id": "XxlT7dtD9JY",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Under $81K | Is This the 10/10 Crash All Over Again?",
-     "start_seconds": 7142.0,
-     "timestamp": "1:59:02",
-     "deep_link": "https://www.youtube.com/watch?v=XxlT7dtD9JY&t=7142s",
-     "kind": "analysis",
-     "note": "Arb started its run in August and has been up for about 40 days as part of a broader altcoin rally."
-    },
-    {
-     "episode_id": "XxlT7dtD9JY",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Under $81K | Is This the 10/10 Crash All Over Again?",
-     "start_seconds": 7680.0,
-     "timestamp": "2:08:00",
-     "deep_link": "https://www.youtube.com/watch?v=XxlT7dtD9JY&t=7680s",
-     "kind": "mention",
-     "note": "Speaker cited Arbitrum as one of several altcoins that have shown readiness to run."
-    },
-    {
-     "episode_id": "XxlT7dtD9JY",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Under $81K | Is This the 10/10 Crash All Over Again?",
-     "start_seconds": 8536.0,
-     "timestamp": "2:22:16",
-     "deep_link": "https://www.youtube.com/watch?v=XxlT7dtD9JY&t=8536s",
-     "kind": "mention",
-     "note": "Arbitrum mentioned in reference to a setup seen a few weeks ago, but no specific analysis provided."
-    },
-    {
-     "episode_id": "XxlT7dtD9JY",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Under $81K | Is This the 10/10 Crash All Over Again?",
-     "start_seconds": 9131.0,
-     "timestamp": "2:32:11",
-     "deep_link": "https://www.youtube.com/watch?v=XxlT7dtD9JY&t=9131s",
-     "kind": "analysis",
-     "note": "Speaker discusses being unsure where ARB will settle but notes that significant liquidity has been grabbed and the situation has been discussed for some time."
-    },
-    {
-     "episode_id": "XxlT7dtD9JY",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Under $81K | Is This the 10/10 Crash All Over Again?",
-     "start_seconds": 9241.0,
-     "timestamp": "2:34:01",
-     "deep_link": "https://www.youtube.com/watch?v=XxlT7dtD9JY&t=9241s",
-     "kind": "analysis",
-     "note": "Speaker identified a Symmetrical Flag Pattern (SFP) formation on the 8-hour chart for ARB, marking it as a potential trade setup and expressing intent to monitor it for a higher low formation."
-    },
-    {
-     "episode_id": "XxlT7dtD9JY",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Under $81K | Is This the 10/10 Crash All Over Again?",
-     "start_seconds": 10322.0,
-     "timestamp": "2:52:02",
-     "deep_link": "https://www.youtube.com/watch?v=XxlT7dtD9JY&t=10322s",
-     "kind": "analysis",
-     "note": "Chart analysis was discussed to explain why altcoins shouldn't scare investors during Bitcoin pullbacks; the speaker examined Arbitrum's weekly price action showing a downtrend pattern."
-    },
-    {
-     "episode_id": "YQWB9LmC_Yc",
-     "episode_title": "\ud83d\udd34 LIVE NOW: Hyperliquid Hits New ATH | Solana Utility Szn + Market Updates",
-     "start_seconds": 9958.0,
-     "timestamp": "2:45:58",
-     "deep_link": "https://www.youtube.com/watch?v=YQWB9LmC_Yc&t=9958s",
-     "kind": "mention",
-     "note": "Speaker mentions Arbitrum as a trading chain alongside Hyperliquid."
-    },
-    {
-     "episode_id": "YxXBgD90fYg",
-     "episode_title": "Long: Memecoins Paired With Real Stocks on Robinhood Chain",
-     "start_seconds": 483.0,
-     "timestamp": "8:03",
-     "deep_link": "https://www.youtube.com/watch?v=YxXBgD90fYg&t=483s",
-     "kind": "mention",
-     "note": "Arbitrum mentioned as one of the different Layer 2 alternatives in crypto."
-    },
-    {
-     "episode_id": "_8vSxBK6kO8",
-     "episode_title": "\ud83d\udd34 LIVE: Meme Stocks PUMPING | STONK New ATH | Market Update + Interviews",
-     "start_seconds": 1015.0,
-     "timestamp": "16:55",
-     "deep_link": "https://www.youtube.com/watch?v=_8vSxBK6kO8&t=1015s",
-     "kind": "analysis",
-     "note": "Chart analysis shown with a rally approaching range highs; speaker mentions calling out ARB as a beneficiary because Uniswap was being built on Arbitrum stack and receives revenue share."
-    },
-    {
-     "episode_id": "__DYw4iUAQ0",
-     "episode_title": "\ud83d\udd34 LIVE: Don\u2019t Panic Sell the Quantum Scare | Do This Instead",
-     "start_seconds": 255.0,
-     "timestamp": "4:15",
-     "deep_link": "https://www.youtube.com/watch?v=__DYw4iUAQ0&t=255s",
-     "kind": "mention",
-     "note": "Speaker mentioned having ARB chart up but then switched to Bitcoin chart instead."
-    },
-    {
-     "episode_id": "_bXn26hfpJA",
-     "episode_title": "\ud83d\udd34 LIVE: No Sleep Szn is Here | Market Update + Interviews",
-     "start_seconds": 9967.0,
-     "timestamp": "2:46:07",
-     "deep_link": "https://www.youtube.com/watch?v=_bXn26hfpJA&t=9967s",
-     "kind": "analysis",
-     "note": "Discussed as entering a season of excitement; a protocol called Otis is ripping on Arbitrum and appears to be a launchpad with upcoming updates and communication with the Arbitrum team."
-    },
-    {
-     "episode_id": "_bXn26hfpJA",
-     "episode_title": "\ud83d\udd34 LIVE: No Sleep Szn is Here | Market Update + Interviews",
-     "start_seconds": 10202.0,
-     "timestamp": "2:50:02",
-     "deep_link": "https://www.youtube.com/watch?v=_bXn26hfpJA&t=10202s",
-     "kind": "analysis",
-     "note": "Discussed as a neutral EVM builder chain not controlled by a centralized entity, positioned as the only viable alternative to corporate chains like Base (Coinbase), Binance (BNB), and Robinhood, with thesis that it could catch bids and power future Fortune 500 company chains."
-    },
-    {
-     "episode_id": "_bXn26hfpJA",
-     "episode_title": "\ud83d\udd34 LIVE: No Sleep Szn is Here | Market Update + Interviews",
-     "start_seconds": 10512.0,
-     "timestamp": "2:55:12",
-     "deep_link": "https://www.youtube.com/watch?v=_bXn26hfpJA&t=10512s",
-     "kind": "analysis",
-     "note": "Discussed as an ecosystem that benefits from revenue flows and chain launches building on top of it; speakers note the token has been 'down incredibly bad' and some Discord members were bullish on ARB token."
-    },
-    {
-     "episode_id": "_bXn26hfpJA",
-     "episode_title": "\ud83d\udd34 LIVE: No Sleep Szn is Here | Market Update + Interviews",
-     "start_seconds": 10977.0,
-     "timestamp": "3:02:57",
-     "deep_link": "https://www.youtube.com/watch?v=_bXn26hfpJA&t=10977s",
-     "kind": "analysis",
-     "note": "Arbitrum had approximately half the DEX volume of Robin Hood chain; speaker suggested it could grow to 5-6% of total DEX volume and beat Hyperliquid, and it leads all blockchains in tokenized ETF market cap growth over 24 hours."
-    },
-    {
-     "episode_id": "_bXn26hfpJA",
-     "episode_title": "\ud83d\udd34 LIVE: No Sleep Szn is Here | Market Update + Interviews",
-     "start_seconds": 11954.0,
-     "timestamp": "3:19:14",
-     "deep_link": "https://www.youtube.com/watch?v=_bXn26hfpJA&t=11954s",
-     "kind": "analysis",
-     "note": "Described as top three in market cap growth of tokenized stocks, adding around five million in the past 17 days."
-    },
-    {
-     "episode_id": "_bXn26hfpJA",
-     "episode_title": "\ud83d\udd34 LIVE: No Sleep Szn is Here | Market Update + Interviews",
-     "start_seconds": 12535.0,
-     "timestamp": "3:28:55",
-     "deep_link": "https://www.youtube.com/watch?v=_bXn26hfpJA&t=12535s",
-     "kind": "mention",
-     "note": "Mentioned as fourth largest blockchain by tokenized ETF market cap, behind Ethereum, Binance Chain, and Solana."
-    },
-    {
-     "episode_id": "_bXn26hfpJA",
-     "episode_title": "\ud83d\udd34 LIVE: No Sleep Szn is Here | Market Update + Interviews",
-     "start_seconds": 14746.0,
-     "timestamp": "4:05:46",
-     "deep_link": "https://www.youtube.com/watch?v=_bXn26hfpJA&t=14746s",
-     "kind": "mention",
-     "note": "Mentioned as one of the chains covered on the show."
-    },
-    {
-     "episode_id": "aJfO9HXg8Fs",
-     "episode_title": "Interfold: $FOLD let competing companies or complete strangers compute together on sensitive data",
-     "start_seconds": 1836.0,
-     "timestamp": "30:36",
-     "deep_link": "https://www.youtube.com/watch?v=aJfO9HXg8Fs&t=1836s",
-     "kind": "mention",
-     "note": "Named as a layer 2 network that is 'really hot right now' and considered for multi-chain deployment strategy."
-    },
-    {
-     "episode_id": "aRTfgGvV4W8",
-     "episode_title": "Reviewing $MET: Soju Says \"There is no equity, only the token\", MET Updates Potential $5Bn Valuation",
-     "start_seconds": 750.0,
-     "timestamp": "12:30",
-     "deep_link": "https://www.youtube.com/watch?v=aRTfgGvV4W8&t=750s",
-     "kind": "analysis",
-     "note": "Speaker compares Arbitrum's historical price action (airdrop selloff followed by 200% recovery in 2023) to Meteora's current pattern."
-    },
-    {
-     "episode_id": "akxWR63zdtk",
-     "episode_title": "The Hot $STONKBROKER Dev Appeared on MCG!",
-     "start_seconds": 1386.0,
-     "timestamp": "23:06",
-     "deep_link": "https://www.youtube.com/watch?v=akxWR63zdtk&t=1386s",
-     "kind": "mention",
-     "note": "Speaker mentions starting in crypto and trading options on Arbitrum One, where they traded on Dopex and later Strike, and received a grant from the Arbitrum One team."
-    },
-    {
-     "episode_id": "ayJIM0WPyHs",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Bottom In? | Do This Before the Next Move",
-     "start_seconds": 1736.0,
-     "timestamp": "28:56",
-     "deep_link": "https://www.youtube.com/watch?v=ayJIM0WPyHs&t=1736s",
-     "kind": "mention",
-     "note": "Arbitrum is mentioned as a blockchain where Simple Pharma was previously building options infrastructure before moving to Robinhood chain."
-    },
-    {
-     "episode_id": "bWdkiIDu_Jg",
-     "episode_title": "\ud83d\udd34 LIVE: Bottom Signals Everywhere, Solana leading the charge! Here's he Plan",
-     "start_seconds": 1260.0,
-     "timestamp": "21:00",
-     "deep_link": "https://www.youtube.com/watch?v=bWdkiIDu_Jg&t=1260s",
-     "kind": "mention",
-     "note": "Speaker mentions that Railgun deploys on ARB, where existing assets can be shielded."
-    },
-    {
-     "episode_id": "bckrJLRN_l0",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto Pulling Back...Buy the Dip? | Market Update + Interviews",
-     "start_seconds": 11167.0,
-     "timestamp": "3:06:07",
-     "deep_link": "https://www.youtube.com/watch?v=bckrJLRN_l0&t=11167s",
-     "kind": "mention",
-     "note": "Arbitrum mentioned as a chain through which Uniswap was generating material revenue."
-    },
-    {
-     "episode_id": "bckrJLRN_l0",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto Pulling Back...Buy the Dip? | Market Update + Interviews",
-     "start_seconds": 11663.0,
-     "timestamp": "3:14:23",
-     "deep_link": "https://www.youtube.com/watch?v=bckrJLRN_l0&t=11663s",
-     "kind": "mention",
-     "note": "Liquidity was swept on Arbitrum along with several other assets."
-    },
-    {
-     "episode_id": "ckSVVsCYrSI",
-     "episode_title": "\ud83d\udd34 LIVE: Uptober Turned Choptober | Bitcoin Holding $80K | What's Next?",
-     "start_seconds": 1137.0,
-     "timestamp": "18:57",
-     "deep_link": "https://www.youtube.com/watch?v=ckSVVsCYrSI&t=1137s",
-     "kind": "analysis",
-     "note": "Speaker notes Arbitrum had a daily SFP looking to form at 173 (17.3), and while they wanted lower prices, the chart looks good."
-    },
-    {
-     "episode_id": "ct401gJf-as",
-     "episode_title": "\ud83d\udd34 LIVE: Hood summit day | Revenue coins dominating | Interviews + Positioning",
-     "start_seconds": 2531.0,
-     "timestamp": "42:11",
-     "deep_link": "https://www.youtube.com/watch?v=ct401gJf-as&t=2531s",
-     "kind": "mention",
-     "note": "Mentioned as an EVM blockchain where similar apps already exist."
-    },
-    {
-     "episode_id": "d-mQ25Dpn68",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Hits $85K | Bull Market Confirmed | Market Update + Interview",
-     "start_seconds": 1425.0,
-     "timestamp": "23:45",
-     "deep_link": "https://www.youtube.com/watch?v=d-mQ25Dpn68&t=1425s",
-     "kind": "analysis",
-     "note": "Speaker mentioned discussing Arbitrum last week and expects it to break out above key resistance, potentially generating decent trades, with potential for 10x to all-time high."
-    },
-    {
-     "episode_id": "d-mQ25Dpn68",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Hits $85K | Bull Market Confirmed | Market Update + Interview",
-     "start_seconds": 1579.0,
-     "timestamp": "26:19",
-     "deep_link": "https://www.youtube.com/watch?v=d-mQ25Dpn68&t=1579s",
-     "kind": "analysis",
-     "note": "Described as having a 10x to all-time high and compared to Uniswap in terms of resistance levels."
-    },
-    {
-     "episode_id": "d-mQ25Dpn68",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Hits $85K | Bull Market Confirmed | Market Update + Interview",
-     "start_seconds": 6892.0,
-     "timestamp": "1:54:52",
-     "deep_link": "https://www.youtube.com/watch?v=d-mQ25Dpn68&t=6892s",
-     "kind": "mention",
-     "note": "Referenced as a comparison to Uniswap's chart pattern that broke through resistance."
-    },
-    {
-     "episode_id": "d-mQ25Dpn68",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Hits $85K | Bull Market Confirmed | Market Update + Interview",
-     "start_seconds": 7435.0,
-     "timestamp": "2:03:55",
-     "deep_link": "https://www.youtube.com/watch?v=d-mQ25Dpn68&t=7435s",
-     "kind": "mention",
-     "note": "Mentioned as a previous trade analysis performed by the speaker last week, compared to XRP analysis being done this week."
-    },
-    {
-     "episode_id": "d-mQ25Dpn68",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Hits $85K | Bull Market Confirmed | Market Update + Interview",
-     "start_seconds": 7865.0,
-     "timestamp": "2:11:05",
-     "deep_link": "https://www.youtube.com/watch?v=d-mQ25Dpn68&t=7865s",
-     "kind": "analysis",
-     "note": "Speaker mentions Arbitrum had insane weekly candles and is up 2-3x from the bottom, references a previous Arbitrum trade from last week that was closed for steep profit."
-    },
-    {
-     "episode_id": "dRGMUoqXkic",
-     "episode_title": "Liminal $LIL: AI-Native Banking Stack \"Nim\", Tokenized Stocks Soon, 14-Month Runway | MCG Show",
-     "start_seconds": 380.0,
-     "timestamp": "6:20",
-     "deep_link": "https://www.youtube.com/watch?v=dRGMUoqXkic&t=380s",
-     "kind": "mention",
-     "note": "Mentioned as a blockchain where stablecoins could be deployed, discussed in context of platform abstraction."
-    },
-    {
-     "episode_id": "eLtX3KdYiZ0",
-     "episode_title": "Virtuals Day- Robinhood Ecosystem Project Spotlight",
-     "start_seconds": 8098.0,
-     "timestamp": "2:14:58",
-     "deep_link": "https://www.youtube.com/watch?v=eLtX3KdYiZ0&t=8098s",
-     "kind": "mention",
-     "note": "Speaker discusses potential ties to Arbitrum and mentions it received support during product launch."
-    },
-    {
-     "episode_id": "eLtX3KdYiZ0",
-     "episode_title": "Virtuals Day- Robinhood Ecosystem Project Spotlight",
-     "start_seconds": 8433.0,
-     "timestamp": "2:20:33",
-     "deep_link": "https://www.youtube.com/watch?v=eLtX3KdYiZ0&t=8433s",
-     "kind": "mention",
-     "note": "Arbitrum mentioned as one of 40 chains supported by Vex."
-    },
-    {
-     "episode_id": "eWiZUQvzYOo",
-     "episode_title": "SOAR:DRP Cross-Chain, Ex-Amazon/Indiegogo Help With Onboarding Campaign, Platform Upgrade | MCG Show",
-     "start_seconds": 2006.0,
-     "timestamp": "33:26",
-     "deep_link": "https://www.youtube.com/watch?v=eWiZUQvzYOo&t=2006s",
-     "kind": "mention",
-     "note": "Andrew Saunders, who worked on the ex-CMO role at Arbitrum and was responsible for its early marketing hype, is now working with the team on their mobile app strategy."
-    },
-    {
-     "episode_id": "gAbaYj44bNs",
-     "episode_title": "The Algorithm That Prints Money | Fraudsworth",
-     "start_seconds": 2554.0,
-     "timestamp": "42:34",
-     "deep_link": "https://www.youtube.com/watch?v=gAbaYj44bNs&t=2554s",
-     "kind": "mention",
-     "note": "Mentioned in context of ARB community-based bots receiving fees from a protocol."
-    },
-    {
-     "episode_id": "gQU9V7n-cRM",
-     "episode_title": "\ud83d\udd34 LIVE: BTC cools while Alts show strength | RHC recovery? | Market update + Interviews",
-     "start_seconds": 1231.0,
-     "timestamp": "20:31",
-     "deep_link": "https://www.youtube.com/watch?v=gQU9V7n-cRM&t=1231s",
-     "kind": "analysis",
-     "note": "Speaker says Arbitrum looks cheap and is lagging behind many alts despite Robinhood being built on the chain; likes it and calls for dips as a long opportunity."
-    },
-    {
-     "episode_id": "gTl0GwRHeAU",
-     "episode_title": "\ud83d\udd34 LIVE: Bears Are Cooked | $600M BTC Shorts Liquidated | Market Update + Interviews",
-     "start_seconds": 908.0,
-     "timestamp": "15:08",
-     "deep_link": "https://www.youtube.com/watch?v=gTl0GwRHeAU&t=908s",
-     "kind": "analysis",
-     "note": "Arbitrum on a bit of a dip, described as a big benefactor of the Robinhood chain and something to buy on dips."
-    },
-    {
-     "episode_id": "gTl0GwRHeAU",
-     "episode_title": "\ud83d\udd34 LIVE: Bears Are Cooked | $600M BTC Shorts Liquidated | Market Update + Interviews",
-     "start_seconds": 12133.0,
-     "timestamp": "3:22:13",
-     "deep_link": "https://www.youtube.com/watch?v=gTl0GwRHeAU&t=12133s",
-     "kind": "mention",
-     "note": "Speaker mentioned they called out Arbitrum."
-    },
-    {
-     "episode_id": "j7kHMGQ1Lyw",
-     "episode_title": "\ud83d\udd34 LIVE: Will $60 SOL Hold? Rotation back into Solana ? | Market Update + Founder Interview",
-     "start_seconds": 5776.0,
-     "timestamp": "1:36:16",
-     "deep_link": "https://www.youtube.com/watch?v=j7kHMGQ1Lyw&t=5776s",
-     "kind": "analysis",
-     "note": "Pulled back the entire Arbitrum or Robinhood pump."
-    },
-    {
-     "episode_id": "jvn-CbwG-8A",
-     "episode_title": "DREAM & x402: Building the Future of AI Agent Commerce & Micro-Payments | MCG Podcast",
-     "start_seconds": 152.0,
-     "timestamp": "2:32",
-     "deep_link": "https://www.youtube.com/watch?v=jvn-CbwG-8A&t=152s",
-     "kind": "analysis",
-     "note": "Speaker discussed building fully on-chain games on Arbitrum, noting the EVM infrastructure wasn't adequate for their needs due to computational limitations."
-    },
-    {
-     "episode_id": "kEIuk-Is0sg",
-     "episode_title": "Watch $HOOKR on MCG | Uniswap v4 whitelisted, King of pools EXCLUSIVE Launch, $WTH Integration",
-     "start_seconds": 471.0,
-     "timestamp": "7:51",
-     "deep_link": "https://www.youtube.com/watch?v=kEIuk-Is0sg&t=471s",
-     "kind": "mention",
-     "note": "Mentioned as 'ARB recap protection' being enabled by default for pools and launches."
-    },
-    {
-     "episode_id": "kEIuk-Is0sg",
-     "episode_title": "Watch $HOOKR on MCG | Uniswap v4 whitelisted, King of pools EXCLUSIVE Launch, $WTH Integration",
-     "start_seconds": 1685.0,
-     "timestamp": "28:05",
-     "deep_link": "https://www.youtube.com/watch?v=kEIuk-Is0sg&t=1685s",
-     "kind": "mention",
-     "note": "ARB recaps are generated as part of the Pool of Kings daily competition mechanic where fees are captured from arbitrage opportunities."
-    },
-    {
-     "episode_id": "kEIuk-Is0sg",
-     "episode_title": "Watch $HOOKR on MCG | Uniswap v4 whitelisted, King of pools EXCLUSIVE Launch, $WTH Integration",
-     "start_seconds": 2018.0,
-     "timestamp": "33:38",
-     "deep_link": "https://www.youtube.com/watch?v=kEIuk-Is0sg&t=2018s",
-     "kind": "mention",
-     "note": "ARB activity mentioned in the context of fee accumulation mechanics."
-    },
-    {
-     "episode_id": "lN2kZJ0CNZg",
-     "episode_title": "\ud83d\udfe2 LIVE: Robinhood Chain Rally Incoming? How to Position",
-     "start_seconds": 3012.0,
-     "timestamp": "50:12",
-     "deep_link": "https://www.youtube.com/watch?v=lN2kZJ0CNZg&t=3012s",
-     "kind": "mention",
-     "note": "Speaker mentions working on projects on Arbitrum and discusses multiple Arbitrum-based protocols."
-    },
-    {
-     "episode_id": "miXTiMNMDCc",
-     "episode_title": "\ud83d\udd34 LIVE: Onchain Volume Falling Across the Board | Why Stay Bullish?",
-     "start_seconds": 9957.0,
-     "timestamp": "2:45:57",
-     "deep_link": "https://www.youtube.com/watch?v=miXTiMNMDCc&t=9957s",
-     "kind": "mention",
-     "note": "Referenced as a blockchain platform being compared to EVM for infrastructure capabilities."
-    },
-    {
-     "episode_id": "oI9Hv_D6UFk",
-     "episode_title": "\ud83d\udd34LIVE: HyperEVM, SOL, RH, or Base? Bulls In Control | Time to Lock In | Market Update + Interview",
-     "start_seconds": 7347.0,
-     "timestamp": "2:02:27",
-     "deep_link": "https://www.youtube.com/watch?v=oI9Hv_D6UFk&t=7347s",
-     "kind": "mention",
-     "note": "Referenced as 'Robin Hood' (apparent nickname), named as one of four notable ecosystems."
-    },
-    {
-     "episode_id": "p1DZ7LSLlNM",
-     "episode_title": "\ud83d\udd34 LIVE: Trading with onchain w/SPAWN Agents, MCG Trader Radio",
-     "start_seconds": 1904.0,
-     "timestamp": "31:44",
-     "deep_link": "https://www.youtube.com/watch?v=p1DZ7LSLlNM&t=1904s",
-     "kind": "mention",
-     "note": "Mentioned as a bridge destination for users seeking DEX trading, with speaker joking it is primarily used for accessing Hyperliquid."
-    },
-    {
-     "episode_id": "q2zmdT9CnNA",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto Pulling Back... What's Next? | Market Update + Interviews",
-     "start_seconds": 7610.0,
-     "timestamp": "2:06:50",
-     "deep_link": "https://www.youtube.com/watch?v=q2zmdT9CnNA&t=7610s",
-     "kind": "analysis",
-     "note": "Arbitrum partnered with Robin Hood and will receive 10% of the revenue from Robin Hood chain; speakers discuss whether Arbitrum will reach all-time highs and its beta relationship to the Robin Hood ecosystem."
-    },
-    {
-     "episode_id": "qDr3pkTC7KM",
-     "episode_title": "Programmable: A launch platform for Uniswap v4 products",
-     "start_seconds": 1482.0,
-     "timestamp": "24:42",
-     "deep_link": "https://www.youtube.com/watch?v=qDr3pkTC7KM&t=1482s",
-     "kind": "mention",
-     "note": "Speaker mentions that the launchpad could work on Arbitrum as well as other chains."
-    },
-    {
-     "episode_id": "qHavUGBG56A",
-     "episode_title": "\ud83d\udd34 LIVE: Black Monday Overblown? | Staying Bullish | Market Update",
-     "start_seconds": 470.0,
-     "timestamp": "7:50",
-     "deep_link": "https://www.youtube.com/watch?v=qHavUGBG56A&t=470s",
-     "kind": "analysis",
-     "note": "Speaker states they feel like longing Arbitrum."
-    },
-    {
-     "episode_id": "qq_4gfyjN6s",
-     "episode_title": "\ud83d\udd34 LIVE: MonkeDAO Solana Product Spotlight + Trader Radio w/@ChillTRD | Market Updates",
-     "start_seconds": 4810.0,
-     "timestamp": "1:20:10",
-     "deep_link": "https://www.youtube.com/watch?v=qq_4gfyjN6s&t=4810s",
-     "kind": "mention",
-     "note": "Named as the blockchain where the speaker built the first delta neutral vault."
-    },
-    {
-     "episode_id": "siZ8uErRtiQ",
-     "episode_title": "Bob The reBuilt: Reveals Top 3 ICM Picks, Watchlist, Accounts to Follow + More!",
-     "start_seconds": 534.0,
-     "timestamp": "8:54",
-     "deep_link": "https://www.youtube.com/watch?v=siZ8uErRtiQ&t=534s",
-     "kind": "analysis",
-     "note": "Speakers reference an Arbitrum governance proposal from 2023 that allocated approximately 20 million tokens for gaming incentives, but the distribution criteria was loose and tokens were primarily acquired by people who gamed the system and sold them."
-    },
-    {
-     "episode_id": "t46W9kf1m90",
-     "episode_title": "\ud83d\udd34 LIVE: Welcome to the Onchain Bull Market | Market Update + Interviews",
-     "start_seconds": 770.0,
-     "timestamp": "12:50",
-     "deep_link": "https://www.youtube.com/watch?v=t46W9kf1m90&t=770s",
-     "kind": "analysis",
-     "note": "Speaker mentions catching an ARB long earlier in the week with a massive move on Arbitrum, and notes it coming into a nice area of resistance."
-    },
-    {
-     "episode_id": "t46W9kf1m90",
-     "episode_title": "\ud83d\udd34 LIVE: Welcome to the Onchain Bull Market | Market Update + Interviews",
-     "start_seconds": 7736.0,
-     "timestamp": "2:08:56",
-     "deep_link": "https://www.youtube.com/watch?v=t46W9kf1m90&t=7736s",
-     "kind": "analysis",
-     "note": "Up roughly 4x off the bottom; described as having higher to go with potential for much larger moves if it flips a key resistance level, after which the ecosystem would rocket."
-    },
-    {
-     "episode_id": "urLmYepetQI",
-     "episode_title": "\ud83d\udd34 LIVE: WTF is a V4 hook | $ETH bottom in? | Market Update + Interviews",
-     "start_seconds": 885.0,
-     "timestamp": "14:45",
-     "deep_link": "https://www.youtube.com/watch?v=urLmYepetQI&t=885s",
-     "kind": "mention",
-     "note": "Arbitrum mentioned as receiving 10% of all fees from Robin Hood."
-    },
-    {
-     "episode_id": "vBRvDqOdKwQ",
-     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
-     "start_seconds": 995.0,
-     "timestamp": "16:35",
-     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=995s",
-     "kind": "mention",
-     "note": "Mentioned as a blockchain stack that other companies might use to run a playbook similar to Robinhood."
-    },
-    {
-     "episode_id": "vqOeJKpQ61E",
-     "episode_title": "A Conversation with Sonder: Trading the Crypto Trenches",
-     "start_seconds": 246.0,
-     "timestamp": "4:06",
-     "deep_link": "https://www.youtube.com/watch?v=vqOeJKpQ61E&t=246s",
-     "kind": "mention",
-     "note": "Mentioned as the underlying blockchain on which Robin Hood L2 is built."
-    },
-    {
-     "episode_id": "vqOeJKpQ61E",
-     "episode_title": "A Conversation with Sonder: Trading the Crypto Trenches",
-     "start_seconds": 3609.0,
-     "timestamp": "1:00:09",
-     "deep_link": "https://www.youtube.com/watch?v=vqOeJKpQ61E&t=3609s",
-     "kind": "analysis",
-     "note": "Speaker identifies Arbitum as receiving 10% of Robin Hood fees and as a beneficiary."
-    },
-    {
-     "episode_id": "wJVIpoVLTsk",
-     "episode_title": "\ud83d\udd34 LIVE: Is This The Perfect Time To Be In Crypto? | Founder Interviews + Market Updates",
-     "start_seconds": 5053.0,
-     "timestamp": "1:24:13",
-     "deep_link": "https://www.youtube.com/watch?v=wJVIpoVLTsk&t=5053s",
-     "kind": "mention",
-     "note": "Arbitrum Foundation reached out to the team and they are working closely with them."
-    },
-    {
-     "episode_id": "wVRcD_oqkz8",
-     "episode_title": "Vantis: Tokenizing hundreds of vertical AI products into a single utility token",
-     "start_seconds": 1384.0,
-     "timestamp": "23:04",
-     "deep_link": "https://www.youtube.com/watch?v=wVRcD_oqkz8&t=1384s",
-     "kind": "mention",
-     "note": "Arbitrum listed as one of five chains supported for card top-ups."
-    },
-    {
-     "episode_id": "wsTdtrlI2I8",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood launchpad war drama | Live Market Updates + Onchain Positioning",
-     "start_seconds": 809.0,
-     "timestamp": "13:29",
-     "deep_link": "https://www.youtube.com/watch?v=wsTdtrlI2I8&t=809s",
-     "kind": "analysis",
-     "note": "Arbitrum described as holding nicely with a good-looking chart, receiving 10% of all Robin Hood fees, forming a bull flag pattern."
-    },
-    {
-     "episode_id": "wsTdtrlI2I8",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood launchpad war drama | Live Market Updates + Onchain Positioning",
-     "start_seconds": 4109.0,
-     "timestamp": "1:08:29",
-     "deep_link": "https://www.youtube.com/watch?v=wsTdtrlI2I8&t=4109s",
-     "kind": "mention",
-     "note": "Mentioned as the chain where the speaker entered the Arbitrum One hackathon in January."
-    },
-    {
-     "episode_id": "wsTdtrlI2I8",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood launchpad war drama | Live Market Updates + Onchain Positioning",
-     "start_seconds": 6461.0,
-     "timestamp": "1:47:41",
-     "deep_link": "https://www.youtube.com/watch?v=wsTdtrlI2I8&t=6461s",
-     "kind": "analysis",
-     "note": "Extensively discussed as an L2 solution chosen by Robinhood Chain for its security, speed, cost-efficiency, and regulatory engagement; described as playing a long-term strategy successfully."
-    },
-    {
-     "episode_id": "y4SqXgBAFFg",
-     "episode_title": "\ud83d\udd34 LIVE: RobinHood Chain Exploding! | War Back!?!? | Market Updates + Founder Interviews",
-     "start_seconds": 534.0,
-     "timestamp": "8:54",
-     "deep_link": "https://www.youtube.com/watch?v=y4SqXgBAFFg&t=534s",
-     "kind": "mention",
-     "note": "Mentioned as the blockchain infrastructure used when Robinhood offered private companies on-chain."
-    },
-    {
-     "episode_id": "zDMFsmfIkkM",
-     "episode_title": "\ud83d\udd34 LIVE: SEC Greenlights Onchain Stocks | Tokenization Supercycle | Market Update + Interviews",
-     "start_seconds": 1202.0,
-     "timestamp": "20:02",
-     "deep_link": "https://www.youtube.com/watch?v=zDMFsmfIkkM&t=1202s",
-     "kind": "mention",
-     "note": "Arbitrum up 4% on the day."
-    },
-    {
-     "episode_id": "zHkjSfxUyVU",
-     "episode_title": "THERAPY IS IN SESSION: FOR TRADERS w/@hurupayapp $HURU @surfcashx $SURF @Official_taches $GSD",
-     "start_seconds": 2866.0,
-     "timestamp": "47:46",
-     "deep_link": "https://www.youtube.com/watch?v=zHkjSfxUyVU&t=2866s",
-     "kind": "mention",
-     "note": "Named as an example of L2 tokens whose viability is questioned due to Vitalik's negative comments on L2s."
-    },
-    {
-     "episode_id": "zWznxthbJNA",
-     "episode_title": "\ud83d\udd34 LIVE: MSTR STRC gets crushed. P2P Cash, onchain startups | Live Market Updates",
-     "start_seconds": 7035.0,
-     "timestamp": "1:57:15",
-     "deep_link": "https://www.youtube.com/watch?v=zWznxthbJNA&t=7035s",
-     "kind": "mention",
-     "note": "Mentioned as a chain where users traditionally needed to bridge to and hold ETH to access perp trading platforms."
-    }
-   ],
-   "episode_count": 79,
    "single_reference": false
   },
   {
@@ -124888,6 +124933,197 @@
    "single_reference": false
   },
   {
+   "symbol": "TAU",
+   "name": "Tau",
+   "asset_class": "crypto",
+   "mentions": 20,
+   "analysis": 15,
+   "moments": [
+    {
+     "episode_id": "0VrjCXFXCA4",
+     "episode_title": "Wake Up! The Next 90 Days Will Change Everything in Crypto | Chill's Filter Ep-3",
+     "start_seconds": 150.0,
+     "timestamp": "2:30",
+     "deep_link": "https://www.youtube.com/watch?v=0VrjCXFXCA4&t=150s",
+     "kind": "mention",
+     "note": "Named as an altcoin looking well and at the bottom of its range showing signs of wanting to bounce."
+    },
+    {
+     "episode_id": "B2cg6LWD60g",
+     "episode_title": "\ud83d\udd34 LIVE: BTC Erases Rally | $870M+ Longs Liquidated | Time to Exit?",
+     "start_seconds": 10047.0,
+     "timestamp": "2:47:27",
+     "deep_link": "https://www.youtube.com/watch?v=B2cg6LWD60g&t=10047s",
+     "kind": "analysis",
+     "note": "Speaker observes tau bouncing and showing some demand at lower levels."
+    },
+    {
+     "episode_id": "DCxwABH6umU",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto + Robinhood Chain Bottom In? | Elysium Launch Incoming | Exact 90-Day Plan",
+     "start_seconds": 745.0,
+     "timestamp": "12:25",
+     "deep_link": "https://www.youtube.com/watch?v=DCxwABH6umU&t=745s",
+     "kind": "analysis",
+     "note": "Tau showed a nice strong bounce on the daily and looks like it wants to break out of the downtrend."
+    },
+    {
+     "episode_id": "DCxwABH6umU",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto + Robinhood Chain Bottom In? | Elysium Launch Incoming | Exact 90-Day Plan",
+     "start_seconds": 11500.0,
+     "timestamp": "3:11:40",
+     "deep_link": "https://www.youtube.com/watch?v=DCxwABH6umU&t=11500s",
+     "kind": "mention",
+     "note": "Speaker briefly mentions Tau looking well among altcoins at the bottom of their range."
+    },
+    {
+     "episode_id": "ElhoMK0uH4M",
+     "episode_title": "\ud83d\udd34 LIVE: Bearish Headlines Strike Again | More Chop or Bottom Signal?",
+     "start_seconds": 1205.0,
+     "timestamp": "20:05",
+     "deep_link": "https://www.youtube.com/watch?v=ElhoMK0uH4M&t=1205s",
+     "kind": "analysis",
+     "note": "Speakers note that Tau is following a similar price path as other assets being tracked."
+    },
+    {
+     "episode_id": "H4kImk1Y7KQ",
+     "episode_title": "\ud83d\udd34 LIVE: FOMC, AI Panic, Clarity Act Vote | Market Update + Interviews",
+     "start_seconds": 10761.0,
+     "timestamp": "2:59:21",
+     "deep_link": "https://www.youtube.com/watch?v=H4kImk1Y7KQ&t=10761s",
+     "kind": "analysis",
+     "note": "Speaker discusses entry price of 2.35 for Tau and describes it as having one of the cleanest technical setups recently, expressing bullish outlook."
+    },
+    {
+     "episode_id": "XB71vFeU2zA",
+     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
+     "start_seconds": 9638.0,
+     "timestamp": "2:40:38",
+     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=9638s",
+     "kind": "analysis",
+     "note": "Speaker analyzed Tau pulling back into an area of support, making lower highs, in a green range, and identified it as potentially hunting for a higher low and eventual breakout of a downtrend."
+    },
+    {
+     "episode_id": "XxlT7dtD9JY",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Under $81K | Is This the 10/10 Crash All Over Again?",
+     "start_seconds": 7090.0,
+     "timestamp": "1:58:10",
+     "deep_link": "https://www.youtube.com/watch?v=XxlT7dtD9JY&t=7090s",
+     "kind": "analysis",
+     "note": "Tau went up for 63 days over two months with an up-and-to-the-right trend."
+    },
+    {
+     "episode_id": "XxlT7dtD9JY",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Under $81K | Is This the 10/10 Crash All Over Again?",
+     "start_seconds": 8226.0,
+     "timestamp": "2:17:06",
+     "deep_link": "https://www.youtube.com/watch?v=XxlT7dtD9JY&t=8226s",
+     "kind": "mention",
+     "note": "Speaker mentions Tau as an interesting asset during macro segment discussion of market opportunities."
+    },
+    {
+     "episode_id": "XxlT7dtD9JY",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Under $81K | Is This the 10/10 Crash All Over Again?",
+     "start_seconds": 8806.0,
+     "timestamp": "2:26:46",
+     "deep_link": "https://www.youtube.com/watch?v=XxlT7dtD9JY&t=8806s",
+     "kind": "analysis",
+     "note": "Speaker discusses setting invalidation levels and entry points on the one-hour chart, mentions potential liquidity sweep and consolidation over a couple of days."
+    },
+    {
+     "episode_id": "bckrJLRN_l0",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto Pulling Back...Buy the Dip? | Market Update + Interviews",
+     "start_seconds": 11359.0,
+     "timestamp": "3:09:19",
+     "deep_link": "https://www.youtube.com/watch?v=bckrJLRN_l0&t=11359s",
+     "kind": "analysis",
+     "note": "Speaker shows Tau as an example token that popped up last cycle, had a run in early 2024, never made new highs in two years, but recently made its first higher high in about two years."
+    },
+    {
+     "episode_id": "ckSVVsCYrSI",
+     "episode_title": "\ud83d\udd34 LIVE: Uptober Turned Choptober | Bitcoin Holding $80K | What's Next?",
+     "start_seconds": 1109.0,
+     "timestamp": "18:29",
+     "deep_link": "https://www.youtube.com/watch?v=ckSVVsCYrSI&t=1109s",
+     "kind": "analysis",
+     "note": "Speaker notes Tau front-ran the SFP but is still traveling deeper into the support zone."
+    },
+    {
+     "episode_id": "ckSVVsCYrSI",
+     "episode_title": "\ud83d\udd34 LIVE: Uptober Turned Choptober | Bitcoin Holding $80K | What's Next?",
+     "start_seconds": 6989.0,
+     "timestamp": "1:56:29",
+     "deep_link": "https://www.youtube.com/watch?v=ckSVVsCYrSI&t=6989s",
+     "kind": "analysis",
+     "note": "Speaker discussed entry points at 254 and 260 for Tau, charting price action and waiting for specific technical patterns before entering a trade."
+    },
+    {
+     "episode_id": "d-mQ25Dpn68",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Hits $85K | Bull Market Confirmed | Market Update + Interview",
+     "start_seconds": 1372.0,
+     "timestamp": "22:52",
+     "deep_link": "https://www.youtube.com/watch?v=d-mQ25Dpn68&t=1372s",
+     "kind": "analysis",
+     "note": "Speaker discusses Tau as setting the stage for the AI trade, noting it bounces every time it goes below 2.12 and just broke out of a multi-year downtrend with a first higher high in over a year."
+    },
+    {
+     "episode_id": "d-mQ25Dpn68",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Hits $85K | Bull Market Confirmed | Market Update + Interview",
+     "start_seconds": 7125.0,
+     "timestamp": "1:58:45",
+     "deep_link": "https://www.youtube.com/watch?v=d-mQ25Dpn68&t=7125s",
+     "kind": "mention",
+     "note": "Referenced as an altcoin that has experienced a significant run off the bottom."
+    },
+    {
+     "episode_id": "gbKVGLAGcU8",
+     "episode_title": "\ud83d\udfe2 LIVE: Onchain Crypto Market Turning Bullish | How To Maximize Your Gains",
+     "start_seconds": 3269.0,
+     "timestamp": "54:29",
+     "deep_link": "https://www.youtube.com/watch?v=gbKVGLAGcU8&t=3269s",
+     "kind": "analysis",
+     "note": "Speaker discusses tau ecosystem, noting that subnet performance is key but many subnets receive high emissions used to subsidize users, creating inflated metrics."
+    },
+    {
+     "episode_id": "lN2kZJ0CNZg",
+     "episode_title": "\ud83d\udfe2 LIVE: Robinhood Chain Rally Incoming? How to Position",
+     "start_seconds": 8384.0,
+     "timestamp": "2:19:44",
+     "deep_link": "https://www.youtube.com/watch?v=lN2kZJ0CNZg&t=8384s",
+     "kind": "analysis",
+     "note": "Noted as up significantly off the bottom over recent weeks on the 2-day chart, though down from all-time highs."
+    },
+    {
+     "episode_id": "qHavUGBG56A",
+     "episode_title": "\ud83d\udd34 LIVE: Black Monday Overblown? | Staying Bullish | Market Update",
+     "start_seconds": 1380.0,
+     "timestamp": "23:00",
+     "deep_link": "https://www.youtube.com/watch?v=qHavUGBG56A&t=1380s",
+     "kind": "analysis",
+     "note": "Speaker describes Tau as having one of the best charts, featuring a falling wedge into a bullish order block with swept liquidity and lower highs, expecting structure to break."
+    },
+    {
+     "episode_id": "sWzSLq3Dq0w",
+     "episode_title": "S&P500 goes 24/7 using crypto rails! The institutions are flooding in!",
+     "start_seconds": 1979.0,
+     "timestamp": "32:59",
+     "deep_link": "https://www.youtube.com/watch?v=sWzSLq3Dq0w&t=1979s",
+     "kind": "analysis",
+     "note": "Tau recently broke back through a trend line and is viewed as potentially offering an entry opportunity."
+    },
+    {
+     "episode_id": "t46W9kf1m90",
+     "episode_title": "\ud83d\udd34 LIVE: Welcome to the Onchain Bull Market | Market Update + Interviews",
+     "start_seconds": 819.0,
+     "timestamp": "13:39",
+     "deep_link": "https://www.youtube.com/watch?v=t46W9kf1m90&t=819s",
+     "kind": "mention",
+     "note": "Mentioned as being on its way to some resistance but not quite there yet."
+    }
+   ],
+   "episode_count": 15,
+   "single_reference": false
+  },
+  {
    "symbol": "NEST",
    "name": "Nest",
    "asset_class": "crypto",
@@ -125431,188 +125667,6 @@
     }
    ],
    "episode_count": 12,
-   "single_reference": false
-  },
-  {
-   "symbol": "TAU",
-   "name": "Tau",
-   "asset_class": "crypto",
-   "mentions": 19,
-   "analysis": 15,
-   "moments": [
-    {
-     "episode_id": "B2cg6LWD60g",
-     "episode_title": "\ud83d\udd34 LIVE: BTC Erases Rally | $870M+ Longs Liquidated | Time to Exit?",
-     "start_seconds": 10047.0,
-     "timestamp": "2:47:27",
-     "deep_link": "https://www.youtube.com/watch?v=B2cg6LWD60g&t=10047s",
-     "kind": "analysis",
-     "note": "Speaker observes tau bouncing and showing some demand at lower levels."
-    },
-    {
-     "episode_id": "DCxwABH6umU",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto + Robinhood Chain Bottom In? | Elysium Launch Incoming | Exact 90-Day Plan",
-     "start_seconds": 745.0,
-     "timestamp": "12:25",
-     "deep_link": "https://www.youtube.com/watch?v=DCxwABH6umU&t=745s",
-     "kind": "analysis",
-     "note": "Tau showed a nice strong bounce on the daily and looks like it wants to break out of the downtrend."
-    },
-    {
-     "episode_id": "DCxwABH6umU",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto + Robinhood Chain Bottom In? | Elysium Launch Incoming | Exact 90-Day Plan",
-     "start_seconds": 11500.0,
-     "timestamp": "3:11:40",
-     "deep_link": "https://www.youtube.com/watch?v=DCxwABH6umU&t=11500s",
-     "kind": "mention",
-     "note": "Speaker briefly mentions Tau looking well among altcoins at the bottom of their range."
-    },
-    {
-     "episode_id": "ElhoMK0uH4M",
-     "episode_title": "\ud83d\udd34 LIVE: Bearish Headlines Strike Again | More Chop or Bottom Signal?",
-     "start_seconds": 1205.0,
-     "timestamp": "20:05",
-     "deep_link": "https://www.youtube.com/watch?v=ElhoMK0uH4M&t=1205s",
-     "kind": "analysis",
-     "note": "Speakers note that Tau is following a similar price path as other assets being tracked."
-    },
-    {
-     "episode_id": "H4kImk1Y7KQ",
-     "episode_title": "\ud83d\udd34 LIVE: FOMC, AI Panic, Clarity Act Vote | Market Update + Interviews",
-     "start_seconds": 10761.0,
-     "timestamp": "2:59:21",
-     "deep_link": "https://www.youtube.com/watch?v=H4kImk1Y7KQ&t=10761s",
-     "kind": "analysis",
-     "note": "Speaker discusses entry price of 2.35 for Tau and describes it as having one of the cleanest technical setups recently, expressing bullish outlook."
-    },
-    {
-     "episode_id": "XB71vFeU2zA",
-     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
-     "start_seconds": 9638.0,
-     "timestamp": "2:40:38",
-     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=9638s",
-     "kind": "analysis",
-     "note": "Speaker analyzed Tau pulling back into an area of support, making lower highs, in a green range, and identified it as potentially hunting for a higher low and eventual breakout of a downtrend."
-    },
-    {
-     "episode_id": "XxlT7dtD9JY",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Under $81K | Is This the 10/10 Crash All Over Again?",
-     "start_seconds": 7090.0,
-     "timestamp": "1:58:10",
-     "deep_link": "https://www.youtube.com/watch?v=XxlT7dtD9JY&t=7090s",
-     "kind": "analysis",
-     "note": "Tau went up for 63 days over two months with an up-and-to-the-right trend."
-    },
-    {
-     "episode_id": "XxlT7dtD9JY",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Under $81K | Is This the 10/10 Crash All Over Again?",
-     "start_seconds": 8226.0,
-     "timestamp": "2:17:06",
-     "deep_link": "https://www.youtube.com/watch?v=XxlT7dtD9JY&t=8226s",
-     "kind": "mention",
-     "note": "Speaker mentions Tau as an interesting asset during macro segment discussion of market opportunities."
-    },
-    {
-     "episode_id": "XxlT7dtD9JY",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Under $81K | Is This the 10/10 Crash All Over Again?",
-     "start_seconds": 8806.0,
-     "timestamp": "2:26:46",
-     "deep_link": "https://www.youtube.com/watch?v=XxlT7dtD9JY&t=8806s",
-     "kind": "analysis",
-     "note": "Speaker discusses setting invalidation levels and entry points on the one-hour chart, mentions potential liquidity sweep and consolidation over a couple of days."
-    },
-    {
-     "episode_id": "bckrJLRN_l0",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto Pulling Back...Buy the Dip? | Market Update + Interviews",
-     "start_seconds": 11359.0,
-     "timestamp": "3:09:19",
-     "deep_link": "https://www.youtube.com/watch?v=bckrJLRN_l0&t=11359s",
-     "kind": "analysis",
-     "note": "Speaker shows Tau as an example token that popped up last cycle, had a run in early 2024, never made new highs in two years, but recently made its first higher high in about two years."
-    },
-    {
-     "episode_id": "ckSVVsCYrSI",
-     "episode_title": "\ud83d\udd34 LIVE: Uptober Turned Choptober | Bitcoin Holding $80K | What's Next?",
-     "start_seconds": 1109.0,
-     "timestamp": "18:29",
-     "deep_link": "https://www.youtube.com/watch?v=ckSVVsCYrSI&t=1109s",
-     "kind": "analysis",
-     "note": "Speaker notes Tau front-ran the SFP but is still traveling deeper into the support zone."
-    },
-    {
-     "episode_id": "ckSVVsCYrSI",
-     "episode_title": "\ud83d\udd34 LIVE: Uptober Turned Choptober | Bitcoin Holding $80K | What's Next?",
-     "start_seconds": 6989.0,
-     "timestamp": "1:56:29",
-     "deep_link": "https://www.youtube.com/watch?v=ckSVVsCYrSI&t=6989s",
-     "kind": "analysis",
-     "note": "Speaker discussed entry points at 254 and 260 for Tau, charting price action and waiting for specific technical patterns before entering a trade."
-    },
-    {
-     "episode_id": "d-mQ25Dpn68",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Hits $85K | Bull Market Confirmed | Market Update + Interview",
-     "start_seconds": 1372.0,
-     "timestamp": "22:52",
-     "deep_link": "https://www.youtube.com/watch?v=d-mQ25Dpn68&t=1372s",
-     "kind": "analysis",
-     "note": "Speaker discusses Tau as setting the stage for the AI trade, noting it bounces every time it goes below 2.12 and just broke out of a multi-year downtrend with a first higher high in over a year."
-    },
-    {
-     "episode_id": "d-mQ25Dpn68",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Hits $85K | Bull Market Confirmed | Market Update + Interview",
-     "start_seconds": 7125.0,
-     "timestamp": "1:58:45",
-     "deep_link": "https://www.youtube.com/watch?v=d-mQ25Dpn68&t=7125s",
-     "kind": "mention",
-     "note": "Referenced as an altcoin that has experienced a significant run off the bottom."
-    },
-    {
-     "episode_id": "gbKVGLAGcU8",
-     "episode_title": "\ud83d\udfe2 LIVE: Onchain Crypto Market Turning Bullish | How To Maximize Your Gains",
-     "start_seconds": 3269.0,
-     "timestamp": "54:29",
-     "deep_link": "https://www.youtube.com/watch?v=gbKVGLAGcU8&t=3269s",
-     "kind": "analysis",
-     "note": "Speaker discusses tau ecosystem, noting that subnet performance is key but many subnets receive high emissions used to subsidize users, creating inflated metrics."
-    },
-    {
-     "episode_id": "lN2kZJ0CNZg",
-     "episode_title": "\ud83d\udfe2 LIVE: Robinhood Chain Rally Incoming? How to Position",
-     "start_seconds": 8384.0,
-     "timestamp": "2:19:44",
-     "deep_link": "https://www.youtube.com/watch?v=lN2kZJ0CNZg&t=8384s",
-     "kind": "analysis",
-     "note": "Noted as up significantly off the bottom over recent weeks on the 2-day chart, though down from all-time highs."
-    },
-    {
-     "episode_id": "qHavUGBG56A",
-     "episode_title": "\ud83d\udd34 LIVE: Black Monday Overblown? | Staying Bullish | Market Update",
-     "start_seconds": 1380.0,
-     "timestamp": "23:00",
-     "deep_link": "https://www.youtube.com/watch?v=qHavUGBG56A&t=1380s",
-     "kind": "analysis",
-     "note": "Speaker describes Tau as having one of the best charts, featuring a falling wedge into a bullish order block with swept liquidity and lower highs, expecting structure to break."
-    },
-    {
-     "episode_id": "sWzSLq3Dq0w",
-     "episode_title": "S&P500 goes 24/7 using crypto rails! The institutions are flooding in!",
-     "start_seconds": 1979.0,
-     "timestamp": "32:59",
-     "deep_link": "https://www.youtube.com/watch?v=sWzSLq3Dq0w&t=1979s",
-     "kind": "analysis",
-     "note": "Tau recently broke back through a trend line and is viewed as potentially offering an entry opportunity."
-    },
-    {
-     "episode_id": "t46W9kf1m90",
-     "episode_title": "\ud83d\udd34 LIVE: Welcome to the Onchain Bull Market | Market Update + Interviews",
-     "start_seconds": 819.0,
-     "timestamp": "13:39",
-     "deep_link": "https://www.youtube.com/watch?v=t46W9kf1m90&t=819s",
-     "kind": "mention",
-     "note": "Mentioned as being on its way to some resistance but not quite there yet."
-    }
-   ],
-   "episode_count": 14,
    "single_reference": false
   },
   {
@@ -150683,6 +150737,62 @@
    "single_reference": false
   },
   {
+   "symbol": "ELY",
+   "name": "Elysium",
+   "asset_class": "crypto",
+   "mentions": 5,
+   "analysis": 5,
+   "moments": [
+    {
+     "episode_id": "0VrjCXFXCA4",
+     "episode_title": "Wake Up! The Next 90 Days Will Change Everything in Crypto | Chill's Filter Ep-3",
+     "start_seconds": 450.0,
+     "timestamp": "7:30",
+     "deep_link": "https://www.youtube.com/watch?v=0VrjCXFXCA4&t=450s",
+     "kind": "analysis",
+     "note": "Speaker discusses Elysium as a new chain launching in three days at a local Bitcoin bottom, positioned to offer fresh opportunities similar to those that appeared on Robinhood chain, with trading planned to go live on day one of launch."
+    },
+    {
+     "episode_id": "DCxwABH6umU",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto + Robinhood Chain Bottom In? | Elysium Launch Incoming | Exact 90-Day Plan",
+     "start_seconds": 6809.0,
+     "timestamp": "1:53:29",
+     "deep_link": "https://www.youtube.com/watch?v=DCxwABH6umU&t=6809s",
+     "kind": "analysis",
+     "note": "Speakers plan an Elysium ecosystem day with multiple projects from the chain. Discussion covers that Elysium will launch with significant hype but will attract LARPs and scammers, with speaker predicting 99% of launches will go to zero."
+    },
+    {
+     "episode_id": "DCxwABH6umU",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto + Robinhood Chain Bottom In? | Elysium Launch Incoming | Exact 90-Day Plan",
+     "start_seconds": 13001.0,
+     "timestamp": "3:36:41",
+     "deep_link": "https://www.youtube.com/watch?v=DCxwABH6umU&t=13001s",
+     "kind": "analysis",
+     "note": "Discussed as an L2 built by Kinetic (the staking provider) that will drive value to Hyperliquid; enabling DeFi experiments like options order books, AMMs, and using Hyperliquid as native oracle."
+    },
+    {
+     "episode_id": "IdN9O-XqlnQ",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto Rebounds After Midterms | What to Do Now",
+     "start_seconds": 1901.0,
+     "timestamp": "31:41",
+     "deep_link": "https://www.youtube.com/watch?v=IdN9O-XqlnQ&t=1901s",
+     "kind": "analysis",
+     "note": "Discussed as an interesting chain attracting money from Hyperliquid wealth effect; viewed as potentially a sell-the-news event initially, but offering good early opportunities due to wealthy Hyperliquid users looking to rotate to betas and people who missed Hyperliquid wanting ecosystem involvement."
+    },
+    {
+     "episode_id": "_mLaSJLAPJs",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto is Crashing | Here\u2019s Exactly What to Do Right Now",
+     "start_seconds": 7641.0,
+     "timestamp": "2:07:21",
+     "deep_link": "https://www.youtube.com/watch?v=_mLaSJLAPJs&t=7641s",
+     "kind": "analysis",
+     "note": "Speakers mention they did a detailed breakdown of Elysium last Friday and discuss it as a potential opportunity to speculate on coinciding with its launch alongside Hyperliquid strength."
+    }
+   ],
+   "episode_count": 4,
+   "single_reference": false
+  },
+  {
    "symbol": "EITHER",
    "name": "Either",
    "asset_class": "crypto",
@@ -155178,6 +155288,53 @@
    "single_reference": false
   },
   {
+   "symbol": "QNT",
+   "name": "Quant",
+   "asset_class": "crypto",
+   "mentions": 4,
+   "analysis": 4,
+   "moments": [
+    {
+     "episode_id": "0VrjCXFXCA4",
+     "episode_title": "Wake Up! The Next 90 Days Will Change Everything in Crypto | Chill's Filter Ep-3",
+     "start_seconds": 206.0,
+     "timestamp": "3:26",
+     "deep_link": "https://www.youtube.com/watch?v=0VrjCXFXCA4&t=206s",
+     "kind": "analysis",
+     "note": "Speaker notes it popped 6x a couple of weeks to a month ago and is now selling off into a key support area."
+    },
+    {
+     "episode_id": "B2cg6LWD60g",
+     "episode_title": "\ud83d\udd34 LIVE: BTC Erases Rally | $870M+ Longs Liquidated | Time to Exit?",
+     "start_seconds": 1119.0,
+     "timestamp": "18:39",
+     "deep_link": "https://www.youtube.com/watch?v=B2cg6LWD60g&t=1119s",
+     "kind": "analysis",
+     "note": "Large-cap cryptocurrency that went up 535% over the last month due to adoption of Quant Network technology by banks for settling $2 trillion daily."
+    },
+    {
+     "episode_id": "B2cg6LWD60g",
+     "episode_title": "\ud83d\udd34 LIVE: BTC Erases Rally | $870M+ Longs Liquidated | Time to Exit?",
+     "start_seconds": 6960.0,
+     "timestamp": "1:56:00",
+     "deep_link": "https://www.youtube.com/watch?v=B2cg6LWD60g&t=6960s",
+     "kind": "analysis",
+     "note": "QNT's technology is being adopted by an entity that processes over $2 trillion per day in the TradFi industry, cited as an example of on-chain adoption in traditional finance."
+    },
+    {
+     "episode_id": "DCxwABH6umU",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto + Robinhood Chain Bottom In? | Elysium Launch Incoming | Exact 90-Day Plan",
+     "start_seconds": 11565.0,
+     "timestamp": "3:12:45",
+     "deep_link": "https://www.youtube.com/watch?v=DCxwABH6umU&t=11565s",
+     "kind": "analysis",
+     "note": "Speaker mentions QNT popped up and went about 6X a couple weeks to a month ago, and is now selling off into a key area."
+    }
+   ],
+   "episode_count": 3,
+   "single_reference": false
+  },
+  {
    "symbol": "GRAIL",
    "name": "Grail Ecosystem",
    "asset_class": "other",
@@ -155692,53 +155849,6 @@
     }
    ],
    "episode_count": 4,
-   "single_reference": false
-  },
-  {
-   "symbol": "ELY",
-   "name": "Elysium",
-   "asset_class": "crypto",
-   "mentions": 4,
-   "analysis": 4,
-   "moments": [
-    {
-     "episode_id": "DCxwABH6umU",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto + Robinhood Chain Bottom In? | Elysium Launch Incoming | Exact 90-Day Plan",
-     "start_seconds": 6809.0,
-     "timestamp": "1:53:29",
-     "deep_link": "https://www.youtube.com/watch?v=DCxwABH6umU&t=6809s",
-     "kind": "analysis",
-     "note": "Speakers plan an Elysium ecosystem day with multiple projects from the chain. Discussion covers that Elysium will launch with significant hype but will attract LARPs and scammers, with speaker predicting 99% of launches will go to zero."
-    },
-    {
-     "episode_id": "DCxwABH6umU",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto + Robinhood Chain Bottom In? | Elysium Launch Incoming | Exact 90-Day Plan",
-     "start_seconds": 13001.0,
-     "timestamp": "3:36:41",
-     "deep_link": "https://www.youtube.com/watch?v=DCxwABH6umU&t=13001s",
-     "kind": "analysis",
-     "note": "Discussed as an L2 built by Kinetic (the staking provider) that will drive value to Hyperliquid; enabling DeFi experiments like options order books, AMMs, and using Hyperliquid as native oracle."
-    },
-    {
-     "episode_id": "IdN9O-XqlnQ",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto Rebounds After Midterms | What to Do Now",
-     "start_seconds": 1901.0,
-     "timestamp": "31:41",
-     "deep_link": "https://www.youtube.com/watch?v=IdN9O-XqlnQ&t=1901s",
-     "kind": "analysis",
-     "note": "Discussed as an interesting chain attracting money from Hyperliquid wealth effect; viewed as potentially a sell-the-news event initially, but offering good early opportunities due to wealthy Hyperliquid users looking to rotate to betas and people who missed Hyperliquid wanting ecosystem involvement."
-    },
-    {
-     "episode_id": "_mLaSJLAPJs",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto is Crashing | Here\u2019s Exactly What to Do Right Now",
-     "start_seconds": 7641.0,
-     "timestamp": "2:07:21",
-     "deep_link": "https://www.youtube.com/watch?v=_mLaSJLAPJs&t=7641s",
-     "kind": "analysis",
-     "note": "Speakers mention they did a detailed breakdown of Elysium last Friday and discuss it as a potential opportunity to speculate on coinciding with its launch alongside Hyperliquid strength."
-    }
-   ],
-   "episode_count": 3,
    "single_reference": false
   },
   {
@@ -161438,44 +161548,6 @@
      "deep_link": "https://www.youtube.com/watch?v=KAIfxFeg3FY&t=5028s",
      "kind": "analysis",
      "note": "Speaker states they are bullish on PVS and plan to slowly accumulate over time despite recent price decline; mentions the token will be key to the protocol's economy and utility."
-    }
-   ],
-   "episode_count": 2,
-   "single_reference": false
-  },
-  {
-   "symbol": "QNT",
-   "name": "Quant",
-   "asset_class": "crypto",
-   "mentions": 3,
-   "analysis": 3,
-   "moments": [
-    {
-     "episode_id": "B2cg6LWD60g",
-     "episode_title": "\ud83d\udd34 LIVE: BTC Erases Rally | $870M+ Longs Liquidated | Time to Exit?",
-     "start_seconds": 1119.0,
-     "timestamp": "18:39",
-     "deep_link": "https://www.youtube.com/watch?v=B2cg6LWD60g&t=1119s",
-     "kind": "analysis",
-     "note": "Large-cap cryptocurrency that went up 535% over the last month due to adoption of Quant Network technology by banks for settling $2 trillion daily."
-    },
-    {
-     "episode_id": "B2cg6LWD60g",
-     "episode_title": "\ud83d\udd34 LIVE: BTC Erases Rally | $870M+ Longs Liquidated | Time to Exit?",
-     "start_seconds": 6960.0,
-     "timestamp": "1:56:00",
-     "deep_link": "https://www.youtube.com/watch?v=B2cg6LWD60g&t=6960s",
-     "kind": "analysis",
-     "note": "QNT's technology is being adopted by an entity that processes over $2 trillion per day in the TradFi industry, cited as an example of on-chain adoption in traditional finance."
-    },
-    {
-     "episode_id": "DCxwABH6umU",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto + Robinhood Chain Bottom In? | Elysium Launch Incoming | Exact 90-Day Plan",
-     "start_seconds": 11565.0,
-     "timestamp": "3:12:45",
-     "deep_link": "https://www.youtube.com/watch?v=DCxwABH6umU&t=11565s",
-     "kind": "analysis",
-     "note": "Speaker mentions QNT popped up and went about 6X a couple weeks to a month ago, and is now selling off into a key area."
     }
    ],
    "episode_count": 2,
@@ -208592,10 +208664,10 @@
    "single_reference": true
   }
  ],
- "total_hits": 20285,
- "dropped_low_confidence": 2432,
+ "total_hits": 20293,
+ "dropped_low_confidence": 2433,
  "dropped_not_an_asset": 2246,
- "episodes_processed": 688,
+ "episodes_processed": 689,
  "episode_ids": [
   "-6Sccmoz7RQ",
   "-8z0M77EVZg",
@@ -208605,6 +208677,7 @@
   "-SjXoHD2znM",
   "-iilkByxBa8",
   "03VnXSHNLkE",
+  "0VrjCXFXCA4",
   "0_RFLMIu9gI",
   "0bmVQog1A4U",
   "0c0Z0kvup2U",
