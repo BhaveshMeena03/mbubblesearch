@@ -46324,7 +46324,7 @@
    "symbol": "PUMP",
    "name": "Pump.fun",
    "asset_class": "other",
-   "mentions": 398,
+   "mentions": 399,
    "analysis": 243,
    "moments": [
     {
@@ -46983,6 +46983,15 @@
      "deep_link": "https://www.youtube.com/watch?v=9vNYS826vag&t=2558s",
      "kind": "analysis",
      "note": "Described as a top five revenue-generating app in crypto generating $2-3 million daily; discussed as a potential NASDAQ-like platform for token launches and ICOs rather than just a memecoin launchpad."
+    },
+    {
+     "episode_id": "A2dsvKwXr-Q",
+     "episode_title": "\"I Live For Pain\" | Shaw's Return to Crypto & CTO at Slop.cash",
+     "start_seconds": 1795.0,
+     "timestamp": "29:55",
+     "deep_link": "https://www.youtube.com/watch?v=A2dsvKwXr-Q&t=1795s",
+     "kind": "mention",
+     "note": "Mentioned as the biggest launch pad in the space, attributed to network effect and brand trust."
     },
     {
      "episode_id": "AImBDqEWd8E",
@@ -49910,7 +49919,7 @@
      "note": "Speaker stated they launched Pump Coin three to four months ago on their Riverboat platform."
     }
    ],
-   "episode_count": 210,
+   "episode_count": 211,
    "single_reference": false
   },
   {
@@ -77466,7 +77475,7 @@
    "symbol": "META",
    "name": "Metadow",
    "asset_class": "crypto",
-   "mentions": 109,
+   "mentions": 110,
    "analysis": 63,
    "moments": [
     {
@@ -77612,6 +77621,15 @@
      "deep_link": "https://www.youtube.com/watch?v=9vNYS826vag&t=2795s",
      "kind": "mention",
      "note": "Referenced as an example where venture capital firms like Paradigm invested at a $180-200 million valuation after retail investors."
+    },
+    {
+     "episode_id": "A2dsvKwXr-Q",
+     "episode_title": "\"I Live For Pain\" | Shaw's Return to Crypto & CTO at Slop.cash",
+     "start_seconds": 1525.0,
+     "timestamp": "25:25",
+     "deep_link": "https://www.youtube.com/watch?v=A2dsvKwXr-Q&t=1525s",
+     "kind": "mention",
+     "note": "Referenced as having similar underlying legal infrastructure to the project being discussed; mentioned in context of DAO structures for token holders."
     },
     {
      "episode_id": "AW4jHLT1xig",
@@ -78451,7 +78469,7 @@
      "note": "Speakers review Metadow's price chart on the 4-hour timeframe, noting it's holding well with a 150 million market cap; they discuss its revenue generation and changes to fee structure where Metadow is increasing its share of LP fees from 50% to 100% on projects launched on the platform."
     }
    ],
-   "episode_count": 83,
+   "episode_count": 84,
    "single_reference": false
   },
   {
@@ -82572,8 +82590,8 @@
    "symbol": "NVDA",
    "name": "Nvidia",
    "asset_class": "stock",
-   "mentions": 215,
-   "analysis": 56,
+   "mentions": 216,
+   "analysis": 57,
    "moments": [
     {
      "episode_id": "-NmeR-pjLN8",
@@ -82763,6 +82781,15 @@
      "deep_link": "https://www.youtube.com/watch?v=9YvEpM4b0Y4&t=742s",
      "kind": "mention",
      "note": "Named as an example company included in the chips and AI distribution bucket."
+    },
+    {
+     "episode_id": "A2dsvKwXr-Q",
+     "episode_title": "\"I Live For Pain\" | Shaw's Return to Crypto & CTO at Slop.cash",
+     "start_seconds": 1235.0,
+     "timestamp": "20:35",
+     "deep_link": "https://www.youtube.com/watch?v=A2dsvKwXr-Q&t=1235s",
+     "kind": "analysis",
+     "note": "Discussed in context of GPU costs and profit margins; speaker mentions that for every dollar of Nvidia GPUs purchased, Nvidia makes like $4, and Anthropic makes $18 on top of that."
     },
     {
      "episode_id": "B2cg6LWD60g",
@@ -84511,7 +84538,7 @@
      "note": "Speaker used Nvidia as an example of a tokenized stock that users could hold in their wallet through the FIRE protocol."
     }
    ],
-   "episode_count": 117,
+   "episode_count": 118,
    "single_reference": false
   },
   {
@@ -106318,7 +106345,7 @@
    "symbol": "BNB",
    "name": "Binance",
    "asset_class": "crypto",
-   "mentions": 117,
+   "mentions": 118,
    "analysis": 27,
    "moments": [
     {
@@ -106473,6 +106500,15 @@
      "deep_link": "https://www.youtube.com/watch?v=6s2rJfz01jQ&t=1644s",
      "kind": "mention",
      "note": "Mentioned as one of the blockchain ecosystems the company plans to expand into."
+    },
+    {
+     "episode_id": "A2dsvKwXr-Q",
+     "episode_title": "\"I Live For Pain\" | Shaw's Return to Crypto & CTO at Slop.cash",
+     "start_seconds": 294.0,
+     "timestamp": "4:54",
+     "deep_link": "https://www.youtube.com/watch?v=A2dsvKwXr-Q&t=294s",
+     "kind": "mention",
+     "note": "Speaker references a Binance hack as an example of security issues in crypto."
     },
     {
      "episode_id": "A7PeR4MWNKE",
@@ -107375,7 +107411,7 @@
      "note": "Mentioned in discussion about 'Binance crime' and a price movement from 40 million to 800 million."
     }
    ],
-   "episode_count": 83,
+   "episode_count": 84,
    "single_reference": false
   },
   {
@@ -151241,6 +151277,62 @@
    "single_reference": false
   },
   {
+   "symbol": "UMIA",
+   "name": "Umiya",
+   "asset_class": "crypto",
+   "mentions": 5,
+   "analysis": 5,
+   "moments": [
+    {
+     "episode_id": "A2dsvKwXr-Q",
+     "episode_title": "\"I Live For Pain\" | Shaw's Return to Crypto & CTO at Slop.cash",
+     "start_seconds": 0.0,
+     "timestamp": "0:00",
+     "deep_link": "https://www.youtube.com/watch?v=A2dsvKwXr-Q&t=0s",
+     "kind": "analysis",
+     "note": "Umiya is the platform hosting Slopcash raise; token holders have special privileges and early access to participate in pre-raise rounds before public launch."
+    },
+    {
+     "episode_id": "IdN9O-XqlnQ",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto Rebounds After Midterms | What to Do Now",
+     "start_seconds": 13661.0,
+     "timestamp": "3:47:41",
+     "deep_link": "https://www.youtube.com/watch?v=IdN9O-XqlnQ&t=13661s",
+     "kind": "analysis",
+     "note": "Speaker notes Umiya is doing really well and discusses upcoming slop launch (Shaw launch) coming up Friday, describing how successful launches for Umiya would help demonstrate the value of Futarki ownership model."
+    },
+    {
+     "episode_id": "avqW2h6oO7U",
+     "episode_title": "WHAT THE DOG DOING? UPDATING WATCHLISTS, IS THE MARKET BOUNCE SUSTAINABLE? w/@umia_finance",
+     "start_seconds": 3966.0,
+     "timestamp": "1:06:06",
+     "deep_link": "https://www.youtube.com/watch?v=avqW2h6oO7U&t=3966s",
+     "kind": "analysis",
+     "note": "UMIA token will be the first quantum token in the ecosystem; speakers discuss its launch as a way to prove out the platform and give ownership to the community, with the token enabling agentic capital formation and new governance primitives."
+    },
+    {
+     "episode_id": "avqW2h6oO7U",
+     "episode_title": "WHAT THE DOG DOING? UPDATING WATCHLISTS, IS THE MARKET BOUNCE SUSTAINABLE? w/@umia_finance",
+     "start_seconds": 4304.0,
+     "timestamp": "1:11:44",
+     "deep_link": "https://www.youtube.com/watch?v=avqW2h6oO7U&t=4304s",
+     "kind": "analysis",
+     "note": "Token value accrues from activity on the UMIA protocol, defined as volumes on decision markets and volumes across UMIA token spot markets."
+    },
+    {
+     "episode_id": "x7qRX-hWxg8",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding (Memes, V4 Hooks, Infra) | Market Update + Interviews",
+     "start_seconds": 1010.0,
+     "timestamp": "16:50",
+     "deep_link": "https://www.youtube.com/watch?v=x7qRX-hWxg8&t=1010s",
+     "kind": "analysis",
+     "note": "Discussed as a curated launchpad project similar to Metadow with ownership model and holder rights; speaker expresses bullish sentiment on the project."
+    }
+   ],
+   "episode_count": 4,
+   "single_reference": false
+  },
+  {
    "symbol": "ANTI",
    "name": "Anti Hunter VC",
    "asset_class": "crypto",
@@ -154522,6 +154614,62 @@
    "single_reference": false
   },
   {
+   "symbol": "UMA",
+   "name": "UMA Protocol",
+   "asset_class": "crypto",
+   "mentions": 5,
+   "analysis": 4,
+   "moments": [
+    {
+     "episode_id": "A2dsvKwXr-Q",
+     "episode_title": "\"I Live For Pain\" | Shaw's Return to Crypto & CTO at Slop.cash",
+     "start_seconds": 518.0,
+     "timestamp": "8:38",
+     "deep_link": "https://www.youtube.com/watch?v=A2dsvKwXr-Q&t=518s",
+     "kind": "analysis",
+     "note": "Speaker describes finding potential exploits in audited UMA Protocol contracts, including ways to manipulate decision markets, and sending patches that were subsequently fixed."
+    },
+    {
+     "episode_id": "L33A0DnDUbE",
+     "episode_title": "\ud83d\udd34LIVE NOW: Hype New ATH | Saylor Sells | Alts to Outperform? | Market Update",
+     "start_seconds": 4043.0,
+     "timestamp": "1:07:23",
+     "deep_link": "https://www.youtube.com/watch?v=L33A0DnDUbE&t=4043s",
+     "kind": "mention",
+     "note": "Referenced as an oracle for binary events in the context of event contracts and protocols."
+    },
+    {
+     "episode_id": "avqW2h6oO7U",
+     "episode_title": "WHAT THE DOG DOING? UPDATING WATCHLISTS, IS THE MARKET BOUNCE SUSTAINABLE? w/@umia_finance",
+     "start_seconds": 3148.0,
+     "timestamp": "52:28",
+     "deep_link": "https://www.youtube.com/watch?v=avqW2h6oO7U&t=3148s",
+     "kind": "analysis",
+     "note": "Discussed as a token and platform designed entirely on-chain from the ground up, featuring decision markets that allow token holders to price and decide on project decisions, with mechanisms to ensure value accrual to token holders."
+    },
+    {
+     "episode_id": "avqW2h6oO7U",
+     "episode_title": "WHAT THE DOG DOING? UPDATING WATCHLISTS, IS THE MARKET BOUNCE SUSTAINABLE? w/@umia_finance",
+     "start_seconds": 9121.0,
+     "timestamp": "2:32:01",
+     "deep_link": "https://www.youtube.com/watch?v=avqW2h6oO7U&t=9121s",
+     "kind": "analysis",
+     "note": "Discussed as a wallet layer project with book value relative to market cap; speaker analyzes downside protection based on treasury assets and burn rate, and evaluates it as a bet on privacy at wallet level."
+    },
+    {
+     "episode_id": "tbgUv4xVkKs",
+     "episode_title": "Umia Finance: The onchain venture protocol",
+     "start_seconds": 1953.0,
+     "timestamp": "32:33",
+     "deep_link": "https://www.youtube.com/watch?v=tbgUv4xVkKs&t=1953s",
+     "kind": "analysis",
+     "note": "Platform being discussed as a one-stop shop for project information including tokenomics, treasury stats, and locked token details for investors and holders."
+    }
+   ],
+   "episode_count": 4,
+   "single_reference": false
+  },
+  {
    "symbol": "AMBER",
    "name": "Amber Vibe",
    "asset_class": "other",
@@ -155943,53 +156091,6 @@
     }
    ],
    "episode_count": 4,
-   "single_reference": false
-  },
-  {
-   "symbol": "UMIA",
-   "name": "Umiya",
-   "asset_class": "other",
-   "mentions": 4,
-   "analysis": 4,
-   "moments": [
-    {
-     "episode_id": "IdN9O-XqlnQ",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto Rebounds After Midterms | What to Do Now",
-     "start_seconds": 13661.0,
-     "timestamp": "3:47:41",
-     "deep_link": "https://www.youtube.com/watch?v=IdN9O-XqlnQ&t=13661s",
-     "kind": "analysis",
-     "note": "Speaker notes Umiya is doing really well and discusses upcoming slop launch (Shaw launch) coming up Friday, describing how successful launches for Umiya would help demonstrate the value of Futarki ownership model."
-    },
-    {
-     "episode_id": "avqW2h6oO7U",
-     "episode_title": "WHAT THE DOG DOING? UPDATING WATCHLISTS, IS THE MARKET BOUNCE SUSTAINABLE? w/@umia_finance",
-     "start_seconds": 3966.0,
-     "timestamp": "1:06:06",
-     "deep_link": "https://www.youtube.com/watch?v=avqW2h6oO7U&t=3966s",
-     "kind": "analysis",
-     "note": "UMIA token will be the first quantum token in the ecosystem; speakers discuss its launch as a way to prove out the platform and give ownership to the community, with the token enabling agentic capital formation and new governance primitives."
-    },
-    {
-     "episode_id": "avqW2h6oO7U",
-     "episode_title": "WHAT THE DOG DOING? UPDATING WATCHLISTS, IS THE MARKET BOUNCE SUSTAINABLE? w/@umia_finance",
-     "start_seconds": 4304.0,
-     "timestamp": "1:11:44",
-     "deep_link": "https://www.youtube.com/watch?v=avqW2h6oO7U&t=4304s",
-     "kind": "analysis",
-     "note": "Token value accrues from activity on the UMIA protocol, defined as volumes on decision markets and volumes across UMIA token spot markets."
-    },
-    {
-     "episode_id": "x7qRX-hWxg8",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding (Memes, V4 Hooks, Infra) | Market Update + Interviews",
-     "start_seconds": 1010.0,
-     "timestamp": "16:50",
-     "deep_link": "https://www.youtube.com/watch?v=x7qRX-hWxg8&t=1010s",
-     "kind": "analysis",
-     "note": "Discussed as a curated launchpad project similar to Metadow with ownership model and holder rights; speaker expresses bullish sentiment on the project."
-    }
-   ],
-   "episode_count": 3,
    "single_reference": false
   },
   {
@@ -159986,53 +160087,6 @@
    "single_reference": false
   },
   {
-   "symbol": "UMA",
-   "name": "UMA",
-   "asset_class": "crypto",
-   "mentions": 4,
-   "analysis": 3,
-   "moments": [
-    {
-     "episode_id": "L33A0DnDUbE",
-     "episode_title": "\ud83d\udd34LIVE NOW: Hype New ATH | Saylor Sells | Alts to Outperform? | Market Update",
-     "start_seconds": 4043.0,
-     "timestamp": "1:07:23",
-     "deep_link": "https://www.youtube.com/watch?v=L33A0DnDUbE&t=4043s",
-     "kind": "mention",
-     "note": "Referenced as an oracle for binary events in the context of event contracts and protocols."
-    },
-    {
-     "episode_id": "avqW2h6oO7U",
-     "episode_title": "WHAT THE DOG DOING? UPDATING WATCHLISTS, IS THE MARKET BOUNCE SUSTAINABLE? w/@umia_finance",
-     "start_seconds": 3148.0,
-     "timestamp": "52:28",
-     "deep_link": "https://www.youtube.com/watch?v=avqW2h6oO7U&t=3148s",
-     "kind": "analysis",
-     "note": "Discussed as a token and platform designed entirely on-chain from the ground up, featuring decision markets that allow token holders to price and decide on project decisions, with mechanisms to ensure value accrual to token holders."
-    },
-    {
-     "episode_id": "avqW2h6oO7U",
-     "episode_title": "WHAT THE DOG DOING? UPDATING WATCHLISTS, IS THE MARKET BOUNCE SUSTAINABLE? w/@umia_finance",
-     "start_seconds": 9121.0,
-     "timestamp": "2:32:01",
-     "deep_link": "https://www.youtube.com/watch?v=avqW2h6oO7U&t=9121s",
-     "kind": "analysis",
-     "note": "Discussed as a wallet layer project with book value relative to market cap; speaker analyzes downside protection based on treasury assets and burn rate, and evaluates it as a bet on privacy at wallet level."
-    },
-    {
-     "episode_id": "tbgUv4xVkKs",
-     "episode_title": "Umia Finance: The onchain venture protocol",
-     "start_seconds": 1953.0,
-     "timestamp": "32:33",
-     "deep_link": "https://www.youtube.com/watch?v=tbgUv4xVkKs&t=1953s",
-     "kind": "analysis",
-     "note": "Platform being discussed as a one-stop shop for project information including tokenomics, treasury stats, and locked token details for investors and holders."
-    }
-   ],
-   "episode_count": 3,
-   "single_reference": false
-  },
-  {
    "symbol": "FIGMA",
    "name": "Figma",
    "asset_class": "other",
@@ -161434,6 +161488,44 @@
      "deep_link": "https://www.youtube.com/watch?v=bZ6Iq-xrkQ0&t=105s",
      "kind": "analysis",
      "note": "Recap is an AI assistant token launched about a month ago on Bags protocol; the speaker discusses its chart movement (straight up with very low volume), community building over five months pre-tokenization, and its utility as a Telegram bot with premium features requiring token holders to access expanded functionality."
+    }
+   ],
+   "episode_count": 3,
+   "single_reference": false
+  },
+  {
+   "symbol": "SLOP",
+   "name": "Slopcash",
+   "asset_class": "crypto",
+   "mentions": 3,
+   "analysis": 3,
+   "moments": [
+    {
+     "episode_id": "A2dsvKwXr-Q",
+     "episode_title": "\"I Live For Pain\" | Shaw's Return to Crypto & CTO at Slop.cash",
+     "start_seconds": 0.0,
+     "timestamp": "0:00",
+     "deep_link": "https://www.youtube.com/watch?v=A2dsvKwXr-Q&t=0s",
+     "kind": "analysis",
+     "note": "Shaw launching a raise for Slopcash on Umiya platform and Robinhood; pre-raise has already hit 600k from 400k minimum goal, opening to public tomorrow."
+    },
+    {
+     "episode_id": "UbKsP6WCsPs",
+     "episode_title": "\ud83d\udd34 LIVE: Market Cooling Off | Buy The Dip? | Market Update + Interviews",
+     "start_seconds": 4920.0,
+     "timestamp": "1:22:00",
+     "deep_link": "https://www.youtube.com/watch?v=UbKsP6WCsPs&t=4920s",
+     "kind": "analysis",
+     "note": "Token paired with Slunks NFT; the speaker's previous experiment that provided learnings about tokenomics and arbitrage dynamics between NFT and token assets."
+    },
+    {
+     "episode_id": "p8t-iFa9z0U",
+     "episode_title": "Mancer: A non-custodial DEX aggregator and order layer on robinhood Chain",
+     "start_seconds": 422.0,
+     "timestamp": "7:02",
+     "deep_link": "https://www.youtube.com/watch?v=p8t-iFa9z0U&t=422s",
+     "kind": "analysis",
+     "note": "Speaker created the Slop token earlier in the year, which informed their understanding of NFT and token economics; the token is how the speaker got the name 'Slop father' on X."
     }
    ],
    "episode_count": 3,
@@ -171705,35 +171797,6 @@
      "deep_link": "https://www.youtube.com/watch?v=dfCW-ey0eAo&t=9191s",
      "kind": "analysis",
      "note": "Coin that speakers entered early and ran from approximately 1.5 million to 5 million before closing position; now sold off and accumulating in a tight range after a couple weeks."
-    }
-   ],
-   "episode_count": 2,
-   "single_reference": false
-  },
-  {
-   "symbol": "SLOP",
-   "name": "Slop token",
-   "asset_class": "crypto",
-   "mentions": 2,
-   "analysis": 2,
-   "moments": [
-    {
-     "episode_id": "UbKsP6WCsPs",
-     "episode_title": "\ud83d\udd34 LIVE: Market Cooling Off | Buy The Dip? | Market Update + Interviews",
-     "start_seconds": 4920.0,
-     "timestamp": "1:22:00",
-     "deep_link": "https://www.youtube.com/watch?v=UbKsP6WCsPs&t=4920s",
-     "kind": "analysis",
-     "note": "Token paired with Slunks NFT; the speaker's previous experiment that provided learnings about tokenomics and arbitrage dynamics between NFT and token assets."
-    },
-    {
-     "episode_id": "p8t-iFa9z0U",
-     "episode_title": "Mancer: A non-custodial DEX aggregator and order layer on robinhood Chain",
-     "start_seconds": 422.0,
-     "timestamp": "7:02",
-     "deep_link": "https://www.youtube.com/watch?v=p8t-iFa9z0U&t=422s",
-     "kind": "analysis",
-     "note": "Speaker created the Slop token earlier in the year, which informed their understanding of NFT and token economics; the token is how the speaker got the name 'Slop father' on X."
     }
    ],
    "episode_count": 2,
@@ -208664,10 +208727,10 @@
    "single_reference": true
   }
  ],
- "total_hits": 20293,
+ "total_hits": 20300,
  "dropped_low_confidence": 2433,
- "dropped_not_an_asset": 2246,
- "episodes_processed": 689,
+ "dropped_not_an_asset": 2251,
+ "episodes_processed": 690,
  "episode_ids": [
   "-6Sccmoz7RQ",
   "-8z0M77EVZg",
@@ -208764,6 +208827,7 @@
   "9lEczLHExQ4",
   "9r8tyuUacfA",
   "9vNYS826vag",
+  "A2dsvKwXr-Q",
   "A3YnGXKpPxw",
   "A7PeR4MWNKE",
   "AImBDqEWd8E",

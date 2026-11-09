@@ -3317,5 +3317,20 @@
   "copies": 1,
   "heard_from": "audio",
   "placed": "2026-11-08"
+ },
+ "2119565640378065235": {
+  "account": "MCGlive",
+  "archive": "mcg",
+  "episode_id": "3EoyxkUDpdY",
+  "start": 2739,
+  "end": 2915,
+  "before": "choose a token to buy, right? Yeah. So on Gabox, we don't change it. We only say your money could buy more of the stock and you believe that would go up in price. that's it got it okay and uh so i want to get to because you have a a second place um winner here on the the stock land of hackathon because i want to cover this",
+  "after": "It's nice. Yeah that is best pull 8X 8X Okay I mean like this it actually kind of like people are using this uh it kind of is it so i guess my next question maybe is like how scalable is this uh crypto jones has a couple of really good questions here um so you know what is okay so basically can this integrate into other sites, is there a fee share with third-party developers? Can you see my screen? Yeah, I'll share it back up. Yeah, so we have a developer page. It already has production API where anyone could integrate Gabox API to create their own machine. Everything you need to know exists in this developer page. You also have an AI agent skill if you do it like we do it in 2026. Yeah, definitely. Okay, so any app can take your APIs. They can build their own experience. Now, how much customizing can they do? Instead of a, you know, like a gumball dispenser, or can they make it their own version of that? Is it just kind of bare bones infrastructure, or are you giving them kind of the look and aesthetic and all the assets?",
+  "after_at": 2917,
+  "duration": 166.2,
+  "matches": 182,
+  "copies": 1,
+  "heard_from": "audio",
+  "placed": "2026-11-09"
  }
 }
