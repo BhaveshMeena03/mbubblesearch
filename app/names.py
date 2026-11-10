@@ -78,6 +78,16 @@ _ALIASES: dict[str, str] = {
     # Ansem's clip of that show on 4 Nov 2026, the first thing Lex saw.
     "tulu king": "Tulip King",
     "answer hack": "AnsemHack",
+    # ThreadGuy's notes for his 6 Nov KOSPI stream failed every morning
+    # for these two: the model wrote the names right, the transcript had
+    # them wrong, and the check (rightly) refused a name the transcript
+    # does not say. Counted on 10 Nov 2026 before adding: "soxel" 286
+    # times, every one the 3x semiconductor ETF ("the soxel, daily semi
+    # bull 3x leverage etf"), against 24 that spell it SOXL; "brevin
+    # howard" 6 times, all the fund ("hedge fund at brevin howard").
+    "soxel": "SOXL",
+    "brevin howard": "Brevan Howard",
+    "brevin howards": "Brevan Howards",
 }
 
 # Manglings that are only manglings in context. Whisper writes ZEC as
@@ -102,6 +112,18 @@ _CONTEXTUAL: list[tuple[re.Pattern, str]] = [
     # "BTC and Zeke", "Hype or Zeke"
     (re.compile(r"\b(BTC|Bitcoin|ETH|Ethereum|Hype|SOL|Solana)\s+(and|or|vs\.?|versus)"
                 r"\s+Zeke\b", re.IGNORECASE), r"\1 \2 ZEC"),
+    # Whisper writes KOSPI, Korea's index, as "Cosby": 17 lines in the
+    # ThreadGuy transcripts on 10 Nov 2026, every one the index ("the cosby
+    # circuit breaker", "cosby closes down 6%", "trade cosby futures"). Cosby
+    # is also a surname and a sitcom, so it changes only next to market
+    # words or as "the Cosby", and never in "Bill Cosby" or "the Cosby
+    # Show". Two lines stay as they are ("cosby live", "this cosby guy"):
+    # nothing on them says which it is. His notes for the 6 Nov market open
+    # failed every morning on "Kospi", the right word the transcript lacked.
+    (re.compile(r"(?<!bill )\bcosby\b(?=[^\n]*\b(?:down|up|close[sd]?|circuit|futures"
+                r"|session|lows?|highs?|wick|green|red|index|etf|percent)\b|[^\n]*\d%)",
+                re.IGNORECASE), "KOSPI"),
+    (re.compile(r"\b(the)\s+cosby\b(?!\s+show)", re.IGNORECASE), r"\1 KOSPI"),
 ]
 # What a search for the coin should also look for in the exact-token index.
 _EXPAND_ALSO = {"zec": ["zeke"], "zcash": ["zeke"],

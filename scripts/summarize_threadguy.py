@@ -230,6 +230,12 @@ def check(raw: str, segments: list[dict], keep_what_passes: bool,
     if not match:
         raise ValueError("no JSON object in the reply")
     data = json.loads(match.group(0))
+    # A reply shaped wrong is refused like any other unusable reply, so it
+    # gets the second try. On 10 Nov 2026 a topics list holding lists made
+    # this raise AttributeError ("'list' object has no attribute 'get'"),
+    # which skipped the retry and failed ISJOX1zIk_w outright.
+    if not isinstance(data, dict):
+        raise ValueError("the reply is not a JSON object")
     given = names.fix(given)[0].lower()
     said = " ".join(x["text"] for x in segments).lower() + " " + given
     starts = sorted({int(x["t"]) for x in segments})
@@ -240,7 +246,15 @@ def check(raw: str, segments: list[dict], keep_what_passes: bool,
     if bad:
         raise ValueError(f"tldr has what the transcript does not: {bad}")
     topics, dropped = [], []
-    for item in data.get("topics") or []:
+    listed = data.get("topics") or []
+    if not isinstance(listed, list):
+        raise ValueError("topics is not a list")
+    for item in listed:
+        if not isinstance(item, dict):
+            if not keep_what_passes:
+                raise ValueError("a topic that is not an object")
+            dropped.append("a topic that is not an object")
+            continue
         text = plain(str(item.get("text") or ""))
         t = seconds(str(item.get("at") or ""))
         if t is not None:
@@ -269,13 +283,21 @@ def check(raw: str, segments: list[dict], keep_what_passes: bool,
     return {"tldr": tldr, "topics": spaced[:12]}, dropped
 
 
+# Room for the reply. The summary model thinks before it writes, and on
+# 10 Nov 2026 a second try at ISJOX1zIk_w spent all of 3,000 tokens on
+# thinking and came back empty (stop_reason "max_tokens", no text), which
+# read in the log as "no JSON object in the reply". Only what is used is
+# paid for, so the ceiling is set well clear of a long stream's notes.
+MAX_TOKENS = 12000
+
+
 async def ask(client, model: str, user: str, system: str = SYSTEM):
     """One call, streamed. The proxy has cut long summary calls before, so
     a dropped connection is tried again after a pause, three times in all."""
     for wait in (30, 90, None):
         try:
             async with client.messages.stream(
-                    model=model, max_tokens=3000, system=system,
+                    model=model, max_tokens=MAX_TOKENS, system=system,
                     messages=[{"role": "user", "content": user}]) as stream:
                 return await stream.get_final_message()
         # The proxy also drops a stream partway: "peer closed connection
@@ -290,8 +312,9 @@ async def ask(client, model: str, user: str, system: str = SYSTEM):
 
 async def summarize(client, model: str, row: dict, segments: list[dict],
                     system: str = SYSTEM, given: str | None = None) -> dict:
-    """Two tries at most. The first reply must pass whole; the second keeps
-    the topics that pass. A reply that is not valid JSON (an unescaped
+    """Three tries at most. The first reply must pass whole; the later ones
+    keep the topics that pass, and each is told what the one before got
+    wrong. A reply that is not valid JSON (an unescaped
     quote in a quotation) is the commonest failure and a second try clears
     it. The topics a second try dropped come back under "dropped", for the
     log; they are not stored."""
@@ -312,11 +335,26 @@ async def summarize(client, model: str, row: dict, segments: list[dict],
             f"Format: {row.get('format', '')}\n\n"
             f"<transcript>\n{transcript(segments)}\n</transcript>")
     last = ""
-    for attempt in (1, 2):
-        message = await ask(client, model, user, system)
+    tries = 3
+    for attempt in range(1, tries + 1):
+        # The second try is told what was wrong with the first, and only
+        # that. Asked the same thing twice, the model made the same mistake
+        # twice: the notes for three streams failed every morning on a name
+        # or a figure it added from what it knows ("Michael Saylor's",
+        # "1988"). Told instead to check that every name and number was in
+        # the transcript, it spent more than 12,000 tokens thinking about a
+        # two hour stream and wrote nothing (10 Nov 2026).
+        prompt = user if attempt == 1 else (
+            f"{user}\n\nYour first summary of this episode could not be used: {last}. "
+            "Write it again the same way, leaving that out.")
+        message = await ask(client, model, prompt, system)
         raw = "".join(b.text for b in message.content if getattr(b, "type", "") == "text")
+        if getattr(message, "stop_reason", None) == "max_tokens":
+            last = f"the reply ran out of room at {MAX_TOKENS} tokens"
+            print(f"      try {attempt} not used: {last}")
+            continue
         try:
-            summary, dropped = check(raw, segments, keep_what_passes=attempt == 2,
+            summary, dropped = check(raw, segments, keep_what_passes=attempt >= 2,
                                      given=given)
         except ValueError as exc:
             last = str(exc)
@@ -324,7 +362,7 @@ async def summarize(client, model: str, row: dict, segments: list[dict],
             continue
         summary["dropped"] = dropped
         return summary
-    raise ValueError(f"no usable summary in two tries: {last[:200]}")
+    raise ValueError(f"no usable summary in {tries} tries: {last[:200]}")
 
 
 def load() -> dict:

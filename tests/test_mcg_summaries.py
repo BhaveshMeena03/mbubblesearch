@@ -103,7 +103,7 @@ def test_minutes_written_where_seconds_belong_are_refused():
     """Arrow Finance's notes: 21 for a topic at 22:05, 34 for one at 34:08."""
     minutes = [("0:00:21", GOOD[1][1]), ("0:00:23", GOOD[2][1]),
                ("0:00:34", GOOD[3][1]), ("0:00:38", GOOD[4][1])]
-    client = Replies(reply(minutes), reply(minutes))
+    client = Replies(reply(minutes), reply(minutes), reply(minutes))
     with pytest.raises(ValueError, match="no usable summary"):
         asyncio.run(sm.summarize(client, "m", ROW, SEGMENTS))
 

@@ -200,10 +200,20 @@ def test_a_reply_that_fails_whole_gets_a_second_try_that_keeps_what_passes():
     assert len(got["dropped"]) == 1
 
 
-def test_two_unusable_replies_are_no_summary():
-    client = Replies("not json", reply(GOOD[:2]))
-    with pytest.raises(ValueError, match="no usable summary in two tries"):
+def test_three_unusable_replies_are_no_summary():
+    client = Replies("not json", reply(GOOD[:2]), reply(GOOD[:3]))
+    with pytest.raises(ValueError, match="no usable summary in 3 tries"):
         asyncio.run(summ.summarize(client, "m", ROW, SEGMENTS))
+    assert len(client.sent) == 3
+
+
+def test_a_third_try_is_told_what_the_second_got_wrong():
+    added = TLDR[:-1] + ", the way Michael Saylor warned."
+    musk = TLDR[:-1] + ", which Musk raised."
+    client = Replies(reply(GOOD, tldr=added), reply(GOOD, tldr=musk), reply(GOOD))
+    got = asyncio.run(summ.summarize(client, "m", ROW, SEGMENTS))
+    assert len(client.sent) == 3 and len(got["topics"]) == 5
+    assert "Musk" in client.sent[2]["messages"][0]["content"]
 
 
 def test_the_model_reads_the_names_the_site_spells():
@@ -311,3 +321,68 @@ def test_a_topic_moves_the_player_it_sits_under():
     it was given, the shelf row's or the stage's."""
     assert 'notes(e, function(){ return pw.querySelector("iframe"); })' in PAGE
     assert 'notes(e, function(){ return st.querySelector("iframe"); })' in PAGE
+
+
+def test_the_second_try_is_told_what_the_first_got_wrong():
+    # The model added a name the stream never says; the second try is told
+    # which one, and the rule, instead of being asked the same thing again.
+    added = TLDR[:-1] + ", the way Michael Saylor warned."
+    client = Replies(reply(GOOD, tldr=added), reply(GOOD))
+    asyncio.run(summ.summarize(client, "m", ROW, SEGMENTS))
+    first = client.sent[0]["messages"][0]["content"]
+    second = client.sent[1]["messages"][0]["content"]
+    assert "could not be used" not in first
+    assert "could not be used" in second and "Michael" in second and "Saylor" in second
+    assert "leaving that out" in second
+
+
+def test_a_reply_shaped_wrong_is_refused_and_tried_again_not_a_crash():
+    nested = "here\n" + json.dumps({"tldr": TLDR, "topics": [["0:06:32", "a list, not an object"]]})
+    with pytest.raises(ValueError, match="not an object"):
+        summ.check(nested, SEGMENTS, keep_what_passes=False, given=GIVEN)
+    # The whole reply a list: not the object the notes need.
+    with pytest.raises(ValueError):
+        summ.check(json.dumps([{"tldr": TLDR}]), SEGMENTS, keep_what_passes=False, given=GIVEN)
+    client = Replies(nested, reply(GOOD))
+    got = asyncio.run(summ.summarize(client, "m", ROW, SEGMENTS))
+    assert len(client.sent) == 2 and len(got["topics"]) == 5
+
+
+def test_a_stray_list_among_good_topics_is_dropped_on_the_second_try():
+    mixed = json.loads(reply(GOOD).split("\n", 1)[1])
+    mixed["topics"].append(["1:00:00", "not an object"])
+    got, dropped = summ.check(json.dumps(mixed), SEGMENTS, keep_what_passes=True, given=GIVEN)
+    assert len(got["topics"]) == 5 and dropped == ["a topic that is not an object"]
+
+
+def test_a_reply_that_ran_out_of_room_says_so_and_is_tried_again():
+    class Cut(Replies):
+        def stream(self, **kwargs):
+            inner = super().stream(**kwargs)
+            client = self
+
+            class Stream:
+                async def __aenter__(self):
+                    return self
+
+                async def __aexit__(self, *a):
+                    return False
+
+                async def get_final_message(self):
+                    got = await inner.get_final_message()
+                    # The first reply is all thinking and no text.
+                    if len(client.sent) == 1:
+                        return SimpleNamespace(content=[], stop_reason="max_tokens")
+                    return got
+            return Stream()
+    client = Cut(reply(GOOD), reply(GOOD))
+    got = asyncio.run(summ.summarize(client, "m", ROW, SEGMENTS))
+    assert len(client.sent) == 2 and len(got["topics"]) == 5
+    second = client.sent[1]["messages"][0]["content"]
+    assert "ran out of room" in second
+
+
+def test_the_call_leaves_room_for_thinking():
+    client = Replies(reply(GOOD))
+    asyncio.run(summ.summarize(client, "m", ROW, SEGMENTS))
+    assert client.sent[0]["max_tokens"] >= 8000

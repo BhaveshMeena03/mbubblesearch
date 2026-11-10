@@ -52,6 +52,12 @@ class TestTheManglingsThatWerePosted:
         ("Lucanets coming on the show", "Luca Netz coming on the show"),
         ("Tulu King says Eli Lilly is his largest position",
          "Tulip King says Eli Lilly is his largest position"),
+        # ThreadGuy, 6 Nov 2026: the notes failed every morning on these.
+        ("He's been buying, buying, buying Soxel.", "buying, buying SOXL."),
+        ("Five credit portfolio managers leave hedge fund at Brevin Howard.",
+         "hedge fund at Brevan Howard."),
+        ("funds managed by black rock, brevin howards, hamilton lane",
+         "black rock, Brevan Howards, hamilton lane"),
     ])
     def test_it_is_corrected(self, mangled, correct):
         assert correct in fix(mangled)[0]
@@ -289,3 +295,24 @@ def test_the_hackathon_typed_as_two_words_is_found_too():
     spellings = expand("when are the ansem hack results")
     assert "when are the anthem hack results" in spellings
     assert "when are the answer hack results" in spellings
+
+
+@pytest.mark.parametrize("line, fixed", [
+    ("cosby closes down 6%.", "KOSPI closes down 6%."),
+    ("it took circuit breaker on the cosby to get me here", "on the KOSPI to get me here"),
+    ("they're going to trade cosby futures, bro.", "trade KOSPI futures"),
+    ("look at the fucking wick on the yearly of the cosby, bro.", "of the KOSPI, bro."),
+    ("yesterday's session cosby was up 3.", "session KOSPI was up 3."),
+])
+def test_cosby_the_index_becomes_kospi(line, fixed):
+    assert fixed in fix(line)[0]
+
+
+@pytest.mark.parametrize("line", [
+    "Bill Cosby was up all night on the news",
+    "we watched the Cosby Show",
+    "the this is the token and 400k let's see this cosby guy",
+    "cosby live",
+])
+def test_cosby_the_man_and_the_show_are_left_alone(line):
+    assert "KOSPI" not in fix(line)[0]
