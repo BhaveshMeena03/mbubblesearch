@@ -45,6 +45,7 @@ sys.path.insert(0, str(ROOT))
 
 from app import local_cache  # noqa: E402
 from app.config import get_settings  # noqa: E402
+from app.mcg_transcript import to_segments  # noqa: E402
 from app.podcast import PodcastIndex  # noqa: E402
 from app.provenance import drop_hallucinated  # noqa: E402
 from app.schemas import Episode  # noqa: E402
@@ -462,6 +463,45 @@ def shortfall(segments: list[dict], seconds: float) -> str | None:
     return None
 
 
+# One query can name at most this many passages. An episode that fills it
+# may have more, and a redo that deleted only the first thousand would
+# leave the rest of the broken copy behind, so it stops instead.
+MAX_PASSAGES = 1000
+
+
+def _raw_index():
+    settings = get_settings()
+    spec = ARCHIVES[ARCHIVE]
+    ns = spec["namespace"](settings)
+    index = PodcastIndex(namespace=ns, index_name=spec["index"](settings)).index
+    return index, ns, settings.embedding_dimension
+
+
+def passage_ids(video_id: str) -> list[str]:
+    """The ids of every passage an episode has in the index now.
+
+    Ids only, no metadata: this is the one read a redo makes, and it is a
+    few kilobytes rather than the episode's text.
+    """
+    index, ns, dimension = _raw_index()
+    probe = [0.0] * dimension
+    probe[0] = 1.0
+    found = index.query(vector=probe, top_k=MAX_PASSAGES, namespace=ns,
+                        include_metadata=False,
+                        filter={"episode_id": {"$eq": video_id}})
+    ids = [m["id"] for m in found.get("matches", [])]
+    if len(ids) >= MAX_PASSAGES:
+        raise RuntimeError(f"{video_id} has {MAX_PASSAGES}+ passages, more "
+                           "than one query can list; not redone")
+    return ids
+
+
+def drop_passages(ids: list[str]) -> None:
+    index, ns, _ = _raw_index()
+    for at in range(0, len(ids), 100):
+        index.delete(ids=ids[at:at + 100], namespace=ns)
+
+
 def forget(video_id: str) -> int:
     """Take an episode off the shelf and out of the index, so it is done
     again from scratch. Returns how many passages were removed.
@@ -469,23 +509,71 @@ def forget(video_id: str) -> int:
     The passages go by id, read back with a filter on the episode: a
     re-transcription windows differently, so leaving the old ones would
     keep fragments of the broken copy beside the new one.
+
+    Not what --redo does any more: that keeps the old copy until the new
+    one is written (see shelve). This is for taking an episode out.
     """
-    settings = get_settings()
-    spec = ARCHIVES[ARCHIVE]
-    ns = spec["namespace"](settings)
-    index = PodcastIndex(namespace=ns, index_name=spec["index"](settings)).index
-    probe = [0.0] * settings.embedding_dimension
-    probe[0] = 1.0
-    found = index.query(vector=probe, top_k=1000, namespace=ns,
-                        include_metadata=False,
-                        filter={"episode_id": {"$eq": video_id}})
-    ids = [m["id"] for m in found.get("matches", [])]
-    for at in range(0, len(ids), 100):
-        index.delete(ids=ids[at:at + 100], namespace=ns)
+    ids = passage_ids(video_id)
+    drop_passages(ids)
     rows = [r for r in shelf() if r.get("id") != video_id]
     SHELF.write_text(json.dumps(rows, indent=1))
     local_cache.forget(ARCHIVE, video_id)
     return len(ids)
+
+
+async def shelve(index, item: dict, kept: list[dict], date: str,
+                 replace: bool = False) -> str:
+    """Write one transcribed episode: passages, local copies, shelf row.
+
+    With replace, the episode is already in the index and this is a redo.
+    The old passages stay searchable until the new ones are in, and only
+    then are the ones the new copy did not overwrite deleted. The old
+    order (delete, then transcribe) left an episode with nothing at all
+    whenever the transcription or the embedding failed in between, and on
+    a batch of eighty that is not a rare event.
+
+    A new copy with fewer lines than the one it replaces is refused: the
+    point of a redo is to fill holes, and a worse transcript is not
+    written over a better one.
+
+    Raises on any failure, before anything is deleted. Returns a line for
+    the log.
+    """
+    episode = Episode(
+        episode_id=item["id"], title=item["title"],
+        url=f"https://www.youtube.com/watch?v={item['id']}",
+        platform="youtube", published_at=date or None,
+        segments=kept,
+    )
+    old: list[str] = []
+    if replace:
+        before = local_cache.load_lines(ARCHIVE, item["id"]) or []
+        if len(kept) < len(before):
+            raise RuntimeError(f"new transcript has {len(kept)} lines, the "
+                               f"old one {len(before)}; kept the old one")
+        old = passage_ids(item["id"])
+    windows = await index.ingest([episode])
+    rows = index.rows_for(episode)
+    stale = sorted(set(old) - {r["id"] for r in rows})
+    if stale:
+        drop_passages(stale)
+    if replace:
+        local_cache.forget(ARCHIVE, item["id"])
+    # The passages, kept here as they were written, so the Sunday
+    # exact-word rebuild never reads them back out of the index. And the
+    # timed lines, so nothing that needs the times (clips, the calls
+    # boards) has to read the index for them either.
+    local_cache.put_windows(ARCHIVE, item["id"], [
+        {"id": r["id"], "title": r["title"], "text": r["text"]} for r in rows])
+    local_cache.put_lines(ARCHIVE, item["id"],
+                          to_segments([r["text_ts"] for r in rows]))
+    add_to_shelf({"id": item["id"], "title": item["title"],
+                  "url": episode.url, "published_at": date,
+                  "seconds": item["seconds"], "format": item["format"]})
+    note = f"{len(kept)} segments -> {windows} passages"
+    if replace:
+        note += f", {len(stale)} old ones removed"
+    return note
 
 
 def add_to_shelf(row: dict) -> None:
@@ -555,9 +643,8 @@ async def main() -> int:
                 print(f"  would redo {t['id']}  {t['seconds'] // 60}m  "
                       f"{t['title'][:52]}")
             return 0
-        for t in todo:
-            print(f"  {t['id']}: removed {forget(t['id'])} old passages "
-                  f"and its shelf row", flush=True)
+        # Nothing is deleted here. Each one keeps its old passages and its
+        # shelf row until the new copy is written (shelve).
     else:
         todo = pending(args.limit)
     if args.only:
@@ -582,6 +669,7 @@ async def main() -> int:
     index = PodcastIndex(namespace=ns, index_name=ix)
     print(f"  writing to index {ix!r}, namespace {ns!r}")
     failures: list[str] = []
+    redoing = set(args.redo)
     added = 0
     # Downloading and transcribing is network and CPU and belongs off the
     # event loop; writing to the index and to the shelf stays on it, one
@@ -635,36 +723,23 @@ async def main() -> int:
                       flush=True)
                 failures.append(f"{item['id']}: {short}")
                 continue
-            episode = Episode(
-                episode_id=item["id"], title=item["title"],
-                url=f"https://www.youtube.com/watch?v={item['id']}",
-                platform="youtube", published_at=date or None,
-                segments=kept,
-            )
             # Embedding is a network call and it was the only step in the
             # loop that could not fail politely. One transient
             # APIConnectionError from Voyage took down a 607 episode run
             # at 394, discarding every episode still in flight. A blip
             # now costs the one episode, which is not shelved and so is
-            # picked up by the next run.
+            # picked up by the next run (or, on a redo, keeps its old
+            # copy and is redone next time).
             try:
-                windows = await index.ingest([episode])
+                note = await shelve(index, item, kept, date,
+                                    replace=item["id"] in redoing)
             except Exception as exc:                        # noqa: BLE001
-                print(f"  [{n}/{len(todo)}] {item['id']} embed failed: "
+                print(f"  [{n}/{len(todo)}] {item['id']} not written: "
                       f"{str(exc)[:90]}", flush=True)
-                failures.append(f"{item['id']}: embed {str(exc)[:90]}")
+                failures.append(f"{item['id']}: {str(exc)[:90]}")
                 continue
             print(f"  [{n}/{len(todo)}] {item['id']}  "
-                  f"{item['title'][:44]}  {len(kept)} segments -> "
-                  f"{windows} passages", flush=True)
-            # The passages, kept here as they were written, so the Sunday
-            # exact-word rebuild never reads them back out of the index.
-            local_cache.put_windows(ARCHIVE, item["id"], [
-                {"id": r["id"], "title": r["title"], "text": r["text"]}
-                for r in index.rows_for(episode)])
-            add_to_shelf({"id": item["id"], "title": item["title"],
-                          "url": episode.url, "published_at": date,
-                          "seconds": item["seconds"], "format": item["format"]})
+                  f"{item['title'][:44]}  {note}", flush=True)
             added += 1
     finally:
         for job in jobs:

@@ -3,6 +3,7 @@
 Both are the same shape of bug: the job went green having done nothing,
 which from outside is indistinguishable from an archive already up to date.
 """
+import asyncio
 import json
 import subprocess
 from pathlib import Path
@@ -207,6 +208,116 @@ def test_redo_removes_old_passages_and_the_shelf_row(monkeypatch, tmp_path):
     assert asked["namespace"] == "threadguy"
     assert deleted == [(100, "threadguy"), (50, "threadguy")]
     assert [r["id"] for r in ingest_mcg.shelf()] == ["a"]
+
+
+# --- a redo keeps the old copy until the new one is in --------------------
+#
+# 82 ThreadGuy streams have 15-minute holes, from Groq chunks lost before
+# the 1 Oct fix. Redoing them used to start by deleting each one, so any
+# failure on the way (a download, a refused chunk, an embed) left a stream
+# with nothing searchable. These pin the new order.
+
+ITEM = {"id": "vid", "title": "Stream", "seconds": 3600, "format": "stream"}
+
+
+def _segs(n: int) -> list[dict]:
+    return [{"t": float(60 * i), "text": f"line {i}"} for i in range(n)]
+
+
+class _FakeIndex:
+    """ingest and rows_for, with every call written down in order."""
+
+    def __init__(self, events, ids, fail=False):
+        self.events, self.ids, self.fail = events, ids, fail
+
+    async def ingest(self, episodes):
+        self.events.append("ingest")
+        if self.fail:
+            raise ConnectionError("voyage blip")
+        return len(self.ids)
+
+    def rows_for(self, ep):
+        return [{"id": i, "title": ep.title, "text": f"t{n}",
+                 "text_ts": f"[0:0{n}:00] line {n}"}
+                for n, i in enumerate(self.ids)]
+
+
+@pytest.fixture
+def redo(monkeypatch, tmp_path):
+    from app import local_cache
+    for name in ("HITS", "WINDOWS", "LINES"):
+        monkeypatch.setattr(local_cache, name, tmp_path / name.lower())
+    shelf = tmp_path / "shelf.json"
+    shelf.write_text(json.dumps([dict(ITEM, url="u", published_at="2026-05-15")]))
+    monkeypatch.setattr(ingest_mcg, "SHELF", shelf)
+    monkeypatch.setattr(ingest_mcg, "ARCHIVE", "threadguy")
+    events: list = []
+    monkeypatch.setattr(ingest_mcg, "passage_ids",
+                        lambda vid: events.append("list") or ["old1", "kept"])
+    monkeypatch.setattr(ingest_mcg, "drop_passages",
+                        lambda ids: events.append(("drop", list(ids))))
+    return events, local_cache
+
+
+def test_a_redo_deletes_only_after_the_new_passages_are_in(redo):
+    events, cache = redo
+    cache.put_lines("threadguy", "vid", _segs(3))
+    index = _FakeIndex(events, ["kept", "new1", "new2"])
+    note = asyncio.run(ingest_mcg.shelve(index, ITEM, _segs(5), "2026-05-15", replace=True))
+    assert events == ["list", "ingest", ("drop", ["old1"])], \
+        "listed, then written, then only the passage the new copy did not overwrite"
+    assert "1 old ones removed" in note
+    assert [r["id"] for r in ingest_mcg.shelf()] == ["vid"], "the row is never taken off"
+    assert [ln["t"] for ln in cache.load_lines("threadguy", "vid")] == [0, 60, 120]
+    assert [w["id"] for w in cache.load_windows("threadguy", "vid")] == ["kept", "new1", "new2"]
+
+
+def test_a_failed_embed_on_a_redo_deletes_nothing(redo):
+    events, cache = redo
+    cache.put_lines("threadguy", "vid", _segs(3))
+    with pytest.raises(ConnectionError):
+        asyncio.run(ingest_mcg.shelve(_FakeIndex(events, ["n"], fail=True),
+                                      ITEM, _segs(5), "", replace=True))
+    assert not [e for e in events if e[0] == "drop"]
+    assert len(cache.load_lines("threadguy", "vid")) == 3, "the old lines are still here"
+    assert [r["id"] for r in ingest_mcg.shelf()] == ["vid"]
+
+
+def test_a_shorter_transcript_is_not_written_over_a_longer_one(redo):
+    events, cache = redo
+    cache.put_lines("threadguy", "vid", _segs(5))
+    with pytest.raises(RuntimeError, match="kept the old one"):
+        asyncio.run(ingest_mcg.shelve(_FakeIndex(events, ["n"]), ITEM, _segs(4), "",
+                                      replace=True))
+    assert events == [], "refused before the index was touched"
+
+
+def test_a_new_episode_lists_nothing_and_keeps_its_timed_lines(redo):
+    events, cache = redo
+    asyncio.run(ingest_mcg.shelve(_FakeIndex(events, ["a", "b"]), ITEM, _segs(2), ""))
+    assert events == ["ingest"]
+    assert cache.load_lines("threadguy", "vid") == [{"t": 0, "text": "line 0"},
+                                                    {"t": 60, "text": "line 1"}]
+
+
+def test_an_episode_too_big_to_list_is_not_redone(monkeypatch):
+    """A query names at most a thousand; deleting only those would leave
+    the rest of the broken copy beside the new one."""
+    class Index:
+        def query(self, **k):
+            return {"matches": [{"id": str(n)} for n in range(ingest_mcg.MAX_PASSAGES)]}
+    monkeypatch.setattr(ingest_mcg, "_raw_index", lambda: (Index(), "threadguy", 4))
+    with pytest.raises(RuntimeError, match="not redone"):
+        ingest_mcg.passage_ids("big")
+
+
+def test_main_no_longer_deletes_before_transcribing():
+    """The old main() called forget() on every --redo id before any audio
+    was fetched. Read the source: that call must not come back."""
+    import inspect
+    src = inspect.getsource(ingest_mcg.main)
+    assert "forget(" not in src
+    assert "shelve(" in src
 
 
 def test_the_groq_key_comes_from_settings_when_the_env_has_none(monkeypatch):
