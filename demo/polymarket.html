@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" type="image/png" sizes="48x48" href="/demo/icon-48.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/demo/icon-512.png">
+<link rel="apple-touch-icon" href="/demo/icon-180.png">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0e11">
+<!-- Unlinked and kept out of search until it has been looked at. -->
+<meta name="robots" content="noindex, nofollow">
+<title>Market Bubble · the Polymarket ticker</title>
+<meta name="description" content="Every Polymarket market Market Bubble ran along the bottom of its broadcast, at the odds it showed, linked to the second it was on screen, and how each one came out.">
+<link rel="stylesheet" href="/demo/ui.css">
+<style>
+  :root{
+    --bg:#0b0e11;--panel:#12161c;--line:#232a33;--text:#e6e8ea;
+    --muted:#8a939e;--green:#16c784;--red:#e5605e;--amber:#e8c157;
+    --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);min-height:100vh;
+    font:15px/1.55 var(--sans);font-feature-settings:"tnum" 1;
+    padding:28px 20px 60px}
+  .wrap{max-width:940px;margin:0 auto}
+  .topbar{display:flex;align-items:center;justify-content:space-between;
+    gap:14px;margin-bottom:26px;flex-wrap:wrap}
+  .brand{font-weight:700;letter-spacing:.5px;font-size:14px;text-decoration:none;color:inherit}
+  .brand span{color:var(--green)}
+  h1{font-family:var(--display);font-weight:400;font-size:46px;
+    line-height:1.08;letter-spacing:-.01em;margin-bottom:12px}
+  h1 em{color:var(--green);font-style:normal}
+  .sub{color:var(--muted);margin-bottom:22px;max-width:680px}
+  .sub b{color:var(--text);font-weight:500}
+  .note{border:1px solid var(--line);color:var(--muted);border-radius:12px;
+    padding:13px 16px;font-size:12.5px;margin-bottom:24px}
+  .note b{color:var(--text);font-weight:500}
+
+  /* The figures above the list, on a rule, like the top of a statement. */
+  .tally{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    margin-bottom:22px}
+  .tally div{padding:14px 14px 13px 0;min-width:0}
+  .tally div + div{padding-left:14px;border-left:1px solid var(--line)}
+  .tally b{display:block;font:400 30px/1.1 var(--display);letter-spacing:-.01em}
+  .tally span{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.7px}
+
+  .controls{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;align-items:center}
+  .chip{font:inherit;font-size:13px;background:transparent;color:var(--muted);
+    border:1px solid var(--line);border-radius:16px;padding:6px 13px;cursor:pointer}
+  .chip:hover{border-color:var(--green);color:var(--green)}
+  .chip[aria-pressed="true"]{background:#16c78418;border-color:#16c78455;color:var(--green)}
+  .chip:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+  .showing{color:var(--muted);font-size:12.5px;margin:0 0 14px;min-height:19px}
+
+  .ep{margin:30px 0 4px;display:flex;gap:10px 16px;flex-wrap:wrap;align-items:baseline}
+  .ep h2{font:400 24px/1.2 var(--display);letter-spacing:-.005em}
+  .ep .when{color:var(--muted);font-size:12.5px}
+  .ep a{color:var(--green);font-size:12.5px;font-weight:600;text-decoration:none}
+  .ep a:hover{text-decoration:underline}
+
+  /* One market. What it was and where to see it on the left; the odds and
+     how it came out on the right, where a ledger keeps its balance. */
+  .mk{display:flex;gap:22px;padding:16px 0 15px;border-top:1px solid var(--line)}
+  .left{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px}
+  .q{font:400 19px/1.34 var(--display);color:#d9dde1;overflow-wrap:anywhere}
+  .meta{color:var(--muted);font-size:12.5px}
+  .acts{display:flex;gap:14px;flex-wrap:wrap;margin-top:2px;font-size:12.5px}
+  .acts a{color:var(--green);font-weight:600;text-decoration:none}
+  .acts a.pm{color:var(--muted);font-weight:500;border-bottom:1px dotted var(--line)}
+  .acts a:hover{text-decoration:underline}
+  .res{flex:0 0 170px;text-align:right;padding-top:2px}
+  .odds{font:400 34px/1 var(--display);letter-spacing:-.01em}
+  .odds small{font:500 11px/1 var(--sans);color:var(--muted);letter-spacing:.6px;
+    text-transform:uppercase;margin-left:6px}
+  .px{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:7px;line-height:1.6}
+  .tag{display:inline-block;font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;
+    border:1px solid var(--line);color:var(--muted);border-radius:9px;padding:1px 8px;
+    margin-top:8px;white-space:nowrap}
+  /* Colour says it, and so do the words, for anybody who cannot tell the
+     colours apart. */
+  .tag.yes{border-color:#16c78466;color:var(--green)}
+  .tag.no{border-color:#e5605e66;color:var(--red)}
+  .lean{display:block;color:var(--muted);font-size:11.5px;margin-top:6px}
+
+  .foot{color:var(--muted);font-size:12.5px;margin-top:30px;line-height:1.7;max-width:720px}
+  .foot a{color:var(--text)}
+  .empty{color:var(--muted);padding:22px 0}
+
+  @media(max-width:700px){
+    h1{font-size:34px}
+    .topbar{flex-direction:column;align-items:flex-start;gap:10px}
+    .tally{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .tally div:nth-child(3){border-left:0;padding-left:0;border-top:1px solid var(--line)}
+    .tally div:nth-child(4){border-top:1px solid var(--line)}
+    .tally b{font-size:25px}
+    .mk{flex-direction:column;gap:8px}
+    .res{flex:none;text-align:left;display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+    .px,.tag,.lean{margin-top:0}
+    .odds{font-size:28px}
+    .q{font-size:17px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <a class="brand" href="/home">MARKET <span>BUBBLE</span> · the ticker</a>
+    <span style="display:inline-flex;gap:10px;flex-wrap:wrap">
+    <a class="btn btn-primary btn-back" href="/demo/podcast.html"><span class="arw">←</span><svg class="ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.75" stroke="currentColor" stroke-width="1.7"/><path d="M10.6 10.6 14 14" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M6 5.3l3 1.7-3 1.7z" fill="currentColor"/></svg>Search every episode</a>
+    </span>
+  </div>
+
+  <h1>What the ticker said, <em>and what happened</em>.</h1>
+  <p class="sub">Every Polymarket market Market Bubble ran along the bottom of
+    its broadcast. <b>The odds it showed, the second it was on screen, and how
+    each one came out.</b></p>
+
+  <div class="note">
+    The odds are <b>Polymarket's, shown by the show's sponsor</b>. They are not
+    a call by Ansem or Banks, and none of this is advice. A market that went
+    the way its odds leaned is the market being right, not the hosts.
+  </div>
+
+  <div class="tally" id="tally" aria-live="polite"></div>
+
+  <div class="controls" id="controls">
+    <button class="chip" data-v="" aria-pressed="true">Every market</button>
+    <button class="chip" data-v="resolved" aria-pressed="false">Resolved</button>
+    <button class="chip" data-v="open" aria-pressed="false">Still open</button>
+  </div>
+  <p class="showing" id="showing"></p>
+
+  <div id="list"><p class="empty">Loading the board…</p></div>
+
+  <p class="foot">
+    How a market gets here: the ticker is read off the broadcast itself, a
+    frame every twenty seconds, and the time each frame aired comes from X's
+    own record of the replay, checked against the clock in the corner of the
+    picture. What the ticker said is only ever used to find the market: the
+    question shown here is Polymarket's own, and it has to match every figure
+    and every month of what was on screen. Polymarket's price for that market,
+    at the minute it was on screen, has to match the odds the ticker showed,
+    within two points, or the row is not here. A person then reads every row,
+    and only the ones marked keep are shown. Where a market now stands is
+    checked with Polymarket every fifteen minutes.
+    <a href="/method">How the archive is built</a>.
+  </p>
+</div>
+
+<script>
+var BOARD = null, ONLY = "";
+
+function esc(s){ return String(s == null ? "" : s)
+  .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;").replace(/'/g,"&#39;"); }
+
+/* Only ever emit http(s) links, never javascript: or data: from data. */
+function safeUrl(u){
+  try{ var p = new URL(u, location.href);
+       return (p.protocol === "http:" || p.protocol === "https:") ? p.href : "";
+  }catch(e){ return ""; }
+}
+
+/* Times the way the show's own clock showed them: Eastern. */
+function eastern(iso, withDay){
+  var d = new Date(iso);
+  if (isNaN(d)) return "";
+  var o = {timeZone: "America/New_York", hour: "numeric", minute: "2-digit"};
+  if (withDay){ o.month = "long"; o.day = "numeric"; o.year = "numeric"; delete o.hour; delete o.minute; }
+  return new Intl.DateTimeFormat("en-US", o).format(d).toLowerCase() + (withDay ? "" : " et");
+}
+function clock(t){
+  t = Math.max(0, Math.floor(+t || 0));
+  var h = Math.floor(t / 3600), m = Math.floor(t % 3600 / 60), s = t % 60;
+  return h + ":" + String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+}
+function num(v){ return typeof v === "number" ? (Math.round(v * 10) / 10) + "%" : "n/a"; }
+
+function standing(r){
+  var s = r.standing || {};
+  if (s.state === "resolved")
+    return '<span class="tag ' + (s.result === "yes" ? "yes" : "no") + '">resolved ' + esc(s.result) + "</span>" +
+      (r.went_as_leaned === null || r.went_as_leaned === undefined ? "" :
+       '<span class="lean">' + (r.went_as_leaned ? "went the way the odds leaned" : "went against the odds") + "</span>");
+  if (s.state === "closed") return '<span class="tag">closed, result pending</span>';
+  if (s.state === "open")
+    return '<span class="tag">open' + (typeof s.yes_now === "number" ? ", " + num(s.yes_now) + " now" : "") + "</span>";
+  return "";
+}
+
+function row(r){
+  var watch = safeUrl(r.watch), pm = safeUrl(r.url);
+  var seen = r.readings > 1 ? " · on the ticker " + r.readings + " times" : "";
+  return '<div class="mk"><div class="left">' +
+    '<div class="q">' + esc(r.question) + "</div>" +
+    '<div class="meta">first on screen ' + esc(eastern(r.seen_from || r.first.aired)) + seen + "</div>" +
+    '<div class="acts">' +
+      (watch ? '<a href="' + esc(watch) + '" target="_blank" rel="noopener">Watch it on X at ' + esc(clock(r.first.t)) + "</a>" : "") +
+      (pm ? '<a class="pm" href="' + esc(pm) + '" target="_blank" rel="noopener">On Polymarket</a>' : "") +
+    "</div></div>" +
+    '<div class="res"><div class="odds">' + esc(r.first.yes) + "%<small>yes</small></div>" +
+      '<div class="px">on screen ' + esc(eastern(r.first.aired)) + (typeof r.price_then === "number" ? "<br>polymarket " + esc(num(r.price_then)) + " then" : "") + "</div>" +
+      standing(r) + "</div>" +
+  "</div>";
+}
+
+function keep(r){
+  var s = (r.standing || {}).state;
+  if (ONLY === "resolved") return s === "resolved";
+  if (ONLY === "open") return s === "open" || s === "closed";
+  return true;
+}
+
+function draw(){
+  var t = BOARD.tally, shown = 0, html = "";
+  document.getElementById("tally").innerHTML =
+    "<div><b>" + t.episodes + "</b><span>episodes</span></div>" +
+    "<div><b>" + t.markets + "</b><span>markets shown</span></div>" +
+    "<div><b>" + t.resolved + "</b><span>resolved</span></div>" +
+    "<div><b>" + t.went_as_leaned + " of " + t.leaned + "</b><span>went the way the odds leaned</span></div>";
+  BOARD.episodes.forEach(function(ep){
+    var rows = ep.rows.filter(keep);
+    if (!rows.length) return;
+    shown += rows.length;
+    var link = safeUrl(ep.broadcast);
+    html += '<div class="ep"><h2>' + esc(ep.title || "Market Bubble") + "</h2>" +
+      '<span class="when">' + esc(eastern(ep.aired, true)) + "</span>" +
+      (link ? '<a href="' + esc(link) + '" target="_blank" rel="noopener">The broadcast on X</a>' : "") + "</div>" +
+      rows.map(row).join("");
+  });
+  document.getElementById("list").innerHTML = html || '<p class="empty">Nothing here with that filter.</p>';
+  var when = BOARD.standing_checked_at ? " Where each market stands was checked " + eastern(BOARD.standing_checked_at) + "." : "";
+  document.getElementById("showing").textContent = shown + " of " + t.markets + " markets." + when;
+}
+
+document.getElementById("controls").addEventListener("click", function(e){
+  var b = e.target.closest(".chip");
+  if (!b || !BOARD) return;
+  ONLY = b.getAttribute("data-v");
+  Array.prototype.forEach.call(this.querySelectorAll(".chip"), function(c){
+    c.setAttribute("aria-pressed", String(c === b));
+  });
+  draw();
+});
+
+fetch("/v1/polymarket").then(function(r){
+  if (!r.ok) throw new Error(r.status);
+  return r.json();
+}).then(function(b){ BOARD = b; draw(); }).catch(function(){
+  document.getElementById("list").innerHTML = '<p class="empty">The board is not published yet.</p>';
+});
+</script>
+</body>
+</html>

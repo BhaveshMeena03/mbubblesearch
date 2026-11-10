@@ -57,6 +57,7 @@ from . import (
 from . import calls as on_air_calls
 from . import guests as guest_pages
 from . import mcg_guests as mcg_guest_index
+from . import polymarket as ticker_markets
 from . import posts as posts_page
 from .agent import REFUSAL_MESSAGE, ConciergeAgent
 from .answer_cache import AnswerCache, make_key
@@ -954,6 +955,94 @@ async def calls_board() -> JSONResponse:
                         headers={"Cache-Control": "no-store"})
 
 
+# --- the polymarket board -----------------------------------------------------
+#
+# The Polymarket markets Market Bubble ran along the bottom of its broadcast,
+# at the odds it showed, and how each one came out. data/polymarket_board.json
+# is matched on a GitHub runner (scripts/polymarket_match.py, because
+# Polymarket is blocked from the laptop) and kept row by row by a person in
+# data/polymarket_verdicts.json; app/polymarket.py says what had to agree.
+# Each market's standing is brought up to date here when Polymarket answers,
+# and the board stands as it was built when it does not.
+_PM_BOARD = _ROOT / "data" / "polymarket_board.json"
+_PM_VERDICTS = _ROOT / "data" / "polymarket_verdicts.json"
+_PM_READ: dict[str, tuple[float, dict]] = {}
+_PM_STANDING: tuple[float, dict[str, dict], str | None] = (0.0, {}, None)
+_PM_STANDING_FOR = 900.0    # seconds a set of fresh standings is reused
+_GAMMA = "https://gamma-api.polymarket.com"
+
+
+def _pm_file(path: Path) -> dict:
+    """A shipped file, read again only when it changes."""
+    try:
+        changed = path.stat().st_mtime
+    except OSError:
+        return {}
+    seen = _PM_READ.get(str(path))
+    if not seen or seen[0] != changed:
+        try:
+            seen = (changed, json.loads(path.read_text(encoding="utf-8")))
+        except Exception as exc:                                # noqa: BLE001
+            logger.warning("could not read %s: %s", path.name, exc)
+            seen = (changed, {})
+        _PM_READ[str(path)] = seen
+    return seen[1]
+
+
+async def _pm_fetch_standing(http: httpx.AsyncClient, ids: list[str]) -> dict[str, dict]:
+    """Where each market stands now, from Polymarket.
+
+    Asked twice per batch: this endpoint drops closed markets unless asked
+    for them and drops open ones when it is, without saying so.
+    """
+    out: dict[str, dict] = {}
+    for i in range(0, len(ids), 50):
+        chunk = [("id", x) for x in ids[i:i + 50]]
+        for extra in ([], [("closed", "true")]):
+            reply = await http.get(f"{_GAMMA}/markets", params=chunk + extra)
+            reply.raise_for_status()
+            for found in reply.json() or []:
+                out[str(found.get("id"))] = ticker_markets.outcome(found)
+    return out
+
+
+async def _pm_standing_now(ids: list[str]) -> tuple[dict[str, dict], str | None]:
+    """Fresh standings, at most once every fifteen minutes; the last ones
+    fetched while Polymarket does not answer."""
+    global _PM_STANDING
+    at, found, when = _PM_STANDING
+    if found and time.monotonic() - at < _PM_STANDING_FOR:
+        return found, when
+    try:
+        async with httpx.AsyncClient(timeout=6.0, headers={
+                "User-Agent": "marketbubblesearch/1.0 (+https://search.lexthedev.com)"}) as http:
+            fresh = await _pm_fetch_standing(http, ids)
+    except Exception as exc:                                    # noqa: BLE001
+        logger.warning("fresh Polymarket standings failed: %s", type(exc).__name__)
+        fresh = {}
+    if fresh:
+        found, when = fresh, datetime.now(UTC).isoformat(timespec="seconds")
+    _PM_STANDING = (time.monotonic(), found, when)
+    return found, when
+
+
+@app.get("/v1/polymarket", dependencies=[Depends(public_rate_limit)])
+async def polymarket_board() -> JSONResponse:
+    """The markets on Market Bubble's ticker, the odds shown, and how they
+    came out."""
+    shipped, verdicts = _pm_file(_PM_BOARD), _pm_file(_PM_VERDICTS)
+    if not shipped.get("episodes"):
+        raise HTTPException(status_code=503, detail="unavailable")
+    ids = sorted({str(r["market"]["id"]) for e in shipped["episodes"]
+                  for r in e.get("rows") or [] if ticker_markets.shippable(r, verdicts)})
+    live, when = await _pm_standing_now(ids) if ids else ({}, None)
+    body = ticker_markets.board(shipped, verdicts, live)
+    body["standing_checked_at"] = when or shipped.get("checked_at")
+    body["live"] = bool(when)
+    # Never kept: a row taken off has to be gone for everybody at once.
+    return JSONResponse(body, headers={"Cache-Control": "no-store"})
+
+
 # --- the guests ----------------------------------------------------------------
 #
 # What a guest said on the show, on a page under that guest's name. Who is
@@ -1388,6 +1477,7 @@ for _path, _target in (("/home", "/demo/home.html"),
                        ("/record", "/demo/finance.html"),
                        ("/mcg/tokens", "/demo/mcg-assets.html"),
                        ("/calls", "/demo/calls.html"),
+                       ("/polymarket", "/demo/polymarket.html"),
                        ("/metrics", "/demo/metrics.html"),
                        ("/posts", "/demo/posts.html"),
                        ("/method", "/demo/how-it-works.html"),

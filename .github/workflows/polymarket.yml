@@ -1,0 +1,56 @@
+# The Polymarket board: matching what the ticker showed to Polymarket.
+#
+# Here and not on the laptop because Polymarket is blocked from India, and
+# the laptop is in India; the API answers a US runner in a fraction of a
+# second. The ticker itself is read on the laptop (scripts/
+# polymarket_ticker.py), where X's video is reachable, and committed under
+# data/polymarket/ticker/.
+#
+# This only READS and leaves the result as an artifact. It never pushes:
+# every row is read by a person before it ships, and the laptop's morning
+# job pushes to main without pulling first, so a second writer here would
+# make that push fail. To use it after reading a new episode's ticker:
+#
+#     gh workflow run polymarket.yml
+#     gh run download <run id> -n polymarket-board -D /tmp/pm
+#
+# then read the rows, write data/polymarket_verdicts.json and commit
+# /tmp/pm/polymarket_board.json as data/polymarket_board.json.
+name: polymarket board
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: polymarket-board
+  cancel-in-progress: false
+
+jobs:
+  match:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Standard library only: app/polymarket.py and the matcher import
+      # nothing else, so there is nothing to install.
+      - name: Match
+        run: |
+          set -o pipefail
+          python scripts/polymarket_match.py --out polymarket_board.json \
+            --record polymarket_responses | tee polymarket_match.log
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: polymarket-board
+          path: |
+            polymarket_board.json
+            polymarket_match.log
+            polymarket_responses/
+          retention-days: 30

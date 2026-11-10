@@ -117,6 +117,12 @@ COPY data/posts_index.json ./data/posts_index.json
 # The guest pages: who came on and what they said, each quote read by a
 # person. Without it /guests and every /guests/<name> answer 503.
 COPY data/guests.json ./data/guests.json
+# The Polymarket board: what the show's ticker put on screen, matched on a
+# GitHub runner, and the verdicts that keep its rows, each read by a
+# person. Without them /v1/polymarket answers 503 and /polymarket says the
+# board is not published.
+COPY data/polymarket_board.json ./data/polymarket_board.json
+COPY data/polymarket_verdicts.json ./data/polymarket_verdicts.json
 # rasmr's shelf and which of his streams are also on X. Without these
 # /rasmr has nothing to show, /v1/archives cannot total the front door,
 # and the bot links his paired streams on YouTube instead of on X.

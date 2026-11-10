@@ -63,6 +63,9 @@ data/
 !data/posts_index.json
 # The guest pages, built by scripts/build_guests.py.
 !data/guests.json
+# The Polymarket board and the verdicts that keep its rows.
+!data/polymarket_board.json
+!data/polymarket_verdicts.json
 # rasmr's shelf and his X pairs.
 !data/rasmr_index.json
 !data/rasmr_broadcast_links.json
