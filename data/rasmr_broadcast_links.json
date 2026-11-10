@@ -50,6 +50,22 @@
   "offset": -9,
   "post": "2095180490684670141"
  },
+ "JfRLv5GH1uo": {
+  "broadcast": "https://x.com/i/broadcasts/2zkAdXLYQkKalk",
+  "post": "2119845632600858817",
+  "sections": [
+   {
+    "from": 0,
+    "offset": -120,
+    "to": 5460
+   },
+   {
+    "from": 6292,
+    "offset": -120,
+    "to": null
+   }
+  ]
+ },
  "KXm8Eg2n1tM": {
   "broadcast": "https://x.com/i/broadcasts/1rGmqpEmOkQGy",
   "offset": 0,
