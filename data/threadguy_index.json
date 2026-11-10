@@ -1344,14 +1344,6 @@
   "format": "stream"
  },
  {
-  "id": "wg7inLOSc04",
-  "title": "MARKET OPEN: Oil Is Pumping?? INTC Beats Earnings??? We goin to WAR???  + Bubble Boi at NOON",
-  "url": "https://www.youtube.com/watch?v=wg7inLOSc04",
-  "published_at": "2026-07-25",
-  "seconds": 6762,
-  "format": "stream"
- },
- {
   "id": "gUIavUfKVdY",
   "title": "Why He Sold Everything - Bubble Boi on Kimi, CXMT, and China's Chips",
   "url": "https://www.youtube.com/watch?v=gUIavUfKVdY",
@@ -1360,20 +1352,28 @@
   "format": "interview"
  },
  {
-  "id": "WtmPJr0H2go",
-  "title": "LIVE: The BUBBLE BOI Interview",
-  "url": "https://www.youtube.com/watch?v=WtmPJr0H2go",
-  "published_at": "2026-07-25",
-  "seconds": 4590,
-  "format": "stream"
- },
- {
   "id": "686f1IKnWgE",
   "title": "Jensen Loves Open Source, Bubble Boi Shares Alpha, and I Have Fun Onchain",
   "url": "https://www.youtube.com/watch?v=686f1IKnWgE",
   "published_at": "2026-07-25",
   "seconds": 1342,
   "format": "interview"
+ },
+ {
+  "id": "wg7inLOSc04",
+  "title": "MARKET OPEN: Oil Is Pumping?? INTC Beats Earnings??? We goin to WAR???  + Bubble Boi at NOON",
+  "url": "https://www.youtube.com/watch?v=wg7inLOSc04",
+  "published_at": "2026-07-24",
+  "seconds": 6762,
+  "format": "stream"
+ },
+ {
+  "id": "WtmPJr0H2go",
+  "title": "LIVE: The BUBBLE BOI Interview",
+  "url": "https://www.youtube.com/watch?v=WtmPJr0H2go",
+  "published_at": "2026-07-24",
+  "seconds": 4590,
+  "format": "stream"
  },
  {
   "id": "ipaybZY8BHw",
@@ -2808,19 +2808,19 @@
   "format": "stream"
  },
  {
-  "id": "_-pOtymfiDE",
-  "title": "LIVE: Market Open. Oil is RIPPING. Trump Comments. USA vs Iran continues. PULL UP",
-  "url": "https://www.youtube.com/watch?v=_-pOtymfiDE",
-  "published_at": "2026-03-13",
-  "seconds": 3040,
-  "format": "stream"
- },
- {
   "id": "NZ13kFgjX1s",
   "title": "LIVE: Bitcoin Is SAVED! - Will OIL Hit $200!? - US vs Iran War Gets WORSE..",
   "url": "https://www.youtube.com/watch?v=NZ13kFgjX1s",
   "published_at": "2026-03-13",
   "seconds": 7666,
+  "format": "stream"
+ },
+ {
+  "id": "_-pOtymfiDE",
+  "title": "LIVE: Market Open. Oil is RIPPING. Trump Comments. USA vs Iran continues. PULL UP",
+  "url": "https://www.youtube.com/watch?v=_-pOtymfiDE",
+  "published_at": "2026-03-12",
+  "seconds": 3040,
   "format": "stream"
  },
  {
@@ -2859,7 +2859,7 @@
   "id": "K7_AHd9pBcI",
   "title": "LIVE: HUGE market open...oil ripping...WW3 escalates...Bitcoin out performing and gold dumping?!",
   "url": "https://www.youtube.com/watch?v=K7_AHd9pBcI",
-  "published_at": "2026-03-10",
+  "published_at": "2026-03-09",
   "seconds": 3969,
   "format": "stream"
  },
@@ -2872,20 +2872,20 @@
   "format": "stream"
  },
  {
-  "id": "h7SGMZ7db70",
-  "title": "LIVE: OIL is SENDING from WW3... - Bitcoin's FAKE Pump - Geopolitical Market Updates & News",
-  "url": "https://www.youtube.com/watch?v=h7SGMZ7db70",
-  "published_at": "2026-03-07",
-  "seconds": 6724,
-  "format": "stream"
- },
- {
   "id": "NbFU97i_RoQ",
   "title": "How WW3 Affects Markets From Here.. (MEPPOnPM)",
   "url": "https://www.youtube.com/watch?v=NbFU97i_RoQ",
   "published_at": "2026-03-07",
   "seconds": 2259,
   "format": "interview"
+ },
+ {
+  "id": "h7SGMZ7db70",
+  "title": "LIVE: OIL is SENDING from WW3... - Bitcoin's FAKE Pump - Geopolitical Market Updates & News",
+  "url": "https://www.youtube.com/watch?v=h7SGMZ7db70",
+  "published_at": "2026-03-06",
+  "seconds": 6724,
+  "format": "stream"
  },
  {
   "id": "RS_Hoi2t7pQ",
@@ -2899,7 +2899,7 @@
   "id": "UxKnMBWB77E",
   "title": "LIVE: WW3 CONTINUES.. - Bitcoin is $75K!? - The AI Bubble is GROWING. - Market Updates & News",
   "url": "https://www.youtube.com/watch?v=UxKnMBWB77E",
-  "published_at": "2026-03-05",
+  "published_at": "2026-03-04",
   "seconds": 11804,
   "format": "stream"
  },
@@ -2907,7 +2907,7 @@
   "id": "G6O-OfEYIMs",
   "title": "LIVE: WW3 IS GETTING WORSE! - Bitcoin is WINNING - GPT and DeepSeek Launch Incoming...",
   "url": "https://www.youtube.com/watch?v=G6O-OfEYIMs",
-  "published_at": "2026-03-04",
+  "published_at": "2026-03-03",
   "seconds": 12629,
   "format": "stream"
  },
