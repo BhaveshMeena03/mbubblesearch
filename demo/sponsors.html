@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" type="image/png" sizes="48x48" href="/demo/icon-48.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/demo/icon-512.png">
+<link rel="apple-touch-icon" href="/demo/icon-180.png">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0e11">
+<!-- Made for the show. Unlinked and kept out of search. -->
+<meta name="robots" content="noindex, nofollow">
+<title>Market Bubble · Polymarket and Phantom on air</title>
+<meta name="description" content="Every time Polymarket or Phantom was said on air on Market Bubble, quoted from the transcript, linked to the second.">
+<link rel="stylesheet" href="/demo/ui.css">
+<style>
+  :root{
+    --bg:#0b0e11;--panel:#12161c;--line:#232a33;--text:#e6e8ea;
+    --muted:#8a939e;--green:#16c784;--purple:#ab9ff2;--blue:#4a7dff;
+    --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);min-height:100vh;
+    font:15px/1.55 var(--sans);font-feature-settings:"tnum" 1;padding:28px 20px 60px}
+  .wrap{max-width:940px;margin:0 auto}
+  .topbar{display:flex;align-items:center;justify-content:space-between;
+    gap:14px;margin-bottom:26px;flex-wrap:wrap}
+  .brand{font-weight:700;letter-spacing:.5px;font-size:14px;text-decoration:none;color:inherit}
+  .brand span{color:var(--green)}
+  h1{font-family:var(--display);font-weight:400;font-size:46px;line-height:1.08;
+    letter-spacing:-.01em;margin-bottom:12px}
+  h1 em{color:var(--green);font-style:normal}
+  .sub{color:var(--muted);margin-bottom:22px;max-width:680px}
+  .sub b{color:var(--text);font-weight:500}
+
+  .tally{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:22px}
+  .tally div{padding:16px 16px 15px 0;min-width:0}
+  .tally div + div{padding-left:16px;border-left:1px solid var(--line)}
+  .tally b{display:block;font:400 40px/1.05 var(--display);letter-spacing:-.01em}
+  .tally .name{font-weight:600;font-size:13px;letter-spacing:.4px}
+  .tally .pm .name{color:var(--blue)} .tally .ph .name{color:var(--purple)}
+  .tally span{display:block;color:var(--muted);font-size:12.5px;margin-top:4px}
+
+  .controls{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+  .chip{font:inherit;font-size:13px;background:transparent;color:var(--muted);
+    border:1px solid var(--line);border-radius:16px;padding:6px 13px;cursor:pointer}
+  .chip:hover{border-color:var(--green);color:var(--green)}
+  .chip[aria-pressed="true"]{background:#16c78418;border-color:#16c78455;color:var(--green)}
+  .chip:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+  .showing{color:var(--muted);font-size:12.5px;margin:0 0 10px;min-height:19px}
+
+  .ep{margin:28px 0 2px;display:flex;gap:6px 14px;flex-wrap:wrap;align-items:baseline}
+  .ep h2{font:400 22px/1.25 var(--display);letter-spacing:-.005em}
+  .ep .when{color:var(--muted);font-size:12.5px}
+  .line{display:flex;gap:14px;padding:10px 0;border-top:1px solid var(--line);align-items:baseline}
+  .line a.at{font-family:var(--mono);font-size:12.5px;color:var(--green);text-decoration:none;
+    flex:0 0 64px}
+  .line a.at:hover{text-decoration:underline}
+  .line .say{flex:1;min-width:0;color:#d9dde1;overflow-wrap:anywhere}
+  .line .say mark{background:none;color:var(--text);font-weight:600}
+  .tag{flex:0 0 auto;font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;
+    border:1px solid var(--line);border-radius:9px;padding:1px 8px;white-space:nowrap}
+  .tag.polymarket{color:var(--blue);border-color:#4a7dff55}
+  .tag.phantom{color:var(--purple);border-color:#ab9ff255}
+  .note{border:1px solid var(--line);color:var(--muted);border-radius:12px;
+    padding:13px 16px;font-size:12.5px;margin:22px 0}
+  .note b{color:var(--text);font-weight:500}
+  .foot{color:var(--muted);font-size:12.5px;margin-top:30px;line-height:1.7;max-width:720px}
+  .foot a{color:var(--text)}
+  .empty{color:var(--muted);padding:22px 0}
+
+  @media(max-width:700px){
+    h1{font-size:34px}
+    .topbar{flex-direction:column;align-items:flex-start;gap:10px}
+    .tally b{font-size:32px}
+    .line{flex-wrap:wrap;gap:4px 12px}
+    .line .say{flex-basis:100%;order:3}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <a class="brand" href="/home">MARKET <span>BUBBLE</span> · on air</a>
+    <a class="btn btn-primary btn-back" href="/demo/podcast.html"><span class="arw">←</span><svg class="ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.75" stroke="currentColor" stroke-width="1.7"/><path d="M10.6 10.6 14 14" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M6 5.3l3 1.7-3 1.7z" fill="currentColor"/></svg>Search every episode</a>
+  </div>
+
+  <h1>Polymarket and Phantom, <em>on air</em>.</h1>
+  <p class="sub" id="sub">Every time either name was said on Market Bubble.
+    <b>Quoted from the show's transcript, linked to the second it was said.</b></p>
+
+  <div class="tally" id="tally" aria-live="polite"></div>
+
+  <div class="controls" id="controls">
+    <button class="chip" data-v="" aria-pressed="true">Both</button>
+    <button class="chip" data-v="polymarket" aria-pressed="false">Polymarket</button>
+    <button class="chip" data-v="phantom" aria-pressed="false">Phantom</button>
+  </div>
+  <p class="showing" id="showing"></p>
+
+  <div id="list"><p class="empty">Loading…</p></div>
+
+  <div class="note" id="left"></div>
+
+  <p class="foot">
+    How this is counted: each show's own transcript, read for either name the
+    way the transcripts spell it ("Polymarket" and, as often, "poly market").
+    The transcripts are automatic and now and then mishear a name, so these
+    are the mentions that were caught and the true count can only be higher.
+    Every line is shown as the transcript has it, at the second it starts;
+    where the show is paired with its broadcast on X, the time opens the
+    broadcast at that second. Lines that say a name and mean something else
+    were found by reading every one and are listed above, with why.
+    <a href="/method">How the archive is built</a>.
+  </p>
+</div>
+
+<script>
+var DATA = null, ONLY = "";
+var NAMES = {polymarket: "Polymarket", phantom: "Phantom"};
+var MARK = {
+  polymarket: /\b(poly\s?-?\s?markets?|polly\s?markets?|pollymarkets?|polymarket'?s?)\b/gi,
+  phantom: /\b(phantoms?)\b/gi
+};
+
+function esc(s){ return String(s == null ? "" : s)
+  .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;").replace(/'/g,"&#39;"); }
+function safeUrl(u){
+  try{ var p = new URL(u, location.href);
+       return (p.protocol === "http:" || p.protocol === "https:") ? p.href : "";
+  }catch(e){ return ""; }
+}
+function clock(t){
+  t = Math.max(0, Math.floor(+t || 0));
+  var h = Math.floor(t / 3600), m = Math.floor(t % 3600 / 60), s = t % 60;
+  return h + ":" + String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+}
+function day(d){
+  var p = String(d || "").split("-");
+  var m = ["january","february","march","april","may","june","july","august",
+           "september","october","november","december"][+p[1] - 1];
+  return m ? m + " " + (+p[2]) + ", " + p[0] : "";
+}
+/* The name in bold inside the line, escaped first so nothing in a
+   transcript can become markup. */
+function said(text, key){
+  return esc(text).replace(MARK[key], "<mark>$1</mark>");
+}
+
+function draw(){
+  var t = DATA.sponsors, shown = 0, html = "";
+  document.getElementById("tally").innerHTML = t.map(function(s){
+    return '<div class="' + (s.key === "polymarket" ? "pm" : "ph") + '"><div class="name">' +
+      esc(s.name) + "</div><b>" + s.mentions + "</b><span>times said, on " + s.shows +
+      " of " + DATA.shows_read + " shows</span></div>";
+  }).join("");
+  DATA.episodes.forEach(function(ep){
+    var lines = ep.lines.filter(function(l){ return !ONLY || l.sponsor === ONLY; });
+    if (!lines.length) return;
+    shown += lines.reduce(function(n, l){ return n + l.count; }, 0);
+    html += '<div class="ep"><h2>' + esc(ep.title) + '</h2><span class="when">' + esc(day(ep.date)) + "</span></div>" +
+      lines.map(function(l){
+        var u = safeUrl(l.link);
+        return '<div class="line"><a class="at" href="' + esc(u) + '" target="_blank" rel="noopener"' +
+          (l.seeks ? "" : ' title="X cannot open this post at a second; it is at ' + esc(clock(l.t)) + '"') + ">" +
+          esc(clock(l.t)) + '</a><span class="say">' + said(l.text, l.sponsor) + '</span>' +
+          '<span class="tag ' + esc(l.sponsor) + '">' + esc(NAMES[l.sponsor]) + "</span></div>";
+      }).join("");
+  });
+  document.getElementById("list").innerHTML = html || '<p class="empty">Nothing here.</p>';
+  document.getElementById("showing").textContent = shown + " mentions" +
+    (ONLY ? " of " + NAMES[ONLY] : "") + ", newest show first.";
+  var out = DATA.left_out;
+  document.getElementById("left").innerHTML = out.length ?
+    "<b>Left out, " + out.length + " line" + (out.length > 1 ? "s" : "") + ":</b> " +
+    out.map(function(l){ return "“" + esc(l.text) + "” (" + esc(l.why) + ")"; }).join("; ") + "." :
+    "Every line that says either name is counted.";
+}
+
+document.getElementById("controls").addEventListener("click", function(e){
+  var b = e.target.closest(".chip");
+  if (!b || !DATA) return;
+  ONLY = b.getAttribute("data-v");
+  Array.prototype.forEach.call(this.querySelectorAll(".chip"), function(c){
+    c.setAttribute("aria-pressed", String(c === b));
+  });
+  draw();
+});
+
+fetch("/demo/sponsor-mentions.json", {cache: "no-store"}).then(function(r){
+  if (!r.ok) throw new Error(r.status);
+  return r.json();
+}).then(function(d){ DATA = d; draw(); }).catch(function(){
+  document.getElementById("list").innerHTML = '<p class="empty">The list could not load.</p>';
+});
+</script>
+</body>
+</html>
