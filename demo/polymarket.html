@@ -216,8 +216,8 @@ function draw(){
   var t = BOARD.tally, shown = 0, html = "";
   document.getElementById("tally").innerHTML =
     "<div><b>" + t.episodes + "</b><span>episodes</span></div>" +
-    "<div><b>" + t.markets + "</b><span>markets shown</span></div>" +
-    "<div><b>" + t.resolved + "</b><span>resolved</span></div>" +
+    "<div><b>" + t.markets + "</b><span>markets on the ticker</span></div>" +
+    "<div><b>" + t.resolved + "</b><span>resolved so far</span></div>" +
     "<div><b>" + t.went_as_leaned + " of " + t.leaned + "</b><span>went the way the odds leaned</span></div>";
   BOARD.episodes.forEach(function(ep){
     var rows = ep.rows.filter(keep);
@@ -231,7 +231,8 @@ function draw(){
   });
   document.getElementById("list").innerHTML = html || '<p class="empty">Nothing here with that filter.</p>';
   var when = BOARD.standing_checked_at ? " Where each market stands was checked " + eastern(BOARD.standing_checked_at) + "." : "";
-  document.getElementById("showing").textContent = shown + " of " + t.markets + " markets." + when;
+  document.getElementById("showing").textContent = shown + " of " + t.shown + " rows" +
+    (t.shown > t.markets ? " (some markets ran on more than one show)" : "") + "." + when;
 }
 
 document.getElementById("controls").addEventListener("click", function(e){

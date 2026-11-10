@@ -364,8 +364,8 @@ def test_a_kept_row_carries_what_a_reader_needs_and_nothing_else():
     assert row["went_as_leaned"] is True and row["leaned"] == "yes"
     assert not {"ocr", "considered", "market", "status"} & set(row)
     assert "yes_token" not in json.dumps(board)
-    assert board["tally"] == {"episodes": 1, "markets": 1, "resolved": 1, "leaned": 1,
-                              "went_as_leaned": 1}
+    assert board["tally"] == {"episodes": 1, "markets": 1, "shown": 1, "resolved": 1,
+                              "leaned": 1, "went_as_leaned": 1}
 
 
 def test_a_market_at_even_odds_leaned_nowhere():
@@ -599,3 +599,18 @@ def test_what_is_searched_for_starts_at_the_first_word():
     q = matcher().queries("%2 NATO x Russia military clash by October 31,2026?")
     assert q[0] == "NATO x Russia military clash by October 31,2026"
     assert matcher().queries("Will the Fed cut?") == ["Will the Fed cut", "Fed cut"]
+
+
+def test_a_market_on_two_shows_is_counted_once_at_its_first_odds():
+    later = {"episode_id": "x-2", "title": "Episode 24", "broadcast": "https://x.com/i/broadcasts/b",
+             "aired": at(OCT9, 86400 * 20).isoformat(),
+             "rows": [{**built_row("x-2:5170738", yes=37),
+                       "first": {"t": 100.0, "aired": at(OCT9, 86400 * 20).isoformat(), "yes": 37}}]}
+    board_in = shipped(built_row("x-1:5170738", yes=30))
+    board_in["episodes"].append(later)
+    kept = {"x-1:5170738": {"verdict": "keep"}, "x-2:5170738": {"verdict": "keep"}}
+    board = pm.board(board_in, kept)
+    # Both shows list it; the tally holds it once, at 30%: leaned no, resolved yes.
+    assert sum(len(e["rows"]) for e in board["episodes"]) == 2
+    assert board["tally"] == {"episodes": 2, "markets": 1, "shown": 2, "resolved": 1,
+                              "leaned": 1, "went_as_leaned": 0}

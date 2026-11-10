@@ -630,7 +630,10 @@ def board(shipped: dict, verdicts: dict, live: dict[str, dict] | None = None) ->
     """
     live = live or {}
     episodes = []
-    resolved = leaned = went = 0
+    # The tally counts a market once, at the odds of the first show it was
+    # on: Apple's "largest company on October 31" ran on 22 Oct at 30% and
+    # on 29 Oct at 37%, and counting it twice would count one result twice.
+    tally: dict[str, tuple[str, int, str | None]] = {}
     for ep in shipped.get("episodes") or []:
         rows = []
         for row in ep.get("rows") or []:
@@ -641,11 +644,9 @@ def board(shipped: dict, verdicts: dict, live: dict[str, dict] | None = None) ->
             shown = row["first"]["yes"]
             lean = None if shown == 50 else ("yes" if shown > 50 else "no")
             settled = standing.get("result") if standing.get("state") == "resolved" else None
-            if settled:
-                resolved += 1
-                if lean:
-                    leaned += 1
-                    went += lean == settled
+            mid, aired = str(market["id"]), row["first"]["aired"]
+            if mid not in tally or aired < tally[mid][0]:
+                tally[mid] = (aired, shown, settled)
             rows.append({
                 "key": row["key"],
                 "question": market["question"],
@@ -668,11 +669,16 @@ def board(shipped: dict, verdicts: dict, live: dict[str, dict] | None = None) ->
                              "aired": ep.get("aired"), "broadcast": ep.get("broadcast"),
                              "rows": rows})
     episodes.sort(key=lambda e: e.get("aired") or "", reverse=True)
+    settled = [(shown, result) for _, shown, result in tally.values() if result]
+    leaning = [(shown, result) for shown, result in settled if shown != 50]
     return {
         "episodes": episodes,
         "tally": {"episodes": len(episodes),
-                  "markets": sum(len(e["rows"]) for e in episodes),
-                  "resolved": resolved, "leaned": leaned, "went_as_leaned": went},
+                  "markets": len(tally),
+                  "shown": sum(len(e["rows"]) for e in episodes),
+                  "resolved": len(settled), "leaned": len(leaning),
+                  "went_as_leaned": sum((shown > 50) == (result == "yes")
+                                        for shown, result in leaning)},
         "built_at": shipped.get("built_at"),
         "checked_at": shipped.get("checked_at"),
     }
