@@ -95,6 +95,16 @@ def _write_atomic(episodes: list[dict], path: Path) -> None:
     os.replace(tmp, path)          # atomic: a reader sees old or new, never half
 
 
+def remove(ids: set[str], path: Path = EPISODES) -> int:
+    """Drop episodes by id under the lock; returns how many went."""
+    with _exclusive(path):
+        current = load(path)
+        kept = [e for e in current if e["episode_id"] not in ids]
+        if len(kept) != len(current):
+            _write_atomic(kept, path)
+        return len(current) - len(kept)
+
+
 def merge(new: list[dict], path: Path = EPISODES,
           replace_all: bool = False) -> tuple[int, int]:
     """Add or update episodes without losing concurrent work.

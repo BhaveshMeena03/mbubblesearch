@@ -92,6 +92,8 @@ def world(tmp_path, monkeypatch):
         post = cmd[2].rsplit("/", 1)[-1]
         if replies[post].get("fails"):
             return Done(1)
+        if replies[post].get("no_talk"):
+            return Done(rec.NO_TALK)
         store.append({"episode_id": f"x-{post}", "title": "new", "segments": []})
         return Done(0)
 
@@ -150,6 +152,16 @@ def test_a_failure_is_tried_on_the_next_runs_then_left_for_a_person(world, monke
     _main(monkeypatch, "2116220650058846455")
     row = json.loads(world["state"].read_text())["posts"]["2116220650058846455"]
     assert row["what"] == "failed" and "left for a person" in row["why"]
+
+
+def test_a_video_with_no_talk_is_left_for_good_after_one_try(world, monkeypatch):
+    """9 and 10 Nov 2026: his chart videos were house music and no voice."""
+    world["replies"]["2120009419820007926"] = _got(no_talk=True)
+    _main(monkeypatch, "2120009419820007926")
+    row = json.loads(world["state"].read_text())["posts"]["2120009419820007926"]
+    assert row["what"] == "leave" and "no talk" in row["why"]
+    assert "tries" not in row
+    assert not any(e["episode_id"] == "x-2120009419820007926" for e in world["store"])
 
 
 def test_a_search_run_retries_what_waited_and_remembers_how_far_it_read(world, monkeypatch):

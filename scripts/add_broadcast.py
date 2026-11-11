@@ -51,6 +51,7 @@ import httpx  # noqa: E402
 from app.config import get_settings  # noqa: E402
 from app.episode_store import load  # noqa: E402
 from app.episode_store import merge as merge_episodes  # noqa: E402
+from app.episode_store import remove as remove_episodes  # noqa: E402
 from app.podcast import GUEST_ON_EVERY_SHOW, PodcastIndex  # noqa: E402
 from app.schemas import Episode, his_own  # noqa: E402
 from app.summaries import SummaryStore  # noqa: E402
@@ -58,6 +59,30 @@ from app.x_api import API, XCredentials  # noqa: E402
 
 EPISODES = ROOT / "data" / "episodes.json"
 SPEAKER_MAP = ROOT / "data" / "speaker_map.json"
+
+# real shows run 120+ words a minute; music over a silent chart video ran 18
+MIN_WORDS_PER_MINUTE = 60
+NO_TALK = 3     # exit code: nothing indexed, the recording has no talk in it
+
+
+def words_per_minute(episode: dict) -> float:
+    segments = episode.get("segments") or []
+    if not segments:
+        return 0.0
+    minutes = max(1.0, float(segments[-1]["t"]) / 60)
+    return sum(len(str(s.get("text", "")).split()) for s in segments) / minutes
+
+
+def drop_quiet(fresh: list[dict], path: Path = EPISODES) -> list[dict]:
+    """Take recordings with almost no talk back out of the store; returns the rest."""
+    quiet = {e["episode_id"]: words_per_minute(e) for e in fresh
+             if words_per_minute(e) < MIN_WORDS_PER_MINUTE}
+    for episode_id, wpm in quiet.items():
+        print(f"  not indexed: {episode_id} has {wpm:.0f} words a minute "
+              f"(under {MIN_WORDS_PER_MINUTE}), music or a silent screen")
+    if quiet:
+        remove_episodes(set(quiet), path)
+    return [e for e in fresh if e["episode_id"] not in quiet]
 
 
 def as_appearance(rows: list[dict], show: str) -> list[dict]:
@@ -232,6 +257,9 @@ async def main() -> int:
         # which is a correct outcome and not a failure.
         print("\n  nothing new — already indexed, or skipped as a duplicate")
         return 0
+    fresh = drop_quiet(fresh)
+    if not fresh:
+        return NO_TALK
     if args.show:
         fresh = as_appearance(fresh, args.show)
         merge_episodes(fresh, EPISODES)

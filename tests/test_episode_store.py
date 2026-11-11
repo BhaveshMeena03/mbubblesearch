@@ -19,7 +19,7 @@ import time
 
 import pytest
 
-from app.episode_store import load, merge
+from app.episode_store import load, merge, remove
 
 
 def episode(episode_id: str, title: str = "t", segments: int = 2) -> dict:
@@ -64,6 +64,21 @@ def test_replace_all_rewrites_everything(tmp_path):
     merge([episode("a"), episode("b")], path)
     merge([episode("a", title="only one left")], path, replace_all=True)
     assert [e["episode_id"] for e in load(path)] == ["a"]
+
+
+def test_remove_drops_only_the_given_ids(tmp_path):
+    path = tmp_path / "episodes.json"
+    merge([episode("a"), episode("b"), episode("c")], path)
+    assert remove({"b", "missing"}, path) == 1
+    assert sorted(e["episode_id"] for e in load(path)) == ["a", "c"]
+
+
+def test_remove_of_nothing_held_leaves_the_file_as_it_was(tmp_path):
+    path = tmp_path / "episodes.json"
+    merge([episode("a")], path)
+    before = path.read_bytes()
+    assert remove({"z"}, path) == 0
+    assert path.read_bytes() == before
 
 
 def test_refuses_to_overwrite_an_unreadable_file(tmp_path):

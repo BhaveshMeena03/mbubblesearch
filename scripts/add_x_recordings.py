@@ -67,6 +67,7 @@ QUERY = ('(from:MarketBubble OR from:blknoiz06) (has:videos OR url:"i/broadcasts
 # Up to this long it is a clip, whatever it is from.
 CLIP_SECONDS = 600
 MAX_TRIES = 3
+NO_TALK = 3     # add_broadcast.py's exit code for a recording with no talk in it
 ON_AIR = ("is_live", "is_upcoming", "post_live")
 # Ansem's broadcast and Market Bubble's go up together: 23 episodes since
 # May 2026 within 40 seconds of each other, most within one.
@@ -249,6 +250,8 @@ def main() -> int:
                 indexed += 1
             elif ran.returncode == 0:
                 what, why = "leave", "the transcriber held it already, as another copy"
+            elif ran.returncode == NO_TALK:
+                what, why = "leave", "no talk in it (music or a silent screen), nothing to search"
             else:
                 what, why = "wait", f"add_broadcast.py exited {ran.returncode}"
             episodes[:] = [dict(e, archive="podcast") for e in now]
