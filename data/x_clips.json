@@ -3677,5 +3677,21 @@
   "copies": 2,
   "heard_from": "audio",
   "placed": "2026-11-11"
+ },
+ "2120518910550458419": {
+  "account": "blknoiz06",
+  "archive": "podcast",
+  "episode_id": "x-2118457515969032365",
+  "start": 142,
+  "end": 13542,
+  "before": "What's good, everybody? How are we doing? Yeah, I think red most red day for the year on cues in the Nasdaq and SBX",
+  "after": "um i appreciate you guys enjoy your thursday evening thirsty thursday uh maybe i'll do some uh trench it on on a on docs just so y'all can watch maybe i'll like record it and then i'll just post it after so you can guys watch how much money i lost maybe that's what i'll do um yeah peace later later",
+  "after_at": 13543,
+  "duration": 5798.7,
+  "matches": 7878,
+  "copies": 2,
+  "heard_from": "audio",
+  "stitched": true,
+  "placed": "2026-11-11"
  }
 }
