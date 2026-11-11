@@ -36,6 +36,7 @@ data/.usage.json
 data/x_bot_state.json
 .broadcast-check.log
 .channels-check.log
+.channels-check.lock
 audio/
 .models/
 # Voice fingerprints -- 192-dimension embeddings of Ansem's and Banks's

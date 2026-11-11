@@ -1,6 +1,13 @@
 """The morning job that indexes MCG Live, ThreadGuy and rasmr on the laptop."""
 
+import contextlib
+import fcntl
+import os
+import subprocess
+import sys
 from pathlib import Path
+
+import pytest
 
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPT = (ROOT / "scripts" / "daily_channels_check.sh").read_text()
@@ -53,7 +60,7 @@ def test_the_groq_key_is_found_without_the_shell():
 def test_new_uploads_reach_the_token_dashboards_gently():
     """The proxy is shared with the site and the bot: 60 calls in flight
     got rate limited, which slows real visitors."""
-    assert "for archive in threadguy mcg; do\n  echo \"-- $archive tokens\"" in SCRIPT
+    assert "for archive in threadguy mcg; do\n    echo \"-- $archive tokens\"" in SCRIPT
     assert '--archive "$archive" --episodes 10 --store --workers 2' in SCRIPT
     assert "EXTRACT_CONCURRENCY=4" in SCRIPT
 
@@ -140,3 +147,125 @@ def test_rasmrs_x_broadcasts_are_paired_every_morning_and_committed():
     assert paired < SCRIPT.index("scripts/place_x_clips.py --search")
     for kept in ("data/rasmr_broadcast_links.json", "data/rasmr_x_broadcasts.json"):
         assert kept in SCRIPT
+
+
+PATH_LINE = 'export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"'
+STUBS = {
+    "curl": "#!/bin/bash\nexit 0\n",
+    "pgrep": "#!/bin/bash\nexit 1\n",
+    "caffeinate": '#!/bin/bash\nwhile [[ $1 == -* ]]; do shift; done; exec "$@"\n',
+    "git": '#!/bin/bash\necho "git $*" >> "$CALLS"; [[ $1 == diff ]] && exit 0; exit 1\n',
+}
+# lockf(1) as on macOS, for CI: flock the file, wait up to -t seconds
+# (cut to half a second here), exit 75 if it stays held
+LOCKF = f"""#!{sys.executable}
+import fcntl, subprocess, sys, time
+args, wait = sys.argv[1:], 0.0
+while args[0].startswith("-"):
+    flag = args.pop(0)
+    if flag == "-t":
+        wait = float(args.pop(0))
+open(args[0] + ".waits", "a").write(f"{{wait:g}}\\n")
+lock, end = open(args[0], "a"), time.time() + min(wait, 0.5)
+while True:
+    try:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        break
+    except BlockingIOError:
+        if time.time() >= end:
+            sys.exit(75)
+        time.sleep(0.05)
+sys.exit(subprocess.run(args[1:]).returncode)
+"""
+X_STEPS = ["scripts/add_x_recordings.py --search", "scripts/place_x_clips.py --search",
+           "scripts/place_x_links.py --search", "scripts/pack_summaries.py"]
+
+
+@contextlib.contextmanager
+def lock_held(path):
+    with open(path, "a") as f:
+        fcntl.flock(f, fcntl.LOCK_EX)
+        yield
+
+
+def run_job(root, flag, real_lockf=False):
+    """Run the job with every command stubbed; returns (exit, output, python calls)."""
+    (root / "scripts").mkdir(exist_ok=True)
+    assert PATH_LINE in SCRIPT
+    # the job puts Homebrew first, which would hide the stubs on a Mac
+    (root / "scripts" / "daily_channels_check.sh").write_text(SCRIPT.replace(PATH_LINE, ""))
+    venv, stubs = root / ".venv" / "bin", root / "stubs"
+    venv.mkdir(parents=True, exist_ok=True)
+    stubs.mkdir(exist_ok=True)
+    files = {**STUBS, "python": '#!/bin/bash\necho "python $*" >> "$CALLS"\n'}
+    if not real_lockf:
+        files["lockf"] = LOCKF
+    for name, body in files.items():
+        target = venv / name if name == "python" else stubs / name
+        target.write_text(body)
+        target.chmod(0o755)
+    calls = root / "calls.log"
+    calls.unlink(missing_ok=True)
+    env = {"PATH": f"{stubs}:/usr/bin:/bin", "CALLS": str(calls), "HOME": str(root)}
+    done = subprocess.run(["bash", str(root / "scripts" / "daily_channels_check.sh"), flag],
+                          capture_output=True, text=True, env=env, timeout=60)
+    lines = calls.read_text().splitlines() if calls.exists() else []
+    return done.returncode, done.stdout + done.stderr, [ln[len("python -u "):] for ln in lines
+                                                         if ln.startswith("python")]
+
+
+def waits(root):
+    return (root / ".channels-check.lock.waits").read_text().split()
+
+
+def test_the_evening_run_does_only_the_x_steps(tmp_path):
+    code, out, calls = run_job(tmp_path, "--run-x")
+    assert code == 0, out
+    assert calls == X_STEPS
+    assert waits(tmp_path) == ["0"]
+
+
+def test_the_morning_run_does_everything_including_the_x_steps(tmp_path):
+    code, out, calls = run_job(tmp_path, "--run")
+    assert code == 0, out
+    steps = [c.split(" ")[0] for c in calls]
+    for step in X_STEPS:
+        assert step in calls
+    assert steps.index("scripts/ingest_mcg.py") < steps.index("scripts/add_x_recordings.py")
+    assert steps.index("scripts/pack_summaries.py") < steps.index("scripts/summarize_mcg.py")
+    assert len(calls) > len(X_STEPS) + 5
+    assert waits(tmp_path) == ["10800"]
+
+
+def test_the_evening_run_skips_while_another_run_holds_the_lock(tmp_path):
+    with lock_held(tmp_path / ".channels-check.lock"):
+        code, out, calls = run_job(tmp_path, "--run-x")
+    assert code == 0 and "another run held the lock" in out
+    assert calls == []
+
+
+def test_the_morning_run_gives_up_if_the_lock_stays_held(tmp_path):
+    with lock_held(tmp_path / ".channels-check.lock"):
+        code, out, calls = run_job(tmp_path, "--run")
+    assert code == 1 and "another run held the lock" in out
+    assert calls == []
+
+
+@pytest.mark.skipif(not os.path.exists("/usr/bin/lockf"), reason="macOS lockf only")
+def test_the_real_lockf_skips_when_held_and_frees_the_lock_after_a_run(tmp_path):
+    with lock_held(tmp_path / ".channels-check.lock"):
+        code, out, calls = run_job(tmp_path, "--run-x", real_lockf=True)
+    assert code == 0 and "another run held the lock" in out and calls == []
+    for _ in range(2):                   # the first run's lock is gone when it ends
+        code, out, calls = run_job(tmp_path, "--run-x", real_lockf=True)
+        assert code == 0, out
+        assert calls == X_STEPS
+
+
+def test_install_adds_the_evening_agent():
+    assert 'write_plist "$PLIST" "$LABEL" --run 9' in SCRIPT
+    assert 'write_plist "$X_PLIST" "$X_LABEL" --run-x 23' in SCRIPT
+
+
+def test_the_script_parses():
+    assert subprocess.run(["bash", "-n", str(ROOT / "scripts" / "daily_channels_check.sh")]).returncode == 0

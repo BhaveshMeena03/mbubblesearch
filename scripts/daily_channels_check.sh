@@ -13,6 +13,12 @@
 #
 #   scripts/daily_channels_check.sh --run
 #
+# Just the X steps (new recordings and clips on X, our link posts), which
+# a second agent runs at 23:00 so a video posted in the day gets the
+# extension's button that night instead of the next morning:
+#
+#   scripts/daily_channels_check.sh --run-x
+#
 # Why here and not on GitHub. The sync workflow can list a channel from a
 # runner but YouTube refuses the download from a datacentre IP, so for MCG
 # it has only ever been able to say "there are new episodes" in a warning
@@ -46,26 +52,28 @@ export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 LABEL="com.mbubblesearch.channelsync"
 PLIST="$HOME/Library/LaunchAgents/$LABEL.plist"
+X_LABEL="com.mbubblesearch.xcheck"
+X_PLIST="$HOME/Library/LaunchAgents/$X_LABEL.plist"
 LOG="$ROOT/.channels-check.log"
+LOCK="$ROOT/.channels-check.lock"
 
-case "${1:-}" in
-  --install)
-    mkdir -p "$HOME/Library/LaunchAgents"
-    cat > "$PLIST" <<PLISTEOF
+# write_plist PATH LABEL FLAG HOUR
+write_plist() {
+  cat > "$1" <<PLISTEOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
   "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-  <key>Label</key><string>$LABEL</string>
+  <key>Label</key><string>$2</string>
   <key>ProgramArguments</key>
   <array>
     <string>$ROOT/scripts/daily_channels_check.sh</string>
-    <string>--run</string>
+    <string>$3</string>
   </array>
   <key>StartCalendarInterval</key>
   <dict>
-    <key>Hour</key><integer>9</integer>
+    <key>Hour</key><integer>$4</integer>
     <key>Minute</key><integer>0</integer>
   </dict>
   <key>StandardOutPath</key><string>$LOG</string>
@@ -73,28 +81,56 @@ case "${1:-}" in
 </dict>
 </plist>
 PLISTEOF
-    launchctl unload "$PLIST" 2>/dev/null || true
-    launchctl load "$PLIST"
-    echo "  installed: MCG Live, ThreadGuy and rasmr, daily at 09:00"
+  launchctl unload "$1" 2>/dev/null || true
+  launchctl load "$1"
+}
+
+case "${1:-}" in
+  --install)
+    mkdir -p "$HOME/Library/LaunchAgents"
+    write_plist "$PLIST" "$LABEL" --run 9
+    write_plist "$X_PLIST" "$X_LABEL" --run-x 23
+    echo "  installed: everything daily at 09:00, the X steps again at 23:00"
     echo "  log: $LOG"
     exit 0
     ;;
   --uninstall)
-    launchctl unload "$PLIST" 2>/dev/null || true
-    rm -f "$PLIST"
+    for plist in "$PLIST" "$X_PLIST"; do
+      launchctl unload "$plist" 2>/dev/null || true
+      rm -f "$plist"
+    done
     echo "  removed"
     exit 0
     ;;
   --run)
+    mode=all
+    ;;
+  --run-x)
+    mode=x
     ;;
   *)
-    echo "usage: $0 --install | --uninstall | --run" >&2
+    echo "usage: $0 --install | --uninstall | --run | --run-x" >&2
     exit 2
     ;;
 esac
 
+# One run at a time: after a closed lid launchd starts both agents at
+# wake. The X run skips (the full run does the X steps too), the full run
+# waits up to three hours. lockf drops the lock when the run ends.
+if [[ -z ${CHANNELS_LOCKED:-} ]]; then
+  wait=10800
+  [[ $mode == x ]] && wait=0
+  CHANNELS_LOCKED=1 lockf -k -s -t "$wait" "$LOCK" "$BASH" "$ROOT/scripts/daily_channels_check.sh" "$1"
+  code=$?
+  [[ $code -ne 75 ]] && exit $code
+  echo "== $(date "+%Y-%m-%d %H:%M %Z") ($mode) =="
+  echo "  another run held the lock; nothing done"
+  [[ $mode == x ]] && exit 0
+  exit 1
+fi
+
 cd "$ROOT"
-echo "== $(date "+%Y-%m-%d %H:%M %Z") =="
+echo "== $(date "+%Y-%m-%d %H:%M %Z") ($mode) =="
 
 # Wait for the network. launchd starts this the moment the Mac wakes for
 # 09:00, and Wi-Fi is not back yet: on 7 and 8 October every step failed
@@ -124,41 +160,45 @@ fi
 unset ANTHROPIC_BASE_URL
 
 status=0
-for archive in threadguy mcg rasmr; do
-  echo "-- $archive"
-  # --max-new bounds a morning after a week away: newest first, the rest
-  # tomorrow. caffeinate keeps the Mac awake through the transcription.
-  caffeinate -i .venv/bin/python -u scripts/ingest_mcg.py \
-    --archive "$archive" --transcriber groq --chunk-workers 4 --workers 2 \
-    --limit 20 --max-new 8 || status=1
-done
+if [[ $mode == all ]]; then
+  for archive in threadguy mcg rasmr; do
+    echo "-- $archive"
+    # --max-new bounds a morning after a week away: newest first, the rest
+    # tomorrow. caffeinate keeps the Mac awake through the transcription.
+    caffeinate -i .venv/bin/python -u scripts/ingest_mcg.py \
+      --archive "$archive" --transcriber groq --chunk-workers 4 --workers 2 \
+      --limit 20 --max-new 8 || status=1
+  done
 
-# The X broadcast of each MCG Live show, so a citation can open on X at
-# the same second. MCG streams to both at once; this finds which broadcast
-# is which show and measures how far apart the two clocks are. One search
-# on X, about half a cent a morning, and three minutes of audio per show.
-echo "-- mcg on x"
-.venv/bin/python -u scripts/pair_mcg_broadcasts.py || status=1
+  # The X broadcast of each MCG Live show, so a citation can open on X at
+  # the same second. MCG streams to both at once; this finds which broadcast
+  # is which show and measures how far apart the two clocks are. One search
+  # on X, about half a cent a morning, and three minutes of audio per show.
+  echo "-- mcg on x"
+  .venv/bin/python -u scripts/pair_mcg_broadcasts.py || status=1
 
-# Notes for ThreadGuy's newest uploads. Already-written ones are skipped,
-# so a morning pays for what arrived overnight and nothing else: one model
-# call per episode, through the proxy in .env.
-echo "-- threadguy notes"
-.venv/bin/python -u scripts/summarize_threadguy.py --latest 10 || status=1
+  # Notes for ThreadGuy's newest uploads. Already-written ones are skipped,
+  # so a morning pays for what arrived overnight and nothing else: one model
+  # call per episode, through the proxy in .env.
+  echo "-- threadguy notes"
+  .venv/bin/python -u scripts/summarize_threadguy.py --latest 10 || status=1
 
-# ThreadGuy's X broadcasts, for the browser extension's button on his
-# posts: one search on X for broadcast posts from @notthreadguy since the
-# newest one on file (about one a day, half a cent), then each new one is
-# heard against the show indexed above. After the notes, so a show paired
-# this morning already has its summary.
-echo "-- threadguy on x"
-.venv/bin/python -u scripts/pair_threadguy_broadcasts.py --search || status=1
+  # ThreadGuy's X broadcasts, for the browser extension's button on his
+  # posts: one search on X for broadcast posts from @notthreadguy since the
+  # newest one on file (about one a day, half a cent), then each new one is
+  # heard against the show indexed above. After the notes, so a show paired
+  # this morning already has its summary.
+  echo "-- threadguy on x"
+  .venv/bin/python -u scripts/pair_threadguy_broadcasts.py --search || status=1
 
-# rasmr's broadcasts on X, the same way: his new broadcast posts (one a
-# stream), then the last week's unpaired ones heard against his indexed
-# streams, so a stream whose YouTube copy came late is paired tomorrow.
-echo "-- rasmr on x"
-.venv/bin/python -u scripts/pair_rasmr_broadcasts.py --search || status=1
+  # rasmr's broadcasts on X, the same way: his new broadcast posts (one a
+  # stream), then the last week's unpaired ones heard against his indexed
+  # streams, so a stream whose YouTube copy came late is paired tomorrow.
+  echo "-- rasmr on x"
+  .venv/bin/python -u scripts/pair_rasmr_broadcasts.py --search || status=1
+fi
+
+# From here down to the summaries, both runs.
 
 # What Market Bubble and Ansem post on X that the archive doesn't hold:
 # his own videos, and the broadcasts and uploads that aren't the Thursday
@@ -187,37 +227,39 @@ echo "-- clips on x"
 echo "-- our link posts"
 .venv/bin/python -u scripts/place_x_links.py --search || status=1
 
-# Notes for MCG's newest, the daily live show included: the extension
-# shows them on MCG Live's posts on X. Already-written ones are skipped.
-echo "-- mcg notes"
-.venv/bin/python -u scripts/summarize_mcg.py --latest 5 || status=1
-
 # Market Bubble's summaries, which the site serves from this file rather
 # than reading them back from Pinecone. A show added since yesterday has its
 # summary in the index first; this fetches just that one.
 echo "-- market bubble summaries"
 .venv/bin/python -u scripts/pack_summaries.py || status=1
 
-# Tokens from the newest uploads of both channels, into each dashboard's
-# store. Episodes already extracted are cached and skipped; two at a time,
-# because the proxy is shared with the live site and the bot, and a run
-# that floods it gets rate limited and slows them down.
-for archive in threadguy mcg; do
-  echo "-- $archive tokens"
-  EXTRACT_CONCURRENCY=4 .venv/bin/python -u scripts/extract_mcg_assets.py \
-    --archive "$archive" --episodes 10 --store --workers 2 || status=1
-done
-
-# Sundays: the exact-word indexes, read back off Pinecone. Weekly, not
-# daily, because each rebuild commits a few megabytes and a daily one would
-# add a gigabyte a year to the repo. Until then a new episode is still
-# found by meaning, just not yet by an exact rare word.
 terms=(data/terms_threadguy.json.gz data/terms_mcg.json.gz)
-if [ "$(date +%u)" = "7" ]; then
+if [[ $mode == all ]]; then
+  # Notes for MCG's newest, the daily live show included: the extension
+  # shows them on MCG Live's posts on X. Already-written ones are skipped.
+  echo "-- mcg notes"
+  .venv/bin/python -u scripts/summarize_mcg.py --latest 5 || status=1
+
+  # Tokens from the newest uploads of both channels, into each dashboard's
+  # store. Episodes already extracted are cached and skipped; two at a time,
+  # because the proxy is shared with the live site and the bot, and a run
+  # that floods it gets rate limited and slows them down.
   for archive in threadguy mcg; do
-    echo "-- exact-word index: $archive"
-    .venv/bin/python -u scripts/build_term_index.py --archive "$archive" || status=1
+    echo "-- $archive tokens"
+    EXTRACT_CONCURRENCY=4 .venv/bin/python -u scripts/extract_mcg_assets.py \
+      --archive "$archive" --episodes 10 --store --workers 2 || status=1
   done
+
+  # Sundays: the exact-word indexes, read back off Pinecone. Weekly, not
+  # daily, because each rebuild commits a few megabytes and a daily one would
+  # add a gigabyte a year to the repo. Until then a new episode is still
+  # found by meaning, just not yet by an exact rare word.
+  if [ "$(date +%u)" = "7" ]; then
+    for archive in threadguy mcg; do
+      echo "-- exact-word index: $archive"
+      .venv/bin/python -u scripts/build_term_index.py --archive "$archive" || status=1
+    done
+  fi
 fi
 
 # Only the shelves, the indexes and the two token reports, whatever else is
@@ -251,7 +293,9 @@ if git diff --quiet -- "${shelves[@]}"; then
   echo "  no new episodes"
   exit $status
 fi
-git commit -q -m "Add the episodes indexed this morning" \
+message="Add the episodes indexed this morning"
+[[ $mode == x ]] && message="Add the X posts placed tonight"
+git commit -q -m "$message" \
   -- "${shelves[@]}" && git push -q origin main \
   && echo "  pushed: $(git log --oneline -1)" \
   || { echo "  could not commit or push the shelves; they are indexed and will go up with the next push"; status=1; }
