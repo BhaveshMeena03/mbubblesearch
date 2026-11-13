@@ -898,7 +898,8 @@ async def archives(request: Request) -> dict:
 # the board is still whole.
 _CALLS_FILE = _ROOT / "data" / "calls.json"
 _CALLS_READ: tuple[float, dict] = (0.0, {})
-_CALL_PRICES: tuple[float, dict[str, float], str | None] = (0.0, {}, None)
+# cached per set of listings so the two boards don't share prices
+_CALL_PRICES: dict[tuple[str, ...], tuple[float, dict[str, float], str | None]] = {}
 _CALL_PRICES_FOR = 600.0    # seconds a set of fresh prices is reused
 
 
@@ -922,13 +923,13 @@ async def _call_prices_now(listings: list[str]) -> tuple[dict[str, float], str |
     """Fresh prices, at most once every ten minutes. Whatever was last
     fetched is handed back while the source is down: an hour-old price
     still beats the one from the morning the board was built."""
-    global _CALL_PRICES
-    at, prices, day = _CALL_PRICES
+    wanted = tuple(sorted({str(x) for x in listings if x}))
+    at, prices, day = _CALL_PRICES.get(wanted, (0.0, {}, None))
     if prices and time.monotonic() - at < _CALL_PRICES_FOR:
         return prices, day
     try:
         async with httpx.AsyncClient(timeout=8.0) as http:
-            found = await call_prices.now(listings, client=http)
+            found = await call_prices.now(list(wanted), client=http)
     except Exception as exc:                                    # noqa: BLE001
         logger.warning("fresh call prices failed: %s", type(exc).__name__)
         found = {}
@@ -936,7 +937,7 @@ async def _call_prices_now(listings: list[str]) -> tuple[dict[str, float], str |
         prices, day = found, datetime.now(UTC).date().isoformat()
     # Stamped either way, so a source that is down is asked again in ten
     # minutes and not on every page view.
-    _CALL_PRICES = (time.monotonic(), prices, day)
+    _CALL_PRICES[wanted] = (time.monotonic(), prices, day)
     return prices, day
 
 
@@ -952,6 +953,22 @@ async def calls_board() -> JSONResponse:
     # to be wrong is taken off, and it has to be gone for everybody the
     # next time they look, not whenever a cache lets go of it.
     return JSONResponse(on_air_calls.board(shipped, live, day),
+                        headers={"Cache-Control": "no-store"})
+
+
+# ThreadGuy calls board, built by scripts/build_threadguy_calls.py
+_THREADGUY_CALLS_FILE = _ROOT / "data" / "threadguy_calls.json"
+
+
+@app.get("/v1/threadguy/calls", dependencies=[Depends(public_rate_limit)])
+async def threadguy_calls_board() -> JSONResponse:
+    """Calls ThreadGuy made on his streams, quoted, linked and priced since."""
+    shipped = _pm_file(_THREADGUY_CALLS_FILE)
+    if not shipped.get("calls"):
+        raise HTTPException(status_code=503, detail="unavailable")
+    live, day = await _call_prices_now(
+        [str(r.get("listing") or "") for r in shipped["calls"]])
+    return JSONResponse(on_air_calls.board(shipped, live, day, hosts=("ThreadGuy",)),
                         headers={"Cache-Control": "no-store"})
 
 
@@ -1473,6 +1490,7 @@ for _path, _target in (("/home", "/demo/home.html"),
                        ("/threadguy", "/demo/threadguy.html"),
                        ("/threadguy/tokens", "/demo/threadguy-assets.html"),
                        ("/threadguy/assets", "/demo/threadguy-assets.html"),
+                       ("/threadguy/calls", "/demo/threadguy-calls.html"),
                        ("/rasmr", "/demo/rasmr.html"),
                        ("/record", "/demo/finance.html"),
                        ("/mcg/tokens", "/demo/mcg-assets.html"),

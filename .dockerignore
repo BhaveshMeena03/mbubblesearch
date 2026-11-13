@@ -59,6 +59,7 @@ data/
 !data/elon_speaker_map.json
 # The calls board, served by /v1/calls.
 !data/calls.json
+!data/threadguy_calls.json
 # Coverage of the posts index, read by /v1/posts/archive.
 !data/posts_index.json
 # The guest pages, built by scripts/build_guests.py.

@@ -145,5 +145,101 @@
   "yahoo": "^GSPC",
   "answers_to": "S&P 500",
   "ticker": "SPX"
+ },
+ "PLTR": {
+  "name": "Palantir",
+  "class": "stock",
+  "yahoo": "PLTR",
+  "answers_to": "Palantir Technologies"
+ },
+ "MU": {
+  "name": "Micron",
+  "class": "stock",
+  "yahoo": "MU",
+  "answers_to": "Micron Technology"
+ },
+ "IBB": {
+  "name": "iShares Biotechnology ETF",
+  "class": "stock",
+  "yahoo": "IBB",
+  "answers_to": "iShares Biotechnology"
+ },
+ "ASTS": {
+  "name": "AST SpaceMobile",
+  "class": "stock",
+  "yahoo": "ASTS",
+  "answers_to": "AST SpaceMobile"
+ },
+ "RAIL": {
+  "name": "Railgun",
+  "class": "crypto",
+  "yahoo": "RAIL-USD",
+  "answers_to": "Railgun"
+ },
+ "VSXY": {
+  "name": "Victoria's Secret",
+  "class": "stock",
+  "yahoo": "VSXY",
+  "answers_to": "Victorias Secret"
+ },
+ "AMC": {
+  "name": "AMC Entertainment",
+  "class": "stock",
+  "yahoo": "AMC",
+  "answers_to": "AMC Entertainment"
+ },
+ "STUB": {
+  "name": "StubHub",
+  "class": "stock",
+  "yahoo": "STUB",
+  "answers_to": "StubHub"
+ },
+ "NET": {
+  "name": "Cloudflare",
+  "class": "stock",
+  "yahoo": "NET",
+  "answers_to": "Cloudflare"
+ },
+ "CARDS": {
+  "name": "Collector Crypt",
+  "class": "crypto",
+  "yahoo": "CARDS38283-USD",
+  "answers_to": "Collector Crypt"
+ },
+ "XMR": {
+  "name": "Monero",
+  "class": "crypto",
+  "yahoo": "XMR-USD",
+  "answers_to": "Monero"
+ },
+ "MSFT": {
+  "name": "Microsoft",
+  "class": "stock",
+  "yahoo": "MSFT",
+  "answers_to": "Microsoft"
+ },
+ "MRVL": {
+  "name": "Marvell",
+  "class": "stock",
+  "yahoo": "MRVL",
+  "answers_to": "Marvell Technology"
+ },
+ "WLD": {
+  "name": "Worldcoin",
+  "class": "crypto",
+  "yahoo": "WLD-USD",
+  "answers_to": "Worldcoin"
+ },
+ "STONK": {
+  "name": "STONK (stonkfun)",
+  "class": "crypto",
+  "yahoo": "STONK42022-USD",
+  "answers_to": "STONK (stonkfun.xyz)"
+ },
+ "LVMH": {
+  "name": "LVMH",
+  "class": "stock",
+  "yahoo": "MC.PA",
+  "answers_to": "LVMH"
  }
 }

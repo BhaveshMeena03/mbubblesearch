@@ -69,8 +69,11 @@ _TACTICAL = (
      "a hedge is not a call"),
     (re.compile(r"\bshort[- ]term trade\b|\bscalp(?:ed|ing)?\b|\bday trad", re.I),
      "a short-term trade is not a call"),
+    # also catch stops said without the word "stop", e.g. "i'm out below 242"
     (re.compile(r"\bstop (?:beneath|below|under|at|is|would)\b|\bmy stop\b"
-                r"|\bstop[- ]?(?:loss|out)\b", re.I),
+                r"|\bstop[- ]?(?:loss|out)\b"
+                r"|\bi'?m out\b.{0,30}?\b(?:below|under) (?:this|that|\$?\d)"
+                r"|\b(?:below|under) \$?[\d.,]+k? i'?m out\b", re.I),
      "a setup with a stop is a trade, not a call"),
 )
 
@@ -145,7 +148,8 @@ def locate(quote: str, segments: list[dict], near: int) -> Span | None:
     return best
 
 
-def voice(labels: dict[str, str], first: int, last: int) -> str | None:
+def voice(labels: dict[str, str], first: int, last: int,
+          hosts: tuple[str, ...] = HOSTS) -> str | None:
     """Whose voice a run of lines is in, or None when that is not known.
 
     The first line has to be labelled: that is where the quote starts and
@@ -154,7 +158,7 @@ def voice(labels: dict[str, str], first: int, last: int) -> str | None:
     two people said is nobody's call.
     """
     who = labels.get(str(first))
-    if who not in HOSTS:
+    if who not in hosts:
         return None
     for index in range(first, last + 1):
         other = labels.get(str(index))
@@ -202,7 +206,8 @@ def _slug(value: object) -> str:
     return re.sub(r"[^a-z0-9]+", "-", str(value or "").lower()).strip("-")[:24]
 
 
-def accept(raw: dict, episode: dict, labels: dict[str, str]) -> tuple[Call | None, str]:
+def accept(raw: dict, episode: dict, labels: dict[str, str],
+           hosts: tuple[str, ...] = HOSTS) -> tuple[Call | None, str]:
     """A model's claim, held against the transcript.
 
     Returns the call, or None and the reason it was refused. The reason is
@@ -231,7 +236,7 @@ def accept(raw: dict, episode: dict, labels: dict[str, str]) -> tuple[Call | Non
     trade = tactical(cut(segments, span))
     if trade:
         return None, trade
-    who = voice(labels, first, last)
+    who = voice(labels, first, last, hosts)
     if who is None:
         return None, "voice not known"
     claimed = str(raw.get("speaker") or "")
@@ -467,7 +472,7 @@ _SANE = (0.05, 20.0)
 
 
 def board(shipped: dict, live: dict[str, float] | None = None,
-          live_at: str | None = None) -> dict:
+          live_at: str | None = None, hosts: tuple[str, ...] = HOSTS) -> dict:
     """The file the build wrote, with today's prices laid over it.
 
     `live` is listing -> price, from whenever the source last answered. It
@@ -502,7 +507,7 @@ def board(shipped: dict, live: dict[str, float] | None = None,
         "calls": rows,
         "summary": tally(rows),
         "by_speaker": {host: tally([r for r in rows if r["speaker"] == host])
-                       for host in HOSTS},
+                       for host in hosts},
         "shows": len({r["episode_id"] for r in rows if r.get("episode_id")}),
         "posts": sum(1 for r in rows if r.get("source") == "post"),
         "live": fresh_rows > 0,

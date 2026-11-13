@@ -24,9 +24,9 @@ eight-word runs, and where two slices disagree the stretch between them is
 heard again until the change is pinned down. What it is matched against is
 the show's own YouTube caption track rather than the index, which is the
 same clock and reads nothing back out of Pinecone. His streams have no
-caption track (checked 1 Nov 2026: "has no automatic captions"), so for
-those the transcript comes back out of the index, one episode's passages,
-as the MCG and rasmr pairing scripts read theirs: about 200 KB a show.
+caption track (checked 1 Nov 2026: "has no automatic captions"), so it uses
+the local cached lines first and only falls back to the index (about 200 KB
+a show) when there are none.
 
 --pair measures one show against one broadcast found some other way, such
 as one of our own posts linking a show from before October. It reads
@@ -54,6 +54,7 @@ sys.path.insert(0, str(ROOT))
 
 import httpx  # noqa: E402
 
+from app import local_cache  # noqa: E402
 from app.captions import coalesce, parse_vtt  # noqa: E402
 from app.config import get_settings, redact  # noqa: E402
 from app.x_api import API, XCredentials  # noqa: E402
@@ -179,11 +180,17 @@ def indexed(video_id: str) -> list[dict]:
     return rebuild(_INDEX, "threadguy", settings.embedding_dimension, video_id)
 
 
+def transcript(video_id: str, work: Path) -> list[dict]:
+    """Lines on the YouTube clock: local cache first, then captions, then the index."""
+    return (local_cache.load_lines("threadguy", video_id)
+            or captions(video_id, work) or indexed(video_id))
+
+
 def measure(url: str, row: dict) -> dict | None:
     """How this broadcast's clock sits against the YouTube copy, or None
     when it is not the same show."""
     with tempfile.TemporaryDirectory() as tmp:
-        lines = captions(row["id"], Path(tmp)) or indexed(row["id"])
+        lines = transcript(row["id"], Path(tmp))
         if not lines:
             return None
         found = chart(lambda at: offset(hear(url, at, Path(tmp)), at, lines),

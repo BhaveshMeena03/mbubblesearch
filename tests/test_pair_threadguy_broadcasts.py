@@ -96,3 +96,20 @@ def test_a_broadcast_that_is_not_the_show_by_ear_is_left_alone(tmp_path, monkeyp
     monkeypatch.setattr(tg, "measure", lambda url, row: None)
     assert tg.pair_by_hand("B8A-Gf9Strs", "https://x.com/i/broadcasts/1MJgNbOYoZkGL") == 1
     assert not (tmp_path / "pairs.json").exists()
+
+
+def test_the_laptops_lines_come_before_youtube_and_the_index(tmp_path, monkeypatch):
+    """Cached lines are used without hitting YouTube or Pinecone."""
+    asked = []
+    cached = {"kept": [{"t": 0.0, "text": "gm"}]}
+    monkeypatch.setattr(tg.local_cache, "load_lines",
+                        lambda archive, vid: asked.append(("cache", archive)) or cached.get(vid))
+    monkeypatch.setattr(tg, "captions", lambda vid, work: asked.append("youtube") or [])
+    monkeypatch.setattr(tg, "indexed", lambda vid: asked.append("index") or [{"t": 1.0, "text": "x"}])
+
+    assert tg.transcript("kept", tmp_path) == [{"t": 0.0, "text": "gm"}]
+    assert asked == [("cache", "threadguy")]
+
+    asked.clear()
+    assert tg.transcript("new", tmp_path) == [{"t": 1.0, "text": "x"}]
+    assert asked == [("cache", "threadguy"), "youtube", "index"]

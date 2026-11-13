@@ -594,6 +594,9 @@ def test_a_hedge_is_refused_however_clearly_he_says_he_is_short():
     ("Stop beneath like 62 and I'll be targeting like all time highs at 77",
      "a setup with a stop is a trade, not a call"),
     ("i think it's gonna go to 190 but i had my stop there", "a setup with a stop is a trade, not a call"),
+    ("a little baby nibble at 249 i'm out like below this this little stack 242",
+     "a setup with a stop is a trade, not a call"),
+    ("a couple weeks max or below 76 i'm out", "a setup with a stop is a trade, not a call"),
 ])
 def test_the_words_that_mark_a_trade(said, why):
     assert calls.tactical(said) == why
@@ -605,6 +608,8 @@ def test_the_words_that_mark_a_trade(said, why):
     "I'm expecting Solana to go to 150 during Q3",
     "people need to stop sleeping on this, i think pump looks really good",
     "the head of the fed said so and i'm still long",
+    "i'm out of zcash, sold the last of it below the top",
+    "i'm out here buying more hype every time it dips under 30",
     "",
 ])
 def test_a_view_is_not_mistaken_for_a_trade(said):
@@ -832,7 +837,7 @@ def test_the_route_serves_the_board_and_survives_the_price_source_being_down(mon
     async def down(listings, *, client):
         raise TimeoutError("price source is down")
     monkeypatch.setattr(main.call_prices, "now", down)
-    monkeypatch.setattr(main, "_CALL_PRICES", (0.0, {}, None))
+    monkeypatch.setattr(main, "_CALL_PRICES", {})
     with TestClient(main.app) as client:
         reply = client.get("/v1/calls")
         assert reply.status_code == 200
@@ -857,7 +862,7 @@ def test_fresh_prices_are_fetched_once_and_reused(monkeypatch):
         asked.append(sorted(set(listings)))
         return {"BTC-USD": 90000.0}
     monkeypatch.setattr(main.call_prices, "now", answers)
-    monkeypatch.setattr(main, "_CALL_PRICES", (0.0, {}, None))
+    monkeypatch.setattr(main, "_CALL_PRICES", {})
 
     async def twice():
         first = await main._call_prices_now(["BTC-USD", "ETH-USD"])
