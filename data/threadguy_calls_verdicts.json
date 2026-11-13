@@ -7672,8 +7672,14 @@
   "why": "not one asset with a listing to price it from: 'Pokemon'"
  },
  "s_mii70KyqM:77:PLTR": {
-  "keep": false,
-  "why": "held back: no X broadcast for this stream (none posted 19-22 Feb), YouTube only"
+  "keep": true,
+  "why": "holding: 'i finally took a position on long palantir... So I'm long palancy right now'; his own position, repeated as 'the only stock I hold' through 9 Mar",
+  "youtube": true,
+  "quote": "i finally took a position on long palantir um because the world is in shambles and I needed some stock exposure",
+  "on_air": "2026-02-19T20:36:40Z",
+  "no_x": "a YouTube live only: no X broadcast posted 19-22 Feb 2026",
+  "checked": "frame at 491s on YouTube: him alone at his desk, captions 'I finally took a position. I'm long Palunteer'",
+  "symbol": "PLTR"
  },
  "seP-cbLnSvU:1146:ZEC": {
   "keep": false,

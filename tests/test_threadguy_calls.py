@@ -1,7 +1,8 @@
 """Tests for the ThreadGuy calls board (scripts/build_threadguy_calls.py).
 
 Quote matching and the trade filter are covered in test_calls.py; these cover
-the X check fields, hourly pricing, the shipped file and the route.
+the X check fields, the YouTube fallback, hourly pricing, the shipped file
+and the route.
 """
 
 from __future__ import annotations
@@ -32,6 +33,10 @@ FOUND = {"shows": {"i2ArP1s0pOw": {"candidates": [CANDIDATE]}}}
 CHECKED = {"keep": True, "why": "his own view", "broadcast": "1MJgNgENXbAGL",
            "x_second": 2582, "on_air": "2026-05-05T19:32:00Z",
            "checked": "heard at 2582 on X, alone on camera"}
+# 19 Feb 2026: a YouTube live with no X broadcast posted 19 to 22 Feb
+ON_YOUTUBE = {"keep": True, "why": "his own position", "youtube": True,
+              "on_air": "2026-02-19T20:36:40Z", "no_x": "no broadcast posted 19-22 Feb",
+              "checked": "frame at 491s on YouTube: him alone at his desk"}
 
 
 def test_a_kept_row_carries_where_it_was_checked_on_x():
@@ -59,6 +64,27 @@ def test_a_short_needs_its_reason_and_a_stale_verdict_stops_the_build():
                       {short["id"]: dict(CHECKED, why="")})
     with pytest.raises(SystemExit, match="match no candidate"):
         tg.kept_calls(FOUND, {"gone:1:zec": CHECKED})
+
+
+def test_a_stream_that_never_aired_on_x_is_kept_on_youtube_at_the_second():
+    row, = tg.kept_calls(FOUND, {CANDIDATE["id"]: ON_YOUTUBE})
+    assert row["youtube"] and "broadcast" not in row
+    placed = tg.placed(row, LINES)
+    assert placed["x_second"] == placed["start_seconds"] == 2582.6
+    assert tg.link(placed) == "https://www.youtube.com/watch?v=i2ArP1s0pOw&t=2581s"
+    assert tg.said_at(placed) == datetime(2026, 2, 19, 21, 19, 42, 600000, tzinfo=UTC)
+
+
+@pytest.mark.parametrize("missing", tg.CHECKED_YOUTUBE)
+def test_a_youtube_row_says_when_it_aired_why_not_x_and_what_the_frame_showed(missing):
+    verdict = {k: v for k, v in ON_YOUTUBE.items() if k != missing}
+    with pytest.raises(SystemExit, match="kept off X without"):
+        tg.kept_calls(FOUND, {CANDIDATE["id"]: verdict})
+
+
+def test_a_stream_that_did_air_on_x_links_there_and_not_to_youtube():
+    with pytest.raises(SystemExit, match="links there"):
+        tg.kept_calls(FOUND, {CANDIDATE["id"]: dict(ON_YOUTUBE, broadcast="1MJgNgENXbAGL")})
 
 
 def test_a_rejected_candidate_needs_no_x_check():
@@ -129,6 +155,11 @@ def test_every_row_was_kept_and_checked_on_x():
     assert {r["id"] for r in board} == set(kept) and len(board) == len(kept)
     for r in board:
         v = kept[r["id"]]
+        if v.get("youtube"):
+            assert v["no_x"] and not v.get("broadcast"), r["id"]
+            at = max(0, int(r["youtube_seconds"]) - 1)
+            assert r["link"] == f"https://www.youtube.com/watch?v={r['episode_id']}&t={at}s"
+            continue
         assert r["link"] == f"https://x.com/i/broadcasts/{v['broadcast']}?t={max(0, int(v['x_second']) - 1)}"
         assert r["speaker"] == "ThreadGuy" and r["source"] == "show"
         assert r["price_then"] and r["listing"], r["id"]
@@ -228,6 +259,7 @@ def test_the_page_waits_for_his_ok_and_reads_only_its_own_board():
 def test_the_page_says_how_a_row_got_there_without_a_dash_in_it():
     text = " ".join(PAGE.split())
     assert "heard on his X broadcast" in text and "not advice" in text
+    assert "link to the second on YouTube" in text and '"Watch on " + on + " at "' in PAGE
     assert "a person" not in text
     assert "—" not in PAGE and "–" not in PAGE
 

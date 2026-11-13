@@ -10,6 +10,8 @@ Same idea as build_calls.py. Inputs:
 
 His streams have no speaker labels, so every kept row also needs where it
 was checked on X: broadcast, x_second, on_air (broadcast start), checked.
+An older stream that never aired on X can be kept with youtube: true,
+on_air (when the live started), no_x (why) and checked; it links to YouTube.
 Prices use the last full hour before he said it, not the daily close.
 """
 
@@ -45,6 +47,7 @@ ASSETS = DATA / "call_assets.json"
 BOARD = DATA / "threadguy_calls.json"
 SHELF = DATA / "threadguy_index.json"
 CHECKED = ("broadcast", "x_second", "on_air", "checked")
+CHECKED_YOUTUBE = ("on_air", "no_x", "checked")
 BY_HAND = ("episode_id", "line", "symbol", "stance", "kind", "quote")
 _BROADCAST = re.compile(r"[A-Za-z0-9]{8,20}")
 # the YouTube upload is often a day after the stream, so date rows by when he said it
@@ -86,12 +89,20 @@ def kept_calls(candidates: dict, verdicts: dict) -> list[dict]:
         if row["stance"] == "short" and not str(verdict.get("why") or "").strip():
             raise SystemExit(f"{ident}: a short needs a \"why\" saying it is a "
                              "view he holds and not a hedge or a trade")
-        missing = [f for f in CHECKED if verdict.get(f) in (None, "")]
-        if missing:
-            raise SystemExit(f"{ident}: kept without being checked on X ({missing})")
-        if not _BROADCAST.fullmatch(str(verdict["broadcast"])):
-            raise SystemExit(f"{ident}: {verdict['broadcast']!r} is not a broadcast id")
-        row.update({f: verdict[f] for f in CHECKED})
+        if verdict.get("youtube"):
+            missing = [f for f in CHECKED_YOUTUBE if verdict.get(f) in (None, "")]
+            if missing:
+                raise SystemExit(f"{ident}: kept off X without {missing}")
+            if verdict.get("broadcast"):
+                raise SystemExit(f"{ident}: has an X broadcast, so it links there")
+            row.update({f: verdict[f] for f in CHECKED_YOUTUBE}, youtube=True)
+        else:
+            missing = [f for f in CHECKED if verdict.get(f) in (None, "")]
+            if missing:
+                raise SystemExit(f"{ident}: kept without being checked on X ({missing})")
+            if not _BROADCAST.fullmatch(str(verdict["broadcast"])):
+                raise SystemExit(f"{ident}: {verdict['broadcast']!r} is not a broadcast id")
+            row.update({f: verdict[f] for f in CHECKED})
         row["symbol"] = str(row.get("symbol") or "").upper()
         rows.append(row)
     return rows
@@ -107,8 +118,11 @@ def placed(row: dict, lines: list[dict]) -> dict | None:
     said = calls.cut(lines, span)
     if calls.tactical(said):
         return None
-    return dict(row, line=span.first, last_line=span.last, quote=said,
-                start_seconds=float(lines[span.first].get("t", 0.0)))
+    start = float(lines[span.first].get("t", 0.0))
+    row = dict(row, line=span.first, last_line=span.last, quote=said, start_seconds=start)
+    if row.get("youtube"):
+        row["x_second"] = start     # no X copy, the YouTube second is the moment
+    return row
 
 
 def undash(line: str) -> str:
@@ -139,7 +153,10 @@ def said_at(row: dict) -> datetime:
 
 def link(row: dict) -> str:
     # start 1s early so the first word isn't cut off
-    return f"https://x.com/i/broadcasts/{row['broadcast']}?t={max(0, int(row['x_second']) - 1)}"
+    at = max(0, int(row["x_second"]) - 1)
+    if row.get("youtube"):
+        return f"https://www.youtube.com/watch?v={row['episode_id']}&t={at}s"
+    return f"https://x.com/i/broadcasts/{row['broadcast']}?t={at}"
 
 
 async def main() -> int:
@@ -240,7 +257,7 @@ async def main() -> int:
                 "class": asset.get("class") or "crypto", "listing": listing,
                 "stance": row["stance"], "kind": row["kind"],
                 "target": row.get("target") or "", "quote": undash(row["quote"]),
-                # X second for the link, transcript line/second for the tests
+                # second the link opens at, transcript line/second for the tests
                 "start_seconds": float(row["x_second"]),
                 "line": row["line"], "youtube_seconds": row["start_seconds"],
                 "timestamp": mb.stamp(row["x_second"]),

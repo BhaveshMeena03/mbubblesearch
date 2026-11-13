@@ -184,7 +184,9 @@
     left is read in context and only what he said for himself is kept: no tweets
     or chat read out, no clips, no guests or callers. Saying it again while he
     still held it doesn't add a new row. Every kept row was heard on his X
-    broadcast at the second it links to and seen on camera. Prices are from the
+    broadcast at the second it links to and seen on camera. A few older streams
+    never aired on X, so those link to the second on YouTube and were checked
+    on camera there. Prices are from the
     last full hour before he said it. Targets with a number are marked reached,
     not reached, or not reached yet. Hedges, scalps and setups with a stop are
     left off. <a href="/method">How the archive is built</a>.
@@ -285,6 +287,7 @@ function checked(c){
 function row(r, i){
   var cls = typeof r.moved_pct !== "number" ? "none" : r.moved_pct > 0 ? "up" : r.moved_pct < 0 ? "down" : "";
   var href = safeUrl(r.link);
+  var on = /^https:\/\/www\.youtube\.com\//.test(href) ? "YouTube" : "X";
   var said = (KIND[r.stance] || KIND.long)[r.kind] || r.kind;
   var tags = "<span class='tag" + (r.stance === "short" ? " short" : "") + "'>" + esc(said) + "</span>" +
     (r.target ? "<span class='tag target'>target: " + esc(r.target) + "</span>" : "") + checked(r.target_check);
@@ -297,7 +300,7 @@ function row(r, i){
     "<div class='acts'>" +
       (href ? "<a class='watch' href='" + esc(href) + "' target='_blank' rel='noopener'>" +
         "<svg viewBox='0 0 12 12' aria-hidden='true'><path d='M2 1.2l8.5 4.8L2 10.8z' fill='currentColor'/></svg>" +
-        "Watch on X at " + esc(r.timestamp) + "</a>" : "") +
+        "Watch on " + on + " at " + esc(r.timestamp) + "</a>" : "") +
       "<span class='ep'>" + esc(r.show) + "</span>" +
       "<a class='share' href='" + esc(shareUrl(r)) + "' target='_blank' rel='noopener'>Post this</a>" +
     "</div>" +
