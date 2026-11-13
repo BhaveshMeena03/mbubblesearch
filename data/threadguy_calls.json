@@ -1,5 +1,5 @@
 {
- "built_at": "2026-11-13T06:10:14+00:00",
+ "built_at": "2026-11-13T07:32:24+00:00",
  "priced_at": "2026-11-13",
  "calls": [
   {
@@ -25,7 +25,7 @@
    "link": "https://x.com/i/broadcasts/2WXKzvANlyagmO?t=3676",
    "price_then": 1281.7099609375,
    "then_at": "2026-11-04",
-   "price_last": 927.9199829101562,
+   "price_last": 953.0399780273438,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -52,7 +52,7 @@
    "link": "https://x.com/i/broadcasts/2nQYlRvNqoEyOV?t=3607",
    "price_then": 603.5260009765625,
    "then_at": "2026-11-02",
-   "price_last": 517.6907958984375,
+   "price_last": 526.586669921875,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -79,7 +79,7 @@
    "link": "https://x.com/i/broadcasts/1pJdRDqeOYnKW?t=1107",
    "price_then": 1246.6199951171875,
    "then_at": "2026-10-30",
-   "price_last": 927.9199829101562,
+   "price_last": 953.0399780273438,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -106,7 +106,7 @@
    "link": "https://x.com/i/broadcasts/1DxLdZBwNqyxm?t=1808",
    "price_then": 92.5999984741211,
    "then_at": "2026-10-29",
-   "price_last": 70.68000030517578,
+   "price_last": 71.62000274658203,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -241,7 +241,7 @@
    "link": "https://x.com/i/broadcasts/1qxvveQNLjwxB?t=5348",
    "price_then": 82032.671875,
    "then_at": "2026-10-20",
-   "price_last": 68149.171875,
+   "price_last": 68850.7265625,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -268,7 +268,7 @@
    "link": "https://x.com/i/broadcasts/1qxvveQNLjwxB?t=5348",
    "price_then": 1181.27001953125,
    "then_at": "2026-10-20",
-   "price_last": 927.9199829101562,
+   "price_last": 953.0399780273438,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -295,7 +295,7 @@
    "link": "https://x.com/i/broadcasts/1NGaroNBBnDJj?t=4142",
    "price_then": 0.33348384499549866,
    "then_at": "2026-10-16",
-   "price_last": 0.18141376972198486,
+   "price_last": 0.18818366527557373,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -322,7 +322,7 @@
    "link": "https://x.com/i/broadcasts/1YGNrbgLXMRGw?t=517",
    "price_then": 1090.199951171875,
    "then_at": "2026-10-15",
-   "price_last": 927.9199829101562,
+   "price_last": 953.0399780273438,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -376,7 +376,7 @@
    "link": "https://x.com/i/broadcasts/1vJpPNRbQpgJE?t=3748",
    "price_then": 0.2557413876056671,
    "then_at": "2026-10-05",
-   "price_last": 0.18141376972198486,
+   "price_last": 0.18818366527557373,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -403,7 +403,7 @@
    "link": "https://x.com/i/broadcasts/1vJpPNRbQpgJE?t=830",
    "price_then": 0.006463999859988689,
    "then_at": "2026-10-05",
-   "price_last": 0.0033229999244213104,
+   "price_last": 0.0034199999645352364,
    "last_at": "2026-11-13",
    "target_check": {
     "level": 0.02,
@@ -436,7 +436,7 @@
    "link": "https://x.com/i/broadcasts/1vJpPNRbQpgJE?t=830",
    "price_then": 29.58679962158203,
    "then_at": "2026-10-05",
-   "price_last": 17.882400512695312,
+   "price_last": 18.93440055847168,
    "last_at": "2026-11-13",
    "target_check": {
     "level": 100.0,
@@ -469,7 +469,7 @@
    "link": "https://x.com/i/broadcasts/1vJpPNRbQpgJE?t=824",
    "price_then": 5.013599872589111,
    "then_at": "2026-10-05",
-   "price_last": 3.358099937438965,
+   "price_last": 3.5192999839782715,
    "last_at": "2026-11-13",
    "target_check": {
     "level": 15.0,
@@ -502,7 +502,7 @@
    "link": "https://x.com/i/broadcasts/1vJpPNRbQpgJE?t=823",
    "price_then": 93.45999908447266,
    "then_at": "2026-10-05",
-   "price_last": 70.68000030517578,
+   "price_last": 71.62000274658203,
    "last_at": "2026-11-13",
    "target_check": {
     "level": 250.0,
@@ -535,7 +535,7 @@
    "link": "https://x.com/i/broadcasts/1wxWjlkLoPNJQ?t=423",
    "price_then": 29.957500457763672,
    "then_at": "2026-10-02",
-   "price_last": 17.882400512695312,
+   "price_last": 18.93440055847168,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -562,7 +562,7 @@
    "link": "https://x.com/i/broadcasts/1pKdRDmjYvdJW?t=1666",
    "price_then": 0.35049372911453247,
    "then_at": "2026-09-21",
-   "price_last": 0.04322562739253044,
+   "price_last": 0.04589053615927696,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -589,7 +589,7 @@
    "link": "https://x.com/i/broadcasts/1aKbdEqEgNBJX?t=481",
    "price_then": 25.927400588989258,
    "then_at": "2026-09-18",
-   "price_last": 17.882400512695312,
+   "price_last": 18.93440055847168,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -616,7 +616,7 @@
    "link": "https://x.com/i/broadcasts/1qKVmyRkVEZxB?t=4444",
    "price_then": 75552.6171875,
    "then_at": "2026-09-16",
-   "price_last": 68149.171875,
+   "price_last": 68850.7265625,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -643,7 +643,7 @@
    "link": "https://x.com/i/broadcasts/1yJAPwBYkXwGb?t=4495",
    "price_then": 1131.06005859375,
    "then_at": "2026-09-15",
-   "price_last": 927.9199829101562,
+   "price_last": 953.0399780273438,
    "last_at": "2026-11-13",
    "target_check": {
     "level": 5000.0,
@@ -676,7 +676,7 @@
    "link": "https://x.com/i/broadcasts/1XxygwybWeVGM?t=6683",
    "price_then": 0.21218736469745636,
    "then_at": "2026-09-14",
-   "price_last": 0.04322562739253044,
+   "price_last": 0.04589053615927696,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -703,7 +703,7 @@
    "link": "https://x.com/i/broadcasts/1PKqrNRaBEbGb?t=6330",
    "price_then": 0.004637999925762415,
    "then_at": "2026-09-09",
-   "price_last": 0.0033229999244213104,
+   "price_last": 0.0034199999645352364,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -730,7 +730,7 @@
    "link": "https://x.com/i/broadcasts/1PKqrNRaBEbGb?t=3510",
    "price_then": 79579.9921875,
    "then_at": "2026-09-09",
-   "price_last": 68149.171875,
+   "price_last": 68850.7265625,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -784,7 +784,7 @@
    "link": "https://x.com/i/broadcasts/1wGWjlpAkemKQ?t=4254",
    "price_then": 846.760009765625,
    "then_at": "2026-09-01",
-   "price_last": 927.9199829101562,
+   "price_last": 953.0399780273438,
    "last_at": "2026-11-13",
    "target_check": {
     "level": 2589.0,
@@ -817,7 +817,7 @@
    "link": "https://x.com/i/broadcasts/1RKZzBVjyRMKB?t=697",
    "price_then": 837.8400268554688,
    "then_at": "2026-08-31",
-   "price_last": 927.9199829101562,
+   "price_last": 953.0399780273438,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -844,7 +844,7 @@
    "link": "https://x.com/i/broadcasts/1qKVmyDQpMMxB?t=6501",
    "price_then": 79533.0,
    "then_at": "2026-08-27",
-   "price_last": 68149.171875,
+   "price_last": 68850.7265625,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -871,7 +871,7 @@
    "link": "https://x.com/i/broadcasts/1dGYlaLkyDvKX?t=2263",
    "price_then": 855.2100219726562,
    "then_at": "2026-08-24",
-   "price_last": 927.9199829101562,
+   "price_last": 953.0399780273438,
    "last_at": "2026-11-13",
    "target_check": {
     "level": 2000.0,
@@ -904,7 +904,7 @@
    "link": "https://x.com/i/broadcasts/1RKZzBoaDMXKB?t=909",
    "price_then": 76709.6171875,
    "then_at": "2026-08-21",
-   "price_last": 68149.171875,
+   "price_last": 68850.7265625,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -931,7 +931,7 @@
    "link": "https://x.com/i/broadcasts/1DGleVjXyDzJL?t=6117",
    "price_then": 0.2577517330646515,
    "then_at": "2026-08-17",
-   "price_last": 0.04928187280893326,
+   "price_last": 0.050858862698078156,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -958,7 +958,7 @@
    "link": "https://x.com/i/broadcasts/1AJEmmAqPYOJL?t=9436",
    "price_then": 77.31999969482422,
    "then_at": "2026-07-14",
-   "price_last": 78.55999755859375,
+   "price_last": 80.38999938964844,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -1012,7 +1012,7 @@
    "link": "https://x.com/i/broadcasts/1MKgNNwZjdAxL?t=2234",
    "price_then": 81.37999725341797,
    "then_at": "2026-07-07",
-   "price_last": 78.55999755859375,
+   "price_last": 80.38999938964844,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -1039,7 +1039,7 @@
    "link": "https://x.com/i/broadcasts/1rGmqqvomODGy?t=9153",
    "price_then": 62.25,
    "then_at": "2026-07-01",
-   "price_last": 70.68000030517578,
+   "price_last": 71.62000274658203,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -1093,7 +1093,7 @@
    "link": "https://x.com/i/broadcasts/1PJqrrdZLyPxb?t=3058",
    "price_then": 65.69999694824219,
    "then_at": "2026-06-29",
-   "price_last": 70.68000030517578,
+   "price_last": 71.62000274658203,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -1120,7 +1120,7 @@
    "link": "https://x.com/i/broadcasts/1dGYllvbQqEKX?t=6400",
    "price_then": 64256.828125,
    "then_at": "2026-06-17",
-   "price_last": 68149.171875,
+   "price_last": 68850.7265625,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -1147,7 +1147,7 @@
    "link": "https://x.com/i/broadcasts/1XxygglqmvnGM?t=2116",
    "price_then": 53.86000061035156,
    "then_at": "2026-06-10",
-   "price_last": 70.68000030517578,
+   "price_last": 71.62000274658203,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -1228,7 +1228,7 @@
    "link": "https://x.com/i/broadcasts/1wxWjjyQjpWJQ?t=3150",
    "price_then": 17.50189971923828,
    "then_at": "2026-06-04",
-   "price_last": 17.882400512695312,
+   "price_last": 18.93440055847168,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -1255,7 +1255,7 @@
    "link": "https://x.com/i/broadcasts/1wxWjjyQjpWJQ?t=3126",
    "price_then": 525.8599853515625,
    "then_at": "2026-06-04",
-   "price_last": 927.9199829101562,
+   "price_last": 953.0399780273438,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -1363,7 +1363,7 @@
    "link": "https://x.com/i/broadcasts/1qGoNNPrnbMKv?t=1981",
    "price_then": 18.601600646972656,
    "then_at": "2026-06-01",
-   "price_last": 17.882400512695312,
+   "price_last": 18.93440055847168,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -1390,7 +1390,7 @@
    "link": "https://x.com/i/broadcasts/1yKAPPaQdOnxb?t=2691",
    "price_then": 66.22000122070312,
    "then_at": "2026-05-29",
-   "price_last": 70.68000030517578,
+   "price_last": 71.62000274658203,
    "last_at": "2026-11-13",
    "target_check": {
     "level": 100.0,
@@ -1423,7 +1423,7 @@
    "link": "https://x.com/i/broadcasts/1yKAPPaQdOnxb?t=438",
    "price_then": 528.5700073242188,
    "then_at": "2026-05-29",
-   "price_last": 927.9199829101562,
+   "price_last": 953.0399780273438,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -1450,7 +1450,7 @@
    "link": "https://x.com/i/broadcasts/1yKAPPaQdOnxb?t=421",
    "price_then": 528.5700073242188,
    "then_at": "2026-05-29",
-   "price_last": 927.9199829101562,
+   "price_last": 953.0399780273438,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -1477,7 +1477,7 @@
    "link": "https://x.com/i/broadcasts/1qxvvkrOgmzxB?t=2551",
    "price_then": 1.5233957767486572,
    "then_at": "2026-05-21",
-   "price_last": 1.7272149324417114,
+   "price_last": 1.748802661895752,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -1531,7 +1531,7 @@
    "link": "https://x.com/i/broadcasts/1MJgNgENXbAGL?t=9888",
    "price_then": 81410.0390625,
    "then_at": "2026-05-05",
-   "price_last": 68149.171875,
+   "price_last": 68850.7265625,
    "last_at": "2026-11-13",
    "target_check": {
     "level": 125000.0,
@@ -1564,7 +1564,7 @@
    "link": "https://x.com/i/broadcasts/1MJgNgnWWajGL?t=2853",
    "price_then": 348.010009765625,
    "then_at": "2026-04-14",
-   "price_last": 927.9199829101562,
+   "price_last": 953.0399780273438,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -1618,7 +1618,61 @@
    "link": "https://x.com/i/broadcasts/1rxmqojRDdDxy?t=2618",
    "price_then": 254.00750732421875,
    "then_at": "2026-04-01",
-   "price_last": 927.9199829101562,
+   "price_last": 953.0399780273438,
+   "last_at": "2026-11-13",
+   "target_check": null
+  },
+  {
+   "id": "itz_adKceIw:49:PLTR",
+   "source": "show",
+   "episode_id": "itz_adKceIw",
+   "show": "LIVE: OIL CRISIS GETS WORSE! US vs IRAN continues & Bitcoin is MOVING...",
+   "aired": "2026-03-10T19:50:30+00:00",
+   "date": "2026-03-10",
+   "speaker": "ThreadGuy",
+   "asset": "Palantir",
+   "symbol": "PLTR",
+   "class": "stock",
+   "listing": "PLTR",
+   "stance": "long",
+   "kind": "exit",
+   "target": "",
+   "quote": "I closed Palantir today because I am... I'll tell you what I'm doing. I'm doing something stupid, but I closed Palantir for like plus 20s and some change percent",
+   "start_seconds": 218.4,
+   "line": 49,
+   "youtube_seconds": 433.0,
+   "timestamp": "3:38",
+   "link": "https://x.com/i/broadcasts/1pKdRbVdPpjJW?t=217",
+   "price_then": 151.46499633789062,
+   "then_at": "2026-03-10",
+   "price_last": 171.5800018310547,
+   "last_at": "2026-11-12",
+   "target_check": null
+  },
+  {
+   "id": "84G-QwMas-g:1746:ZEC",
+   "source": "show",
+   "episode_id": "84G-QwMas-g",
+   "show": "LIVE: WW3 HAS BEGUN! - Bitcoin is RIPPING - Hyperliquid is BACK!? - Market Updates & News",
+   "aired": "2026-03-02T22:54:14+00:00",
+   "date": "2026-03-02",
+   "speaker": "ThreadGuy",
+   "asset": "Zcash",
+   "symbol": "ZEC",
+   "class": "crypto",
+   "listing": "ZEC-USD",
+   "stance": "long",
+   "kind": "holding",
+   "target": "",
+   "quote": "i'm basically just sitting in btc and palantir some spot z cash not much at this point because it looks like it's just going to be dead for an extended period of time",
+   "start_seconds": 7597.7,
+   "line": 1746,
+   "youtube_seconds": 7712.0,
+   "timestamp": "2:06:37",
+   "link": "https://x.com/i/broadcasts/1YxNrZbzaaXxw?t=7596",
+   "price_then": 222.69125366210938,
+   "then_at": "2026-03-02",
+   "price_last": 953.0399780273438,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -1645,7 +1699,7 @@
    "link": "https://x.com/i/broadcasts/1nAJEEpydXoJL?t=1088",
    "price_then": 63543.17578125,
    "then_at": "2026-02-05",
-   "price_last": 68149.171875,
+   "price_last": 68850.7265625,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -1672,7 +1726,7 @@
    "link": "https://x.com/i/broadcasts/1BRKjgwWDQVGw?t=9032",
    "price_then": 72321.9765625,
    "then_at": "2026-02-04",
-   "price_last": 68149.171875,
+   "price_last": 68850.7265625,
    "last_at": "2026-11-13",
    "target_check": {
     "level": 1000000.0,
@@ -1705,7 +1759,7 @@
    "link": "https://x.com/i/broadcasts/1BRKjgwWDQVGw?t=2585",
    "price_then": 261.0797119140625,
    "then_at": "2026-02-04",
-   "price_last": 927.9199829101562,
+   "price_last": 953.0399780273438,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -1732,7 +1786,7 @@
    "link": "https://x.com/i/broadcasts/1BRKjgwWDQVGw?t=2579",
    "price_then": 35.74268341064453,
    "then_at": "2026-02-04",
-   "price_last": 70.68000030517578,
+   "price_last": 71.62000274658203,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -1759,7 +1813,7 @@
    "link": "https://x.com/i/broadcasts/1YpKkkwMmMBKj?t=6988",
    "price_then": 0.5369270443916321,
    "then_at": "2026-01-28",
-   "price_last": 0.2906999886035919,
+   "price_last": 0.30059999227523804,
    "last_at": "2026-11-13",
    "target_check": null
   },
@@ -1786,7 +1840,7 @@
    "link": "https://x.com/i/broadcasts/1ZkKzZbLjerKv?t=3048",
    "price_then": 367.6867980957031,
    "then_at": "2026-01-21",
-   "price_last": 927.9199829101562,
+   "price_last": 953.0399780273438,
    "last_at": "2026-11-13",
    "target_check": null
   }

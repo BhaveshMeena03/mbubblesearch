@@ -1536,8 +1536,14 @@
   "why": "repeat: on the board from XLZO42nzxzI:529:BTC"
  },
  "84G-QwMas-g:1746:ZEC": {
-  "keep": false,
-  "why": "held back: no X broadcast found yet for this stream"
+  "keep": true,
+  "why": "his own holding: 'i'm basically just sitting in btc and palantir some spot z cash not much'",
+  "quote": "i'm basically just sitting in btc and palantir some spot z cash not much at this point because it looks like it's just going to be dead for an extended period of time",
+  "symbol": "ZEC",
+  "broadcast": "1YxNrZbzaaXxw",
+  "x_second": 7597.7,
+  "on_air": "2026-03-02T20:47:37.000Z",
+  "checked": "heard on X at 7598s: \"One rejection, two rejections, three rejections, four. So we'll see what happens. I'm not like too, too, too crazy. I'm basically just sitti\"; frame: him alone at his desk, BTC chart on screen"
  },
  "84G-QwMas-g:1748:HYPE": {
   "keep": false,
@@ -6804,8 +6810,14 @@
   "why": "no listing to price it from: Circle (CIRCL), not on Yahoo"
  },
  "itz_adKceIw:49:PLTR": {
-  "keep": false,
-  "why": "held back: no X broadcast found yet for this stream"
+  "keep": true,
+  "why": "exit: 'I closed Palantir today... closed Palantir for like plus 20s and some change percent' (L49-52), his own close of the position kept at s_mii70KyqM:77",
+  "quote": "I closed Palantir today because I am... I'll tell you what I'm doing. I'm doing something stupid, but I closed Palantir for like plus 20s and some change percent",
+  "symbol": "PLTR",
+  "broadcast": "1pKdRbVdPpjJW",
+  "x_second": 218.4,
+  "on_air": "2026-03-10T19:46:52.000Z",
+  "checked": "heard on X at 218s: \"the board outside of that defense nasty i closed palantir today because i am i'll tell you what i'm doing i'm doing something stupid but i c\"; frame: him alone at his desk, CVX chart on screen"
  },
  "jLTt7ivTWnE:1117:BTC": {
   "keep": false,
@@ -7661,7 +7673,7 @@
  },
  "s_mii70KyqM:77:PLTR": {
   "keep": false,
-  "why": "held back: no X broadcast found yet for this stream"
+  "why": "held back: no X broadcast for this stream (none posted 19-22 Feb), YouTube only"
  },
  "seP-cbLnSvU:1146:ZEC": {
   "keep": false,
