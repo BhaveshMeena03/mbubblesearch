@@ -169,6 +169,34 @@ def test_errors_still_give_up_after_six(monkeypatch, tmp_path):
     assert len(calls) == 6
 
 
+def test_a_failed_attempt_says_so_in_the_log(monkeypatch, tmp_path, capsys):
+    ok = _Reply(200, {"segments": [{"start": 3.0, "text": " gm "}]})
+    _one_chunk(monkeypatch, tmp_path, [_Reply(500), ok])
+    ingest_mcg.transcribe_via_groq(tmp_path / "a.m4a", "k")
+    assert "groq chunk0000.mp3 failed (RuntimeError: http 500) after 0s" in capsys.readouterr().out
+
+
+@pytest.mark.parametrize("wall, awake, line", [
+    # 13 Nov 2026: lid shut on battery, the answer came after two hours
+    (7200.0, 600.0, "answered after 7200s, the mac was asleep for 6600s of it"),
+    (700.0, 700.0, "answered after 700s\n"),     # awake the whole time: Groq was slow
+])
+def test_a_slow_answer_says_whether_the_mac_slept(monkeypatch, tmp_path, capsys,
+                                                 wall, awake, line):
+    ok = _Reply(200, {"segments": [{"start": 3.0, "text": " gm "}]})
+    _one_chunk(monkeypatch, tmp_path, [ok])
+    ticks = iter([(1000.0, 50.0)] + [(1000.0 + wall, 50.0 + awake)] * 2)
+    monkeypatch.setattr(ingest_mcg, "_clock", lambda: next(ticks))
+    assert ingest_mcg.transcribe_via_groq(tmp_path / "a.m4a", "k") == [{"t": 903.0, "text": "gm"}]
+    assert line in capsys.readouterr().out
+
+
+def test_a_quick_answer_adds_nothing_to_the_log(monkeypatch, tmp_path, capsys):
+    _one_chunk(monkeypatch, tmp_path, [_Reply(200, {"segments": []})])
+    ingest_mcg.transcribe_via_groq(tmp_path / "a.m4a", "k")
+    assert "groq " not in capsys.readouterr().out
+
+
 @pytest.mark.parametrize("last, seconds, short", [
     (None, 3600, True),       # nothing transcribed
     (360, 11220, True),       # six minutes of a 187 minute stream

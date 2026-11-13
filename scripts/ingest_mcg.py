@@ -314,6 +314,23 @@ class RateLimitedError(RuntimeError):
 # Waits of up to five minutes each: about an hour of patience per chunk,
 # which is how long the free tier's hourly allowance takes to come back.
 MAX_REFUSALS = 12
+# An attempt slower than this gets a line in the log.
+SLOW_ATTEMPT = 120.0
+
+
+def _clock() -> tuple[float, float]:
+    """(wall, awake). The wall clock keeps going while the Mac sleeps, monotonic doesn't."""
+    return time.time(), time.monotonic()
+
+
+def _attempt_note(chunk: str, since: tuple[float, float], what: str) -> str:
+    """Log line for a failed or slow attempt, saying how much of it the Mac slept."""
+    now_wall, now_awake = _clock()
+    wall, awake = now_wall - since[0], now_awake - since[1]
+    note = f"     groq {chunk} {what} after {wall:.0f}s"
+    if wall - awake > 60:
+        note += f", the mac was asleep for {wall - awake:.0f}s of it"
+    return note
 
 
 def transcribe_via_groq(path: Path, api_key: str) -> list[dict]:
@@ -336,6 +353,7 @@ def transcribe_via_groq(path: Path, api_key: str) -> list[dict]:
         """
         errors = refusals = 0
         while True:
+            since = _clock()
             try:
                 with open(chunk, "rb") as fh:
                     r = httpx.post(
@@ -366,10 +384,15 @@ def transcribe_via_groq(path: Path, api_key: str) -> list[dict]:
                 raise
             except Exception as exc:                        # noqa: BLE001
                 errors += 1
+                print(_attempt_note(chunk.name, since,
+                                    f"failed ({type(exc).__name__}: {' '.join(str(exc).split())[:100]})"),
+                      flush=True)
                 if errors >= 6:
                     raise RuntimeError(f"transcribe failed: {exc}") from exc
                 time.sleep(5 * errors)
                 continue
+            if _clock()[0] - since[0] > SLOW_ATTEMPT:
+                print(_attempt_note(chunk.name, since, "answered"), flush=True)
             out: list[dict] = []
             for seg in body.get("segments", []):
                 said = (seg.get("text") or "").strip()
