@@ -278,6 +278,22 @@
    }
   ]
  },
+ "atNAdE005Cg": {
+  "broadcast": "https://x.com/i/broadcasts/2aWjeamlJWvNkP",
+  "post": "2121236584808718590",
+  "sections": [
+   {
+    "from": 0,
+    "offset": 0,
+    "to": 4140
+   },
+   {
+    "from": 4207,
+    "offset": -7,
+    "to": null
+   }
+  ]
+ },
  "cax_yGq6fss": {
   "broadcast": "https://x.com/i/broadcasts/2kEvPZZnLXqePP",
   "post": "2119786611256787443",
