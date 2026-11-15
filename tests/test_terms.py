@@ -148,11 +148,15 @@ def test_the_threadguy_index_holds_the_words_that_missed():
     a topic, not a rare word, so the df cap rightly drops it and search
     finds it by meaning. What has to hold is the class reaching the
     built index, not one member of it.
+
+    "bucket" went the same way on 15 Nov (67 windows by 1 Nov). For
+    "what did blurr say about bucket shops" the exact part is the guest,
+    and a guest's name is kept from the titles however often it is said.
     """
     raw = json.loads(gzip.decompress(path_for("threadguy").read_bytes()))
     mixed = [t for t in raw["terms"] if re.fullmatch(r"(?=.*\d)(?=.*[a-z])[a-z0-9]{2}", t)]
     assert len(mixed) >= 5, mixed
-    assert raw["terms"].get("bucket"), "Blurr's 'bucket shop'"
+    assert raw["title_terms"].get("blurr"), "Blurr's stream, for 'bucket shop'"
 
 
 def _index(tmp_path, terms, title_terms=None, n=10, gz=True):
