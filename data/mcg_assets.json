@@ -4,8 +4,8 @@
    "symbol": "SOL",
    "name": "Solana",
    "asset_class": "crypto",
-   "mentions": 2740,
-   "analysis": 829,
+   "mentions": 2745,
+   "analysis": 830,
    "moments": [
     {
      "episode_id": "-6Sccmoz7RQ",
@@ -19862,6 +19862,33 @@
      "note": "Referenced as a blockchain chain where launchpad standards like pom fun are used."
     },
     {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 214.0,
+     "timestamp": "3:34",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=214s",
+     "kind": "mention",
+     "note": "Mentioned as one of several blockchains integrated with Kinetic's trading interface XYZ."
+    },
+    {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 557.0,
+     "timestamp": "9:17",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=557s",
+     "kind": "mention",
+     "note": "Named as a chain that cannot compose with Hyperliquid security in the way Elysium can."
+    },
+    {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 1613.0,
+     "timestamp": "26:53",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=1613s",
+     "kind": "mention",
+     "note": "Listed as one of the native hyperliquid spot tokens available for trading on hyperliquid."
+    },
+    {
      "episode_id": "oivlxqeU-Yg",
      "episode_title": "Empulser Tech $CPT: 93% Token Burn, Logistics Mass-Market Play & Breakpoint Networking | MCG Show",
      "start_seconds": 384.0,
@@ -19896,6 +19923,24 @@
      "deep_link": "https://www.youtube.com/watch?v=oj43b_GW-2g&t=1828s",
      "kind": "mention",
      "note": "Speaker mentions a community member 'Fabian' gained 0.3 SOL from participating in the token project."
+    },
+    {
+     "episode_id": "omJuJAl69Zg",
+     "episode_title": "Tessera | The MCP Gateway Putting AI Agents on Elysium",
+     "start_seconds": 47.0,
+     "timestamp": "0:47",
+     "deep_link": "https://www.youtube.com/watch?v=omJuJAl69Zg&t=47s",
+     "kind": "analysis",
+     "note": "Charlie discussed working around the Solana ecosystem and being part of Solana Super Team Australia, helping with web design and agentic infrastructure."
+    },
+    {
+     "episode_id": "omJuJAl69Zg",
+     "episode_title": "Tessera | The MCP Gateway Putting AI Agents on Elysium",
+     "start_seconds": 938.0,
+     "timestamp": "15:38",
+     "deep_link": "https://www.youtube.com/watch?v=omJuJAl69Zg&t=938s",
+     "kind": "mention",
+     "note": "Mentioned as one of the chains they plan to support with their multi-chain thesis, alongside Ethereum and Hyperliquid."
     },
     {
      "episode_id": "om_ij59Cydo",
@@ -24668,15 +24713,15 @@
      "note": "Speaker discusses Solana price levels, noting a 20x move from 500K to current 8 million levels and speculating on future levels in another month."
     }
    ],
-   "episode_count": 552,
+   "episode_count": 554,
    "single_reference": false
   },
   {
    "symbol": "BTC",
    "name": "Bitcoin",
    "asset_class": "crypto",
-   "mentions": 1478,
-   "analysis": 806,
+   "mentions": 1480,
+   "analysis": 807,
    "moments": [
     {
      "episode_id": "-8z0M77EVZg",
@@ -35821,6 +35866,24 @@
      "note": "Speaker mentions not trusting Jordan on Bitcoin specifically, contrasting with his Iran market expertise."
     },
     {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 669.0,
+     "timestamp": "11:09",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=669s",
+     "kind": "analysis",
+     "note": "Used as an example for how a fully on-chain options order book could read pricing data and automatically hedge via Bitcoin perpetual long or short positions."
+    },
+    {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 1602.0,
+     "timestamp": "26:42",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=1602s",
+     "kind": "mention",
+     "note": "Available as native Bitcoin through unit on Hyperliquid as a spot token that can be traded."
+    },
+    {
      "episode_id": "oj43b_GW-2g",
      "episode_title": "The Play Behind $TASM: DeFi Gaming Twist, Upcoming Land NFTs, Token Guilds Utility + More!",
      "start_seconds": 312.0,
@@ -37981,15 +38044,15 @@
      "note": "Speaker mentions companies using treasuries to buy Bitcoin."
     }
    ],
-   "episode_count": 394,
+   "episode_count": 395,
    "single_reference": false
   },
   {
    "symbol": "ETH",
    "name": "Ethereum",
    "asset_class": "crypto",
-   "mentions": 1032,
-   "analysis": 367,
+   "mentions": 1036,
+   "analysis": 368,
    "moments": [
     {
      "episode_id": "-8z0M77EVZg",
@@ -45363,6 +45426,33 @@
      "note": "Mentioned as the yield payment asset from a fee-sharing pool."
     },
     {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 14.0,
+     "timestamp": "0:14",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=14s",
+     "kind": "mention",
+     "note": "Mentioned as transitioning away from discussing ETH to discussing Elysium."
+    },
+    {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 774.0,
+     "timestamp": "12:54",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=774s",
+     "kind": "analysis",
+     "note": "Discussed in context of layer two networks and their economic relationship to Ethereum L1 security and revenues, with layer twos paying only about $1,000 a day to Ethereum."
+    },
+    {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 1613.0,
+     "timestamp": "26:53",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=1613s",
+     "kind": "mention",
+     "note": "Listed as one of the native hyperliquid spot tokens available for trading on hyperliquid."
+    },
+    {
      "episode_id": "oj43b_GW-2g",
      "episode_title": "The Play Behind $TASM: DeFi Gaming Twist, Upcoming Land NFTs, Token Guilds Utility + More!",
      "start_seconds": 312.0,
@@ -45370,6 +45460,15 @@
      "deep_link": "https://www.youtube.com/watch?v=oj43b_GW-2g&t=312s",
      "kind": "mention",
      "note": "Mentioned as something a normie knows about."
+    },
+    {
+     "episode_id": "omJuJAl69Zg",
+     "episode_title": "Tessera | The MCP Gateway Putting AI Agents on Elysium",
+     "start_seconds": 938.0,
+     "timestamp": "15:38",
+     "deep_link": "https://www.youtube.com/watch?v=omJuJAl69Zg&t=938s",
+     "kind": "mention",
+     "note": "Mentioned as one of the chains they plan to support with their multi-chain thesis, alongside Solana and Hyperliquid."
     },
     {
      "episode_id": "om_ij59Cydo",
@@ -47280,15 +47379,15 @@
      "note": "Speaker mentions Solana DATs and companies using treasuries to buy ETH."
     }
    ],
-   "episode_count": 370,
+   "episode_count": 372,
    "single_reference": false
   },
   {
    "symbol": "HYPE",
    "name": "Hyperliquid",
    "asset_class": "crypto",
-   "mentions": 408,
-   "analysis": 257,
+   "mentions": 415,
+   "analysis": 260,
    "moments": [
     {
      "episode_id": "-iilkByxBa8",
@@ -50414,6 +50513,69 @@
      "note": "Referenced as having done an amazing job at buying back its own token."
     },
     {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 69.0,
+     "timestamp": "1:09",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=69s",
+     "kind": "analysis",
+     "note": "Discussed extensively as the parent chain for Elysium L2; Kinetic offers liquid staking for HYPE with close to 90% market share; addressed as ecosystem to build trading infrastructure for."
+    },
+    {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 341.0,
+     "timestamp": "5:41",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=341s",
+     "kind": "analysis",
+     "note": "Discussed as a blockchain with HyperCore (exchange layer) optimized for trading at 24,000 TPS, and HyperVM (general-purpose smart contract layer). Speakers emphasize its unique composability and use of Hyperliquid pricing as the native oracle for Elysium."
+    },
+    {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 913.0,
+     "timestamp": "15:13",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=913s",
+     "kind": "analysis",
+     "note": "Native token that receives value from USDC bridging economics and money market yields through agreement with Coinbase; assistance fund purchases HYPE with these revenues."
+    },
+    {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 1159.0,
+     "timestamp": "19:19",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=1159s",
+     "kind": "mention",
+     "note": "Hyperliquid Assistance Fund referenced as receiving burned KNPQ tokens; described as already holding $3 billion."
+    },
+    {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 1609.0,
+     "timestamp": "26:49",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=1609s",
+     "kind": "mention",
+     "note": "Mentioned as one of the native hyperliquid spot tokens that can be traded on hyperliquid."
+    },
+    {
+     "episode_id": "omJuJAl69Zg",
+     "episode_title": "Tessera | The MCP Gateway Putting AI Agents on Elysium",
+     "start_seconds": 326.0,
+     "timestamp": "5:26",
+     "deep_link": "https://www.youtube.com/watch?v=omJuJAl69Zg&t=326s",
+     "kind": "mention",
+     "note": "Mentioned as a perpetual DEX aggregator where agents could be building perpetual infrastructure or trading."
+    },
+    {
+     "episode_id": "omJuJAl69Zg",
+     "episode_title": "Tessera | The MCP Gateway Putting AI Agents on Elysium",
+     "start_seconds": 1070.0,
+     "timestamp": "17:50",
+     "deep_link": "https://www.youtube.com/watch?v=omJuJAl69Zg&t=1070s",
+     "kind": "mention",
+     "note": "Mentioned as a platform where users can do limit orders, buy and sell trades."
+    },
+    {
      "episode_id": "oqhVVvYHbpM",
      "episode_title": "\ud83d\udd34 LIVE: Neobanks Are Back | Pumpcade Pumping | Time to Lock In? Market Updates",
      "start_seconds": 980.0,
@@ -50963,7 +51125,7 @@
      "note": "A vault platform where trading activity is tracked and displayed; the speaker launched a vault on Sunday/Monday with 20x leverage, generating significant P&L over the first few days."
     }
    ],
-   "episode_count": 194,
+   "episode_count": 196,
    "single_reference": false
   },
   {
@@ -57337,8 +57499,8 @@
    "symbol": "USDC",
    "name": "USD Coin",
    "asset_class": "crypto",
-   "mentions": 511,
-   "analysis": 146,
+   "mentions": 513,
+   "analysis": 147,
    "moments": [
     {
      "episode_id": "-8z0M77EVZg",
@@ -61202,6 +61364,24 @@
      "note": "Mentioned as an alternative token users bring to swap for Stonk Bros."
     },
     {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 918.0,
+     "timestamp": "15:18",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=918s",
+     "kind": "analysis",
+     "note": "Discussed as bridged from HyperEVM to Elysium, with an agreement between Coinbase and Hyperliquid to pay 90% of money market yields to Hyperliquid, which uses proceeds to purchase HYPE tokens."
+    },
+    {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 1684.0,
+     "timestamp": "28:04",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=1684s",
+     "kind": "mention",
+     "note": "Mentioned as a token that Elysium is exploring for staking and additional yield opportunities."
+    },
+    {
      "episode_id": "om_ij59Cydo",
      "episode_title": "Wesplit $SPLIT : Split Bills, Investments On-Chain, Phantom Partnership, Toly Retweeted | MCG Show",
      "start_seconds": 1152.0,
@@ -61940,14 +62120,14 @@
      "note": "Mentioned as an asset users needed to send to Arbitrum to access perp platforms."
     }
    ],
-   "episode_count": 295,
+   "episode_count": 296,
    "single_reference": false
   },
   {
    "symbol": "UNI",
    "name": "Uniswap V4",
    "asset_class": "crypto",
-   "mentions": 263,
+   "mentions": 264,
    "analysis": 127,
    "moments": [
     {
@@ -63886,6 +64066,15 @@
      "note": "Speaker discusses Uniswap V4 strategies for tokenized stocks and mentions Uniswap's involvement in the earn omnipool mechanism."
     },
     {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 1402.0,
+     "timestamp": "23:22",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=1402s",
+     "kind": "mention",
+     "note": "Described as fantastic on the launchers alongside Aerodrome."
+    },
+    {
      "episode_id": "q2zmdT9CnNA",
      "episode_title": "\ud83d\udd34 LIVE: Crypto Pulling Back... What's Next? | Market Update + Interviews",
      "start_seconds": 7751.0,
@@ -64318,7 +64507,7 @@
      "note": "Mentioned in context of ponds and V4 hooks, and as a way to trade on-chain via website."
     }
    ],
-   "episode_count": 127,
+   "episode_count": 128,
    "single_reference": false
   },
   {
@@ -67859,7 +68048,7 @@
    "symbol": "ZEC",
    "name": "Zcash",
    "asset_class": "crypto",
-   "mentions": 210,
+   "mentions": 211,
    "analysis": 101,
    "moments": [
     {
@@ -69465,6 +69654,15 @@
      "note": "Mentioned as an example of a privacy-focused protocol and token worth billions of dollars building at the privacy layer."
     },
     {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 1613.0,
+     "timestamp": "26:53",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=1613s",
+     "kind": "mention",
+     "note": "Listed as one of the native hyperliquid spot tokens available for trading on hyperliquid."
+    },
+    {
      "episode_id": "oqP-d3jYxfc",
      "episode_title": "When will Crypto bounce? | Onchain Reality Check",
      "start_seconds": 8232.0,
@@ -69753,7 +69951,7 @@
      "note": "Named as an example of Stonk's crypto-native pairings."
     }
    ],
-   "episode_count": 103,
+   "episode_count": 104,
    "single_reference": false
   },
   {
@@ -79059,7 +79257,7 @@
    "symbol": "NVDA",
    "name": "Nvidia",
    "asset_class": "stock",
-   "mentions": 226,
+   "mentions": 227,
    "analysis": 64,
    "moments": [
     {
@@ -80755,6 +80953,15 @@
      "note": "Mentioned in comparison regarding pair liquidity, with the Nvidia one noted as having 30 million in value."
     },
     {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 1626.0,
+     "timestamp": "27:06",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=1626s",
+     "kind": "mention",
+     "note": "Mentioned as an example of a wrapped asset (wrapped NVIDIA by Xdox)."
+    },
+    {
      "episode_id": "oqP-d3jYxfc",
      "episode_title": "When will Crypto bounce? | Onchain Reality Check",
      "start_seconds": 347.0,
@@ -81097,7 +81304,7 @@
      "note": "Speaker used Nvidia as an example of a tokenized stock that users could hold in their wallet through the FIRE protocol."
     }
    ],
-   "episode_count": 123,
+   "episode_count": 124,
    "single_reference": false
   },
   {
@@ -122909,7 +123116,7 @@
    "symbol": "NEST",
    "name": "Nest",
    "asset_class": "other",
-   "mentions": 25,
+   "mentions": 26,
    "analysis": 18,
    "moments": [
     {
@@ -123136,9 +123343,18 @@
      "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=11953s",
      "kind": "analysis",
      "note": "Described as a way to get exposure to Elysium; discussed as a good position before Elysium launch on November 9th with 6 million current market cap and 41 million FDV, 85% lock rate, and potential upside."
+    },
+    {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 1378.0,
+     "timestamp": "22:58",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=1378s",
+     "kind": "mention",
+     "note": "Nest team has had many appearances on the show and their token performed well."
     }
    ],
-   "episode_count": 10,
+   "episode_count": 11,
    "single_reference": false
   },
   {
@@ -125901,7 +126117,7 @@
    "symbol": "SPY",
    "name": "SPY (S&P 500 ETF)",
    "asset_class": "index",
-   "mentions": 31,
+   "mentions": 32,
    "analysis": 16,
    "moments": [
     {
@@ -126166,6 +126382,15 @@
      "note": "S&P 500 performance compared to Argan AI fund returns; SPY is up 48% since May 2024 and 12% year to date."
     },
     {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 1629.0,
+     "timestamp": "27:09",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=1629s",
+     "kind": "mention",
+     "note": "Referenced in passing regarding a trade opportunity."
+    },
+    {
      "episode_id": "q7hcCdzTTiI",
      "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holds Above $83K | Uptober Incoming? | Market Update + Interviews",
      "start_seconds": 8992.0,
@@ -126184,7 +126409,7 @@
      "note": "Mentioned as an asset available to buy on the MOI app alongside tokenized equities and memecoins."
     }
    ],
-   "episode_count": 26,
+   "episode_count": 27,
    "single_reference": false
   },
   {
@@ -137401,6 +137626,116 @@
    "single_reference": false
   },
   {
+   "symbol": "ELY",
+   "name": "Elysium",
+   "asset_class": "crypto",
+   "mentions": 11,
+   "analysis": 11,
+   "moments": [
+    {
+     "episode_id": "0VrjCXFXCA4",
+     "episode_title": "Wake Up! The Next 90 Days Will Change Everything in Crypto | Chill's Filter Ep-3",
+     "start_seconds": 450.0,
+     "timestamp": "7:30",
+     "deep_link": "https://www.youtube.com/watch?v=0VrjCXFXCA4&t=450s",
+     "kind": "analysis",
+     "note": "Speaker discusses Elysium as a new chain launching in three days at a local Bitcoin bottom, positioned to offer fresh opportunities similar to those that appeared on Robinhood chain, with trading planned to go live on day one of launch."
+    },
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 6684.0,
+     "timestamp": "1:51:24",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=6684s",
+     "kind": "analysis",
+     "note": "Extensively analyzed as a project; compared to Robinhood's RobNode; speakers examined user adoption metrics, bridge activity, net deposits, accounts, fees, and product differentiation, particularly the lack of need for oracles and integration with Hyperliquid core."
+    },
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 8700.0,
+     "timestamp": "2:25:00",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=8700s",
+     "kind": "analysis",
+     "note": "Speaker analyzes Elysium's tokenomics and circulation: approximately 56% circulating supply, market cap of 1.3 million with roughly 750-800K circulating, notes lack of product traction data, and adds it to a watch list for monitoring."
+    },
+    {
+     "episode_id": "8tP90A-LpzY",
+     "episode_title": "\ud83d\udd34 LIVE: $1B+ Liquidated as Crypto Nukes | Jensen Huang Drama | Should You Sell It All?",
+     "start_seconds": 5613.0,
+     "timestamp": "1:33:33",
+     "deep_link": "https://www.youtube.com/watch?v=8tP90A-LpzY&t=5613s",
+     "kind": "analysis",
+     "note": "Speaker discusses Elysium positioning, noting it had pullbacks and sell-the-news reaction on mainnet launch similar to Robinhood, describing it as a buying opportunity."
+    },
+    {
+     "episode_id": "8tP90A-LpzY",
+     "episode_title": "\ud83d\udd34 LIVE: $1B+ Liquidated as Crypto Nukes | Jensen Huang Drama | Should You Sell It All?",
+     "start_seconds": 7809.0,
+     "timestamp": "2:10:09",
+     "deep_link": "https://www.youtube.com/watch?v=8tP90A-LpzY&t=7809s",
+     "kind": "analysis",
+     "note": "Discussed as a chain launching in December with a large network upgrade that will connect to Hyperliquid infrastructure; speaker analyzes the difference between its public testnet launch (causing sell-the-news) versus Robinhood's surprise launch."
+    },
+    {
+     "episode_id": "DCxwABH6umU",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto + Robinhood Chain Bottom In? | Elysium Launch Incoming | Exact 90-Day Plan",
+     "start_seconds": 6809.0,
+     "timestamp": "1:53:29",
+     "deep_link": "https://www.youtube.com/watch?v=DCxwABH6umU&t=6809s",
+     "kind": "analysis",
+     "note": "Speakers plan an Elysium ecosystem day with multiple projects from the chain. Discussion covers that Elysium will launch with significant hype but will attract LARPs and scammers, with speaker predicting 99% of launches will go to zero."
+    },
+    {
+     "episode_id": "DCxwABH6umU",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto + Robinhood Chain Bottom In? | Elysium Launch Incoming | Exact 90-Day Plan",
+     "start_seconds": 13001.0,
+     "timestamp": "3:36:41",
+     "deep_link": "https://www.youtube.com/watch?v=DCxwABH6umU&t=13001s",
+     "kind": "analysis",
+     "note": "Discussed as an L2 built by Kinetic (the staking provider) that will drive value to Hyperliquid; enabling DeFi experiments like options order books, AMMs, and using Hyperliquid as native oracle."
+    },
+    {
+     "episode_id": "IdN9O-XqlnQ",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto Rebounds After Midterms | What to Do Now",
+     "start_seconds": 1901.0,
+     "timestamp": "31:41",
+     "deep_link": "https://www.youtube.com/watch?v=IdN9O-XqlnQ&t=1901s",
+     "kind": "analysis",
+     "note": "Discussed as an interesting chain attracting money from Hyperliquid wealth effect; viewed as potentially a sell-the-news event initially, but offering good early opportunities due to wealthy Hyperliquid users looking to rotate to betas and people who missed Hyperliquid wanting ecosystem involvement."
+    },
+    {
+     "episode_id": "VgNa1gilw74",
+     "episode_title": "\ud83d\udd34 LIVE: Is Crypto Worth Trading? | Onchain Reality Check",
+     "start_seconds": 2588.0,
+     "timestamp": "43:08",
+     "deep_link": "https://www.youtube.com/watch?v=VgNa1gilw74&t=2588s",
+     "kind": "analysis",
+     "note": "Extended discussion of Elysium thesis including 300 million index volume in two days post-launch, DeFi experiments leveraging Hyperliquid infrastructure, and speaker's decision to stay flat on the chain due to FUD and poor sentiment."
+    },
+    {
+     "episode_id": "_mLaSJLAPJs",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto is Crashing | Here\u2019s Exactly What to Do Right Now",
+     "start_seconds": 7641.0,
+     "timestamp": "2:07:21",
+     "deep_link": "https://www.youtube.com/watch?v=_mLaSJLAPJs&t=7641s",
+     "kind": "analysis",
+     "note": "Speakers mention they did a detailed breakdown of Elysium last Friday and discuss it as a potential opportunity to speculate on coinciding with its launch alongside Hyperliquid strength."
+    },
+    {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 477.0,
+     "timestamp": "7:57",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=477s",
+     "kind": "analysis",
+     "note": "Presented as a fast blockchain with 100 millisecond block times and general-purpose block space, solving HyperVM's performance issues. Shipping within four to six weeks and enables smart contracts to compose with Hyperliquid security directly through precompiles."
+    }
+   ],
+   "episode_count": 8,
+   "single_reference": false
+  },
+  {
    "symbol": "LUMEN",
    "name": "Lumen",
    "asset_class": "crypto",
@@ -139314,107 +139649,6 @@
     }
    ],
    "episode_count": 5,
-   "single_reference": false
-  },
-  {
-   "symbol": "ELY",
-   "name": "Elysium",
-   "asset_class": "crypto",
-   "mentions": 10,
-   "analysis": 10,
-   "moments": [
-    {
-     "episode_id": "0VrjCXFXCA4",
-     "episode_title": "Wake Up! The Next 90 Days Will Change Everything in Crypto | Chill's Filter Ep-3",
-     "start_seconds": 450.0,
-     "timestamp": "7:30",
-     "deep_link": "https://www.youtube.com/watch?v=0VrjCXFXCA4&t=450s",
-     "kind": "analysis",
-     "note": "Speaker discusses Elysium as a new chain launching in three days at a local Bitcoin bottom, positioned to offer fresh opportunities similar to those that appeared on Robinhood chain, with trading planned to go live on day one of launch."
-    },
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 6684.0,
-     "timestamp": "1:51:24",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=6684s",
-     "kind": "analysis",
-     "note": "Extensively analyzed as a project; compared to Robinhood's RobNode; speakers examined user adoption metrics, bridge activity, net deposits, accounts, fees, and product differentiation, particularly the lack of need for oracles and integration with Hyperliquid core."
-    },
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 8700.0,
-     "timestamp": "2:25:00",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=8700s",
-     "kind": "analysis",
-     "note": "Speaker analyzes Elysium's tokenomics and circulation: approximately 56% circulating supply, market cap of 1.3 million with roughly 750-800K circulating, notes lack of product traction data, and adds it to a watch list for monitoring."
-    },
-    {
-     "episode_id": "8tP90A-LpzY",
-     "episode_title": "\ud83d\udd34 LIVE: $1B+ Liquidated as Crypto Nukes | Jensen Huang Drama | Should You Sell It All?",
-     "start_seconds": 5613.0,
-     "timestamp": "1:33:33",
-     "deep_link": "https://www.youtube.com/watch?v=8tP90A-LpzY&t=5613s",
-     "kind": "analysis",
-     "note": "Speaker discusses Elysium positioning, noting it had pullbacks and sell-the-news reaction on mainnet launch similar to Robinhood, describing it as a buying opportunity."
-    },
-    {
-     "episode_id": "8tP90A-LpzY",
-     "episode_title": "\ud83d\udd34 LIVE: $1B+ Liquidated as Crypto Nukes | Jensen Huang Drama | Should You Sell It All?",
-     "start_seconds": 7809.0,
-     "timestamp": "2:10:09",
-     "deep_link": "https://www.youtube.com/watch?v=8tP90A-LpzY&t=7809s",
-     "kind": "analysis",
-     "note": "Discussed as a chain launching in December with a large network upgrade that will connect to Hyperliquid infrastructure; speaker analyzes the difference between its public testnet launch (causing sell-the-news) versus Robinhood's surprise launch."
-    },
-    {
-     "episode_id": "DCxwABH6umU",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto + Robinhood Chain Bottom In? | Elysium Launch Incoming | Exact 90-Day Plan",
-     "start_seconds": 6809.0,
-     "timestamp": "1:53:29",
-     "deep_link": "https://www.youtube.com/watch?v=DCxwABH6umU&t=6809s",
-     "kind": "analysis",
-     "note": "Speakers plan an Elysium ecosystem day with multiple projects from the chain. Discussion covers that Elysium will launch with significant hype but will attract LARPs and scammers, with speaker predicting 99% of launches will go to zero."
-    },
-    {
-     "episode_id": "DCxwABH6umU",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto + Robinhood Chain Bottom In? | Elysium Launch Incoming | Exact 90-Day Plan",
-     "start_seconds": 13001.0,
-     "timestamp": "3:36:41",
-     "deep_link": "https://www.youtube.com/watch?v=DCxwABH6umU&t=13001s",
-     "kind": "analysis",
-     "note": "Discussed as an L2 built by Kinetic (the staking provider) that will drive value to Hyperliquid; enabling DeFi experiments like options order books, AMMs, and using Hyperliquid as native oracle."
-    },
-    {
-     "episode_id": "IdN9O-XqlnQ",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto Rebounds After Midterms | What to Do Now",
-     "start_seconds": 1901.0,
-     "timestamp": "31:41",
-     "deep_link": "https://www.youtube.com/watch?v=IdN9O-XqlnQ&t=1901s",
-     "kind": "analysis",
-     "note": "Discussed as an interesting chain attracting money from Hyperliquid wealth effect; viewed as potentially a sell-the-news event initially, but offering good early opportunities due to wealthy Hyperliquid users looking to rotate to betas and people who missed Hyperliquid wanting ecosystem involvement."
-    },
-    {
-     "episode_id": "VgNa1gilw74",
-     "episode_title": "\ud83d\udd34 LIVE: Is Crypto Worth Trading? | Onchain Reality Check",
-     "start_seconds": 2588.0,
-     "timestamp": "43:08",
-     "deep_link": "https://www.youtube.com/watch?v=VgNa1gilw74&t=2588s",
-     "kind": "analysis",
-     "note": "Extended discussion of Elysium thesis including 300 million index volume in two days post-launch, DeFi experiments leveraging Hyperliquid infrastructure, and speaker's decision to stay flat on the chain due to FUD and poor sentiment."
-    },
-    {
-     "episode_id": "_mLaSJLAPJs",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto is Crashing | Here\u2019s Exactly What to Do Right Now",
-     "start_seconds": 7641.0,
-     "timestamp": "2:07:21",
-     "deep_link": "https://www.youtube.com/watch?v=_mLaSJLAPJs&t=7641s",
-     "kind": "analysis",
-     "note": "Speakers mention they did a detailed breakdown of Elysium last Friday and discuss it as a potential opportunity to speculate on coinciding with its launch alongside Hyperliquid strength."
-    }
-   ],
-   "episode_count": 7,
    "single_reference": false
   },
   {
@@ -141809,7 +142043,7 @@
    "symbol": "MONAD",
    "name": "Monad",
    "asset_class": "crypto",
-   "mentions": 22,
+   "mentions": 23,
    "analysis": 8,
    "moments": [
     {
@@ -141984,6 +142218,15 @@
      "note": "Speaker mentions Monad was up along with a few other assets doing well."
     },
     {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 556.0,
+     "timestamp": "9:16",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=556s",
+     "kind": "mention",
+     "note": "Named as a chain that cannot compose with Hyperliquid security in the way Elysium can."
+    },
+    {
      "episode_id": "p1DZ7LSLlNM",
      "episode_title": "\ud83d\udd34 LIVE: Trading with onchain w/SPAWN Agents, MCG Trader Radio",
      "start_seconds": 3668.0,
@@ -142011,7 +142254,7 @@
      "note": "Monad was mentioned in comparison as another Layer 2, contrasted with Robin Hood's retail-first distribution advantage."
     }
    ],
-   "episode_count": 16,
+   "episode_count": 17,
    "single_reference": false
   },
   {
@@ -156527,6 +156770,89 @@
    "single_reference": false
   },
   {
+   "symbol": "ASCEND",
+   "name": "Ascend",
+   "asset_class": "crypto",
+   "mentions": 8,
+   "analysis": 4,
+   "moments": [
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 254.0,
+     "timestamp": "4:14",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=254s",
+     "kind": "mention",
+     "note": "Described as one of the top launch pads on Elysium."
+    },
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 4796.0,
+     "timestamp": "1:19:56",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=4796s",
+     "kind": "analysis",
+     "note": "Speaker mentions that people who own Ascend tokens probably own Mantra tokens too and want their investments to do well."
+    },
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 4992.0,
+     "timestamp": "1:23:12",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=4992s",
+     "kind": "analysis",
+     "note": "Discussed as having an 'ascended token listing' used to create buy pressure on existing ecosystem coins through staking yield support."
+    },
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 7125.0,
+     "timestamp": "1:58:45",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=7125s",
+     "kind": "analysis",
+     "note": "Speaker discusses Ascend's mechanism of buying or reserving hyper core listings and potential uplist catalysts to exchanges like HyperLiquid."
+    },
+    {
+     "episode_id": "B2cg6LWD60g",
+     "episode_title": "\ud83d\udd34 LIVE: BTC Erases Rally | $870M+ Longs Liquidated | Time to Exit?",
+     "start_seconds": 5167.0,
+     "timestamp": "1:26:07",
+     "deep_link": "https://www.youtube.com/watch?v=B2cg6LWD60g&t=5167s",
+     "kind": "mention",
+     "note": "Mentioned as having staking opportunities alongside Hype; later noted as having a builder grants program giving away approximately 100K."
+    },
+    {
+     "episode_id": "XB71vFeU2zA",
+     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
+     "start_seconds": 11821.0,
+     "timestamp": "3:17:01",
+     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=11821s",
+     "kind": "analysis",
+     "note": "Speaker identifies Ascend as a launch platform on Elysium committing 250k to builders, introducing a strategic partner program, and integrating day one on FOMO, calling it one to watch."
+    },
+    {
+     "episode_id": "_mLaSJLAPJs",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto is Crashing | Here\u2019s Exactly What to Do Right Now",
+     "start_seconds": 4257.0,
+     "timestamp": "1:10:57",
+     "deep_link": "https://www.youtube.com/watch?v=_mLaSJLAPJs&t=4257s",
+     "kind": "mention",
+     "note": "Named as one of two launch events being watched; noted as not expected to have a token."
+    },
+    {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 1405.0,
+     "timestamp": "23:25",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=1405s",
+     "kind": "mention",
+     "note": "Mentioned as one of several projects that have been successful."
+    }
+   ],
+   "episode_count": 5,
+   "single_reference": false
+  },
+  {
    "symbol": "RAXEL",
    "name": "Raxel",
    "asset_class": "crypto",
@@ -156690,80 +157016,6 @@
     }
    ],
    "episode_count": 6,
-   "single_reference": false
-  },
-  {
-   "symbol": "ASCEND",
-   "name": "Ascend",
-   "asset_class": "crypto",
-   "mentions": 7,
-   "analysis": 4,
-   "moments": [
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 254.0,
-     "timestamp": "4:14",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=254s",
-     "kind": "mention",
-     "note": "Described as one of the top launch pads on Elysium."
-    },
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 4796.0,
-     "timestamp": "1:19:56",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=4796s",
-     "kind": "analysis",
-     "note": "Speaker mentions that people who own Ascend tokens probably own Mantra tokens too and want their investments to do well."
-    },
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 4992.0,
-     "timestamp": "1:23:12",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=4992s",
-     "kind": "analysis",
-     "note": "Discussed as having an 'ascended token listing' used to create buy pressure on existing ecosystem coins through staking yield support."
-    },
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 7125.0,
-     "timestamp": "1:58:45",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=7125s",
-     "kind": "analysis",
-     "note": "Speaker discusses Ascend's mechanism of buying or reserving hyper core listings and potential uplist catalysts to exchanges like HyperLiquid."
-    },
-    {
-     "episode_id": "B2cg6LWD60g",
-     "episode_title": "\ud83d\udd34 LIVE: BTC Erases Rally | $870M+ Longs Liquidated | Time to Exit?",
-     "start_seconds": 5167.0,
-     "timestamp": "1:26:07",
-     "deep_link": "https://www.youtube.com/watch?v=B2cg6LWD60g&t=5167s",
-     "kind": "mention",
-     "note": "Mentioned as having staking opportunities alongside Hype; later noted as having a builder grants program giving away approximately 100K."
-    },
-    {
-     "episode_id": "XB71vFeU2zA",
-     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
-     "start_seconds": 11821.0,
-     "timestamp": "3:17:01",
-     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=11821s",
-     "kind": "analysis",
-     "note": "Speaker identifies Ascend as a launch platform on Elysium committing 250k to builders, introducing a strategic partner program, and integrating day one on FOMO, calling it one to watch."
-    },
-    {
-     "episode_id": "_mLaSJLAPJs",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto is Crashing | Here\u2019s Exactly What to Do Right Now",
-     "start_seconds": 4257.0,
-     "timestamp": "1:10:57",
-     "deep_link": "https://www.youtube.com/watch?v=_mLaSJLAPJs&t=4257s",
-     "kind": "mention",
-     "note": "Named as one of two launch events being watched; noted as not expected to have a token."
-    }
-   ],
-   "episode_count": 4,
    "single_reference": false
   },
   {
@@ -161411,7 +161663,7 @@
    "symbol": "AERO",
    "name": "Aerodrome",
    "asset_class": "other",
-   "mentions": 12,
+   "mentions": 13,
    "analysis": 3,
    "moments": [
     {
@@ -161505,6 +161757,15 @@
      "note": "The protocol is a fork of Aerodrome; speakers discuss how Aerodrome has done well with innovation and they keep those elements while making custom changes."
     },
     {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 1402.0,
+     "timestamp": "23:22",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=1402s",
+     "kind": "mention",
+     "note": "Described as fantastic on the launchers alongside Uniswap."
+    },
+    {
      "episode_id": "q7hcCdzTTiI",
      "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holds Above $83K | Uptober Incoming? | Market Update + Interviews",
      "start_seconds": 13042.0,
@@ -161523,7 +161784,7 @@
      "note": "Mentioned as a pool migration announcement related to Velvet's recent price movement."
     }
    ],
-   "episode_count": 11,
+   "episode_count": 12,
    "single_reference": false
   },
   {
@@ -162153,6 +162414,80 @@
    "single_reference": false
   },
   {
+   "symbol": "ELO",
+   "name": "Elo",
+   "asset_class": "other",
+   "mentions": 7,
+   "analysis": 3,
+   "moments": [
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 2765.0,
+     "timestamp": "46:05",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=2765s",
+     "kind": "analysis",
+     "note": "Described as a hyperliquid-native store of value experiment powered by Virtual, characterized as a cross between ore and Plinko/Roulette gaming mechanics."
+    },
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 7213.0,
+     "timestamp": "2:00:13",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=7213s",
+     "kind": "mention",
+     "note": "Speaker mentions elo was mentioned but does not know much about it."
+    },
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 7582.0,
+     "timestamp": "2:06:22",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=7582s",
+     "kind": "analysis",
+     "note": "Speaker criticizes the launch dynamics, noting a rapid 4x price move in first five minutes (100k to 400k), indicating potential bundled supply or early insider knowledge."
+    },
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 7981.0,
+     "timestamp": "2:13:01",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=7981s",
+     "kind": "mention",
+     "note": "Mentioned as an anti-sniper launch token."
+    },
+    {
+     "episode_id": "PZ5E7taO1Yo",
+     "episode_title": "\ud83d\udd34 LIVE: RWA Memes Heating Up | Next Leg Soon? | Market Update + Interviews",
+     "start_seconds": 8058.0,
+     "timestamp": "2:14:18",
+     "deep_link": "https://www.youtube.com/watch?v=PZ5E7taO1Yo&t=8058s",
+     "kind": "mention",
+     "note": "Token with 32K market cap; someone is trying to promote it; mentioned in Discord."
+    },
+    {
+     "episode_id": "gQU9V7n-cRM",
+     "episode_title": "\ud83d\udd34 LIVE: BTC cools while Alts show strength | RHC recovery? | Market update + Interviews",
+     "start_seconds": 3552.0,
+     "timestamp": "59:12",
+     "deep_link": "https://www.youtube.com/watch?v=gQU9V7n-cRM&t=3552s",
+     "kind": "mention",
+     "note": "A user asked why their ELO token did not move at all with ETH."
+    },
+    {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 1435.0,
+     "timestamp": "23:55",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=1435s",
+     "kind": "analysis",
+     "note": "Described as a Hyperliquid native store of value experiment powered by Virtual, combining elements like ore, Plinko, and Roulette, and involves mining."
+    }
+   ],
+   "episode_count": 4,
+   "single_reference": false
+  },
+  {
    "symbol": "METAD",
    "name": "Metadow",
    "asset_class": "crypto",
@@ -162520,6 +162855,71 @@
     }
    ],
    "episode_count": 6,
+   "single_reference": false
+  },
+  {
+   "symbol": "OM",
+   "name": "Mantra",
+   "asset_class": "crypto",
+   "mentions": 6,
+   "analysis": 3,
+   "moments": [
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 4638.0,
+     "timestamp": "1:17:18",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=4638s",
+     "kind": "analysis",
+     "note": "Discussion of investment in Mantra on their launch, competitive relationship with Ascend, and speaker's acknowledgment of mistakes in prior interactions between the two projects."
+    },
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 5971.0,
+     "timestamp": "1:39:31",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=5971s",
+     "kind": "analysis",
+     "note": "Discussed as a competitor at the time with good alignments; mentioned that the speaker is one of the top tokens on Mantra with a market cap that almost reached 300-400K."
+    },
+    {
+     "episode_id": "VgNa1gilw74",
+     "episode_title": "\ud83d\udd34 LIVE: Is Crypto Worth Trading? | Onchain Reality Check",
+     "start_seconds": 2807.0,
+     "timestamp": "46:47",
+     "deep_link": "https://www.youtube.com/watch?v=VgNa1gilw74&t=2807s",
+     "kind": "mention",
+     "note": "Speaker mentions that a lot of FUD came out with Mantra and other projects, with accusations of rugging and poor price action."
+    },
+    {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 1405.0,
+     "timestamp": "23:25",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=1405s",
+     "kind": "mention",
+     "note": "Mentioned as a successful ecosystem project that has started integrating tokenized equity pairs."
+    },
+    {
+     "episode_id": "vBRvDqOdKwQ",
+     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
+     "start_seconds": 9407.0,
+     "timestamp": "2:36:47",
+     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=9407s",
+     "kind": "analysis",
+     "note": "OM token functionality is compared to DTF; the speaker notes that OM kept reserves of M and D, whereas the new protocol pairs DETF with a strategy vault rather than with D."
+    },
+    {
+     "episode_id": "vBRvDqOdKwQ",
+     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
+     "start_seconds": 10269.0,
+     "timestamp": "2:51:09",
+     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=10269s",
+     "kind": "mention",
+     "note": "Mentioned in passing alongside discussion of a token launch; speakers note Olympus DAO team connection."
+    }
+   ],
+   "episode_count": 4,
    "single_reference": false
   },
   {
@@ -162910,62 +163310,6 @@
     }
    ],
    "episode_count": 4,
-   "single_reference": false
-  },
-  {
-   "symbol": "OM",
-   "name": "Mantra",
-   "asset_class": "crypto",
-   "mentions": 5,
-   "analysis": 3,
-   "moments": [
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 4638.0,
-     "timestamp": "1:17:18",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=4638s",
-     "kind": "analysis",
-     "note": "Discussion of investment in Mantra on their launch, competitive relationship with Ascend, and speaker's acknowledgment of mistakes in prior interactions between the two projects."
-    },
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 5971.0,
-     "timestamp": "1:39:31",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=5971s",
-     "kind": "analysis",
-     "note": "Discussed as a competitor at the time with good alignments; mentioned that the speaker is one of the top tokens on Mantra with a market cap that almost reached 300-400K."
-    },
-    {
-     "episode_id": "VgNa1gilw74",
-     "episode_title": "\ud83d\udd34 LIVE: Is Crypto Worth Trading? | Onchain Reality Check",
-     "start_seconds": 2807.0,
-     "timestamp": "46:47",
-     "deep_link": "https://www.youtube.com/watch?v=VgNa1gilw74&t=2807s",
-     "kind": "mention",
-     "note": "Speaker mentions that a lot of FUD came out with Mantra and other projects, with accusations of rugging and poor price action."
-    },
-    {
-     "episode_id": "vBRvDqOdKwQ",
-     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
-     "start_seconds": 9407.0,
-     "timestamp": "2:36:47",
-     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=9407s",
-     "kind": "analysis",
-     "note": "OM token functionality is compared to DTF; the speaker notes that OM kept reserves of M and D, whereas the new protocol pairs DETF with a strategy vault rather than with D."
-    },
-    {
-     "episode_id": "vBRvDqOdKwQ",
-     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
-     "start_seconds": 10269.0,
-     "timestamp": "2:51:09",
-     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=10269s",
-     "kind": "mention",
-     "note": "Mentioned in passing alongside discussion of a token launch; speakers note Olympus DAO team connection."
-    }
-   ],
-   "episode_count": 3,
    "single_reference": false
   },
   {
@@ -168711,71 +169055,6 @@
    "single_reference": false
   },
   {
-   "symbol": "ELO",
-   "name": "Elo",
-   "asset_class": "other",
-   "mentions": 6,
-   "analysis": 2,
-   "moments": [
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 2765.0,
-     "timestamp": "46:05",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=2765s",
-     "kind": "analysis",
-     "note": "Described as a hyperliquid-native store of value experiment powered by Virtual, characterized as a cross between ore and Plinko/Roulette gaming mechanics."
-    },
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 7213.0,
-     "timestamp": "2:00:13",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=7213s",
-     "kind": "mention",
-     "note": "Speaker mentions elo was mentioned but does not know much about it."
-    },
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 7582.0,
-     "timestamp": "2:06:22",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=7582s",
-     "kind": "analysis",
-     "note": "Speaker criticizes the launch dynamics, noting a rapid 4x price move in first five minutes (100k to 400k), indicating potential bundled supply or early insider knowledge."
-    },
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 7981.0,
-     "timestamp": "2:13:01",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=7981s",
-     "kind": "mention",
-     "note": "Mentioned as an anti-sniper launch token."
-    },
-    {
-     "episode_id": "PZ5E7taO1Yo",
-     "episode_title": "\ud83d\udd34 LIVE: RWA Memes Heating Up | Next Leg Soon? | Market Update + Interviews",
-     "start_seconds": 8058.0,
-     "timestamp": "2:14:18",
-     "deep_link": "https://www.youtube.com/watch?v=PZ5E7taO1Yo&t=8058s",
-     "kind": "mention",
-     "note": "Token with 32K market cap; someone is trying to promote it; mentioned in Discord."
-    },
-    {
-     "episode_id": "gQU9V7n-cRM",
-     "episode_title": "\ud83d\udd34 LIVE: BTC cools while Alts show strength | RHC recovery? | Market update + Interviews",
-     "start_seconds": 3552.0,
-     "timestamp": "59:12",
-     "deep_link": "https://www.youtube.com/watch?v=gQU9V7n-cRM&t=3552s",
-     "kind": "mention",
-     "note": "A user asked why their ELO token did not move at all with ETH."
-    }
-   ],
-   "episode_count": 3,
-   "single_reference": false
-  },
-  {
    "symbol": "DYDX",
    "name": "dYdX",
    "asset_class": "crypto",
@@ -173026,6 +173305,35 @@
     }
    ],
    "episode_count": 1,
+   "single_reference": false
+  },
+  {
+   "symbol": "KNPQ",
+   "name": "Kinetic",
+   "asset_class": "crypto",
+   "mentions": 2,
+   "analysis": 2,
+   "moments": [
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 2468.0,
+     "timestamp": "41:08",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=2468s",
+     "kind": "analysis",
+     "note": "KNPQ is used to launch or deploy tokens on Elysium; 50% of sequencer revenue is used to buy KNPQ on the open market and burn it; token deployers can verify token information on the explorer for 100 KNPQ which is burnt."
+    },
+    {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 1139.0,
+     "timestamp": "18:59",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=1139s",
+     "kind": "analysis",
+     "note": "KNPQ tokens are spent by token deployers to launch on Elysium; 50% of sequencer revenue is used to buy KNPQ on the open market and burn it by sending to Hyperliquid Assistance Fund."
+    }
+   ],
+   "episode_count": 2,
    "single_reference": false
   },
   {
@@ -178618,6 +178926,71 @@
    "single_reference": false
   },
   {
+   "symbol": "MANTRA",
+   "name": "Mantra",
+   "asset_class": "other",
+   "mentions": 6,
+   "analysis": 1,
+   "moments": [
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 2734.0,
+     "timestamp": "45:34",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=2734s",
+     "kind": "mention",
+     "note": "Mentioned as an ecosystem project that has integrated tokenized equity pairs."
+    },
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 5896.0,
+     "timestamp": "1:38:16",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=5896s",
+     "kind": "mention",
+     "note": "Blockchain or platform on which Tessera token was launched via fair launch."
+    },
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 7193.0,
+     "timestamp": "1:59:53",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=7193s",
+     "kind": "mention",
+     "note": "Speaker mentions discussing Mantra as one of the tokens on Elysium."
+    },
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 7569.0,
+     "timestamp": "2:06:09",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=7569s",
+     "kind": "analysis",
+     "note": "Speaker discusses potential risk related to tokens Ascend owns in Mantra and uncertainty about token resolution."
+    },
+    {
+     "episode_id": "_mLaSJLAPJs",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto is Crashing | Here\u2019s Exactly What to Do Right Now",
+     "start_seconds": 4257.0,
+     "timestamp": "1:10:57",
+     "deep_link": "https://www.youtube.com/watch?v=_mLaSJLAPJs&t=4257s",
+     "kind": "mention",
+     "note": "Named as one of two launch events being watched; indicated to have an upcoming token and described as aligned with the speaker's team discussions."
+    },
+    {
+     "episode_id": "omJuJAl69Zg",
+     "episode_title": "Tessera | The MCP Gateway Putting AI Agents on Elysium",
+     "start_seconds": 556.0,
+     "timestamp": "9:16",
+     "deep_link": "https://www.youtube.com/watch?v=omJuJAl69Zg&t=556s",
+     "kind": "mention",
+     "note": "Tessera token was fair launched on Mantra blockchain; the team chose Mantra over Ascend due to access issues with Ascend and alignment with Mantra's buyback and infrastructure goals."
+    }
+   ],
+   "episode_count": 3,
+   "single_reference": false
+  },
+  {
    "symbol": "MKR",
    "name": "Maker DAO",
    "asset_class": "crypto",
@@ -178795,62 +179168,6 @@
    "single_reference": false
   },
   {
-   "symbol": "MANTRA",
-   "name": "Mantra",
-   "asset_class": "other",
-   "mentions": 5,
-   "analysis": 1,
-   "moments": [
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 2734.0,
-     "timestamp": "45:34",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=2734s",
-     "kind": "mention",
-     "note": "Mentioned as an ecosystem project that has integrated tokenized equity pairs."
-    },
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 5896.0,
-     "timestamp": "1:38:16",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=5896s",
-     "kind": "mention",
-     "note": "Blockchain or platform on which Tessera token was launched via fair launch."
-    },
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 7193.0,
-     "timestamp": "1:59:53",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=7193s",
-     "kind": "mention",
-     "note": "Speaker mentions discussing Mantra as one of the tokens on Elysium."
-    },
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 7569.0,
-     "timestamp": "2:06:09",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=7569s",
-     "kind": "analysis",
-     "note": "Speaker discusses potential risk related to tokens Ascend owns in Mantra and uncertainty about token resolution."
-    },
-    {
-     "episode_id": "_mLaSJLAPJs",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto is Crashing | Here\u2019s Exactly What to Do Right Now",
-     "start_seconds": 4257.0,
-     "timestamp": "1:10:57",
-     "deep_link": "https://www.youtube.com/watch?v=_mLaSJLAPJs&t=4257s",
-     "kind": "mention",
-     "note": "Named as one of two launch events being watched; indicated to have an upcoming token and described as aligned with the speaker's team discussions."
-    }
-   ],
-   "episode_count": 2,
-   "single_reference": false
-  },
-  {
    "symbol": "GROK",
    "name": "Grok",
    "asset_class": "other",
@@ -178957,6 +179274,53 @@
      "deep_link": "https://www.youtube.com/watch?v=dHFyU0S98K4&t=9125s",
      "kind": "mention",
      "note": "Speaker said 'Definitely not uh Ethereum Classic' when comparing projects."
+    }
+   ],
+   "episode_count": 4,
+   "single_reference": false
+  },
+  {
+   "symbol": "RAMSES",
+   "name": "Ramses",
+   "asset_class": "other",
+   "mentions": 4,
+   "analysis": 1,
+   "moments": [
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 2831.0,
+     "timestamp": "47:11",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=2831s",
+     "kind": "mention",
+     "note": "Mentioned as another DEX in the ecosystem."
+    },
+    {
+     "episode_id": "RufYrYmMVwU",
+     "episode_title": "\ud83d\udd34 LIVE: Onchain Market Bottom Forming | Q4 Rally Setup + How to Maximize Returns",
+     "start_seconds": 6726.0,
+     "timestamp": "1:52:06",
+     "deep_link": "https://www.youtube.com/watch?v=RufYrYmMVwU&t=6726s",
+     "kind": "mention",
+     "note": "Named as a top DEX on Robinhood chain."
+    },
+    {
+     "episode_id": "ckSVVsCYrSI",
+     "episode_title": "\ud83d\udd34 LIVE: Uptober Turned Choptober | Bitcoin Holding $80K | What's Next?",
+     "start_seconds": 10248.0,
+     "timestamp": "2:50:48",
+     "deep_link": "https://www.youtube.com/watch?v=ckSVVsCYrSI&t=10248s",
+     "kind": "analysis",
+     "note": "Discussed as having good metrics and traction; received a quote tweet from Robinhood which resulted in market cap movement from 1.5M to 3.6M."
+    },
+    {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 1503.0,
+     "timestamp": "25:03",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=1503s",
+     "kind": "mention",
+     "note": "Mentioned as another DEX in the ecosystem."
     }
    ],
    "episode_count": 4,
@@ -179794,44 +180158,6 @@
      "deep_link": "https://www.youtube.com/watch?v=gTl0GwRHeAU&t=4800s",
      "kind": "analysis",
      "note": "NASDAQ established a partnership with Pith where Pith became external distributor of NASDAQ basic real-time quote and tradable products for US equities; relationship involves co-location services, data normalization, and redistribution of exchange order book data."
-    }
-   ],
-   "episode_count": 3,
-   "single_reference": false
-  },
-  {
-   "symbol": "RAMSES",
-   "name": "Ramses",
-   "asset_class": "other",
-   "mentions": 3,
-   "analysis": 1,
-   "moments": [
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 2831.0,
-     "timestamp": "47:11",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=2831s",
-     "kind": "mention",
-     "note": "Mentioned as another DEX in the ecosystem."
-    },
-    {
-     "episode_id": "RufYrYmMVwU",
-     "episode_title": "\ud83d\udd34 LIVE: Onchain Market Bottom Forming | Q4 Rally Setup + How to Maximize Returns",
-     "start_seconds": 6726.0,
-     "timestamp": "1:52:06",
-     "deep_link": "https://www.youtube.com/watch?v=RufYrYmMVwU&t=6726s",
-     "kind": "mention",
-     "note": "Named as a top DEX on Robinhood chain."
-    },
-    {
-     "episode_id": "ckSVVsCYrSI",
-     "episode_title": "\ud83d\udd34 LIVE: Uptober Turned Choptober | Bitcoin Holding $80K | What's Next?",
-     "start_seconds": 10248.0,
-     "timestamp": "2:50:48",
-     "deep_link": "https://www.youtube.com/watch?v=ckSVVsCYrSI&t=10248s",
-     "kind": "analysis",
-     "note": "Discussed as having good metrics and traction; received a quote tweet from Robinhood which resulted in market cap movement from 1.5M to 3.6M."
     }
    ],
    "episode_count": 3,
@@ -185411,26 +185737,6 @@
      "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=1193s",
      "kind": "analysis",
      "note": "A $10 billion market cap company down 40% from top; trading at 85% to net asset value; held by Tom Lee's firm."
-    }
-   ],
-   "episode_count": 1,
-   "single_reference": true
-  },
-  {
-   "symbol": "KNPQ",
-   "name": "Kinetic",
-   "asset_class": "crypto",
-   "mentions": 1,
-   "analysis": 1,
-   "moments": [
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 2468.0,
-     "timestamp": "41:08",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=2468s",
-     "kind": "analysis",
-     "note": "KNPQ is used to launch or deploy tokens on Elysium; 50% of sequencer revenue is used to buy KNPQ on the open market and burn it; token deployers can verify token information on the explorer for 100 KNPQ which is burnt."
     }
    ],
    "episode_count": 1,
@@ -197751,6 +198057,26 @@
      "deep_link": "https://www.youtube.com/watch?v=oSkWYs5rAGk&t=764s",
      "kind": "analysis",
      "note": "Described as a major sponsor of the hackathon; teams are being encouraged to integrate Ansim and increase the utility of that token as part of judging criteria."
+    }
+   ],
+   "episode_count": 1,
+   "single_reference": true
+  },
+  {
+   "symbol": "SARA",
+   "name": "Tessera",
+   "asset_class": "crypto",
+   "mentions": 1,
+   "analysis": 1,
+   "moments": [
+    {
+     "episode_id": "omJuJAl69Zg",
+     "episode_title": "Tessera | The MCP Gateway Putting AI Agents on Elysium",
+     "start_seconds": 1112.0,
+     "timestamp": "18:32",
+     "deep_link": "https://www.youtube.com/watch?v=omJuJAl69Zg&t=1112s",
+     "kind": "analysis",
+     "note": "Token discussed as one of the best performing tokens on chain, rising from 40k to around 3 million in value."
     }
    ],
    "episode_count": 1,
@@ -213325,10 +213651,10 @@
    "single_reference": true
   }
  ],
- "total_hits": 20773,
- "dropped_low_confidence": 2505,
- "dropped_not_an_asset": 2305,
- "episodes_processed": 699,
+ "total_hits": 20808,
+ "dropped_low_confidence": 2506,
+ "dropped_not_an_asset": 2310,
+ "episodes_processed": 701,
  "episode_ids": [
   "-6Sccmoz7RQ",
   "-8z0M77EVZg",
@@ -213901,8 +214227,10 @@
   "oHAQqLYKqBc",
   "oI9Hv_D6UFk",
   "oSkWYs5rAGk",
+  "oh-PMIoVOVw",
   "oivlxqeU-Yg",
   "oj43b_GW-2g",
+  "omJuJAl69Zg",
   "om_ij59Cydo",
   "oqP-d3jYxfc",
   "oqhVVvYHbpM",
