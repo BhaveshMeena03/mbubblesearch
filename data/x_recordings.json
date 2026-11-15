@@ -1,5 +1,5 @@
 {
- "newest": "2121592402234548448",
+ "newest": "2121929768023310813",
  "posts": {
   "2052486417465627019": {
    "account": "blknoiz06",
@@ -373,6 +373,12 @@
   "2121592402234548448": {
    "account": "blknoiz06",
    "at": "2026-11-14",
+   "what": "leave",
+   "why": "a clip, placed by place_x_clips.py"
+  },
+  "2121929768023310813": {
+   "account": "blknoiz06",
+   "at": "2026-11-15",
    "what": "leave",
    "why": "a clip, placed by place_x_clips.py"
   }
