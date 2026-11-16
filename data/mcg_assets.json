@@ -4,7 +4,7 @@
    "symbol": "SOL",
    "name": "Solana",
    "asset_class": "crypto",
-   "mentions": 2745,
+   "mentions": 2746,
    "analysis": 830,
    "moments": [
     {
@@ -2112,6 +2112,15 @@
      "deep_link": "https://www.youtube.com/watch?v=50P-rICrUfs&t=7056s",
      "kind": "mention",
      "note": "Mentioned in an anecdote about someone claiming to have taken a 100k loan and invested it into Solana at $2 in the previous cycle."
+    },
+    {
+     "episode_id": "51Gq2ynLdOg",
+     "episode_title": "Only Launchpad That Doesn\u2019t Extract From Traders | Ascend x Elysium",
+     "start_seconds": 922.0,
+     "timestamp": "15:22",
+     "deep_link": "https://www.youtube.com/watch?v=51Gq2ynLdOg&t=922s",
+     "kind": "mention",
+     "note": "Mentioned only in passing regarding its price movements, noting it did not see significant downside relative to previous cycles."
     },
     {
      "episode_id": "56LF5PHOXms",
@@ -24713,7 +24722,7 @@
      "note": "Speaker discusses Solana price levels, noting a 20x move from 500K to current 8 million levels and speculating on future levels in another month."
     }
    ],
-   "episode_count": 554,
+   "episode_count": 555,
    "single_reference": false
   },
   {
@@ -38051,7 +38060,7 @@
    "symbol": "ETH",
    "name": "Ethereum",
    "asset_class": "crypto",
-   "mentions": 1036,
+   "mentions": 1037,
    "analysis": 368,
    "moments": [
     {
@@ -38890,6 +38899,15 @@
      "deep_link": "https://www.youtube.com/watch?v=50P-rICrUfs&t=6493s",
      "kind": "analysis",
      "note": "Speaker compared Solana traders to ETH traders from 2022-2023, noting ETH was perceived as focused on utility and innovation while Solana traders were seen as just trading meme coins."
+    },
+    {
+     "episode_id": "51Gq2ynLdOg",
+     "episode_title": "Only Launchpad That Doesn\u2019t Extract From Traders | Ascend x Elysium",
+     "start_seconds": 866.0,
+     "timestamp": "14:26",
+     "deep_link": "https://www.youtube.com/watch?v=51Gq2ynLdOg&t=866s",
+     "kind": "mention",
+     "note": "Referenced as an example of a token held by whales during the 2020 NFT season when Ethereum gained significant value."
     },
     {
      "episode_id": "56LF5PHOXms",
@@ -47379,15 +47397,15 @@
      "note": "Speaker mentions Solana DATs and companies using treasuries to buy ETH."
     }
    ],
-   "episode_count": 372,
+   "episode_count": 373,
    "single_reference": false
   },
   {
    "symbol": "HYPE",
    "name": "Hyperliquid",
    "asset_class": "crypto",
-   "mentions": 415,
-   "analysis": 260,
+   "mentions": 419,
+   "analysis": 264,
    "moments": [
     {
      "episode_id": "-iilkByxBa8",
@@ -47712,6 +47730,42 @@
      "deep_link": "https://www.youtube.com/watch?v=4eErwRiL8VE&t=357s",
      "kind": "analysis",
      "note": "Described as a strong proving point for tokenization, used for trading tokenized gold and oil especially during periods of extreme volatility and weekend trading when traditional markets were closed."
+    },
+    {
+     "episode_id": "51Gq2ynLdOg",
+     "episode_title": "Only Launchpad That Doesn\u2019t Extract From Traders | Ascend x Elysium",
+     "start_seconds": 185.0,
+     "timestamp": "3:05",
+     "deep_link": "https://www.youtube.com/watch?v=51Gq2ynLdOg&t=185s",
+     "kind": "analysis",
+     "note": "Used as a gas token on the Elysium chain that accumulates value; discussed alongside Kinetic as part of the value accrual mechanism."
+    },
+    {
+     "episode_id": "51Gq2ynLdOg",
+     "episode_title": "Only Launchpad That Doesn\u2019t Extract From Traders | Ascend x Elysium",
+     "start_seconds": 668.0,
+     "timestamp": "11:08",
+     "deep_link": "https://www.youtube.com/watch?v=51Gq2ynLdOg&t=668s",
+     "kind": "analysis",
+     "note": "Discussed as a token that large traders hold but do not use for DeFi activities; staking mechanism proposed via Khype (Kinetics LST) to direct yield towards buying back ecosystem tokens."
+    },
+    {
+     "episode_id": "51Gq2ynLdOg",
+     "episode_title": "Only Launchpad That Doesn\u2019t Extract From Traders | Ascend x Elysium",
+     "start_seconds": 736.0,
+     "timestamp": "12:16",
+     "deep_link": "https://www.youtube.com/watch?v=51Gq2ynLdOg&t=736s",
+     "kind": "analysis",
+     "note": "Discussed as a major token with buyback programs; speakers analyze how to attract Hyperliquid whales by offering competitive buyback amounts and high staking APY on Ascend to create wealth effects and on-chain activity."
+    },
+    {
+     "episode_id": "51Gq2ynLdOg",
+     "episode_title": "Only Launchpad That Doesn\u2019t Extract From Traders | Ascend x Elysium",
+     "start_seconds": 1552.0,
+     "timestamp": "25:52",
+     "deep_link": "https://www.youtube.com/watch?v=51Gq2ynLdOg&t=1552s",
+     "kind": "analysis",
+     "note": "Speaker discusses supporting a token on Ascend that would use generated revenue to fund hype and kinetic buybacks."
     },
     {
      "episode_id": "5GIhPFF8hDg",
@@ -51125,7 +51179,7 @@
      "note": "A vault platform where trading activity is tracked and displayed; the speaker launched a vault on Sunday/Monday with 20x leverage, generating significant P&L over the first few days."
     }
    ],
-   "episode_count": 196,
+   "episode_count": 197,
    "single_reference": false
   },
   {
@@ -153274,6 +153328,89 @@
    "single_reference": false
   },
   {
+   "symbol": "OM",
+   "name": "Mantra",
+   "asset_class": "crypto",
+   "mentions": 8,
+   "analysis": 5,
+   "moments": [
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 4638.0,
+     "timestamp": "1:17:18",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=4638s",
+     "kind": "analysis",
+     "note": "Discussion of investment in Mantra on their launch, competitive relationship with Ascend, and speaker's acknowledgment of mistakes in prior interactions between the two projects."
+    },
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 5971.0,
+     "timestamp": "1:39:31",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=5971s",
+     "kind": "analysis",
+     "note": "Discussed as a competitor at the time with good alignments; mentioned that the speaker is one of the top tokens on Mantra with a market cap that almost reached 300-400K."
+    },
+    {
+     "episode_id": "51Gq2ynLdOg",
+     "episode_title": "Only Launchpad That Doesn\u2019t Extract From Traders | Ascend x Elysium",
+     "start_seconds": 1199.0,
+     "timestamp": "19:59",
+     "deep_link": "https://www.youtube.com/watch?v=51Gq2ynLdOg&t=1199s",
+     "kind": "analysis",
+     "note": "Discussed a conflict situation between Ascend and Mantra involving a DDoS attack on Ascend's launch day, with strategic investment considerations mentioned."
+    },
+    {
+     "episode_id": "51Gq2ynLdOg",
+     "episode_title": "Only Launchpad That Doesn\u2019t Extract From Traders | Ascend x Elysium",
+     "start_seconds": 1438.0,
+     "timestamp": "23:58",
+     "deep_link": "https://www.youtube.com/watch?v=51Gq2ynLdOg&t=1438s",
+     "kind": "analysis",
+     "note": "Speaker mentions Mantra team and model, describing it as beneficial to the ecosystem and competing positively with Ascend."
+    },
+    {
+     "episode_id": "VgNa1gilw74",
+     "episode_title": "\ud83d\udd34 LIVE: Is Crypto Worth Trading? | Onchain Reality Check",
+     "start_seconds": 2807.0,
+     "timestamp": "46:47",
+     "deep_link": "https://www.youtube.com/watch?v=VgNa1gilw74&t=2807s",
+     "kind": "mention",
+     "note": "Speaker mentions that a lot of FUD came out with Mantra and other projects, with accusations of rugging and poor price action."
+    },
+    {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 1405.0,
+     "timestamp": "23:25",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=1405s",
+     "kind": "mention",
+     "note": "Mentioned as a successful ecosystem project that has started integrating tokenized equity pairs."
+    },
+    {
+     "episode_id": "vBRvDqOdKwQ",
+     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
+     "start_seconds": 9407.0,
+     "timestamp": "2:36:47",
+     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=9407s",
+     "kind": "analysis",
+     "note": "OM token functionality is compared to DTF; the speaker notes that OM kept reserves of M and D, whereas the new protocol pairs DETF with a strategy vault rather than with D."
+    },
+    {
+     "episode_id": "vBRvDqOdKwQ",
+     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
+     "start_seconds": 10269.0,
+     "timestamp": "2:51:09",
+     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=10269s",
+     "kind": "mention",
+     "note": "Mentioned in passing alongside discussion of a token launch; speakers note Olympus DAO team connection."
+    }
+   ],
+   "episode_count": 5,
+   "single_reference": false
+  },
+  {
    "symbol": "FDRY",
    "name": "Foundry",
    "asset_class": "other",
@@ -162855,71 +162992,6 @@
     }
    ],
    "episode_count": 6,
-   "single_reference": false
-  },
-  {
-   "symbol": "OM",
-   "name": "Mantra",
-   "asset_class": "crypto",
-   "mentions": 6,
-   "analysis": 3,
-   "moments": [
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 4638.0,
-     "timestamp": "1:17:18",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=4638s",
-     "kind": "analysis",
-     "note": "Discussion of investment in Mantra on their launch, competitive relationship with Ascend, and speaker's acknowledgment of mistakes in prior interactions between the two projects."
-    },
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 5971.0,
-     "timestamp": "1:39:31",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=5971s",
-     "kind": "analysis",
-     "note": "Discussed as a competitor at the time with good alignments; mentioned that the speaker is one of the top tokens on Mantra with a market cap that almost reached 300-400K."
-    },
-    {
-     "episode_id": "VgNa1gilw74",
-     "episode_title": "\ud83d\udd34 LIVE: Is Crypto Worth Trading? | Onchain Reality Check",
-     "start_seconds": 2807.0,
-     "timestamp": "46:47",
-     "deep_link": "https://www.youtube.com/watch?v=VgNa1gilw74&t=2807s",
-     "kind": "mention",
-     "note": "Speaker mentions that a lot of FUD came out with Mantra and other projects, with accusations of rugging and poor price action."
-    },
-    {
-     "episode_id": "oh-PMIoVOVw",
-     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
-     "start_seconds": 1405.0,
-     "timestamp": "23:25",
-     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=1405s",
-     "kind": "mention",
-     "note": "Mentioned as a successful ecosystem project that has started integrating tokenized equity pairs."
-    },
-    {
-     "episode_id": "vBRvDqOdKwQ",
-     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
-     "start_seconds": 9407.0,
-     "timestamp": "2:36:47",
-     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=9407s",
-     "kind": "analysis",
-     "note": "OM token functionality is compared to DTF; the speaker notes that OM kept reserves of M and D, whereas the new protocol pairs DETF with a strategy vault rather than with D."
-    },
-    {
-     "episode_id": "vBRvDqOdKwQ",
-     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
-     "start_seconds": 10269.0,
-     "timestamp": "2:51:09",
-     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=10269s",
-     "kind": "mention",
-     "note": "Mentioned in passing alongside discussion of a token launch; speakers note Olympus DAO team connection."
-    }
-   ],
-   "episode_count": 4,
    "single_reference": false
   },
   {
@@ -186743,6 +186815,26 @@
    "single_reference": true
   },
   {
+   "symbol": "ASC",
+   "name": "Ascend",
+   "asset_class": "crypto",
+   "mentions": 1,
+   "analysis": 1,
+   "moments": [
+    {
+     "episode_id": "51Gq2ynLdOg",
+     "episode_title": "Only Launchpad That Doesn\u2019t Extract From Traders | Ascend x Elysium",
+     "start_seconds": 1376.0,
+     "timestamp": "22:56",
+     "deep_link": "https://www.youtube.com/watch?v=51Gq2ynLdOg&t=1376s",
+     "kind": "analysis",
+     "note": "The speaker discusses Ascend's model, tokens, staking yield, and token listing process as core mechanisms of their ecosystem."
+    }
+   ],
+   "episode_count": 1,
+   "single_reference": true
+  },
+  {
    "symbol": "LNCH",
    "name": "Launchcoin",
    "asset_class": "crypto",
@@ -201952,6 +202044,64 @@
    "single_reference": false
   },
   {
+   "symbol": "AETHER",
+   "name": "Aether",
+   "asset_class": "crypto",
+   "mentions": 2,
+   "analysis": 0,
+   "moments": [
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 4308.0,
+     "timestamp": "1:11:48",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=4308s",
+     "kind": "mention",
+     "note": "Aether mentioned as an ecosystem project on Ascend platform."
+    },
+    {
+     "episode_id": "51Gq2ynLdOg",
+     "episode_title": "Only Launchpad That Doesn\u2019t Extract From Traders | Ascend x Elysium",
+     "start_seconds": 1073.0,
+     "timestamp": "17:53",
+     "deep_link": "https://www.youtube.com/watch?v=51Gq2ynLdOg&t=1073s",
+     "kind": "mention",
+     "note": "Mentioned as a project with early FOMO traders holding the coin; speakers noted the team is high quality but have only talked to them a handful of times."
+    }
+   ],
+   "episode_count": 2,
+   "single_reference": false
+  },
+  {
+   "symbol": "EAC",
+   "name": "EAC",
+   "asset_class": "crypto",
+   "mentions": 2,
+   "analysis": 0,
+   "moments": [
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 5046.0,
+     "timestamp": "1:24:06",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=5046s",
+     "kind": "mention",
+     "note": "Named as one of the top three token launchers currently farming Ascended points."
+    },
+    {
+     "episode_id": "51Gq2ynLdOg",
+     "episode_title": "Only Launchpad That Doesn\u2019t Extract From Traders | Ascend x Elysium",
+     "start_seconds": 1740.0,
+     "timestamp": "29:00",
+     "deep_link": "https://www.youtube.com/watch?v=51Gq2ynLdOg&t=1740s",
+     "kind": "mention",
+     "note": "Listed as one of the top three token launchers currently farming ascended points."
+    }
+   ],
+   "episode_count": 2,
+   "single_reference": false
+  },
+  {
    "symbol": "AXP",
    "name": "American Express",
    "asset_class": "stock",
@@ -203591,46 +203741,6 @@
    "single_reference": true
   },
   {
-   "symbol": "AETHER",
-   "name": "Aether",
-   "asset_class": "crypto",
-   "mentions": 1,
-   "analysis": 0,
-   "moments": [
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 4308.0,
-     "timestamp": "1:11:48",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=4308s",
-     "kind": "mention",
-     "note": "Aether mentioned as an ecosystem project on Ascend platform."
-    }
-   ],
-   "episode_count": 1,
-   "single_reference": true
-  },
-  {
-   "symbol": "EAC",
-   "name": "EAC",
-   "asset_class": "crypto",
-   "mentions": 1,
-   "analysis": 0,
-   "moments": [
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 5046.0,
-     "timestamp": "1:24:06",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=5046s",
-     "kind": "mention",
-     "note": "Named as one of the top three token launchers currently farming Ascended points."
-    }
-   ],
-   "episode_count": 1,
-   "single_reference": true
-  },
-  {
    "symbol": "EELS",
    "name": "Eelscape",
    "asset_class": "crypto",
@@ -204325,6 +204435,26 @@
      "deep_link": "https://www.youtube.com/watch?v=50P-rICrUfs&t=3669s",
      "kind": "mention",
      "note": "Project mentioned as something V Funk is currently working on, implied as an opportunity that came from his Anom positioning."
+    }
+   ],
+   "episode_count": 1,
+   "single_reference": true
+  },
+  {
+   "symbol": "PURPS",
+   "name": "Pocket Purps",
+   "asset_class": "crypto",
+   "mentions": 1,
+   "analysis": 0,
+   "moments": [
+    {
+     "episode_id": "51Gq2ynLdOg",
+     "episode_title": "Only Launchpad That Doesn\u2019t Extract From Traders | Ascend x Elysium",
+     "start_seconds": 1740.0,
+     "timestamp": "29:00",
+     "deep_link": "https://www.youtube.com/watch?v=51Gq2ynLdOg&t=1740s",
+     "kind": "mention",
+     "note": "Listed as one of the top three token launchers currently farming ascended points."
     }
    ],
    "episode_count": 1,
@@ -213651,10 +213781,10 @@
    "single_reference": true
   }
  ],
- "total_hits": 20808,
- "dropped_low_confidence": 2506,
- "dropped_not_an_asset": 2310,
- "episodes_processed": 701,
+ "total_hits": 20820,
+ "dropped_low_confidence": 2508,
+ "dropped_not_an_asset": 2318,
+ "episodes_processed": 702,
  "episode_ids": [
   "-6Sccmoz7RQ",
   "-8z0M77EVZg",
@@ -213710,6 +213840,7 @@
   "4PlcWhQM96A",
   "4eErwRiL8VE",
   "50P-rICrUfs",
+  "51Gq2ynLdOg",
   "56LF5PHOXms",
   "58dRFj2SsUc",
   "59sU_69N5f0",
