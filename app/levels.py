@@ -26,6 +26,7 @@ from dataclasses import asdict, dataclass
 from datetime import UTC, datetime, timedelta
 
 from app import calls
+from app.schemas import his_own
 
 # buy     he would buy or add there
 # sell    he would sell or take profit there
@@ -93,6 +94,22 @@ class Level:
 
     def as_row(self) -> dict:
         return asdict(self)
+
+
+def own_video(episode: dict) -> bool:
+    """A video Ansem posted himself ("Ansem on X"): nobody else talks in
+    it, so it carries no voice labels, and it was heard when he posted
+    it rather than at a time into a live show."""
+    return his_own(episode.get("show"))
+
+
+def voices(episode: dict, labels: dict[str, dict]) -> dict[str, str]:
+    """Whose voice each line is in: the labels on file, or, for one of
+    his own videos, his on every line."""
+    found = labels.get(str(episode.get("episode_id")), {})
+    if not found and own_video(episode):
+        return {str(i): "Ansem" for i in range(len(episode.get("segments") or []))}
+    return found
 
 
 def level_id(episode_id: str, line: int, symbol: str, level: float) -> str:
@@ -392,7 +409,8 @@ def draft(row: dict, alert: str) -> str:
     sym = row["symbol"].lower()
     return "\n\n".join([
         headline(row, alert),
-        f"market bubble, {spoken_date(row['date'])}, with {sym} at {money(row['price_then'])}:",
+        f"{'his video on x' if row.get('own') else 'market bubble'}, "
+        f"{spoken_date(row['date'])}, with {sym} at {money(row['price_then'])}:",
         f'"{plain(row["quote"])}"',
         f"{sym} is {money(check.get('price_now'))} now.",
         row["link"],

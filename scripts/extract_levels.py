@@ -17,6 +17,9 @@ scripts/build_levels.py builds data/levels.json from the ones kept.
 Windows with no digit in anything said are not sent: a level is a
 number, and the captions write numbers as digits.
 
+Ansem's own videos ("Ansem on X") have no voice labels, because nobody
+else talks in them; every line is read as his (app/levels.py voices).
+
 The model's raw replies are cached per show in data/.levels_cache/.
 """
 
@@ -178,7 +181,7 @@ async def main() -> int:
     before = json.loads(OUT.read_text()) if OUT.exists() else {"shows": {}}
     report = dict(before.get("shows", {}))
     for show in shows:
-        marks = labels.get(show["episode_id"], {})
+        marks = levels.voices(show, labels)
         if not marks:
             print(f"  no voice labels, skipped: {show['title'][:60]}")
             continue

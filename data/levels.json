@@ -1,5 +1,5 @@
 {
- "built_at": "2026-11-19T02:53:38+00:00",
+ "built_at": "2026-11-19T03:56:59+00:00",
  "levels": [
   {
    "id": "x-2118457515969032365:2708:ZEC:1370",
@@ -7,6 +7,7 @@
    "show": "Market Bubble Episode 25 - Presented by @polymarket",
    "said_at": "2026-11-06T00:31:08+00:00",
    "date": "2026-11-05",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Zcash",
    "symbol": "ZEC",
@@ -27,8 +28,8 @@
     "side": "above",
     "hit_at": "2026-11-06T14:00+00:00",
     "best": 1383.56005859375,
-    "price_now": 900.0,
-    "now_at": "2026-11-19T02:53+00:00",
+    "price_now": 918.75,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -38,6 +39,7 @@
    "show": "Market Bubble Episode 25 - Presented by @polymarket",
    "said_at": "2026-11-05T21:47:07+00:00",
    "date": "2026-11-05",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -57,10 +59,10 @@
     "state": "open",
     "side": "below",
     "hit_at": null,
-    "best": 62001.55078125,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
-    "away_pct": 4.07
+    "best": 62004.0,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
+    "away_pct": 4.88
    }
   },
   {
@@ -69,6 +71,7 @@
    "show": "Market Bubble Episode 25 - Presented by @polymarket",
    "said_at": "2026-11-05T21:47:01+00:00",
    "date": "2026-11-05",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -88,9 +91,9 @@
     "state": "hit",
     "side": "below",
     "hit_at": "2026-11-06T15:00+00:00",
-    "best": 62001.55078125,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 62004.0,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -100,6 +103,7 @@
    "show": "Market Bubble Episode 25 - Presented by @polymarket",
    "said_at": "2026-11-05T21:46:45+00:00",
    "date": "2026-11-05",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Zcash",
    "symbol": "ZEC",
@@ -120,8 +124,8 @@
     "side": "below",
     "hit_at": "2026-11-14T18:00+00:00",
     "best": 801.3400268554688,
-    "price_now": 900.0,
-    "now_at": "2026-11-19T02:53+00:00",
+    "price_now": 918.75,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -131,6 +135,7 @@
    "show": "Market Bubble Episode 25 - Presented by @polymarket",
    "said_at": "2026-11-05T21:46:31+00:00",
    "date": "2026-11-05",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Zcash",
    "symbol": "ZEC",
@@ -151,8 +156,8 @@
     "side": "below",
     "hit_at": "2026-11-10T16:00+00:00",
     "best": 801.3400268554688,
-    "price_now": 900.0,
-    "now_at": "2026-11-19T02:53+00:00",
+    "price_now": 918.75,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -162,6 +167,7 @@
    "show": "Market Bubble Episode 25 - Presented by @polymarket",
    "said_at": "2026-11-05T21:42:32+00:00",
    "date": "2026-11-05",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -181,10 +187,106 @@
     "state": "open",
     "side": "above",
     "hit_at": null,
-    "best": 76278.0390625,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
-    "away_pct": 31.11
+    "best": 76290.25,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
+    "away_pct": 30.0
+   }
+  },
+  {
+   "id": "x-2116220650058846455:36:GC:4100",
+   "episode_id": "x-2116220650058846455",
+   "show": "Ansem on X: thoughts on gold, btc/gold and btc/nasdaq",
+   "said_at": "2026-10-30T17:28:15+00:00",
+   "date": "2026-10-30",
+   "own": true,
+   "speaker": "Ansem",
+   "asset": "Gold",
+   "symbol": "GOLD",
+   "class": "commodity",
+   "listing": "GC=F",
+   "kind": "line",
+   "level": 4100.0,
+   "quote": "the trades like this here, probably like a reclaim of like 4,100, I think I would say",
+   "line": 36,
+   "start_seconds": 266.87,
+   "timestamp": "4:26",
+   "link": "https://x.com/blknoiz06/status/2116220650058846455",
+   "price_then": 3901.89990234375,
+   "quiet": true,
+   "by": null,
+   "check": {
+    "state": "hit",
+    "side": "above",
+    "hit_at": "2026-11-05T00:00+00:00",
+    "best": 4157.7001953125,
+    "price_now": 3712.199951171875,
+    "now_at": "2026-11-19T03:46+00:00",
+    "away_pct": null
+   }
+  },
+  {
+   "id": "x-2116134237971915020:70:HYPE:75",
+   "episode_id": "x-2116134237971915020",
+   "show": "Ansem on X: 0:00 - Hyperliquid x ICE news",
+   "said_at": "2026-10-30T11:44:52+00:00",
+   "date": "2026-10-30",
+   "own": true,
+   "speaker": "Ansem",
+   "asset": "Hyperliquid",
+   "symbol": "HYPE",
+   "class": "crypto",
+   "listing": "HYPE32196-USD",
+   "kind": "buy",
+   "level": 75.0,
+   "quote": "I think I'll get a chance to buy it under 80 in the 75",
+   "line": 70,
+   "start_seconds": 355.06,
+   "timestamp": "5:55",
+   "link": "https://x.com/blknoiz06/status/2116134237971915020",
+   "price_then": 92.66000366210938,
+   "quiet": false,
+   "by": null,
+   "check": {
+    "state": "hit",
+    "side": "below",
+    "hit_at": "2026-11-08T21:00+00:00",
+    "best": 60.040000915527344,
+    "price_now": 67.23999786376953,
+    "now_at": "2026-11-19T03:56+00:00",
+    "away_pct": null
+   }
+  },
+  {
+   "id": "x-2116134237971915020:468:BTC:79400",
+   "episode_id": "x-2116134237971915020",
+   "show": "Ansem on X: 0:00 - Hyperliquid x ICE news",
+   "said_at": "2026-10-30T11:44:52+00:00",
+   "date": "2026-10-30",
+   "own": true,
+   "speaker": "Ansem",
+   "asset": "Bitcoin",
+   "symbol": "BTC",
+   "class": "crypto",
+   "listing": "BTC-USD",
+   "kind": "line",
+   "level": 79400.0,
+   "quote": "I think that's like 80K, 79.4 on BTC",
+   "line": 468,
+   "start_seconds": 2169.61,
+   "timestamp": "36:09",
+   "link": "https://x.com/blknoiz06/status/2116134237971915020",
+   "price_then": 77432.59375,
+   "quiet": true,
+   "by": null,
+   "check": {
+    "state": "hit",
+    "side": "above",
+    "hit_at": "2026-11-04T14:00+00:00",
+    "best": 81077.78125,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
+    "away_pct": null
    }
   },
   {
@@ -193,6 +295,7 @@
    "show": "Market Bubble Episode 24 w/ @TraderMayne and @Insentos - Presented by @polymarket",
    "said_at": "2026-10-29T22:08:18+00:00",
    "date": "2026-10-29",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Zcash",
    "symbol": "ZEC",
@@ -213,9 +316,9 @@
     "side": "below",
     "hit_at": null,
     "best": 801.3400268554688,
-    "price_now": 900.0,
-    "now_at": "2026-11-19T02:53+00:00",
-    "away_pct": 16.67
+    "price_now": 918.75,
+    "now_at": "2026-11-19T03:56+00:00",
+    "away_pct": 18.37
    }
   },
   {
@@ -224,6 +327,7 @@
    "show": "Market Bubble Episode 24 w/ @TraderMayne and @Insentos - Presented by @polymarket",
    "said_at": "2026-10-29T20:45:44+00:00",
    "date": "2026-10-29",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Ethereum",
    "symbol": "ETH",
@@ -244,8 +348,8 @@
     "side": "above",
     "hit_at": "2026-11-02T03:00+00:00",
     "best": 2446.840087890625,
-    "price_now": 1768.510009765625,
-    "now_at": "2026-11-19T02:53+00:00",
+    "price_now": 1787.449951171875,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -255,6 +359,7 @@
    "show": "Market Bubble Episode 24 w/ @TraderMayne and @Insentos - Presented by @polymarket",
    "said_at": "2026-10-29T20:45:34+00:00",
    "date": "2026-10-29",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -274,9 +379,9 @@
     "state": "hit",
     "side": "above",
     "hit_at": "2026-10-29T21:00+00:00",
-    "best": 81075.6015625,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 81077.78125,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -286,6 +391,7 @@
    "show": "Market Bubble Episode 24 w/ @TraderMayne and @Insentos - Presented by @polymarket",
    "said_at": "2026-10-29T20:43:32+00:00",
    "date": "2026-10-29",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -305,9 +411,9 @@
     "state": "hit",
     "side": "below",
     "hit_at": "2026-11-06T15:00+00:00",
-    "best": 62001.55078125,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 62004.0,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -317,6 +423,7 @@
    "show": "Market Bubble Episode 24 w/ @TraderMayne and @Insentos - Presented by @polymarket",
    "said_at": "2026-10-29T20:43:23+00:00",
    "date": "2026-10-29",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Ethereum",
    "symbol": "ETH",
@@ -337,8 +444,136 @@
     "side": "below",
     "hit_at": "2026-11-14T20:00+00:00",
     "best": 1711.760009765625,
-    "price_now": 1768.510009765625,
-    "now_at": "2026-11-19T02:53+00:00",
+    "price_now": 1787.449951171875,
+    "now_at": "2026-11-19T03:56+00:00",
+    "away_pct": null
+   }
+  },
+  {
+   "id": "x-2115752920779989271:245:ETH:1800",
+   "episode_id": "x-2115752920779989271",
+   "show": "Ansem on X: market thoughts, trading breakouts & breakdowns, candlesticks as fractals",
+   "said_at": "2026-10-29T10:29:39+00:00",
+   "date": "2026-10-29",
+   "own": true,
+   "speaker": "Ansem",
+   "asset": "Ethereum",
+   "symbol": "ETH",
+   "class": "crypto",
+   "listing": "ETH-USD",
+   "kind": "target",
+   "level": 1800.0,
+   "quote": "I think 1800 is like the final spot, but",
+   "line": 245,
+   "start_seconds": 1209.66,
+   "timestamp": "20:09",
+   "link": "https://x.com/blknoiz06/status/2115752920779989271",
+   "price_then": 2316.919921875,
+   "quiet": false,
+   "by": null,
+   "check": {
+    "state": "hit",
+    "side": "below",
+    "hit_at": "2026-11-14T20:00+00:00",
+    "best": 1711.760009765625,
+    "price_now": 1787.449951171875,
+    "now_at": "2026-11-19T03:56+00:00",
+    "away_pct": null
+   }
+  },
+  {
+   "id": "x-2115418459765113280:405:ETH:2450",
+   "episode_id": "x-2115418459765113280",
+   "show": "Ansem on X: Q4 market thoughts october 28th, 2026",
+   "said_at": "2026-10-28T12:20:38+00:00",
+   "date": "2026-10-28",
+   "own": true,
+   "speaker": "Ansem",
+   "asset": "Ethereum",
+   "symbol": "ETH",
+   "class": "crypto",
+   "listing": "ETH-USD",
+   "kind": "line",
+   "level": 2450.0,
+   "quote": "probably above there and then like 2,450 on ETH. And yeah, we'll see",
+   "line": 405,
+   "start_seconds": 2019.24,
+   "timestamp": "33:39",
+   "link": "https://x.com/blknoiz06/status/2115418459765113280",
+   "price_then": 2344.22998046875,
+   "quiet": false,
+   "by": null,
+   "check": {
+    "state": "open",
+    "side": "above",
+    "hit_at": null,
+    "best": 2446.840087890625,
+    "price_now": 1787.449951171875,
+    "now_at": "2026-11-19T03:56+00:00",
+    "away_pct": 37.07
+   }
+  },
+  {
+   "id": "x-2115418459765113280:404:BTC:82500",
+   "episode_id": "x-2115418459765113280",
+   "show": "Ansem on X: Q4 market thoughts october 28th, 2026",
+   "said_at": "2026-10-28T12:20:38+00:00",
+   "date": "2026-10-28",
+   "own": true,
+   "speaker": "Ansem",
+   "asset": "Bitcoin",
+   "symbol": "BTC",
+   "class": "crypto",
+   "listing": "BTC-USD",
+   "kind": "line",
+   "level": 82500.0,
+   "quote": "I think it's like whatever, 82.5 on BTC, probably above there and then like",
+   "line": 404,
+   "start_seconds": 2015.78,
+   "timestamp": "33:35",
+   "link": "https://x.com/blknoiz06/status/2115418459765113280",
+   "price_then": 80909.7265625,
+   "quiet": false,
+   "by": null,
+   "check": {
+    "state": "open",
+    "side": "above",
+    "hit_at": null,
+    "best": 81870.3828125,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
+    "away_pct": 30.8
+   }
+  },
+  {
+   "id": "x-2115418459765113280:160:ETH:1800",
+   "episode_id": "x-2115418459765113280",
+   "show": "Ansem on X: Q4 market thoughts october 28th, 2026",
+   "said_at": "2026-10-28T12:20:38+00:00",
+   "date": "2026-10-28",
+   "own": true,
+   "speaker": "Ansem",
+   "asset": "Ethereum",
+   "symbol": "ETH",
+   "class": "crypto",
+   "listing": "ETH-USD",
+   "kind": "target",
+   "level": 1800.0,
+   "quote": "So yeah, like 1800 and then like 1750, I think, in here",
+   "line": 160,
+   "start_seconds": 802.7,
+   "timestamp": "13:22",
+   "link": "https://x.com/blknoiz06/status/2115418459765113280",
+   "price_then": 2344.22998046875,
+   "quiet": false,
+   "by": null,
+   "check": {
+    "state": "hit",
+    "side": "below",
+    "hit_at": "2026-11-14T20:00+00:00",
+    "best": 1711.760009765625,
+    "price_now": 1787.449951171875,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -348,6 +583,7 @@
    "show": "BULL RUN IS OVER?",
    "said_at": "2026-10-09T01:00:55+00:00",
    "date": "2026-10-08",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -367,9 +603,9 @@
     "state": "hit",
     "side": "below",
     "hit_at": "2026-11-06T15:00+00:00",
-    "best": 62001.55078125,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 62004.0,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -379,6 +615,7 @@
    "show": "BULL RUN IS OVER?",
    "said_at": "2026-10-09T01:00:42+00:00",
    "date": "2026-10-08",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -398,10 +635,10 @@
     "state": "open",
     "side": "above",
     "hit_at": null,
-    "best": 84849.640625,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
-    "away_pct": 39.9
+    "best": 84850.9921875,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
+    "away_pct": 38.72
    }
   },
   {
@@ -410,6 +647,7 @@
    "show": "THE SEC & CFTC STEAMROLL: Market Bubble Episode 20 - Presented by @Polymarket",
    "said_at": "2026-09-17T20:58:40+00:00",
    "date": "2026-09-17",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Robinhood",
    "symbol": "HOOD",
@@ -441,6 +679,7 @@
    "show": "LIVE W/ WILL CLEMENTE, NET NET CAPITAL, & TYLER BERNABE: Market Bubble Ep 18 - Presented by @Polymarket",
    "said_at": "2026-09-04T00:16:34+00:00",
    "date": "2026-09-03",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Ethereum",
    "symbol": "ETH",
@@ -461,8 +700,8 @@
     "side": "below",
     "hit_at": "2026-10-15T02:00+00:00",
     "best": 1711.760009765625,
-    "price_now": 1768.510009765625,
-    "now_at": "2026-11-19T02:53+00:00",
+    "price_now": 1787.449951171875,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -472,6 +711,7 @@
    "show": "LIVE W/ WILL CLEMENTE, NET NET CAPITAL, & TYLER BERNABE: Market Bubble Ep 18 - Presented by @Polymarket",
    "said_at": "2026-09-04T00:16:27+00:00",
    "date": "2026-09-03",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Zcash",
    "symbol": "ZEC",
@@ -492,9 +732,9 @@
     "side": "below",
     "hit_at": null,
     "best": 801.3400268554688,
-    "price_now": 900.0,
-    "now_at": "2026-11-19T02:53+00:00",
-    "away_pct": 16.67
+    "price_now": 918.75,
+    "now_at": "2026-11-19T03:56+00:00",
+    "away_pct": 18.37
    }
   },
   {
@@ -503,6 +743,7 @@
    "show": "LIVE W/ WILL CLEMENTE, NET NET CAPITAL, & TYLER BERNABE: Market Bubble Ep 18 - Presented by @Polymarket",
    "said_at": "2026-09-04T00:16:24+00:00",
    "date": "2026-09-03",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -522,9 +763,9 @@
     "state": "hit",
     "side": "below",
     "hit_at": "2026-11-08T21:00+00:00",
-    "best": 62001.55078125,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 62004.0,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -534,6 +775,7 @@
    "show": "LIVE W/ WILL CLEMENTE, NET NET CAPITAL, & TYLER BERNABE: Market Bubble Ep 18 - Presented by @Polymarket",
    "said_at": "2026-09-03T23:18:02+00:00",
    "date": "2026-09-03",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -553,10 +795,10 @@
     "state": "open",
     "side": "above",
     "hit_at": null,
-    "best": 87394.0,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
-    "away_pct": 59.89
+    "best": 87373.78125,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
+    "away_pct": 58.54
    }
   },
   {
@@ -565,6 +807,7 @@
    "show": "LIVE W/ WILL CLEMENTE, NET NET CAPITAL, & TYLER BERNABE: Market Bubble Ep 18 - Presented by @Polymarket",
    "said_at": "2026-09-03T22:04:29+00:00",
    "date": "2026-09-03",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -584,9 +827,9 @@
     "state": "hit",
     "side": "above",
     "hit_at": "2026-09-21T08:00+00:00",
-    "best": 87394.0,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 87373.78125,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -596,6 +839,7 @@
    "show": "$100K POLYMARKET FANTASY FOOTBALL DRAFT NIGHT",
    "said_at": "2026-08-27T20:52:48+00:00",
    "date": "2026-08-27",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Solana",
    "symbol": "SOL",
@@ -615,10 +859,10 @@
     "state": "open",
     "side": "above",
     "hit_at": null,
-    "best": 124.9000015258789,
-    "price_now": 73.1500015258789,
-    "now_at": "2026-11-19T02:53+00:00",
-    "away_pct": 720.23
+    "best": 124.88999938964844,
+    "price_now": 74.08999633789062,
+    "now_at": "2026-11-19T03:56+00:00",
+    "away_pct": 709.83
    }
   },
   {
@@ -627,6 +871,7 @@
    "show": "LIVE W/ ORANGIE, SE YONG PARK, AUSTIN FEDERA, & GRASS PROTOCOL: Market Bubble EP 16 - Presented by Polymarket",
    "said_at": "2026-08-21T00:30:54+00:00",
    "date": "2026-08-20",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -646,9 +891,9 @@
     "state": "hit",
     "side": "above",
     "hit_at": "2026-09-21T08:00+00:00",
-    "best": 87394.0,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 87373.78125,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -658,6 +903,7 @@
    "show": "LIVE W/ ORANGIE, SE YONG PARK, AUSTIN FEDERA, & GRASS PROTOCOL: Market Bubble EP 16 - Presented by Polymarket",
    "said_at": "2026-08-20T20:41:22+00:00",
    "date": "2026-08-20",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -677,9 +923,9 @@
     "state": "hit",
     "side": "below",
     "hit_at": "2026-11-14T14:00+00:00",
-    "best": 62001.55078125,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 62004.0,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -689,6 +935,7 @@
    "show": "LIVE W/ JOHANN KERBRAT, IVAN SOTO-WRIGHT, & AUSTIN BARACK: Market Bubble Ep 13 - Presented by @Polymarket",
    "said_at": "2026-07-30T23:50:05+00:00",
    "date": "2026-07-30",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Solana",
    "symbol": "SOL",
@@ -708,9 +955,9 @@
     "state": "hit",
     "side": "above",
     "hit_at": "2026-08-27T13:00+00:00",
-    "best": 124.9000015258789,
-    "price_now": 73.1500015258789,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 124.88999938964844,
+    "price_now": 74.08999633789062,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -720,6 +967,7 @@
    "show": "LIVE W/ JOHANN KERBRAT, IVAN SOTO-WRIGHT, & AUSTIN BARACK: Market Bubble Ep 13 - Presented by @Polymarket",
    "said_at": "2026-07-30T23:35:22+00:00",
    "date": "2026-07-30",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -739,10 +987,10 @@
     "state": "open",
     "side": "below",
     "hit_at": null,
-    "best": 62001.55078125,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
-    "away_pct": 4.07
+    "best": 62004.0,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
+    "away_pct": 4.88
    }
   },
   {
@@ -751,6 +999,7 @@
    "show": "LIVE W/ JOHANN KERBRAT, IVAN SOTO-WRIGHT, & AUSTIN BARACK: Market Bubble Ep 13 - Presented by @Polymarket",
    "said_at": "2026-07-30T23:34:49+00:00",
    "date": "2026-07-30",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -770,9 +1019,9 @@
     "state": "hit",
     "side": "above",
     "hit_at": "2026-08-19T15:00+00:00",
-    "best": 87394.0,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 87373.78125,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -782,6 +1031,7 @@
    "show": "LIVE W/ BRIAN ARMSTRONG & KENDRICK PERKINS: Market Bubble Ep 12 - Presented by @Polymarket",
    "said_at": "2026-07-24T00:04:22+00:00",
    "date": "2026-07-23",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Solana",
    "symbol": "SOL",
@@ -801,9 +1051,9 @@
     "state": "hit",
     "side": "below",
     "hit_at": "2026-07-24T11:00+00:00",
-    "best": 67.37999725341797,
-    "price_now": 73.1500015258789,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 67.43000030517578,
+    "price_now": 74.08999633789062,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -813,6 +1063,7 @@
    "show": "LIVE W/ BRIAN ARMSTRONG & KENDRICK PERKINS: Market Bubble Ep 12 - Presented by @Polymarket",
    "said_at": "2026-07-24T00:03:46+00:00",
    "date": "2026-07-23",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Solana",
    "symbol": "SOL",
@@ -832,10 +1083,10 @@
     "state": "open",
     "side": "below",
     "hit_at": null,
-    "best": 67.37999725341797,
-    "price_now": 73.1500015258789,
-    "now_at": "2026-11-19T02:53+00:00",
-    "away_pct": 17.98
+    "best": 67.43000030517578,
+    "price_now": 74.08999633789062,
+    "now_at": "2026-11-19T03:56+00:00",
+    "away_pct": 19.02
    }
   },
   {
@@ -844,6 +1095,7 @@
    "show": "LIVE W/ BRIAN ARMSTRONG & KENDRICK PERKINS: Market Bubble Ep 12 - Presented by @Polymarket",
    "said_at": "2026-07-24T00:02:32+00:00",
    "date": "2026-07-23",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -862,10 +1114,10 @@
    "check": {
     "state": "hit",
     "side": "above",
-    "hit_at": "2026-09-03T21:00+00:00",
-    "best": 87394.0,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
+    "hit_at": "2026-09-21T01:00+00:00",
+    "best": 87373.78125,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -875,6 +1127,7 @@
    "show": "LIVE W/ BRIAN ARMSTRONG & KENDRICK PERKINS: Market Bubble Ep 12 - Presented by @Polymarket",
    "said_at": "2026-07-24T00:01:31+00:00",
    "date": "2026-07-23",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -894,9 +1147,9 @@
     "state": "hit",
     "side": "above",
     "hit_at": "2026-08-19T15:00+00:00",
-    "best": 87394.0,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 87373.78125,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -906,6 +1159,7 @@
    "show": "LIVE W/ JESSE POLLAK & LUCAS BRUDER: Market Bubble Ep 11 - Presented by @Polymarket",
    "said_at": "2026-07-17T00:15:56+00:00",
    "date": "2026-07-16",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -925,9 +1179,9 @@
     "state": "hit",
     "side": "above",
     "hit_at": "2026-09-21T08:00+00:00",
-    "best": 87394.0,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 87373.78125,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -937,6 +1191,7 @@
    "show": "LIVE W/ JESSE POLLAK & LUCAS BRUDER: Market Bubble Ep 11 - Presented by @Polymarket",
    "said_at": "2026-07-17T00:15:56+00:00",
    "date": "2026-07-16",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -956,9 +1211,9 @@
     "state": "hit",
     "side": "above",
     "hit_at": "2026-08-21T01:00+00:00",
-    "best": 87394.0,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 87373.78125,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -968,6 +1223,7 @@
    "show": "LIVE W/ JESSE POLLAK & LUCAS BRUDER: Market Bubble Ep 11 - Presented by @Polymarket",
    "said_at": "2026-07-17T00:15:50+00:00",
    "date": "2026-07-16",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -987,9 +1243,9 @@
     "state": "hit",
     "side": "above",
     "hit_at": "2026-07-21T07:00+00:00",
-    "best": 87394.0,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 87373.78125,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -999,6 +1255,7 @@
    "show": "LIVE W/ JESSE POLLAK & LUCAS BRUDER: Market Bubble Ep 11 - Presented by @Polymarket",
    "said_at": "2026-07-16T22:10:39+00:00",
    "date": "2026-07-16",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Solana",
    "symbol": "SOL",
@@ -1018,9 +1275,9 @@
     "state": "hit",
     "side": "below",
     "hit_at": "2026-07-28T01:00+00:00",
-    "best": 67.37999725341797,
-    "price_now": 73.1500015258789,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 67.43000030517578,
+    "price_now": 74.08999633789062,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -1030,6 +1287,7 @@
    "show": "LIVE W/ JESSE POLLAK & LUCAS BRUDER: Market Bubble Ep 11 - Presented by @Polymarket",
    "said_at": "2026-07-16T22:10:15+00:00",
    "date": "2026-07-16",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Solana",
    "symbol": "SOL",
@@ -1049,9 +1307,9 @@
     "state": "hit",
     "side": "above",
     "hit_at": "2026-08-19T20:00+00:00",
-    "best": 124.9000015258789,
-    "price_now": 73.1500015258789,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 124.88999938964844,
+    "price_now": 74.08999633789062,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -1061,6 +1319,7 @@
    "show": "LIVE W/ JESSE POLLAK & LUCAS BRUDER: Market Bubble Ep 11 - Presented by @Polymarket",
    "said_at": "2026-07-16T20:51:26+00:00",
    "date": "2026-07-16",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Solana",
    "symbol": "SOL",
@@ -1080,9 +1339,9 @@
     "state": "hit",
     "side": "above",
     "hit_at": "2026-08-22T04:00+00:00",
-    "best": 124.9000015258789,
-    "price_now": 73.1500015258789,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 124.88999938964844,
+    "price_now": 74.08999633789062,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -1092,6 +1351,7 @@
    "show": "LIVE W/ JESSE POLLAK & LUCAS BRUDER: Market Bubble Ep 11 - Presented by @Polymarket",
    "said_at": "2026-07-16T20:51:26+00:00",
    "date": "2026-07-16",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -1111,9 +1371,9 @@
     "state": "hit",
     "side": "above",
     "hit_at": "2026-08-25T02:00+00:00",
-    "best": 87394.0,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 87373.78125,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -1123,6 +1383,7 @@
    "show": "LIVE W/ JESSE POLLAK & LUCAS BRUDER: Market Bubble Ep 11 - Presented by @Polymarket",
    "said_at": "2026-07-16T20:48:32+00:00",
    "date": "2026-07-16",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -1142,10 +1403,10 @@
     "state": "open",
     "side": "below",
     "hit_at": null,
-    "best": 62001.55078125,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
-    "away_pct": 4.07
+    "best": 62004.0,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
+    "away_pct": 4.88
    }
   },
   {
@@ -1154,6 +1415,7 @@
    "show": "LIVE W/ JESSE POLLAK & LUCAS BRUDER: Market Bubble Ep 11 - Presented by @Polymarket",
    "said_at": "2026-07-16T20:48:32+00:00",
    "date": "2026-07-16",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -1173,10 +1435,10 @@
     "state": "open",
     "side": "below",
     "hit_at": null,
-    "best": 62001.55078125,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
-    "away_pct": 7.27
+    "best": 62004.0,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
+    "away_pct": 8.05
    }
   },
   {
@@ -1185,6 +1447,7 @@
    "show": "LIVE W/ LUCA NETZ & GPT-LIVE: Market Bubble Ep 10 - Presented by @Polymarket",
    "said_at": "2026-07-10T00:08:10+00:00",
    "date": "2026-07-09",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Solana",
    "symbol": "SOL",
@@ -1204,9 +1467,9 @@
     "state": "hit",
     "side": "above",
     "hit_at": "2026-08-19T20:00+00:00",
-    "best": 124.9000015258789,
-    "price_now": 73.1500015258789,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 124.88999938964844,
+    "price_now": 74.08999633789062,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -1216,6 +1479,7 @@
    "show": "LIVE W/ LUCA NETZ & GPT-LIVE: Market Bubble Ep 10 - Presented by @Polymarket",
    "said_at": "2026-07-09T21:08:13+00:00",
    "date": "2026-07-09",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -1235,9 +1499,9 @@
     "state": "hit",
     "side": "above",
     "hit_at": "2026-07-21T07:00+00:00",
-    "best": 87394.0,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 87373.78125,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -1247,6 +1511,7 @@
    "show": "Market Bubble: The Ansem Edition - Presented by @Polymarket",
    "said_at": "2026-07-03T00:09:52+00:00",
    "date": "2026-07-02",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Solana",
    "symbol": "SOL",
@@ -1266,10 +1531,10 @@
     "state": "open",
     "side": "above",
     "hit_at": null,
-    "best": 124.9000015258789,
-    "price_now": 73.1500015258789,
-    "now_at": "2026-11-19T02:53+00:00",
-    "away_pct": 720.23
+    "best": 124.88999938964844,
+    "price_now": 74.08999633789062,
+    "now_at": "2026-11-19T03:56+00:00",
+    "away_pct": 709.83
    }
   },
   {
@@ -1278,6 +1543,7 @@
    "show": "Market Bubble: The Ansem Edition - Presented by @Polymarket",
    "said_at": "2026-07-02T23:33:41+00:00",
    "date": "2026-07-02",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Solana",
    "symbol": "SOL",
@@ -1297,9 +1563,9 @@
     "state": "hit",
     "side": "below",
     "hit_at": "2026-07-05T09:00+00:00",
-    "best": 67.37999725341797,
-    "price_now": 73.1500015258789,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 67.43000030517578,
+    "price_now": 74.08999633789062,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -1309,6 +1575,7 @@
    "show": "Market Bubble: The Ansem Edition - Presented by @Polymarket",
    "said_at": "2026-07-02T22:34:21+00:00",
    "date": "2026-07-02",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Solana",
    "symbol": "SOL",
@@ -1328,10 +1595,10 @@
     "state": "open",
     "side": "above",
     "hit_at": null,
-    "best": 124.9000015258789,
-    "price_now": 73.1500015258789,
-    "now_at": "2026-11-19T02:53+00:00",
-    "away_pct": 1253.38
+    "best": 124.88999938964844,
+    "price_now": 74.08999633789062,
+    "now_at": "2026-11-19T03:56+00:00",
+    "away_pct": 1236.21
    }
   },
   {
@@ -1340,6 +1607,7 @@
    "show": "LIVE W/ TJR & Mert Market Bubble EP 8 - Presented by @Polymarket",
    "said_at": "2026-06-25T23:38:54+00:00",
    "date": "2026-06-25",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Micron",
    "symbol": "MU",
@@ -1371,6 +1639,7 @@
    "show": "LIVE W/ TJR & Mert Market Bubble EP 8 - Presented by @Polymarket",
    "said_at": "2026-06-25T23:25:33+00:00",
    "date": "2026-06-25",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -1390,9 +1659,9 @@
     "state": "hit",
     "side": "above",
     "hit_at": "2026-07-21T07:00+00:00",
-    "best": 87394.0,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 87373.78125,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -1402,6 +1671,7 @@
    "show": "LIVE W/ TJR & Mert Market Bubble EP 8 - Presented by @Polymarket",
    "said_at": "2026-06-25T23:23:22+00:00",
    "date": "2026-06-25",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -1422,8 +1692,8 @@
     "side": "below",
     "hit_at": "2026-07-01T01:00+00:00",
     "best": 57720.73046875,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -1433,6 +1703,7 @@
    "show": "LIVE W/ TJR & Mert Market Bubble EP 8 - Presented by @Polymarket",
    "said_at": "2026-06-25T23:04:06+00:00",
    "date": "2026-06-25",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Solana",
    "symbol": "SOL",
@@ -1452,9 +1723,9 @@
     "state": "hit",
     "side": "above",
     "hit_at": "2026-07-02T10:00+00:00",
-    "best": 124.9000015258789,
-    "price_now": 73.1500015258789,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 124.88999938964844,
+    "price_now": 74.08999633789062,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -1464,6 +1735,7 @@
    "show": "LIVE W/ TJR & Mert Market Bubble EP 8 - Presented by @Polymarket",
    "said_at": "2026-06-25T20:58:08+00:00",
    "date": "2026-06-25",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -1483,9 +1755,9 @@
     "state": "hit",
     "side": "above",
     "hit_at": "2026-08-20T10:00+00:00",
-    "best": 87394.0,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 87373.78125,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -1495,6 +1767,7 @@
    "show": "LIVE W/ TJR & Mert Market Bubble EP 8 - Presented by @Polymarket",
    "said_at": "2026-06-25T20:40:22+00:00",
    "date": "2026-06-25",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Solana",
    "symbol": "SOL",
@@ -1514,10 +1787,10 @@
     "state": "open",
     "side": "above",
     "hit_at": null,
-    "best": 124.9000015258789,
-    "price_now": 73.1500015258789,
-    "now_at": "2026-11-19T02:53+00:00",
-    "away_pct": 720.23
+    "best": 124.88999938964844,
+    "price_now": 74.08999633789062,
+    "now_at": "2026-11-19T03:56+00:00",
+    "away_pct": 709.83
    }
   },
   {
@@ -1526,6 +1799,7 @@
    "show": "LIVE W/ ILLIA POLOSUKHIN, ANDREW KANG, & CAMILLA ARAUJO: Market Bubble EP 7 - Presented by @Polymarket",
    "said_at": "2026-06-19T01:14:21+00:00",
    "date": "2026-06-18",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Hyperliquid",
    "symbol": "HYPE",
@@ -1546,8 +1820,8 @@
     "side": "above",
     "hit_at": "2026-07-04T04:00+00:00",
     "best": 98.01000213623047,
-    "price_now": 66.62000274658203,
-    "now_at": "2026-11-19T02:53+00:00",
+    "price_now": 67.23999786376953,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -1557,6 +1831,7 @@
    "show": "LIVE W/ ILLIA POLOSUKHIN, ANDREW KANG, & CAMILLA ARAUJO: Market Bubble EP 7 - Presented by @Polymarket",
    "said_at": "2026-06-19T01:12:19+00:00",
    "date": "2026-06-18",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Hyperliquid",
    "symbol": "HYPE",
@@ -1577,8 +1852,8 @@
     "side": "below",
     "hit_at": "2026-07-24T21:00+00:00",
     "best": 51.099998474121094,
-    "price_now": 66.62000274658203,
-    "now_at": "2026-11-19T02:53+00:00",
+    "price_now": 67.23999786376953,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -1588,6 +1863,7 @@
    "show": "LIVE W/ ERIK VOORHEES, MIKE MAJLAK, & FLOOD: Market Bubble EP 5 - Presented by @Polymarket",
    "said_at": "2026-06-04T20:47:46+00:00",
    "date": "2026-06-04",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -1607,9 +1883,9 @@
     "state": "hit",
     "side": "above",
     "hit_at": "2026-06-07T22:00+00:00",
-    "best": 87394.0,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 87373.78125,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -1619,6 +1895,7 @@
    "show": "LIVE W/ ERIK VOORHEES, MIKE MAJLAK, & FLOOD: Market Bubble EP 5 - Presented by @Polymarket",
    "said_at": "2026-06-04T20:47:39+00:00",
    "date": "2026-06-04",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Hyperliquid",
    "symbol": "HYPE",
@@ -1639,9 +1916,9 @@
     "side": "below",
     "hit_at": null,
     "best": 51.099998474121094,
-    "price_now": 66.62000274658203,
-    "now_at": "2026-11-19T02:53+00:00",
-    "away_pct": 32.45
+    "price_now": 67.23999786376953,
+    "now_at": "2026-11-19T03:56+00:00",
+    "away_pct": 33.08
    }
   },
   {
@@ -1650,6 +1927,7 @@
    "show": "LIVE W/ ERIK VOORHEES, MIKE MAJLAK, & FLOOD: Market Bubble EP 5 - Presented by @Polymarket",
    "said_at": "2026-06-04T20:47:11+00:00",
    "date": "2026-06-04",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -1670,8 +1948,8 @@
     "side": "below",
     "hit_at": "2026-06-05T16:00+00:00",
     "best": 57720.73046875,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -1681,6 +1959,7 @@
    "show": "LIVE W/ GREG OSURI & MAYNE: Market Bubble EP 4 - Presented by @Polymarket",
    "said_at": "2026-05-21T20:57:17+00:00",
    "date": "2026-05-21",
+   "own": false,
    "speaker": "Ansem",
    "asset": "NEAR Protocol",
    "symbol": "NEAR",
@@ -1701,8 +1980,8 @@
     "side": "above",
     "hit_at": "2026-09-18T01:00+00:00",
     "best": 5.978400230407715,
-    "price_now": 3.319200038909912,
-    "now_at": "2026-11-19T02:53+00:00",
+    "price_now": 3.389699935913086,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -1712,6 +1991,7 @@
    "show": "LIVE W/ GREG OSURI & MAYNE: Market Bubble EP 4 - Presented by @Polymarket",
    "said_at": "2026-05-21T20:44:23+00:00",
    "date": "2026-05-21",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -1731,9 +2011,9 @@
     "state": "hit",
     "side": "above",
     "hit_at": "2026-08-21T08:00+00:00",
-    "best": 87394.0,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
+    "best": 87373.78125,
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -1743,6 +2023,7 @@
    "show": "LIVE W/ TRISTAN THOMPSON & TJR: Market Bubble EP 3 - Presented by @Polymarket",
    "said_at": "2026-05-14T21:09:54+00:00",
    "date": "2026-05-14",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -1763,8 +2044,8 @@
     "side": "below",
     "hit_at": "2026-05-23T07:00+00:00",
     "best": 57720.73046875,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   },
@@ -1774,6 +2055,7 @@
    "show": "LIVE W/ TRISTAN THOMPSON & TJR: Market Bubble EP 3 - Presented by @Polymarket",
    "said_at": "2026-05-14T21:08:44+00:00",
    "date": "2026-05-14",
+   "own": false,
    "speaker": "Ansem",
    "asset": "Bitcoin",
    "symbol": "BTC",
@@ -1794,8 +2076,8 @@
     "side": "below",
     "hit_at": "2026-05-15T13:00+00:00",
     "best": 57720.73046875,
-    "price_now": 62544.76171875,
-    "now_at": "2026-11-19T02:53+00:00",
+    "price_now": 63075.58984375,
+    "now_at": "2026-11-19T03:56+00:00",
     "away_pct": null
    }
   }

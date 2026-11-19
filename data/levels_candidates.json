@@ -3044,6 +3044,284 @@
      "quote": "This thing went to 74, straight up, 72, into September, and that's literally market top"
     }
    ]
+  },
+  "x-2115418459765113280": {
+   "title": "Ansem on X: Q4 market thoughts october 28th, 2026",
+   "published_at": "2026-10-28",
+   "proposed": 14,
+   "refused": {
+    "the number is not in the quote": 2,
+    "quote is not in the transcript": 1
+   },
+   "candidates": [
+    {
+     "id": "x-2115418459765113280:21:ETH:4800",
+     "episode_id": "x-2115418459765113280",
+     "line": 21,
+     "last_line": 23,
+     "start_seconds": 101.66,
+     "speaker": "Ansem",
+     "asset": "Ethereum",
+     "symbol": "ETH",
+     "asset_class": "crypto",
+     "kind": "target",
+     "level": 4800.0,
+     "quote": "All time high. Fucking $4,800"
+    },
+    {
+     "id": "x-2115418459765113280:24:ETH:880",
+     "episode_id": "x-2115418459765113280",
+     "line": 24,
+     "last_line": 25,
+     "start_seconds": 104.54,
+     "speaker": "Ansem",
+     "asset": "Ethereum",
+     "symbol": "ETH",
+     "asset_class": "crypto",
+     "kind": "target",
+     "level": 880.0,
+     "quote": "last cycle when it followed in 2022, 2023 around 880"
+    },
+    {
+     "id": "x-2115418459765113280:36:ETH:1540",
+     "episode_id": "x-2115418459765113280",
+     "line": 36,
+     "last_line": 36,
+     "start_seconds": 159.16,
+     "speaker": "Ansem",
+     "asset": "Ethereum",
+     "symbol": "ETH",
+     "asset_class": "crypto",
+     "kind": "line",
+     "level": 1540.0,
+     "quote": "Yes, this run up in 20 from 20. These lows in 2023 is actually a big spot to like 1540"
+    },
+    {
+     "id": "x-2115418459765113280:58:ETH:4000",
+     "episode_id": "x-2115418459765113280",
+     "line": 58,
+     "last_line": 58,
+     "start_seconds": 262.24,
+     "speaker": "Ansem",
+     "asset": "Ethereum",
+     "symbol": "ETH",
+     "asset_class": "crypto",
+     "kind": "target",
+     "level": 4000.0,
+     "quote": "And then in late 2023, it made this high and went to 4K"
+    },
+    {
+     "id": "x-2115418459765113280:160:ETH:1800",
+     "episode_id": "x-2115418459765113280",
+     "line": 160,
+     "last_line": 160,
+     "start_seconds": 802.7,
+     "speaker": "Ansem",
+     "asset": "Ethereum",
+     "symbol": "ETH",
+     "asset_class": "crypto",
+     "kind": "line",
+     "level": 1800.0,
+     "quote": "So yeah, like 1800 and then like 1750, I think, in here"
+    },
+    {
+     "id": "x-2115418459765113280:160:ETH:1750",
+     "episode_id": "x-2115418459765113280",
+     "line": 160,
+     "last_line": 160,
+     "start_seconds": 802.7,
+     "speaker": "Ansem",
+     "asset": "Ethereum",
+     "symbol": "ETH",
+     "asset_class": "crypto",
+     "kind": "line",
+     "level": 1750.0,
+     "quote": "So yeah, like 1800 and then like 1750, I think, in here"
+    },
+    {
+     "id": "x-2115418459765113280:181:ETH:2400",
+     "episode_id": "x-2115418459765113280",
+     "line": 181,
+     "last_line": 181,
+     "start_seconds": 910.54,
+     "speaker": "Ansem",
+     "asset": "Ethereum",
+     "symbol": "ETH",
+     "asset_class": "crypto",
+     "kind": "target",
+     "level": 2400.0,
+     "quote": "I think I said like 2,400, 2,400"
+    },
+    {
+     "id": "x-2115418459765113280:251:ETH:2335",
+     "episode_id": "x-2115418459765113280",
+     "line": 251,
+     "last_line": 251,
+     "start_seconds": 1363.74,
+     "speaker": "Ansem",
+     "asset": "Ethereum",
+     "symbol": "ETH",
+     "asset_class": "crypto",
+     "kind": "line",
+     "level": 2335.0,
+     "quote": "Or if you want to add on confirmation, you would add on a break beneath like 2335 on"
+    },
+    {
+     "id": "x-2115418459765113280:253:ETH:1800",
+     "episode_id": "x-2115418459765113280",
+     "line": 253,
+     "last_line": 254,
+     "start_seconds": 1375.8,
+     "speaker": "Ansem",
+     "asset": "Ethereum",
+     "symbol": "ETH",
+     "asset_class": "crypto",
+     "kind": "target",
+     "level": 1800.0,
+     "quote": "you can kind of move your stop down to this high from this day because I don't think it's going to go higher than that and your targets as I said are like whatever 1800"
+    },
+    {
+     "id": "x-2115418459765113280:404:BTC:82500",
+     "episode_id": "x-2115418459765113280",
+     "line": 404,
+     "last_line": 405,
+     "start_seconds": 2015.78,
+     "speaker": "Ansem",
+     "asset": "Bitcoin",
+     "symbol": "BTC",
+     "asset_class": "crypto",
+     "kind": "target",
+     "level": 82500.0,
+     "quote": "I think it's like whatever, 82.5 on BTC, probably above there and then like"
+    },
+    {
+     "id": "x-2115418459765113280:405:ETH:2450",
+     "episode_id": "x-2115418459765113280",
+     "line": 405,
+     "last_line": 405,
+     "start_seconds": 2019.24,
+     "speaker": "Ansem",
+     "asset": "Ethereum",
+     "symbol": "ETH",
+     "asset_class": "crypto",
+     "kind": "target",
+     "level": 2450.0,
+     "quote": "probably above there and then like 2,450 on ETH. And yeah, we'll see"
+    }
+   ]
+  },
+  "x-2115752920779989271": {
+   "title": "Ansem on X: market thoughts, trading breakouts & breakdowns, candlesticks as fractals",
+   "published_at": "2026-10-29",
+   "proposed": 1,
+   "refused": {},
+   "candidates": [
+    {
+     "id": "x-2115752920779989271:245:ETH:1800",
+     "episode_id": "x-2115752920779989271",
+     "line": 245,
+     "last_line": 245,
+     "start_seconds": 1209.66,
+     "speaker": "Ansem",
+     "asset": "Ethereum",
+     "symbol": "ETH",
+     "asset_class": "crypto",
+     "kind": "target",
+     "level": 1800.0,
+     "quote": "I think 1800 is like the final spot, but"
+    }
+   ]
+  },
+  "x-2116220650058846455": {
+   "title": "Ansem on X: thoughts on gold, btc/gold and btc/nasdaq",
+   "published_at": "2026-10-30",
+   "proposed": 4,
+   "refused": {
+    "the number is not in the quote": 2
+   },
+   "candidates": [
+    {
+     "id": "x-2116220650058846455:8:GC:5600",
+     "episode_id": "x-2116220650058846455",
+     "line": 8,
+     "last_line": 8,
+     "start_seconds": 86.58,
+     "speaker": "Ansem",
+     "asset": "Gold",
+     "symbol": "GC",
+     "asset_class": "commodity",
+     "kind": "target",
+     "level": 5600.0,
+     "quote": "it fucking went from 2k to 5600 and"
+    },
+    {
+     "id": "x-2116220650058846455:36:GC:4100",
+     "episode_id": "x-2116220650058846455",
+     "line": 36,
+     "last_line": 36,
+     "start_seconds": 266.87,
+     "speaker": "Ansem",
+     "asset": "Gold",
+     "symbol": "GC",
+     "asset_class": "commodity",
+     "kind": "line",
+     "level": 4100.0,
+     "quote": "the trades like this here, probably like a reclaim of like 4,100, I think I would say"
+    }
+   ]
+  },
+  "x-2116134237971915020": {
+   "title": "Ansem on X: 0:00 - Hyperliquid x ICE news",
+   "published_at": "2026-10-30",
+   "proposed": 5,
+   "refused": {
+    "the number is not in the quote": 1,
+    "quote is not in the transcript": 1
+   },
+   "candidates": [
+    {
+     "id": "x-2116134237971915020:63:HYPE:100",
+     "episode_id": "x-2116134237971915020",
+     "line": 63,
+     "last_line": 64,
+     "start_seconds": 326.22,
+     "speaker": "Ansem",
+     "asset": "Hyperliquid",
+     "symbol": "HYPE",
+     "asset_class": "crypto",
+     "kind": "target",
+     "level": 100.0,
+     "quote": "Don't really go another 10% down. This thing is easily going to be over 100 in a week or so"
+    },
+    {
+     "id": "x-2116134237971915020:70:HYPE:75",
+     "episode_id": "x-2116134237971915020",
+     "line": 70,
+     "last_line": 70,
+     "start_seconds": 355.06,
+     "speaker": "Ansem",
+     "asset": "Hyperliquid",
+     "symbol": "HYPE",
+     "asset_class": "crypto",
+     "kind": "buy",
+     "level": 75.0,
+     "quote": "I think I'll get a chance to buy it under 80 in the 75"
+    },
+    {
+     "id": "x-2116134237971915020:468:BTC:79400",
+     "episode_id": "x-2116134237971915020",
+     "line": 468,
+     "last_line": 468,
+     "start_seconds": 2169.61,
+     "speaker": "Ansem",
+     "asset": "Bitcoin",
+     "symbol": "BTC",
+     "asset_class": "crypto",
+     "kind": "line",
+     "level": 79400.0,
+     "quote": "I think that's like 80K, 79.4 on BTC"
+    }
+   ]
   }
  }
 }

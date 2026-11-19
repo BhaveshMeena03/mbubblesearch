@@ -873,5 +873,83 @@
  "x-2118457515969032365:3095:LTC:74": {
   "keep": false,
   "why": "where litecoin went in an old cycle"
+ },
+ "x-2115418459765113280:21:ETH:4800": {
+  "keep": false,
+  "why": "the 2021 high, history"
+ },
+ "x-2115418459765113280:24:ETH:880": {
+  "keep": false,
+  "why": "the 2022 low, history"
+ },
+ "x-2115418459765113280:36:ETH:1540": {
+  "keep": false,
+  "why": "a level on the 2023 chart, history"
+ },
+ "x-2115418459765113280:58:ETH:4000": {
+  "keep": false,
+  "why": "the 2023 high, history"
+ },
+ "x-2115418459765113280:160:ETH:1800": {
+  "keep": true,
+  "why": "where he sees eth going: 1800, then 1750",
+  "kind": "target"
+ },
+ "x-2115418459765113280:160:ETH:1750": {
+  "keep": false,
+  "why": "the same zone as 1800 on the same line"
+ },
+ "x-2115418459765113280:181:ETH:2400": {
+  "keep": false,
+  "why": "not clear what the 2400 refers to"
+ },
+ "x-2115418459765113280:251:ETH:2335": {
+  "keep": false,
+  "why": "where to add to a short, a trade"
+ },
+ "x-2115418459765113280:253:ETH:1800": {
+  "keep": false,
+  "why": "the same 1800, said as a trade target later in the video"
+ },
+ "x-2115418459765113280:404:BTC:82500": {
+  "keep": true,
+  "why": "the level where he flips back bullish on bitcoin: 82.5k",
+  "kind": "line"
+ },
+ "x-2115418459765113280:405:ETH:2450": {
+  "keep": true,
+  "why": "and 2450 on eth",
+  "kind": "line"
+ },
+ "x-2115752920779989271:245:ETH:1800": {
+  "keep": true,
+  "why": "1800 is the final spot for eth",
+  "kind": "target"
+ },
+ "x-2116220650058846455:8:GC:5600": {
+  "keep": false,
+  "why": "where gold ran to, history"
+ },
+ "x-2116220650058846455:36:GC:4100": {
+  "keep": true,
+  "why": "back above 4100 and he was wrong on gold",
+  "kind": "line",
+  "symbol": "GOLD",
+  "quiet": true
+ },
+ "x-2116134237971915020:63:HYPE:100": {
+  "keep": false,
+  "why": "over 100 within a week, a window that has passed"
+ },
+ "x-2116134237971915020:70:HYPE:75": {
+  "keep": true,
+  "why": "he expects a chance to buy hype under 80, at 75",
+  "kind": "buy"
+ },
+ "x-2116134237971915020:468:BTC:79400": {
+  "keep": true,
+  "why": "a daily close above 79.4k and he was wrong being bearish",
+  "kind": "line",
+  "quiet": true
  }
 }

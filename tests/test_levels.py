@@ -269,6 +269,15 @@ def test_the_same_number_said_on_three_shows_is_one_alert_from_the_first():
     assert levels.remember([again, first], {})["hit"] == ["july", "june"]
 
 
+def test_his_own_video_is_his_on_every_line_and_a_show_needs_its_labels():
+    video = {"episode_id": "x-2115418459765113280", "show": "Ansem on X",
+             "segments": [{"t": 0.0, "text": "a"}, {"t": 4.0, "text": "b"}]}
+    assert levels.voices(video, {}) == {"0": "Ansem", "1": "Ansem"}
+    assert levels.own_video(video) and not levels.own_video(EPISODE)
+    assert levels.voices(EPISODE, {}) == {}
+    assert levels.voices(EPISODE, {EPISODE["episode_id"]: VOICES}) == VOICES
+
+
 # --- the post ----------------------------------------------------------------------
 
 def test_the_draft_is_the_accounts_voice_with_one_link():
@@ -282,6 +291,13 @@ def test_the_draft_is_the_accounts_voice_with_one_link():
         "https://x.com/i/broadcasts/1dxYlaZbXWQJX?t=5720",
     ]
     assert text.count("http") == 1 and "—" not in text and "–" not in text
+
+
+def test_his_own_video_is_named_as_his_video_and_links_the_post():
+    item = dict(row("a", away_pct=3.5), own=True, link="https://x.com/blknoiz06/status/2116134237971915020")
+    lines = levels.draft(item, "near").split("\n\n")
+    assert lines[1] == "his video on x, october 29, 2026, with zec at $1,260:"
+    assert lines[-1] == "https://x.com/blknoiz06/status/2116134237971915020"
 
 
 def test_a_near_draft_says_how_far():
@@ -338,10 +354,14 @@ def test_every_level_is_said_word_for_word_on_its_line_in_that_voice():
         span = calls.locate(item["quote"], episode["segments"], item["line"])
         assert span is not None and span.first == item["line"], item["id"]
         assert calls.cut(episode["segments"], span) == item["quote"], item["id"]
-        assert calls.voice(voices[item["episode_id"]], span.first, span.last) == item["speaker"], item["id"]
+        marks = levels.voices(episode, voices)
+        assert calls.voice(marks, span.first, span.last) == item["speaker"], item["id"]
         assert levels.said_in(item["level"], item["quote"]), item["id"]
         assert levels.sane(item["level"], item["price_then"]), item["id"]
-        assert item["link"].endswith(f"t={int(item['start_seconds'])}"), item["id"]
+        if levels.own_video(episode):
+            assert item["link"] == episode["url"], item["id"]
+        else:
+            assert item["link"].endswith(f"t={int(item['start_seconds'])}"), item["id"]
 
 
 @needs_levels

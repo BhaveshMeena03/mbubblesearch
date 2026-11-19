@@ -175,7 +175,7 @@ async def main() -> int:
             if episode is None:
                 problems.append(f"{ident}: the show is not in data/episodes.json")
                 continue
-            row = placed(row, episode, labels.get(row["episode_id"], {}))
+            row = placed(row, episode, levels.voices(episode, labels))
             if row is None:
                 problems.append(f"{ident}: the quote is not on that line in that voice, "
                                 "or the number is not in it")
@@ -184,7 +184,10 @@ async def main() -> int:
             if aired is None:
                 problems.append(f"{ident}: cannot tell when the show aired")
                 continue
-            said_at = aired + timedelta(seconds=row["start_seconds"])
+            own = levels.own_video(episode)
+            # A show is heard live, so a level is said that many seconds in.
+            # One of his own videos is heard when he posts it.
+            said_at = aired if own else aired + timedelta(seconds=row["start_seconds"])
             asset = assets.get(row["symbol"])
             if not asset or not asset.get("yahoo") or not asset.get("name"):
                 problems.append(f"{ident}: no listing on file for {row['symbol']!r}")
@@ -223,14 +226,17 @@ async def main() -> int:
                 "show": " ".join(str(episode.get("title") or "").split()),
                 "said_at": said_at.isoformat(timespec="seconds"),
                 "date": said_at.astimezone(HOME).date().isoformat(),
-                "speaker": row["speaker"], "asset": asset["name"],
+                "own": own, "speaker": row["speaker"], "asset": asset["name"],
                 "symbol": asset.get("ticker") or row["symbol"],
                 "class": asset.get("class") or "crypto", "listing": listing,
                 "kind": row["kind"], "level": row["level"],
                 "quote": row["quote"], "line": row["line"],
                 "start_seconds": row["start_seconds"],
                 "timestamp": stamp(row["start_seconds"]),
-                "link": link(episode, row["start_seconds"], players),
+                # An uploaded video on X does not open at a second, so his
+                # own videos link the post.
+                "link": (str(episode.get("url") or "") if own
+                         else link(episode, row["start_seconds"], players)),
                 "price_then": then,
                 "quiet": bool(row.get("quiet")), "by": row.get("by"),
                 "check": old.get("check") if old.get("listing") == listing else None,
