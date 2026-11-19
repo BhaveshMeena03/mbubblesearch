@@ -323,6 +323,10 @@ USAGE = Counter()
 async def ask(client: AsyncAnthropic, model: str, window: str,
               gate: asyncio.Semaphore, *, system: str | None = None,
               tool: dict | None = None) -> list[dict]:
+    tool = tool or TOOL
+    # What the tool returns its list under: "calls" here, "levels" for
+    # scripts/extract_levels.py, which reads the shows the same way.
+    key = tool["input_schema"]["required"][0]
     async with gate:
         for attempt in range(4):
             try:
@@ -330,8 +334,8 @@ async def ask(client: AsyncAnthropic, model: str, window: str,
                     model=model, max_tokens=2048,
                     system=[{"type": "text", "text": system or SYSTEM,
                              "cache_control": {"type": "ephemeral"}}],
-                    tools=[tool or TOOL],
-                    tool_choice={"type": "tool", "name": "record_calls"},
+                    tools=[tool],
+                    tool_choice={"type": "tool", "name": tool["name"]},
                     messages=[{"role": "user",
                                "content": f"<excerpt>\n{window}\n</excerpt>"}],
                 )
@@ -341,7 +345,7 @@ async def ask(client: AsyncAnthropic, model: str, window: str,
                 USAGE["output_tokens"] += getattr(use, "output_tokens", 0) or 0
                 for block in reply.content:
                     if block.type == "tool_use":
-                        found = block.input.get("calls", [])
+                        found = block.input.get(key, [])
                         return found if isinstance(found, list) else []
                 return []
             except Exception as exc:                            # noqa: BLE001

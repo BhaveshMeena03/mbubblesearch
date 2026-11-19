@@ -1,0 +1,877 @@
+{
+ "x-2052486417154969659:464:BTC:75000": {
+  "keep": false,
+  "why": "where it was in april 2025, not a level"
+ },
+ "x-2052486417154969659:518:ZEC:700": {
+  "keep": false,
+  "why": "last year's top, not a level"
+ },
+ "x-2055023168868553083:627:BTC:79000": {
+  "keep": true,
+  "why": "the key level he says bitcoin is holding; support he expects to hold: losing it would only say he was wrong, so it never alerts",
+  "kind": "line",
+  "quiet": true
+ },
+ "x-2055023168868553083:651:BTC:75000": {
+  "keep": true,
+  "why": "his invalidation: below 75k bitcoin starts downtrending; support he expects to hold: losing it would only say he was wrong, so it never alerts",
+  "kind": "line",
+  "quiet": true
+ },
+ "x-2055023168868553083:909:ZEC:800": {
+  "keep": false,
+  "why": "the 2017 all-time high, history"
+ },
+ "x-2055023168868553083:1264:RKLB:60": {
+  "keep": false,
+  "why": "an old trade, sold at 60"
+ },
+ "x-2055023168868553083:3580:CERE:115": {
+  "keep": false,
+  "why": "cerebras ipo prices as they happened, not a level"
+ },
+ "x-2055023168868553083:3581:CERE:185": {
+  "keep": false,
+  "why": "cerebras ipo prices as they happened, not a level"
+ },
+ "x-2055023168868553083:3582:CERE:280": {
+  "keep": false,
+  "why": "cerebras ipo prices as they happened, not a level"
+ },
+ "x-2055023168868553083:3609:CERE:200": {
+  "keep": false,
+  "why": "cerebras ipo prices as they happened, not a level"
+ },
+ "x-2055023168868553083:3610:CERE:285": {
+  "keep": false,
+  "why": "cerebras ipo prices as they happened, not a level"
+ },
+ "x-2055023168868553083:3620:CERE:350": {
+  "keep": false,
+  "why": "cerebras ipo prices as they happened, not a level"
+ },
+ "x-2055023168868553083:3622:CERE:380": {
+  "keep": false,
+  "why": "cerebras ipo prices as they happened, not a level"
+ },
+ "x-2055023168868553083:3623:CERE:330": {
+  "keep": false,
+  "why": "cerebras ipo prices as they happened, not a level"
+ },
+ "x-2055023168868553083:3715:ETH:800": {
+  "keep": false,
+  "why": "banks on where he bought years ago"
+ },
+ "x-2055023168868553083:3718:SOL:8": {
+  "keep": false,
+  "why": "banks on where he bought years ago"
+ },
+ "x-2057559650166559016:309:BTC:79000": {
+  "keep": true,
+  "why": "range high he wants reclaimed to be bullish",
+  "kind": "line"
+ },
+ "x-2057559650166559016:493:NEAR:1.5": {
+  "keep": false,
+  "why": "describes the current range"
+ },
+ "x-2057559650166559016:496:NEAR:1.45": {
+  "keep": false,
+  "why": "a stop on a trade setup, not a view"
+ },
+ "x-2057559650166559016:500:NEAR:3.2": {
+  "keep": true,
+  "why": "the area he names above the breakout",
+  "kind": "target"
+ },
+ "x-2057559650166559016:4591:HYPE:40": {
+  "keep": false,
+  "why": "a made-up example to explain pair trades"
+ },
+ "x-2062633295792271762:345:BTC:60000": {
+  "keep": true,
+  "why": "the 60k level: if it gives, liquidations underneath",
+  "kind": "line"
+ },
+ "x-2062633295792271762:354:HYPE:45": {
+  "keep": true,
+  "why": "best buy if it goes really deep, 45 to 50",
+  "kind": "buy"
+ },
+ "x-2062633295792271762:355:BTC:64000": {
+  "keep": true,
+  "why": "prior high around 64k, another big level; support he expects to hold: losing it would only say he was wrong, so it never alerts",
+  "kind": "line",
+  "quiet": true
+ },
+ "x-2062633295792271762:368:HYPE:75": {
+  "keep": false,
+  "why": "banks reading the new high, not a level"
+ },
+ "x-2062633295792271762:718:ETH:1900": {
+  "keep": false,
+  "why": "a friend's story, not his level"
+ },
+ "x-2062633295792271762:977:HYPE:4": {
+  "keep": false,
+  "why": "where hype traded at launch, history"
+ },
+ "x-2065170470186651823:927:SPACEX:160": {
+  "keep": false,
+  "why": "a trade setup with a stop at 158"
+ },
+ "x-2065170470186651823:947:SPACEX:135": {
+  "keep": false,
+  "why": "the expected ipo price, not his level"
+ },
+ "x-2067707414028382656:32:SPACEX:135": {
+  "keep": false,
+  "why": "the ipo price, history"
+ },
+ "x-2067707414028382656:36:SPACEX:180": {
+  "keep": false,
+  "why": "where it trades right now"
+ },
+ "x-2067707414028382656:46:SPACEX:180": {
+  "keep": false,
+  "why": "where it trades right now"
+ },
+ "x-2067707414028382656:4405:BTC:66500": {
+  "keep": false,
+  "why": "a stop loss on a short, a trade"
+ },
+ "x-2067707414028382656:4409:BTC:66000": {
+  "keep": false,
+  "why": "moving a stop loss in a demo, a trade"
+ },
+ "x-2067707414028382656:4594:MINIMAX:463": {
+  "keep": false,
+  "why": "a trade entry with a stop"
+ },
+ "x-2067707414028382656:4673:BTC:69000": {
+  "keep": false,
+  "why": "teaching a chart pattern, asset not clear"
+ },
+ "x-2067707414028382656:4743:MU:1100": {
+  "keep": false,
+  "why": "an entry with a stop for the 1k challenge, a trade"
+ },
+ "x-2067707414028382656:4793:SPCE:225": {
+  "keep": false,
+  "why": "a past move"
+ },
+ "x-2067707414028382656:4898:HYPE:57": {
+  "keep": true,
+  "why": "where he thinks hype is going, 57 to 60",
+  "kind": "target"
+ },
+ "x-2067707414028382656:4934:HYPE:72": {
+  "keep": true,
+  "why": "on a reclaim of 72 he would long again",
+  "kind": "buy"
+ },
+ "x-2067707414028382656:4936:HYPE:54": {
+  "keep": false,
+  "why": "a range he is fine with, not a level"
+ },
+ "x-2070244072342827487:60:BTC:55000": {
+  "keep": false,
+  "why": "banks reading out ansem's tweet, not said by ansem"
+ },
+ "x-2070244072342827487:85:SOL:600": {
+  "keep": true,
+  "why": "this cycle sol can go from 60 to around 600, his target",
+  "kind": "target"
+ },
+ "x-2070244072342827487:363:SOL:600": {
+  "keep": false,
+  "why": "banks repeating ansem's target"
+ },
+ "x-2070244072342827487:388:BTC:40000": {
+  "keep": false,
+  "why": "what he thought earlier in june, past tense"
+ },
+ "x-2070244072342827487:393:BTC:72000": {
+  "keep": true,
+  "why": "the safer entry: wait for above 70, like 72",
+  "kind": "buy"
+ },
+ "x-2070244072342827487:2579:SOL:100": {
+  "keep": false,
+  "why": "a comparison, not a level"
+ },
+ "x-2070244072342827487:2631:SOL:16": {
+  "keep": false,
+  "why": "an old swing low"
+ },
+ "x-2070244072342827487:2671:SOL:80": {
+  "keep": true,
+  "why": "the safer entry on a reclaim of 80 to 83",
+  "kind": "buy"
+ },
+ "x-2070244072342827487:2675:SOL:76": {
+  "keep": false,
+  "why": "the stop on that entry, a trade"
+ },
+ "x-2070244072342827487:2743:PUMP:17.0017": {
+  "keep": false,
+  "why": "the number is misheard"
+ },
+ "x-2070244072342827487:2884:BTC:60000": {
+  "keep": false,
+  "why": "where bitcoin is right now"
+ },
+ "x-2070244072342827487:2920:BTC:58000": {
+  "keep": true,
+  "why": "58 to 60k is a really big support level; support he expects to hold: losing it would only say he was wrong, so it never alerts",
+  "kind": "line",
+  "quiet": true
+ },
+ "x-2070244072342827487:2941:BTC:66000": {
+  "keep": true,
+  "why": "a weekly close through 66k retests the range high",
+  "kind": "line"
+ },
+ "x-2070244072342827487:3049:SKX:1200": {
+  "keep": false,
+  "why": "where the stock is now"
+ },
+ "x-2070244072342827487:3067:MU:990": {
+  "keep": true,
+  "why": "the 990 low should not be touched if micron keeps trending up; support he expects to hold: losing it would only say he was wrong, so it never alerts",
+  "kind": "line",
+  "quiet": true
+ },
+ "x-2070244072342827487:3089:HYPE:320": {
+  "keep": false,
+  "why": "reading a research note's number, not his"
+ },
+ "x-2070244072342827487:3132:ETH:1500": {
+  "keep": false,
+  "why": "a scenario explaining a pair trade"
+ },
+ "x-2070244072342827487:3133:SOL:60": {
+  "keep": false,
+  "why": "a scenario explaining a pair trade"
+ },
+ "x-2072780197179666519:178:SOL:600": {
+  "keep": false,
+  "why": "banks repeating ansem's target"
+ },
+ "x-2072780197179666519:2475:SOL:990": {
+  "keep": true,
+  "why": "his real price target, eth's top market cap, about 990 on sol",
+  "kind": "target"
+ },
+ "x-2072780197179666519:2601:HYPE:30": {
+  "keep": false,
+  "why": "banks on where he bought"
+ },
+ "x-2072780197179666519:4061:ZEC:70": {
+  "keep": false,
+  "why": "where he closed an old trade"
+ },
+ "x-2072780197179666519:4196:SOL:80": {
+  "keep": true,
+  "why": "back above 80 is a really key spot for solana",
+  "kind": "line"
+ },
+ "x-2072780197179666519:6472:SOL:600": {
+  "keep": true,
+  "why": "600 is his price target for solana",
+  "kind": "target"
+ },
+ "x-2075316750439338088:487:BTC:10000": {
+  "keep": false,
+  "why": "banks, a what-if"
+ },
+ "x-2075316750439338088:621:ANSEM:2e+08": {
+  "keep": false,
+  "why": "money given back, not a price"
+ },
+ "x-2075316750439338088:832:BTC:66000": {
+  "keep": true,
+  "why": "bitcoin back above 66k is a really key level",
+  "kind": "line"
+ },
+ "x-2075316750439338088:987:SOL:80000": {
+  "keep": false,
+  "why": "banks joking"
+ },
+ "x-2075316750439338088:4582:SOL:150": {
+  "keep": false,
+  "why": "dated to q3, which ended near 125; an alert after would misstate it"
+ },
+ "x-2075316750439338088:4600:SOL:83": {
+  "keep": true,
+  "why": "expects sol to reclaim the 83 level",
+  "kind": "line"
+ },
+ "x-2075316750439338088:4641:HYPE:65": {
+  "keep": false,
+  "why": "a short-term trade with a stop at 62"
+ },
+ "x-2077854740575092752:124:BTC:58000": {
+  "keep": true,
+  "why": "crucial support, the 2021 highs around 58k 60k",
+  "kind": "line",
+  "quiet": true
+ },
+ "x-2077854740575092752:124:BTC:60000": {
+  "keep": true,
+  "why": "crucial support, the 2021 highs around 58k 60k",
+  "kind": "line",
+  "quiet": true
+ },
+ "x-2077854740575092752:128:BTC:75000": {
+  "keep": false,
+  "why": "where bitcoin sold off from, history"
+ },
+ "x-2077854740575092752:155:SOL:100": {
+  "keep": true,
+  "why": "sol back over 100 flips the momentum traders",
+  "kind": "line"
+ },
+ "x-2077854740575092752:155:BTC:80000": {
+  "keep": true,
+  "why": "bitcoin back over 80k flips the momentum traders",
+  "kind": "line"
+ },
+ "x-2077854740575092752:1599:SOL:83": {
+  "keep": true,
+  "why": "the 83 resistance he keeps naming",
+  "kind": "line"
+ },
+ "x-2077854740575092752:1607:SOL:73": {
+  "keep": true,
+  "why": "back under 73 would be a bad sign",
+  "kind": "line",
+  "quiet": true
+ },
+ "x-2077854740575092752:1617:HYPE:65": {
+  "keep": false,
+  "why": "a setup from the last show that got stopped out"
+ },
+ "x-2077854740575092752:3349:CXMT:6.92": {
+  "keep": false,
+  "why": "where a pre-ipo perp trades now"
+ },
+ "x-2077854740575092752:3697:BTC:67300": {
+  "keep": false,
+  "why": "the bear case he says he does not hold"
+ },
+ "x-2077854740575092752:3718:BTC:66000": {
+  "keep": true,
+  "why": "a weekly close above 66k is his confirmation",
+  "kind": "line"
+ },
+ "x-2077854740575092752:3719:BTC:75000": {
+  "keep": true,
+  "why": "above 66k weekly, retest 75k first",
+  "kind": "target"
+ },
+ "x-2077854740575092752:3719:BTC:83000": {
+  "keep": true,
+  "why": "then the 83k high",
+  "kind": "target"
+ },
+ "x-2077854740575092752:3884:SOL:1.37": {
+  "keep": false,
+  "why": "an old trade from years ago"
+ },
+ "x-2077854740575092752:3892:SOL:1.8": {
+  "keep": false,
+  "why": "an old trade from years ago"
+ },
+ "x-2077854740575092752:3938:BTC:58000": {
+  "keep": false,
+  "why": "the same 58 to 60k zone, said earlier in the show"
+ },
+ "x-2077854740575092752:3978:BTC:58700": {
+  "keep": false,
+  "why": "an old setup he tweeted"
+ },
+ "x-2077854740575092752:3981:BTC:66000": {
+  "keep": false,
+  "why": "the same 66k weekly level, said earlier in the show"
+ },
+ "x-2077854740575092752:4000:BTC:62000": {
+  "keep": false,
+  "why": "a lower time frame move for the day"
+ },
+ "x-2077854740575092752:4216:MYCAR:800": {
+  "keep": false,
+  "why": "asset not clear from the lines"
+ },
+ "x-2077854740575092752:4226:MYCAR:780": {
+  "keep": false,
+  "why": "asset not clear from the lines"
+ },
+ "x-2080390322110992735:1177:HYPE:80": {
+  "keep": false,
+  "why": "the high it already hit"
+ },
+ "x-2080390322110992735:3709:BTC:66000": {
+  "keep": true,
+  "why": "a weekly close through 66 to 67k shoots back to the range top",
+  "kind": "line"
+ },
+ "x-2080390322110992735:3713:BTC:62000": {
+  "keep": false,
+  "why": "a this-week move if the weekly fails, short term"
+ },
+ "x-2080390322110992735:3718:BTC:82000": {
+  "keep": true,
+  "why": "the bull starts once bitcoin cleanly breaks above 82k",
+  "kind": "line"
+ },
+ "x-2080390322110992735:3722:BTC:66000": {
+  "keep": false,
+  "why": "the same 66k level, said a minute earlier"
+ },
+ "x-2080390322110992735:3734:SOL:60": {
+  "keep": true,
+  "why": "i don't think we're going lower than 60",
+  "kind": "line",
+  "quiet": true
+ },
+ "x-2080390322110992735:3740:SOL:75": {
+  "keep": true,
+  "why": "the buy: 75 to 72",
+  "kind": "buy"
+ },
+ "x-2080390322110992735:3774:PUMP:1675": {
+  "keep": false,
+  "why": "chart units, not a price (pump trades near 0.0017)"
+ },
+ "x-2080390322110992735:3781:PUMP:1600": {
+  "keep": false,
+  "why": "chart units, not a price"
+ },
+ "x-2080390322110992735:3781:HYPE:1675": {
+  "keep": false,
+  "why": "he is talking about pump, not hype"
+ },
+ "x-2080390322110992735:3781:HYPE:1600": {
+  "keep": false,
+  "why": "he is talking about pump, not hype"
+ },
+ "x-2082927683709628775:251:SOL:3": {
+  "keep": false,
+  "why": "banks, a joke about old prices"
+ },
+ "x-2082927683709628775:650:BTC:100000": {
+  "keep": false,
+  "why": "odds on a polymarket line, not his level"
+ },
+ "x-2082927683709628775:1119:PUMP:2400": {
+  "keep": false,
+  "why": "chart units, not a price (pump trades near 0.002)"
+ },
+ "x-2082927683709628775:2491:BTC:67000": {
+  "keep": false,
+  "why": "banks repeating the level"
+ },
+ "x-2082927683709628775:2491:BTC:66000": {
+  "keep": false,
+  "why": "banks repeating the level"
+ },
+ "x-2082927683709628775:3122:BTC:66000": {
+  "keep": true,
+  "why": "through 66k and bitcoin goes back to the range top",
+  "kind": "line"
+ },
+ "x-2082927683709628775:3128:BTC:58000": {
+  "keep": true,
+  "why": "a retest of the 58 to 60k area is a buy",
+  "kind": "buy",
+  "level": 60000
+ },
+ "x-2082927683709628775:3146:SOL:69": {
+  "keep": false,
+  "why": "where they called the low, history"
+ },
+ "x-2082927683709628775:3147:SOL:73.5": {
+  "keep": false,
+  "why": "a monthly close for july, short term"
+ },
+ "x-2082927683709628775:3151:SOL:100": {
+  "keep": false,
+  "why": "the same 100 to 106 move, said again at 3:16"
+ },
+ "x-2082927683709628775:3188:PUMP:1650": {
+  "keep": false,
+  "why": "chart units, not a price (pump trades near 0.002)"
+ },
+ "x-2082927683709628775:3191:PUMP:1650": {
+  "keep": false,
+  "why": "chart units, not a price (pump trades near 0.002)"
+ },
+ "x-2082927683709628775:3194:PUMP:1600": {
+  "keep": false,
+  "why": "chart units, not a price (pump trades near 0.002)"
+ },
+ "x-2082927683709628775:3195:PUMP:2200": {
+  "keep": false,
+  "why": "chart units, not a price (pump trades near 0.002)"
+ },
+ "x-2082927683709628775:3195:PUMP:2400": {
+  "keep": false,
+  "why": "chart units, not a price (pump trades near 0.002)"
+ },
+ "x-2082927683709628775:3249:HYPE:52": {
+  "keep": false,
+  "why": "a chart swing low he points at"
+ },
+ "x-2082927683709628775:3250:HYPE:54": {
+  "keep": false,
+  "why": "a chart swing low he points at"
+ },
+ "x-2082927683709628775:3306:SOL:106": {
+  "keep": true,
+  "why": "a weekly close through 84 sends sol to 100, 106",
+  "kind": "target"
+ },
+ "x-2082927683709628775:3314:SOL:72": {
+  "keep": false,
+  "why": "a daily low on a short time frame"
+ },
+ "x-2082927683709628775:3319:SOL:60": {
+  "keep": false,
+  "why": "the same 60 he gave on 23 july"
+ },
+ "x-2085464542763765841:218:PHI:7": {
+  "keep": false,
+  "why": "polymarket odds, not a price"
+ },
+ "x-2085464542763765841:220:LAR:16": {
+  "keep": false,
+  "why": "polymarket odds, not a price"
+ },
+ "x-2085464542763765841:1069:BTC:60000": {
+  "keep": false,
+  "why": "where saylor sold, history"
+ },
+ "x-2085464542763765841:1222:PUMP:2400": {
+  "keep": false,
+  "why": "chart units, not a price (pump trades near 0.002)"
+ },
+ "x-2088002434253922358:796:BTC:200000": {
+  "keep": false,
+  "why": "banks, a what-if"
+ },
+ "x-2088002434253922358:4185:PUMP:2200": {
+  "keep": false,
+  "why": "chart units, not a price"
+ },
+ "x-2092001067471147370:811:MLG:2.5e+08": {
+  "keep": false,
+  "why": "the orangie upload is a cut of the 20 aug show; and a story"
+ },
+ "x-2092001067471147370:814:MLG:1e+08": {
+  "keep": false,
+  "why": "the orangie upload is a cut of the 20 aug show; and a story"
+ },
+ "x-2090537938899845434:128:BTC:66000": {
+  "keep": true,
+  "why": "the 66 to 67k level, a weekly close through it shifts the trend",
+  "kind": "line"
+ },
+ "x-2090537938899845434:133:BTC:83000": {
+  "keep": false,
+  "why": "dated to q3; an alert after q3 would misstate it"
+ },
+ "x-2090537938899845434:351:ZEC:0.1": {
+  "keep": false,
+  "why": "a zec/btc ratio, not a price"
+ },
+ "x-2090537938899845434:431:HYPE:50": {
+  "keep": false,
+  "why": "the range it has been in"
+ },
+ "x-2090537938899845434:431:HYPE:75": {
+  "keep": false,
+  "why": "the range it has been in"
+ },
+ "x-2090537938899845434:942:VVV:20": {
+  "keep": false,
+  "why": "how far it already ran"
+ },
+ "x-2090537938899845434:5282:BTC:83000": {
+  "keep": true,
+  "why": "weekly closes above 83, 84 and it's over",
+  "kind": "line"
+ },
+ "x-2090537938899845434:5335:ZEC:800": {
+  "keep": false,
+  "why": "reading out what he said before"
+ },
+ "x-2090537938899845434:5511:ETH:2400": {
+  "keep": false,
+  "why": "walking through an old trade, not clearly now"
+ },
+ "x-2090537938899845434:5593:UNKNOWN:3000": {
+  "keep": false,
+  "why": "asset not clear"
+ },
+ "x-2090537938899845434:5677:SOL:150": {
+  "keep": false,
+  "why": "dated to q3; an alert after q3 would misstate it"
+ },
+ "x-2090537938899845434:5894:PUMP:160": {
+  "keep": false,
+  "why": "market caps of a coin, not a price"
+ },
+ "x-2090537938899845434:5898:PUMP:400": {
+  "keep": false,
+  "why": "market caps of a coin, not a price"
+ },
+ "x-2093074127011909791:52:BTC:80000": {
+  "keep": false,
+  "why": "where bitcoin is right now"
+ },
+ "x-2093074127011909791:371:SOL:150": {
+  "keep": false,
+  "why": "dated to q3; an alert after q3 would misstate it"
+ },
+ "x-2093074127011909791:372:SOL:600": {
+  "keep": true,
+  "why": "still thinks sol goes back to 600 by the end of this cycle",
+  "kind": "target"
+ },
+ "x-2093074127011909791:4252:BTC:120000": {
+  "keep": false,
+  "why": "polymarket odds"
+ },
+ "x-2095611959161082020:109:BASE:50": {
+  "keep": false,
+  "why": "banks reading market caps"
+ },
+ "x-2095611959161082020:856:HYPE:25": {
+  "keep": false,
+  "why": "banks on where he bought"
+ },
+ "x-2095611959161082020:1635:BTC:83000": {
+  "keep": true,
+  "why": "once it gets above 83k it's off to the races",
+  "kind": "line"
+ },
+ "x-2095611959161082020:3386:BTC:83000": {
+  "keep": false,
+  "why": "the same 83k level, said earlier in the show"
+ },
+ "x-2095611959161082020:3387:BTC:100000": {
+  "keep": true,
+  "why": "would not be surprised to see it above 100k by end of the year",
+  "kind": "target",
+  "by": "2026-12-31"
+ },
+ "x-2095611959161082020:4204:BTC:75000": {
+  "keep": false,
+  "why": "he narrows it to 74k a few seconds later"
+ },
+ "x-2095611959161082020:4208:BTC:74000": {
+  "keep": true,
+  "why": "on the record: bitcoin does not go beneath 74k",
+  "kind": "line",
+  "quiet": true
+ },
+ "x-2095611959161082020:4209:ZEC:750": {
+  "keep": true,
+  "why": "on the record: zcash does not go beneath 750",
+  "kind": "line",
+  "quiet": true
+ },
+ "x-2095611959161082020:4210:ETH:2350": {
+  "keep": true,
+  "why": "on the record: eth does not go beneath 2350",
+  "kind": "line",
+  "quiet": true
+ },
+ "x-2095611959161082020:4254:ZEC:0.1": {
+  "keep": false,
+  "why": "a zec/btc ratio, not a price"
+ },
+ "x-2098149424623132694:947:VVV:22": {
+  "keep": false,
+  "why": "the high it already broke"
+ },
+ "x-2098149424623132694:974:BTC:85000": {
+  "keep": false,
+  "why": "an example of closing a hedge"
+ },
+ "x-2098149424623132694:1536:PUMP:3000": {
+  "keep": false,
+  "why": "chart units, not a price"
+ },
+ "x-2098149424623132694:1615:BTC:20000": {
+  "keep": false,
+  "why": "2017, history"
+ },
+ "x-2100684090018316301:299:ZEC:300": {
+  "keep": false,
+  "why": "where they first called it, history"
+ },
+ "x-2100684090018316301:489:HOOD:200": {
+  "keep": true,
+  "why": "robinhood trading 200 plus by end of next year, his call",
+  "kind": "target",
+  "by": "2027-12-31"
+ },
+ "x-2100684090018316301:757:ZEC:1500": {
+  "keep": false,
+  "why": "where zcash is now"
+ },
+ "x-2103221357530263924:166:BTC:50000": {
+  "keep": false,
+  "why": "what the og crowd expected, not his view"
+ },
+ "x-2103221357530263924:616:ZEC:1500": {
+  "keep": false,
+  "why": "where zcash is now"
+ },
+ "x-2108360500283335093:59:BTC:87500": {
+  "keep": true,
+  "why": "the 87.5k yearly open: once it flips, bitcoin runs hard",
+  "kind": "line"
+ },
+ "x-2108360500283335093:63:BTC:75000": {
+  "keep": true,
+  "why": "the 75k low you don't want to go beneath",
+  "kind": "line",
+  "quiet": true
+ },
+ "x-2108360500283335093:520:PUMP:0.01": {
+  "keep": false,
+  "why": "all-time highs within a few weeks, a window that has passed"
+ },
+ "x-2108360500283335093:569:ZEC:10000": {
+  "keep": false,
+  "why": "banks working out a market cap"
+ },
+ "x-2108360500283335093:588:BTC:1.5e+06": {
+  "keep": false,
+  "why": "a lifetime target, too far off for an alert"
+ },
+ "x-2108360500283335093:912:BTC:1.5e+06": {
+  "keep": false,
+  "why": "banks quizzing the chat"
+ },
+ "x-2112232289178722440:173:ZEC:40": {
+  "keep": false,
+  "why": "last year's low, history"
+ },
+ "x-2112232289178722440:176:ZEC:800": {
+  "keep": false,
+  "why": "history"
+ },
+ "x-2112232289178722440:541:BTC:3000": {
+  "keep": false,
+  "why": "2017, history"
+ },
+ "x-2115904746355851479:123:ETH:1800": {
+  "keep": true,
+  "why": "i think eth is going to go to 1800",
+  "kind": "target"
+ },
+ "x-2115904746355851479:127:BTC:75000": {
+  "keep": true,
+  "why": "bitcoin at least has 75k as support",
+  "kind": "line",
+  "quiet": true
+ },
+ "x-2115904746355851479:176:BTC:79400": {
+  "keep": true,
+  "why": "wait for bitcoin to get back above 79.4 before buying back",
+  "kind": "line"
+ },
+ "x-2115904746355851479:177:ETH:2300": {
+  "keep": true,
+  "why": "and 2300 for eth",
+  "kind": "line"
+ },
+ "x-2115904746355851479:2113:ZEC:750": {
+  "keep": true,
+  "why": "if it nukes, he wants to buy zcash at 750",
+  "kind": "buy"
+ },
+ "x-2115904746355851479:2275:NKE:50": {
+  "keep": false,
+  "why": "a trade the guest pitched with a stop at 32"
+ },
+ "x-2115904746355851479:2842:ETH:1800": {
+  "keep": false,
+  "why": "the same 1800 as 0:10:25"
+ },
+ "x-2118457515969032365:46:BTC:82000": {
+  "keep": true,
+  "why": "a weekly close back over 82k is the spot to buy back in",
+  "kind": "buy"
+ },
+ "x-2118457515969032365:118:ZEC:1040": {
+  "keep": true,
+  "why": "sub 1040 is definitely going to happen",
+  "kind": "target"
+ },
+ "x-2118457515969032365:121:ZEC:750": {
+  "keep": false,
+  "why": "his zone is 750 to 850; kept by hand at 850, the top of it"
+ },
+ "x-2118457515969032365:122:ZEC:850": {
+  "keep": true,
+  "by_hand": true,
+  "why": "where he is looking to buy zcash on the deeper pullback: 750 to 850",
+  "episode_id": "x-2118457515969032365",
+  "line": 122,
+  "speaker": "Ansem",
+  "symbol": "ZEC",
+  "kind": "buy",
+  "level": 850,
+  "quote": "This is kind of where I'm looking a bit of that between like 750 and 850."
+ },
+ "x-2118457515969032365:125:BTC:75000": {
+  "keep": true,
+  "why": "the 75 to 76k last key support",
+  "kind": "line",
+  "quiet": true
+ },
+ "x-2118457515969032365:127:BTC:60000": {
+  "keep": true,
+  "why": "if that breaks, bitcoin retests the range lows around 60",
+  "kind": "target"
+ },
+ "x-2118457515969032365:129:BTC:75900": {
+  "keep": false,
+  "why": "an entry with a tight stop, a trade"
+ },
+ "x-2118457515969032365:750:HYPE:100": {
+  "keep": false,
+  "why": "one half of a what-if"
+ },
+ "x-2118457515969032365:752:ZEC:1500": {
+  "keep": false,
+  "why": "one half of a what-if"
+ },
+ "x-2118457515969032365:2678:PUMP:35": {
+  "keep": false,
+  "why": "chart units, not a price"
+ },
+ "x-2118457515969032365:2681:PUMP:34": {
+  "keep": false,
+  "why": "chart units, not a price"
+ },
+ "x-2118457515969032365:2708:ZEC:1370": {
+  "keep": true,
+  "why": "the main resistance, 1370 to 1440",
+  "kind": "line"
+ },
+ "x-2118457515969032365:2763:HYPE:75": {
+  "keep": false,
+  "why": "a bid with a tight invalidation, a trade"
+ },
+ "x-2118457515969032365:3095:LTC:74": {
+  "keep": false,
+  "why": "where litecoin went in an old cycle"
+ }
+}
