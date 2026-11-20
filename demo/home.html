@@ -71,9 +71,9 @@
   header{display:flex;align-items:center;justify-content:space-between;
     gap:16px;padding:26px 0 18px;border-bottom:1px solid var(--edge);
     position:relative;z-index:80}
-  .mark{display:flex;align-items:baseline;gap:10px;text-decoration:none;color:inherit}
-  .mark .w{font-family:"Instrument Serif",Georgia,serif;font-size:21px;letter-spacing:.2px}
-  .mark .s{font-family:var(--mono);font-size:10px;letter-spacing:.24em;
+  .mark{display:flex;align-items:baseline;gap:12px;text-decoration:none;color:inherit}
+  .mark .w{font-family:"Instrument Serif",Georgia,serif;font-size:31px;line-height:1;letter-spacing:.2px}
+  .mark .s{font-family:var(--mono);font-size:12.5px;letter-spacing:.24em;
     text-transform:uppercase;color:var(--ink-3)}
 
   /* ── hero ─────────────────────────────────────────────────────────── */
@@ -542,6 +542,8 @@
        screen of a phone to scroll past before the first word of it. */
     body.asked .hero .tries,body.asked .hero .scale{display:none}
   }
+  /* Beside the Archives menu on a phone there is room for less of it. */
+  @media(max-width:560px){.mark{gap:9px}.mark .w{font-size:25px}.mark .s{font-size:10.5px}}
   @media(max-width:380px){.mark .s{display:none}}
 </style>
 </head>
