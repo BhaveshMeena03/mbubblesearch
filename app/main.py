@@ -51,6 +51,7 @@ from . import (
     og_card,
     quotes,
     recency,
+    seo,
     sources,
     x_posts,
 )
@@ -1177,6 +1178,43 @@ async def llms_txt(request: Request) -> PlainTextResponse:
     return PlainTextResponse(render_llms(text, await _archive_sizes(request)))
 
 
+# Asked for by every crawler before anything else, and a 404 until 20
+# November 2026. An hour's cache: both change only with a deploy or a new
+# recording, and a crawler asks for robots.txt on every visit.
+_CRAWLER_CACHE = {"Cache-Control": "public, max-age=3600"}
+
+
+@app.get("/robots.txt", include_in_schema=False)
+async def robots_txt() -> PlainTextResponse:
+    return PlainTextResponse(seo.robots_txt(), headers=_CRAWLER_CACHE)
+
+
+async def _newest_recordings(request: Request) -> dict[str, str]:
+    """archive -> the day of its newest recording, for the sitemap.
+
+    Whatever cannot be read is left out, and its pages are then listed
+    without a date: a sitemap is still a sitemap without one.
+    """
+    found: dict[str, str] = {}
+    sizes = await _archive_sizes(request)
+    for name, archive in ((sizes or {}).get("by") or {}).items():
+        if archive.get("last"):
+            found[name] = str(archive["last"])[:10]
+    try:
+        days = [str(e.get("published_at") or "")[:10]
+                for e in _episodes_by_id().values()]
+        found["podcast"] = max(d for d in days if d)
+    except Exception as exc:                                    # noqa: BLE001
+        logger.warning("could not date the Market Bubble pages: %s", exc)
+    return found
+
+
+@app.get("/sitemap.xml", include_in_schema=False)
+async def sitemap_xml(request: Request) -> Response:
+    return Response(seo.sitemap_xml(await _newest_recordings(request)),
+                    media_type="application/xml", headers=_CRAWLER_CACHE)
+
+
 # Google Search Console's proof that this site is ours, for the Chrome Web
 # Store's "official URL" on the extension's listing. The file is public by
 # design and holds only its own name; Google asks for it to stay up after
@@ -1268,6 +1306,11 @@ async def security_headers(request: Request, call_next):
     response = await call_next(request)
     for name, value in _SECURITY_HEADERS.items():
         response.headers.setdefault(name, value)
+    # Which addresses stay out of search: see app/seo.py. Here because it
+    # is one more header decided by the path, on every reply.
+    crawl = seo.robots_header(request.url.path)
+    if crawl:
+        response.headers.setdefault("X-Robots-Tag", crawl)
     return response
 
 
