@@ -9,7 +9,9 @@
 <meta name="theme-color" content="#0b0e11">
 <!-- One episode's page. The server fills the fields in (app/episode_pages.py)
      and sends it whole, so a search engine reads the summary without
-     running anything. Opened as a file it is a template, not a page. -->
+     running anything. Its one script, episode.js, plays a time in the page
+     instead of following its link; without it every time is still a link
+     to that second. Opened as a file it is a template, not a page. -->
 <title>{{title}}</title>
 <meta name="description" content="{{description}}">
 <meta property="og:title" content="{{og_title}}">
@@ -62,11 +64,31 @@
     column-gap:22px;padding:15px 0 14px;border-top:1px solid var(--line)}
   .topic p{color:#dfe3e6;overflow-wrap:anywhere}
   .topic p b,.lead b,.para b{color:var(--text);font-weight:600}
+  /* Sized to its own text, not to the cell: stretched across it, the
+     focus ring was a box the width of the margin. */
   .at{font-family:var(--mono);font-size:12.5px;line-height:1.9;
-    color:var(--green);font-weight:600;text-decoration:none}
-  a.at:hover{text-decoration:underline}
-  a.at:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+    color:var(--green);font-weight:600;text-decoration:none;
+    justify-self:start;align-self:start}
+  a.at:hover,a.at.on{text-decoration:underline}
+  a.at:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:3px}
   .at.off{color:var(--muted);font-weight:400}
+  /* A time that leaves for X says so; one that plays here does not. */
+  a.at.out::after{content:" \2197";font-weight:400}
+
+  /* The moment, played under the line it belongs to (episode.js). It
+     starts at the words' left edge, under the time's own column. */
+  .player{margin:0 0 18px 126px}
+  .player iframe{display:block;width:100%;aspect-ratio:16/9;border:0;
+    border-radius:12px;background:#000}
+  .player-bar{display:flex;justify-content:flex-end;align-items:center;
+    gap:16px;margin-top:9px;font-size:12.5px}
+  .player-bar a{color:var(--green);text-decoration:none}
+  .player-bar a:hover{text-decoration:underline}
+  .player-bar button{background:none;border:1px solid var(--line);
+    color:var(--muted);border-radius:8px;padding:4px 11px;font:inherit;cursor:pointer}
+  .player-bar button:hover{color:var(--text);border-color:var(--muted)}
+  .player-bar a:focus-visible,.player-bar button:focus-visible{
+    outline:2px solid var(--green);outline-offset:3px}
   .para{color:#c9ced3;padding:12px 0}
   /* A summary whose times are not linked has no margin to fill. */
   .notes.plain .topic{grid-template-columns:minmax(0,1fr)}
@@ -95,6 +117,7 @@
     .lead{font-size:16px}
     /* The time goes above the words. */
     .topic{grid-template-columns:minmax(0,1fr);row-gap:2px;padding:13px 0 12px}
+    .player{margin-left:0}
     .steps{grid-template-columns:minmax(0,1fr)}
     .step:last-child{text-align:left}
   }
@@ -136,5 +159,6 @@
     here is advice.
   </p>
 </div>
+<script src="/demo/episode.js" defer></script>
 </body>
 </html>

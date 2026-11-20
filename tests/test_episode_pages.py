@@ -112,6 +112,82 @@ def test_a_link_is_only_ever_a_player_at_a_second():
     assert ep.recording('https://x.com/a"><script>') == ""
 
 
+# --- what can be played in the page ------------------------------------------------
+
+def upload(episode_id: str, second: int):
+    """A stand-in for the map of a broadcast onto its YouTube upload: the
+    upload starts 100 seconds in and was cut after the first hour."""
+    return ("V3RNvh6GbEs", second - 100) if 100 <= second < 3600 else None
+
+
+def test_a_recording_indexed_from_youtube_is_its_own_copy():
+    assert ep.on_youtube("dQw4w9WgXcQ", 112) == ("dQw4w9WgXcQ", 112)
+    assert ep.on_youtube("dQw4w9WgXcQ", 112, upload) == ("dQw4w9WgXcQ", 112)
+
+
+def test_a_broadcast_plays_where_its_upload_has_the_moment_and_nowhere_else():
+    assert ep.on_youtube(EP24, 271, upload) == ("V3RNvh6GbEs", 171)
+    assert ep.on_youtube(EP24, 50, upload) is None           # before the upload starts
+    assert ep.on_youtube(EP24, 5720, upload) is None         # cut from the upload
+    assert ep.on_youtube(EP24, 271) is None                  # nobody to ask
+
+
+@pytest.mark.parametrize("answer", [("not an id", 5), ("V3RNvh6GbEs", -1), ("V3RNvh6GbEs", "5"),
+                                    ("V3RNvh6GbEs",), "V3RNvh6GbEs", 5, (None, None)])
+def test_a_bad_answer_from_the_map_costs_one_link_and_not_the_page(answer):
+    assert ep.on_youtube(EP24, 271, lambda *_: answer) is None
+
+    def broken(*_):
+        raise IndexError("a row with two fields")
+    assert ep.on_youtube(EP24, 271, broken) is None
+
+
+@pytest.mark.parametrize("seconds", [-1, 86400, None, "112", True])
+def test_a_time_that_is_not_a_time_plays_nothing(seconds):
+    assert ep.on_youtube("dQw4w9WgXcQ", seconds) is None
+
+
+def test_a_time_on_youtube_plays_in_the_page_and_one_that_is_not_goes_to_x():
+    made = ep.from_summary(ROW, player=PLAYER, youtube=upload)
+    out = ep.render_page(PAGE, made)
+    # 4:31 is in the upload: played here, and a link to YouTube without script.
+    assert ('<a class="at" href="https://www.youtube.com/watch?v=V3RNvh6GbEs&amp;t=171s" '
+            'data-yt="V3RNvh6GbEs" data-at="171" target="_blank" rel="noopener" '
+            'aria-label="Play from 4:31">4:31</a>') in out
+    # 1:35:20 was cut from it: the broadcast on X, marked as a way out.
+    assert (f'<a class="at out" href="{PLAYER}?t=5720" target="_blank" rel="noopener" '
+            'aria-label="Watch on X from 1:35:20">1:35:20</a>') in out
+    # Of the five times, two are in the stand-in upload (4:31 and 10:00).
+    assert out.count("data-yt=") == 2 and out.count('class="at out"') == 3
+
+
+def test_his_own_video_and_an_unpinned_note_play_nothing():
+    own = ep.render_page(PAGE, ep.from_summary(dict(ROW, show="Ansem on X"),
+                                               player=PLAYER, youtube=upload))
+    assert "data-yt" not in own and 'class="at off"' in own
+    old = ep.render_page(PAGE, ep.from_note("mcg", MCG_ROW, NOTE, PAIR))
+    assert "data-yt" not in old and "<a class=\"at" not in old
+
+
+def test_a_pinned_note_plays_every_topic_from_its_own_recording():
+    out = ep.render_page(PAGE, ep.from_note("mcg", MCG_ROW, dict(NOTE, pinned=True), PAIR))
+    assert 'data-yt="dQw4w9WgXcQ" data-at="112"' in out
+    assert 'data-yt="dQw4w9WgXcQ" data-at="1090"' in out
+    assert 'href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&amp;t=112s"' in out
+
+
+def test_a_call_made_on_the_show_plays_in_the_page_too():
+    calls = [{"episode_id": EP24, "speaker": "Ansem", "asset": "Zcash", "timestamp": "4:31",
+              "start_seconds": 271.4, "quote": "a quote", "link": f"{PLAYER}?t=271"},
+             {"episode_id": EP24, "speaker": "Ansem", "asset": "Bitcoin", "timestamp": "1:35:20",
+              "start_seconds": 5720.0, "quote": "another", "link": f"{PLAYER}?t=5720"}]
+    made = ep.from_summary(ROW, player=PLAYER, calls=calls, youtube=upload)
+    assert [c["yt"] for c in made["calls"]] == [("V3RNvh6GbEs", 171), None]
+    out = ep.render_page(PAGE, made)
+    assert 'aria-label="Play from 4:31">4:31</a><p><b>Ansem on Zcash:</b>' in out
+    assert f'<a class="at out" href="{PLAYER}?t=5720"' in out
+
+
 # --- reading a summary -------------------------------------------------------------
 
 def test_a_summary_is_read_whatever_way_it_was_laid_out():
@@ -255,13 +331,17 @@ def test_the_page_says_what_the_summary_says_and_names_its_own_address():
     assert "October 29, 2026" in out and "<b>Market Bubble</b>" in out
     assert "Calls made on this show" in out and "Ansem on Zcash:" in out
     assert 'href="/demo/podcast.html"' in out and "Ask Market Bubble anything" in out
-    assert "Each time opens the show at that second." in out
+    assert "Each time plays the show from that second." in out
 
 
-def test_the_page_needs_no_script_and_is_not_hidden_from_search():
-    out = ep.render_page(PAGE, ep.from_summary(ROW, player=PLAYER))
-    assert "<script" not in out.lower()
+def test_the_page_is_whole_without_its_one_script_and_is_not_hidden_from_search():
+    """The script only keeps a reader on the page. Every time it would
+    play is already a link to that second."""
+    out = ep.render_page(PAGE, ep.from_summary(ROW, player=PLAYER, youtube=upload))
+    assert re.findall(r"<script[^>]*>", out) == ['<script src="/demo/episode.js" defer>']
     assert 'name="robots"' not in out
+    times = re.findall(r'<a class="at[^"]*"[^>]*>', out)
+    assert len(times) == 5 and all('href="https://' in t for t in times)
 
 
 def test_nothing_in_a_title_or_a_summary_becomes_markup():
@@ -342,9 +422,12 @@ def test_every_shipped_page_renders_and_links_only_to_a_player_at_a_second():
     for e in shelf:
         newer, older = ep.neighbours(shelf, e["id"])
         out = ep.render_page(PAGE, e, newer, older)
-        assert "{{" not in out and "<script" not in out.lower(), e["id"]
-        for link in re.findall(r'<a class="at" href="([^"]+)"', out):
+        assert "{{" not in out, e["id"]
+        assert re.findall(r"<script[^>]*>", out) == ['<script src="/demo/episode.js" defer>'], e["id"]
+        for link in re.findall(r'<a class="at(?: out)?" href="([^"]+)"', out):
             assert SEEKS.fullmatch(link), (e["id"], link)
+        for video, at in re.findall(r'data-yt="([^"]*)" data-at="([^"]*)"', out):
+            assert re.fullmatch(r"[A-Za-z0-9_-]{11}", video) and at.isdigit(), e["id"]
 
 
 def test_no_shipped_note_that_is_not_pinned_links_a_time():
@@ -374,6 +457,36 @@ def test_a_market_bubble_time_opens_that_shows_own_broadcast():
     assert seen >= 300
 
 
+def test_most_shipped_moments_play_in_the_page_and_a_broadcasts_follow_its_upload():
+    from app import youtube_map
+    inline = out = 0
+    for e in main._episode_catalog():
+        for b in e["blocks"]:
+            if b.get("t") is None:
+                continue
+            if e["id"].startswith("x-") and not ep.his_own(e["show"]):
+                assert b["yt"] == ep.on_youtube(e["id"], b["t"], youtube_map.youtube_moment), e["id"]
+            elif b.get("link"):
+                assert b["yt"] == (e["id"], b["t"]), e["id"]
+            inline += bool(b.get("yt"))
+            out += bool(b.get("link")) and not b.get("yt")
+    assert inline >= 1200 and out < inline / 10
+
+
+SCRIPT = (ROOT / "demo" / "episode.js").read_text()
+
+
+def test_the_player_script_leaves_a_link_a_link_when_it_should():
+    """Read as written: a click asking for a new tab is not taken over,
+    an id that is not an id is not played, and the frame is YouTube's
+    cookie-less player and nothing else."""
+    assert 'closest("a.at[data-yt]")' in SCRIPT
+    assert "event.metaKey" in SCRIPT and "event.ctrlKey" in SCRIPT and "event.button !== 0" in SCRIPT
+    assert "/^[A-Za-z0-9_-]{11}$/" in SCRIPT
+    assert re.findall(r'"(https://[^"]+)"', SCRIPT) == ["https://www.youtube-nocookie.com/embed/"]
+    assert "innerHTML" not in SCRIPT and "eval(" not in SCRIPT
+
+
 # --- as served ---------------------------------------------------------------------
 
 @pytest.fixture
@@ -385,6 +498,13 @@ def client(monkeypatch):
     monkeypatch.setattr(main, "_archive_sizes", sizes)
     with TestClient(main.app) as c:
         yield c
+
+
+def test_the_player_script_is_served_and_revalidated(client):
+    r = client.get("/demo/episode.js")
+    assert r.status_code == 200 and "javascript" in r.headers["content-type"]
+    assert r.headers["cache-control"] == "no-cache"
+    assert "x-robots-tag" not in r.headers
 
 
 def test_an_episode_is_served_whole_at_its_own_address(client):

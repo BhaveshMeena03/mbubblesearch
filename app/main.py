@@ -106,7 +106,7 @@ from .summaries import SHIPPED as SUMMARIES_FILE
 from .summaries import SummaryStore, load_shipped
 from .traffic import Traffic
 from .usage import UsageLedger, writable_path
-from .youtube_map import summary_moments, youtube_first
+from .youtube_map import summary_moments, youtube_first, youtube_moment
 
 logging.basicConfig(level=logging.INFO)
 
@@ -1214,7 +1214,8 @@ def _episode_catalog() -> list[dict]:
         for row in _listed(list(load_shipped(SUMMARIES_FILE).values())):
             player = players.get(row.get("episode_id"))
             made = episode_pages.from_summary(
-                row, player=player if isinstance(player, str) else "", calls=calls)
+                row, player=player if isinstance(player, str) else "", calls=calls,
+                youtube=youtube_moment)
             if made:
                 found.setdefault(made["id"], made)
     except Exception as exc:                                    # noqa: BLE001

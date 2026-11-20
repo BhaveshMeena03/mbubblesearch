@@ -18,10 +18,13 @@ every topic checked against a line of the show. Older ones ran up to 35
 minutes late, and a link that opens the wrong minute is worse than a
 topic with no link, so those are listed as plain text.
 
-A link at a second goes where the show plays at a second: the X
-broadcast when the show went out on X and the clocks are known to agree
-there, otherwise the YouTube copy. One of Ansem's own videos on X does
-not open at a second at all, so its times are text.
+A time plays on the page itself wherever the moment is on YouTube, which
+is the only player that can be put in a page and started at a second
+(demo/episode.js; without script the same link opens YouTube there). X
+opens a broadcast at a second only for somebody logged in on a desktop,
+and anywhere else from the start, so the X broadcast is the link only
+for a moment that has no YouTube copy. One of Ansem's own videos on X
+does not open at a second at all, so its times are text.
 
 Pure: summaries, listings and pair files in, text out. The pages are
 written here so a test can read exactly what a crawler is sent.
@@ -133,6 +136,34 @@ def moment(episode_id: str, seconds: int, *, player: str = "",
     return link if _SEEKS.fullmatch(link) else ""
 
 
+def on_youtube(episode_id: str, seconds: object, youtube=None) -> tuple[str, int] | None:
+    """(video id, second) where a moment can be played in the page, or
+    None when it is not on YouTube.
+
+    A recording indexed from YouTube is its own copy. A Market Bubble
+    broadcast is asked of `youtube`, which knows where each of its
+    seconds sits in the upload (app/youtube_map.youtube_moment) and says
+    None for a stretch the upload cut. Whatever it answers is checked: a
+    bad row in that map costs one link, not the page.
+    """
+    at = _second(seconds)
+    if at is None:
+        return None
+    if _YOUTUBE_ID.fullmatch(episode_id):
+        return episode_id, at
+    if youtube is None:
+        return None
+    try:
+        found = youtube(episode_id, at)
+        video, there = found if found else (None, None)
+    except Exception:                                           # noqa: BLE001
+        return None
+    there = _second(there)
+    if isinstance(video, str) and _YOUTUBE_ID.fullmatch(video) and there is not None:
+        return video, there
+    return None
+
+
 def recording(link: object) -> str:
     """The address of a recording, if it is one on X or YouTube."""
     link = str(link or "")
@@ -205,9 +236,11 @@ def _plain(text: object) -> str:
 
 # --- one episode, whichever archive it is in ----------------------------------------
 
-def from_summary(row: dict, *, player: str = "", calls: list[dict] | None = None) -> dict | None:
+def from_summary(row: dict, *, player: str = "", calls: list[dict] | None = None,
+                 youtube=None) -> dict | None:
     """A Market Bubble row, or one of Ansem's appearances elsewhere, as a
-    page. None when there is nothing to say on one."""
+    page. None when there is nothing to say on one. `youtube` is where a
+    broadcast's seconds sit in its upload: see on_youtube."""
     ident = row.get("episode_id")
     if not is_id(ident) or not str(row.get("title") or "").strip():
         return None
@@ -220,12 +253,14 @@ def from_summary(row: dict, *, player: str = "", calls: list[dict] | None = None
         at = block.get("t")
         block["link"] = ("" if own or at is None else
                          moment(ident, at, player=player if ident.startswith("x-") else ""))
+        block["yt"] = None if own or at is None else on_youtube(ident, at, youtube)
     return {"archive": "podcast", "id": ident, "title": _plain(row["title"]),
             "show": show or ARCHIVES["podcast"]["name"],
             "date": str(row.get("published_at") or "")[:10],
             "seconds": None, "watch": recording(row.get("url")),
             "tldr": tldr, "blocks": blocks,
-            "calls": [c for c in calls or [] if c.get("episode_id") == ident]}
+            "calls": [dict(c, yt=on_youtube(ident, c.get("start_seconds"), youtube))
+                      for c in calls or [] if c.get("episode_id") == ident]}
 
 
 def from_note(archive: str, row: dict, note: dict | None, pair: dict | None = None) -> dict | None:
@@ -243,7 +278,8 @@ def from_note(archive: str, row: dict, note: dict | None, pair: dict | None = No
             continue
         at = _second(topic.get("t")) if pinned else None
         blocks.append({"kind": "li", "t": at, "to": None, "text": topic["text"],
-                       "link": moment(ident, at, pair=pair) if at is not None else ""})
+                       "link": moment(ident, at, pair=pair) if at is not None else "",
+                       "yt": on_youtube(ident, at)})
     if blocks:
         blocks.insert(0, {"kind": "h", "text": "Topics"})
     return {"archive": archive, "id": ident, "title": _plain(row["title"]),
@@ -288,28 +324,42 @@ def _cut(text: str, limit: int) -> str:
     return text[:limit].rsplit(" ", 1)[0].rstrip(",;:") + "…"
 
 
+def _time_html(label: str, said: str, yt: object, link: str) -> str:
+    """A time in the margin: a link that plays the moment in the page,
+    a link out to the broadcast on X, or the time as text."""
+    if not label:
+        return '<span class="at"></span>'
+    if yt:
+        video, there = yt
+        watch = f"https://www.youtube.com/watch?v={video}&t={there}s"
+        # data-yt and data-at are what demo/episode.js plays in place.
+        # Without script it is an ordinary link to the same second.
+        return (f'<a class="at" href="{_e(watch)}" data-yt="{_e(video)}" data-at="{int(there)}" '
+                f'target="_blank" rel="noopener" aria-label="Play from {_e(said)}">'
+                f'{_e(label)}</a>')
+    if _SEEKS.fullmatch(link):
+        return (f'<a class="at out" href="{_e(link)}" target="_blank" rel="noopener" '
+                f'aria-label="Watch on X from {_e(said)}">{_e(label)}</a>')
+    return f'<span class="at off">{_e(label)}</span>'
+
+
 def _block_html(block: dict) -> str:
     if block["kind"] == "h":
         return f'<h2>{_shown(block["text"])}</h2>'
     if block["kind"] == "p":
         return f'<p class="para">{_shown(block["text"])}</p>'
-    at, link = block.get("t"), block.get("link") or ""
-    label = "" if at is None else clock(at)
+    at = block.get("t")
+    said = "" if at is None else clock(at)
+    label = said
     if label and block.get("to") is not None:
         label += f" to {clock(block['to'])}"
-    if link:
-        time = (f'<a class="at" href="{_e(link)}" target="_blank" rel="noopener" '
-                f'aria-label="Watch at {_e(clock(at))}">{_e(label)}</a>')
-    else:
-        time = f'<span class="at off">{_e(label)}</span>' if label else '<span class="at"></span>'
+    time = _time_html(label, said, block.get("yt"), block.get("link") or "")
     return f'<div class="topic">{time}<p>{_shown(block["text"])}</p></div>'
 
 
 def _call_html(call: dict) -> str:
-    link = str(call.get("link") or "")
-    stamp = _e(call.get("timestamp"))
-    watch = (f'<a class="at" href="{_e(link)}" target="_blank" rel="noopener">{stamp}</a>'
-             if _SEEKS.fullmatch(link) else f'<span class="at off">{stamp}</span>')
+    stamp = " ".join(str(call.get("timestamp") or "").split())
+    watch = _time_html(stamp, stamp, call.get("yt"), str(call.get("link") or ""))
     return (f'<div class="topic">{watch}<p><b>{_e(call.get("speaker"))} on '
             f'{_e(call.get("asset"))}:</b> “{_e(call.get("quote"))}”</p></div>')
 
@@ -337,7 +387,7 @@ def render_page(template: str, episode: dict, newer: dict | None = None,
         calls = ('<h2>Calls made on this show</h2>\n'
                  + "\n".join(_call_html(c) for c in episode["calls"])
                  + '\n<p class="more"><a href="/calls">What each call has done since</a></p>')
-    timed = any(b.get("link") for b in episode["blocks"])
+    timed = any(b.get("link") or b.get("yt") for b in episode["blocks"])
     return fill(template, {
         "title": _e(f"{_cut(title, 90)} · summary | Market Bubble Search"),
         "description": _e(described),
@@ -358,7 +408,7 @@ def render_page(template: str, episode: dict, newer: dict | None = None,
         "calls": calls,
         "newer": _step(newer, "Newer"),
         "older": _step(older, "Older"),
-        "times": ("Each time opens the show at that second. " if timed else ""),
+        "times": ("Each time plays the show from that second. " if timed else ""),
     })
 
 
