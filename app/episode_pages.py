@@ -377,3 +377,12 @@ def render_index(template: str, episodes: list[dict]) -> str:
             f'<section style="--green:{archive["accent"]}">'
             f'<h2>{_e(archive["name"])} <span>{len(shelf)}</span></h2>\n{rows}\n</section>')
     return fill(template, {"sections": "\n".join(sections), "count": str(len(episodes))})
+
+
+def render_missing(template: str, count: int) -> str:
+    """What an address with no episode behind it is sent: the way to the
+    list, and not the list. The list is a hundred kilobytes, and an
+    address anybody can make up should not be able to ask for it."""
+    return fill(template, {"count": str(count), "sections": (
+        '<p class="lead">There is no episode at this address. '
+        '<a href="/episodes">See every episode</a>.</p>')})

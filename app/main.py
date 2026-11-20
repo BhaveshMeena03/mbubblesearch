@@ -1237,15 +1237,11 @@ def _episode_catalog() -> list[dict]:
     return _EPISODE_PAGES
 
 
-def _episodes_list_page(status_code: int = 200) -> HTMLResponse:
-    template = (_ROOT / "demo" / "episodes.html").read_text(encoding="utf-8")
-    return HTMLResponse(episode_pages.render_index(template, _episode_catalog()),
-                        status_code=status_code, headers={"Cache-Control": "no-cache"})
-
-
 @app.get("/episodes", include_in_schema=False)
 async def episodes_page() -> HTMLResponse:
-    return _episodes_list_page()
+    template = (_ROOT / "demo" / "episodes.html").read_text(encoding="utf-8")
+    return HTMLResponse(episode_pages.render_index(template, _episode_catalog()),
+                        headers={"Cache-Control": "no-cache"})
 
 
 # The two templates are files under /demo, and opened there they are
@@ -1262,9 +1258,11 @@ async def episode_page(episode_id: str) -> HTMLResponse:
     found = (next((e for e in catalog if e["id"] == episode_id), None)
              if episode_pages.is_id(episode_id) else None)
     if found is None:
-        # Still a 404 to anything that keeps score, and the list to a
-        # person who followed a link to an episode with no page.
-        return _episodes_list_page(status_code=404)
+        # A 404 to anything that keeps score, and the way to the list for
+        # a person who followed a link to an episode with no page.
+        template = (_ROOT / "demo" / "episodes.html").read_text(encoding="utf-8")
+        return HTMLResponse(episode_pages.render_missing(template, len(catalog)),
+                            status_code=404, headers={"Cache-Control": "no-cache"})
     newer, older = episode_pages.neighbours(catalog, episode_id)
     template = (_ROOT / "demo" / "episode.html").read_text(encoding="utf-8")
     return HTMLResponse(episode_pages.render_page(template, found, newer, older),

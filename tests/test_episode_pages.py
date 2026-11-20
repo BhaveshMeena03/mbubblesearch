@@ -405,10 +405,15 @@ def test_the_list_links_every_page_there_is(client):
 
 @pytest.mark.parametrize("path", ["/episodes/zzzzzzzzzzz", "/episodes/x-1", "/episodes/%3Cscript%3E",
                                   "/episodes/dQw4w9WgXcQQQQQQ"])
-def test_an_episode_with_no_page_is_a_404_that_still_shows_the_list(client, path):
+def test_an_episode_with_no_page_is_a_small_404_that_points_at_the_list(client, path):
+    """Not the list itself: it is a hundred kilobytes, and an address
+    anybody can make up should not be able to ask for it."""
     r = client.get(path)
     assert r.status_code == 404
-    assert "Every episode, summarized" in r.text and "<script" not in r.text.lower()
+    assert "There is no episode at this address." in r.text
+    assert '<a href="/episodes">See every episode</a>' in r.text
+    assert len(r.text) < 6000 and 'class="row"' not in r.text
+    assert "<script" not in r.text.lower() and "zzzz" not in r.text
 
 
 def test_the_templates_are_not_served_as_pages_of_braces(client):
