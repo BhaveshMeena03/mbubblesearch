@@ -7,9 +7,10 @@ test suite and obvious to a visitor.
 
 A timestamp inside an episode summary used to be a link that opened
 YouTube in a new tab, which is exactly what the rest of the page stopped
-doing when citations learned to play in place. An X broadcast keeps the
-link, because X still cannot jump to a time in video and a button that
-opened it at 0:00 would promise more than a plain link does.
+doing when citations learned to play in place. A moment the YouTube
+upload cut keeps a link, to the live broadcast on X at that second, and
+a time that can be opened nowhere is printed as text: a control that
+opened the show at 0:00 would promise more than it does.
 
 And the note explaining that X cannot jump used to sit under the results
 heading, so a set where four of six results played announced to all six
@@ -31,9 +32,9 @@ def test_every_summary_can_be_shared_by_link():
     """A summary already opened from #ep-<id>, but only for someone who
     knew to build that address. Each card now carries a button that copies
     it, and the address it copies is the one the page opens from."""
-    assert 'class="share ep-share"' in PAGE
-    assert 'd.id = "ep-" + ep.episode_id' in PAGE
-    assert 'location.origin + location.pathname + "#" + d.id' in PAGE
+    assert 'share.className="share ep-share"' in PAGE
+    assert 'el.id="ep-"+ep.episode_id;' in PAGE
+    assert 'location.origin+location.pathname+"#ep-"+ep.episode_id' in PAGE
     assert 'want.indexOf("ep-") === 0' in PAGE
     # Followed from the page itself, only the hash changes and nothing
     # reloads; the card has to open on that too.
@@ -41,16 +42,20 @@ def test_every_summary_can_be_shared_by_link():
 
 
 def test_a_summary_timestamp_plays_rather_than_navigating_away():
-    assert 'class="cite ep-cite"' in PAGE
-    assert 'class="player ep-player"' in PAGE
-    assert 'querySelector(".ep-player")' in PAGE
+    assert 'slot.className="player ep-player"' in PAGE
+    assert 'cell.type="button"; cell.className="at"; cell.textContent=label;' in PAGE
+    assert "playIn(box,yt[0],yt[1],true," in PAGE
 
 
-def test_a_broadcast_summary_keeps_its_outbound_link():
-    """canSeek gates the two shapes. Without the gate, an X timestamp
-    would render a button that cannot do anything."""
-    assert "var seekable = canSeek(url)" in PAGE
-    assert "if(!seekable){" in PAGE
+def test_a_moment_the_upload_cut_keeps_its_outbound_link():
+    """Three shapes, in this order: plays here, opens X at the second,
+    or is text. The link is marked with an arrow so it does not look
+    like the button beside it."""
+    plays = PAGE.index("if(yt && VIDEO.test(yt[0]||\"\")){")
+    leaves = PAGE.index('cell.className="at out"; cell.href=b.link;')
+    text = PAGE.index('cell.className="at off"; cell.textContent=label;')
+    assert plays < leaves < text
+    assert '.notes a.at::after{content:" \\2197"' in PAGE
 
 
 def test_the_scrub_note_is_not_attached_to_the_heading():
@@ -78,4 +83,8 @@ def test_every_card_offers_a_way_into_the_moment():
 def test_only_one_player_can_be_open():
     """Two videos playing at once is the worst failure this page has, and
     the reset runs across every slot, not only the ones nearby."""
-    assert PAGE.count('querySelectorAll(".player").forEach') >= 2
+    quiet = PAGE[PAGE.index("function quiet(){"):][:400]
+    assert 'document.querySelectorAll(".player").forEach' in quiet
+    # An episode, a time in its summary, a card, a time in the answer,
+    # the example and a new question all go through it.
+    assert PAGE.count("quiet();") >= 5

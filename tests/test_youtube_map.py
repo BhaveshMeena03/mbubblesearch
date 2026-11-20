@@ -68,6 +68,17 @@ def test_summary_timestamps_map_where_they_can(monkeypatch):
     assert got == {"305": ["YT1", 195]}
 
 
+def test_a_broadcast_names_the_upload_it_was_cut_into(monkeypatch):
+    """So the page can play the episode from the start. The one most of
+    its anchors are in, when a second upload carries a few."""
+    _use(monkeypatch)
+    assert youtube_map.upload_of("x-live") == "YT1"
+    assert youtube_map.upload_of("x-other") == ""
+    mixed = {"x-two": [[10, "SHORT", 5], [20, "LONG", 15], [30, "LONG", 25], ["bad"], None]}
+    monkeypatch.setattr(youtube_map, "_anchors", lambda: mixed)
+    assert youtube_map.upload_of("x-two") == "LONG"
+
+
 # The other way, for our old posts that linked the upload: the broadcast's
 # second for a second of YouTube. Here the upload drops X's 590s to 800s.
 CUT = {"x-live": [[t, "YT1", t - 110] for t in range(100, 600, 10)]

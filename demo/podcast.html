@@ -28,377 +28,45 @@
 <meta name="twitter:image" content="https://search.lexthedev.com/demo/og-broadcast.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif&family=Inter:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="/demo/ui.css">
 <style>
+  /* The broadcast's room, laid out like ThreadGuy's, rasmr's and MCG's:
+     a strip of figures, the question on the left with the newest
+     recordings beside it, and every episode underneath by month. The
+     search, the cards under an answer and everything they do are this
+     page's own and unchanged; only where they sit moved. */
   :root{
     --bg:#0b0e11;--panel:#12161c;--line:#232a33;--text:#e6e8ea;
     --muted:#8a939e;--green:#16c784;
+    --deck:#12161c;--deck-2:#161b23;--edge:#232a33;--edge-2:#33404d;
+    --ink:#e6e8ea;--ink-2:#aab3bd;--ink-3:#8a939e;--live:#ff5d6c;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --ease:cubic-bezier(.22,.78,.24,1);--quick:.22s;
+    --card:#161b23;
   }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--bg);color:var(--text);min-height:100vh;
-    font:15px/1.6 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,
-      sans-serif;
-    font-feature-settings:"tnum" 1;
-    display:flex;flex-direction:column;align-items:center;padding:0 16px;
-    position:relative}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+    font-size:15px;line-height:1.55;font-feature-settings:"tnum" 1;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden}
+  /* One soft pool of the show's green behind the question. Fixed, so it
+     does not travel with the scroll and become a smear. */
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(720px 420px at 30% 12%,
+        color-mix(in srgb,var(--green) 9%,transparent), transparent 68%),
+      radial-gradient(900px 500px at 50% 0%,
+        rgba(255,255,255,.028), transparent 70%)}
+  .wrap{position:relative;z-index:1;max-width:1320px;margin:0 auto;
+    padding:0 clamp(20px,3.4vw,52px)}
+  a{color:inherit}
+  button{font-family:inherit}
 
-  /* The column and the header used to disagree -- 820 against 1060 --
-     so the page read as a narrow strip with the header hanging over it.
-     One width for both. Prose inside still gets its own narrower measure,
-     because a line of body text 980px wide is hard to read even when the
-     column allows it. */
-  .wrap{width:100%;max-width:1320px;padding:24px 0 80px}
-  /* As wide as the other rooms. The search and what it answers keep the
-     980px column they were built for, centred; the sections a visitor
-     browses, the question cards, the summaries and the rest, use the
-     whole width. */
-  .wrap > .eyebrow,.wrap > h1,.wrap > form,.wrap > .chips,.wrap > .example,
-  .wrap > .spin,.wrap > .answer,.wrap > .hits{max-width:980px;margin-left:auto;margin-right:auto}
-  /* The wordmark that was a line of centred text is a header now, styled
-     with the rest of it further down this file. */
-  /* Live prices for the two coins this project is attached to, and the one
-     everything on the show is priced against. Hidden until it has real
-     numbers: a price strip showing "--" is worse than no price strip, and
-     a stale one is worse than both. */
-  .ticks{position:absolute;top:50%;transform:translateY(-50%);right:16px;
-    display:flex;justify-content:flex-end;gap:5px;margin:0}
-  .ticks[hidden]{display:none}
-  .tick{display:inline-flex;align-items:baseline;gap:5px;
-    background:var(--panel);border:1px solid var(--line);border-radius:999px;
-    padding:3px 9px;font-size:10.5px;color:var(--muted);
-    text-decoration:none;white-space:nowrap;
-    transition:border-color .15s,transform .15s}
-  .tick:hover{border-color:#2f3947;transform:translateY(-1px)}
-  .tick .sym{color:var(--text);font-weight:700;letter-spacing:.02em}
-  .tick .px{color:var(--text);font-variant-numeric:tabular-nums}
-  .tick .ch{font-variant-numeric:tabular-nums;font-weight:600}
-  .tick .up{color:var(--green)} .tick .dn{color:#ff6b6b}
-  /* The project's own coin, marked green so it reads as ours among the
-     two it sits beside. It opens its chart like the others do. */
-  .tick.own{border-color:#16c78455}
-  .tick.own .sym{color:var(--green)}
-  /* The prices only clear the centred disclosure above about 1400px, and
-     that is arithmetic rather than taste: the sentence is 454px wide and
-     centred, the prices are 457 and pinned right, so they meet at any
-     window narrower than the two of them plus the margin between. Below
-     it they sit under the sentence instead.
-
-     This has to follow the rules above rather than precede them. At equal
-     specificity the later rule wins, and written first it never applied
-     at all -- the prices stayed pinned at every width, including the ones
-     it existed to fix. */
-  @media(max-width:1400px){
-    .ticks{position:static;transform:none;flex-wrap:wrap;
-      justify-content:center}
-  }
-  /* Phones, and AFTER the rule above on purpose: that one sets flex-wrap
-     back to wrap, and at equal specificity the later rule wins. Written
-     before it, nowrap here never applied and the row still broke.
-
-     Measured: the three pills want 448px and a phone gives 343, so they
-     wrapped two-and-one and read as an accident. The 24h change is the
-     widest part of each and the least load-bearing — the price is what
-     somebody glances at, and the change is one tap away on the chart the
-     pill already opens. Without it they fit on one line with room over. */
-  @media(max-width:560px){
-    .tick .ch{display:none}
-    .tick{font-size:11px;padding:4px 11px;gap:6px}
-    .ticks{gap:6px;flex-wrap:nowrap;max-width:100%}
-  }
-
-  h1{font-family:"Instrument Serif",Georgia,"Times New Roman",serif;
-    font-size:54px;font-weight:400;line-height:1.08;margin-bottom:14px;
-    letter-spacing:-.015em;text-align:center}
-  h1 em{color:var(--green);font-style:normal}
-  .sub{color:var(--muted);margin-bottom:32px;text-align:center;
-    font-size:16px}
-  /* The field is the product, so it gets the room. It used to share a line
-     with the button at roughly half the column, which made the most
-     important control on the page look like a newsletter signup. */
-  form{display:flex;gap:10px;margin-bottom:18px}
-  #q{flex:1;background:var(--panel);border:1px solid var(--line);
-    border-radius:14px;color:var(--text);padding:20px 22px;font-size:18px;
-    outline:none;transition:border-color .15s,box-shadow .15s}
-  #q::placeholder{color:#6b7480}
-  #q:focus{border-color:var(--green);
-    box-shadow:0 0 0 4px rgba(22,199,132,.13)}
-  button{background:var(--green);color:var(--bg);border:none;border-radius:14px;
-    font-weight:700;padding:0 30px;cursor:pointer;font-size:16px}
-  button:disabled{opacity:.5;cursor:default}
-  /* Centred under a centred box, and given room to breathe: these are the
-     first thing most people click, so they should read as an invitation
-     rather than as leftovers under the field. */
-  .chips{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:44px;
-    justify-content:center}
-  .chip{font-size:14.5px;background:transparent;color:var(--green);
-    border:1px solid #16c78455;border-radius:16px;padding:6px 12px;cursor:pointer}
-  .chip:hover{background:#16c78418}
-  .answer{background:var(--panel);border:1px solid var(--line);
-    border-radius:14px;padding:18px 20px;margin-bottom:22px;display:none}
-  .answer.show{display:block}
-  /* The answer had no block rhythm: paragraphs, headings and lists all ran
-     together at the default zero margin. */
-  #answer-body{font-size:17px;line-height:1.65}
-  #answer-body p{margin:0 0 12px}
-  #answer-body p:last-child{margin-bottom:0}
-  #answer-body h4{font-size:15px;font-weight:700;margin:18px 0 8px}
-  #answer-body h4:first-child{margin-top:0}
-  #answer-body ul{margin:0 0 12px;padding-left:20px}
-  #answer-body li{margin-bottom:6px}
-  .answer h3{font-size:12px;text-transform:uppercase;letter-spacing:.8px;
-    color:var(--muted);margin-bottom:10px}
-  .hits h3{font-size:12px;text-transform:uppercase;letter-spacing:.8px;
-    color:var(--muted);margin:0 0 12px}
-  .hit{display:block;text-decoration:none;color:inherit;background:var(--panel);
-    border:1px solid var(--line);border-radius:12px;padding:14px 16px;
-    transition:border-color .15s}
-  .hit:hover{border-color:var(--green)}
-  .hit-wrap{margin-bottom:10px}
-  .who{font-size:11px;font-weight:600;letter-spacing:.03em;
-    padding:2px 7px;border-radius:999px;white-space:nowrap;
-    color:#7ee2b8;background:rgba(52,211,153,.10);
-    border:1px solid rgba(52,211,153,.28)}
-  /* A cited moment inside the answer, clickable. The citation is the
-     product; leaving it as plain text makes the reader hunt for the card
-     that matches it. */
-  .cite{color:#7ee2b8;cursor:pointer;border:0;background:none;padding:0;
-    font:inherit;border-bottom:1px dashed rgba(126,226,184,.5)}
-  .cite:hover{border-bottom-style:solid}
-  /* A timestamp inside a summary keeps the look it had as a link. */
-  .ep-cite{color:var(--green);font-variant-numeric:tabular-nums;
-    font-weight:600;border-bottom-color:rgba(22,199,132,.45)}
-  .also{margin:44px 0 8px;padding-top:26px;
-    border-top:1px solid rgba(255,255,255,.08)}
-  .also h2{font-size:15px;font-weight:600;opacity:.6;margin:0 0 14px;
-    letter-spacing:.02em}
-  .also-grid{display:grid;gap:12px;grid-template-columns:1fr 1fr}
-  @media (max-width:640px){.also-grid{grid-template-columns:1fr}}
-  .also-card{display:block;padding:14px 16px;border-radius:12px;
-    text-decoration:none;color:inherit;
-    border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.02)}
-  .also-card:hover{border-color:rgba(255,255,255,.22)}
-  .also-name{display:block;font-weight:600;font-size:15px;margin-bottom:5px}
-  .also-say{display:block;font-size:13px;line-height:1.5;opacity:.6}
-  .example{border:1px solid rgba(255,255,255,.10);border-radius:14px;
-    padding:16px 18px;margin:18px 0 6px;background:rgba(255,255,255,.02)}
-  .example-tag{font-size:11px;font-weight:700;letter-spacing:.09em;
-    text-transform:uppercase;opacity:.4;margin-bottom:9px}
-  .example-q{font-size:13px;letter-spacing:.02em;opacity:.55;margin-bottom:8px}
-  .example-q::before{content:"“";opacity:.5}
-  .example-q::after{content:"”";opacity:.5}
-  .example-a{font-size:16px;line-height:1.55}
-  .example-foot{display:flex;align-items:center;gap:12px;flex-wrap:wrap;
-    margin-top:12px}
-  .example-ep{font-size:12px;opacity:.5}
-  .example-play{cursor:pointer;font:inherit;font-size:13px;font-weight:600;
-    color:#7ee2b8;background:rgba(52,211,153,.10);
-    border:1px solid rgba(52,211,153,.30);border-radius:999px;
-    padding:6px 12px}
-  .example-play:hover{background:rgba(52,211,153,.16)}
-  /* 16:9 without a wrapper div, so the player keeps its shape on a phone
-     where the card is the width of the screen. */
-  .clipbox:empty{display:none}
-  .clipbox{margin-top:10px;padding:12px 14px;border:1px solid #232a33;
-           border-radius:10px;background:#12161c}
-  .clip-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-  .clip-row label{font-size:13px;color:#8a939e;min-width:48px}
-  .clip-row input[type=range]{flex:1;accent-color:#16c784}
-  .c-lab{font-size:13px;color:#e6e8ea;min-width:196px;text-align:right;
-         font-variant-numeric:tabular-nums}
-  .c-hint{font-size:12px;color:var(--muted);margin:2px 0 10px;
-    font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
-  .c-hint:empty{display:none}
-  .clip-row label{text-transform:none}
-  .clip-go{display:flex;align-items:center;gap:10px}
-  .c-status{font-size:13px;color:#8a939e}
-  .c-out:not(:empty){margin-top:10px}
-  .c-out video{width:100%;border-radius:10px;display:block}
-  .c-dl{display:inline-block;margin-top:8px}
-  .player{margin-top:8px}
-  .player:empty{display:none}
-  .player iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:10px;
-    display:block;background:#000}
-  /* The actions sit OUTSIDE the anchor. A button nested inside a link is
-     invalid, and every click on it would navigate to YouTube instead. */
-  /* Always visible. These were revealed on hover, to keep the result list
-     clean — which hid them from everyone who was not already looking for
-     them. The person who asked for the feature could not find it on the
-     live page. A control nobody knows about is the same as one that was
-     never built, and tidiness is not worth that. */
-  .hit-actions{display:flex;gap:8px;padding:8px 4px 0}
-  .hit-actions .share{font-size:11px;padding:3px 10px}
-
-  /* On a phone these were 21px tall, which is half what a thumb needs and
-     well under the 44px Apple asks for. Most of the traffic to this page
-     arrives from a link in a timeline, so the touch size is the size that
-     matters, not the desktop one. */
-  /* Four equal buttons across, then the link out on a line of its own.
-     As a flex row with 16px of padding each, the five of them were wider
-     than a phone: every label broke onto three lines, "watch on YouTube"
-     ran off the edge, and the whole page scrolled sideways. */
-  @media (max-width:640px){
-    .hit-actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:8px;padding:10px 0 2px}
-    .hit-actions .share{font-size:12px;padding:0 4px;min-height:40px;
-      display:inline-flex;align-items:center;justify-content:center;
-      white-space:nowrap}
-    .hit-actions .watch{grid-column:1/-1;justify-self:end;margin-left:0;
-      padding:4px 2px}
-  }
-  .hit-top{display:flex;align-items:center;gap:10px;margin-bottom:6px;
-    flex-wrap:wrap}
-  /* The timestamp IS the product, so it is styled as the thing to press
-     rather than as a label that happens to be green. Monospace so the
-     digits do not shift width between results, a filled pill so it reads
-     as a control, and the triangle inside it rather than as a character
-     beside it. Taken from a sister build, where this treatment measurably
-     reads as "press this"; the palette stays ours. */
-  .play{
-    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-    font-size:13px;font-weight:500;color:var(--green);white-space:nowrap;
-    background:rgba(22,199,132,.10);border:1px solid rgba(22,199,132,.30);
-    padding:4px 9px;border-radius:7px;flex:none;
-    display:inline-flex;align-items:center;gap:6px;cursor:pointer;
-    transition:background .16s ease,border-color .16s ease;
-  }
-  .play svg{width:9px;height:9px;fill:currentColor;flex:none}
-  .hit-wrap:hover .play{background:rgba(22,199,132,.19);
-    border-color:rgba(22,199,132,.5)}
-  /* The affordance for a result that cannot jump: no play triangle, muted
-     rather than actionable, and a button that copies the timestamp so
-     reaching it by hand is one paste instead of remembering four digits.
-
-     This used to be what every X result got, on the belief that X had no
-     ?t= for video. It does — see canSeek below — so broadcasts now render
-     as playable like anything else, and this style is left for a link that
-     genuinely arrives without a timestamp. */
-  .play.noseek{color:var(--muted);font-weight:600;
-    background:transparent;border-color:transparent;padding:0;
-    display:inline-flex;align-items:center;gap:6px}
-  .hit-wrap:hover .play.noseek{background:transparent;
-    border-color:transparent}
-  .play.noseek .ts{color:var(--text);font-weight:700;
-    font-variant-numeric:tabular-nums}
-  .copyts{background:transparent;border:1px solid var(--line);color:var(--muted);
-    border-radius:6px;font-size:10.5px;padding:1px 6px;cursor:pointer;
-    margin-left:2px;font-weight:500}
-  .copyts:hover{color:var(--green);border-color:var(--green)}
-  .copyts.done{color:var(--green);border-color:var(--green)}
-  /* In the actions row, last, and quiet. It used to sit in the title row
-     with margin-left:auto, which put it on a line of its own the moment a
-     title was long enough to wrap — floating right, attached to nothing.
-     Muted rather than green because the timestamp beside it is the action
-     now, and a brighter link that leaves the site should not outrank it. */
-  .watch{margin-left:auto;color:var(--muted);font-size:12px;
-    white-space:nowrap;text-decoration:none;align-self:center}
-  .watch:hover{color:var(--green)}
-  .ep{color:var(--muted);font-size:13px;overflow:hidden;text-overflow:ellipsis;
-    white-space:nowrap;max-width:100%}
-  .aired{font-size:11px;color:var(--muted);white-space:nowrap;
-    border:1px solid var(--line);border-radius:999px;padding:1px 8px}
-  .quote{font-size:14.5px;color:#8a939e;display:-webkit-box;
-    -webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-  .empty{color:var(--muted)}
-  .spin{display:none;color:var(--muted);margin-bottom:20px}
-  .spin.show{display:block}
-  /* The wait is the problem this solves. Retrieval lands in about two
-     seconds and the answer can take thirty more, so without this the panel
-     sits empty for half a minute and the page reads as hung. Saying what is
-     happening — and how many passages it is happening to — turns a blank
-     wait into a visible one. Taken from a sister build. */
-  /* Author rules beat the UA stylesheet, so `display:flex` here silently
-     defeated the browser's own [hidden]{display:none} — el.hidden = true
-     did nothing and "reading N passages" sat above finished answers
-     forever. The rule has to be restated, and !important so nothing added
-     later loses this argument again. */
-  .reading[hidden]{display:none!important}
-  .reading{display:flex;align-items:center;gap:10px;margin:0 0 12px;
-    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-    font-size:12px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--muted)}
-  .bars{display:inline-flex;gap:2px;align-items:flex-end;height:11px}
-  .bars s{width:2px;height:4px;background:var(--green);display:block;
-    animation:eq .9s ease-in-out infinite}
-  .bars s:nth-child(2){animation-delay:.15s}
-  .bars s:nth-child(3){animation-delay:.3s}
-  .bars s:nth-child(4){animation-delay:.45s}
-  @keyframes eq{0%,100%{height:4px}50%{height:11px}}
-  /* The caret marks the answer as still being written, which is the other
-     half of the same question: is this finished, or is more coming? */
-  /* Attached to #answer-body while text is streaming, so the reader can
-     tell "still writing" from "finished". */
-  #answer-body.writing::after{content:"";display:inline-block;
-    width:7px;height:15px;background:var(--green);margin-left:3px;
-    vertical-align:-2px;animation:blink 1s step-end infinite}
-  @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-  @media (prefers-reduced-motion:reduce){
-    .bars s,#answer-body.writing::after{animation:none}
-  }
-  .foot{color:var(--muted);font-size:12px;margin-top:40px;border-top:1px solid
-    var(--line);padding-top:16px}
-  /* scroll-margin so the header does not sit on top of the
-     heading when the Episodes link jumps here. */
-  .eps{margin-top:44px;scroll-margin-top:24px}
-  .eps h2{font-size:18px;margin-bottom:4px}
-  .eps .sub2{color:var(--muted);font-size:13px;margin-bottom:16px}
-  .eps .eps-guest-h{margin-top:32px}
-  #eps-guest{scroll-margin-top:24px}
-  details.epcard{background:var(--panel);border:1px solid var(--line);
-    border-radius:12px;margin-bottom:10px;overflow:hidden;
-    /* Opened from a link (#ep-<id>), its title clears the sticky header. */
-    scroll-margin-top:64px}
-  details.epcard summary{cursor:pointer;padding:14px 16px;font-weight:600;
-    list-style:none;display:flex;align-items:center;gap:10px}
-  details.epcard summary::-webkit-details-marker{display:none}
-  details.epcard summary .tw{color:var(--green);font-size:12px;transition:transform .15s}
-  /* Marks the uncut broadcast, so two adjacent entries for one show read
-     as two versions rather than as a duplicate. */
-  .srcbadge{font-size:10.5px;font-weight:600;letter-spacing:.3px;
-    color:var(--muted);border:1px solid var(--line);border-radius:999px;
-    padding:2px 8px;margin-left:auto;white-space:nowrap;flex-shrink:0}
-  details.epcard[open] summary .tw{transform:rotate(90deg)}
-  .ep-body{padding:0 16px 16px;font-size:14px;color:#c7ccd2;white-space:normal;overflow-wrap:break-word}
-  .ep-body h3,.ep-body strong{color:var(--text)}
-  .ep-body ul{padding-left:18px;margin:8px 0}
-  .ep-body li{margin:4px 0}
-  .ts{color:var(--green);text-decoration:none;font-variant-numeric:tabular-nums;
-    font-weight:600}
-  .ts:hover{text-decoration:underline}
-  .ep-link{display:inline-block;margin-top:10px;color:var(--green);
-    font-size:13px;text-decoration:none}
-  .ep-link:hover{text-decoration:underline}
-  /* The way out to the show on the left, the link to this summary on the
-     right. */
-  .ep-foot{display:flex;align-items:center;justify-content:space-between;
-    gap:12px;margin-top:10px}
-  .ep-foot .ep-link{margin-top:0}
-  .ep-foot .share{float:none;flex-shrink:0}
-  .share{background:transparent;color:var(--muted);border:1px solid var(--line);
-    border-radius:8px;font-size:12px;padding:4px 10px;cursor:pointer;
-    float:right;font-weight:400}
-  .share:hover{color:var(--green);border-color:var(--green)}
-  /* Mobile. The desktop hero grew, so every size it grew has to be walked
-     back here explicitly rather than left to inherit — a 54px serif line
-     and a 20px field do not fit a phone. */
-  @media (max-width:520px){
-    .wrap{padding:32px 0 64px}
-    h1{font-size:32px}
-    .sub{font-size:14px;margin-bottom:24px}
-    form{flex-direction:column}
-    form button{padding:13px}
-    #q{font-size:16px;padding:15px 16px}
-    .chips{margin-bottom:32px}
-  }
-
-  /* ---- header ----------------------------------------------------------
-     The page used to open with a line of text where a product opens with a
-     header. A mark, the name, and two places to go is the difference
-     between something somebody built and something somebody runs. */
-  header.site{width:100%;max-width:1320px;display:flex;align-items:center;
-    justify-content:space-between;gap:20px;padding:20px 4px 0;margin:0 auto}
+  /* ── the header ─────────────────────────────────────────────── */
+  header.site{display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding:26px 0 18px;border-bottom:1px solid var(--edge);position:relative;z-index:80}
   header.site .brand{display:flex;align-items:center;gap:10px;
-    text-decoration:none;color:var(--text)}
+    text-decoration:none;color:var(--ink)}
   header.site .brand img{display:block;border-radius:6px}
   /* The site's name as every page sets it (demo/nav.js, .home-crumb):
      it was 15px of sans here and 31px of serif on the front door. */
@@ -411,66 +79,400 @@
   @media(max-width:760px){.brand-name{gap:9px}.brand-name .w{font-size:25px}
     .brand-name .s{font-size:10.5px}}
   @media(max-width:420px){.brand-name .s{display:none}}
-  .site-nav{display:flex;gap:22px}
-  .site-nav a[hidden]{display:none!important}
-  .site-nav a{position:relative;color:var(--muted);text-decoration:none;
-    font-size:14px;padding-bottom:5px;transition:color .15s ease}
-  /* The same rule the other archive's nav draws, in this one's green. */
-  .site-nav a::after{content:"";position:absolute;left:0;right:100%;
-    bottom:0;height:1px;background:var(--green);transition:right .2s ease}
-  .site-nav a:hover{color:var(--text)}
-  .site-nav a:hover::after{right:0}
-  /* On a phone only the archive switcher stays. Hiding the whole nav,
-     as this did, hid the switcher with it: a phone on this page had no
-     way to reach any other archive. */
+  /* The way to the calls board and the token dashboard, beside the
+     archive switcher, in the type the other rooms use for theirs. */
+  .site-nav{display:flex;align-items:center;gap:20px}
+  .site-nav > a{font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-2);text-decoration:none;
+    transition:color var(--quick) var(--ease)}
+  .site-nav > a:hover{color:var(--ink)}
+  /* On a phone only the archive switcher stays beside the name. */
   @media (max-width:560px){ .site-nav > a{display:none} }
 
-  /* ---- depth -----------------------------------------------------------
-     A flat near-black rectangle reads as a terminal. One soft pool of light
-     behind the question turns the page into a place with a centre. Fixed,
-     so it does not travel with the scroll and become a smear. */
-  body::before{content:"";position:fixed;inset:0;pointer-events:none;
-    z-index:0;
-    background:
-      radial-gradient(720px 420px at 50% 18%,
-        color-mix(in srgb,var(--green) 9%,transparent), transparent 68%),
-      radial-gradient(900px 500px at 50% 0%,
-        rgba(255,255,255,.028), transparent 70%)}
-  .wrap{position:relative;z-index:1}
+  /* ── the readout strip, as the sibling archives have it ────────── */
+  .strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+    border-bottom:1px solid var(--edge);margin:0}
+  .strip div{padding:16px 0 18px 18px;border-left:1px solid var(--edge)}
+  .strip div:first-child{border-left:0;padding-left:0}
+  .strip span{display:block;font-family:var(--mono);font-size:10px;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3)}
+  .strip b{display:block;margin-top:8px;font-family:var(--display);
+    font-weight:400;font-size:30px;line-height:1;color:var(--ink);
+    font-variant-numeric:tabular-nums}
+  .strip b small{font-family:var(--mono);font-size:11px;color:var(--ink-3);
+    margin-left:6px;letter-spacing:.06em}
 
-  /* ---- the ticker, demoted ---------------------------------------------
-     Live prices were the first thing on the page, which told every new
-     visitor this is a token before it told them it is a search engine. The
-     prices still belong here, at the end rather than the start. */
-  .ticks{gap:4px}
-  .tick{font-size:10px;padding:2px 8px;background:transparent;
-    border-color:rgba(35,42,51,.7);color:#6b7480}
-  .tick:hover{border-color:var(--line);transform:none}
+  /* ── hero: the question on the left, the newest recordings right ── */
+  .hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,400px);
+    gap:clamp(36px,5vw,72px);align-items:start;padding:52px 0 0}
+  h1{font-family:var(--display);font-weight:400;
+    font-size:clamp(40px,5vw,72px);line-height:1.0;letter-spacing:-1.1px;
+    margin:0;padding-bottom:.08em}
+  h1 em{font-style:italic;color:var(--green)}
+  .lede{color:var(--ink-2);font-size:17px;max-width:50ch;margin:18px 0 0}
 
-  /* ---- rhythm ---------------------------------------------------------- */
-  h1{margin-top:44px;letter-spacing:-.02em}
-  .sub{max-width:660px;margin-left:auto;margin-right:auto}
-  @media (max-width:560px){ h1{margin-top:26px} }
+  #f{display:flex;margin:30px 0 0;max-width:640px;
+    border:1px solid var(--edge-2);border-radius:3px;background:var(--deck);
+    transition:border-color var(--quick) var(--ease),box-shadow var(--quick) var(--ease)}
+  #f:focus-within{border-color:var(--green);box-shadow:0 0 0 4px rgba(22,199,132,.12)}
+  #q{flex:1;min-width:0;background:transparent;color:var(--ink);border:0;
+    padding:18px 20px;font:inherit;font-size:17px;outline:none}
+  #q::placeholder{color:var(--ink-3)}
+  #go{background:var(--green);color:#06210f;border:0;padding:0 24px;
+    font-family:var(--mono);font-weight:600;font-size:14px;letter-spacing:.18em;
+    text-transform:uppercase;cursor:pointer;transition:filter var(--quick) var(--ease)}
+  #go:hover:not(:disabled){filter:brightness(1.1)}
+  #go:disabled{background:var(--edge-2);color:var(--ink-3);cursor:default}
 
-  .eyebrow{margin-top:46px;text-align:center;font-size:11.5px;
-    font-weight:600;letter-spacing:.14em;text-transform:uppercase;
-    color:#6b7480}
-  .eyebrow + h1{margin-top:14px}
-  /* Smaller on a phone so the line stays one line: at desktop size it
-     wrapped and left "HOURS" on a row of its own. */
-  @media (max-width:560px){ .eyebrow{margin-top:26px;font-size:10.5px;
-    letter-spacing:.09em} }
-  /* The bar stays at the top of a phone screen (nav.js), with the page's
-     colour painted behind it. The column's own top padding sat above
-     that, so the page opened on an empty band over the header. */
+  .tries{display:flex;flex-direction:column;align-items:flex-start;gap:2px;
+    margin:18px 0 0;max-width:640px}
+  .tries .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--ink-3);margin:0 0 6px}
+  /* The arrow in its own column, so a question that wraps on a phone
+     wraps under its own first word and not back under the arrow. */
+  .try{display:flex;align-items:baseline;background:transparent;border:0;
+    color:var(--ink-2);padding:6px 0;
+    font:inherit;font-size:14.5px;cursor:pointer;text-align:left;
+    transition:color var(--quick) var(--ease)}
+  .try::before{content:"\2192";color:var(--green);margin-right:10px;flex:none}
+  .try:hover{color:var(--ink)}
+
+  /* A worked example, before anything is asked. It goes when a real
+     answer arrives. */
+  .example{max-width:640px;margin:26px 0 0;padding:16px 18px;
+    border:1px solid var(--edge);border-radius:3px;background:var(--deck)}
+  .example-tag{font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--ink-3);margin-bottom:9px}
+  .example-q{font-family:var(--mono);font-size:13px;color:var(--green);margin-bottom:8px}
+  .example-q::before{content:"> ";color:var(--ink-3)}
+  .example-a{font-size:16px;line-height:1.55}
+  .example-foot{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px}
+  .example-ep{font-size:12px;color:var(--ink-3)}
+  .example-play{cursor:pointer;font-family:var(--mono);font-size:12px;font-weight:500;
+    color:var(--green);background:rgba(22,199,132,.08);
+    border:1px solid rgba(22,199,132,.35);border-radius:3px;padding:5px 11px}
+  .example-play:hover{background:rgba(22,199,132,.16)}
+
+  .latest h2{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--ink-3);font-weight:500;margin:4px 0 12px;
+    display:flex;align-items:center;gap:9px}
+  .latest h2 i{width:7px;height:7px;border-radius:50%;background:var(--live);
+    animation:pulse 2.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,93,108,.45)}
+    70%{box-shadow:0 0 0 7px rgba(255,93,108,0)}100%{box-shadow:0 0 0 0 rgba(255,93,108,0)}}
+  .day{display:grid;grid-template-columns:52px minmax(0,1fr);gap:14px;
+    padding:13px 14px;border:1px solid var(--edge);border-radius:3px;
+    background:var(--deck);cursor:pointer;margin-bottom:8px;
+    transition:border-color var(--quick) var(--ease),background var(--quick) var(--ease),
+               transform var(--quick) var(--ease)}
+  .day:hover{border-color:var(--edge-2);background:var(--deck-2);transform:translateX(-2px)}
+  .day:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+  .day.on{border-color:var(--green);background:var(--deck-2)}
+  .day .when{text-align:center;border-right:1px solid var(--edge);padding-right:12px}
+  .day .when b{display:block;font-family:var(--display);
+    font-weight:400;font-size:28px;line-height:1;color:var(--ink)}
+  .day .when span{display:block;margin-top:4px;font-family:var(--mono);font-size:9.5px;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+  .day .what{min-width:0}
+  .day .t{font-size:13.5px;line-height:1.38;color:var(--ink);
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .day .m{margin-top:6px;font-family:var(--mono);font-size:10.5px;color:var(--ink-3);
+    display:flex;gap:10px;min-width:0}
+  .day .m .fm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .day .m .live{color:var(--live)}
+  .empty{color:var(--ink-3);font-size:14px;padding:18px 0}
+
+  /* The newest recordings play on a stage under the hero, the full width
+     of the page: in a column this narrow a video would be a thumbnail. */
+  .stage{display:none;margin:34px 0 0}
+  .stage.on{display:block}
+
+  /* ── an episode, opened ───────────────────────────────────────────
+     Its player when it has a copy on YouTube, then its summary. Each
+     time in the summary moves that player, so the summary works as
+     chapters; a moment the upload cut opens the broadcast on X at the
+     second instead, and says so with its arrow. */
+  .pw{margin-top:12px;cursor:default}
+  .stage .pw{margin-top:0}
+  .pw .player iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:3px;
+    background:#000;display:block}
+  .notes{margin:16px 0 4px;cursor:default}
+  .notes .tldr{margin:0 0 14px;color:var(--ink);font-size:15px;line-height:1.6;
+    max-width:78ch}
+  .notes h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--ink-3);font-weight:500;margin:20px 0 6px}
+  .notes ol{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+  .notes li{display:grid;grid-template-columns:76px minmax(0,1fr);gap:14px;
+    align-items:baseline;padding:6px 8px;margin:0 -8px;border-radius:3px}
+  .notes li.on{background:var(--deck-2)}
+  .notes .at{background:transparent;border:0;padding:0;text-align:left;
+    color:var(--green);font-family:var(--mono);font-size:12.5px;cursor:pointer;
+    font-variant-numeric:tabular-nums;white-space:nowrap;text-decoration:none}
+  .notes .at:hover,.notes .at:focus-visible{text-decoration:underline}
+  .notes a.at::after{content:" \2197";font-weight:400}
+  .notes .at.off{color:var(--ink-3);cursor:default;text-decoration:none}
+  .notes li > span:last-child,.notes .para{color:var(--ink-2);font-size:14.5px;line-height:1.55}
+  .notes .para{margin:6px 0;max-width:78ch}
+  .notes b,.notes .tldr b{color:var(--ink);font-weight:600}
+  .ep-foot{display:flex;align-items:center;justify-content:space-between;
+    gap:12px;flex-wrap:wrap;margin:14px 0 6px}
+  .ep-out{color:var(--green);font-size:13.5px;text-decoration:none}
+  .ep-out:hover{text-decoration:underline}
   @media (max-width:560px){
-    .wrap{padding-top:0}
+    .notes li{grid-template-columns:62px minmax(0,1fr);gap:10px}
+  }
+
+  /* ── the answer ───────────────────────────────────────────────── */
+  .spin{display:none;margin:48px 0 0;font-family:var(--mono);font-size:11px;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--green);
+    align-items:center;gap:11px}
+  .spin.show{display:flex}
+  .spin.show::before{content:"";width:7px;height:7px;flex:none;border-radius:50%;
+    background:var(--green);animation:beat 1.1s infinite}
+  @keyframes beat{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
+  .answer{display:none;margin:48px 0 0}
+  .answer.show{display:block}
+  .answer h3{display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+    font-family:var(--mono);font-size:11px;letter-spacing:.16em;font-weight:500;
+    text-transform:uppercase;color:var(--ink-3);margin:0 0 14px}
+  #share-actions{margin-left:auto;display:inline-flex;letter-spacing:0;text-transform:none}
+  #answer-body{font-size:17px;line-height:1.65}
+  #answer-body p{margin:0 0 12px}
+  #answer-body p:last-child{margin-bottom:0}
+  #answer-body h4{font-size:15px;font-weight:700;margin:18px 0 8px}
+  #answer-body h4:first-child{margin-top:0}
+  #answer-body ul{margin:0 0 12px;padding-left:20px}
+  #answer-body li{margin-bottom:6px}
+  /* A time the answer cites, played under it. */
+  .cite{color:var(--green);cursor:pointer;white-space:nowrap;
+    font-family:var(--mono);font-size:.88em;padding:1px 6px 1px 5px;
+    border:1px solid rgba(22,199,132,.35);border-radius:3px;
+    background:rgba(22,199,132,.07);
+    transition:background var(--quick) var(--ease),border-color var(--quick) var(--ease)}
+  .cite::before{content:"\25B6";font-size:.7em;margin-right:5px;position:relative;top:-1px}
+  .cite:hover{background:rgba(22,199,132,.16);border-color:var(--green)}
+  .cite:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+  /* Author rules beat the UA stylesheet, so a display rule here would
+     defeat [hidden]: restated, and !important so nothing later loses
+     this argument again. */
+  .reading[hidden]{display:none!important}
+  .reading{display:flex;align-items:center;gap:10px;margin:0 0 12px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--green)}
+  .bars{display:inline-flex;gap:2px;align-items:flex-end;height:11px}
+  .bars s{width:2px;height:4px;background:var(--green);display:block;
+    animation:eq .9s ease-in-out infinite}
+  .bars s:nth-child(2){animation-delay:.15s}
+  .bars s:nth-child(3){animation-delay:.3s}
+  .bars s:nth-child(4){animation-delay:.45s}
+  @keyframes eq{0%,100%{height:4px}50%{height:11px}}
+  /* Attached to #answer-body while text is streaming, so the reader can
+     tell "still writing" from "finished". */
+  #answer-body.writing::after{content:"";display:inline-block;
+    width:7px;height:15px;background:var(--green);margin-left:3px;
+    vertical-align:-2px;animation:blink 1s step-end infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+  /* The passages, each a card with its actions under it. */
+  .hits{margin:26px 0 0}
+  .hits h3{font-family:var(--mono);font-size:11px;letter-spacing:.16em;font-weight:500;
+    text-transform:uppercase;color:var(--ink-3);margin:0 0 12px}
+  .hit-wrap{min-width:0;background:var(--deck);border:1px solid var(--edge);
+    border-radius:3px;padding:14px 16px 12px;margin-bottom:8px;
+    transition:border-color var(--quick) var(--ease)}
+  .hit-wrap:hover{border-color:var(--edge-2)}
+  .hit{display:block;text-decoration:none;color:inherit;min-width:0}
+  .hit-top{display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+  .hit .ep{color:var(--ink-2);font-size:13.5px;font-weight:600;overflow:hidden;
+    text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+  .who{font-size:11px;font-weight:600;letter-spacing:.03em;
+    padding:2px 7px;border-radius:999px;white-space:nowrap;
+    color:#7ee2b8;background:rgba(52,211,153,.10);
+    border:1px solid rgba(52,211,153,.28)}
+  /* The timestamp is the thing to press: monospace so the digits do not
+     shift, a filled box so it reads as a control. */
+  .play{font-family:var(--mono);font-size:12.5px;font-weight:500;color:var(--green);
+    white-space:nowrap;background:rgba(22,199,132,.10);border:1px solid rgba(22,199,132,.30);
+    padding:3px 8px;border-radius:3px;flex:none;
+    display:inline-flex;align-items:center;gap:6px;cursor:pointer;
+    transition:background .16s ease,border-color .16s ease}
+  .play svg{width:9px;height:9px;fill:currentColor;flex:none}
+  .hit-wrap:hover .play{background:rgba(22,199,132,.19);border-color:rgba(22,199,132,.5)}
+  .play.noseek{color:var(--ink-3);font-weight:600;background:transparent;
+    border-color:transparent;padding:0}
+  .hit-wrap:hover .play.noseek{background:transparent;border-color:transparent}
+  .play.noseek .ts{color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums}
+  .copyts{background:transparent;border:1px solid var(--edge);color:var(--ink-3);
+    border-radius:3px;font-size:10.5px;padding:1px 6px;cursor:pointer;margin-left:2px}
+  .copyts:hover,.copyts.done{color:var(--green);border-color:var(--green)}
+  .aired{font-family:var(--mono);font-size:11px;color:var(--ink-3);white-space:nowrap}
+  .quote{font-size:14.5px;color:var(--ink-2);display:-webkit-box;
+    -webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+  .share{background:transparent;color:var(--ink-3);border:1px solid var(--edge-2);
+    border-radius:99px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;padding:3px 10px;cursor:pointer;text-decoration:none;
+    transition:color var(--quick) var(--ease),border-color var(--quick) var(--ease)}
+  .share:hover{color:var(--green);border-color:var(--green)}
+  .share:disabled{opacity:.5;cursor:default}
+  .watch{margin-left:auto;color:var(--ink-3);font-size:12px;
+    white-space:nowrap;text-decoration:none;align-self:center}
+  .watch:hover{color:var(--green)}
+  /* Always visible: a control nobody knows about is the same as one that
+     was never built. */
+  .hit-actions{display:flex;gap:8px;flex-wrap:wrap;padding:10px 0 0}
+  /* Four equal buttons across, then the link out on a line of its own.
+     As a flex row the five of them were wider than a phone. */
+  @media (max-width:640px){
+    .hit-actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:8px;padding:10px 0 2px}
+    .hit-actions .share{font-size:10px;letter-spacing:.04em;padding:0 4px;min-height:40px;
+      display:inline-flex;align-items:center;justify-content:center;
+      white-space:nowrap;border-radius:3px}
+    .hit-actions .watch{grid-column:1/-1;justify-self:end;margin-left:0;
+      padding:4px 2px}
+  }
+  .player:empty{display:none}
+  .player{margin-top:10px}
+  .player iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:3px;
+    display:block;background:#000}
+  .clipbox:empty{display:none}
+  .clipbox{margin-top:10px;padding:12px 14px;border:1px solid var(--edge);
+    border-radius:3px;background:rgba(255,255,255,.02)}
+  .clip-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .clip-row label{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--ink-3);min-width:56px}
+  .clip-row input[type=range]{flex:1;min-width:0;accent-color:var(--green)}
+  .c-lab{font-family:var(--mono);font-size:12px;color:var(--ink-2);min-width:196px;
+    text-align:right;font-variant-numeric:tabular-nums}
+  .c-hint{font-size:12px;color:var(--ink-3);margin:2px 0 10px;font-family:var(--mono)}
+  .c-hint:empty{display:none}
+  .clip-go{display:flex;align-items:center;gap:10px}
+  .c-status{font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+  .c-out:not(:empty){margin-top:10px}
+  .c-out video{width:100%;border-radius:3px;display:block;background:#000}
+  .c-dl{display:inline-block;margin-top:8px}
+  @media(max-width:620px){
+    .clip-row{flex-wrap:wrap}
+    .c-lab{min-width:0;text-align:left;width:100%}
+  }
+
+  /* ── the shelf ────────────────────────────────────────────────── */
+  .sect{margin:64px 0 0;border-top:1px solid var(--edge);padding-top:22px;
+    scroll-margin-top:24px}
+  .sect[hidden]{display:none}
+  .sect > h2{font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--ink-3);font-weight:500;margin:0 0 6px;
+    display:flex;align-items:center;gap:12px}
+  .sect > h2::before{content:attr(data-n);color:var(--green)}
+  .sect > .note{color:var(--ink-2);font-size:14.5px;margin:0 0 20px;max-width:66ch}
+  .month{margin:26px 0 0}
+  .month > h3{font-family:var(--display);font-weight:400;
+    font-size:24px;margin:0 0 10px;color:var(--ink)}
+  .month > h3 span{font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+    color:var(--ink-3);margin-left:10px}
+  .rec{display:grid;grid-template-columns:78px 104px minmax(0,1fr) 64px;gap:4px 16px;
+    align-items:center;padding:11px 14px;border-radius:3px;cursor:pointer;
+    border:1px solid transparent;scroll-margin-top:76px;
+    transition:background var(--quick) var(--ease),border-color var(--quick) var(--ease)}
+  #eps-guest-list .rec{grid-template-columns:78px 160px minmax(0,1fr) 64px}
+  .rec:hover{background:var(--deck);border-color:var(--edge)}
+  .rec:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+  .rec.playing{background:var(--deck);border-color:var(--edge-2)}
+  .rec .d{font-family:var(--mono);font-size:12px;color:var(--ink-3);
+    font-variant-numeric:tabular-nums}
+  .rec .f{font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--ink-3);overflow:hidden;
+    text-overflow:ellipsis;white-space:nowrap}
+  .rec .f.live{color:var(--live)}
+  .rec .t{font-size:14.5px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;
+    white-space:nowrap}
+  .rec .r{font-family:var(--mono);font-size:12px;color:var(--ink-3);text-align:right;
+    font-variant-numeric:tabular-nums}
+  .rec .pw{grid-column:1/-1}
+  /* A row with a summary carries a dot before its title. */
+  .rec.noted .t::before{content:"";display:inline-block;width:6px;height:6px;
+    border-radius:50%;background:var(--green);margin-right:10px;vertical-align:2px}
+  .dotkey{display:inline-block;width:6px;height:6px;border-radius:50%;
+    background:var(--green);vertical-align:2px;margin:0 2px}
+
+  /* ── also built on this archive ───────────────────────────────── */
+  .also-grid{display:grid;gap:12px;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .also-card{display:block;padding:16px 18px;border-radius:3px;
+    text-decoration:none;color:inherit;border:1px solid var(--edge);background:var(--deck);
+    transition:border-color var(--quick) var(--ease),background var(--quick) var(--ease)}
+  .also-card:hover{border-color:var(--edge-2);background:var(--deck-2)}
+  .also-name{display:flex;align-items:baseline;gap:8px;font-weight:600;font-size:15px;
+    margin-bottom:5px}
+  .also-name .arw{color:var(--green)}
+  .also-say{display:block;font-size:13.5px;line-height:1.5;color:var(--ink-2)}
+  @media (max-width:860px){.also-grid{grid-template-columns:1fr}}
+
+  /* ── the foot ─────────────────────────────────────────────────── */
+  footer.foot{margin:64px 0 46px;border-top:1px solid var(--edge);padding-top:22px;
+    display:grid;grid-template-columns:1fr auto;gap:16px 20px;align-items:end;
+    font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+  footer.foot .fine{max-width:60ch;line-height:1.7}
+  footer.foot .fine a{color:var(--ink-2)}
+  footer.foot nav{display:flex;gap:18px;flex-wrap:wrap;justify-content:flex-end}
+  footer.foot nav a{text-decoration:none;color:var(--ink-2);
+    transition:color var(--quick) var(--ease)}
+  footer.foot nav a:hover{color:var(--green)}
+  /* Live prices for the two coins this project is attached to, and the one
+     everything on the show is priced against. Hidden until every row has
+     a real number. */
+  .ticks{grid-column:1/-1;display:flex;justify-content:flex-end;gap:5px;flex-wrap:wrap}
+  .ticks[hidden]{display:none}
+  .tick{display:inline-flex;align-items:baseline;gap:5px;background:transparent;
+    border:1px solid var(--edge);border-radius:999px;padding:2px 8px;
+    font-size:10px;color:var(--ink-3);text-decoration:none;white-space:nowrap}
+  .tick:hover{border-color:var(--edge-2)}
+  .tick .sym{color:var(--ink);font-weight:600;letter-spacing:.02em}
+  .tick .px{color:var(--ink);font-variant-numeric:tabular-nums}
+  .tick .ch{font-variant-numeric:tabular-nums;font-weight:600}
+  .tick .up{color:var(--green)} .tick .dn{color:#ff6b6b}
+  .tick.own{border-color:#16c78455}
+  .tick.own .sym{color:var(--green)}
+
+  .try:focus-visible,#go:focus-visible,.share:focus-visible,.example-play:focus-visible,
+  footer.foot nav a:focus-visible,.archsw>summary:focus-visible,.archsw .menu a:focus-visible,
+  .site-nav > a:focus-visible,.also-card:focus-visible{
+    outline:2px solid var(--green);outline-offset:3px;border-radius:2px}
+
+  .rise{opacity:0;transform:translateY(12px);animation:rise .7s var(--ease) forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){
+    .rise{animation:none;opacity:1;transform:none}
+    .latest h2 i,.bars s,#answer-body.writing::after,.spin.show::before{animation:none}
+  }
+  @media(max-width:980px){
+    .hero{grid-template-columns:1fr;gap:34px}
+  }
+  @media(max-width:720px){
+    .rec,#eps-guest-list .rec{grid-template-columns:1fr 56px;row-gap:3px}
+    .rec .d,.rec .f{grid-column:1;font-size:11px}
+    .rec .d{grid-row:1}
+    .rec .f{grid-row:2}
+    .rec .t{grid-column:1/-1;grid-row:3;white-space:normal}
+    .rec .r{grid-column:2;grid-row:1}
+    footer.foot{grid-template-columns:1fr}
+    footer.foot nav,.ticks{justify-content:flex-start}
+  }
+  @media(max-width:620px){
+    .hero{padding-top:36px}
+    .strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .strip div:nth-child(3){border-left:0;padding-left:0}
+    .strip div:nth-child(n+3){border-top:1px solid var(--edge)}
+    .strip b{font-size:24px}
+    #f{flex-direction:column}
+    #go{padding:15px}
+  }
+  /* The bar stays at the top of a phone screen (nav.js), with the page's
+     colour painted behind it. A phone paints its status bar in the page's
+     flat colour too, and the pool of light reached the top edge, so the
+     page opened on three strips: a dark status bar, a green band, a dark
+     header. Faded out over the first screen-inch, they are one colour. */
+  @media (max-width:560px){
     header.site{padding-top:16px;padding-bottom:12px}
-    /* A phone paints its status bar in the page's flat colour, and the
-       pinned header is that colour too. The pool of light reached the top
-       edge, so the page opened on three strips: a dark status bar, a
-       green band, a dark header. Faded out over the first screen-inch,
-       all three are one colour and the light starts under the header. */
     body::before{background:
       linear-gradient(to bottom,var(--bg) 0,var(--bg) 60px,transparent 170px),
       radial-gradient(720px 420px at 50% 18%,
@@ -478,146 +480,89 @@
       radial-gradient(900px 500px at 50% 0%,
         rgba(255,255,255,.028), transparent 70%)}
   }
-
-  /* ---- one control -----------------------------------------------------
-     The field and the button were two rectangles side by side with a gap
-     between them, which is a form. Every search surface people already use
-     puts the button inside the field, so the whole thing reads as one
-     object you type into. The field carries the padding on the right that
-     the button then sits in, so the text never runs under it. */
-  form{position:relative;display:block;gap:0}
-  #q{width:100%;padding-right:132px;border-radius:16px;padding-top:22px;
-    padding-bottom:22px;padding-left:24px;font-size:17px;
-    background:rgba(18,22,28,.86);
-    box-shadow:0 1px 0 rgba(255,255,255,.03) inset,
-               0 18px 40px -28px rgba(0,0,0,.9)}
-  #q:focus{box-shadow:0 0 0 4px rgba(22,199,132,.15),
-                      0 18px 44px -26px rgba(22,199,132,.35)}
-  button{border-radius:16px;font-weight:650;letter-spacing:-.01em}
-  #go{position:absolute;top:8px;right:8px;bottom:8px;padding:0 24px;
-    border-radius:12px;font-size:14px;line-height:1;
-    transition:filter .15s ease,transform .15s ease}
-  #go:hover:not(:disabled){filter:brightness(1.07);transform:translateY(-1px)}
-  /* On a phone the button would take half the field. It goes back under it,
-     full width, where a thumb can actually reach it, and the field goes back
-     to the size the phone rules already chose for it. Those rules are
-     earlier in the file, so at equal specificity this block has to restate
-     them or the desktop sizing above wins on mobile too. */
-  @media (max-width:560px){
-    form{display:flex;flex-direction:column;gap:10px}
-    #q{padding:15px 16px;font-size:16px}
-    #go{position:static;padding:15px 24px}
-  }
-
-  /* ---- the suggestions -------------------------------------------------
-     Three saturated green pills directly under a saturated green button
-     meant four things shouting at the same volume, and the one that matters
-     is the button. Quiet until you go near them, green only on hover. */
-  .chip{background:rgba(255,255,255,.02);border-color:var(--line);
-    color:var(--muted);padding:7px 14px;font-size:14.5px;
-    transition:color .15s ease,border-color .15s ease,background .15s ease}
-  .chip:hover{background:rgba(22,199,132,.08);border-color:#16c78455;
-    color:var(--green)}
-
-  /* ---- the footer the disclosure moved into --------------------------- */
-  .foot{display:flex;align-items:center;justify-content:space-between;
-    gap:18px;flex-wrap:wrap;line-height:1.6}
-  .foot > span{flex:1;min-width:260px}
-  .foot .ticks{position:static;transform:none;margin:0;flex-wrap:wrap;
-    justify-content:flex-end}
 </style>
   <script src="/demo/nav.js" defer></script>
   <script src="/demo/typer.js"></script>
 </head>
 <body>
 <div class="wrap">
-  <header class="site">
+  <header class="site rise" style="animation-delay:.02s">
     <a class="brand" href="/home">
       <img src="/demo/icon-96.png" alt="" width="26" height="26">
       <span class="brand-name"><span class="w">Market Bubble</span><span class="s">Search</span></span>
     </a>
     <nav class="site-nav">
-      <!-- One switcher rather than a link per archive. There are four
-           now, plus two token dashboards, and every page carried its own
-           hand-written list: they disagreed with each other and the
-           finance archive was in none of them. demo/nav.js owns the
-           list, so adding the fifth is one row there rather than an edit
-           in five files and one forgotten. -->
+      <a href="/calls">Calls</a>
+      <a href="/demo/assets.html">Tokens</a>
+      <!-- One switcher rather than a link per archive: demo/nav.js owns
+           the list, so adding one is a row there and not an edit in
+           every page. -->
       <span data-archives></span>
-      <!-- Revealed by the summaries fetch below, so it is never
-           a link to a section that is not there. -->
-      <a href="#eps" hidden>Episodes</a>
     </nav>
   </header>
 
-  <!-- What the thing is, before the headline asks anything of you. It
-       replaces the price strip as the first line on the page, which is the
-       whole point. Figures from scripts/count_the_archive.py. -->
-  <!-- Written into the markup so the line is right before any JavaScript
-       runs and still right if the call below fails, and refreshed from the
-       server so it does not go stale the next time a show is ingested.
-       Re-check the fallback after an ingest: it is a floor, not a lie. -->
-  <div class="eyebrow" id="eyebrow">Searchable archive &middot; 21 episodes
-    &middot; 73 hours</div>
-
-  <h1>Ask the <em>Market Bubble</em> broadcast anything.</h1>
-  <p class="sub">Search every episode by meaning, not keywords, and jump straight to the moment they said it.</p>
-
-  <form id="f">
-    <input id="q" placeholder="e.g. what did they say about liquidation?"
-      autocomplete="off" maxlength="2000">
-    <button id="go" type="submit">Search</button>
-  </form>
-
-  <div class="chips">
-    <!-- Every one of these is checked against the live index before it goes
-         here. The previous three were written for the concierge -- seed
-         phrases, bridging, liquidation -- and two of them answered "I
-         couldn't find that in the episodes I've indexed", because the
-         podcast does not cover them. The most inviting button on the page
-         was demonstrating a failure to every first-time visitor.
-
-         They also now show what the tool is actually for: a half-remembered
-         story, phrased the way someone would say it out loud, landing on
-         the exact moment. A question you could have answered with ctrl-F
-         proves nothing. -->
-    <button class="chip">blackrock told an nba player not to buy bitcoin</button>
-    <button class="chip">how did he turn 500 dollars into 40 million</button>
-    <button class="chip">why does ansem think ethereum is done</button>
+  <!-- Filled from /v1/podcast/archive and the episode list, so no figure
+       here is one somebody has to retype after a show is added. -->
+  <div class="strip rise" id="strip" style="animation-delay:.05s">
+    <div><span>episodes</span><b id="s-eps">&middot;</b></div>
+    <div><span>Ansem elsewhere</span><b id="s-guest">&middot;</b></div>
+    <div><span>runtime</span><b id="s-hours">&middot;</b></div>
+    <div><span>latest episode</span><b id="s-last">&middot;</b></div>
   </div>
 
-  <!-- A worked example, rendered flat rather than fetched. Nobody types
-       into an empty box for a tool they have not seen work, and running a
-       real search on every page load would spend a model call to show the
-       same answer to everyone. This is one verified moment -- Ansem on
-       Hyperliquid, 9:37 into Market Bubble #4, checked against the
-       transcript -- with the same player the real results use. It hides
-       itself the moment somebody searches. -->
-  <div class="example" id="example">
-    <!-- Labelled, because unlabelled it reads as a result nobody asked
-         for. Somebody arriving cold cannot tell a demonstration from an
-         answer, and a page that appears to have answered a question you
-         did not ask is stranger than an empty one. -->
-    <div class="example-tag">for example</div>
-    <div class="example-q">what did ansem say about hyperliquid</div>
-    <div class="example-a">Ansem called it “an application that is a real
-      business… growing its users, and actually making strides in a way that
-      no other crypto project has done with implementing tradfi assets: stocks, perps on stocks, perps on commodities.”</div>
-    <div class="example-foot">
-      <button class="example-play" id="example-play">▶ 9:37 · hear him say it</button>
-      <!-- "from" is doing real work: unlabelled, an episode title sitting
-           beside a play button reads as a second question — especially
-           this one, which is about Ethereum while the example asks about
-           Hyperliquid. It is the source, not another thing to click. -->
-      <span class="example-ep">from “Why Ansem Thinks Ethereum Is Done..” ·
-        Market Bubble #4</span>
+  <section class="hero">
+    <div>
+      <h1 class="rise" style="animation-delay:.09s">Ask the <em>Market Bubble</em><br>broadcast anything.</h1>
+      <p class="lede rise" style="animation-delay:.13s">Ansem and FaZe Banks's show, every
+        episode transcribed. Search by meaning, not keywords, and jump straight to the
+        second they said it.</p>
+      <form id="f" autocomplete="off" class="rise" style="animation-delay:.17s">
+        <input id="q" type="search" aria-label="Ask the Market Bubble archive"
+               placeholder="what did ansem say about zcash" maxlength="2000">
+        <button id="go" type="submit">Ask</button>
+      </form>
+      <!-- Every one of these is checked against the live index before it
+           goes here. They are phrased the way someone half remembers a
+           story, because a question ctrl-F could answer proves nothing. -->
+      <div class="tries rise" id="tries" style="animation-delay:.21s">
+        <span class="lbl">Try asking</span>
+        <button type="button" class="try chip">blackrock told an nba player not to buy bitcoin</button>
+        <button type="button" class="try chip">how did he turn 500 dollars into 40 million</button>
+        <button type="button" class="try chip">why does ansem think ethereum is done</button>
+      </div>
+
+      <!-- A worked example, written in rather than fetched: running a real
+           search on every page load would spend a model call to show the
+           same answer to everyone. One verified moment, Ansem on
+           Hyperliquid, 9:37 into Market Bubble #4, checked against the
+           transcript, with the player the real results use. It goes the
+           moment somebody searches. -->
+      <div class="example rise" id="example" style="animation-delay:.25s">
+        <div class="example-tag">for example</div>
+        <div class="example-q">what did ansem say about hyperliquid</div>
+        <div class="example-a">Ansem called it “an application that is a real
+          business… growing its users, and actually making strides in a way that
+          no other crypto project has done with implementing tradfi assets: stocks, perps on stocks, perps on commodities.”</div>
+        <div class="example-foot">
+          <button type="button" class="example-play" id="example-play">▶ 9:37 · hear him say it</button>
+          <span class="example-ep">from “Why Ansem Thinks Ethereum Is Done..” ·
+            Market Bubble #4</span>
+        </div>
+        <div class="player" id="example-player"></div>
+      </div>
     </div>
-    <div class="player" id="example-player"></div>
-  </div>
 
-  <div class="spin" id="spin">Searching the episodes…</div>
+    <aside class="latest rise" style="animation-delay:.2s" aria-label="Latest recordings">
+      <h2><i></i>latest recordings</h2>
+      <div id="days"><div class="empty">Loading.</div></div>
+    </aside>
+  </section>
 
-  <div class="answer" id="answer">
+  <div class="stage" id="stage"></div>
+
+  <div class="spin" id="spin" role="status">Searching the episodes…</div>
+
+  <div class="answer" id="answer" aria-live="polite">
     <h3>Answer</h3>
     <div class="reading" id="reading" hidden>
       <span class="bars" aria-hidden="true"><s></s><s></s><s></s><s></s></span>
@@ -638,26 +583,27 @@
   </section>
   <script src="/demo/moments.js" defer></script>
 
-  <div class="eps" id="eps" hidden>
-    <h2>Episode summaries</h2>
-    <p class="sub2">Every episode condensed to a 2-minute read, with
-    timestamps. Click to expand.</p>
-    <div id="eps-list"></div>
-    <div id="eps-guest" hidden>
-      <h2 class="eps-guest-h">Ansem on other shows</h2>
-      <p class="sub2">His long interviews elsewhere, searchable with the
-      rest. Answers name the show they came from.</p>
-      <div id="eps-guest-list"></div>
-    </div>
-  </div>
+  <section class="sect" id="eps">
+    <h2 data-n="01">every episode</h2>
+    <p class="note">Newest first, grouped by month. Pick one for its summary, with the
+      video above it when the show has a copy on YouTube. A time plays that moment here;
+      one marked &#8599; was cut from the upload and opens the live broadcast on X at
+      that second.</p>
+    <div id="eps-list"><div class="empty">Loading the episodes.</div></div>
+  </section>
 
-  <!-- These were two bright buttons directly above the search box,
-       competing with the one thing the page exists to do. They are real
-       features, not clutter, so they moved rather than went: down here
-       they also get a sentence explaining what they are, which a button
-       in a top bar never had room for. -->
-  <div class="also">
-    <h2>Also built on this archive</h2>
+  <!-- Ansem's appearances on other shows, and the videos he posts on X,
+       under their own heading so the list above stays Market Bubble's. -->
+  <section class="sect" id="eps-guest" hidden>
+    <h2 data-n="02">Ansem elsewhere</h2>
+    <p class="note">Ansem on other shows, and the videos he posts on X on his own.
+      They are searchable with the rest, and an answer names where it came from.</p>
+    <div id="eps-guest-list"></div>
+  </section>
+
+  <section class="sect also">
+    <h2 data-n="03">also built on this archive</h2>
+    <p class="note">The same transcripts, read for something other than a question.</p>
     <div class="also-grid">
       <a class="also-card" href="/calls">
         <span class="also-name">What they called, and what it did<span class="arw">→</span></span>
@@ -674,28 +620,34 @@
         <span class="also-say">The same idea pointed at the Bullpen terminal. Ask it how something works, get the answer from the
           docs.</span>
       </a>
-      </span>
     </div>
-  </div>
+  </section>
 
-  <div class="foot">
-    <!-- The disclosure that used to run above the product's own name. Every
-         claim it made is still here; it just no longer arrives before the
-         visitor has learned what the thing is. -->
-    <span>Auto-generated captions &middot; semantic search over podcast
-    transcripts &middot; informational only, not financial advice &middot;
-    built as an independent concept, not affiliated &middot;
-    <a href="/method">how it works</a> &middot;
-    <a href="/episodes">every episode, summarized</a>.</span>
-    <!-- Live prices, moved down with it. Populated by the block at the
-         bottom of this file, hidden if anything about that fails. -->
+  <footer class="foot">
+    <div class="fine">
+      Free, no login. Informational only, and not financial advice.
+      Auto-generated captions, searched by meaning. An independent project,
+      not affiliated with Market Bubble.
+      <a href="/method">How it works</a> &middot;
+      <a href="/episodes">every episode, summarized</a>.
+    </div>
+    <nav>
+      <a href="/home">All archives</a><a href="/mcg">MCG Live</a>
+      <a href="/threadguy">ThreadGuy</a><a href="/rasmr">rasmr</a>
+      <a href="/elon">Elon Musk</a><a href="/finance">The Record</a>
+    </nav>
+    <!-- Live prices, at the end rather than the start: first on the page
+         they said "this is a token" before it said "this is a search
+         engine". Filled by the last script in this file, and hidden if
+         anything about that fails. -->
     <div class="ticks" id="ticks" hidden></div>
-  </div>
+  </footer>
 </div>
 
 <script>
 (function(){
   var API = "";
+  var EXAMPLE_LABEL = "\u25B6 9:37 \u00b7 hear him say it";
   var f=document.getElementById("f"), q=document.getElementById("q"),
       go=document.getElementById("go"), spin=document.getElementById("spin"),
       answer=document.getElementById("answer"),
@@ -775,143 +727,395 @@
     return out.join("");
   }
 
-  // Turn [h:mm:ss] / [m:ss] markers in a summary into links that open the
-  // episode at that second on YouTube. Runs on md()'s escaped HTML, so the
-  // bracketed timestamps are plain literal text we can safely replace.
-  // A timestamp inside a summary opens the moment in place, the same way
-  // one inside an answer does. It used to be a link that opened YouTube in
-  // a new tab — which is exactly the behaviour the rest of the page
-  // stopped doing, so the summaries were the last half-converted part of
-  // it. An X broadcast keeps the outbound link, because X still cannot
-  // jump to a timestamp and a button that opened it at 0:00 would be a
-  // worse promise than a plain link.
-  function linkifyTimestamps(html, url, onYoutube){
-    var seekable = canSeek(url);
-    return html.replace(/\[(?:(\d+):)?(\d{1,2}):(\d{2})\]/g,
-      function(m, h, mm, ss){
-        var sec=(parseInt(h||0,10)*3600)+(parseInt(mm,10)*60)+parseInt(ss,10);
-        // The summary was written from the live broadcast. Where that moment
-        // is also in the YouTube upload, play it here, at YouTube's second.
-        var yt = onYoutube && onYoutube[String(sec)];
-        if(yt){
-          return '<button class="cite ep-cite" data-sec="'+yt[1]+'" '+
-                 'data-ep="https://www.youtube.com/watch?v='+escAttr(yt[0])+'" '+
-                 'title="play this moment">'+m.slice(1,-1)+'</button>';
+  // ─── the episodes ───────────────────────────────────────────────────
+  //
+  // The newest five beside the question and all of them below, by month,
+  // as the ThreadGuy, rasmr and MCG pages lay theirs out. One opens to
+  // its summary, under a player when the show has a copy on YouTube.
+  //
+  // The summary was written from the live broadcast, so its times are the
+  // broadcast's. The server sends, for each one, the second it plays at
+  // on YouTube (`yt`) where the upload kept that moment, and the link
+  // that opens the broadcast on X at that second (`link`). A time plays
+  // here when it can and opens X when it cannot; one with neither is
+  // printed as text, because a control that opened the show at 0:00
+  // would promise more than it does.
+  //
+  // Everything is built from text nodes. The summaries are model output,
+  // and nothing a model wrote goes into the page as markup.
+  var MONTH_NAMES=["January","February","March","April","May","June","July",
+                   "August","September","October","November","December"];
+  var DOW=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  var VIDEO=/^[A-Za-z0-9_-]{11}$/;
+  var ON_X=/^https:\/\/x\.com\//;
+  var EPS=[];
+  var stage=document.getElementById("stage");
+  // The row or the stage that has an episode open, and which tile lit it.
+  var open=null;
+
+  function dayOf(iso){
+    var d=new Date(String(iso||"").slice(0,10)+"T12:00:00Z");
+    return isNaN(d.getTime()) ? null : d;
+  }
+  function shortDay(iso){
+    var d=dayOf(iso);
+    return d ? MONTH_NAMES[d.getUTCMonth()].slice(0,3)+" "+d.getUTCDate() : "";
+  }
+  function monthOf(iso){
+    var d=dayOf(iso);
+    return d ? MONTH_NAMES[d.getUTCMonth()]+" "+d.getUTCFullYear() : "Undated";
+  }
+
+  // What a row is. A video Ansem posted on X was never a live broadcast,
+  // and an interview on somebody else's show is filed under that show.
+  function kindOf(ep){
+    if(ep.own) return {text:"his video", live:false};
+    if(ep.show) return {text:ep.show, live:false};
+    return ON_X.test(ep.url||"") ? {text:"live on X", live:true}
+                                 : {text:"episode", live:false};
+  }
+  function watchText(ep){
+    if(ep.own) return "Watch the video on X";
+    return ON_X.test(ep.url||"") ? "Watch the full broadcast on X"
+                                 : "Watch it on YouTube";
+  }
+
+  // A summary marks bold as **text**. Split, never parsed: an unpaired
+  // marker is dropped and the words stay plain.
+  function rich(el,text){
+    var parts=String(text||"").split("**");
+    if(parts.length%2===0){ el.appendChild(document.createTextNode(parts.join(""))); return; }
+    parts.forEach(function(part,i){
+      if(!part) return;
+      if(i%2){ var b=document.createElement("b"); b.textContent=part; el.appendChild(b); }
+      else el.appendChild(document.createTextNode(part));
+    });
+  }
+
+  // One recording at a time, wherever it was asked for.
+  function quiet(){
+    document.querySelectorAll(".player").forEach(function(o){ o.innerHTML=""; });
+    document.querySelectorAll("button.play-here").forEach(function(o){
+      o.textContent="▶ play here"; });
+    var eg=document.getElementById("example-play");
+    if(eg) eg.textContent=EXAMPLE_LABEL;
+  }
+
+  function playIn(box,video,sec,auto,title){
+    var slot=box.querySelector(".player");
+    if(!slot||!VIDEO.test(video||"")) return;
+    quiet();
+    var f=document.createElement("iframe");
+    f.src="https://www.youtube-nocookie.com/embed/"+video
+      +"?start="+Math.max(0,Math.floor(Number(sec)||0))
+      +"&rel=0&modestbranding=1&playsinline=1"+(auto?"&autoplay=1":"");
+    f.title=title||"The recording";
+    f.setAttribute("allow","autoplay; encrypted-media; fullscreen; picture-in-picture");
+    f.setAttribute("allowfullscreen","");
+    slot.appendChild(f);
+  }
+
+  // Scroll only as far as it takes to bring something fully into view.
+  function reveal(el){
+    var box=el.getBoundingClientRect();
+    var over=box.bottom-window.innerHeight+24, under=box.top-16;
+    if(under<0) window.scrollBy({top:under,behavior:"smooth"});
+    else if(over>0) window.scrollBy({top:Math.min(over,under),behavior:"smooth"});
+  }
+
+  // A row or a tile is pressed like a button. Only a key pressed on the
+  // row itself counts: one pressed on a control inside its open summary
+  // belongs to that control.
+  function pressable(el,label,fn){
+    el.tabIndex=0;
+    el.setAttribute("role","button");
+    el.setAttribute("aria-label",label);
+    el.setAttribute("aria-expanded","false");
+    el.addEventListener("click",fn);
+    el.addEventListener("keydown",function(e){
+      if(e.target!==el) return;
+      if(e.key==="Enter"||e.key===" "){ e.preventDefault(); fn(); }
+    });
+  }
+
+  // The time in front of a line of the summary.
+  function timeFor(ep,b,box,li){
+    var at=Number(b.t);
+    var cell;
+    if(b.t===undefined||b.t===null||!isFinite(at)){
+      cell=document.createElement("span"); cell.className="at off";
+      return cell;
+    }
+    var label=hms(at);
+    var yt=Array.isArray(b.yt) ? b.yt : null;
+    if(yt && VIDEO.test(yt[0]||"")){
+      cell=document.createElement("button");
+      cell.type="button"; cell.className="at"; cell.textContent=label;
+      cell.setAttribute("aria-label","Play from "+label);
+      cell.addEventListener("click",function(){
+        playIn(box,yt[0],yt[1],true,(ep.title||"The recording")+", from "+label);
+        box.querySelectorAll("li.on").forEach(function(o){ o.classList.remove("on"); });
+        li.classList.add("on");
+        var slot=box.querySelector(".player");
+        if(slot && slot.getBoundingClientRect().top<0){
+          slot.scrollIntoView({behavior:"smooth",block:"start"});
         }
-        var link=url+(url.indexOf("?")>-1?"&":"?")+"t="+sec+"s";
-        if(!seekable){
-          return '<a class="ts" href="'+escAttr(safeUrl(link))+'" target="_blank" '+
-                 'rel="noopener">'+m+'</a>';
-        }
-        return '<button class="cite ep-cite" data-sec="'+sec+'" '+
-               'data-ep="'+escAttr(url)+'" title="play this moment">'+m.slice(1,-1)+'</button>';
       });
+      return cell;
+    }
+    if(b.link && /^https:\/\/(x\.com|www\.youtube\.com)\//.test(b.link)){
+      cell=document.createElement("a");
+      cell.className="at out"; cell.href=b.link; cell.target="_blank"; cell.rel="noopener";
+      cell.textContent=label;
+      cell.setAttribute("aria-label","Open the broadcast at "+label);
+      return cell;
+    }
+    cell=document.createElement("span"); cell.className="at off"; cell.textContent=label;
+    return cell;
+  }
+
+  // An episode, opened: its player, its summary, and the ways out.
+  function panel(ep,auto){
+    var box=document.createElement("div");
+    box.className="pw";
+    // Nothing pressed inside the panel is a press on the row around it.
+    box.addEventListener("click",function(ev){ ev.stopPropagation(); });
+    var slot=document.createElement("div");
+    slot.className="player ep-player";
+    box.appendChild(slot);
+
+    var notes=document.createElement("div");
+    notes.className="notes";
+    if(ep.tldr){
+      var lead=document.createElement("p");
+      lead.className="tldr"; rich(lead,ep.tldr);
+      notes.appendChild(lead);
+    }
+    var list=null;
+    (ep.blocks||[]).forEach(function(b){
+      if(b.kind==="h"||b.kind==="p"){
+        list=null;
+        var line=document.createElement(b.kind==="h" ? "h4" : "p");
+        if(b.kind==="p") line.className="para";
+        rich(line,b.kind==="h" ? String(b.text||"").replace(/\*\*/g,"") : b.text);
+        notes.appendChild(line);
+        return;
+      }
+      if(!list){ list=document.createElement("ol"); notes.appendChild(list); }
+      var li=document.createElement("li");
+      li.appendChild(timeFor(ep,b,box,li));
+      var said=document.createElement("span");
+      rich(said,b.text);
+      li.appendChild(said);
+      list.appendChild(li);
+    });
+    if(notes.firstChild) box.appendChild(notes);
+
+    var foot=document.createElement("p");
+    foot.className="ep-foot";
+    if(ep.url){
+      var out=document.createElement("a");
+      out.className="ep-out"; out.href=safeUrl(ep.url);
+      out.target="_blank"; out.rel="noopener";
+      out.textContent=watchText(ep)+" ↗";
+      foot.appendChild(out);
+    }
+    // So anyone reading a summary can pass it on. The address it copies
+    // is the one goToHash opens.
+    var share=document.createElement("button");
+    share.type="button"; share.className="share ep-share"; share.textContent="share link";
+    share.addEventListener("click",function(){
+      var url=location.origin+location.pathname+"#ep-"+ep.episode_id;
+      (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject())
+        .then(function(){ share.textContent="copied ✓"; })
+        .catch(function(){ prompt("Copy this link:",url); });
+      setTimeout(function(){ share.textContent="share link"; },2000);
+    });
+    foot.appendChild(share);
+    box.appendChild(foot);
+
+    if(VIDEO.test(ep.youtube||"")){
+      playIn(box,ep.youtube,0,auto,"Playing "+(ep.title||"this episode"));
+    }
+    return box;
+  }
+
+  function shut(){
+    if(!open) return;
+    if(open.host===stage){
+      stage.classList.remove("on"); stage.innerHTML="";
+      if(open.tile){
+        open.tile.classList.remove("on");
+        open.tile.setAttribute("aria-expanded","false");
+      }
+    } else {
+      var pw=open.host.querySelector(".pw");
+      if(pw) pw.remove();
+      open.host.classList.remove("playing");
+      open.host.setAttribute("aria-expanded","false");
+    }
+    open=null;
+  }
+
+  // A row opens in place. Pressed again, it closes.
+  function toggleRow(el,ep,auto){
+    if(open && open.host===el){ shut(); return; }
+    shut();
+    el.appendChild(panel(ep,auto));
+    el.classList.add("playing");
+    el.setAttribute("aria-expanded","true");
+    open={host:el};
+  }
+
+  function row(ep){
+    var el=document.createElement("div");
+    el.className="rec"+((ep.tldr||(ep.blocks||[]).length) ? " noted" : "");
+    // So a link can open one summary: /demo/podcast.html#ep-<id>.
+    el.id="ep-"+ep.episode_id;
+    ["d","f","t","r"].forEach(function(name){
+      var cell=document.createElement("span"); cell.className=name; el.appendChild(cell);
+    });
+    var kind=kindOf(ep);
+    el.querySelector(".d").textContent=shortDay(ep.published_at);
+    el.querySelector(".f").textContent=kind.text;
+    if(kind.live) el.querySelector(".f").classList.add("live");
+    el.querySelector(".t").textContent=ep.title||"";
+    el.querySelector(".r").textContent=ep.seconds ? hms(ep.seconds) : "";
+    pressable(el,"Open "+(ep.title||"this episode"),function(){
+      toggleRow(el,ep,true);
+      if(open && open.host===el) reveal(el);
+    });
+    return el;
+  }
+
+  function drawShelf(host,list,noun){
+    host.innerHTML="";
+    var group=null;
+    list.forEach(function(ep){
+      var label=monthOf(ep.published_at);
+      if(!group||group.getAttribute("data-m")!==label){
+        group=document.createElement("div");
+        group.className="month"; group.setAttribute("data-m",label);
+        var h=document.createElement("h3");
+        h.textContent=label;
+        var n=list.filter(function(x){ return monthOf(x.published_at)===label; }).length;
+        var count=document.createElement("span");
+        count.textContent=n+" "+noun+(n===1 ? "" : "s");
+        h.appendChild(count);
+        group.appendChild(h);
+        host.appendChild(group);
+      }
+      group.appendChild(row(ep));
+    });
+  }
+
+  // The newest few, as days. They open on the stage under the hero and
+  // not inside the tile, where a video would be the width of a thumbnail.
+  function drawDays(list){
+    var host=document.getElementById("days");
+    host.innerHTML="";
+    list.slice(0,5).forEach(function(ep){
+      var d=dayOf(ep.published_at), kind=kindOf(ep);
+      var el=document.createElement("div");
+      el.className="day";
+      el.innerHTML='<div class="when"><b></b><span></span></div>'
+                 + '<div class="what"><div class="t"></div>'
+                 + '<div class="m"><span class="fm"></span><span class="rt"></span></div></div>';
+      el.querySelector(".when b").textContent=d ? d.getUTCDate() : "";
+      el.querySelector(".when span").textContent=
+        d ? DOW[d.getUTCDay()]+" "+MONTH_NAMES[d.getUTCMonth()].slice(0,3) : "";
+      el.querySelector(".t").textContent=ep.title||"";
+      var fm=el.querySelector(".fm");
+      fm.textContent=kind.text;
+      if(kind.live) fm.classList.add("live");
+      el.querySelector(".rt").textContent=ep.seconds ? hms(ep.seconds) : "";
+      pressable(el,"Open "+(ep.title||"this episode"),function(){
+        if(open && open.tile===el){ shut(); return; }
+        shut();
+        stage.appendChild(panel(ep,true));
+        stage.classList.add("on");
+        el.classList.add("on");
+        el.setAttribute("aria-expanded","true");
+        open={host:stage,tile:el};
+        reveal(stage);
+      });
+      host.appendChild(el);
+    });
+  }
+
+  // search.lexthedev.com/#ansem opens on Ansem's appearances, and
+  // #ep-<id> on one summary, already open. The browser looks for an
+  // anchor as the page loads, before these lists exist, so it is gone to
+  // once they do. A summary opened this way does not start playing:
+  // nobody pressed play.
+  function goToHash(){
+    var want=(location.hash||"").slice(1);
+    if(want === "ansem" || want === "eps-guest"){
+      var shows=document.getElementById("eps-guest");
+      if(shows && !shows.hidden) shows.scrollIntoView({block:"start"});
+    } else if(want==="eps"){
+      document.getElementById("eps").scrollIntoView({block:"start"});
+    } else if(want.indexOf("ep-") === 0){
+      var card=document.getElementById(want);
+      var ep=EPS.filter(function(e){ return "ep-"+e.episode_id===want; })[0];
+      if(!card||!ep) return;
+      if(!(open && open.host===card)) toggleRow(card,ep,false);
+      card.scrollIntoView({block:"start"});
+    }
   }
 
   function loadEpisodes(){
-    /* The size of the archive, so the opening line does not go stale the
-       next time a show is ingested. It was hand-typed, and hand-typed
-       figures are how the explainer ended up claiming 26 shows and 70
-       hours months after both stopped being true.
-
-       The markup already carries a correct-at-deploy figure, so a failure
-       here leaves the line as it was rather than blanking it or showing a
-       spinner where a number should be. */
+    function figure(id,text,unit){
+      var el=document.getElementById(id);
+      if(!el) return;
+      el.textContent=text;
+      if(unit){
+        var small=document.createElement("small");
+        small.textContent=unit;
+        el.appendChild(small);
+      }
+    }
+    // The size of the archive, from the same rows the list below draws,
+    // so the figures and the list cannot disagree.
     fetch(API+"/v1/podcast/archive")
       .then(function(r){ return r.ok ? r.json() : null; })
       .then(function(a){
-        if(!a || !a.shows) return;
-        var el = document.getElementById("eyebrow");
-        if(!el) return;
-        el.textContent = "Searchable archive \u00b7 " + a.shows
-          + (a.shows === 1 ? " episode" : " episodes")
-          + (a.appearances ? " \u00b7 " + a.appearances
-             + (a.appearances === 1 ? " appearance" : " appearances")
-             + " elsewhere" : "")
-          + (a.hours ? " \u00b7 " + a.hours + " hours" : "");
+        if(!a||!a.shows) return;
+        figure("s-eps",a.shows.toLocaleString());
+        figure("s-guest",(a.appearances||0).toLocaleString());
+        if(a.hours) figure("s-hours",Math.round(a.hours).toLocaleString(),"hrs");
       })
-      .catch(function(){ /* the line in the markup stands */ });
+      .catch(function(){ /* the strip keeps its dots */ });
 
     fetch(API+"/v1/podcast/episodes")
       .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
-      .then(function(eps){
-        if(!eps.length) return;
-        var wrap=document.getElementById("eps-list");
-        // Ansem's appearances on other shows get their own list, under
-        // their own heading, so the episode list stays Market Bubble's.
-        var guest=document.getElementById("eps-guest-list");
-        eps.forEach(function(ep){
-          var d=document.createElement("details");
-          d.className="epcard";
-          var bodyHtml=linkifyTimestamps(md(ep.summary||""), ep.url||"", ep.youtube_at);
-          // Both cuts of an episode are listed: the YouTube upload and the
-          // full live broadcast, which runs roughly twice as long because
-          // the upload is edited down. They sit next to each other in the
-          // list and would otherwise read as the same show duplicated.
-          var live = !canSeek(ep.url || "");
-          // A video Ansem posted on X was never a live broadcast.
-          var badge = live ? '<span class="srcbadge">' +
-            (ep.show ? 'on X' : 'full live · on X') + '</span>' : '';
-          d.innerHTML='<summary><span class="tw">▶</span>'+esc(ep.title)+badge+
-            '</summary><div class="ep-body">'
-            +'<div class="player ep-player"></div>'+bodyHtml+
-            '<div class="ep-foot">'+
-            '<a class="ep-link" href="'+escAttr(safeUrl(ep.url||""))+'" '+
-            'target="_blank" rel="noopener">'
-            + (live ? (ep.show ? 'Watch the video on X →'
-                               : 'Watch the full broadcast on X →')
-                    : 'Watch the full episode →') + '</a>'+
-            '<button class="share ep-share" type="button">share link</button>'+
-            '</div></div>';
-          // So a link can open one summary: /demo/podcast.html#ep-<id>.
-          d.id = "ep-" + ep.episode_id;
-          // And so anyone reading one can pass that link on. It opens this
-          // card, already open, wherever it sits in the list.
-          var share = d.querySelector(".ep-share");
-          share.addEventListener("click", function(){
-            var url = location.origin + location.pathname + "#" + d.id;
-            (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject())
-              .then(function(){ share.textContent = "copied ✓"; })
-              .catch(function(){ prompt("Copy this link:", url); });
-            setTimeout(function(){ share.textContent = "share link"; }, 2000);
-          });
-          if (ep.show && guest) {
-            guest.appendChild(d);
-            document.getElementById("eps-guest").hidden=false;
-          } else {
-            wrap.appendChild(d);
-          }
-        });
-        document.getElementById("eps").hidden=false;
-        // search.lexthedev.com/#ansem opens on Ansem's appearances. The
-        // browser looks for the anchor as the page loads, before this list
-        // exists, finds nothing and stays at the top: the section is about
-        // 14,000 pixels down. So it is scrolled to once it is there.
-        function goToHash(){
-          var want = (location.hash || "").slice(1);
-          if (want === "ansem" || want === "eps-guest") {
-            var shows = document.getElementById("eps-guest");
-            if (shows && !shows.hidden) shows.scrollIntoView({block: "start"});
-          } else if (want.indexOf("ep-") === 0) {
-            // A reply under Ansem's 28 Oct video wanted the two minute read
-            // of it, open, not a list to find it in.
-            var card = document.getElementById(want);
-            if (card) { card.open = true; card.scrollIntoView({block: "start"}); }
-          }
+      .then(function(list){
+        if(!Array.isArray(list)||!list.length) throw new Error("empty");
+        EPS=list.slice().sort(function(a,b){
+          return String(b.published_at||"").localeCompare(String(a.published_at||"")); });
+        // Ansem's appearances and his own videos get their own list,
+        // under their own heading, so the first stays Market Bubble's.
+        var shows=EPS.filter(function(ep){ return !ep.show; });
+        var guest=EPS.filter(function(ep){ return ep.show; });
+        drawShelf(document.getElementById("eps-list"),shows,"episode");
+        if(guest.length){
+          drawShelf(document.getElementById("eps-guest-list"),guest,"recording");
+          document.getElementById("eps-guest").hidden=false;
         }
+        drawDays(EPS);
+        var newest=dayOf(shows.length ? shows[0].published_at : "");
+        if(newest) figure("s-last",shortDay(shows[0].published_at),String(newest.getUTCFullYear()));
         goToHash();
-        // A shared link followed from this same page changes only the hash,
-        // which loads nothing, so the card would stay shut.
+        // A shared link followed from this same page changes only the
+        // hash, which loads nothing, so the summary would stay shut.
         window.addEventListener("hashchange", goToHash);
-        // The nav link is dead until this section exists, so it only
-        // appears once there is somewhere for it to go. It pointed at
-        // #episodes while the section was #eps, which is a link that
-        // silently does nothing -- worse than no link, because a person
-        // taps it, gets no feedback, and concludes the site is broken.
-        var jump = document.querySelector('.site-nav a[href="#eps"]');
-        if (jump) jump.hidden = false;
       })
-      .catch(function(){ /* summaries are optional — page works without */ });
+      .catch(function(){
+        var msg='<div class="empty">The episodes could not be loaded. The search above still works.</div>';
+        document.getElementById("eps-list").innerHTML=msg;
+        document.getElementById("days").innerHTML=
+          '<div class="empty">Could not load the latest recordings.</div>';
+      });
   }
   loadEpisodes();
 
@@ -1072,7 +1276,8 @@ function airedLabel(iso){
     var slot=document.getElementById("example-player");
     if(!btn||!slot||!block) return;
     btn.addEventListener("click",function(){
-      if(slot.firstChild){ slot.innerHTML=""; btn.textContent="\u25B6 9:37 — hear him say it"; return; }
+      if(slot.firstChild){ slot.innerHTML=""; btn.textContent=EXAMPLE_LABEL; return; }
+      quiet();
       var f=document.createElement("iframe");
       f.src=embedFor("https://www.youtube.com/watch?v=F4OhqZjtVkY&t=577s");
       f.loading="lazy"; f.title="Ansem on Hyperliquid, 9:37";
@@ -1265,8 +1470,7 @@ function airedLabel(iso){
       if(!src) return;
       // One player at a time: two videos talking over each other is worse
       // than the link it replaced.
-      Array.prototype.forEach.call(hits.querySelectorAll(".player"),function(o){o.innerHTML="";});
-      Array.prototype.forEach.call(hits.querySelectorAll(".play-here"),function(o){o.textContent="\u25B6 play here";});
+      quiet();
       var f=document.createElement("iframe");
       f.src=src; f.loading="lazy"; f.title="the cited moment";
       f.setAttribute("allow","autoplay; encrypted-media; picture-in-picture");
@@ -1354,7 +1558,7 @@ function airedLabel(iso){
       var h=lastHits[0];
       x.fillText("▶ "+h.timestamp+"  "+(h.title||"").slice(0,42),PAD,y);
     }
-    cardFooter(x,C,SITE+" — ask anything, jump to the moment");
+    cardFooter(x,C,SITE+" · ask anything, jump to the moment");
     saveCanvas(C,"market-bubble-answer.png");
   }
 
@@ -1391,7 +1595,7 @@ function airedLabel(iso){
     });
     y+=6;
     x.fillStyle="#8a939e"; x.font="400 22px -apple-system,Segoe UI,Roboto,sans-serif";
-    x.fillText("auto-generated caption — play the timestamp to hear it",PAD,y);
+    x.fillText("auto-generated caption · play the timestamp to hear it",PAD,y);
     y+=20;
 
     // Attribution: episode and the exact second, which is what makes the
@@ -1404,7 +1608,7 @@ function airedLabel(iso){
     var ep=(h.title||""), aired=airedLabel(h.published_at);
     x.fillText(wrapText(x,ep,W-tw-30)[0]+(aired?"  ·  "+aired:""),PAD+tw+30,y);
 
-    cardFooter(x,C,SITE+" — search every episode by meaning");
+    cardFooter(x,C,SITE+" · search every episode by meaning");
     saveCanvas(C,"market-bubble-"+(h.timestamp||"moment").replace(/:/g,"-")+".png");
   }
 
@@ -1521,33 +1725,6 @@ function airedLabel(iso){
     return gap <= CITE_WINDOW ? best : null;
   }
 
-  // The same for a timestamp inside an episode summary, opened at the top
-  // of that episode's own card so the summary stays readable underneath.
-  // Delegated from the list, because the cards are built after this runs.
-  var epsList = document.getElementById("eps-list");
-  if(epsList){
-    epsList.addEventListener("click", function(ev){
-      var b = ev.target.closest ? ev.target.closest("button.ep-cite") : null;
-      if(!b) return;
-      var url = b.getAttribute("data-ep") || "";
-      var src = embedFor(url + (url.indexOf("?") > -1 ? "&" : "?")
-                         + "t=" + b.getAttribute("data-sec") + "s");
-      if(!src) return;
-      var card = b.closest("details");
-      var slot = card && card.querySelector(".ep-player");
-      if(!slot) return;
-      document.querySelectorAll(".player").forEach(function(o){ o.innerHTML=""; });
-      document.querySelectorAll(".play-here").forEach(function(o){
-        o.textContent="\u25B6 play here"; });
-      var f=document.createElement("iframe");
-      f.src=src; f.loading="lazy"; f.title="this moment in the episode";
-      f.setAttribute("allow","autoplay; encrypted-media; picture-in-picture");
-      f.setAttribute("allowfullscreen","");
-      slot.appendChild(f);
-      slot.scrollIntoView({block:"nearest"});
-    });
-  }
-
   // One player for the answer's own citations, opened under the answer.
   if(body){
     body.addEventListener("click", function(ev){
@@ -1560,10 +1737,8 @@ function airedLabel(iso){
       if(!src) return;
       var slot = document.getElementById("answer-player");
       if(!slot) return;
-      // Never two at once, here or in the cards.
-      document.querySelectorAll(".player").forEach(function(o){ o.innerHTML=""; });
-      document.querySelectorAll(".play-here").forEach(function(o){
-        o.textContent="\u25B6 play here"; });
+      // Never two at once, here, in the cards or in an episode.
+      quiet();
       var f=document.createElement("iframe");
       f.src=src; f.loading="lazy"; f.title="the cited moment";
       f.setAttribute("allow","autoplay; encrypted-media; picture-in-picture");
@@ -1599,6 +1774,7 @@ function airedLabel(iso){
     var myToken=++runToken, mySignal=inflight.signal;
     var stale=function(){ return myToken!==runToken; };
     go.disabled=true; spin.classList.add("show");
+    shut(); quiet();
     if (window.revealOnPhone) revealOnPhone(spin);
     answer.classList.remove("show"); hits.innerHTML="";
 
@@ -1612,7 +1788,7 @@ function airedLabel(iso){
       if(res.status===429||res.status===503){
         return res.json().catch(function(){ return {}; }).then(function(j){
           throw new LimitError(j.detail ||
-            "Search is busy right now — please try again shortly.");
+            "Search is busy right now. Please try again shortly.");
         });
       }
       if(!res.ok||!res.body) throw new Error("stream "+res.status);
@@ -1649,7 +1825,7 @@ function airedLabel(iso){
               showReading(n?("reading "+n+" passage"+(n===1?"":"s")):"writing the answer");
             }
             else if(ev==="error"){
-              hideReading(); typer.set("Search hiccuped — try again.");
+              hideReading(); typer.set("Search hiccuped. Try again.");
             }
             else if(p.text){
               // First token: the model is answering, so the status line has
@@ -1679,7 +1855,7 @@ function airedLabel(iso){
         renderHits(data.hits);
       }).catch(function(e){
         if(stale()||(e&&e.name==="AbortError")) return;
-        body.textContent="Search is unavailable right now — please try again.";
+        body.textContent="Search is unavailable right now. Please try again.";
         answer.classList.add("show");
       }).finally(function(){ if(!stale()) finishSearch(); });
     });

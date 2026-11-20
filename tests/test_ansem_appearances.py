@@ -92,7 +92,8 @@ def test_answers_are_told_to_name_the_show():
 def test_the_page_lists_them_apart():
     page = (ROOT / "demo" / "podcast.html").read_text()
     assert 'id="eps-guest-list"' in page and "Ansem on other shows" in page
-    assert "ep.show && guest" in page and "a.appearances" in page
+    assert "EPS.filter(function(ep){ return ep.show; })" in page and "a.appearances" in page
+    assert 'drawShelf(document.getElementById("eps-guest-list"),guest,"recording")' in page
 
 
 def test_the_market_bubble_token_dashboard_never_mines_them():
@@ -238,14 +239,23 @@ def test_an_appearance_is_not_held_to_a_full_shows_length(monkeypatch):
 
 def test_his_posted_video_is_not_badged_as_a_live_broadcast():
     page = (ROOT / "demo" / "podcast.html").read_text()
-    assert "(ep.show ? 'on X' : 'full live · on X')" in page
+    assert 'if(ep.own) return {text:"his video", live:false};' in page
+    # and the server says which rows are his own, not the page guessing
+    from app import main
+    row = {"episode_id": "x-2115418459765113280", "title": "Q4 market thoughts",
+           "url": "https://x.com/blknoiz06/status/2115418459765113280",
+           "published_at": "2026-10-28", "show": "Ansem on X",
+           "summary": "**TL;DR:** His own video.\n\n- [0:01:40] Gold."}
+    sent = main._episode_row(row, {}, {})
+    assert sent["own"] is True and sent["youtube"] == ""
+    assert all("yt" not in b and "link" not in b for b in sent["blocks"])
 
 
 def test_a_link_can_open_one_summary():
     page = (ROOT / "demo" / "podcast.html").read_text()
-    assert 'd.id = "ep-" + ep.episode_id;' in page
-    assert 'want.indexOf("ep-") === 0' in page and "card.open = true" in page
-    assert "(ep.show ? 'Watch the video on X →'" in page
+    assert 'el.id="ep-"+ep.episode_id;' in page
+    assert 'want.indexOf("ep-") === 0' in page and "toggleRow(card,ep,false)" in page
+    assert 'if(ep.own) return "Watch the video on X";' in page
 
 
 def test_fixing_a_word_keeps_the_show_on_every_passage():

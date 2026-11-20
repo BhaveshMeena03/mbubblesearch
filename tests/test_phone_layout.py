@@ -51,7 +51,7 @@ def test_no_search_box_makes_an_iphone_zoom():
         assert "@media (max-width:760px){ #q{font-size:16px} }" in page(name), name
     # These three set the box at 17px on every screen, so there is nothing
     # to raise on a phone.
-    for name in ("mcg", "threadguy", "rasmr"):
+    for name in ("mcg", "threadguy", "rasmr", "podcast"):
         assert "padding:18px 20px;font:inherit;font-size:17px;outline:none}" in page(name), name
 
 
@@ -86,7 +86,9 @@ def test_the_record_asks_before_it_lists_who_is_in_it():
 
 def test_the_market_bubble_page_has_no_band_above_its_header():
     html = page("podcast")
-    assert ".wrap{padding-top:0}" in html
+    # The column has no top padding of its own; the header carries it.
+    assert "padding:0 clamp(20px,3.4vw,52px)}" in html
+    assert "header.site{padding-top:16px;padding-bottom:12px}" in html
     assert "linear-gradient(to bottom,var(--bg) 0,var(--bg) 60px,transparent 170px)" in html
 
 

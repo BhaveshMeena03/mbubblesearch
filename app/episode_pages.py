@@ -167,6 +167,11 @@ def on_youtube(episode_id: str, seconds: object, youtube=None) -> tuple[str, int
     return None
 
 
+def is_youtube(ident: object) -> bool:
+    """Whether an episode's id is its YouTube video's own id."""
+    return isinstance(ident, str) and bool(_YOUTUBE_ID.fullmatch(ident))
+
+
 def recording(link: object) -> str:
     """The address of a recording, if it is one on X or YouTube."""
     link = str(link or "")

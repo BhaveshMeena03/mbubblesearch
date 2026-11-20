@@ -93,6 +93,7 @@ from .schemas import (
     QuoteCheckRequest,
     RetrievedChunk,
     XAskRequest,
+    his_own,
 )
 from .security import (
     RateLimiter,
@@ -106,7 +107,7 @@ from .summaries import SHIPPED as SUMMARIES_FILE
 from .summaries import SummaryStore, load_shipped
 from .traffic import Traffic
 from .usage import UsageLedger, writable_path
-from .youtube_map import summary_moments, youtube_first, youtube_moment
+from .youtube_map import upload_of, youtube_first, youtube_moment
 
 logging.basicConfig(level=logging.INFO)
 
@@ -2943,13 +2944,63 @@ async def podcast_episodes(
     """
     _track("episode_summary_views")
     rows = _listed(await summaries.list_all())
-    # Where each summary timestamp plays on YouTube, for the live
-    # broadcasts that have an upload. The summary was written from the
-    # broadcast, so its times are the broadcast's; this gives the page
-    # the matching second on YouTube wherever that moment survived the cut.
-    return [{**r, "youtube_at": summary_moments(r.get("episode_id") or "",
-                                                r.get("summary") or "")}
-            for r in rows]
+    players = _json_object(x_posts.BROADCAST_LINKS)
+    lengths = _episodes_by_id()
+    out = []
+    for row in rows:
+        try:
+            out.append(_episode_row(row, players, lengths))
+        except Exception as exc:                                # noqa: BLE001
+            # One row that cannot be read is one episode missing from the
+            # list, not an empty list.
+            logger.warning("could not list %s: %s", row.get("episode_id"), exc)
+    return out
+
+
+def _episode_row(row: dict, players: dict, lengths: dict) -> dict:
+    """One episode as the page draws it: what it is, how long it runs,
+    what plays in the page, and its summary already read.
+
+    The summary was written from the live broadcast, so its times are
+    the broadcast's. Each one carries the second it plays at on YouTube
+    where the upload kept that moment (`yt`), and the link that opens the
+    broadcast on X at that second (`link`). The page plays the first and
+    falls back to the second; a time with neither is printed as text.
+    """
+    ident = str(row.get("episode_id") or "")
+    player = players.get(ident)
+    made = episode_pages.from_summary(
+        row, player=player if isinstance(player, str) else "",
+        youtube=youtube_moment) or {}
+    own = his_own(row.get("show"))
+    if own:
+        video = ""                          # a post on X, never uploaded
+    elif ident.startswith("x-"):
+        video = upload_of(ident)
+    else:
+        video = ident if episode_pages.is_youtube(ident) else ""
+    segments = (lengths.get(ident) or {}).get("segments") or []
+    return {"episode_id": ident, "title": row.get("title") or "",
+            "url": episode_pages.recording(row.get("url")),
+            "published_at": str(row.get("published_at") or "")[:10],
+            "show": row.get("show") or "", "own": own,
+            "seconds": int(max((float(s.get("t") or 0) for s in segments), default=0)),
+            "youtube": video,
+            "tldr": made.get("tldr") or "",
+            "blocks": [_block(b) for b in made.get("blocks") or []]}
+
+
+def _block(block: dict) -> dict:
+    """A line of a summary, with only the keys it has: there are about
+    900 of them in the list, and most have no time on YouTube or on X."""
+    out = {"kind": block.get("kind"), "text": block.get("text") or ""}
+    if block.get("t") is not None:
+        out["t"] = block["t"]
+    if block.get("link"):
+        out["link"] = block["link"]
+    if block.get("yt"):
+        out["yt"] = list(block["yt"])
+    return out
 
 
 

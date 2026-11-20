@@ -134,6 +134,17 @@ def youtube_first(hit: dict) -> dict:
             "live_link": hit.get("deep_link")}
 
 
+def upload_of(episode_id: str) -> str:
+    """The YouTube upload a live broadcast was cut into, or "" when it
+    has none. The one most of its anchors are in, if there are two."""
+    rows = _anchors().get(episode_id) or []
+    counts: dict[str, int] = {}
+    for row in rows:
+        if isinstance(row, (list, tuple)) and len(row) > 1 and isinstance(row[1], str):
+            counts[row[1]] = counts.get(row[1], 0) + 1
+    return max(counts, key=counts.get) if counts else ""
+
+
 def summary_moments(episode_id: str, summary: str) -> dict[str, list]:
     """For each [h:mm:ss] in a summary: [youtube_id, second], where it maps."""
     out: dict[str, list] = {}
