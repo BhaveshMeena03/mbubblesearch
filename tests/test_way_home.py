@@ -31,7 +31,7 @@ def test_every_archive_links_home_from_its_corner():
 def test_the_archives_keep_their_own_name_in_the_corner():
     """The parent sits in front of each room's name rather than replacing
     it: the corner is where each archive says what it is."""
-    for name, own in (("mcg", "The MCG Index"), ("elon", "THE MUSK RECORD"),
+    for name, own in (("mcg", "The MCG Index"), ("elon", "The Musk Record"),
                       ("threadguy", "ThreadGuy"), ("rasmr", "<b>rasmr</b>")):
         page = _page(name)
         assert 'class="home-crumb" href="/home"' in page, name
@@ -42,9 +42,10 @@ def test_the_archives_keep_their_own_name_in_the_corner():
 
 
 def test_the_crumb_is_styled_once_for_every_page():
-    """In the shared nav rather than five copies, and in the monospace
-    every page already uses: left to inherit, it fell through to the
-    browser's default serif beside a bold sans."""
+    """In the shared nav rather than five copies. Its small word, and a
+    crumb with no parts, are in the monospace every page already uses:
+    left to inherit, it fell through to the browser's default serif
+    beside a bold sans. What it looks like is tests/test_headers.py."""
     nav = (DEMO / "nav.js").read_text()
     assert ".home-crumb{" in nav
     assert "IBM Plex Mono" in nav.split(".home-crumb{")[1].split("}")[0] \

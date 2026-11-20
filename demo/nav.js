@@ -75,17 +75,25 @@
       /* The way home, on every archive. Each page's corner carries its
          own name, so the parent sits in front of it rather than replacing
          it, and it inherits the page's colour like the menu does. */
-      ".brandline{display:inline-flex;align-items:baseline;gap:10px;",
+      ".brandline{display:inline-flex;align-items:baseline;gap:12px;",
       "flex-wrap:wrap;min-width:0}",
-      /* Set in the monospace every page already uses for its small
-         labels. Left to inherit, it fell through to the browser's default
-         serif on the pages whose corner is a bold sans. */
-      ".home-crumb{color:inherit;text-decoration:none;opacity:.62;",
+      /* The site's name, the same on every page: "Market Bubble" in the
+         display serif with SEARCH set small beside it, at the size the
+         front door sets its own (demo/home.html, .mark). It was a line of
+         10px capitals at 62% here and 31px there, so the one name every
+         page shares was the smallest thing on six of them.
+         The small word is in the monospace every page already uses for
+         its labels, and the rule names it so a crumb with no parts still
+         reads as a label and not as the browser's default serif. */
+      ".home-crumb{color:inherit;text-decoration:none;display:inline-flex;",
+      "align-items:baseline;gap:12px;white-space:nowrap;",
       "font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;",
-      "font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;",
-      "font-weight:500;white-space:nowrap;transition:opacity .2s}",
-      ".home-crumb:hover,.home-crumb:focus-visible{opacity:1}",
-      ".home-sep{opacity:.3}",
+      "font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;font-weight:400}",
+      ".home-crumb .w{font-family:'Instrument Serif',Georgia,'Times New Roman',serif;",
+      "font-size:31px;line-height:1;letter-spacing:.2px;text-transform:none}",
+      ".home-crumb .s{opacity:.55;transition:opacity .2s}",
+      ".home-crumb:hover .s,.home-crumb:focus-visible .s{opacity:1}",
+      ".home-sep{opacity:.3;font-size:22px}",
       /* On a phone the header stays: scrolled past the top there was no
          way to switch archives at all. The page's own background runs
          edge to edge behind it, and it slims once the page is scrolled. */
@@ -115,6 +123,11 @@
       "flex:0 0 100%;min-width:0;margin:0}",
       ".navbar.crumbed .mark{flex-wrap:nowrap}",
       ".navbar.crumbed .mark b{white-space:nowrap}",
+      /* Beside the switcher on a phone there is room for less of the name,
+         and scrolled, for less again. */
+      ".home-crumb{gap:9px;font-size:10.5px}",
+      ".home-crumb .w{font-size:25px}",
+      ".navbar.crumbed.stuck .home-crumb .w{font-size:21px}",
       /* "Search" under the page you are already searching is a tab with
          nowhere to go, and it is what pushed the nav onto a second row. */
       ".navbar.crumbed a.here{display:none}",
@@ -127,7 +140,8 @@
       /* Scrolled, the bar is one row: the way home and the switcher. */
       ".navbar.crumbed.stuck .mark,.navbar.crumbed.stuck .brandline>.eyebrow{",
       "display:none}",
-      "}"
+      "}",
+      "@media (max-width:420px){.home-crumb .s{display:none}}"
     ].join("");
     document.head.appendChild(css);
   }

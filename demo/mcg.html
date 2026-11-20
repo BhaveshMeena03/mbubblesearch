@@ -99,10 +99,10 @@
   header{display:flex;align-items:baseline;justify-content:space-between;
     gap:16px;padding:26px 0 12px;border-bottom:1px solid var(--rule-dark)}
   .mark{display:flex;align-items:baseline;gap:11px;text-decoration:none}
-  /* Condensed and heavy, the way the channel sets its own name. */
-  .mark b{font-family:var(--sans);
-    font-weight:800;font-size:22px;letter-spacing:.01em;color:var(--ink);
-    text-transform:uppercase}
+  /* In the display serif at 22px, like every other archive's name. It
+     was condensed and heavy capitals, the one corner that did not match. */
+  .mark b{font-family:var(--display);
+    font-weight:400;font-size:22px;letter-spacing:0;color:var(--ink)}
   .mark span{font-family:"IBM Plex Mono",monospace;font-size:10.5px;
     letter-spacing:.18em;text-transform:uppercase;color:var(--blue)}
   /* A rule that draws itself under the word you are pointing at. The nav
@@ -411,14 +411,14 @@
 
 <div class="wrap">
   <header>
-    <span class="brandline"><a class="home-crumb" href="/home">Market Bubble Search</a><span class="home-sep" aria-hidden="true">/</span>
+    <span class="brandline"><a class="home-crumb" href="/home"><span class="w">Market Bubble</span><span class="s">Search</span></a><span class="home-sep" aria-hidden="true">/</span>
     <a class="mark" href="/demo/mcg.html">
         <b>The MCG Index</b><span>archive</span>
       </a>
     </span>
     <nav>
+      <a href="/mcg/assets">Tokens</a>
       <span data-archives></span>
-      <a class="here">Search</a>
     </nav>
   </header>
 

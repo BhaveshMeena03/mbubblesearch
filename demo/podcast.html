@@ -400,9 +400,17 @@
   header.site .brand{display:flex;align-items:center;gap:10px;
     text-decoration:none;color:var(--text)}
   header.site .brand img{display:block;border-radius:6px}
-  .brand-name{font-size:15px;font-weight:600;letter-spacing:-.01em;
+  /* The site's name as every page sets it (demo/nav.js, .home-crumb):
+     it was 15px of sans here and 31px of serif on the front door. */
+  .brand-name{display:inline-flex;align-items:baseline;gap:12px;white-space:nowrap;
     color:var(--text)}
-  .brand-name b{color:var(--green);font-weight:600}
+  .brand-name .w{font-family:var(--display);font-size:31px;line-height:1;
+    letter-spacing:.2px}
+  .brand-name .s{font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,monospace;
+    font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--green)}
+  @media(max-width:760px){.brand-name{gap:9px}.brand-name .w{font-size:25px}
+    .brand-name .s{font-size:10.5px}}
+  @media(max-width:420px){.brand-name .s{display:none}}
   .site-nav{display:flex;gap:22px}
   .site-nav a[hidden]{display:none!important}
   .site-nav a{position:relative;color:var(--muted);text-decoration:none;
@@ -526,7 +534,7 @@
   <header class="site">
     <a class="brand" href="/home">
       <img src="/demo/icon-96.png" alt="" width="26" height="26">
-      <span class="brand-name">Market Bubble <b>Search</b></span>
+      <span class="brand-name"><span class="w">Market Bubble</span><span class="s">Search</span></span>
     </a>
     <nav class="site-nav">
       <!-- One switcher rather than a link per archive. There are four
