@@ -18,8 +18,9 @@ HOME = (DEMO / "home.html").read_text()
 PODCAST = (DEMO / "podcast.html").read_text()
 
 # Every page whose corner is the site's name, a slash, and its own.
-CRUMBED = ["mcg", "mcg-assets", "threadguy", "threadguy-assets", "rasmr", "elon", "finance"]
-NAMED = ["mcg", "mcg-assets", "threadguy", "threadguy-assets", "rasmr", "elon"]
+CRUMBED = ["mcg", "mcg-assets", "threadguy", "threadguy-assets", "rasmr", "elon", "finance",
+           "calls", "assets"]
+NAMED = ["mcg", "mcg-assets", "threadguy", "threadguy-assets", "rasmr", "elon", "calls", "assets"]
 LOCKUP = ('<a class="home-crumb" href="/home"><span class="w">Market Bubble</span>'
           '<span class="s">Search</span></a>')
 
@@ -99,3 +100,25 @@ def test_mcg_offers_its_tokens_the_way_threadguy_does():
     theirs = re.split(r"<header[^>]*>", page("threadguy"), maxsplit=1)[1].split("</header>", 1)[0]
     assert '<a class="tokens" href="/threadguy/tokens">Tokens</a>' in theirs
     assert "<span data-archives></span>" in corner
+
+
+@pytest.mark.parametrize("name, kind, other", [("calls", "calls", "/demo/assets.html"),
+                                               ("assets", "tokens", "/calls")])
+def test_the_calls_board_and_the_token_page_have_the_header_the_rooms_have(name, kind, other):
+    """They kept a line of bold capitals and two buttons after every
+    other page changed: "check tokens and call page we didnt update the
+    layout there". Now the site's name, this page's, the way back to the
+    search, the other of the two, and the archive switcher."""
+    html = page(name)
+    corner = html.split("<header>", 1)[1].split("</header>", 1)[0]
+    assert f"<b>Market Bubble</b><span>{kind}</span>" in corner
+    assert '<a href="/demo/podcast.html">&larr; Search</a>' in corner
+    assert f'<a href="{other}">' in corner and "<span data-archives></span>" in corner
+    assert '<script src="/demo/nav.js" defer></script>' in html
+    assert 'class="topbar"' not in html and "MARKET <span>BUBBLE</span>" not in html
+    # The same strip of figures, the label over the number.
+    strip = "tally" if name == "calls" else "tiles"
+    assert f".{strip}{{display:grid;grid-template-columns:repeat(" in html
+    assert "flex-direction:column-reverse" in html and "var(--mono)" in rule(html, f".{strip} span")
+    assert "font-size:clamp(38px,5vw,62px)" in rule(html, "h1")
+    assert "IBM+Plex+Mono" in html

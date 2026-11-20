@@ -21,48 +21,85 @@
 <meta name="twitter:title" content="What they called on Market Bubble, and what it did">
 <meta name="twitter:description" content="Every on-air call by Ansem and Banks. Quoted word for word, linked to the second, priced from that night to today.">
 <meta name="twitter:image" content="https://search.lexthedev.com/demo/og-calls.png?v=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="/demo/ui.css">
 <style>
   :root{
     --bg:#0b0e11;--panel:#12161c;--line:#232a33;--text:#e6e8ea;
     --muted:#8a939e;--green:#16c784;--red:#e5605e;--amber:#e8c157;
-    --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+    --deck:#12161c;--deck-2:#161b23;--edge:#232a33;--edge-2:#33404d;
+    --ink-2:#aab3bd;--ink-3:#8a939e;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --ease:cubic-bezier(.22,.78,.24,1);--quick:.22s;
+    --card:#161b23;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--bg);color:var(--text);min-height:100vh;
     font:15px/1.55 var(--sans);font-feature-settings:"tnum" 1;
-    padding:28px 20px 60px}
-  .wrap{max-width:940px;margin:0 auto}
-  .topbar{display:flex;align-items:center;justify-content:space-between;
-    gap:14px;margin-bottom:26px;flex-wrap:wrap}
-  .brand{font-weight:700;letter-spacing:.5px;font-size:14px}
-  .brand span{color:var(--green)}
-  h1{font-family:var(--display);font-weight:400;font-size:46px;
-    line-height:1.08;letter-spacing:-.01em;margin-bottom:12px}
-  h1 em{color:var(--green);font-style:normal}
-  .sub{color:var(--muted);margin-bottom:22px;max-width:660px}
-  .sub b{color:var(--text);font-weight:500}
+    -webkit-font-smoothing:antialiased;overflow-x:hidden}
+  /* The pool of light of the Market Bubble page this belongs to. */
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(720px 420px at 30% 12%,
+        color-mix(in srgb,var(--green) 9%,transparent), transparent 68%),
+      radial-gradient(900px 500px at 50% 0%,rgba(255,255,255,.028), transparent 70%)}
+  .wrap{position:relative;z-index:1;max-width:1120px;margin:0 auto;
+    padding:0 clamp(20px,3.4vw,52px) 80px}
 
-  /* The line above the board. One row of figures on a rule, like the top
-     of a statement, because that is what this page is. */
+  /* The header every room has: the site's name, then this page's own.
+     It was a line of bold capitals and two buttons, the one corner of
+     the site that still looked like the first version of it. */
+  header{display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding:26px 0 18px;border-bottom:1px solid var(--edge);position:relative;z-index:80}
+  .mark{display:flex;align-items:baseline;gap:11px;text-decoration:none;color:inherit}
+  .mark b{font-family:var(--display);font-weight:400;font-size:22px}
+  .mark span{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--green)}
+  header nav{display:flex;align-items:center;gap:20px;font-family:var(--mono);
+    font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+  header nav > a{color:var(--ink-2);text-decoration:none;
+    transition:color var(--quick) var(--ease)}
+  header nav > a:hover{color:var(--text)}
+  header nav > a:focus-visible,.archsw>summary:focus-visible{
+    outline:2px solid var(--green);outline-offset:3px;border-radius:2px}
+
+  h1{font-family:var(--display);font-weight:400;
+    font-size:clamp(38px,5vw,62px);line-height:1.02;letter-spacing:-1px;
+    margin:48px 0 0;padding-bottom:.06em}
+  h1 em{font-style:italic;color:var(--green);padding-right:.06em}
+  .sub{color:var(--ink-2);font-size:16.5px;max-width:62ch;margin:16px 0 0}
+  .sub b{color:var(--text);font-weight:500}
+  /* What this is not, said once and quietly, beside a rule. */
+  .note{margin:22px 0 0;max-width:78ch;color:var(--ink-3);font-size:13px;
+    border-left:2px solid var(--edge-2);padding:2px 0 2px 14px}
+  .note b{color:var(--text);font-weight:500}
+
+  /* The figures on a rule, as every room's strip has them: the label in
+     small capitals over the number. The markup puts the number first, so
+     each cell is turned over. */
   .tally{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
-    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-    margin-bottom:22px}
-  .tally div{padding:14px 14px 13px 0;min-width:0}
-  .tally div + div{padding-left:14px;border-left:1px solid var(--line)}
-  .tally b{display:block;font:400 30px/1.1 var(--display);letter-spacing:-.01em}
-  .tally span{color:var(--muted);font-size:11px;text-transform:uppercase;
-    letter-spacing:.7px}
+    border-top:1px solid var(--edge);border-bottom:1px solid var(--edge);margin:32px 0 0}
+  .tally div{display:flex;flex-direction:column-reverse;justify-content:flex-end;
+    padding:15px 0 17px 18px;border-left:1px solid var(--edge);min-width:0}
+  .tally div:first-child{border-left:0;padding-left:0}
+  .tally b{display:block;margin-top:8px;font:400 30px/1 var(--display);
+    font-variant-numeric:tabular-nums}
+  .tally span{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--ink-3)}
   .tally .up{color:var(--green)} .tally .down{color:var(--red)}
 
-  .controls{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;align-items:center}
+  .controls{display:flex;gap:8px;margin:30px 0 8px;flex-wrap:wrap;align-items:center}
   .controls .gap{flex:1}
-  .chip{font:inherit;font-size:13px;background:transparent;color:var(--muted);
-    border:1px solid var(--line);border-radius:16px;padding:6px 13px;cursor:pointer}
-  .chip:hover{border-color:var(--green);color:var(--green)}
-  .chip[aria-pressed="true"]{background:#16c78418;border-color:#16c78455;color:var(--green)}
+  .chip{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    background:transparent;color:var(--ink-2);border:1px solid var(--edge-2);
+    border-radius:99px;padding:8px 14px;cursor:pointer;
+    transition:border-color var(--quick) var(--ease),color var(--quick) var(--ease)}
+  .chip:hover{border-color:var(--green);color:var(--text)}
+  .chip[aria-pressed="true"]{background:rgba(22,199,132,.12);border-color:var(--green);color:var(--green)}
   .chip:focus-visible{outline:2px solid var(--green);outline-offset:2px}
-  .showing{color:var(--muted);font-size:12.5px;margin:0 0 14px;min-height:19px}
+  .showing{color:var(--ink-3);font-family:var(--mono);font-size:11.5px;margin:0 0 14px;min-height:19px}
 
   /* One call. The number it comes to sits on the right, where a ledger
      keeps its balance, and everything that backs it up is on the left. */
@@ -93,7 +130,7 @@
   .tag.target{border-color:#e8c15755;color:var(--amber);white-space:normal;
     max-width:100%;line-height:1.5}
   .quote{grid-column:1;font:400 20px/1.34 var(--display);color:#d9dde1;
-    margin-top:6px;overflow-wrap:anywhere}
+    margin-top:6px;overflow-wrap:anywhere;max-width:72ch}
   .quote::before{content:"\201C"} .quote::after{content:"\201D"}
   .acts{grid-column:1;display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;
     font-size:12.5px;align-items:center}
@@ -115,22 +152,20 @@
     line-height:1.55}
   .px b{color:var(--text);font-weight:500}
 
-  .note{border:1px solid var(--line);color:var(--muted);border-radius:12px;
-    padding:13px 16px;font-size:12.5px;margin-bottom:24px}
-  .note b{color:var(--text);font-weight:500}
-  .foot{color:var(--muted);font-size:12.5px;margin-top:26px;line-height:1.7;
-    max-width:700px}
+  .foot{color:var(--ink-3);font-size:12.5px;margin-top:46px;line-height:1.7;
+    max-width:78ch;border-top:1px solid var(--edge);padding-top:20px}
   .foot a{color:var(--text)}
+  .ends{margin-top:18px;font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+  .ends a{color:var(--ink-2);text-decoration:none}
+  .ends a:hover{color:var(--green)}
   .empty{color:var(--muted);padding:22px 0}
 
   @media(max-width:700px){
-    h1{font-size:34px}
-    .topbar{flex-direction:column;align-items:flex-start;gap:10px}
     /* Three figures over two, each row the full width, so the rule
        between them runs edge to edge. */
     .tally{grid-template-columns:repeat(6,minmax(0,1fr))}
     .tally div{grid-column:span 2}
-    .tally div:nth-child(n+4){grid-column:span 3;border-top:1px solid var(--line)}
+    .tally div:nth-child(n+4){grid-column:span 3;border-top:1px solid var(--edge)}
     .tally div:nth-child(4){border-left:0;padding-left:0}
     .tally b{font-size:25px}
     /* The number goes under the quote it belongs to, on one line. */
@@ -145,16 +180,20 @@
     @keyframes rise{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
   }
 </style>
+<script src="/demo/nav.js" defer></script>
 </head>
 <body>
 <div class="wrap">
-  <div class="topbar">
-    <a class="brand" href="/home" style="text-decoration:none;color:inherit">MARKET <span>BUBBLE</span> · calls</a>
-    <span style="display:inline-flex;gap:10px;flex-wrap:wrap">
-    <a class="btn btn-primary btn-back" href="/demo/podcast.html"><span class="arw">←</span><svg class="ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.75" stroke="currentColor" stroke-width="1.7"/><path d="M10.6 10.6 14 14" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M6 5.3l3 1.7-3 1.7z" fill="currentColor"/></svg>Search every episode</a>
-    <a class="btn btn-ghost" href="/demo/assets.html">Every token they analyzed</a>
+  <header>
+    <span class="brandline"><a class="home-crumb" href="/home"><span class="w">Market Bubble</span><span class="s">Search</span></a><span class="home-sep" aria-hidden="true">/</span>
+      <a class="mark" href="/calls"><b>Market Bubble</b><span>calls</span></a>
     </span>
-  </div>
+    <nav>
+      <a href="/demo/podcast.html">&larr; Search</a>
+      <a href="/demo/assets.html">Tokens</a>
+      <span data-archives></span>
+    </nav>
+  </header>
 
   <h1>What they called, <em>and what it did</em>.</h1>
   <p class="sub">Every time Ansem or FaZe Banks said on air that he owned
@@ -199,6 +238,12 @@
     own holdings, or a setup for the next few days, is not a view to hold a
     price against months later.
     <a href="/method">How the archive is built</a>.
+  </p>
+  <p class="ends">
+    <a href="/demo/podcast.html">Ask Market Bubble anything</a> &middot;
+    <a href="/demo/assets.html">Every token they analyzed</a> &middot;
+    <a href="/episodes">Every episode, summarized</a> &middot;
+    built by <a href="https://x.com/Lexx_eth" target="_blank" rel="noopener">@Lexx_eth</a>
   </p>
 </div>
 
