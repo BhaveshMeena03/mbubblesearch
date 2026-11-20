@@ -90,6 +90,26 @@ def test_a_date_that_is_missing_or_not_a_date_is_left_out_and_not_guessed(newest
     assert dict(found)[f"{seo.SITE}/demo/mcg.html"] == ""
 
 
+def test_pages_written_on_the_server_are_listed_after_the_rest_once_each():
+    more = [(f"{seo.SITE}/episodes", "2026-11-18"),
+            (f"{seo.SITE}/episodes/x-2115904746355851479", "2026-10-29"),
+            (f"{seo.SITE}/episodes/x-2115904746355851479", "2026-10-29"),     # twice
+            (f"{seo.SITE}/demo/mcg.html", "2026-01-01"),                      # already listed
+            ("https://elsewhere.example/episodes/abc", "2026-10-29"),         # not this site
+            (f"{seo.SITE}/episodes/dQw4w9WgXcQ", "sometime")]                 # no date
+    found = urls(seo.sitemap_xml(NEWEST, more))
+    assert [loc for loc, _ in found][:len(LISTED)] == [f"{seo.SITE}/demo/{n}" for n in LISTED]
+    assert found[len(LISTED):] == [(f"{seo.SITE}/episodes", "2026-11-18"),
+                                   (f"{seo.SITE}/episodes/x-2115904746355851479", "2026-10-29"),
+                                   (f"{seo.SITE}/episodes/dQw4w9WgXcQ", "")]
+    assert dict(found)[f"{seo.SITE}/demo/mcg.html"] == "2026-11-15"
+
+
+def test_an_address_with_an_ampersand_is_still_xml():
+    found = urls(seo.sitemap_xml(None, [(f"{seo.SITE}/episodes?a=1&b=2", "2026-11-18")]))
+    assert found[-1][0] == f"{seo.SITE}/episodes?a=1&b=2"
+
+
 def test_a_timestamp_is_cut_to_its_day():
     found = dict(urls(seo.sitemap_xml({"mcg": "2026-11-15T21:04:00+00:00"})))
     assert found[f"{seo.SITE}/demo/mcg.html"] == "2026-11-15"
@@ -97,8 +117,10 @@ def test_a_timestamp_is_cut_to_its_day():
 
 # --- every page on file ------------------------------------------------------------
 
-# Has a title, is not a page of the site, and is not worth a tag of its own.
-NOT_A_PAGE = {"index.html"}
+# Has a title and is not a page of the site: a stray demo, and the two
+# templates the episode pages are written from (their routes send anybody
+# who opens one to /episodes).
+NOT_A_PAGE = {"index.html", "episode.html", "episodes.html"}
 
 
 def test_every_listed_page_exists_is_not_hidden_and_says_what_it_is():
@@ -193,6 +215,7 @@ def test_every_floor_is_under_what_the_archive_holds():
 
 @pytest.mark.parametrize("path", ["/demo/podcast.html", "/demo/home.html", "/demo/calls.html",
                                   "/demo/concierge.html", "/", "/home", "/calls", "/guests",
+                                  "/episodes", "/episodes/x-2115904746355851479",
                                   "/robots.txt", "/sitemap.xml", "/llms.txt",
                                   "/demo/og-home.png", "/demo/ui.css", "/og/search.png"])
 def test_what_may_be_indexed_is_sent_no_header(path):
@@ -221,6 +244,11 @@ def client(monkeypatch):
         yield c
 
 
+def test_a_checker_that_only_asks_if_the_files_are_there_is_told_yes(client):
+    assert client.head("/robots.txt").status_code == 200
+    assert client.head("/sitemap.xml").status_code == 200
+
+
 def test_robots_txt_is_served_as_text(client):
     r = client.get("/robots.txt")
     assert r.status_code == 200 and r.headers["content-type"].startswith("text/plain")
@@ -232,8 +260,11 @@ def test_robots_txt_is_served_as_text(client):
 def test_the_sitemap_is_served_as_xml_with_the_archives_dates(client):
     r = client.get("/sitemap.xml")
     assert r.status_code == 200 and r.headers["content-type"].startswith("application/xml")
-    found = dict(urls(r.text))
-    assert list(found) == [f"{seo.SITE}/demo/{name}" for name in LISTED]
+    listed = urls(r.text)
+    found = dict(listed)
+    assert len(found) == len(listed)                    # each address once
+    assert list(found)[:len(LISTED)] == [f"{seo.SITE}/demo/{name}" for name in LISTED]
+    assert all(loc.startswith(f"{seo.SITE}/") for loc in found)
     assert found[f"{seo.SITE}/demo/mcg.html"] == "2026-11-15"
     # Market Bubble's comes off the episodes on file, not the stand-in.
     assert re.fullmatch(r"\d{4}-\d{2}-\d{2}", found[f"{seo.SITE}/demo/podcast.html"])
@@ -250,7 +281,7 @@ def test_the_sitemap_survives_the_archives_not_answering(client, monkeypatch):
     monkeypatch.setattr(main, "_episodes_by_id", broken)
     r = client.get("/sitemap.xml")
     assert r.status_code == 200
-    assert [day for _, day in urls(r.text)] == [""] * len(LISTED)
+    assert [day for _, day in urls(r.text)][:len(LISTED)] == [""] * len(LISTED)
 
 
 def test_a_listed_page_is_served_without_the_header_and_a_template_with_it(client):

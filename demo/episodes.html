@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" type="image/png" sizes="48x48" href="/demo/icon-48.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/demo/icon-512.png">
+<link rel="apple-touch-icon" href="/demo/icon-180.png">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0e11">
+<!-- The list of every episode that has a page. The server fills it in
+     (app/episode_pages.py). Opened as a file it is a template, not a page. -->
+<title>Every episode, summarized · Market Bubble Search</title>
+<meta name="description" content="Market Bubble, MCG Live and ThreadGuy, episode by episode: what each one covered, with the times it was said. Pick an episode, or ask the archive anything.">
+<meta property="og:title" content="Every episode, summarized">
+<meta property="og:description" content="Market Bubble, MCG Live and ThreadGuy, episode by episode: what each one covered, with the times it was said.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Market Bubble Search">
+<meta property="og:url" content="https://search.lexthedev.com/episodes">
+<meta property="og:image" content="https://search.lexthedev.com/demo/og-home.png?v=6">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Every episode, summarized">
+<meta name="twitter:description" content="Market Bubble, MCG Live and ThreadGuy, episode by episode: what each one covered, with the times it was said.">
+<meta name="twitter:image" content="https://search.lexthedev.com/demo/og-home.png?v=6">
+<link rel="canonical" href="https://search.lexthedev.com/episodes">
+<link rel="stylesheet" href="/demo/ui.css">
+<style>
+  :root{
+    --bg:#0b0e11;--panel:#12161c;--line:#232a33;--text:#e6e8ea;
+    --muted:#8a939e;--green:#16c784;
+    --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);min-height:100vh;
+    font:15px/1.55 var(--sans);font-feature-settings:"tnum" 1;
+    padding:28px 20px 70px}
+  .wrap{max-width:940px;margin:0 auto}
+  .topbar{display:flex;align-items:center;justify-content:space-between;
+    gap:14px;margin-bottom:44px;flex-wrap:wrap}
+  .brand{font-weight:700;letter-spacing:.5px;font-size:14px;
+    text-decoration:none;color:inherit}
+  .brand span{color:var(--green)}
+  h1{font-family:var(--display);font-weight:400;font-size:64px;
+    line-height:1;letter-spacing:-.02em}
+  .lead{color:var(--muted);margin-top:16px;max-width:660px}
+  .lead b{color:var(--text);font-weight:500}
+
+  section{margin-top:46px}
+  h2{font-family:var(--mono);font-weight:500;font-size:11.5px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--green);
+    padding-bottom:10px;border-bottom:1px solid var(--line)}
+  h2 span{color:var(--muted);margin-left:6px}
+  .row{display:grid;grid-template-columns:170px minmax(0,1fr);column-gap:22px;
+    padding:11px 0 10px;border-bottom:1px solid var(--line);
+    text-decoration:none;color:var(--text)}
+  .row:hover b{color:var(--green)}
+  .row:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+  .day{font-family:var(--mono);font-size:12px;line-height:1.9;color:var(--muted)}
+  .row b{font-weight:500;overflow-wrap:anywhere}
+
+  @media(max-width:700px){
+    .topbar{flex-direction:column;align-items:flex-start;gap:10px;margin-bottom:30px}
+    h1{font-size:42px}
+    .row{grid-template-columns:minmax(0,1fr);row-gap:0}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <a class="brand" href="/home">MARKET <span>BUBBLE</span> SEARCH · episodes</a>
+    <a class="btn btn-ghost" href="/home">Ask every archive at once</a>
+  </div>
+
+  <h1>Every episode, summarized</h1>
+  <p class="lead"><b>{{count}} recordings</b>, each with what it covered and
+    the times it was said. A recording is listed once it has a summary, so
+    the newest ones arrive a little after they air.</p>
+
+{{sections}}
+</div>
+</body>
+</html>

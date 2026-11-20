@@ -46,6 +46,7 @@ from . import (
     attribution,
     call_prices,
     egress,
+    episode_pages,
     market,
     mcg_transcript,
     og_card,
@@ -101,7 +102,8 @@ from .security import (
     public_rate_limit,
     require_admin,
 )
-from .summaries import SummaryStore
+from .summaries import SHIPPED as SUMMARIES_FILE
+from .summaries import SummaryStore, load_shipped
 from .traffic import Traffic
 from .usage import UsageLedger, writable_path
 from .youtube_map import summary_moments, youtube_first
@@ -1172,6 +1174,103 @@ async def guest_card(request: Request, slug: str):
     return Response(kept[1], media_type="image/png", headers=headers)
 
 
+# ─── a page per episode ──────────────────────────────────────────────
+#
+# Written on the server from the summaries that ship (app/episode_pages.py),
+# so a search engine reads what an episode covered without running anything.
+
+_EPISODE_PAGES: list[dict] | None = None
+
+
+def _json_object(path: Path) -> dict:
+    try:
+        found = json.loads(path.read_text(encoding="utf-8"))
+    except Exception as exc:                                    # noqa: BLE001
+        logger.warning("could not read %s: %s", path.name, exc)
+        return {}
+    return found if isinstance(found, dict) else {}
+
+
+def _episode_catalog() -> list[dict]:
+    """Every episode that has a page, newest first, built once.
+
+    Only from files that ship with the image: no index is read, so a
+    crawler walking six hundred pages costs nothing. A recording indexed
+    since the last deploy gets its page with the next one, and the
+    morning job makes one every day.
+
+    Each archive on its own, so one that cannot be read costs only its
+    own pages.
+    """
+    global _EPISODE_PAGES
+    if _EPISODE_PAGES is not None:
+        return _EPISODE_PAGES
+    found: dict[str, dict] = {}
+    try:
+        players = _json_object(x_posts.BROADCAST_LINKS)
+        calls = sorted((c for c in _calls_file().get("calls") or []
+                        if c.get("source") == "show"),
+                       key=lambda c: float(c.get("start_seconds") or 0))
+        for row in _listed(list(load_shipped(SUMMARIES_FILE).values())):
+            player = players.get(row.get("episode_id"))
+            made = episode_pages.from_summary(
+                row, player=player if isinstance(player, str) else "", calls=calls)
+            if made:
+                found.setdefault(made["id"], made)
+    except Exception as exc:                                    # noqa: BLE001
+        logger.warning("no Market Bubble episode pages: %s", exc)
+    for archive, rows, notes, pairs in (
+            ("mcg", _mcg_episodes, _mcg_summaries, x_posts.MCG_PAIRS),
+            ("threadguy", _threadguy_episodes, _threadguy_summaries,
+             x_posts.THREADGUY_PAIRS)):
+        try:
+            written, paired = notes(), _json_object(pairs)
+            for row in rows():
+                made = episode_pages.from_note(archive, row, written.get(row.get("id")),
+                                               paired.get(row.get("id")))
+                if made:
+                    found.setdefault(made["id"], made)
+        except Exception as exc:                                # noqa: BLE001
+            logger.warning("no %s episode pages: %s", archive, exc)
+    _EPISODE_PAGES = episode_pages.in_order(list(found.values()))
+    logger.info("episode pages: %d", len(_EPISODE_PAGES))
+    return _EPISODE_PAGES
+
+
+def _episodes_list_page(status_code: int = 200) -> HTMLResponse:
+    template = (_ROOT / "demo" / "episodes.html").read_text(encoding="utf-8")
+    return HTMLResponse(episode_pages.render_index(template, _episode_catalog()),
+                        status_code=status_code, headers={"Cache-Control": "no-cache"})
+
+
+@app.get("/episodes", include_in_schema=False)
+async def episodes_page() -> HTMLResponse:
+    return _episodes_list_page()
+
+
+# The two templates are files under /demo, and opened there they are
+# pages of braces. Each goes to what it is the template of.
+@app.get("/demo/episodes.html", include_in_schema=False)
+@app.get("/demo/episode.html", include_in_schema=False)
+async def episode_templates() -> RedirectResponse:
+    return RedirectResponse(url="/episodes", status_code=301)
+
+
+@app.get("/episodes/{episode_id}", include_in_schema=False)
+async def episode_page(episode_id: str) -> HTMLResponse:
+    catalog = _episode_catalog()
+    found = (next((e for e in catalog if e["id"] == episode_id), None)
+             if episode_pages.is_id(episode_id) else None)
+    if found is None:
+        # Still a 404 to anything that keeps score, and the list to a
+        # person who followed a link to an episode with no page.
+        return _episodes_list_page(status_code=404)
+    newer, older = episode_pages.neighbours(catalog, episode_id)
+    template = (_ROOT / "demo" / "episode.html").read_text(encoding="utf-8")
+    return HTMLResponse(episode_pages.render_page(template, found, newer, older),
+                        headers={"Cache-Control": "no-cache"})
+
+
 @app.get("/llms.txt", include_in_schema=False)
 async def llms_txt(request: Request) -> PlainTextResponse:
     text = (_ROOT / "demo" / "llms.txt").read_text(encoding="utf-8")
@@ -1184,7 +1283,9 @@ async def llms_txt(request: Request) -> PlainTextResponse:
 _CRAWLER_CACHE = {"Cache-Control": "public, max-age=3600"}
 
 
-@app.get("/robots.txt", include_in_schema=False)
+# HEAD as well as GET: a checker that asks only whether the file is there
+# was told 405, which reads as "no robots.txt".
+@app.api_route("/robots.txt", methods=["GET", "HEAD"], include_in_schema=False)
 async def robots_txt() -> PlainTextResponse:
     return PlainTextResponse(seo.robots_txt(), headers=_CRAWLER_CACHE)
 
@@ -1209,9 +1310,13 @@ async def _newest_recordings(request: Request) -> dict[str, str]:
     return found
 
 
-@app.get("/sitemap.xml", include_in_schema=False)
+@app.api_route("/sitemap.xml", methods=["GET", "HEAD"], include_in_schema=False)
 async def sitemap_xml(request: Request) -> Response:
-    return Response(seo.sitemap_xml(await _newest_recordings(request)),
+    catalog = _episode_catalog()
+    more = [(episode_pages.address(e["id"]), e["date"]) for e in catalog]
+    if catalog:
+        more.insert(0, (f"{seo.SITE}/episodes", catalog[0]["date"]))
+    return Response(seo.sitemap_xml(await _newest_recordings(request), more),
                     media_type="application/xml", headers=_CRAWLER_CACHE)
 
 

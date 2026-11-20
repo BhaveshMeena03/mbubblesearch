@@ -73,18 +73,33 @@ def robots_txt() -> str:
             f"Sitemap: {SITE}/sitemap.xml\n")
 
 
-def sitemap_xml(newest: dict[str, str] | None = None) -> str:
+def _row(address: str, day: object) -> str:
+    day = str(day or "")[:10]
+    stamp = f"<lastmod>{day}</lastmod>" if _DAY.fullmatch(day) else ""
+    return f"  <url><loc>{escape(address)}</loc>{stamp}</url>"
+
+
+def sitemap_xml(newest: dict[str, str] | None = None,
+                more: list[tuple[str, str]] | None = None) -> str:
     """The sitemap. `newest` is archive -> the day of its newest
     recording; a page whose archive is missing from it, or whose date is
-    not a date, is listed without one rather than with a guess."""
+    not a date, is listed without one rather than with a guess.
+
+    `more` is the pages written on the server, one per episode, as
+    (address, day). Only an address on this site is listed, once.
+    """
     days = {name: str(day)[:10] for name, day in (newest or {}).items()
             if _DAY.fullmatch(str(day)[:10])}
     latest = max(days.values(), default="")
     rows = []
     for name, archive in PAGES:
         day = latest if archive == "*" else days.get(archive or "", "")
-        stamp = f"<lastmod>{day}</lastmod>" if day else ""
-        rows.append(f"  <url><loc>{escape(canonical(name))}</loc>{stamp}</url>")
+        rows.append(_row(canonical(name), day))
+    seen = {canonical(name) for name, _ in PAGES}
+    for address, day in more or []:
+        if str(address).startswith(f"{SITE}/") and address not in seen:
+            seen.add(address)
+            rows.append(_row(address, day))
     return ('<?xml version="1.0" encoding="UTF-8"?>\n'
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
             + "\n".join(rows) + "\n</urlset>\n")

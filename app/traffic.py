@@ -48,8 +48,13 @@ MAX_VISITOR_HASHES = 2_000
 # Pages a person opens. API calls are counted by what they do, through
 # _track, not here.
 PAGES = re.compile(r"^/(?:home|mcg|elon|musk|finance|record|threadguy|rasmr|method"
-                   r"|threadguy/(?:tokens|assets)|mcg/(?:assets|tokens)"
+                   r"|threadguy/(?:tokens|assets)|mcg/(?:assets|tokens)|episodes"
                    r"|demo/[\w-]+\.html)?/?$")
+# One row for all of the episode pages. There are hundreds, a day's pages
+# are kept in a single small record, and a count per episode would grow
+# that record with every one somebody opened.
+EPISODE = re.compile(r"^/episodes/[\w-]+/?$")
+EPISODE_PAGES = "/episodes/*"
 # Link previews fetch the page too. Counting X's card fetcher as a visitor
 # would make every post look like it brought people in.
 BOTS = re.compile(r"bot|crawl|spider|slurp|preview|facebookexternalhit|embedly"
@@ -162,7 +167,9 @@ class Traffic:
 
     def page(self, path: str, client: str, user_agent: str | None,
              referer: str | None) -> None:
-        if not PAGES.match(path):
+        if EPISODE.match(path):
+            path = EPISODE_PAGES
+        elif not PAGES.match(path):
             return
         day = self._day()
         if BOTS.search(user_agent or "") or not user_agent:

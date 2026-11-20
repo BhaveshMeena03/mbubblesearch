@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" type="image/png" sizes="48x48" href="/demo/icon-48.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/demo/icon-512.png">
+<link rel="apple-touch-icon" href="/demo/icon-180.png">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0e11">
+<!-- One episode's page. The server fills the fields in (app/episode_pages.py)
+     and sends it whole, so a search engine reads the summary without
+     running anything. Opened as a file it is a template, not a page. -->
+<title>{{title}}</title>
+<meta name="description" content="{{description}}">
+<meta property="og:title" content="{{og_title}}">
+<meta property="og:description" content="{{description}}">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Market Bubble Search">
+<meta property="og:url" content="{{url}}">
+<meta property="og:image" content="{{image}}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{og_title}}">
+<meta name="twitter:description" content="{{description}}">
+<meta name="twitter:image" content="{{image}}">
+<link rel="canonical" href="{{url}}">
+<link rel="stylesheet" href="/demo/ui.css">
+<style>
+  :root{
+    --bg:#0b0e11;--panel:#12161c;--line:#232a33;--text:#e6e8ea;
+    --muted:#8a939e;--green:{{accent}};
+    --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);min-height:100vh;
+    font:15px/1.6 var(--sans);font-feature-settings:"tnum" 1;
+    padding:28px 20px 70px}
+  .wrap{max-width:860px;margin:0 auto}
+  .topbar{display:flex;align-items:center;justify-content:space-between;
+    gap:14px;margin-bottom:44px;flex-wrap:wrap}
+  .brand{font-weight:700;letter-spacing:.5px;font-size:14px;
+    text-decoration:none;color:inherit}
+  .brand span{color:var(--green)}
+  .nav{display:inline-flex;gap:10px;flex-wrap:wrap}
+
+  /* Which show and when, set small above the title, the way a broadcast
+     captions itself. */
+  .plate{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  .plate b{color:var(--green);font-weight:500}
+  h1{font-family:var(--display);font-weight:400;font-size:46px;
+    line-height:1.06;letter-spacing:-.015em;overflow-wrap:anywhere}
+  .lead{font-size:17px;line-height:1.65;color:#d5dade;margin-top:22px}
+  .go{margin-top:22px}
+
+  /* The summary. A time sits in a margin column and is the way in; the
+     words run beside it. */
+  .notes{margin-top:14px}
+  .notes h2{font-family:var(--mono);font-weight:500;font-size:11.5px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    margin:40px 0 4px}
+  .topic{display:grid;grid-template-columns:104px minmax(0,1fr);
+    column-gap:22px;padding:15px 0 14px;border-top:1px solid var(--line)}
+  .topic p{color:#dfe3e6;overflow-wrap:anywhere}
+  .topic p b,.lead b,.para b{color:var(--text);font-weight:600}
+  .at{font-family:var(--mono);font-size:12.5px;line-height:1.9;
+    color:var(--green);font-weight:600;text-decoration:none}
+  a.at:hover{text-decoration:underline}
+  a.at:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+  .at.off{color:var(--muted);font-weight:400}
+  .para{color:#c9ced3;padding:12px 0}
+  /* A summary whose times are not linked has no margin to fill. */
+  .notes.plain .topic{grid-template-columns:minmax(0,1fr)}
+  .notes.plain .at{display:none}
+  .more{margin-top:14px;font-size:13.5px}
+  .more a,.note a{color:var(--green);text-decoration:none}
+  .more a:hover,.note a:hover{text-decoration:underline}
+
+  .steps{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:46px}
+  .step{border:1px solid var(--line);border-radius:12px;padding:13px 16px;
+    text-decoration:none;color:var(--text);min-width:0}
+  .step:hover{border-color:var(--green)}
+  .step:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+  .step span{display:block;font-family:var(--mono);font-size:11px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+  .step b{font-weight:500;font-size:14px;display:block;overflow:hidden;
+    text-overflow:ellipsis;white-space:nowrap}
+  .step:last-child{text-align:right}
+
+  .note{border:1px solid var(--line);color:var(--muted);border-radius:12px;
+    padding:13px 16px;font-size:12.5px;margin-top:26px}
+
+  @media(max-width:700px){
+    .topbar{flex-direction:column;align-items:flex-start;gap:10px;margin-bottom:30px}
+    h1{font-size:32px}
+    .lead{font-size:16px}
+    /* The time goes above the words. */
+    .topic{grid-template-columns:minmax(0,1fr);row-gap:2px;padding:13px 0 12px}
+    .steps{grid-template-columns:minmax(0,1fr)}
+    .step:last-child{text-align:left}
+  }
+  /* Nothing here fades in. The page is what was said, and it is never in
+     a state where that is not on it. */
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <a class="brand" href="/home">MARKET <span>BUBBLE</span> SEARCH · episodes</a>
+    <span class="nav">
+    <a class="btn btn-primary btn-back" href="/episodes"><span class="arw">←</span>Every episode</a>
+    <a class="btn btn-ghost" href="{{search}}">Ask {{archive}} anything</a>
+    </span>
+  </div>
+
+  <p class="plate">{{plate}}</p>
+  <h1>{{name}}</h1>
+  <p class="lead">{{tldr}}</p>
+  <p class="go">{{watch}}</p>
+
+  <section class="notes{{mode}}" aria-label="What was covered">
+{{body}}
+{{calls}}
+  </section>
+
+  <nav class="steps" aria-label="More episodes">
+{{newer}}
+{{older}}
+  </nav>
+
+  <p class="note">
+    This summary was written from the recording's transcript by a language
+    model. {{times}}For the exact words,
+    <a href="{{search}}">ask the {{archive}} archive</a>: every answer there
+    is quoted word for word and linked to the second it was said. Market
+    Bubble Search is independent and not affiliated with the show. Nothing
+    here is advice.
+  </p>
+</div>
+</body>
+</html>
