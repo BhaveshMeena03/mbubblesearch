@@ -105,16 +105,15 @@ def test_every_page_loads_the_typer_before_its_own_script(page):
     assert "Typer(" in html, page
 
 
-@pytest.mark.parametrize("page", ["home.html", "threadguy.html", "rasmr.html"])
+@pytest.mark.parametrize("page", ["home.html", "threadguy.html", "rasmr.html", "mcg.html"])
 def test_no_page_redraws_a_burst_at_a_time_any_more(page):
     html = (ROOT / "demo" / page).read_text()
     assert "setTimeout(draw, 40)" not in html
     assert "typer.finish(resolve)" in html
 
 
-@pytest.mark.parametrize("page", ["mcg.html", "elon.html"])
-def test_times_are_linked_once_the_last_word_is_on_screen(page):
-    html = (ROOT / "demo" / page).read_text()
+def test_times_are_linked_once_the_last_word_is_on_screen():
+    html = (ROOT / "demo" / "elon.html").read_text()
     assert "acc += p.text; answerText(acc);" not in html
     finish = html.index("typer.finish(function(){")
     assert html.index("citeTimestamps(hits);", finish) - finish < 200

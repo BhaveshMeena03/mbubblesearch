@@ -3712,6 +3712,8 @@ async def mcg_episodes() -> list[dict]:
           "url": e.get("url", ""),
           "published_at": e.get("published_at", ""),
           "seconds": int(float(e.get("seconds") or 0)),
+          # Interview or stream: the shelf labels each row with it.
+          "format": e.get("format", ""),
           # Who was on it and what it was about. Two different strengths of
           # claim and they stay separate here: `guests` were introduced out
           # loud and checked against the transcript, `subject` is read off

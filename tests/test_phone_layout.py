@@ -47,13 +47,17 @@ def test_asking_on_a_phone_brings_the_answer_into_view():
 
 def test_no_search_box_makes_an_iphone_zoom():
     """iOS Safari zooms the page when a field under 16px takes focus."""
-    for name in ("mcg", "elon", "assets", "mcg-assets", "threadguy-assets"):
+    for name in ("elon", "assets", "mcg-assets", "threadguy-assets"):
         assert "@media (max-width:760px){ #q{font-size:16px} }" in page(name), name
+    # These three set the box at 17px on every screen, so there is nothing
+    # to raise on a phone.
+    for name in ("mcg", "threadguy", "rasmr"):
+        assert "padding:18px 20px;font:inherit;font-size:17px;outline:none}" in page(name), name
 
 
 def test_passage_cards_cannot_grow_wider_than_the_screen():
     """A grid item will not shrink below its one-line title."""
-    for name in ("home", "threadguy", "rasmr"):
+    for name in ("home", "threadguy", "rasmr", "mcg"):
         html = page(name)
         assert "grid-template-columns:minmax(0,1fr)" in html, name
         assert ".hit{min-width:0;" in html, name

@@ -43,11 +43,11 @@ SCALE = {
                    "font:inherit;font-size:14.5px;cursor:pointer;",
                    ".answer{--caret:var(--sky);font-size:17px;",
                    ".hit p{margin:9px 0 0;color:var(--ink-2);font-size:14.5px;"],
-    "mcg.html": ['monospace;font-size:17px;padding:19px 13px}',
-                 'monospace;font-size:14px;font-weight:600;',
-                 'monospace;font-size:14.5px;',
-                 ".answer .body{padding:20px 18px;font-size:17px;",
-                 ".said{margin:8px 0 0;font-size:14.5px}"],
+    "mcg.html": ["padding:18px 20px;font:inherit;font-size:17px;",
+                 "font-weight:600;font-size:14px;letter-spacing:.18em;",
+                 "font:inherit;font-size:14.5px;cursor:pointer;",
+                 ".answer{--caret:var(--mint);font-size:17px;",
+                 ".hit p{margin:9px 0 0;color:var(--ink-2);font-size:14.5px;"],
     "elon.html": ['monospace;font-size:17px;padding:20px 14px}',
                   'monospace;font-size:14px;font-weight:600;',
                   'monospace;font-size:14.5px;padding:7px 12px;',
@@ -72,6 +72,6 @@ def test_every_page_reads_at_one_scale(page, rules):
         assert rule in css, f"{page}: {rule}"
 
 
-@pytest.mark.parametrize("page", ["podcast.html", "mcg.html", "elon.html", "posts.html"])
+@pytest.mark.parametrize("page", ["podcast.html", "elon.html", "posts.html"])
 def test_phones_keep_a_box_big_enough_that_ios_does_not_zoom(page):
     assert "#q{font-size:16px" in (ROOT / "demo" / page).read_text()

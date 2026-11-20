@@ -94,6 +94,8 @@ def test_nothing_in_a_header_looks_like_a_link_and_goes_nowhere(name):
 
 
 def test_mcg_offers_its_tokens_the_way_threadguy_does():
-    corner = page("mcg").split("<header>", 1)[1].split("</header>", 1)[0]
-    assert '<a href="/mcg/assets">Tokens</a>' in corner
+    corner = re.split(r"<header[^>]*>", page("mcg"), maxsplit=1)[1].split("</header>", 1)[0]
+    assert '<a class="tokens" href="/mcg/assets">Tokens</a>' in corner
+    theirs = re.split(r"<header[^>]*>", page("threadguy"), maxsplit=1)[1].split("</header>", 1)[0]
+    assert '<a class="tokens" href="/threadguy/tokens">Tokens</a>' in theirs
     assert "<span data-archives></span>" in corner
