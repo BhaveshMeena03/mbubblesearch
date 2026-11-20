@@ -270,10 +270,12 @@
 
   /* ── the shelf ────────────────────────────────────────────────── */
   .sect{margin:64px 0 0;border-top:1px solid var(--edge);padding-top:22px}
-  .sect h2{font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;
-    text-transform:uppercase;color:var(--ink-3);font-weight:500;margin:0 0 6px;
-    display:flex;align-items:center;gap:12px}
-  .sect h2::before{content:"01";color:var(--sky)}
+  /* The section's name at the size of "Asked and answered" above it
+     (demo/moments.js). It was a 10px label over the longest part of the
+     page. */
+  .sect h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:36px;
+    line-height:1.08;letter-spacing:-.01em;color:var(--ink);margin:0 0 8px}
+  @media(max-width:640px){.sect h2{font-size:29px}}
   .note{color:var(--ink-2);font-size:14.5px;margin:0 0 20px;max-width:64ch}
   .month{margin:26px 0 0}
   .month > h3{font-family:"Instrument Serif",Georgia,serif;font-weight:400;
@@ -434,7 +436,7 @@
   <script src="/demo/moments.js" defer></script>
 
   <section class="sect rise" style="animation-delay:.32s">
-    <h2>on the shelf</h2>
+    <h2>On the shelf</h2>
     <p class="note">Newest first, grouped by month. Pick one to watch it here. A <span class="dotkey"></span> means it has notes: what it covers, with a time on every topic that jumps the video there.</p>
     <div id="shelf"><div class="empty">Loading the shelf.</div></div>
   </section>

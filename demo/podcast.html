@@ -360,21 +360,23 @@
   .sect{margin:64px 0 0;border-top:1px solid var(--edge);padding-top:22px;
     scroll-margin-top:24px}
   .sect[hidden]{display:none}
-  .sect > h2{font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;
-    text-transform:uppercase;color:var(--ink-3);font-weight:500;margin:0 0 6px;
-    display:flex;align-items:center;gap:12px}
-  .sect > h2::before{content:attr(data-n);color:var(--green)}
+  /* A section's name at the size of "Asked and answered" above it
+     (demo/moments.js). It was a 10px label, the smallest type on the
+     page over the longest part of it. */
+  .sect > h2{font-family:var(--display);font-weight:400;font-size:36px;
+    line-height:1.08;letter-spacing:-.01em;color:var(--ink);margin:0 0 8px}
+  @media(max-width:640px){.sect > h2{font-size:29px}}
   .sect > .note{color:var(--ink-2);font-size:14.5px;margin:0 0 20px;max-width:66ch}
   .month{margin:26px 0 0}
   .month > h3{font-family:var(--display);font-weight:400;
     font-size:24px;margin:0 0 10px;color:var(--ink)}
   .month > h3 span{font-family:var(--mono);font-size:11px;letter-spacing:.1em;
     color:var(--ink-3);margin-left:10px}
-  .rec{display:grid;grid-template-columns:78px 104px minmax(0,1fr) 64px;gap:4px 16px;
-    align-items:center;padding:11px 14px;border-radius:3px;cursor:pointer;
+  .rec{display:grid;grid-template-columns:78px 104px minmax(0,1fr) auto;gap:4px 16px;
+    align-items:baseline;padding:12px 14px;border-radius:3px;cursor:pointer;
     border:1px solid transparent;scroll-margin-top:76px;
     transition:background var(--quick) var(--ease),border-color var(--quick) var(--ease)}
-  #eps-guest-list .rec{grid-template-columns:78px 160px minmax(0,1fr) 64px}
+  #eps-guest-list .rec{grid-template-columns:78px 160px minmax(0,1fr) auto}
   .rec:hover{background:var(--deck);border-color:var(--edge)}
   .rec:focus-visible{outline:2px solid var(--green);outline-offset:2px}
   .rec.playing{background:var(--deck);border-color:var(--edge-2)}
@@ -387,13 +389,17 @@
   .rec .t{font-size:14.5px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;
     white-space:nowrap}
   .rec .r{font-family:var(--mono);font-size:12px;color:var(--ink-3);text-align:right;
-    font-variant-numeric:tabular-nums}
+    font-variant-numeric:tabular-nums;white-space:nowrap}
   .rec .pw{grid-column:1/-1}
-  /* A row with a summary carries a dot before its title. */
-  .rec.noted .t::before{content:"";display:inline-block;width:6px;height:6px;
-    border-radius:50%;background:var(--green);margin-right:10px;vertical-align:2px}
-  .dotkey{display:inline-block;width:6px;height:6px;border-radius:50%;
-    background:var(--green);vertical-align:2px;margin:0 2px}
+  /* The summary's opening under the title, and a caret that turns when
+     the row is open. A dot before the title was the only sign a row had
+     a summary, and nobody found them. */
+  .rec .x{grid-column:3;color:var(--ink-3);font-size:13.5px;line-height:1.45;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .rec .x:empty,.rec.playing .x{display:none}
+  .rec .tw{display:inline-block;margin-left:12px;color:var(--green);font-size:12px;
+    transition:transform var(--quick) var(--ease)}
+  .rec.playing .tw{transform:rotate(90deg)}
 
   /* ── also built on this archive ───────────────────────────────── */
   .also-grid{display:grid;gap:12px;grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -448,11 +454,12 @@
     .hero{grid-template-columns:1fr;gap:34px}
   }
   @media(max-width:720px){
-    .rec,#eps-guest-list .rec{grid-template-columns:1fr 56px;row-gap:3px}
+    .rec,#eps-guest-list .rec{grid-template-columns:1fr auto;row-gap:3px}
     .rec .d,.rec .f{grid-column:1;font-size:11px}
     .rec .d{grid-row:1}
     .rec .f{grid-row:2}
     .rec .t{grid-column:1/-1;grid-row:3;white-space:normal}
+    .rec .x{grid-column:1/-1;grid-row:4}
     .rec .r{grid-column:2;grid-row:1}
     footer.foot{grid-template-columns:1fr}
     footer.foot nav,.ticks{justify-content:flex-start}
@@ -584,25 +591,26 @@
   <script src="/demo/moments.js" defer></script>
 
   <section class="sect" id="eps">
-    <h2 data-n="01">every episode</h2>
-    <p class="note">Newest first, grouped by month. Pick one for its summary, with the
-      video above it when the show has a copy on YouTube. A time plays that moment here;
-      one marked &#8599; was cut from the upload and opens the live broadcast on X at
-      that second.</p>
+    <h2>Episode summaries</h2>
+    <p class="note">Every episode condensed to a two minute read, with a time on every
+      topic. Open one to read it, with the video above it when the show has a copy on
+      YouTube. A time plays that moment here; one marked &#8599; was cut from the upload
+      and opens the live broadcast on X at that second.</p>
     <div id="eps-list"><div class="empty">Loading the episodes.</div></div>
   </section>
 
   <!-- Ansem's appearances on other shows, and the videos he posts on X,
        under their own heading so the list above stays Market Bubble's. -->
   <section class="sect" id="eps-guest" hidden>
-    <h2 data-n="02">Ansem elsewhere</h2>
-    <p class="note">Ansem on other shows, and the videos he posts on X on his own.
-      They are searchable with the rest, and an answer names where it came from.</p>
+    <h2>Ansem elsewhere</h2>
+    <p class="note">Ansem on other shows, and the videos he posts on X on his own, each
+      with its summary. They are searchable with the rest, and an answer names where it
+      came from.</p>
     <div id="eps-guest-list"></div>
   </section>
 
   <section class="sect also">
-    <h2 data-n="03">also built on this archive</h2>
+    <h2>Also built on this archive</h2>
     <p class="note">The same transcripts, read for something other than a question.</p>
     <div class="also-grid">
       <a class="also-card" href="/calls">
@@ -969,10 +977,11 @@
 
   function row(ep){
     var el=document.createElement("div");
-    el.className="rec"+((ep.tldr||(ep.blocks||[]).length) ? " noted" : "");
+    var noted=!!(ep.tldr||(ep.blocks||[]).length);
+    el.className="rec"+(noted ? " noted" : "");
     // So a link can open one summary: /demo/podcast.html#ep-<id>.
     el.id="ep-"+ep.episode_id;
-    ["d","f","t","r"].forEach(function(name){
+    ["d","f","t","r","x"].forEach(function(name){
       var cell=document.createElement("span"); cell.className=name; el.appendChild(cell);
     });
     var kind=kindOf(ep);
@@ -981,7 +990,16 @@
     if(kind.live) el.querySelector(".f").classList.add("live");
     el.querySelector(".t").textContent=ep.title||"";
     el.querySelector(".r").textContent=ep.seconds ? hms(ep.seconds) : "";
-    pressable(el,"Open "+(ep.title||"this episode"),function(){
+    // How the summary opens, in the row, so it can be seen that there is
+    // one before anything is pressed.
+    el.querySelector(".x").textContent=String(ep.tldr||"").replace(/\*\*/g,"");
+    if(noted){
+      var caret=document.createElement("span");
+      caret.className="tw"; caret.textContent="\u25B8";
+      caret.setAttribute("aria-hidden","true");
+      el.querySelector(".r").appendChild(caret);
+    }
+    pressable(el,(noted ? "Open the summary of " : "Open ")+(ep.title||"this episode"),function(){
       toggleRow(el,ep,true);
       if(open && open.host===el) reveal(el);
     });

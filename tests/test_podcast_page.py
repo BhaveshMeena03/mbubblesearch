@@ -282,3 +282,52 @@ def test_the_price_script_calls_nothing_it_does_not_define():
     assert "function safeUrl(u){" in PRICES
     for name in ("money", "best", "row", "load", "safeUrl"):
         assert f"function {name}(" in PRICES, name
+
+
+# --- what he asked for on 20 November, after the first version went up -----------
+
+def css_rule(css: str, selector: str) -> str:
+    found = re.search(re.escape(selector) + r"\{([^}]*)\}", css)
+    assert found, selector
+    return " ".join(found.group(1).split())
+
+
+def test_a_sections_name_is_as_big_as_asked_and_answered():
+    """Every section under the search opens with a name at one size. The
+    shelf's was a 10px label under a 36px heading."""
+    cards = (DEMO / "moments.js").read_text()
+    assert ".mm-h{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:36px;" in cards
+    assert "@media(max-width:640px){.mm-h{font-size:29px}" in cards
+    ours = css_rule(PAGE, ".sect > h2")
+    assert "font-size:36px" in ours and "var(--display)" in ours and "uppercase" not in ours
+    assert "@media(max-width:640px){.sect > h2{font-size:29px}}" in PAGE
+    for name in ("threadguy", "rasmr", "mcg"):
+        html = (DEMO / f"{name}.html").read_text()
+        theirs = css_rule(html, ".sect h2")
+        assert "font-size:36px" in theirs and "Instrument Serif" in theirs, name
+        assert "uppercase" not in theirs and '.sect h2::before{content:"01"' not in html, name
+        assert "@media(max-width:640px){.sect h2{font-size:29px}}" in html, name
+        assert "<h2>On the shelf</h2>" in html, name
+
+
+def test_the_summaries_can_be_seen_before_anything_is_pressed():
+    """"i dont see the summaries anywhere": a dot before the title was the
+    only sign a row had one. The section says what it is, and each row
+    shows how its summary opens."""
+    assert "<h2>Episode summaries</h2>" in BODY
+    assert "Every episode condensed to a two minute read" in " ".join(BODY.split())
+    assert 'el.querySelector(".x").textContent=String(ep.tldr||"").replace(/\\*\\*/g,"");' in EPISODES
+    clipped = css_rule(PAGE, ".rec .x")
+    assert "-webkit-line-clamp:2" in clipped and "grid-column:3" in clipped
+    # Open, the whole summary is under the row, so its opening is not said twice.
+    assert ".rec .x:empty,.rec.playing .x{display:none}" in PAGE
+    assert 'caret.className="tw"' in EPISODES and ".rec.playing .tw{transform:rotate(90deg)}" in PAGE
+    assert '(noted ? "Open the summary of " : "Open ")' in EPISODES
+    assert ".rec.noted .t::before" not in PAGE
+
+
+def test_every_shipped_episode_has_an_opening_to_show():
+    from app.summaries import load_shipped
+    rows = main._listed(list(load_shipped().values()))
+    sent = [main._episode_row(row, {}, {}) for row in rows]
+    assert all(len(r["tldr"]) > 60 for r in sent)
