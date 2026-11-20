@@ -128,7 +128,10 @@ def moment(episode_id: str, seconds: int, *, player: str = "",
         link = f"{player}?t={at}"
     else:
         if isinstance(pair, dict) and pair.get("broadcast"):
-            gap = mcg_on_x._offset(pair, at)
+            try:
+                gap = mcg_on_x._offset(pair, at)
+            except (TypeError, ValueError):
+                gap = None              # a pair with no number for its clock
             if gap is not None and at + gap >= 0:
                 link = f"{pair['broadcast']}?t={at + gap}"
         if not link and _YOUTUBE_ID.fullmatch(episode_id):
@@ -273,7 +276,8 @@ def from_note(archive: str, row: dict, note: dict | None, pair: dict | None = No
         return None
     pinned = note.get("pinned") is True
     blocks: list[dict] = []
-    for topic in note.get("topics") or []:
+    topics = note.get("topics")
+    for topic in topics if isinstance(topics, list) else []:
         if not isinstance(topic, dict) or not str(topic.get("text") or "").strip():
             continue
         at = _second(topic.get("t")) if pinned else None

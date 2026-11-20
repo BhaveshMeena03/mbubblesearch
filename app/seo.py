@@ -114,6 +114,10 @@ def robots_header(path: str) -> str | None:
     """
     if path.startswith(("/v1/", "/x-bot/")) or path == "/healthz":
         return "noindex"
+    # The pages the framework writes about the API. They were indexable,
+    # under a title from another project.
+    if path in ("/docs", "/redoc", "/openapi.json") or path.startswith("/docs/"):
+        return "noindex"
     if path in ("/demo", "/demo/"):
         return "noindex"                # the directory's own index.html
     if path.startswith("/demo/") and path.endswith(".html"):

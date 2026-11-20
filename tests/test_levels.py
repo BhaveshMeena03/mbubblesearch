@@ -194,6 +194,29 @@ def test_an_error_body_is_no_bars(junk):
     assert levels.read_bars(junk) == []
 
 
+def test_two_bars_with_one_start_do_not_end_the_check():
+    """Sorted whole, the rows compared a price with a missing one."""
+    reply = {"chart": {"result": [{"timestamp": [1761778800, 1761775200, 1761775200],
+                                   "indicators": {"quote": [{"high": [12, None, 10],
+                                                             "low": [9, 8, None],
+                                                             "close": [11, 9, None]}]}}]}}
+    bars = levels.read_bars(reply)
+    assert [b[0].timestamp() for b in bars] == [1761775200, 1761775200, 1761778800]
+
+
+def test_a_stock_said_while_its_market_is_shut_is_priced_at_the_last_close():
+    """Said on a Saturday, a share's price is Friday's. A coin with a
+    hole that long has no price."""
+    friday = hourly(datetime(2026, 11, 13, 19, tzinfo=UTC), [(70, 68, 69), (70, 69, 69.5)])
+    saturday = datetime(2026, 11, 14, 16, tzinfo=UTC)
+    monday = datetime(2026, 11, 16, 13, tzinfo=UTC)
+    assert levels.price_at(friday, saturday) is None
+    assert levels.price_at(friday, saturday, stale=levels.STALE_CLOSED) == 69.5
+    assert levels.price_at(friday, monday, stale=levels.STALE_CLOSED) == 69.5
+    assert levels.price_at(friday, datetime(2026, 11, 19, 13, tzinfo=UTC),
+                           stale=levels.STALE_CLOSED) is None
+
+
 def test_a_chart_reply_is_read_with_its_highs_and_lows():
     reply = {"chart": {"result": [{"timestamp": [1761775200, 1761778800],
                                    "indicators": {"quote": [{"high": [10, None],
@@ -230,7 +253,7 @@ def test_an_alert_is_given_once():
     hit = row("a", state="hit", hit_at="2026-11-18T09:00+00:00")
     near = row("b", away_pct=3.0)
     seen = levels.remember([hit, near], {})
-    assert seen == {"hit": ["a"], "near": ["b"]}
+    assert seen == {"hit": ["a"], "near": ["b"], "known": ["a", "b"]}
     assert levels.alerts([hit, near], seen, LAST_LOOK) == []
 
 
@@ -242,12 +265,86 @@ def test_near_is_an_alert_and_then_reached_is_another():
     assert [f["alert"] for f in later] == ["hit"]
 
 
+def test_a_level_reached_minutes_after_a_look_is_said_at_the_next_one():
+    """Looked at 04:36 with the level open, reached at 04:50. The bar it
+    is in started at 04:00, before the look, and by the clock alone it
+    was reached "before the last look" and was never said."""
+    look = datetime(2026, 11, 18, 4, 36, tzinfo=UTC)
+    seen = {"hit": [], "near": [], "known": ["a"], "checked_at": look.isoformat()}
+    reached = row("a", state="hit", hit_at="2026-11-18T04:00+00:00")
+    assert [f["alert"] for f in levels.alerts([reached], seen, look)] == ["hit"]
+    # On daily bars it is stamped with midnight, and is still said.
+    daily = row("a", state="hit", hit_at="2026-11-18T00:00+00:00")
+    assert [f["alert"] for f in levels.alerts([daily], seen, look)] == ["hit"]
+    # And once it has been, not again.
+    after = levels.remember([reached], seen)
+    assert levels.alerts([reached], after, look) == []
+
+
+def test_a_level_nobody_has_looked_at_is_judged_by_when_it_was_reached():
+    """One a new build added, or any level on the first run."""
+    look = datetime(2026, 11, 18, 4, 36, tzinfo=UTC)
+    seen = {"hit": [], "near": [], "known": ["other"], "checked_at": look.isoformat()}
+    long_ago = row("new", state="hit", hit_at="2026-09-21T08:00+00:00")
+    this_morning = row("new", state="hit", hit_at="2026-11-18T00:00+00:00")
+    assert levels.alerts([long_ago], seen, look) == []
+    assert [f["id"] for f in levels.alerts([this_morning], seen, look)] == ["new"]
+
+
+def test_a_state_file_from_before_known_was_kept_counts_every_level_as_looked_at():
+    look = datetime(2026, 11, 18, 4, 36, tzinfo=UTC)
+    old = {"hit": [], "near": [], "checked_at": look.isoformat()}
+    reached = row("a", state="hit", hit_at="2026-11-18T04:00+00:00")
+    assert [f["alert"] for f in levels.alerts([reached], old, look)] == ["hit"]
+
+
+def test_a_buy_and_a_target_at_one_price_are_two_statements():
+    """Bitcoin 60,000 is on file as a buy from July and a target from
+    November. Each is its own post. The same statement on a later show
+    is still one."""
+    buy = dict(row("july", away_pct=4.9), symbol="BTC", level=60000.0, kind="buy",
+               said_at="2026-07-30T23:01:28+00:00")
+    target = dict(row("nov", away_pct=4.9), symbol="BTC", level=60000.0, kind="target",
+                  said_at="2026-11-05T22:10:22+00:00")
+    again = dict(target, id="later", said_at="2026-11-12T22:00:00+00:00")
+    found = levels.alerts([target, again, buy], {}, LAST_LOOK)
+    assert [(f["id"], f["kind"]) for f in found] == [("july", "buy"), ("nov", "target")]
+
+
+def test_a_look_is_kept_beside_the_state_until_it_is_marked():
+    now = datetime(2026, 11, 20, 4, 36, tzinfo=UTC)
+    state = {"hit": ["old"], "near": [], "known": ["old", "a"], "checked_at": "2026-11-19T04:36:00+00:00"}
+    reached = row("a", state="hit", hit_at="2026-11-20T03:00+00:00")
+    after = levels.looked([reached], state, now)
+    # The state is as it was, so looking twice shows the same thing twice.
+    assert {k: v for k, v in after.items() if k != "pending"} == state
+    assert [f["id"] for f in levels.alerts([reached], after, now)] == ["a"]
+    kept = levels.marked(after)
+    assert kept == {"hit": ["a", "old"], "near": [], "known": ["a"],
+                    "checked_at": "2026-11-20T04:36:00+00:00"}
+    assert levels.alerts([reached], kept, now) == []
+    # A second look replaces the first that was never marked.
+    again = levels.looked([reached], after, datetime(2026, 11, 20, 9, tzinfo=UTC))
+    assert again["pending"]["checked_at"] == "2026-11-20T09:00:00+00:00"
+    assert levels.marked({"hit": []}) is None and levels.marked({"pending": "no"}) is None
+
+
+def test_what_is_reached_after_a_look_is_not_marked_with_it():
+    """Marking records the look, not the market at the moment of marking."""
+    now = datetime(2026, 11, 20, 4, 36, tzinfo=UTC)
+    open_then = row("a")
+    state = levels.marked(levels.looked([open_then], {}, now))
+    assert state["hit"] == [] and state["known"] == ["a"]
+    reached = row("a", state="hit", hit_at="2026-11-20T04:00+00:00")
+    assert [f["alert"] for f in levels.alerts([reached], state, now)] == ["hit"]
+
+
 def test_a_quiet_level_never_alerts():
     """A support he expected to hold: losing it only says he was wrong."""
     quiet = dict(row("a", state="hit", hit_at="2026-11-18T09:00+00:00"), quiet=True)
     near = dict(row("b", away_pct=2.0), quiet=True)
     assert levels.alerts([quiet, near], {}, LAST_LOOK) == []
-    assert levels.remember([quiet, near], {}) == {"hit": ["a"], "near": ["b"]}
+    assert levels.remember([quiet, near], {}) == {"hit": ["a"], "near": ["b"], "known": ["a", "b"]}
 
 
 def test_a_dated_target_counts_only_until_its_date():
@@ -320,6 +417,7 @@ def test_every_kind_and_side_has_a_headline(kind, side, first):
 
 @pytest.mark.parametrize("value, shown", [
     (62778.03, "$62,778"), (907.58, "$908"), (23.456, "$23.46"), (0.012345, "$0.01235"), (None, "?"),
+    (0.00001234, "$0.00001234"), (0.5, "$0.5"), (0.00165, "$0.00165"), (0, "?"),
 ])
 def test_prices_are_written_the_way_people_say_them(value, shown):
     assert levels.money(value) == shown

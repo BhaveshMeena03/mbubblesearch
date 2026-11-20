@@ -22,10 +22,18 @@ def test_it_runs_on_the_settings_production_runs_on():
 
 
 def test_no_secret_is_read_from_the_blueprint():
-    """Secrets are "sync: false" in render.yaml, with no value to read."""
+    """Secrets are "sync: false" in render.yaml, with no value to read.
+    Checked against the file itself: every variable it marks that way,
+    whatever it is called, is left out."""
+    import yaml
+    spec = yaml.safe_load((ROOT / "render.yaml").read_text())
+    secret = {v["key"] for service in spec["services"] for v in service.get("envVars") or []
+              if v.get("sync") is False}
+    assert "X_BOT_ENABLED" in secret and len(secret) >= 5
     found = ask_bot.production_settings()
-    assert "X_BOT_ENABLED" not in found
-    assert all(k.startswith("X_BOT_") for k in found)
+    assert found and not set(found) & secret
+    assert all("value" in v for service in spec["services"]
+               for v in service.get("envVars") or [] if v["key"] in found)
 
 
 def test_the_stand_in_client_refuses_x():

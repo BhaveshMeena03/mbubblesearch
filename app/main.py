@@ -1212,10 +1212,17 @@ def _episode_catalog() -> list[dict]:
                         if c.get("source") == "show"),
                        key=lambda c: float(c.get("start_seconds") or 0))
         for row in _listed(list(load_shipped(SUMMARIES_FILE).values())):
-            player = players.get(row.get("episode_id"))
-            made = episode_pages.from_summary(
-                row, player=player if isinstance(player, str) else "", calls=calls,
-                youtube=youtube_moment)
+            try:
+                player = players.get(row.get("episode_id"))
+                made = episode_pages.from_summary(
+                    row, player=player if isinstance(player, str) else "", calls=calls,
+                    youtube=youtube_moment)
+            except Exception as exc:                            # noqa: BLE001
+                # One row that cannot be read is one page. The catalog is
+                # built once and kept, so letting it end the loop took
+                # every page after it down until the next deploy.
+                logger.warning("no page for %s: %s", row.get("episode_id"), exc)
+                continue
             if made:
                 found.setdefault(made["id"], made)
     except Exception as exc:                                    # noqa: BLE001
@@ -1227,8 +1234,12 @@ def _episode_catalog() -> list[dict]:
         try:
             written, paired = notes(), _json_object(pairs)
             for row in rows():
-                made = episode_pages.from_note(archive, row, written.get(row.get("id")),
-                                               paired.get(row.get("id")))
+                try:
+                    made = episode_pages.from_note(
+                        archive, row, written.get(row.get("id")), paired.get(row.get("id")))
+                except Exception as exc:                        # noqa: BLE001
+                    logger.warning("no page for %s: %s", row.get("id"), exc)
+                    continue
                 if made:
                     found.setdefault(made["id"], made)
         except Exception as exc:                                # noqa: BLE001
@@ -1238,7 +1249,9 @@ def _episode_catalog() -> list[dict]:
     return _EPISODE_PAGES
 
 
-@app.get("/episodes", include_in_schema=False)
+# HEAD as well as GET, on both: something checking the sitemap's six
+# hundred addresses with HEAD was told 405 for every one.
+@app.api_route("/episodes", methods=["GET", "HEAD"], include_in_schema=False)
 async def episodes_page() -> HTMLResponse:
     template = (_ROOT / "demo" / "episodes.html").read_text(encoding="utf-8")
     return HTMLResponse(episode_pages.render_index(template, _episode_catalog()),
@@ -1253,7 +1266,7 @@ async def episode_templates() -> RedirectResponse:
     return RedirectResponse(url="/episodes", status_code=301)
 
 
-@app.get("/episodes/{episode_id}", include_in_schema=False)
+@app.api_route("/episodes/{episode_id}", methods=["GET", "HEAD"], include_in_schema=False)
 async def episode_page(episode_id: str) -> HTMLResponse:
     catalog = _episode_catalog()
     found = (next((e for e in catalog if e["id"] == episode_id), None)

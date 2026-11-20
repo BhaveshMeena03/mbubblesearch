@@ -299,6 +299,20 @@ def test_a_recording_with_no_note_is_not_a_page(row, note):
     assert ep.from_note("somewhere", MCG_ROW, NOTE) is None
 
 
+@pytest.mark.parametrize("topics", [5, "one", None, {"t": 1}, [5, None, "x", {"t": 3}]])
+def test_a_note_whose_topics_are_not_a_list_of_topics_is_a_page_without_them(topics):
+    made = ep.from_note("mcg", MCG_ROW, dict(NOTE, topics=topics, pinned=True), PAIR)
+    assert made["tldr"] == NOTE["tldr"] and made["blocks"] == []
+
+
+@pytest.mark.parametrize("pair", [{"broadcast": PAIR["broadcast"], "offset": None},
+                                  {"broadcast": PAIR["broadcast"], "offset": "two"},
+                                  {"broadcast": PAIR["broadcast"], "sections": [{"from": 0}]},
+                                  "a pair", 7])
+def test_a_pair_with_no_number_for_its_clock_falls_back_to_youtube(pair):
+    assert ep.moment("dQw4w9WgXcQ", 112, pair=pair) == "https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=112s"
+
+
 def test_the_shelf_runs_newest_first_and_each_page_knows_its_neighbours():
     a = ep.from_note("mcg", dict(MCG_ROW, id="aaaaaaaaaaa", published_at="2026-11-01"), NOTE)
     b = ep.from_note("mcg", dict(MCG_ROW, id="bbbbbbbbbbb", published_at="2026-11-10"), NOTE)
@@ -534,6 +548,48 @@ def test_an_episode_with_no_page_is_a_small_404_that_points_at_the_list(client, 
     assert '<a href="/episodes">See every episode</a>' in r.text
     assert len(r.text) < 6000 and 'class="row"' not in r.text
     assert "<script" not in r.text.lower() and "zzzz" not in r.text
+
+
+def test_a_checker_asking_with_head_is_told_the_pages_are_there(client):
+    assert client.head("/episodes").status_code == 200
+    assert client.head(f"/episodes/{EP24}").status_code == 200
+    assert client.head("/episodes/zzzzzzzzzzz").status_code == 404
+
+
+def test_one_recording_that_cannot_be_made_into_a_page_costs_only_its_own(monkeypatch):
+    """The catalog is built once and kept. One bad note used to end the
+    loop, and every page after it was a 404 until the next deploy."""
+    whole = len(main._episode_catalog())
+    real_note, real_summary = ep.from_note, ep.from_summary
+    victims = {"mcg": next(e["id"] for e in main._episode_catalog() if e["archive"] == "mcg"),
+               "podcast": EP24}
+
+    def note(archive, row, *rest):
+        if row.get("id") == victims["mcg"]:
+            raise TypeError("'int' object is not iterable")
+        return real_note(archive, row, *rest)
+
+    def summary(row, **more):
+        if row.get("episode_id") == victims["podcast"]:
+            raise KeyError("summary")
+        return real_summary(row, **more)
+
+    monkeypatch.setattr(main, "_EPISODE_PAGES", None)
+    monkeypatch.setattr(main.episode_pages, "from_note", note)
+    monkeypatch.setattr(main.episode_pages, "from_summary", summary)
+    built = main._episode_catalog()
+    assert len(built) == whole - 2
+    assert not {e["id"] for e in built} & set(victims.values())
+    monkeypatch.setattr(main, "_EPISODE_PAGES", None)      # and leave nothing broken behind
+
+
+def test_the_list_promises_only_what_every_page_has():
+    """It said each recording came with "the times it was said". Four
+    hundred and sixty-seven of them have a summary and no checked times."""
+    said = " ".join(re.sub(r"<[^>]+>", " ", LIST).split())
+    assert "times it was said" not in LIST
+    assert "each with a summary of what it covered" in said
+    assert "Where a time has been checked against the recording" in said
 
 
 def test_the_templates_are_not_served_as_pages_of_braces(client):

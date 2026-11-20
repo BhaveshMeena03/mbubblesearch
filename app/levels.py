@@ -21,6 +21,7 @@ low, over it on a high.
 
 from __future__ import annotations
 
+import math
 import re
 from dataclasses import asdict, dataclass
 from datetime import UTC, datetime, timedelta
@@ -36,6 +37,10 @@ KINDS = ("buy", "sell", "target", "line")
 
 # How close counts as near, in percent of today's price.
 NEAR_PCT = 5.0
+# How far before the last look a level nobody has looked at before may
+# have been reached and still be news. A day, because that is the longest
+# a bar runs and a bar is stamped with when it starts.
+FRESH = timedelta(days=1)
 # A level further than this from the price when he said it is a misread
 # ("30" heard as a price when he meant 30 percent), not a level. The top
 # is wide on purpose: "Solana from $66 to $600 this cycle" is 9x and real.
@@ -207,25 +212,34 @@ def read_bars(payload: object) -> list[Bar]:
         except (TypeError, ValueError, OverflowError, OSError):
             continue
         bars.append((start, _nth(highs, index), _nth(lows, index), _nth(closes, index)))
-    return sorted(bars)
+    # By the start alone. Sorting whole rows compares a price with a
+    # missing one the moment two bars share a start, and that is a crash.
+    return sorted(bars, key=lambda bar: bar[0])
 
 
 def _nth(values: list, index: int) -> float | None:
     return _number(values[index]) if index < len(values) else None
 
 
-def price_at(bars: list[Bar], when: datetime, width: timedelta = timedelta(hours=1)) -> float | None:
-    """The close of the last bar that had finished when he spoke.
+# How old the last finished bar may be. A coin trades every hour, so a
+# gap this long means the source has no price for that evening, and a
+# guess is not printed.
+STALE = timedelta(hours=6)
+# A stock or a future has a close instead: said on a Saturday, its price
+# is Friday's. Four days carries that across a long weekend and no further.
+STALE_CLOSED = timedelta(days=4)
 
-    Not older than six hours: a gap that long means the source has no
-    price for that evening, and a guess is not printed.
-    """
+
+def price_at(bars: list[Bar], when: datetime, width: timedelta = timedelta(hours=1),
+             stale: timedelta = STALE) -> float | None:
+    """The close of the last bar that had finished when he spoke, or None
+    when that bar is older than `stale`."""
     done = [(start, close) for start, _, _, close in bars
             if start + width <= when and close is not None]
     if not done:
         return None
-    start, close = max(done)
-    return close if when - (start + width) <= timedelta(hours=6) else None
+    start, close = max(done, key=lambda bar: bar[0])
+    return close if when - (start + width) <= stale else None
 
 
 def side(level: float, then: float) -> str:
@@ -296,20 +310,34 @@ def alerts(rows: list[dict], seen: dict, since: datetime,
     """What is new since the last look: a level reached, or a level now
     within NEAR_PCT. Each one once.
 
-    `seen` is {"hit": [ids], "near": [ids]}. A level reached before
-    `since` was reached while nobody was looking for it, and is recorded
-    without an alert: the first run would otherwise post six months of
-    history in one morning.
+    `seen` is what the last look left behind: {"hit": [ids], "near":
+    [ids], "known": [ids]}. A level that was on file and open at the last
+    look and is reached now is news, whatever time its bar carries. The
+    time cannot decide it: a bar is stamped with when it starts, so a
+    level reached at 04:50, a quarter of an hour after a look at 04:36,
+    is on file as reached at 04:00, and by the clock alone it happened
+    "before the last look" and would never be said.
+
+    The clock is only for a level nobody has looked at before: the first
+    run, or one a new build added. Reached longer ago than `since` (less
+    a bar), it was reached while nobody was looking for it and is
+    recorded without an alert. The first run would otherwise post six
+    months of history in one morning.
 
     Left out: a quiet level (a support he expected to hold, where the
     only news is that he was wrong), a dated target past its date, and
-    the same number from the same host said again in a later show: he
-    named Solana 600 on three shows, and that is one post, from the
-    first time.
+    the same statement from the same host said again in a later show: he
+    named Solana 600 as a target on three shows, and that is one post,
+    from the first time. A buy at a price and a target at that price are
+    two statements, and each gets its own.
     """
     now = now or datetime.now(UTC)
     found: dict[tuple, dict] = {}
     hit, near = set(seen.get("hit") or []), set(seen.get("near") or [])
+    known = seen.get("known")
+    on_file = set(known or [])
+    # A file from before "known" was kept recorded every level there was.
+    all_on_file = known is None and bool(seen.get("checked_at"))
     for row in rows:
         if row.get("quiet"):
             continue
@@ -318,13 +346,15 @@ def alerts(rows: list[dict], seen: dict, since: datetime,
         alert = None
         if check.get("state") == "hit" and ident not in hit:
             when = _moment(check["hit_at"])
-            if when >= since and in_time(row, when):
+            looked_at = all_on_file or ident in on_file
+            if (looked_at or when >= since - FRESH) and in_time(row, when):
                 alert = "hit"
         elif is_near(check) and ident not in near and ident not in hit and in_time(row, now):
             alert = "near"
         if alert is None:
             continue
-        key = (alert, row.get("speaker"), row.get("symbol"), float(row.get("level") or 0))
+        key = (alert, row.get("speaker"), row.get("symbol"), row.get("kind"),
+               float(row.get("level") or 0))
         held = found.get(key)
         if held is None or str(row.get("said_at", "")) < str(held.get("said_at", "")):
             found[key] = {"alert": alert, **row}
@@ -332,7 +362,8 @@ def alerts(rows: list[dict], seen: dict, since: datetime,
 
 
 def remember(rows: list[dict], seen: dict) -> dict:
-    """`seen` with everything reached or near today written in."""
+    """What a look leaves behind: everything reached or near by now, and
+    every level that was on file to be looked at."""
     hit = set(seen.get("hit") or [])
     near = set(seen.get("near") or [])
     for row in rows:
@@ -341,7 +372,29 @@ def remember(rows: list[dict], seen: dict) -> dict:
             hit.add(row["id"])
         elif is_near(check):
             near.add(row["id"])
-    return {"hit": sorted(hit), "near": sorted(near)}
+    return {"hit": sorted(hit), "near": sorted(near),
+            "known": sorted(row["id"] for row in rows)}
+
+
+def looked(rows: list[dict], seen: dict, now: datetime) -> dict:
+    """The state file after a look that has not been marked yet.
+
+    What the look saw is kept beside the state, as "pending", and the
+    state itself is left alone. Marking is a second step, taken after the
+    drafts have been handed over, and it has to record this look and not
+    a newer one: a level reached in the minutes between the two would be
+    recorded as seen without ever having been shown.
+    """
+    kept = {key: value for key, value in seen.items() if key != "pending"}
+    return {**kept, "pending": {**remember(rows, kept),
+                                "checked_at": now.isoformat(timespec="seconds")}}
+
+
+def marked(seen: dict) -> dict | None:
+    """The state file once the pending look is recorded, or None when
+    there is no look waiting."""
+    pending = seen.get("pending")
+    return dict(pending) if isinstance(pending, dict) else None
 
 
 # --- the post ----------------------------------------------------------------------
@@ -357,7 +410,12 @@ def money(value: float | None) -> str:
         return f"${value:,.0f}"
     if value >= 1:
         return f"${value:,.2f}"
-    return f"${value:.4g}"
+    if value <= 0:
+        return "?"
+    # Four figures that mean something, written out: a coin at a thousandth
+    # of a cent is $0.00001234, not $1.234e-05.
+    places = 3 - math.floor(math.log10(value))
+    return f"${value:.{places}f}".rstrip("0").rstrip(".")
 
 
 def spoken_date(day: str) -> str:

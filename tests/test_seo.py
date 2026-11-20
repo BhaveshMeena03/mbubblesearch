@@ -225,7 +225,8 @@ def test_what_may_be_indexed_is_sent_no_header(path):
 @pytest.mark.parametrize("path", ["/demo/stats-card.html", "/demo/x-banner.html", "/demo/index.html",
                                   "/demo", "/demo/", "/demo/a-page-made-tomorrow.html",
                                   "/demo/polymarket.html", "/demo/Podcast.html",
-                                  "/v1/calls", "/v1/archives", "/x-bot/status", "/healthz"])
+                                  "/v1/calls", "/v1/archives", "/x-bot/status", "/healthz",
+                                  "/docs", "/redoc", "/openapi.json", "/docs/oauth2-redirect"])
 def test_everything_else_under_demo_and_the_api_is_noindex(path):
     assert seo.robots_header(path) == "noindex"
 

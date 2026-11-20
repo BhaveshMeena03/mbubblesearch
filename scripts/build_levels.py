@@ -204,7 +204,9 @@ async def main() -> int:
                 # said in the middle of a crash ("wait for it to get back
                 # above 2300") is on the wrong side of the hourly close.
                 fine = (datetime.now(UTC) - said_at).days <= FINE_DAYS
-                reply = await fetch(listing, said_at.date() - timedelta(days=1 if fine else 3),
+                # Far enough back to hold Friday's close for something said
+                # on a Monday morning.
+                reply = await fetch(listing, said_at.date() - timedelta(days=4),
                                     said_at.date(), client, interval="5m" if fine else "1h",
                                     raw=True)
                 meta = call_prices.read_chart(reply)[0]
@@ -212,8 +214,10 @@ async def main() -> int:
                     problems.append(f"{ident}: {listing} answered as "
                                     f"{meta.get('longName') or meta.get('shortName')!r}")
                     continue
+                closes = asset.get("class") in ("stock", "index", "commodity")
                 then = levels.price_at(levels.read_bars(reply), said_at,
-                                       timedelta(minutes=5) if fine else timedelta(hours=1))
+                                       timedelta(minutes=5) if fine else timedelta(hours=1),
+                                       levels.STALE_CLOSED if closes else levels.STALE)
             if not then:
                 problems.append(f"{ident}: {listing} has no price for {said_at:%Y-%m-%d %H:%M}")
                 continue

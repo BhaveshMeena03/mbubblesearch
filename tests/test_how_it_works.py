@@ -37,12 +37,14 @@ def test_the_figures_it_opens_with_are_under_what_the_archives_hold():
 
 
 def test_the_exact_words_it_claims_are_in_the_term_indexes():
-    held = 0
+    """Each word once. Added up archive by archive the five lists come to
+    210,000, and 70,000 of those are a word counted again."""
+    held: set[str] = set()
     for path in sorted((ROOT / "data").glob("term*.json*")):
         raw = path.read_bytes()
         found = json.loads(gzip.decompress(raw) if path.suffix == ".gz" else raw)
-        held += len(found["terms"])
-    assert number(r"more than ([\d,]+) names and numbers") <= held
+        held |= set(found["terms"])
+    assert number(r"more than ([\d,]+) rare words, names and numbers") <= len(held)
 
 
 def test_every_setting_it_names_is_the_setting():
@@ -58,7 +60,7 @@ def test_no_figure_is_typed_in_as_an_exact_count():
     for stale in ("18 shows", "38 files", "66 hours", "68,525", "3,107", "19,449",
                   "12 candidates"):
         assert stale not in TEXT, stale
-    counts = re.findall(r"(more than )?([\d,]+) (hours|recordings|names and numbers)", TEXT, re.I)
+    counts = re.findall(r"(more than )?([\d,]+) (hours|recordings|rare words)", TEXT, re.I)
     assert len(counts) == 3 and all(lead for lead, _, _ in counts)
 
 

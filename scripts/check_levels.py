@@ -13,8 +13,14 @@ New since the last look is either:
     near   the price is within 5% of a level it has not reached
 
 Each level alerts once per kind. What has been alerted is kept in
-data/.levels_seen.json, on this Mac only; --mark writes it. The daily
-drafts task runs this with --mark after it has drafted the posts.
+data/.levels_seen.json, on this Mac only.
+
+A look is not remembered until it is marked. The drafts task looks
+(--json), hands over the drafts, and then runs --mark, which records
+that same look without fetching anything: looking again at that point
+would record a level reached in the minutes between as seen, and it
+would never be shown. With no look waiting, --mark looks and records
+at once.
 
 Nothing is posted. A draft is a starting point for a person to check:
 a level can be reached and the moment still not be worth a post.
@@ -44,6 +50,14 @@ SEEN = ROOT / "data" / ".levels_seen.json"
 FIRST_LOOK = timedelta(hours=36)
 
 
+def save(state: dict) -> None:
+    """Whole or not at all: a state file cut off half way would read as
+    no state, and every level reached this year would alert again."""
+    fresh = SEEN.with_suffix(".json.tmp")
+    fresh.write_text(json.dumps(state, indent=1) + "\n")
+    fresh.replace(SEEN)
+
+
 async def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", action="store_true", help="print the alerts as JSON")
@@ -52,6 +66,11 @@ async def main() -> int:
 
     rows = json.loads(LEVELS.read_text()).get("levels", [])
     seen = json.loads(SEEN.read_text()) if SEEN.exists() else {}
+    waiting = levels.marked(seen)
+    if args.mark and waiting is not None:
+        save(waiting)
+        print(f"marked the look of {waiting.get('checked_at')}")
+        return 0
     now = datetime.now(UTC)
     since = (datetime.fromisoformat(seen["checked_at"]) if seen.get("checked_at")
              else now - FIRST_LOOK)
@@ -70,10 +89,8 @@ async def main() -> int:
                   f"{alert['level']:g}  ({alert['speaker']}, {alert['date']})  "
                   f"now {check.get('price_now')}  {check.get('hit_at') or ''}")
             print(levels.draft(alert, alert["alert"]))
-    if args.mark:
-        SEEN.write_text(json.dumps({**levels.remember(rows, seen),
-                                    "checked_at": now.isoformat(timespec="seconds")},
-                                   indent=1) + "\n")
+    state = levels.looked(rows, seen, now)
+    save(levels.marked(state) if args.mark else state)
     return 0
 
 
