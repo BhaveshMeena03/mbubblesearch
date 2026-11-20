@@ -1891,6 +1891,15 @@ function airedLabel(iso){
   var box = document.getElementById("ticks");
   if(!box) return;
 
+  // Only a web address becomes a link. This script is on its own, so the
+  // page's safeUrl above is out of its reach: calling that one threw on
+  // every row and the strip stayed hidden from 30 October to 20 November.
+  function safeUrl(u){
+    try{ var p=new URL(String(u).trim(), location.href);
+         return (p.protocol==="http:"||p.protocol==="https:") ? p.href : "#";
+    }catch(e){ return "#"; }
+  }
+
   function money(n){
     n = Number(n);
     if(!isFinite(n) || n <= 0) return null;

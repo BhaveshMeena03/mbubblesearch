@@ -9,7 +9,10 @@ were. These hold both halves: the layout, and what was not to be lost.
 """
 
 import asyncio
+import json
 import re
+import shutil
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -226,3 +229,56 @@ def test_the_page_has_no_dashes_in_its_own_words():
         code = line.split("//", 1)[0]
         if "—" in code:
             assert code.lstrip().startswith(("*", "/*")) or "actually want to click" in line, line
+
+
+# --- the prices in the foot ------------------------------------------------------
+
+PRICES = PAGE.rsplit("<script>", 1)[1].split("</script>", 1)[0]
+NODE = shutil.which("node")
+
+
+def prices(pair_url: str) -> dict:
+    """Runs the price script as the browser does, on its own, with a
+    page that has the strip and an exchange that answers."""
+    harness = """
+      const box = {hidden: true, rows: [], innerHTML: "", appendChild(el){ this.rows.push(el); }};
+      globalThis.document = {getElementById: id => id === "ticks" ? box : null,
+                             createElement: () => ({})};
+      globalThis.location = {href: "https://search.lexthedev.com/demo/podcast.html"};
+      globalThis.setInterval = () => 0;
+      globalThis.fetch = async () => ({ok: true, json: async () => ({pairs: [
+        {priceUsd: "0.5", liquidity: {usd: 5}, url: "https://thin.example/x"},
+        {priceUsd: "1.25", liquidity: {usd: 900}, priceChange: {h24: -2.5}, url: process.argv[1]}]})});
+      eval(require("fs").readFileSync(0, "utf8"));
+      setTimeout(() => console.log(JSON.stringify({hidden: box.hidden,
+        rows: box.rows.map(r => ({href: r.href, text: r.innerHTML, cls: r.className}))})), 60);
+    """
+    out = subprocess.run([NODE, "-e", harness, pair_url], input=PRICES, capture_output=True,
+                         text=True, timeout=30, check=True)
+    return json.loads(out.stdout)
+
+
+@pytest.mark.skipif(NODE is None, reason="node is not installed")
+def test_the_prices_show_when_every_coin_has_one():
+    """From 30 October to 20 November 2026 they never did. A link check
+    added to this script called a function that lives in the page's other
+    script, every row threw, and a strip that hides itself when anything
+    fails hid itself every time."""
+    got = prices("https://dexscreener.com/solana/abc")
+    assert got["hidden"] is False and len(got["rows"]) == 3
+    assert [r["href"] for r in got["rows"]] == ["https://dexscreener.com/solana/abc"] * 3
+    assert "$ANSEM" in got["rows"][0]["text"] and "$1.25" in got["rows"][0]["text"]
+    assert "-2.5%" in got["rows"][0]["text"] and got["rows"][2]["cls"] == "tick own"
+
+
+@pytest.mark.skipif(NODE is None, reason="node is not installed")
+def test_a_price_never_links_to_anything_but_a_web_address():
+    got = prices("javascript:alert(1)")
+    assert got["hidden"] is False
+    assert [r["href"] for r in got["rows"]] == ["#"] * 3
+
+
+def test_the_price_script_calls_nothing_it_does_not_define():
+    assert "function safeUrl(u){" in PRICES
+    for name in ("money", "best", "row", "load", "safeUrl"):
+        assert f"function {name}(" in PRICES, name
