@@ -29,120 +29,105 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
   :root{
-    /* MCG's palette, not Market Bubble's. This page was cloned from the
-       other archive's dashboard and kept its colours, so clicking "tokens"
-       from the MCG page landed somewhere that looked like a different
-       product. The token NAMES are unchanged on purpose -- every rule in
-       this file already reads them, so re-pointing the values re-skins the
-       page without touching a single component. */
+    /* MCG's palette, mint on near-black, as on the archive page this
+       belongs to. */
     --bg:#080b09;--panel:#0f1411;--line:#1c241f;--text:#e8f2ea;
     --muted:#8b9c91;--green:#6ecf9e;--amber:#e8c157;
     --rule-dark:#2c3a31;--faint:#5f6c63;
+    --deck:#0f1411;--deck-2:#131a16;--edge:#1c241f;--edge-2:#2c3a31;
+    --ink-2:#a9b8ae;--ink-3:#8b9c91;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --ease:cubic-bezier(.22,.78,.24,1);--quick:.22s;
+    --card:#131a16;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--bg);color:var(--text);min-height:100vh;
     font:15px/1.55 var(--sans);font-feature-settings:"tnum" 1;
-    /* Matches the archive page exactly. This carried 28px of top padding
-       inherited from the other archive's dashboard, which pushed the
-       wordmark to y=54 while the page you arrive from sits it at y=26 --
-       so moving between them nudged the whole header down. */
-    padding:0 20px 90px}
-  .wrap{max-width:940px;margin:0 auto}
-  /* One pool of the channel's green, lifted from the archive page so the
-     two share a background rather than two different blacks. */
+    -webkit-font-smoothing:antialiased;overflow-x:hidden}
+  /* One cold pool of the channel's green, as on the archive page. */
   body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
     background:
       radial-gradient(760px 420px at 50% -8%, rgba(110,207,158,.10), transparent 70%),
       radial-gradient(900px 600px at 85% 8%, rgba(110,207,158,.045), transparent 70%)}
-  .wrap{position:relative;z-index:1}
+  .wrap{position:relative;z-index:1;max-width:1120px;margin:0 auto;
+    padding:0 clamp(20px,3.4vw,52px) 80px}
 
-  /* Header, wordmark and nav copied from demo/mcg.html so the two pages
-     have one chrome. Same items in the same order: moving between them
-     should feel like a section change, not a different site. */
-  header{display:flex;align-items:baseline;justify-content:space-between;
-    gap:16px;padding:26px 0 12px;border-bottom:1px solid var(--rule-dark)}
-  .mark{display:flex;align-items:baseline;gap:11px;text-decoration:none}
+  /* The header the archive page has, so moving between the two is a
+     change of section and not of site. */
+  header{display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding:26px 0 18px;border-bottom:1px solid var(--edge);position:relative;z-index:80}
+  .mark{display:flex;align-items:baseline;gap:11px;text-decoration:none;color:inherit}
   .mark b{font-family:var(--display);font-weight:400;font-size:22px;
     letter-spacing:0;color:var(--text)}
-  .mark span{font-family:"IBM Plex Mono",monospace;font-size:10.5px;
-    letter-spacing:.18em;text-transform:uppercase;color:var(--green)}
-  /* A rule that draws itself under the word you are pointing at, and a
-     stated "you are here". Four flat labels that only changed colour read
-     as text rather than as somewhere to go. */
-  nav{display:flex;gap:20px;font-family:"IBM Plex Mono",monospace;
+  .mark span{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--green)}
+  header nav{display:flex;align-items:center;gap:20px;font-family:var(--mono);
     font-size:11px;letter-spacing:.1em;text-transform:uppercase}
-  nav a{position:relative;color:var(--muted);text-decoration:none;
-    padding-bottom:5px;transition:color .16s ease}
-  nav a::after{content:"";position:absolute;left:0;right:100%;bottom:0;
-    height:1px;background:var(--green);transition:right .2s ease}
-  nav a:hover{color:var(--text)}
-  nav a:hover::after{right:0}
-  nav a.here{color:var(--text);cursor:default}
-  nav a.here::after{right:0;background:var(--rule-dark)}
-  @media (max-width:640px){
-    header{flex-direction:column;align-items:flex-start;gap:10px}
-  }
+  header nav > a{color:var(--ink-2);text-decoration:none;
+    transition:color var(--quick) var(--ease)}
+  header nav > a:hover{color:var(--text)}
+  header nav > a:focus-visible,.archsw>summary:focus-visible{
+    outline:2px solid var(--green);outline-offset:3px;border-radius:2px}
 
-  h1{font-family:var(--display);font-weight:400;font-size:42px;
-    line-height:1.12;letter-spacing:-.01em;margin-bottom:10px}
-  h1 em{color:var(--green);font-style:normal}
-  .sub{color:var(--muted);margin-bottom:22px;max-width:640px}
+  h1{font-family:var(--display);font-weight:400;
+    font-size:clamp(38px,5vw,62px);line-height:1.02;letter-spacing:-1px;
+    margin:48px 0 0;padding-bottom:.06em}
+  h1 em{font-style:italic;color:var(--green);padding-right:.06em}
+  .sub{color:var(--ink-2);font-size:16.5px;max-width:62ch;margin:16px 0 0}
+  /* What this is not, said once and quietly, beside a rule. */
+  .note{margin:22px 0 0;max-width:78ch;color:var(--ink-3);font-size:13px;
+    border-left:2px solid var(--edge-2);padding:2px 0 2px 14px}
+  .note b{color:var(--text);font-weight:500}
 
-  /* The archive page's readout rather than a row of rounded cards: ruled
-     columns, mono labels above the figure. It is the best thing on that
-     page -- it answers "how much is in here" before anyone asks -- so the
-     dashboard states its own size the same way. */
-  /* Four cells, four columns. At three the last one dropped to a row of
-     its own and read as an afterthought rather than part of the readout. */
-  .tiles{display:grid;grid-template-columns:repeat(4,1fr);
-    border-bottom:1px solid var(--rule-dark);margin-bottom:26px;
-    font-family:"IBM Plex Mono",monospace}
-  .tile{padding:13px 0 15px;border-right:1px solid var(--line)}
-  .tile + .tile{padding-left:22px}
-  .tile:last-child{border-right:0}
-  .tile b{display:block;font-size:26px;line-height:1.1;order:2;
-    font-weight:700;letter-spacing:-.01em}
-  .tile span{display:block;color:var(--faint);font-size:10.5px;
-    text-transform:uppercase;letter-spacing:.18em;margin-bottom:6px}
-  @media (max-width:640px){
-    .tiles{grid-template-columns:1fr 1fr}
-    .tile:nth-child(2n){border-right:0}
-    .tile:nth-child(2n+1){padding-left:0}
-  }
+  /* The figures on a rule, as the archive page's strip has them: the
+     label in small capitals over the number. The markup puts the number
+     first, so each cell is turned over. */
+  .tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+    border-top:1px solid var(--edge);border-bottom:1px solid var(--edge);margin:32px 0 0}
+  .tiles .tile{display:flex;flex-direction:column-reverse;justify-content:flex-end;
+    padding:15px 0 17px 18px;border-left:1px solid var(--edge);min-width:0}
+  .tiles .tile:first-child{border-left:0;padding-left:0}
+  .tiles b{display:block;margin-top:8px;font:400 30px/1 var(--display);
+    font-variant-numeric:tabular-nums}
+  .tiles span{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--ink-3)}
 
-  footer{margin-top:52px;padding-top:18px;
-    border-top:1px solid var(--rule-dark);display:flex;gap:18px;
+  footer{margin-top:52px;padding-top:20px;
+    border-top:1px solid var(--edge);display:flex;gap:18px;
     justify-content:space-between;flex-wrap:wrap;
-    font-family:"IBM Plex Mono",monospace;font-size:11.5px;
-    color:var(--faint);line-height:1.6}
+    font-family:var(--mono);font-size:11px;
+    color:var(--ink-3);line-height:1.7}
   footer a{color:var(--muted)}
   footer span{max-width:620px}
 
-  .chartbox{background:var(--panel);border:1px solid var(--line);
-    border-radius:14px;padding:18px 20px;margin-bottom:26px;overflow-x:auto}
-  .chartbox h2{font-size:13px;text-transform:uppercase;letter-spacing:1px;
-    color:var(--muted);font-weight:600;margin-bottom:14px}
+  .chartbox{background:var(--deck);border:1px solid var(--edge);
+    border-radius:3px;padding:16px 18px 12px;margin:28px 0 0;overflow-x:auto}
+  .chartbox h2{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--ink-3);font-weight:500;margin-bottom:14px}
 
-  .controls{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
-  #q{flex:1;min-width:200px;background:var(--panel);border:1px solid var(--line);
-    border-radius:12px;color:var(--text);padding:11px 14px;font-size:15px;outline:none}
-  #q:focus{border-color:var(--green)}
-  .chip{font-size:13px;background:transparent;color:var(--muted);
-    border:1px solid var(--line);border-radius:16px;padding:7px 14px;cursor:pointer}
-  .chip:hover{border-color:var(--green);color:var(--green)}
-  .chip.on{background:#16c78418;border-color:#16c78455;color:var(--green)}
+  .controls{display:flex;gap:10px;margin:34px 0 14px;flex-wrap:wrap;align-items:center}
+  #q{flex:1;min-width:200px;background:var(--deck);border:1px solid var(--edge-2);
+    border-radius:3px;color:var(--text);padding:12px 14px;font:inherit;font-size:15px;outline:none}
+  #q:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(110,207,158,.12)}
+  #q::placeholder{color:var(--ink-3)}
+  .chip{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    background:transparent;color:var(--ink-2);border:1px solid var(--edge-2);
+    border-radius:99px;padding:8px 14px;cursor:pointer;
+    transition:border-color var(--quick) var(--ease),color var(--quick) var(--ease)}
+  .chip:hover{border-color:var(--green);color:var(--text)}
+  .chip.on{background:rgba(110,207,158,.12);border-color:var(--green);color:var(--green)}
 
-  .row{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  .row{background:var(--deck);border:1px solid var(--edge);border-radius:3px;
     margin-bottom:8px;overflow:hidden}
   .head{display:flex;align-items:center;gap:12px;padding:13px 16px;cursor:pointer;
     transition:border-color .15s}
-  .head:hover{background:#161b22}
+  .head:hover{background:var(--deck-2)}
   .sym{font-weight:700;font-size:15px;min-width:74px}
   .nm{color:var(--muted);font-size:14px;overflow:hidden;text-overflow:ellipsis;
     white-space:nowrap;flex:1}
-  .cls{font-size:11px;color:var(--muted);border:1px solid var(--line);
-    border-radius:10px;padding:2px 8px;text-transform:uppercase;letter-spacing:.5px}
-  .num{font-size:13px;color:var(--muted);white-space:nowrap}
+  .cls{font-family:var(--mono);font-size:10px;color:var(--ink-3);border:1px solid var(--edge-2);
+    border-radius:99px;padding:2px 8px;text-transform:uppercase;letter-spacing:.14em}
+  .num{font-family:var(--mono);font-size:12px;color:var(--ink-3);white-space:nowrap}
   .num b{color:var(--green);font-size:15px}
   .caret{color:var(--muted);font-size:12px;width:12px}
 
@@ -185,10 +170,10 @@
     padding:2px 6px}
   .mkoff{font-size:12px;color:var(--muted);border:1px dashed var(--line);
     border-radius:8px;padding:4px 10px}
-  .mkgo{display:inline-flex;align-items:center;gap:6px;background:#16c78418;
-    border:1px solid #16c78466;color:var(--green);border-radius:8px;
+  .mkgo{display:inline-flex;align-items:center;gap:6px;background:rgba(110,207,158,.10);
+    border:1px solid rgba(110,207,158,.4);color:var(--green);border-radius:8px;
     padding:5px 11px;font-size:12px;font-weight:600;text-decoration:none}
-  .mkgo:hover{background:#16c78428}
+  .mkgo:hover{background:rgba(110,207,158,.17)}
   .mknfa{font-size:11px;color:var(--muted);margin-left:auto}
   @media(max-width:560px){ .mknfa{margin-left:0;width:100%} }
   .mo{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #1b212a;
@@ -202,17 +187,16 @@
     overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .tag{font-size:10px;letter-spacing:.5px;text-transform:uppercase;
     border-radius:8px;padding:1px 6px;margin-left:6px;vertical-align:1px}
-  .tag.analysis{background:#16c78420;color:var(--green)}
-  .tag.mention{background:#232a33;color:var(--muted)}
+  .tag.analysis{background:rgba(110,207,158,.13);color:var(--green)}
+  .tag.mention{background:var(--edge);color:var(--muted)}
 
-  .note{background:transparent;border:1px solid var(--line);
-    color:var(--muted);border-radius:12px;padding:13px 16px;
-    font-size:12.5px;margin-bottom:22px}
-  .foot{color:var(--muted);font-size:12.5px;margin-top:28px;line-height:1.7}
   .empty{color:var(--muted);padding:20px 0}
   @media(max-width:620px){
-    /* Room under the header: the headline sat against its rule. */
-    h1{font-size:32px;margin-top:26px}
+    /* Two figures over two, the rule between them edge to edge. */
+    .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .tiles .tile:nth-child(3){border-left:0;padding-left:0}
+    .tiles .tile:nth-child(n+3){border-top:1px solid var(--edge)}
+    .tiles b{font-size:24px}
     .nm{display:none}
     .sym{min-width:62px}
   }
@@ -240,9 +224,9 @@
   </header>
 
   <h1>Every token they've <em>actually covered</em>.</h1>
-  <p class="sub">Pulled from every MCG Live episode, one project per show,
-    649 of them. Ranked by how much the show genuinely dug in, not just how
-    often a name got dropped. Every row links to the exact moment.</p>
+  <p class="sub">Pulled from every MCG Live episode, one project per show.
+    Ranked by how much the show genuinely dug in, not just how often a name
+    got dropped. Every row links to the exact moment.</p>
 
   <div class="note" id="note">
     Built from YouTube's auto-generated captions, which mis-hear ticker names.
@@ -320,7 +304,7 @@ function chart(assets){
     svg += '<text x="0" y="' + (y + 15) + '" fill="#e6e8ea" font-size="12.5" ' +
            'font-weight="700">' + esc(a.symbol) + '</text>';
     svg += '<rect x="' + labelW + '" y="' + (y + 4) + '" width="' + bw +
-           '" height="14" rx="3" fill="#16c784" opacity="' +
+           '" height="14" rx="3" fill="#6ecf9e" opacity="' +
            (0.45 + 0.55 * (a.analysis / max)).toFixed(2) + '"/>';
     svg += '<text x="' + (labelW + bw + 8) + '" y="' + (y + 15) +
            '" fill="#8a939e" font-size="12">' + esc(a.analysis) + '</text>';
@@ -380,7 +364,7 @@ function moments(ms){
     ? '<p class="empty" style="padding:10px 0 2px;font-size:12.5px">+ ' +
       hidden + ' more reference' + (hidden === 1 ? '' : 's') +
       '. Search the full transcript on the <a href="/demo/mcg.html" ' +
-      'style="color:#16c784">search page</a>.</p>'
+      'style="color:#6ecf9e">search page</a>.</p>'
     : '';
   return shown.map(function(m){
     var url = safeUrl(m.deep_link || "");

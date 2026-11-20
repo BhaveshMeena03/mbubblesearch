@@ -116,9 +116,26 @@ def test_the_calls_board_and_the_token_page_have_the_header_the_rooms_have(name,
     assert f'<a href="{other}">' in corner and "<span data-archives></span>" in corner
     assert '<script src="/demo/nav.js" defer></script>' in html
     assert 'class="topbar"' not in html and "MARKET <span>BUBBLE</span>" not in html
-    # The same strip of figures, the label over the number.
-    strip = "tally" if name == "calls" else "tiles"
-    assert f".{strip}{{display:grid;grid-template-columns:repeat(" in html
-    assert "flex-direction:column-reverse" in html and "var(--mono)" in rule(html, f".{strip} span")
+
+
+@pytest.mark.parametrize("name, strip", [("calls", "tally"), ("assets", "tiles"),
+                                         ("mcg-assets", "tiles")])
+def test_the_tool_pages_open_the_way_the_rooms_do(name, strip):
+    """A headline at the rooms' size, then the figures on a rule with
+    the label over the number, not a row of rounded boxes."""
+    html = page(name)
     assert "font-size:clamp(38px,5vw,62px)" in rule(html, "h1")
+    assert "font-style:italic" in rule(html, "h1 em")
+    assert f".{strip}{{display:grid;grid-template-columns:repeat(" in html
+    assert "flex-direction:column-reverse" in html
+    assert "var(--mono)" in rule(html, f".{strip} span")
+    assert "var(--display)" in rule(html, f".{strip} b")
+    assert "max-width:1120px" in rule(html, ".wrap")
+    assert "border-left:2px solid var(--edge-2)" in rule(html, ".note")
     assert "IBM+Plex+Mono" in html
+
+
+def test_the_mcg_token_page_wears_mcgs_green_and_none_of_market_bubbles():
+    html = page("mcg-assets")
+    assert "--green:#6ecf9e" in html and "16c784" not in html
+    assert "649 of them" not in html                      # a count nobody kept up
