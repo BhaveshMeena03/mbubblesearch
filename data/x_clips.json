@@ -5480,5 +5480,35 @@
   "copies": 1,
   "heard_from": "audio",
   "placed": "2026-11-21"
+ },
+ "2124273181511086229": {
+  "account": "MCGlive",
+  "archive": "mcg",
+  "episode_id": "c-dQtmlJZxw",
+  "start": 3804,
+  "end": 3936,
+  "before": "and if I turn him around, I still think it's better than what I thought I was going to get. He's actually got this little backpack here, which is an NVIDIA Orin. I'm just going to keep looking at this little video. Yeah, I'm going to full screen you so that you can actually show this properly. Super. Yeah, so I'll back him up a little bit, you know. But",
+  "after": "still got to dig that up yeah dig that up i would have to dig it up but let me see if i can find it like just off my phone and it was so funny but yeah while you're looking that up because i've actually always wondered this is like i saw this boxing match with the the dude with the tight shorts and he does uh funny like stunts and stuff he did this boxing match against a humanoid robot and like it looked like it was pretty like he yeah frankie frankie la pena i think that was yeah i mean yeah this this guy is no joke it's like um you know you're really in a situation where this robot can do some serious damage and then also the issue with uh pinching you know so if you're in these little areas he he will pinch you but let me see oh my gosh so that's uh not good for the human uh human versus the robot situation that's a that's a scary proposition that they can be so here here he is doing the kung fu and coming towards me right there and there's you know obviously i'm falling over and trying to catch him and everything it was you know i i'm like i've got him in a half nelson at this point and",
+  "after_at": 3936,
+  "duration": 138.2,
+  "matches": 299,
+  "copies": 2,
+  "heard_from": "audio",
+  "placed": "2026-11-22"
+ },
+ "2124283350223589800": {
+  "account": "MCGlive",
+  "archive": "mcg",
+  "episode_id": "oh-PMIoVOVw",
+  "start": 1005,
+  "end": 1130,
+  "before": "so FOMO was integrated with Elysium having it right at the top and all the trending tokens people could have really easy discovery give us the most updated numbers here like what are you guys looking at in terms of volume uh how you know how many accounts and then I want to talk a little bit about how that works into Kinetic but yeah start with just the numbers",
+  "after": "And dare I say with all the tailwinds of hype itself, which are crazy. But I want to talk about Kinetic here because you have this, I believe you spend 100 K Kinetic tokens or KNPQ tokens to, I believe this is to launch or by token deployers. Can you just explain kind of some of the tokenomics behind Kinetic as it relates to Elysium itself? Yeah. So we take 50% of the sequencer revenue, which over the last few days has been $120,000. Last I checked, 50% of this goes into buying KNTQ on the open market programmatically and burning it by sending it to the Hyperliquid Assistance Fund, which has like $3 billion in hype already. So we do that. And then the other 25% is split 50-50 with our treasury and then supporting builders through a sequencer rebate, essentially. So if your application on Elysium is kicking ass and consuming a lot of gas and block space, then you will basically get a quarter of all sequencer fees rebated back to you pro rata, which again, has never existed before. So we have a very robust developer program in this regard. The video you're showing right now is actually quite interesting as well because DexScreener and some of these other screener tools in the space are some of the most successful businesses in crypto. And at Elysium,",
+  "after_at": 1132,
+  "duration": 126.8,
+  "matches": 236,
+  "copies": 1,
+  "heard_from": "captions",
+  "placed": "2026-11-22"
  }
 }

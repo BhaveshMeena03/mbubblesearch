@@ -4,8 +4,8 @@
    "symbol": "BTC",
    "name": "Bitcoin",
    "asset_class": "crypto",
-   "mentions": 2497,
-   "analysis": 1408,
+   "mentions": 2499,
+   "analysis": 1410,
    "moments": [
     {
      "episode_id": "-A0rmPYG0s0",
@@ -22479,16 +22479,34 @@
      "deep_link": "https://www.youtube.com/watch?v=zh4R-zhOARw&t=9601s",
      "kind": "mention",
      "note": "Speaker mentioned Bitcoin at 74 alongside ZEC at 1000."
+    },
+    {
+     "episode_id": "zkKZ2FlgYjk",
+     "episode_title": "It's Literally So Over, Applying To McDonald's, Praying For Salvation [Stream Recap]",
+     "start_seconds": 354.0,
+     "timestamp": "5:54",
+     "deep_link": "https://www.youtube.com/watch?v=zkKZ2FlgYjk&t=354s",
+     "kind": "analysis",
+     "note": "Speaker discusses Bitcoin at 61.8 level and expresses uncertainty about where the bottom will be."
+    },
+    {
+     "episode_id": "zkKZ2FlgYjk",
+     "episode_title": "It's Literally So Over, Applying To McDonald's, Praying For Salvation [Stream Recap]",
+     "start_seconds": 1304.0,
+     "timestamp": "21:44",
+     "deep_link": "https://www.youtube.com/watch?v=zkKZ2FlgYjk&t=1304s",
+     "kind": "analysis",
+     "note": "Speaker describes Bitcoin as being in free fall and characterizes the price action over 295 days as extremely painful."
     }
    ],
-   "episode_count": 466,
+   "episode_count": 467,
    "single_reference": false
   },
   {
    "symbol": "SOL",
    "name": "Solana",
    "asset_class": "crypto",
-   "mentions": 1108,
+   "mentions": 1109,
    "analysis": 522,
    "moments": [
     {
@@ -32462,9 +32480,18 @@
      "deep_link": "https://www.youtube.com/watch?v=zh4R-zhOARw&t=375s",
      "kind": "mention",
      "note": "Speaker mentions dreaming about 'Solana Doomer's PFP on Twitter' and thinking about a trader's trading style related to Solana."
+    },
+    {
+     "episode_id": "zkKZ2FlgYjk",
+     "episode_title": "It's Literally So Over, Applying To McDonald's, Praying For Salvation [Stream Recap]",
+     "start_seconds": 1527.0,
+     "timestamp": "25:27",
+     "deep_link": "https://www.youtube.com/watch?v=zkKZ2FlgYjk&t=1527s",
+     "kind": "mention",
+     "note": "Solana price quoted at 71 (implied dollars)."
     }
    ],
-   "episode_count": 381,
+   "episode_count": 382,
    "single_reference": false
   },
   {
@@ -44913,7 +44940,7 @@
    "symbol": "ETH",
    "name": "Ethereum",
    "asset_class": "crypto",
-   "mentions": 923,
+   "mentions": 924,
    "analysis": 418,
    "moments": [
     {
@@ -53222,9 +53249,18 @@
      "deep_link": "https://www.youtube.com/watch?v=zh4R-zhOARw&t=2469s",
      "kind": "mention",
      "note": "Speaker mentions 'ETH dudes' and praises their commitment to cryptocurrency."
+    },
+    {
+     "episode_id": "zkKZ2FlgYjk",
+     "episode_title": "It's Literally So Over, Applying To McDonald's, Praying For Salvation [Stream Recap]",
+     "start_seconds": 1533.0,
+     "timestamp": "25:33",
+     "deep_link": "https://www.youtube.com/watch?v=zkKZ2FlgYjk&t=1533s",
+     "kind": "mention",
+     "note": "Ethereum price quoted at 1750 (implied dollars)."
     }
    ],
-   "episode_count": 352,
+   "episode_count": 353,
    "single_reference": false
   },
   {
@@ -57535,8 +57571,8 @@
    "symbol": "NVDA",
    "name": "NVIDIA",
    "asset_class": "stock",
-   "mentions": 536,
-   "analysis": 240,
+   "mentions": 541,
+   "analysis": 244,
    "moments": [
     {
      "episode_id": "-QwoqW8T3js",
@@ -62361,9 +62397,54 @@
      "deep_link": "https://www.youtube.com/watch?v=zh4R-zhOARw&t=6532s",
      "kind": "mention",
      "note": "NVIDIA mentioned in context of employee survey showing 88% want Jensen Huang to stay as CEO."
+    },
+    {
+     "episode_id": "zkKZ2FlgYjk",
+     "episode_title": "It's Literally So Over, Applying To McDonald's, Praying For Salvation [Stream Recap]",
+     "start_seconds": 57.0,
+     "timestamp": "0:57",
+     "deep_link": "https://www.youtube.com/watch?v=zkKZ2FlgYjk&t=57s",
+     "kind": "mention",
+     "note": "Jensen Huang, CEO of NVIDIA (described as 'the most important CEO, the most valuable company in the world'), was reportedly forced out."
+    },
+    {
+     "episode_id": "zkKZ2FlgYjk",
+     "episode_title": "It's Literally So Over, Applying To McDonald's, Praying For Salvation [Stream Recap]",
+     "start_seconds": 467.0,
+     "timestamp": "7:47",
+     "deep_link": "https://www.youtube.com/watch?v=zkKZ2FlgYjk&t=467s",
+     "kind": "analysis",
+     "note": "Extended discussion about NVIDIA's interim CEO situation, Jensen Huang not being reinstated, and China's geopolitical interest in removing him; speaker notes a trillion dollars knocked off NVIDIA's market cap."
+    },
+    {
+     "episode_id": "zkKZ2FlgYjk",
+     "episode_title": "It's Literally So Over, Applying To McDonald's, Praying For Salvation [Stream Recap]",
+     "start_seconds": 660.0,
+     "timestamp": "11:00",
+     "deep_link": "https://www.youtube.com/watch?v=zkKZ2FlgYjk&t=660s",
+     "kind": "analysis",
+     "note": "Discussed extensively as a major concern regarding CEO transition; described as having largest market weighting in indexes and acting as a bank to the sector; fundamental strength but facing structural selling pressures."
+    },
+    {
+     "episode_id": "zkKZ2FlgYjk",
+     "episode_title": "It's Literally So Over, Applying To McDonald's, Praying For Salvation [Stream Recap]",
+     "start_seconds": 1000.0,
+     "timestamp": "16:40",
+     "deep_link": "https://www.youtube.com/watch?v=zkKZ2FlgYjk&t=1000s",
+     "kind": "analysis",
+     "note": "Discussed as a significant market factor; speaker asserts Nvidia 'has to be one' of the top concerns and mentions 'NVIDIA bottoms' in the bull case scenario."
+    },
+    {
+     "episode_id": "zkKZ2FlgYjk",
+     "episode_title": "It's Literally So Over, Applying To McDonald's, Praying For Salvation [Stream Recap]",
+     "start_seconds": 1339.0,
+     "timestamp": "22:19",
+     "deep_link": "https://www.youtube.com/watch?v=zkKZ2FlgYjk&t=1339s",
+     "kind": "analysis",
+     "note": "Speaker discusses NVIDIA as an important chart and references where people step in, indicating price action analysis."
     }
    ],
-   "episode_count": 221,
+   "episode_count": 222,
    "single_reference": false
   },
   {
@@ -75623,7 +75704,7 @@
    "symbol": "AAPL",
    "name": "Apple",
    "asset_class": "stock",
-   "mentions": 228,
+   "mentions": 229,
    "analysis": 75,
    "moments": [
     {
@@ -77677,16 +77758,25 @@
      "deep_link": "https://www.youtube.com/watch?v=zh4R-zhOARw&t=5679s",
      "kind": "mention",
      "note": "Mentioned as an example of stocks that individuals bought tens of thousands of dollars worth of and held without checking the market for over three years."
+    },
+    {
+     "episode_id": "zkKZ2FlgYjk",
+     "episode_title": "It's Literally So Over, Applying To McDonald's, Praying For Salvation [Stream Recap]",
+     "start_seconds": 1563.0,
+     "timestamp": "26:03",
+     "deep_link": "https://www.youtube.com/watch?v=zkKZ2FlgYjk&t=1563s",
+     "kind": "mention",
+     "note": "Apple mentioned as up about 0.5 percent during market opening."
     }
    ],
-   "episode_count": 138,
+   "episode_count": 139,
    "single_reference": false
   },
   {
    "symbol": "PLTR",
    "name": "Palantir",
    "asset_class": "stock",
-   "mentions": 167,
+   "mentions": 168,
    "analysis": 71,
    "moments": [
     {
@@ -79191,16 +79281,25 @@
      "deep_link": "https://www.youtube.com/watch?v=zQYD8glu3cQ&t=2014s",
      "kind": "mention",
      "note": "Referenced as an example of a stock the speaker analyzed on YouTube streams."
+    },
+    {
+     "episode_id": "zkKZ2FlgYjk",
+     "episode_title": "It's Literally So Over, Applying To McDonald's, Praying For Salvation [Stream Recap]",
+     "start_seconds": 1542.0,
+     "timestamp": "25:42",
+     "deep_link": "https://www.youtube.com/watch?v=zkKZ2FlgYjk&t=1542s",
+     "kind": "mention",
+     "note": "Palantir mentioned as down 2 percent, noted as exception in otherwise green defense sector."
     }
    ],
-   "episode_count": 112,
+   "episode_count": 113,
    "single_reference": false
   },
   {
    "symbol": "SPY",
    "name": "SPDR S&P 500 ETF Trust",
    "asset_class": "index",
-   "mentions": 211,
+   "mentions": 212,
    "analysis": 70,
    "moments": [
     {
@@ -81101,17 +81200,26 @@
      "deep_link": "https://www.youtube.com/watch?v=zh4R-zhOARw&t=5679s",
      "kind": "mention",
      "note": "Mentioned as SP500 index shares that investors bought and held without checking the market for over three years."
+    },
+    {
+     "episode_id": "zkKZ2FlgYjk",
+     "episode_title": "It's Literally So Over, Applying To McDonald's, Praying For Salvation [Stream Recap]",
+     "start_seconds": 1452.0,
+     "timestamp": "24:12",
+     "deep_link": "https://www.youtube.com/watch?v=zkKZ2FlgYjk&t=1452s",
+     "kind": "mention",
+     "note": "SPY mentioned as down 4 percent during market opening."
     }
    ],
-   "episode_count": 129,
+   "episode_count": 130,
    "single_reference": false
   },
   {
    "symbol": "INTC",
    "name": "Intel",
    "asset_class": "stock",
-   "mentions": 174,
-   "analysis": 65,
+   "mentions": 176,
+   "analysis": 66,
    "moments": [
     {
      "episode_id": "-goMJvTOlqE",
@@ -82678,9 +82786,27 @@
      "deep_link": "https://www.youtube.com/watch?v=yyt3TGWuluw&t=1829s",
      "kind": "analysis",
      "note": "Announced an upsized $20 billion common stock offering at $95 per share, up from the original $15 billion."
+    },
+    {
+     "episode_id": "zkKZ2FlgYjk",
+     "episode_title": "It's Literally So Over, Applying To McDonald's, Praying For Salvation [Stream Recap]",
+     "start_seconds": 1542.0,
+     "timestamp": "25:42",
+     "deep_link": "https://www.youtube.com/watch?v=zkKZ2FlgYjk&t=1542s",
+     "kind": "mention",
+     "note": "Intel mentioned along defense stocks."
+    },
+    {
+     "episode_id": "zkKZ2FlgYjk",
+     "episode_title": "It's Literally So Over, Applying To McDonald's, Praying For Salvation [Stream Recap]",
+     "start_seconds": 1988.0,
+     "timestamp": "33:08",
+     "deep_link": "https://www.youtube.com/watch?v=zkKZ2FlgYjk&t=1988s",
+     "kind": "analysis",
+     "note": "Intel EPS and GMS estimates have been cut significantly; PC market is at or near a trough but expected to improve by 2028 as DRAM pricing comes down; stock trading at 92 and about to go green on the daily."
     }
    ],
-   "episode_count": 94,
+   "episode_count": 95,
    "single_reference": false
   },
   {
@@ -91645,7 +91771,7 @@
    "symbol": "TSLA",
    "name": "Tesla",
    "asset_class": "stock",
-   "mentions": 183,
+   "mentions": 184,
    "analysis": 61,
    "moments": [
     {
@@ -93294,9 +93420,18 @@
      "deep_link": "https://www.youtube.com/watch?v=zh4R-zhOARw&t=8355s",
      "kind": "mention",
      "note": "Speaker referenced Tesla as an example of historical investment opportunity, noting that a $5 investment years ago would have made someone a millionaire."
+    },
+    {
+     "episode_id": "zkKZ2FlgYjk",
+     "episode_title": "It's Literally So Over, Applying To McDonald's, Praying For Salvation [Stream Recap]",
+     "start_seconds": 23.0,
+     "timestamp": "0:23",
+     "deep_link": "https://www.youtube.com/watch?v=zkKZ2FlgYjk&t=23s",
+     "kind": "mention",
+     "note": "The speaker jokes about making 'a little ditzy dally casual long on the final company to ever exist', appearing to reference Tesla in passing."
     }
    ],
-   "episode_count": 121,
+   "episode_count": 122,
    "single_reference": false
   },
   {
@@ -99606,7 +99741,7 @@
    "symbol": "IGV",
    "name": "iShares Global Tech ETF",
    "asset_class": "index",
-   "mentions": 116,
+   "mentions": 117,
    "analysis": 44,
    "moments": [
     {
@@ -100652,9 +100787,18 @@
      "deep_link": "https://www.youtube.com/watch?v=zh4R-zhOARw&t=2691s",
      "kind": "mention",
      "note": "Speaker states 'IGV is up two' referring to pre-market gains."
+    },
+    {
+     "episode_id": "zkKZ2FlgYjk",
+     "episode_title": "It's Literally So Over, Applying To McDonald's, Praying For Salvation [Stream Recap]",
+     "start_seconds": 1419.0,
+     "timestamp": "23:39",
+     "deep_link": "https://www.youtube.com/watch?v=zkKZ2FlgYjk&t=1419s",
+     "kind": "mention",
+     "note": "IGV mentioned as down 1 percent."
     }
    ],
-   "episode_count": 87,
+   "episode_count": 88,
    "single_reference": false
   },
   {
@@ -126971,7 +127115,7 @@
    "symbol": "MRVL",
    "name": "Marvell",
    "asset_class": "stock",
-   "mentions": 58,
+   "mentions": 59,
    "analysis": 19,
    "moments": [
     {
@@ -127495,9 +127639,18 @@
      "deep_link": "https://www.youtube.com/watch?v=yYtz_AR0x1k&t=1195s",
      "kind": "analysis",
      "note": "Speaker stated their Marvell tokens are down from entry of 350, got exposure to AI, concerned about hyper liquid after-hours trading impact on the stock."
+    },
+    {
+     "episode_id": "zkKZ2FlgYjk",
+     "episode_title": "It's Literally So Over, Applying To McDonald's, Praying For Salvation [Stream Recap]",
+     "start_seconds": 716.0,
+     "timestamp": "11:56",
+     "deep_link": "https://www.youtube.com/watch?v=zkKZ2FlgYjk&t=716s",
+     "kind": "mention",
+     "note": "CEO Matt Murphy identified as potential NVIDIA CEO candidate; referenced as historical strong performer with nostalgic reflection on past gains."
     }
    ],
-   "episode_count": 41,
+   "episode_count": 42,
    "single_reference": false
   },
   {
@@ -134277,7 +134430,7 @@
    "symbol": "IBM",
    "name": "IBM",
    "asset_class": "stock",
-   "mentions": 50,
+   "mentions": 51,
    "analysis": 13,
    "moments": [
     {
@@ -134729,16 +134882,25 @@
      "deep_link": "https://www.youtube.com/watch?v=zJfP45Uag1E&t=9115s",
      "kind": "mention",
      "note": "Speaker mentions thinking about IBM over the weekend."
+    },
+    {
+     "episode_id": "zkKZ2FlgYjk",
+     "episode_title": "It's Literally So Over, Applying To McDonald's, Praying For Salvation [Stream Recap]",
+     "start_seconds": 1563.0,
+     "timestamp": "26:03",
+     "deep_link": "https://www.youtube.com/watch?v=zkKZ2FlgYjk&t=1563s",
+     "kind": "mention",
+     "note": "IBM mentioned as up a percent during market opening."
     }
    ],
-   "episode_count": 36,
+   "episode_count": 37,
    "single_reference": false
   },
   {
    "symbol": "ADBE",
    "name": "Adobe",
    "asset_class": "stock",
-   "mentions": 37,
+   "mentions": 38,
    "analysis": 13,
    "moments": [
     {
@@ -135073,9 +135235,18 @@
      "deep_link": "https://www.youtube.com/watch?v=xl5iN1U2yN4&t=4222s",
      "kind": "analysis",
      "note": "Speakers discuss Leopold Ashenbrenner's bad bet against software stocks, specifically mentioning Adobe as down about 10-30 from the bottom."
+    },
+    {
+     "episode_id": "zkKZ2FlgYjk",
+     "episode_title": "It's Literally So Over, Applying To McDonald's, Praying For Salvation [Stream Recap]",
+     "start_seconds": 1549.0,
+     "timestamp": "25:49",
+     "deep_link": "https://www.youtube.com/watch?v=zkKZ2FlgYjk&t=1549s",
+     "kind": "mention",
+     "note": "Adobe listed among biggest gainers as green."
     }
    ],
-   "episode_count": 29,
+   "episode_count": 30,
    "single_reference": false
   },
   {
@@ -136107,7 +136278,7 @@
    "symbol": "TSM",
    "name": "Taiwan Semiconductor Manufacturing Company",
    "asset_class": "stock",
-   "mentions": 23,
+   "mentions": 24,
    "analysis": 13,
    "moments": [
     {
@@ -136316,9 +136487,18 @@
      "deep_link": "https://www.youtube.com/watch?v=xl5iN1U2yN4&t=4092s",
      "kind": "analysis",
      "note": "Speakers note TSMC has only a couple percent AI exposure currently, but project 20% AI revenue by 2027 with doubling expected to significantly impact their business."
+    },
+    {
+     "episode_id": "zkKZ2FlgYjk",
+     "episode_title": "It's Literally So Over, Applying To McDonald's, Praying For Salvation [Stream Recap]",
+     "start_seconds": 1983.0,
+     "timestamp": "33:03",
+     "deep_link": "https://www.youtube.com/watch?v=zkKZ2FlgYjk&t=1983s",
+     "kind": "mention",
+     "note": "Referenced as a source of external wafers."
     }
    ],
-   "episode_count": 19,
+   "episode_count": 20,
    "single_reference": false
   },
   {
@@ -142433,7 +142613,7 @@
    "symbol": "NFLX",
    "name": "Netflix",
    "asset_class": "stock",
-   "mentions": 35,
+   "mentions": 36,
    "analysis": 8,
    "moments": [
     {
@@ -142750,9 +142930,18 @@
      "deep_link": "https://www.youtube.com/watch?v=tbX1jLp2P9U&t=435s",
      "kind": "analysis",
      "note": "Speaker mentions hitting on Netflix down, part of their public trading account performance on equities."
+    },
+    {
+     "episode_id": "zkKZ2FlgYjk",
+     "episode_title": "It's Literally So Over, Applying To McDonald's, Praying For Salvation [Stream Recap]",
+     "start_seconds": 1563.0,
+     "timestamp": "26:03",
+     "deep_link": "https://www.youtube.com/watch?v=zkKZ2FlgYjk&t=1563s",
+     "kind": "mention",
+     "note": "Netflix mentioned as up a percent during market opening."
     }
    ],
-   "episode_count": 30,
+   "episode_count": 31,
    "single_reference": false
   },
   {
@@ -157200,7 +157389,7 @@
    "symbol": "ARM",
    "name": "Arm Holdings",
    "asset_class": "stock",
-   "mentions": 16,
+   "mentions": 17,
    "analysis": 3,
    "moments": [
     {
@@ -157346,9 +157535,18 @@
      "deep_link": "https://www.youtube.com/watch?v=pDUwR75CG6s&t=774s",
      "kind": "mention",
      "note": "Speaker mentioned SoftBank has a monster stake in ARM."
+    },
+    {
+     "episode_id": "zkKZ2FlgYjk",
+     "episode_title": "It's Literally So Over, Applying To McDonald's, Praying For Salvation [Stream Recap]",
+     "start_seconds": 702.0,
+     "timestamp": "11:42",
+     "deep_link": "https://www.youtube.com/watch?v=zkKZ2FlgYjk&t=702s",
+     "kind": "mention",
+     "note": "CEO Rene Haas spoke at TomorrowX Summit and was described as pretty good."
     }
    ],
-   "episode_count": 14,
+   "episode_count": 15,
    "single_reference": false
   },
   {
@@ -161880,6 +162078,98 @@
    "single_reference": false
   },
   {
+   "symbol": "GOOG",
+   "name": "Google",
+   "asset_class": "stock",
+   "mentions": 9,
+   "analysis": 2,
+   "moments": [
+    {
+     "episode_id": "HJ9U2YJkzLs",
+     "episode_title": "Michael Saylor Just Sold His Bitcoin... [Stream Recap]",
+     "start_seconds": 1813.0,
+     "timestamp": "30:13",
+     "deep_link": "https://www.youtube.com/watch?v=HJ9U2YJkzLs&t=1813s",
+     "kind": "mention",
+     "note": "Owns 15% of Anthropic; stock is down on the day."
+    },
+    {
+     "episode_id": "ZEsn_hhFrgI",
+     "episode_title": "Why Robotics Is The Next Trillion Dollar Industry - Andrew Kang",
+     "start_seconds": 2469.0,
+     "timestamp": "41:09",
+     "deep_link": "https://www.youtube.com/watch?v=ZEsn_hhFrgI&t=2469s",
+     "kind": "analysis",
+     "note": "Discussed as having been asleep at the wheel on humanoid robotics, previously owned Boston Dynamics, had an Everyday Robots initiative that was scrapped, and is now partnering with companies like Aptronic to build robot hardware while potentially providing operating systems."
+    },
+    {
+     "episode_id": "gKJ-BygczS0",
+     "episode_title": "What happened to Leopold Aschenbrenner? : The FLOOD Interview",
+     "start_seconds": 1357.0,
+     "timestamp": "22:37",
+     "deep_link": "https://www.youtube.com/watch?v=gKJ-BygczS0&t=1357s",
+     "kind": "mention",
+     "note": "Mentioned as reference point comparison, noted as a $4 trillion company in contrast to Leopold's smaller positions."
+    },
+    {
+     "episode_id": "jZvTL-5L_24",
+     "episode_title": "The BIGGEST Earning Calls of 2026.. [Stream Recap]",
+     "start_seconds": 1071.0,
+     "timestamp": "17:51",
+     "deep_link": "https://www.youtube.com/watch?v=jZvTL-5L_24&t=1071s",
+     "kind": "mention",
+     "note": "Google candling up four percent after hours."
+    },
+    {
+     "episode_id": "pDUwR75CG6s",
+     "episode_title": "Why OpenAI Is The Next Amazon - GoodAlexander",
+     "start_seconds": 4146.0,
+     "timestamp": "1:09:06",
+     "deep_link": "https://www.youtube.com/watch?v=pDUwR75CG6s&t=4146s",
+     "kind": "analysis",
+     "note": "Speaker discusses Google as a consensus long with positive cash flow, TPUs, and cloud backlog, but criticizes Gemini as a poor model that performs poorly for coding, suggesting it is a fade relative to consensus."
+    },
+    {
+     "episode_id": "qbpw_xCObdQ",
+     "episode_title": "SpaceX's IPO Just Changed The Stock Market Forever... [Stream Recap]",
+     "start_seconds": 1043.0,
+     "timestamp": "17:23",
+     "deep_link": "https://www.youtube.com/watch?v=qbpw_xCObdQ&t=1043s",
+     "kind": "mention",
+     "note": "Up half percent."
+    },
+    {
+     "episode_id": "v1QRNLI0C80",
+     "episode_title": "This FOMC Changes Everything... [Stream Recap]",
+     "start_seconds": 2162.0,
+     "timestamp": "36:02",
+     "deep_link": "https://www.youtube.com/watch?v=v1QRNLI0C80&t=2162s",
+     "kind": "mention",
+     "note": "Berkshire Hathaway took $10 billion position at $350 per share."
+    },
+    {
+     "episode_id": "vg_C4atXx3w",
+     "episode_title": "MARKET OPEN: Crypto is an AI LOSER, Meta Muse is BACK, The Anthropic IPO",
+     "start_seconds": 4505.0,
+     "timestamp": "1:15:05",
+     "deep_link": "https://www.youtube.com/watch?v=vg_C4atXx3w&t=4505s",
+     "kind": "mention",
+     "note": "Trader held a $5 billion position at Google and was up on it."
+    },
+    {
+     "episode_id": "zkKZ2FlgYjk",
+     "episode_title": "It's Literally So Over, Applying To McDonald's, Praying For Salvation [Stream Recap]",
+     "start_seconds": 1549.0,
+     "timestamp": "25:49",
+     "deep_link": "https://www.youtube.com/watch?v=zkKZ2FlgYjk&t=1549s",
+     "kind": "mention",
+     "note": "Google mentioned as up a percent; speaker notes new model performance."
+    }
+   ],
+   "episode_count": 9,
+   "single_reference": false
+  },
+  {
    "symbol": "INJ",
    "name": "Injective",
    "asset_class": "crypto",
@@ -162126,89 +162416,6 @@
     }
    ],
    "episode_count": 7,
-   "single_reference": false
-  },
-  {
-   "symbol": "GOOG",
-   "name": "Google",
-   "asset_class": "stock",
-   "mentions": 8,
-   "analysis": 2,
-   "moments": [
-    {
-     "episode_id": "HJ9U2YJkzLs",
-     "episode_title": "Michael Saylor Just Sold His Bitcoin... [Stream Recap]",
-     "start_seconds": 1813.0,
-     "timestamp": "30:13",
-     "deep_link": "https://www.youtube.com/watch?v=HJ9U2YJkzLs&t=1813s",
-     "kind": "mention",
-     "note": "Owns 15% of Anthropic; stock is down on the day."
-    },
-    {
-     "episode_id": "ZEsn_hhFrgI",
-     "episode_title": "Why Robotics Is The Next Trillion Dollar Industry - Andrew Kang",
-     "start_seconds": 2469.0,
-     "timestamp": "41:09",
-     "deep_link": "https://www.youtube.com/watch?v=ZEsn_hhFrgI&t=2469s",
-     "kind": "analysis",
-     "note": "Discussed as having been asleep at the wheel on humanoid robotics, previously owned Boston Dynamics, had an Everyday Robots initiative that was scrapped, and is now partnering with companies like Aptronic to build robot hardware while potentially providing operating systems."
-    },
-    {
-     "episode_id": "gKJ-BygczS0",
-     "episode_title": "What happened to Leopold Aschenbrenner? : The FLOOD Interview",
-     "start_seconds": 1357.0,
-     "timestamp": "22:37",
-     "deep_link": "https://www.youtube.com/watch?v=gKJ-BygczS0&t=1357s",
-     "kind": "mention",
-     "note": "Mentioned as reference point comparison, noted as a $4 trillion company in contrast to Leopold's smaller positions."
-    },
-    {
-     "episode_id": "jZvTL-5L_24",
-     "episode_title": "The BIGGEST Earning Calls of 2026.. [Stream Recap]",
-     "start_seconds": 1071.0,
-     "timestamp": "17:51",
-     "deep_link": "https://www.youtube.com/watch?v=jZvTL-5L_24&t=1071s",
-     "kind": "mention",
-     "note": "Google candling up four percent after hours."
-    },
-    {
-     "episode_id": "pDUwR75CG6s",
-     "episode_title": "Why OpenAI Is The Next Amazon - GoodAlexander",
-     "start_seconds": 4146.0,
-     "timestamp": "1:09:06",
-     "deep_link": "https://www.youtube.com/watch?v=pDUwR75CG6s&t=4146s",
-     "kind": "analysis",
-     "note": "Speaker discusses Google as a consensus long with positive cash flow, TPUs, and cloud backlog, but criticizes Gemini as a poor model that performs poorly for coding, suggesting it is a fade relative to consensus."
-    },
-    {
-     "episode_id": "qbpw_xCObdQ",
-     "episode_title": "SpaceX's IPO Just Changed The Stock Market Forever... [Stream Recap]",
-     "start_seconds": 1043.0,
-     "timestamp": "17:23",
-     "deep_link": "https://www.youtube.com/watch?v=qbpw_xCObdQ&t=1043s",
-     "kind": "mention",
-     "note": "Up half percent."
-    },
-    {
-     "episode_id": "v1QRNLI0C80",
-     "episode_title": "This FOMC Changes Everything... [Stream Recap]",
-     "start_seconds": 2162.0,
-     "timestamp": "36:02",
-     "deep_link": "https://www.youtube.com/watch?v=v1QRNLI0C80&t=2162s",
-     "kind": "mention",
-     "note": "Berkshire Hathaway took $10 billion position at $350 per share."
-    },
-    {
-     "episode_id": "vg_C4atXx3w",
-     "episode_title": "MARKET OPEN: Crypto is an AI LOSER, Meta Muse is BACK, The Anthropic IPO",
-     "start_seconds": 4505.0,
-     "timestamp": "1:15:05",
-     "deep_link": "https://www.youtube.com/watch?v=vg_C4atXx3w&t=4505s",
-     "kind": "mention",
-     "note": "Trader held a $5 billion position at Google and was up on it."
-    }
-   ],
-   "episode_count": 8,
    "single_reference": false
   },
   {
@@ -184681,6 +184888,44 @@
    "single_reference": false
   },
   {
+   "symbol": "PALO",
+   "name": "Palo Alto Networks",
+   "asset_class": "stock",
+   "mentions": 3,
+   "analysis": 0,
+   "moments": [
+    {
+     "episode_id": "SUtNB4f7msQ",
+     "episode_title": "MARKET OPEN: Crypto is in SHAMBLES, COGNITION BEEF, Who Cares About the US 10Y Yield?",
+     "start_seconds": 6045.0,
+     "timestamp": "1:40:45",
+     "deep_link": "https://www.youtube.com/watch?v=SUtNB4f7msQ&t=6045s",
+     "kind": "mention",
+     "note": "Palo Alto Networks was identified as a cybersecurity company and distinguished from another company on the list."
+    },
+    {
+     "episode_id": "mhlj7R97I8w",
+     "episode_title": "MARKET OPEN: AI BROKE THE INTERNET, Interviewing a Cybersecurity EXPERT, TAP IN",
+     "start_seconds": 3424.0,
+     "timestamp": "57:04",
+     "deep_link": "https://www.youtube.com/watch?v=mhlj7R97I8w&t=3424s",
+     "kind": "mention",
+     "note": "Stock up 4%."
+    },
+    {
+     "episode_id": "zkKZ2FlgYjk",
+     "episode_title": "It's Literally So Over, Applying To McDonald's, Praying For Salvation [Stream Recap]",
+     "start_seconds": 1563.0,
+     "timestamp": "26:03",
+     "deep_link": "https://www.youtube.com/watch?v=zkKZ2FlgYjk&t=1563s",
+     "kind": "mention",
+     "note": "Palo Alto mentioned as flat during market opening."
+    }
+   ],
+   "episode_count": 3,
+   "single_reference": false
+  },
+  {
    "symbol": "MICHI",
    "name": "Michi",
    "asset_class": "crypto",
@@ -186018,35 +186263,6 @@
      "deep_link": "https://www.youtube.com/watch?v=c7qoEsRBcGk&t=4802s",
      "kind": "mention",
      "note": "Mentioned as an acquisition example where token holders received nothing."
-    }
-   ],
-   "episode_count": 2,
-   "single_reference": false
-  },
-  {
-   "symbol": "PALO",
-   "name": "Palo Alto Networks",
-   "asset_class": "stock",
-   "mentions": 2,
-   "analysis": 0,
-   "moments": [
-    {
-     "episode_id": "SUtNB4f7msQ",
-     "episode_title": "MARKET OPEN: Crypto is in SHAMBLES, COGNITION BEEF, Who Cares About the US 10Y Yield?",
-     "start_seconds": 6045.0,
-     "timestamp": "1:40:45",
-     "deep_link": "https://www.youtube.com/watch?v=SUtNB4f7msQ&t=6045s",
-     "kind": "mention",
-     "note": "Palo Alto Networks was identified as a cybersecurity company and distinguished from another company on the list."
-    },
-    {
-     "episode_id": "mhlj7R97I8w",
-     "episode_title": "MARKET OPEN: AI BROKE THE INTERNET, Interviewing a Cybersecurity EXPERT, TAP IN",
-     "start_seconds": 3424.0,
-     "timestamp": "57:04",
-     "deep_link": "https://www.youtube.com/watch?v=mhlj7R97I8w&t=3424s",
-     "kind": "mention",
-     "note": "Stock up 4%."
     }
    ],
    "episode_count": 2,
@@ -195810,12 +196026,32 @@
    ],
    "episode_count": 1,
    "single_reference": true
+  },
+  {
+   "symbol": "PSTG",
+   "name": "Pershing Square",
+   "asset_class": "stock",
+   "mentions": 1,
+   "analysis": 0,
+   "moments": [
+    {
+     "episode_id": "zkKZ2FlgYjk",
+     "episode_title": "It's Literally So Over, Applying To McDonald's, Praying For Salvation [Stream Recap]",
+     "start_seconds": 1355.0,
+     "timestamp": "22:35",
+     "deep_link": "https://www.youtube.com/watch?v=zkKZ2FlgYjk&t=1355s",
+     "kind": "mention",
+     "note": "Speaker references Pershing Square getting buying pressure in an index."
+    }
+   ],
+   "episode_count": 1,
+   "single_reference": true
   }
  ],
- "total_hits": 19690,
- "dropped_low_confidence": 1575,
- "dropped_not_an_asset": 1229,
- "episodes_processed": 582,
+ "total_hits": 19715,
+ "dropped_low_confidence": 1577,
+ "dropped_not_an_asset": 1233,
+ "episodes_processed": 583,
  "episode_ids": [
   "-A0rmPYG0s0",
   "-CYcuGbAnpI",
@@ -196398,6 +196634,7 @@
   "zR7YVWOWKLU",
   "zRoM3xmAFXk",
   "zaXq38R26vE",
-  "zh4R-zhOARw"
+  "zh4R-zhOARw",
+  "zkKZ2FlgYjk"
  ]
 }

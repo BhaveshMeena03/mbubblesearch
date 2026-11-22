@@ -74655,7 +74655,7 @@
    "symbol": "NVDA",
    "name": "Nvidia",
    "asset_class": "stock",
-   "mentions": 249,
+   "mentions": 251,
    "analysis": 78,
    "moments": [
     {
@@ -76369,6 +76369,24 @@
      "note": "Speaker notes that Mag 7 (Magnificent Seven index) is green."
     },
     {
+     "episode_id": "ksTLtTmt3Hc",
+     "episode_title": "We Interviewed Our First \"HUMANOID\" Robot Guest | BIOLLM",
+     "start_seconds": 1099.0,
+     "timestamp": "18:19",
+     "deep_link": "https://www.youtube.com/watch?v=ksTLtTmt3Hc&t=1099s",
+     "kind": "mention",
+     "note": "The speaker mentions that the robot has an NVIDIA Orin chip as a backpack component."
+    },
+    {
+     "episode_id": "ksTLtTmt3Hc",
+     "episode_title": "We Interviewed Our First \"HUMANOID\" Robot Guest | BIOLLM",
+     "start_seconds": 1771.0,
+     "timestamp": "29:31",
+     "deep_link": "https://www.youtube.com/watch?v=ksTLtTmt3Hc&t=1771s",
+     "kind": "mention",
+     "note": "NVIDIA mentioned as an example of AI stocks getting crushed in recent market downturn."
+    },
+    {
      "episode_id": "lN2kZJ0CNZg",
      "episode_title": "\ud83d\udfe2 LIVE: Robinhood Chain Rally Incoming? How to Position",
      "start_seconds": 3352.0,
@@ -76900,7 +76918,7 @@
      "note": "Speaker used Nvidia as an example of a tokenized stock that users could hold in their wallet through the FIRE protocol."
     }
    ],
-   "episode_count": 129,
+   "episode_count": 130,
    "single_reference": false
   },
   {
@@ -199723,6 +199741,26 @@
    "single_reference": true
   },
   {
+   "symbol": "BIOLLM",
+   "name": "BioLLM",
+   "asset_class": "other",
+   "mentions": 1,
+   "analysis": 1,
+   "moments": [
+    {
+     "episode_id": "ksTLtTmt3Hc",
+     "episode_title": "We Interviewed Our First \"HUMANOID\" Robot Guest | BIOLLM",
+     "start_seconds": 112.0,
+     "timestamp": "1:52",
+     "deep_link": "https://www.youtube.com/watch?v=ksTLtTmt3Hc&t=112s",
+     "kind": "analysis",
+     "note": "BioLLM is a brain-computer interface project that pairs AI model neurons with biological neurons grown in a lab in Melbourne, Australia; the token launched approximately a year before this discussion."
+    }
+   ],
+   "episode_count": 1,
+   "single_reference": true
+  },
+  {
    "symbol": "WMF",
    "name": "WMF Fund",
    "asset_class": "other",
@@ -214147,6 +214185,26 @@
    "single_reference": true
   },
   {
+   "symbol": "OLM",
+   "name": "OLM",
+   "asset_class": "crypto",
+   "mentions": 1,
+   "analysis": 0,
+   "moments": [
+    {
+     "episode_id": "ksTLtTmt3Hc",
+     "episode_title": "We Interviewed Our First \"HUMANOID\" Robot Guest | BIOLLM",
+     "start_seconds": 1424.0,
+     "timestamp": "23:44",
+     "deep_link": "https://www.youtube.com/watch?v=ksTLtTmt3Hc&t=1424s",
+     "kind": "mention",
+     "note": "Speaker mentions people are 'ride and die by OLM' and that the project has held up well even when markets have been bad."
+    }
+   ],
+   "episode_count": 1,
+   "single_reference": true
+  },
+  {
    "symbol": "SIGLE",
    "name": "Sigle",
    "asset_class": "crypto",
@@ -216347,10 +216405,10 @@
    "single_reference": true
   }
  ],
- "total_hits": 21088,
+ "total_hits": 21092,
  "dropped_low_confidence": 2526,
  "dropped_not_an_asset": 2338,
- "episodes_processed": 708,
+ "episodes_processed": 709,
  "episode_ids": [
   "-6Sccmoz7RQ",
   "-8z0M77EVZg",
@@ -216900,6 +216958,7 @@
   "klo8J50SqEA",
   "klz1MroNYfo",
   "kmZLpRLWeOs",
+  "ksTLtTmt3Hc",
   "ktrph5SXzWU",
   "l6c1Ha15aV0",
   "lHiHv6_Hfh0",
