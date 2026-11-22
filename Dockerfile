@@ -95,6 +95,9 @@ COPY data/terms_tradfi.json.gz ./data/terms_tradfi.json.gz
 # cannot seek — the deploy succeeds and the timestamps quietly stop working.
 COPY data/broadcast_links.json ./data/broadcast_links.json
 COPY data/youtube_map.json ./data/youtube_map.json
+# The video file behind each video Ansem posted on X. Without it the
+# page has nothing to play, and every time in those summaries is text.
+COPY data/x_videos.json ./data/x_videos.json
 COPY data/mcg_broadcast_links.json ./data/mcg_broadcast_links.json
 COPY data/guest_windows.json ./data/guest_windows.json
 # The three token dashboards, as the morning job aggregated and committed

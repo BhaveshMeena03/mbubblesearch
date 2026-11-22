@@ -335,6 +335,11 @@
   .player{margin-top:10px}
   .player iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:3px;
     display:block;background:#000}
+  /* When X will not let one of his videos play here. */
+  .nofile{color:var(--ink-3);font-size:13.5px;padding:12px 14px;
+    border:1px solid var(--edge);border-radius:3px}
+  .nofile a{color:var(--green);text-decoration:none}
+  .nofile a:hover{text-decoration:underline}
   .clipbox:empty{display:none}
   .clipbox{margin-top:10px;padding:12px 14px;border:1px solid var(--edge);
     border-radius:3px;background:rgba(255,255,255,.02)}
@@ -823,6 +828,84 @@
     slot.appendChild(f);
   }
 
+  // ─── a video posted on X, played here ───────────────────────────────
+  //
+  // X has no link that opens a posted video at a second, so for a video
+  // Ansem posted himself the page plays the file, from the second asked
+  // for (app/x_videos.py). X's video server refuses a request that names
+  // another site, so the player sits in a frame of its own whose requests
+  // name none. Not the whole page: YouTube's player has to be told where
+  // it is embedded.
+  //
+  // If X closes that, the reader is told and offered the post. Only an
+  // address on X's own video and image hosts is ever played or shown.
+  var FILE=/^https:\/\/video\.twimg\.com\/[A-Za-z0-9_\-.\/]+\.mp4(\?tag=\d{1,4})?$/;
+  var POSTER=/^https:\/\/pbs\.twimg\.com\/[A-Za-z0-9_\-.\/]+\.(jpg|png)(\?name=[a-z0-9]{1,12})?$/;
+  var FRAME='<!doctype html><meta name="referrer" content="no-referrer">'
+    +'<style>html,body{margin:0;height:100%;background:#000}'
+    +'video{display:block;width:100%;height:100%;background:#000}</style>'
+    +'<video controls playsinline preload="metadata"></video>';
+
+  function fileOf(thing){
+    var f=thing && thing.file;
+    return (f && typeof f.mp4==="string" && FILE.test(f.mp4)) ? f : null;
+  }
+  // The browser may refuse to start a video nobody pressed play on. The
+  // player's own button is then one press away.
+  function start(video){
+    var going=video.play();
+    if(going && going.catch) going.catch(function(){});
+  }
+  function refused(slot,link){
+    slot.innerHTML="";
+    var p=document.createElement("p");
+    p.className="nofile";
+    p.appendChild(document.createTextNode("X would not let this play here. "));
+    if(link && safeUrl(link)!=="#"){
+      var a=document.createElement("a");
+      a.href=safeUrl(link); a.target="_blank"; a.rel="noopener";
+      a.textContent="Watch it on X \u2197";
+      p.appendChild(a);
+    }
+    slot.appendChild(p);
+  }
+  function playFile(box,file,sec,auto,title,link){
+    var slot=box.querySelector(".player");
+    if(!slot||!file) return;
+    sec=Math.max(0,Math.floor(Number(sec)||0));
+    // Another time in the video that is already here moves its player.
+    var here=slot.querySelector("iframe.xfile");
+    if(here && here._video && here._file===file.mp4){
+      here._video.currentTime=sec;
+      if(auto) start(here._video);
+      return;
+    }
+    quiet();
+    var phone=window.matchMedia && window.matchMedia("(max-width:760px)").matches;
+    var src=(phone && typeof file.small==="string" && FILE.test(file.small))
+            ? file.small : file.mp4;
+    var f=document.createElement("iframe");
+    f.className="xfile";
+    f.title=title||"The video";
+    f.setAttribute("referrerpolicy","no-referrer");
+    f.setAttribute("allow","autoplay; fullscreen; picture-in-picture");
+    f.setAttribute("allowfullscreen","");
+    f.addEventListener("load",function(){
+      var video=f.contentDocument && f.contentDocument.querySelector("video");
+      if(!video) return;
+      f._video=video; f._file=file.mp4;
+      if(typeof file.poster==="string" && POSTER.test(file.poster)) video.poster=file.poster;
+      video.addEventListener("error",function(){ refused(slot,link); });
+      video.addEventListener("loadedmetadata",function(){
+        if(sec) video.currentTime=sec;
+        if(auto) start(video);
+      },{once:true});
+      video.src=src;
+    });
+    f.srcdoc=FRAME;
+    slot.appendChild(f);
+  }
+
   // Scroll only as far as it takes to bring something fully into view.
   function reveal(el){
     var box=el.getBoundingClientRect();
@@ -856,12 +939,16 @@
     }
     var label=hms(at);
     var yt=Array.isArray(b.yt) ? b.yt : null;
-    if(yt && VIDEO.test(yt[0]||"")){
+    var file=fileOf(ep);
+    if((yt && VIDEO.test(yt[0]||"")) || file){
       cell=document.createElement("button");
       cell.type="button"; cell.className="at"; cell.textContent=label;
       cell.setAttribute("aria-label","Play from "+label);
       cell.addEventListener("click",function(){
-        playIn(box,yt[0],yt[1],true,(ep.title||"The recording")+", from "+label);
+        var named=(ep.title||"The recording")+", from "+label;
+        // On YouTube at YouTube's second; his own video at its own.
+        if(yt && VIDEO.test(yt[0]||"")) playIn(box,yt[0],yt[1],true,named);
+        else playFile(box,file,at,true,named,ep.url);
         box.querySelectorAll("li.on").forEach(function(o){ o.classList.remove("on"); });
         li.classList.add("on");
         var slot=box.querySelector(".player");
@@ -944,6 +1031,8 @@
 
     if(VIDEO.test(ep.youtube||"")){
       playIn(box,ep.youtube,0,auto,"Playing "+(ep.title||"this episode"));
+    } else if(fileOf(ep)){
+      playFile(box,fileOf(ep),0,auto,"Playing "+(ep.title||"this video"),ep.url);
     }
     return box;
   }
@@ -1266,7 +1355,7 @@ function airedLabel(iso){
           +'</div>'
           +'<div class="quote">'+esc(cleanSnippet(h.text))+'</div></a>'
           +'<div class="hit-actions">'
-          +(canEmbed(h.deep_link)
+          +((canEmbed(h.deep_link)||fileOf(h))
               ? '<button class="share play-here" data-act="play" data-i="'+i+'">'
                 + '\u25B6 play here</button>'
               : '<a class="share play-here" target="_blank" rel="noopener" href="'
@@ -1484,6 +1573,12 @@ function airedLabel(iso){
       var slot=hits.querySelector('.player[data-slot="'+i+'"]');
       if(!slot) return;
       if(slot.firstChild){ slot.innerHTML=""; btn.textContent="\u25B6 play here"; return; }
+      // A passage from a video he posted on X plays from its file.
+      if(fileOf(h)){
+        playFile(slot.parentNode,fileOf(h),h.start_seconds,true,"the cited moment",h.deep_link);
+        btn.textContent="close";
+        return;
+      }
       var src=embedFor(h.deep_link);
       if(!src) return;
       // One player at a time: two videos talking over each other is worse
@@ -1720,6 +1815,7 @@ function airedLabel(iso){
         // A passage the server pointed at YouTube carries the offset from
         // the broadcast's clock, which is the one the answer quotes.
         return before + '<button class="cite" data-sec="' + (sec + (hit.youtube_offset || 0))
+             + '" data-i="' + lastHits.indexOf(hit)
              + '" data-ep="' + escAttr(hit.deep_link) + '" title="play this moment">'
              + esc(stamp) + '</button>';
       });
@@ -1749,12 +1845,26 @@ function airedLabel(iso){
       var b = ev.target.closest ? ev.target.closest("button.cite") : null;
       if(!b) return;
       var url = b.getAttribute("data-ep") || "";
-      var src = embedFor(url.split("&t=")[0].split("?t=")[0]
-                         + (url.indexOf("?") > -1 ? "&" : "?")
-                         + "t=" + b.getAttribute("data-sec") + "s");
-      if(!src) return;
+      var cited = b.getAttribute("data-sec");
       var slot = document.getElementById("answer-player");
       if(!slot) return;
+      // From a video he posted on X: its file, at the second cited.
+      var from = lastHits[parseInt(b.getAttribute("data-i"),10)];
+      if(fileOf(from)){
+        playFile(answer,fileOf(from),cited,true,"the cited moment",from.deep_link);
+        slot.scrollIntoView({block:"nearest"});
+        return;
+      }
+      var src = embedFor(url.split("&t=")[0].split("?t=")[0]
+                         + (url.indexOf("?") > -1 ? "&" : "?")
+                         + "t=" + cited + "s");
+      // On X only: the button did nothing. The broadcast opens there, at
+      // the second cited.
+      if(!src){
+        var there = safeUrl(url.replace(/([?&]t=)\d+s?/, "$1" + cited));
+        if(there !== "#") window.open(there,"_blank","noopener");
+        return;
+      }
       // Never two at once, here, in the cards or in an episode.
       quiet();
       var f=document.createElement("iframe");

@@ -178,7 +178,8 @@ while True:
 sys.exit(subprocess.run(args[1:]).returncode)
 """
 X_STEPS = ["scripts/add_x_recordings.py --search", "scripts/place_x_clips.py --search",
-           "scripts/place_x_links.py --search", "scripts/pack_summaries.py"]
+           "scripts/place_x_links.py --search", "scripts/pack_summaries.py",
+           "scripts/find_x_videos.py"]
 
 
 @contextlib.contextmanager

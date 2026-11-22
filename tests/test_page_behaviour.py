@@ -51,7 +51,7 @@ def test_a_moment_the_upload_cut_keeps_its_outbound_link():
     """Three shapes, in this order: plays here, opens X at the second,
     or is text. The link is marked with an arrow so it does not look
     like the button beside it."""
-    plays = PAGE.index("if(yt && VIDEO.test(yt[0]||\"\")){")
+    plays = PAGE.index("if((yt && VIDEO.test(yt[0]||\"\")) || file){")
     leaves = PAGE.index('cell.className="at out"; cell.href=b.link;')
     text = PAGE.index('cell.className="at off"; cell.textContent=label;')
     assert plays < leaves < text

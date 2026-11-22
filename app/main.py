@@ -55,6 +55,7 @@ from . import (
     seo,
     sources,
     x_posts,
+    x_videos,
 )
 from . import calls as on_air_calls
 from . import guests as guest_pages
@@ -2293,7 +2294,8 @@ async def podcast_search_stream(
         # page, instead of sending the reader to X. Only here, for the
         # page: the bot relinks to the answer's broadcast-clock second, so
         # it keeps the X link, which is correct for that clock.
-        payload = json.dumps([youtube_first(h.model_dump()) for h in hits])
+        payload = json.dumps([x_videos.attach(youtube_first(h.model_dump()))
+                              for h in hits])
         yield f"event: hits\ndata: {payload}\n\n"
         if cached:
             yield f"data: {json.dumps({'text': cached['answer']})}\n\n"
@@ -2980,7 +2982,12 @@ def _episode_row(row: dict, players: dict, lengths: dict) -> dict:
     else:
         video = ident if episode_pages.is_youtube(ident) else ""
     segments = (lengths.get(ident) or {}).get("segments") or []
-    return {"episode_id": ident, "title": row.get("title") or "",
+    # A video he posted has no link that opens at a second, so the page
+    # plays its file (app/x_videos.py). Only his own: a broadcast has a
+    # player on X that does open at one.
+    file = x_videos.for_episode(ident) if own else None
+    return {**({"file": file} if file else {}),
+            "episode_id": ident, "title": row.get("title") or "",
             "url": episode_pages.recording(row.get("url")),
             "published_at": str(row.get("published_at") or "")[:10],
             "show": row.get("show") or "", "own": own,

@@ -233,6 +233,12 @@ echo "-- our link posts"
 echo "-- market bubble summaries"
 .venv/bin/python -u scripts/pack_summaries.py || status=1
 
+# The video file behind each video Ansem posted, so the page can play one
+# from a second: X has no link that does. After the summaries, which say
+# which rows are his. One free lookup for each video not yet on file.
+echo "-- his videos' files"
+.venv/bin/python -u scripts/find_x_videos.py || status=1
+
 terms=(data/terms_threadguy.json.gz data/terms_mcg.json.gz)
 if [[ $mode == all ]]; then
   # Notes for MCG's newest, the daily live show included: the extension
@@ -278,7 +284,7 @@ for kept in data/mcg_broadcast_links.json data/threadguy_broadcast_links.json \
             data/threadguy_x_broadcasts.json data/mcg_summaries.json.gz \
             data/x_clips.json data/x_clips_search.json \
             data/x_links.json data/x_links_search.json \
-            data/x_recordings.json data/x_copies.json \
+            data/x_recordings.json data/x_copies.json data/x_videos.json \
             data/episodes.json.gz data/broadcast_links.json \
             data/rasmr_broadcast_links.json data/rasmr_x_broadcasts.json \
             data/term_index.json data/highlights.json; do
