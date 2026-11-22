@@ -196,6 +196,9 @@
   .stage .pw{margin-top:0}
   .pw .player iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:3px;
     background:#000;display:block}
+  /* A time pressed far down a summary scrolls its player back into view,
+     and on a phone that is under the pinned bar without this. */
+  .pw .player{scroll-margin-top:76px}
   .notes{margin:16px 0 4px;cursor:default}
   .notes .tldr{margin:0 0 14px;color:var(--ink);font-size:15px;line-height:1.6;
     max-width:78ch}
@@ -235,6 +238,9 @@
   .answer h3{display:flex;align-items:center;gap:12px;flex-wrap:wrap;
     font-family:var(--mono);font-size:11px;letter-spacing:.16em;font-weight:500;
     text-transform:uppercase;color:var(--ink-3);margin:0 0 14px}
+  /* A display rule beats [hidden], so "Answer" stayed over a panel that
+     was still reading. Restated, as for .reading below. */
+  .answer h3[hidden]{display:none!important}
   #share-actions{margin-left:auto;display:inline-flex;letter-spacing:0;text-transform:none}
   #answer-body{font-size:17px;line-height:1.65}
   #answer-body p{margin:0 0 12px}
@@ -848,6 +854,12 @@
 
   function fileOf(thing){
     var f=thing && thing.file;
+    // A passage that came back without one, as from the search that
+    // answers in one piece, is looked up in the episodes already here.
+    if(!f && thing && thing.episode_id){
+      var row=EPS.filter(function(e){ return e.episode_id===thing.episode_id; })[0];
+      f=row && row.file;
+    }
     return (f && typeof f.mp4==="string" && FILE.test(f.mp4)) ? f : null;
   }
   // The browser may refuse to start a video nobody pressed play on. The
@@ -875,9 +887,14 @@
     sec=Math.max(0,Math.floor(Number(sec)||0));
     // Another time in the video that is already here moves its player.
     var here=slot.querySelector("iframe.xfile");
-    if(here && here._video && here._file===file.mp4){
-      here._video.currentTime=sec;
-      if(auto) start(here._video);
+    if(here && here._file===file.mp4){
+      // Kept on the frame: a time pressed before the video has arrived
+      // is the one it starts at, not the one pressed first.
+      here._want=sec;
+      if(here._video && here._video.readyState>0){
+        here._video.currentTime=sec;
+        if(auto) start(here._video);
+      }
       return;
     }
     quiet();
@@ -890,14 +907,15 @@
     f.setAttribute("referrerpolicy","no-referrer");
     f.setAttribute("allow","autoplay; fullscreen; picture-in-picture");
     f.setAttribute("allowfullscreen","");
+    f._file=file.mp4; f._want=sec;
     f.addEventListener("load",function(){
       var video=f.contentDocument && f.contentDocument.querySelector("video");
       if(!video) return;
-      f._video=video; f._file=file.mp4;
+      f._video=video;
       if(typeof file.poster==="string" && POSTER.test(file.poster)) video.poster=file.poster;
       video.addEventListener("error",function(){ refused(slot,link); });
       video.addEventListener("loadedmetadata",function(){
-        if(sec) video.currentTime=sec;
+        if(f._want) video.currentTime=f._want;
         if(auto) start(video);
       },{once:true});
       video.src=src;

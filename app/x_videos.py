@@ -43,25 +43,38 @@ def pick(info: object) -> dict | None:
 
     Only a whole file X serves over https: the page plays it with the
     browser's own player, which Chrome cannot do with a playlist. The
-    tallest at or under 720 lines, and the tallest at or under 360 for a
-    phone; when every file is taller than the limit, the shortest.
+    largest at or under 720 lines, and the largest at or under 360 for a
+    phone; when every file is larger than the limit, the smallest.
     """
     if not isinstance(info, dict):
         return None
+    entries = info.get("entries")
+    if entries is not None:
+        # A post can carry more than one video, and the transcript is of
+        # one of them. Which is not known here, so two is none: a time
+        # that opened the wrong video would be worse than a time in text.
+        try:
+            entries = [e for e in entries if isinstance(e, dict)]
+        except TypeError:
+            return None
+        return pick(entries[0]) if len(entries) == 1 else None
     files = []
     for fmt in info.get("formats") or []:
         if not isinstance(fmt, dict):
             continue
-        url, height = fmt.get("url"), fmt.get("height")
+        url, height, width = fmt.get("url"), fmt.get("height"), fmt.get("width")
         if (isinstance(url, str) and FILE.fullmatch(url)
                 and isinstance(height, int) and height > 0):
-            files.append((height, url))
+            # Its shorter side, so a video shot upright is measured the
+            # way a wide one is: 720x1280 is a 720 and not a 1280.
+            lines = min(height, width) if isinstance(width, int) and width > 0 else height
+            files.append((lines, url))
     if not files:
         return None
     files.sort()
 
     def under(limit: int) -> str:
-        fits = [url for height, url in files if height <= limit]
+        fits = [url for lines, url in files if lines <= limit]
         return fits[-1] if fits else files[0][1]
 
     found = {"mp4": under(TALL), "small": under(SMALL)}

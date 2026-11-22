@@ -310,6 +310,14 @@ def test_a_sections_name_is_as_big_as_asked_and_answered():
         assert "<h2>On the shelf</h2>" in html, name
 
 
+def test_answer_is_not_printed_over_a_panel_that_is_still_reading():
+    """showReading() hides the heading with [hidden]. Laying the heading
+    out with flex defeated that, as it once did for the status line."""
+    assert "if(answerHead) answerHead.hidden=true;" in SCRIPT
+    assert ".answer h3[hidden]{display:none!important}" in PAGE
+    assert ".reading[hidden]{display:none!important}" in PAGE
+
+
 def test_the_summaries_can_be_seen_before_anything_is_pressed():
     """"i dont see the summaries anywhere": a dot before the title was the
     only sign a row had one. The section says what it is, and each row

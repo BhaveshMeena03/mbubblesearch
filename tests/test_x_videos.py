@@ -63,6 +63,25 @@ def test_nothing_usable_is_nothing_and_not_an_error(info):
     assert x_videos.pick(info) is None
 
 
+def test_a_video_shot_upright_is_measured_by_its_shorter_side():
+    """720x1280 is a 720. Measured by height alone it was a 1280, and a
+    laptop was handed the 320 pixel file."""
+    tall = [{"url": MP4.format(f"{w}x{h}"), "width": w, "height": h}
+            for w, h in ((320, 568), (480, 852), (720, 1280))]
+    kept = x_videos.pick({"formats": tall})
+    assert kept == {"mp4": MP4.format("720x1280"), "small": MP4.format("320x568")}
+
+
+def test_a_post_with_one_video_in_a_list_is_that_video_and_two_is_none():
+    """yt-dlp hands a post with several videos back as a list. The
+    transcript is of one of them and nothing here says which."""
+    one = found(360, 720)
+    assert x_videos.pick({"_type": "playlist", "entries": [one]}) == x_videos.pick(one)
+    assert x_videos.pick({"_type": "playlist", "entries": [one, found(720)]}) is None
+    for empty in ([], None.__class__, 5, [None, "x"]):
+        assert x_videos.pick({"entries": empty}) is None
+
+
 def test_a_poster_from_anywhere_else_is_dropped():
     info = found(720)
     info["thumbnail"] = "https://evil.example/poster.jpg"
@@ -144,6 +163,11 @@ def test_every_row_that_ships_is_one_of_his_videos_and_playable():
     own = {r["episode_id"] for r in load_shipped().values() if his_own(r.get("show"))}
     assert len(rows) >= 4 and set(rows) <= own
     for episode, row in rows.items():
+        if "mp4" not in row:
+            # Looked for and not found: written down so it is not asked
+            # for every morning, and never handed to a page.
+            assert set(row) <= {"none", "failed"} and x_videos.for_episode(episode) is None
+            continue
         assert x_videos.for_episode(episode) == row, episode
         assert "/vid/avc1/" in row["mp4"] and row["small"] and row["poster"]
     # The four that were his when this was built, so it is seen if one goes.
@@ -189,8 +213,52 @@ def test_a_video_it_cannot_find_ends_the_run_on_1_and_keeps_the_rest(finder, mon
     monkeypatch.setattr(finder, "look_up", look_up)
     monkeypatch.setattr("sys.argv", ["find_x_videos.py", "--all"])
     assert finder.main() == 1
-    assert json.loads(x_videos.PATH.read_text()) == {}
+    rows = json.loads(x_videos.PATH.read_text())
+    assert rows["x-1"] == {"failed": 1} and set(rows["x-2"]) == {"none"}
+    assert x_videos.for_episode("x-1") is None and x_videos.for_episode("x-2") is None
     assert not x_videos.PATH.with_suffix(".json.tmp").exists()
+
+
+def test_a_post_that_keeps_failing_is_left_after_three_tries(finder, monkeypatch):
+    """A deleted post would otherwise fail the job twice a day for good,
+    and a job that always ends on 1 hides the morning it matters."""
+    asked = []
+
+    def look_up(url):
+        asked.append(url)
+        if url.endswith("/1"):
+            raise RuntimeError("gone")
+        return {"mp4": MP4.format("1280x720")}
+    monkeypatch.setattr(finder, "look_up", look_up)
+    monkeypatch.setattr("sys.argv", ["find_x_videos.py"])
+    assert [finder.main() for _ in range(5)] == [1, 1, 1, 0, 0]
+    assert asked.count("https://x.com/blknoiz06/status/1") == 3
+    assert asked.count("https://x.com/blknoiz06/status/2") == 1
+    assert json.loads(x_videos.PATH.read_text())["x-1"] == {"failed": 3}
+    # Asked for by name, it is looked up again.
+    monkeypatch.setattr("sys.argv", ["find_x_videos.py", "--episode", "x-1"])
+    assert finder.main() == 1 and asked.count("https://x.com/blknoiz06/status/1") == 4
+
+
+def test_a_post_with_no_file_to_find_is_asked_for_once(finder, monkeypatch):
+    asked = []
+    monkeypatch.setattr(finder, "look_up", lambda url: asked.append(url))
+    monkeypatch.setattr("sys.argv", ["find_x_videos.py"])
+    assert [finder.main() for _ in range(3)] == [1, 0, 0]
+    assert len(asked) == 2                                     # the two posts, once each
+
+
+def test_summaries_that_cannot_be_read_do_not_empty_the_file(finder, monkeypatch):
+    """own_videos() is {} when the summaries are missing or broken. That
+    used to prune every row, save {} and end on 0, and the morning job
+    would have pushed it: none of his videos would play."""
+    kept = {"x-1": {"mp4": MP4.format("1280x720")}}
+    x_videos.PATH.write_text(json.dumps(kept))
+    monkeypatch.setattr(finder, "own_videos", lambda: {})
+    monkeypatch.setattr(finder, "look_up", lambda url: pytest.fail("nothing to look up"))
+    monkeypatch.setattr("sys.argv", ["find_x_videos.py", "--all"])
+    assert finder.main() == 1
+    assert json.loads(x_videos.PATH.read_text()) == kept
 
 
 def test_the_real_list_is_his_videos_and_no_broadcast():
@@ -257,9 +325,31 @@ def test_every_place_a_time_can_be_pressed_plays_his_video_there():
 
 
 def test_another_time_in_the_same_video_moves_the_player_it_has():
-    play = PAGE[PAGE.index("function playFile("):][:900]
+    play = PAGE[PAGE.index("function playFile("):][:1100]
     assert "here._video.currentTime=sec;" in play
     assert play.index("here._video.currentTime=sec;") < play.index("quiet();")
+
+
+def test_the_time_pressed_last_is_the_one_a_slow_video_starts_at():
+    """Pressed before the video had arrived, the second time was undone
+    by the first one's handler when it did."""
+    play = PAGE[PAGE.index("function playFile("):][:2600]
+    assert "here._want=sec;" in play and "f._file=file.mp4; f._want=sec;" in play
+    assert "if(f._want) video.currentTime=f._want;" in play
+    assert "if(sec) video.currentTime=sec;" not in play
+    assert "here._video.readyState>0" in play
+
+
+def test_a_passage_finds_its_file_when_the_search_did_not_send_one():
+    """The search that answers in one piece sends no file. The page has
+    the episodes, each with its own."""
+    look = PAGE[PAGE.index("function fileOf("):][:520]
+    assert "EPS.filter(function(e){ return e.episode_id===thing.episode_id; })[0]" in look
+    assert "FILE.test(f.mp4)" in look
+
+
+def test_a_player_scrolled_back_to_clears_the_bar_a_phone_pins():
+    assert ".pw .player{scroll-margin-top:76px}" in PAGE
 
 
 def test_when_x_refuses_the_reader_is_told_and_offered_the_post():

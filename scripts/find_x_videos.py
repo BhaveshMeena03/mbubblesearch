@@ -11,7 +11,10 @@ scripts/pack_summaries.py in the morning job.
 
 One lookup a video through yt-dlp, which reads the same public data X's
 own player does: no X API credit. A video it cannot find a file for is
-left out and said so, and the script ends on 1 so the job's log shows it.
+said so, and the script ends on 1 so the job's log shows it. A post with
+no file to find is written down and not asked for again; one whose lookup
+failed is tried on the next two runs and then left, so a deleted post
+fails the job three times and not every morning for good.
 """
 
 from __future__ import annotations
@@ -19,6 +22,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from datetime import UTC, datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -27,6 +31,8 @@ sys.path.insert(0, str(ROOT))
 from app import x_videos  # noqa: E402
 from app.schemas import his_own  # noqa: E402
 from app.summaries import load_shipped  # noqa: E402
+
+TRIES = 3
 
 
 def own_videos() -> dict[str, str]:
@@ -56,30 +62,48 @@ def main() -> int:
     args = ap.parse_args()
 
     posts = own_videos()
+    if not posts:
+        # The summaries could not be read, or hold none of his videos.
+        # Either way nothing is known, and writing that down would take
+        # every video on file off the site.
+        print("  none of his videos found in the summaries: the file is left as it is")
+        return 1
     try:
         rows = json.loads(x_videos.PATH.read_text())
     except (FileNotFoundError, ValueError):
         rows = {}
-    wanted = [e for e in posts if args.all or args.episode == e or e not in rows]
-    if args.episode:
-        wanted = [e for e in wanted if e == args.episode]
+    if not isinstance(rows, dict):
+        rows = {}
+
+    def due(episode: str) -> bool:
+        row = rows.get(episode)
+        if args.all or args.episode == episode or not isinstance(row, dict):
+            return True
+        return "mp4" not in row and "none" not in row and int(row.get("failed") or 0) < TRIES
+
+    wanted = [e for e in posts if due(e) and args.episode in (None, e)]
     missed = 0
     for episode in wanted:
+        before = rows.get(episode) if isinstance(rows.get(episode), dict) else {}
         try:
             found = look_up(posts[episode])
         except Exception as exc:                                # noqa: BLE001
-            print(f"  {episode}: {type(exc).__name__}")
-            found = None
+            missed += 1
+            rows[episode] = {"failed": int(before.get("failed") or 0) + 1}
+            print(f"  {episode}: {type(exc).__name__}, its times stay as text")
+            continue
         if found:
             rows[episode] = found
             print(f"  {episode}: found")
         else:
             missed += 1
-            print(f"  {episode}: no file found, its times stay as text")
+            rows[episode] = {"none": datetime.now(UTC).date().isoformat()}
+            print(f"  {episode}: no file to find, its times stay as text")
     # A video that is no longer one of his is not kept.
     rows = {episode: row for episode, row in rows.items() if episode in posts}
     save(rows)
-    print(f"  {len(rows)} of {len(posts)} of his videos have a file")
+    playable = sum(1 for row in rows.values() if isinstance(row, dict) and "mp4" in row)
+    print(f"  {playable} of {len(posts)} of his videos have a file")
     return 1 if missed else 0
 
 
