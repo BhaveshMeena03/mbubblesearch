@@ -4,7 +4,7 @@
    "symbol": "SOL",
    "name": "Solana",
    "asset_class": "crypto",
-   "mentions": 2757,
+   "mentions": 2758,
    "analysis": 834,
    "moments": [
     {
@@ -3507,6 +3507,15 @@
      "deep_link": "https://www.youtube.com/watch?v=9B_MXvX0CuA&t=873s",
      "kind": "mention",
      "note": "Pump Fun is discussed as a launchpad platform where the token is being migrated; conversation implies tokens are deployed on Solana."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 1268.0,
+     "timestamp": "21:08",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=1268s",
+     "kind": "mention",
+     "note": "Named in comparison to other blockchains in the context of profiting from being blockchains rather than securities."
     },
     {
      "episode_id": "9YvEpM4b0Y4",
@@ -24821,7 +24830,7 @@
      "note": "Speaker discusses Solana price levels, noting a 20x move from 500K to current 8 million levels and speculating on future levels in another month."
     }
    ],
-   "episode_count": 559,
+   "episode_count": 560,
    "single_reference": false
   },
   {
@@ -38438,8 +38447,8 @@
    "symbol": "ETH",
    "name": "Ethereum",
    "asset_class": "crypto",
-   "mentions": 1046,
-   "analysis": 373,
+   "mentions": 1049,
+   "analysis": 374,
    "moments": [
     {
      "episode_id": "-8z0M77EVZg",
@@ -39745,6 +39754,33 @@
      "deep_link": "https://www.youtube.com/watch?v=97ZNTDM8pRo&t=8530s",
      "kind": "analysis",
      "note": "Speaker mentions KLED performed phenomenally well against Ethereum."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 955.0,
+     "timestamp": "15:55",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=955s",
+     "kind": "mention",
+     "note": "Mentioned in comparison to Hyperliquid; speaker notes Hyperliquid is doing things Ethereum dreams of doing in five years."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 1268.0,
+     "timestamp": "21:08",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=1268s",
+     "kind": "mention",
+     "note": "Named in comparison to other blockchains in the context of profiting from being blockchains rather than securities."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 3908.0,
+     "timestamp": "1:05:08",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=3908s",
+     "kind": "analysis",
+     "note": "Referenced as part of USDG-Ethereum trading pairs that dominate order flow on Uniswap over other pairs."
     },
     {
      "episode_id": "9YvEpM4b0Y4",
@@ -47856,15 +47892,15 @@
      "note": "Speaker mentions Solana DATs and companies using treasuries to buy ETH."
     }
    ],
-   "episode_count": 377,
+   "episode_count": 378,
    "single_reference": false
   },
   {
    "symbol": "HYPE",
    "name": "Hyperliquid",
    "asset_class": "crypto",
-   "mentions": 437,
-   "analysis": 274,
+   "mentions": 444,
+   "analysis": 277,
    "moments": [
     {
      "episode_id": "-iilkByxBa8",
@@ -48468,6 +48504,69 @@
      "deep_link": "https://www.youtube.com/watch?v=97ZNTDM8pRo&t=10563s",
      "kind": "mention",
      "note": "Hyperliquid mentioned as having gone crazy over the weekend and ranking high in 24-hour revenue."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 704.0,
+     "timestamp": "11:44",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=704s",
+     "kind": "analysis",
+     "note": "Speaker states they are a 'hyper liquid maxi' with all holdings in Hyperliquid."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 943.0,
+     "timestamp": "15:43",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=943s",
+     "kind": "analysis",
+     "note": "Speaker expresses strong belief that Hyperliquid is one of the best products from crypto economy, highlighting its purpose-built consensus layer optimized for a matching engine and perp DEX that dominizes; notes it achieves sufficient decentralization with 27 co-located nodes and near institutional-grade high-frequency trading performance."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 1254.0,
+     "timestamp": "20:54",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=1254s",
+     "kind": "analysis",
+     "note": "Discussed as a successful blockchain generating substantial cash flow, with valuation frameworks based on cash flow analysis. Speaker mentions it's the only major asset they currently own and states commitment to holding regardless of price movements."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 1603.0,
+     "timestamp": "26:43",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=1603s",
+     "kind": "mention",
+     "note": "Referenced in passing as something Mantra's approach is in line with."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 2447.0,
+     "timestamp": "40:47",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=2447s",
+     "kind": "mention",
+     "note": "Mentioned in passing as a platform where tokenization of traders is occurring."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 2499.0,
+     "timestamp": "41:39",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=2499s",
+     "kind": "mention",
+     "note": "Referenced as the basis for comparison, stating the upcoming airdrop should be as big as the biggest airdrop since Hyperliquid itself."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 4116.0,
+     "timestamp": "1:08:36",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=4116s",
+     "kind": "mention",
+     "note": "Hyperliquid's precompiles and network component expansion mentioned as interesting features."
     },
     {
      "episode_id": "9lEczLHExQ4",
@@ -51800,14 +51899,14 @@
      "note": "A vault platform where trading activity is tracked and displayed; the speaker launched a vault on Sunday/Monday with 20x leverage, generating significant P&L over the first few days."
     }
    ],
-   "episode_count": 202,
+   "episode_count": 203,
    "single_reference": false
   },
   {
    "symbol": "PUMP",
    "name": "Pump.fun",
    "asset_class": "other",
-   "mentions": 405,
+   "mentions": 406,
    "analysis": 246,
    "moments": [
     {
@@ -52439,6 +52538,15 @@
      "deep_link": "https://www.youtube.com/watch?v=8tP90A-LpzY&t=4512s",
      "kind": "mention",
      "note": "PumpFun mentioned as a social trading app launching and becoming an information flow platform competing with crypto Twitter."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 3501.0,
+     "timestamp": "58:21",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=3501s",
+     "kind": "mention",
+     "note": "Referenced as the 'completely the other side' of launchpad models compared to metadao, described as 'just wild west.'"
     },
     {
      "episode_id": "9lEczLHExQ4",
@@ -55456,7 +55564,7 @@
      "note": "Speaker stated they launched Pump Coin three to four months ago on their Riverboat platform."
     }
    ],
-   "episode_count": 216,
+   "episode_count": 217,
    "single_reference": false
   },
   {
@@ -58228,8 +58336,8 @@
    "symbol": "USDC",
    "name": "USD Coin",
    "asset_class": "crypto",
-   "mentions": 514,
-   "analysis": 147,
+   "mentions": 515,
+   "analysis": 148,
    "moments": [
     {
      "episode_id": "-8z0M77EVZg",
@@ -58779,6 +58887,15 @@
      "deep_link": "https://www.youtube.com/watch?v=7yGhbuFKVw0&t=1253s",
      "kind": "analysis",
      "note": "Platform uses USDC for pay-per-message pricing sent via X402."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 1368.0,
+     "timestamp": "22:48",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=1368s",
+     "kind": "analysis",
+     "note": "Discussed in context of stablecoin deposits on Elysium and comparisons to competitor chains like Base in terms of deposit volumes and yield generation."
     },
     {
      "episode_id": "9bZPeck9Jeg",
@@ -62858,7 +62975,7 @@
      "note": "Mentioned as an asset users needed to send to Arbitrum to access perp platforms."
     }
    ],
-   "episode_count": 297,
+   "episode_count": 298,
    "single_reference": false
   },
   {
@@ -68822,7 +68939,7 @@
    "symbol": "ZEC",
    "name": "Zcash",
    "asset_class": "crypto",
-   "mentions": 213,
+   "mentions": 214,
    "analysis": 101,
    "moments": [
     {
@@ -69031,6 +69148,15 @@
      "deep_link": "https://www.youtube.com/watch?v=7N5rXf50YYM&t=1844s",
      "kind": "analysis",
      "note": "Looking for pullback into high time frame support on ZEC for leverage longs; part of four major setups being watched."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 1268.0,
+     "timestamp": "21:08",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=1268s",
+     "kind": "mention",
+     "note": "Mentioned as a blockchain described as a potentially worse offender in terms of profiting from being a blockchain rather than a security."
     },
     {
      "episode_id": "9lEczLHExQ4",
@@ -70743,7 +70869,7 @@
      "note": "Named as an example of Stonk's crypto-native pairings."
     }
    ],
-   "episode_count": 106,
+   "episode_count": 107,
    "single_reference": false
   },
   {
@@ -74655,8 +74781,8 @@
    "symbol": "NVDA",
    "name": "Nvidia",
    "asset_class": "stock",
-   "mentions": 251,
-   "analysis": 78,
+   "mentions": 253,
+   "analysis": 79,
    "moments": [
     {
      "episode_id": "-NmeR-pjLN8",
@@ -74864,6 +74990,24 @@
      "deep_link": "https://www.youtube.com/watch?v=7VgfmZW-7LE&t=1138s",
      "kind": "mention",
      "note": "Mentioned as a player trying to innovate in the compute world to make it cheaper and more efficient."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 2345.0,
+     "timestamp": "39:05",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=2345s",
+     "kind": "analysis",
+     "note": "Speaker mentions NVIDIA is at $146 and notes that NVIDIA is getting crushed as the AI bubble has blown up."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 3908.0,
+     "timestamp": "1:05:08",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=3908s",
+     "kind": "mention",
+     "note": "Mentioned in context of a trading pair (artificial paired with NVIDIA) on Robinhood and comparing liquidity."
     },
     {
      "episode_id": "9YvEpM4b0Y4",
@@ -76918,7 +77062,7 @@
      "note": "Speaker used Nvidia as an example of a tokenized stock that users could hold in their wallet through the FIRE protocol."
     }
    ],
-   "episode_count": 130,
+   "episode_count": 131,
    "single_reference": false
   },
   {
@@ -98759,8 +98903,8 @@
    "symbol": "USDT",
    "name": "Tether",
    "asset_class": "crypto",
-   "mentions": 135,
-   "analysis": 39,
+   "mentions": 136,
+   "analysis": 40,
    "moments": [
     {
      "episode_id": "-Lbmo2D7630",
@@ -98896,6 +99040,15 @@
      "deep_link": "https://www.youtube.com/watch?v=7acI4jr9ZOI&t=864s",
      "kind": "analysis",
      "note": "Discussed as a stablecoin used for peer-to-peer transactions, cross-border payments, and dollar exposure in Asia, particularly in 2016-2017; noted as a significant payment form in African countries and used to trade on major exchanges."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 1382.0,
+     "timestamp": "23:02",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=1382s",
+     "kind": "analysis",
+     "note": "Mentioned alongside USDC as a stablecoin where issuers like Circle and Tether do not share deposit yield with token holders, with deposits currently held in treasuries earning approximately 3% yield."
     },
     {
      "episode_id": "9bZPeck9Jeg",
@@ -99978,7 +100131,7 @@
      "note": "Mentioned briefly in reference to 'Tether FUD the other day' but not analyzed."
     }
    ],
-   "episode_count": 96,
+   "episode_count": 97,
    "single_reference": false
   },
   {
@@ -103650,6 +103803,503 @@
    "single_reference": false
   },
   {
+   "symbol": "CASH",
+   "name": "Cash Cat",
+   "asset_class": "crypto",
+   "mentions": 54,
+   "analysis": 36,
+   "moments": [
+    {
+     "episode_id": "1UFlORh3zt0",
+     "episode_title": "\ud83d\udd34 LIVE: FOMC Day, Onchain Rotations...Next Leg Loading? | Market Update + Interviews",
+     "start_seconds": 5996.0,
+     "timestamp": "1:39:56",
+     "deep_link": "https://www.youtube.com/watch?v=1UFlORh3zt0&t=5996s",
+     "kind": "mention",
+     "note": "Named as one of early Robin Hood tokens that re-rated from sub 100k to 100 million and beyond in market cap."
+    },
+    {
+     "episode_id": "4PlcWhQM96A",
+     "episode_title": "\ud83d\udd34 LIVE: Time To Log Off? | AI Fears, Debt Market Shutdown, Anthropic IPO",
+     "start_seconds": 8123.0,
+     "timestamp": "2:15:23",
+     "deep_link": "https://www.youtube.com/watch?v=4PlcWhQM96A&t=8123s",
+     "kind": "analysis",
+     "note": "Identified as the leading meme token on Robinhood chain; speaker expressed expectation it could reach a billion-dollar valuation."
+    },
+    {
+     "episode_id": "8tP90A-LpzY",
+     "episode_title": "\ud83d\udd34 LIVE: $1B+ Liquidated as Crypto Nukes | Jensen Huang Drama | Should You Sell It All?",
+     "start_seconds": 7751.0,
+     "timestamp": "2:09:11",
+     "deep_link": "https://www.youtube.com/watch?v=8tP90A-LpzY&t=7751s",
+     "kind": "mention",
+     "note": "Named as an example of a project that capitalized during meta shifts and caught moves early."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 3.0,
+     "timestamp": "0:03",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=3s",
+     "kind": "analysis",
+     "note": "Speaker invested their entire bag into Cash Cat after it appeared, viewing it as an identical twin to Toshi and crediting it with changing their entire mindset about the meme token game."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 697.0,
+     "timestamp": "11:37",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=697s",
+     "kind": "analysis",
+     "note": "Speaker discusses extensive involvement with Cash Cat as a launch pad project, spending significant effort on its success, giving their entire bag to market makers for it, and viewing it as a potential ceiling-setter for the cycle."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 1853.0,
+     "timestamp": "30:53",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=1853s",
+     "kind": "analysis",
+     "note": "Cash Cat is described as a pyramid structure maintained by the community; Let's Cash launchpad was created to accumulate supply for Cash Cat operations and helped fund market making and centralized exchange costs."
+    },
+    {
+     "episode_id": "AImBDqEWd8E",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding | Ceilings Rising | Market Update + Interviews",
+     "start_seconds": 814.0,
+     "timestamp": "13:34",
+     "deep_link": "https://www.youtube.com/watch?v=AImBDqEWd8E&t=814s",
+     "kind": "analysis",
+     "note": "Discussed as a meme token on the Robin Hood chain that was the earliest meme token and first call in their Discord sub 200K; described as the king meme coin on Robin Hood with price going up and viewed as likely to reach a billion dollar market cap."
+    },
+    {
+     "episode_id": "AImBDqEWd8E",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding | Ceilings Rising | Market Update + Interviews",
+     "start_seconds": 10790.0,
+     "timestamp": "2:59:50",
+     "deep_link": "https://www.youtube.com/watch?v=AImBDqEWd8E&t=10790s",
+     "kind": "analysis",
+     "note": "Cash Cat recently did 200-250 million and is described as swiftly heading toward a billion dollars."
+    },
+    {
+     "episode_id": "AImBDqEWd8E",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding | Ceilings Rising | Market Update + Interviews",
+     "start_seconds": 11845.0,
+     "timestamp": "3:17:25",
+     "deep_link": "https://www.youtube.com/watch?v=AImBDqEWd8E&t=11845s",
+     "kind": "mention",
+     "note": "Mentioned as being listed on Robinhood; speaker's friend asked about it after downloading the app."
+    },
+    {
+     "episode_id": "AImBDqEWd8E",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding | Ceilings Rising | Market Update + Interviews",
+     "start_seconds": 16288.0,
+     "timestamp": "4:31:28",
+     "deep_link": "https://www.youtube.com/watch?v=AImBDqEWd8E&t=16288s",
+     "kind": "analysis",
+     "note": "Cash Cat's market cap ceiling is described as a billion, stated as a lock; presented as a meme RWA pairing related to Robin Hood."
+    },
+    {
+     "episode_id": "B2cg6LWD60g",
+     "episode_title": "\ud83d\udd34 LIVE: BTC Erases Rally | $870M+ Longs Liquidated | Time to Exit?",
+     "start_seconds": 9472.0,
+     "timestamp": "2:37:52",
+     "deep_link": "https://www.youtube.com/watch?v=B2cg6LWD60g&t=9472s",
+     "kind": "mention",
+     "note": "Speaker mentioned liking Cash Cat automatically because of the lore behind it, relating it to being the first name of the Robinhood app."
+    },
+    {
+     "episode_id": "DhLaLq6NZJA",
+     "episode_title": "\ud83d\udd34 LIVE: On-chain crypto showing resilience | Pullback's to watch | Live Market Updates + Interviews",
+     "start_seconds": 1685.0,
+     "timestamp": "28:05",
+     "deep_link": "https://www.youtube.com/watch?v=DhLaLq6NZJA&t=1685s",
+     "kind": "analysis",
+     "note": "Described as leading meme token on Robinhood chain; speaker predicts it could reach $1B market cap if it follows pattern of leading memes on other chains; recommends buying dips sub-$100M valuation, around $45M."
+    },
+    {
+     "episode_id": "DhLaLq6NZJA",
+     "episode_title": "\ud83d\udd34 LIVE: On-chain crypto showing resilience | Pullback's to watch | Live Market Updates + Interviews",
+     "start_seconds": 9801.0,
+     "timestamp": "2:43:21",
+     "deep_link": "https://www.youtube.com/watch?v=DhLaLq6NZJA&t=9801s",
+     "kind": "analysis",
+     "note": "Speaker describes Cash Cat as a proxy bet on Robinhood doing well, expects it may go to a billion at some point."
+    },
+    {
+     "episode_id": "EHhZRRHMZQM",
+     "episode_title": "\ud83d\udd34 LIVE: Markets ripping |  RHC leading | Market Update + Founder Interview",
+     "start_seconds": 11594.0,
+     "timestamp": "3:13:14",
+     "deep_link": "https://www.youtube.com/watch?v=EHhZRRHMZQM&t=11594s",
+     "kind": "mention",
+     "note": "Mentioned as being at all-time highs and continuing to move higher."
+    },
+    {
+     "episode_id": "EHhZRRHMZQM",
+     "episode_title": "\ud83d\udd34 LIVE: Markets ripping |  RHC leading | Market Update + Founder Interview",
+     "start_seconds": 12919.0,
+     "timestamp": "3:35:19",
+     "deep_link": "https://www.youtube.com/watch?v=EHhZRRHMZQM&t=12919s",
+     "kind": "analysis",
+     "note": "Described as the leader meme coin on Robinhood with thesis that every major chain has a $1 billion runner for a meme coin."
+    },
+    {
+     "episode_id": "F3chwn4aU3U",
+     "episode_title": "\ud83d\udd34 LIVE: Ansem Joins Launchpad Wars | Time to Buy Dips? | Market Update + Interview",
+     "start_seconds": 3108.0,
+     "timestamp": "51:48",
+     "deep_link": "https://www.youtube.com/watch?v=F3chwn4aU3U&t=3108s",
+     "kind": "analysis",
+     "note": "Speaker had predicted a pullback in Cash Cat and circled the target area; the pullback occurred as predicted; speaker noted potential for more downside and identified a 'golden pocket area' between 75-90 million market cap as attractive, citing a head and shoulders formation and deep value zone."
+    },
+    {
+     "episode_id": "F3chwn4aU3U",
+     "episode_title": "\ud83d\udd34 LIVE: Ansem Joins Launchpad Wars | Time to Buy Dips? | Market Update + Interview",
+     "start_seconds": 3461.0,
+     "timestamp": "57:41",
+     "deep_link": "https://www.youtube.com/watch?v=F3chwn4aU3U&t=3461s",
+     "kind": "mention",
+     "note": "Listed as one of tokens being tracked on Robinhood charts."
+    },
+    {
+     "episode_id": "IiXJRXVECBo",
+     "episode_title": "The Rise Of Soby: FOMO's Top Trader, $158K/Day, Sneak disses @Orangie Web3",
+     "start_seconds": 616.0,
+     "timestamp": "10:16",
+     "deep_link": "https://www.youtube.com/watch?v=IiXJRXVECBo&t=616s",
+     "kind": "mention",
+     "note": "Speaker mentioned Cash Cat launching on Arbitrum and expressed regret about missing this opportunity while they were checked out."
+    },
+    {
+     "episode_id": "MvjP9JvGxnM",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto Looks Promising...Here's Why | Market Updates",
+     "start_seconds": 467.0,
+     "timestamp": "7:47",
+     "deep_link": "https://www.youtube.com/watch?v=MvjP9JvGxnM&t=467s",
+     "kind": "analysis",
+     "note": "Speaker states they captured a 4,000% move on Cash Cat in the Robin Hood eco."
+    },
+    {
+     "episode_id": "Mwp0GbhnqLI",
+     "episode_title": "\ud83d\udd34 LIVE: No bailouts for crypto, Clarity Act In Days? | Founder Interviews + Market Updates",
+     "start_seconds": 285.0,
+     "timestamp": "4:45",
+     "deep_link": "https://www.youtube.com/watch?v=Mwp0GbhnqLI&t=285s",
+     "kind": "mention",
+     "note": "Cash Cat was mentioned as a token launched by Knox launchpad on Robin Hood chain."
+    },
+    {
+     "episode_id": "Mwp0GbhnqLI",
+     "episode_title": "\ud83d\udd34 LIVE: No bailouts for crypto, Clarity Act In Days? | Founder Interviews + Market Updates",
+     "start_seconds": 12320.0,
+     "timestamp": "3:25:20",
+     "deep_link": "https://www.youtube.com/watch?v=Mwp0GbhnqLI&t=12320s",
+     "kind": "mention",
+     "note": "Named as an example memecoin that could be paired with Hood."
+    },
+    {
+     "episode_id": "NAZzbIlnR9o",
+     "episode_title": "Sunrise: Every Asset, Tradable on Solana.",
+     "start_seconds": 604.0,
+     "timestamp": "10:04",
+     "deep_link": "https://www.youtube.com/watch?v=NAZzbIlnR9o&t=604s",
+     "kind": "analysis",
+     "note": "Listed on Solana on July 10th; achieved 25% of daily Cash Cat volume across Robinhood and Solana within 24 hours."
+    },
+    {
+     "episode_id": "NAZzbIlnR9o",
+     "episode_title": "Sunrise: Every Asset, Tradable on Solana.",
+     "start_seconds": 1412.0,
+     "timestamp": "23:32",
+     "deep_link": "https://www.youtube.com/watch?v=NAZzbIlnR9o&t=1412s",
+     "kind": "mention",
+     "note": "Mentioned as an example of a compelling asset available across different chains including Solana."
+    },
+    {
+     "episode_id": "O4A8vFhlU2Q",
+     "episode_title": "\ud83d\udd34 LIVE: Saylor Selling | Onchain Cooking | Bear Market Update + Trader Radio",
+     "start_seconds": 7298.0,
+     "timestamp": "2:01:38",
+     "deep_link": "https://www.youtube.com/watch?v=O4A8vFhlU2Q&t=7298s",
+     "kind": "analysis",
+     "note": "Speaker posted about Cash Cats over the weekend and describes a clean technical analysis setup with a head and shoulders pattern, showing 55% gains since the posted analysis with a strong breakout from a retracement range."
+    },
+    {
+     "episode_id": "O4A8vFhlU2Q",
+     "episode_title": "\ud83d\udd34 LIVE: Saylor Selling | Onchain Cooking | Bear Market Update + Trader Radio",
+     "start_seconds": 7877.0,
+     "timestamp": "2:11:17",
+     "deep_link": "https://www.youtube.com/watch?v=O4A8vFhlU2Q&t=7877s",
+     "kind": "analysis",
+     "note": "Described as the top meme on a specific chain, discussed as having been flipped by other tokens at certain points and as a token that reaches deep value territory where buyers accumulate."
+    },
+    {
+     "episode_id": "QSRP-rTwfYE",
+     "episode_title": "\ud83d\udd34 LIVE: Calm Before the Storm | Onchain Weekly Recap",
+     "start_seconds": 4131.0,
+     "timestamp": "1:08:51",
+     "deep_link": "https://www.youtube.com/watch?v=QSRP-rTwfYE&t=4131s",
+     "kind": "mention",
+     "note": "Mentioned as an example of a meme coin that people commonly refer to when thinking about Robinhood, launched in July."
+    },
+    {
+     "episode_id": "RLS5bDw7pYg",
+     "episode_title": "\ud83d\udd34 LIVE: Clarity Act Vote...What Next? | Market Update + Interviews",
+     "start_seconds": 3930.0,
+     "timestamp": "1:05:30",
+     "deep_link": "https://www.youtube.com/watch?v=RLS5bDw7pYg&t=3930s",
+     "kind": "mention",
+     "note": "Speaker referred to 'cash cat launching' on a Robinhood chain as something they missed."
+    },
+    {
+     "episode_id": "RufYrYmMVwU",
+     "episode_title": "\ud83d\udd34 LIVE: Onchain Market Bottom Forming | Q4 Rally Setup + How to Maximize Returns",
+     "start_seconds": 7252.0,
+     "timestamp": "2:00:52",
+     "deep_link": "https://www.youtube.com/watch?v=RufYrYmMVwU&t=7252s",
+     "kind": "analysis",
+     "note": "Speaker discusses Cash Cat as a v1 meme on Robin Hood, noting it forms a nice round bottom and serves as a barometer for the Robin Hood ecosystem."
+    },
+    {
+     "episode_id": "WBB3vdHLF2Q",
+     "episode_title": "\ud83d\udd34 LIVE: S&P New ATH | Uniswap Launchpad Coming | Market Update + Interview",
+     "start_seconds": 7707.0,
+     "timestamp": "2:08:27",
+     "deep_link": "https://www.youtube.com/watch?v=WBB3vdHLF2Q&t=7707s",
+     "kind": "analysis",
+     "note": "Memecoin that pumped significantly when Vlad (CEO of Robinhood) engaged with it; first memecoin that Vlad meaningfully engaged with before When."
+    },
+    {
+     "episode_id": "Xf3MBXMtfD0",
+     "episode_title": "\ud83d\udd34 LIVE: Bottom is in | Opportunities everywhere | Market Update + Interviews",
+     "start_seconds": 5967.0,
+     "timestamp": "1:39:27",
+     "deep_link": "https://www.youtube.com/watch?v=Xf3MBXMtfD0&t=5967s",
+     "kind": "mention",
+     "note": "Named as one of the tokens for which liquidity support is being built on the Robinhood chain platform."
+    },
+    {
+     "episode_id": "Xf3MBXMtfD0",
+     "episode_title": "\ud83d\udd34 LIVE: Bottom is in | Opportunities everywhere | Market Update + Interviews",
+     "start_seconds": 11113.0,
+     "timestamp": "3:05:13",
+     "deep_link": "https://www.youtube.com/watch?v=Xf3MBXMtfD0&t=11113s",
+     "kind": "analysis",
+     "note": "Discussed as the leading meme on Robinhood, described as resilient, and predicted to potentially reach a billion dollars valuation."
+    },
+    {
+     "episode_id": "bJygdk4PDrM",
+     "episode_title": "Scopl: Yield-bearing limit orders on Robinhood",
+     "start_seconds": 1289.0,
+     "timestamp": "21:29",
+     "deep_link": "https://www.youtube.com/watch?v=bJygdk4PDrM&t=1289s",
+     "kind": "analysis",
+     "note": "Discussed as a token that can be bought and sold on Scopore with limit orders; users can place limit sells if they have cash token or limit buys if they have USDC or ETH to acquire cash token."
+    },
+    {
+     "episode_id": "c6xFYSGZ0Fo",
+     "episode_title": "\ud83d\udd34 LIVE: Has Onchain Summer Begun? | Market Update + Founder Interviews",
+     "start_seconds": 10269.0,
+     "timestamp": "2:51:09",
+     "deep_link": "https://www.youtube.com/watch?v=c6xFYSGZ0Fo&t=10269s",
+     "kind": "analysis",
+     "note": "Speakers discussed buying Cash Cat as part of Robin Hood L2 strategy; it was the original name of the OG Robin Hood app. Chart showed it moved from 130k market cap to 3.7 million market cap."
+    },
+    {
+     "episode_id": "c6xFYSGZ0Fo",
+     "episode_title": "\ud83d\udd34 LIVE: Has Onchain Summer Begun? | Market Update + Founder Interviews",
+     "start_seconds": 10635.0,
+     "timestamp": "2:57:15",
+     "deep_link": "https://www.youtube.com/watch?v=c6xFYSGZ0Fo&t=10635s",
+     "kind": "mention",
+     "note": "Cash Cat is making the first DEX on Robin Hood chain."
+    },
+    {
+     "episode_id": "c6yysVT-tOg",
+     "episode_title": "\ud83d\udd34 LIVE: Will Robinhood Selloff Continue? | Market Update + Founder Interview",
+     "start_seconds": 11470.0,
+     "timestamp": "3:11:10",
+     "deep_link": "https://www.youtube.com/watch?v=c6yysVT-tOg&t=11470s",
+     "kind": "mention",
+     "note": "Listed as one of the tokens on a chart shown; speaker suggests it may continue to perform based on lore perspective."
+    },
+    {
+     "episode_id": "dIsFawgT6DQ",
+     "episode_title": "\ud83d\udd34 LIVE: FOMO App Dominating | Onchain is HOT | Creator Coins Back? + Market Update",
+     "start_seconds": 6526.0,
+     "timestamp": "1:48:46",
+     "deep_link": "https://www.youtube.com/watch?v=dIsFawgT6DQ&t=6526s",
+     "kind": "mention",
+     "note": "Mentioned as one of the top three tokens expected on Robinhood, described as having performed very well recently."
+    },
+    {
+     "episode_id": "oI9Hv_D6UFk",
+     "episode_title": "\ud83d\udd34LIVE: HyperEVM, SOL, RH, or Base? Bulls In Control | Time to Lock In | Market Update + Interview",
+     "start_seconds": 13191.0,
+     "timestamp": "3:39:51",
+     "deep_link": "https://www.youtube.com/watch?v=oI9Hv_D6UFk&t=13191s",
+     "kind": "analysis",
+     "note": "Speaker mentioned trading Cash Cat as a long-term DLMM position and demonstrated opening a range on it that was printing fees decently."
+    },
+    {
+     "episode_id": "pwhvqgCGV0w",
+     "episode_title": "This Trader Caught $ORBIO at $40K Market Cap (Now $100M+)",
+     "start_seconds": 2301.0,
+     "timestamp": "38:21",
+     "deep_link": "https://www.youtube.com/watch?v=pwhvqgCGV0w&t=2301s",
+     "kind": "analysis",
+     "note": "Described as top long ecosystem meme coin, used as whiteboard for spinning up RWA ecosystem opportunities, in steady state deployment."
+    },
+    {
+     "episode_id": "qkYKDed4Apk",
+     "episode_title": "\ud83d\udd34 LIVE: $CASHCAT Robinhood Listing | Uniswap Launchpad | Market Update + Interviews",
+     "start_seconds": 344.0,
+     "timestamp": "5:44",
+     "deep_link": "https://www.youtube.com/watch?v=qkYKDed4Apk&t=344s",
+     "kind": "analysis",
+     "note": "CashCat got listed; speakers discussed it previously at the bottom, mentioned buckets for long-term accumulation on Robinhood, and characterized it as a rotation game."
+    },
+    {
+     "episode_id": "qkYKDed4Apk",
+     "episode_title": "\ud83d\udd34 LIVE: $CASHCAT Robinhood Listing | Uniswap Launchpad | Market Update + Interviews",
+     "start_seconds": 10086.0,
+     "timestamp": "2:48:06",
+     "deep_link": "https://www.youtube.com/watch?v=qkYKDed4Apk&t=10086s",
+     "kind": "mention",
+     "note": "Identified as a meme token on Robinhood that the speaker dip bought. Referenced as the meme runner bucket example."
+    },
+    {
+     "episode_id": "qq_4gfyjN6s",
+     "episode_title": "\ud83d\udd34 LIVE: MonkeDAO Solana Product Spotlight + Trader Radio w/@ChillTRD | Market Updates",
+     "start_seconds": 11297.0,
+     "timestamp": "3:08:17",
+     "deep_link": "https://www.youtube.com/watch?v=qq_4gfyjN6s&t=11297s",
+     "kind": "analysis",
+     "note": "Speaker notes Cash Cat looks good but expects potential pullback to 100 mil support level before resuming uptrend, describing the current price action as unusual."
+    },
+    {
+     "episode_id": "qq_4gfyjN6s",
+     "episode_title": "\ud83d\udd34 LIVE: MonkeDAO Solana Product Spotlight + Trader Radio w/@ChillTRD | Market Updates",
+     "start_seconds": 11493.0,
+     "timestamp": "3:11:33",
+     "deep_link": "https://www.youtube.com/watch?v=qq_4gfyjN6s&t=11493s",
+     "kind": "analysis",
+     "note": "Speaker discusses potential range formation and price levels on Cash Cat, suggesting it may revisit tested levels and potentially slide higher before moving lower."
+    },
+    {
+     "episode_id": "twr8yC6xgVo",
+     "episode_title": "Scherwode.fun: The Launchpad Built for Robinhood Chain",
+     "start_seconds": 651.0,
+     "timestamp": "10:51",
+     "deep_link": "https://www.youtube.com/watch?v=twr8yC6xgVo&t=651s",
+     "kind": "mention",
+     "note": "Mentioned as an example of what could be included in a rooted token investment portfolio backed by a contract address."
+    },
+    {
+     "episode_id": "urLmYepetQI",
+     "episode_title": "\ud83d\udd34 LIVE: WTF is a V4 hook | $ETH bottom in? | Market Update + Interviews",
+     "start_seconds": 7299.0,
+     "timestamp": "2:01:39",
+     "deep_link": "https://www.youtube.com/watch?v=urLmYepetQI&t=7299s",
+     "kind": "analysis",
+     "note": "Cash Cat had a launchpad and was the only asset shown in Vlad's Q2 earnings report wallet holdings, causing a price wick from 36 million to 62 million; discussed as a leading meme on Robinhood chain and as an LP opportunity on Meteora using DLMM."
+    },
+    {
+     "episode_id": "urLmYepetQI",
+     "episode_title": "\ud83d\udd34 LIVE: WTF is a V4 hook | $ETH bottom in? | Market Update + Interviews",
+     "start_seconds": 7516.0,
+     "timestamp": "2:05:16",
+     "deep_link": "https://www.youtube.com/watch?v=urLmYepetQI&t=7516s",
+     "kind": "analysis",
+     "note": "Identified as the leader in the meme bucket on Robinhood, with traders choosing to trade it on Solana over Robinhood to avoid bridging processes."
+    },
+    {
+     "episode_id": "vBRvDqOdKwQ",
+     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
+     "start_seconds": 304.0,
+     "timestamp": "5:04",
+     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=304s",
+     "kind": "analysis",
+     "note": "Discussed as having reached $220 million market cap on Robinhood chain, positioned as one of the main runners alongside Pods and AI."
+    },
+    {
+     "episode_id": "vBRvDqOdKwQ",
+     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
+     "start_seconds": 480.0,
+     "timestamp": "8:00",
+     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=480s",
+     "kind": "analysis",
+     "note": "Named as one of four tokens that reached 100 million market cap and sustained that level; billion dollar projections mentioned."
+    },
+    {
+     "episode_id": "vqOeJKpQ61E",
+     "episode_title": "A Conversation with Sonder: Trading the Crypto Trenches",
+     "start_seconds": 317.0,
+     "timestamp": "5:17",
+     "deep_link": "https://www.youtube.com/watch?v=vqOeJKpQ61E&t=317s",
+     "kind": "analysis",
+     "note": "Cash was discussed as the foundational ecosystem asset; speaker noted it started going up, causing bridge funding issues, and that removal of friction around Cash fueled the move. Everything in the ecosystem relies on Cash according to the speaker's original thesis."
+    },
+    {
+     "episode_id": "vqOeJKpQ61E",
+     "episode_title": "A Conversation with Sonder: Trading the Crypto Trenches",
+     "start_seconds": 1209.0,
+     "timestamp": "20:09",
+     "deep_link": "https://www.youtube.com/watch?v=vqOeJKpQ61E&t=1209s",
+     "kind": "analysis",
+     "note": "Discussed as a memecoin on Robin Hood chain with significant early holder gains; speaker analyzes its market cap trajectory compared to similar projects like Toshi, suggests it could potentially reach 1 billion market cap, and states personal plan to accumulate and hold for a year."
+    },
+    {
+     "episode_id": "vqOeJKpQ61E",
+     "episode_title": "A Conversation with Sonder: Trading the Crypto Trenches",
+     "start_seconds": 2551.0,
+     "timestamp": "42:31",
+     "deep_link": "https://www.youtube.com/watch?v=vqOeJKpQ61E&t=2551s",
+     "kind": "analysis",
+     "note": "Described as fitting the prototype of a new chain with the largest retail consumer finance app in the world; speaker notes it could go to zero but matches criteria for potential billion-dollar market cap runners."
+    },
+    {
+     "episode_id": "wsTdtrlI2I8",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood launchpad war drama | Live Market Updates + Onchain Positioning",
+     "start_seconds": 7441.0,
+     "timestamp": "2:04:01",
+     "deep_link": "https://www.youtube.com/watch?v=wsTdtrlI2I8&t=7441s",
+     "kind": "analysis",
+     "note": "Identified as the leading meme token on Robinhood; speakers expect similar pattern to flagship memes on other chains, with analysis of potential rollover to 30 million market cap."
+    },
+    {
+     "episode_id": "x7qRX-hWxg8",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding (Memes, V4 Hooks, Infra) | Market Update + Interviews",
+     "start_seconds": 9445.0,
+     "timestamp": "2:37:25",
+     "deep_link": "https://www.youtube.com/watch?v=x7qRX-hWxg8&t=9445s",
+     "kind": "analysis",
+     "note": "Cash Cat described as the leading meme on Robinhood with thesis that it will reach a billion dollars. Listed on Robinhood at 210 million market cap with prediction of 100% gain within a week to 400 million."
+    },
+    {
+     "episode_id": "y4SqXgBAFFg",
+     "episode_title": "\ud83d\udd34 LIVE: RobinHood Chain Exploding! | War Back!?!? | Market Updates + Founder Interviews",
+     "start_seconds": 697.0,
+     "timestamp": "11:37",
+     "deep_link": "https://www.youtube.com/watch?v=y4SqXgBAFFg&t=697s",
+     "kind": "analysis",
+     "note": "Speakers note that Cashcat went to 130 million market cap after Vlad and Robinhood team members followed the account on social media."
+    },
+    {
+     "episode_id": "zTEsQqVVsZk",
+     "episode_title": "\ud83d\udd34 LIVE: Bear Market Ending? | RH Szn Continues | Market Update + Interviews",
+     "start_seconds": 9684.0,
+     "timestamp": "2:41:24",
+     "deep_link": "https://www.youtube.com/watch?v=zTEsQqVVsZk&t=9684s",
+     "kind": "analysis",
+     "note": "Speaker mentions currently dealing in Cash Cat and wants it listed on Sunrise/Meteora, expressing interest in providing liquidity and price action exposure."
+    }
+   ],
+   "episode_count": 35,
+   "single_reference": false
+  },
+  {
    "symbol": "PMX",
    "name": "Polymarket (PMX)",
    "asset_class": "other",
@@ -106629,476 +107279,6 @@
     }
    ],
    "episode_count": 22,
-   "single_reference": false
-  },
-  {
-   "symbol": "CASH",
-   "name": "Cash Cat",
-   "asset_class": "crypto",
-   "mentions": 51,
-   "analysis": 33,
-   "moments": [
-    {
-     "episode_id": "1UFlORh3zt0",
-     "episode_title": "\ud83d\udd34 LIVE: FOMC Day, Onchain Rotations...Next Leg Loading? | Market Update + Interviews",
-     "start_seconds": 5996.0,
-     "timestamp": "1:39:56",
-     "deep_link": "https://www.youtube.com/watch?v=1UFlORh3zt0&t=5996s",
-     "kind": "mention",
-     "note": "Named as one of early Robin Hood tokens that re-rated from sub 100k to 100 million and beyond in market cap."
-    },
-    {
-     "episode_id": "4PlcWhQM96A",
-     "episode_title": "\ud83d\udd34 LIVE: Time To Log Off? | AI Fears, Debt Market Shutdown, Anthropic IPO",
-     "start_seconds": 8123.0,
-     "timestamp": "2:15:23",
-     "deep_link": "https://www.youtube.com/watch?v=4PlcWhQM96A&t=8123s",
-     "kind": "analysis",
-     "note": "Identified as the leading meme token on Robinhood chain; speaker expressed expectation it could reach a billion-dollar valuation."
-    },
-    {
-     "episode_id": "8tP90A-LpzY",
-     "episode_title": "\ud83d\udd34 LIVE: $1B+ Liquidated as Crypto Nukes | Jensen Huang Drama | Should You Sell It All?",
-     "start_seconds": 7751.0,
-     "timestamp": "2:09:11",
-     "deep_link": "https://www.youtube.com/watch?v=8tP90A-LpzY&t=7751s",
-     "kind": "mention",
-     "note": "Named as an example of a project that capitalized during meta shifts and caught moves early."
-    },
-    {
-     "episode_id": "AImBDqEWd8E",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding | Ceilings Rising | Market Update + Interviews",
-     "start_seconds": 814.0,
-     "timestamp": "13:34",
-     "deep_link": "https://www.youtube.com/watch?v=AImBDqEWd8E&t=814s",
-     "kind": "analysis",
-     "note": "Discussed as a meme token on the Robin Hood chain that was the earliest meme token and first call in their Discord sub 200K; described as the king meme coin on Robin Hood with price going up and viewed as likely to reach a billion dollar market cap."
-    },
-    {
-     "episode_id": "AImBDqEWd8E",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding | Ceilings Rising | Market Update + Interviews",
-     "start_seconds": 10790.0,
-     "timestamp": "2:59:50",
-     "deep_link": "https://www.youtube.com/watch?v=AImBDqEWd8E&t=10790s",
-     "kind": "analysis",
-     "note": "Cash Cat recently did 200-250 million and is described as swiftly heading toward a billion dollars."
-    },
-    {
-     "episode_id": "AImBDqEWd8E",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding | Ceilings Rising | Market Update + Interviews",
-     "start_seconds": 11845.0,
-     "timestamp": "3:17:25",
-     "deep_link": "https://www.youtube.com/watch?v=AImBDqEWd8E&t=11845s",
-     "kind": "mention",
-     "note": "Mentioned as being listed on Robinhood; speaker's friend asked about it after downloading the app."
-    },
-    {
-     "episode_id": "AImBDqEWd8E",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding | Ceilings Rising | Market Update + Interviews",
-     "start_seconds": 16288.0,
-     "timestamp": "4:31:28",
-     "deep_link": "https://www.youtube.com/watch?v=AImBDqEWd8E&t=16288s",
-     "kind": "analysis",
-     "note": "Cash Cat's market cap ceiling is described as a billion, stated as a lock; presented as a meme RWA pairing related to Robin Hood."
-    },
-    {
-     "episode_id": "B2cg6LWD60g",
-     "episode_title": "\ud83d\udd34 LIVE: BTC Erases Rally | $870M+ Longs Liquidated | Time to Exit?",
-     "start_seconds": 9472.0,
-     "timestamp": "2:37:52",
-     "deep_link": "https://www.youtube.com/watch?v=B2cg6LWD60g&t=9472s",
-     "kind": "mention",
-     "note": "Speaker mentioned liking Cash Cat automatically because of the lore behind it, relating it to being the first name of the Robinhood app."
-    },
-    {
-     "episode_id": "DhLaLq6NZJA",
-     "episode_title": "\ud83d\udd34 LIVE: On-chain crypto showing resilience | Pullback's to watch | Live Market Updates + Interviews",
-     "start_seconds": 1685.0,
-     "timestamp": "28:05",
-     "deep_link": "https://www.youtube.com/watch?v=DhLaLq6NZJA&t=1685s",
-     "kind": "analysis",
-     "note": "Described as leading meme token on Robinhood chain; speaker predicts it could reach $1B market cap if it follows pattern of leading memes on other chains; recommends buying dips sub-$100M valuation, around $45M."
-    },
-    {
-     "episode_id": "DhLaLq6NZJA",
-     "episode_title": "\ud83d\udd34 LIVE: On-chain crypto showing resilience | Pullback's to watch | Live Market Updates + Interviews",
-     "start_seconds": 9801.0,
-     "timestamp": "2:43:21",
-     "deep_link": "https://www.youtube.com/watch?v=DhLaLq6NZJA&t=9801s",
-     "kind": "analysis",
-     "note": "Speaker describes Cash Cat as a proxy bet on Robinhood doing well, expects it may go to a billion at some point."
-    },
-    {
-     "episode_id": "EHhZRRHMZQM",
-     "episode_title": "\ud83d\udd34 LIVE: Markets ripping |  RHC leading | Market Update + Founder Interview",
-     "start_seconds": 11594.0,
-     "timestamp": "3:13:14",
-     "deep_link": "https://www.youtube.com/watch?v=EHhZRRHMZQM&t=11594s",
-     "kind": "mention",
-     "note": "Mentioned as being at all-time highs and continuing to move higher."
-    },
-    {
-     "episode_id": "EHhZRRHMZQM",
-     "episode_title": "\ud83d\udd34 LIVE: Markets ripping |  RHC leading | Market Update + Founder Interview",
-     "start_seconds": 12919.0,
-     "timestamp": "3:35:19",
-     "deep_link": "https://www.youtube.com/watch?v=EHhZRRHMZQM&t=12919s",
-     "kind": "analysis",
-     "note": "Described as the leader meme coin on Robinhood with thesis that every major chain has a $1 billion runner for a meme coin."
-    },
-    {
-     "episode_id": "F3chwn4aU3U",
-     "episode_title": "\ud83d\udd34 LIVE: Ansem Joins Launchpad Wars | Time to Buy Dips? | Market Update + Interview",
-     "start_seconds": 3108.0,
-     "timestamp": "51:48",
-     "deep_link": "https://www.youtube.com/watch?v=F3chwn4aU3U&t=3108s",
-     "kind": "analysis",
-     "note": "Speaker had predicted a pullback in Cash Cat and circled the target area; the pullback occurred as predicted; speaker noted potential for more downside and identified a 'golden pocket area' between 75-90 million market cap as attractive, citing a head and shoulders formation and deep value zone."
-    },
-    {
-     "episode_id": "F3chwn4aU3U",
-     "episode_title": "\ud83d\udd34 LIVE: Ansem Joins Launchpad Wars | Time to Buy Dips? | Market Update + Interview",
-     "start_seconds": 3461.0,
-     "timestamp": "57:41",
-     "deep_link": "https://www.youtube.com/watch?v=F3chwn4aU3U&t=3461s",
-     "kind": "mention",
-     "note": "Listed as one of tokens being tracked on Robinhood charts."
-    },
-    {
-     "episode_id": "IiXJRXVECBo",
-     "episode_title": "The Rise Of Soby: FOMO's Top Trader, $158K/Day, Sneak disses @Orangie Web3",
-     "start_seconds": 616.0,
-     "timestamp": "10:16",
-     "deep_link": "https://www.youtube.com/watch?v=IiXJRXVECBo&t=616s",
-     "kind": "mention",
-     "note": "Speaker mentioned Cash Cat launching on Arbitrum and expressed regret about missing this opportunity while they were checked out."
-    },
-    {
-     "episode_id": "MvjP9JvGxnM",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto Looks Promising...Here's Why | Market Updates",
-     "start_seconds": 467.0,
-     "timestamp": "7:47",
-     "deep_link": "https://www.youtube.com/watch?v=MvjP9JvGxnM&t=467s",
-     "kind": "analysis",
-     "note": "Speaker states they captured a 4,000% move on Cash Cat in the Robin Hood eco."
-    },
-    {
-     "episode_id": "Mwp0GbhnqLI",
-     "episode_title": "\ud83d\udd34 LIVE: No bailouts for crypto, Clarity Act In Days? | Founder Interviews + Market Updates",
-     "start_seconds": 285.0,
-     "timestamp": "4:45",
-     "deep_link": "https://www.youtube.com/watch?v=Mwp0GbhnqLI&t=285s",
-     "kind": "mention",
-     "note": "Cash Cat was mentioned as a token launched by Knox launchpad on Robin Hood chain."
-    },
-    {
-     "episode_id": "Mwp0GbhnqLI",
-     "episode_title": "\ud83d\udd34 LIVE: No bailouts for crypto, Clarity Act In Days? | Founder Interviews + Market Updates",
-     "start_seconds": 12320.0,
-     "timestamp": "3:25:20",
-     "deep_link": "https://www.youtube.com/watch?v=Mwp0GbhnqLI&t=12320s",
-     "kind": "mention",
-     "note": "Named as an example memecoin that could be paired with Hood."
-    },
-    {
-     "episode_id": "NAZzbIlnR9o",
-     "episode_title": "Sunrise: Every Asset, Tradable on Solana.",
-     "start_seconds": 604.0,
-     "timestamp": "10:04",
-     "deep_link": "https://www.youtube.com/watch?v=NAZzbIlnR9o&t=604s",
-     "kind": "analysis",
-     "note": "Listed on Solana on July 10th; achieved 25% of daily Cash Cat volume across Robinhood and Solana within 24 hours."
-    },
-    {
-     "episode_id": "NAZzbIlnR9o",
-     "episode_title": "Sunrise: Every Asset, Tradable on Solana.",
-     "start_seconds": 1412.0,
-     "timestamp": "23:32",
-     "deep_link": "https://www.youtube.com/watch?v=NAZzbIlnR9o&t=1412s",
-     "kind": "mention",
-     "note": "Mentioned as an example of a compelling asset available across different chains including Solana."
-    },
-    {
-     "episode_id": "O4A8vFhlU2Q",
-     "episode_title": "\ud83d\udd34 LIVE: Saylor Selling | Onchain Cooking | Bear Market Update + Trader Radio",
-     "start_seconds": 7298.0,
-     "timestamp": "2:01:38",
-     "deep_link": "https://www.youtube.com/watch?v=O4A8vFhlU2Q&t=7298s",
-     "kind": "analysis",
-     "note": "Speaker posted about Cash Cats over the weekend and describes a clean technical analysis setup with a head and shoulders pattern, showing 55% gains since the posted analysis with a strong breakout from a retracement range."
-    },
-    {
-     "episode_id": "O4A8vFhlU2Q",
-     "episode_title": "\ud83d\udd34 LIVE: Saylor Selling | Onchain Cooking | Bear Market Update + Trader Radio",
-     "start_seconds": 7877.0,
-     "timestamp": "2:11:17",
-     "deep_link": "https://www.youtube.com/watch?v=O4A8vFhlU2Q&t=7877s",
-     "kind": "analysis",
-     "note": "Described as the top meme on a specific chain, discussed as having been flipped by other tokens at certain points and as a token that reaches deep value territory where buyers accumulate."
-    },
-    {
-     "episode_id": "QSRP-rTwfYE",
-     "episode_title": "\ud83d\udd34 LIVE: Calm Before the Storm | Onchain Weekly Recap",
-     "start_seconds": 4131.0,
-     "timestamp": "1:08:51",
-     "deep_link": "https://www.youtube.com/watch?v=QSRP-rTwfYE&t=4131s",
-     "kind": "mention",
-     "note": "Mentioned as an example of a meme coin that people commonly refer to when thinking about Robinhood, launched in July."
-    },
-    {
-     "episode_id": "RLS5bDw7pYg",
-     "episode_title": "\ud83d\udd34 LIVE: Clarity Act Vote...What Next? | Market Update + Interviews",
-     "start_seconds": 3930.0,
-     "timestamp": "1:05:30",
-     "deep_link": "https://www.youtube.com/watch?v=RLS5bDw7pYg&t=3930s",
-     "kind": "mention",
-     "note": "Speaker referred to 'cash cat launching' on a Robinhood chain as something they missed."
-    },
-    {
-     "episode_id": "RufYrYmMVwU",
-     "episode_title": "\ud83d\udd34 LIVE: Onchain Market Bottom Forming | Q4 Rally Setup + How to Maximize Returns",
-     "start_seconds": 7252.0,
-     "timestamp": "2:00:52",
-     "deep_link": "https://www.youtube.com/watch?v=RufYrYmMVwU&t=7252s",
-     "kind": "analysis",
-     "note": "Speaker discusses Cash Cat as a v1 meme on Robin Hood, noting it forms a nice round bottom and serves as a barometer for the Robin Hood ecosystem."
-    },
-    {
-     "episode_id": "WBB3vdHLF2Q",
-     "episode_title": "\ud83d\udd34 LIVE: S&P New ATH | Uniswap Launchpad Coming | Market Update + Interview",
-     "start_seconds": 7707.0,
-     "timestamp": "2:08:27",
-     "deep_link": "https://www.youtube.com/watch?v=WBB3vdHLF2Q&t=7707s",
-     "kind": "analysis",
-     "note": "Memecoin that pumped significantly when Vlad (CEO of Robinhood) engaged with it; first memecoin that Vlad meaningfully engaged with before When."
-    },
-    {
-     "episode_id": "Xf3MBXMtfD0",
-     "episode_title": "\ud83d\udd34 LIVE: Bottom is in | Opportunities everywhere | Market Update + Interviews",
-     "start_seconds": 5967.0,
-     "timestamp": "1:39:27",
-     "deep_link": "https://www.youtube.com/watch?v=Xf3MBXMtfD0&t=5967s",
-     "kind": "mention",
-     "note": "Named as one of the tokens for which liquidity support is being built on the Robinhood chain platform."
-    },
-    {
-     "episode_id": "Xf3MBXMtfD0",
-     "episode_title": "\ud83d\udd34 LIVE: Bottom is in | Opportunities everywhere | Market Update + Interviews",
-     "start_seconds": 11113.0,
-     "timestamp": "3:05:13",
-     "deep_link": "https://www.youtube.com/watch?v=Xf3MBXMtfD0&t=11113s",
-     "kind": "analysis",
-     "note": "Discussed as the leading meme on Robinhood, described as resilient, and predicted to potentially reach a billion dollars valuation."
-    },
-    {
-     "episode_id": "bJygdk4PDrM",
-     "episode_title": "Scopl: Yield-bearing limit orders on Robinhood",
-     "start_seconds": 1289.0,
-     "timestamp": "21:29",
-     "deep_link": "https://www.youtube.com/watch?v=bJygdk4PDrM&t=1289s",
-     "kind": "analysis",
-     "note": "Discussed as a token that can be bought and sold on Scopore with limit orders; users can place limit sells if they have cash token or limit buys if they have USDC or ETH to acquire cash token."
-    },
-    {
-     "episode_id": "c6xFYSGZ0Fo",
-     "episode_title": "\ud83d\udd34 LIVE: Has Onchain Summer Begun? | Market Update + Founder Interviews",
-     "start_seconds": 10269.0,
-     "timestamp": "2:51:09",
-     "deep_link": "https://www.youtube.com/watch?v=c6xFYSGZ0Fo&t=10269s",
-     "kind": "analysis",
-     "note": "Speakers discussed buying Cash Cat as part of Robin Hood L2 strategy; it was the original name of the OG Robin Hood app. Chart showed it moved from 130k market cap to 3.7 million market cap."
-    },
-    {
-     "episode_id": "c6xFYSGZ0Fo",
-     "episode_title": "\ud83d\udd34 LIVE: Has Onchain Summer Begun? | Market Update + Founder Interviews",
-     "start_seconds": 10635.0,
-     "timestamp": "2:57:15",
-     "deep_link": "https://www.youtube.com/watch?v=c6xFYSGZ0Fo&t=10635s",
-     "kind": "mention",
-     "note": "Cash Cat is making the first DEX on Robin Hood chain."
-    },
-    {
-     "episode_id": "c6yysVT-tOg",
-     "episode_title": "\ud83d\udd34 LIVE: Will Robinhood Selloff Continue? | Market Update + Founder Interview",
-     "start_seconds": 11470.0,
-     "timestamp": "3:11:10",
-     "deep_link": "https://www.youtube.com/watch?v=c6yysVT-tOg&t=11470s",
-     "kind": "mention",
-     "note": "Listed as one of the tokens on a chart shown; speaker suggests it may continue to perform based on lore perspective."
-    },
-    {
-     "episode_id": "dIsFawgT6DQ",
-     "episode_title": "\ud83d\udd34 LIVE: FOMO App Dominating | Onchain is HOT | Creator Coins Back? + Market Update",
-     "start_seconds": 6526.0,
-     "timestamp": "1:48:46",
-     "deep_link": "https://www.youtube.com/watch?v=dIsFawgT6DQ&t=6526s",
-     "kind": "mention",
-     "note": "Mentioned as one of the top three tokens expected on Robinhood, described as having performed very well recently."
-    },
-    {
-     "episode_id": "oI9Hv_D6UFk",
-     "episode_title": "\ud83d\udd34LIVE: HyperEVM, SOL, RH, or Base? Bulls In Control | Time to Lock In | Market Update + Interview",
-     "start_seconds": 13191.0,
-     "timestamp": "3:39:51",
-     "deep_link": "https://www.youtube.com/watch?v=oI9Hv_D6UFk&t=13191s",
-     "kind": "analysis",
-     "note": "Speaker mentioned trading Cash Cat as a long-term DLMM position and demonstrated opening a range on it that was printing fees decently."
-    },
-    {
-     "episode_id": "pwhvqgCGV0w",
-     "episode_title": "This Trader Caught $ORBIO at $40K Market Cap (Now $100M+)",
-     "start_seconds": 2301.0,
-     "timestamp": "38:21",
-     "deep_link": "https://www.youtube.com/watch?v=pwhvqgCGV0w&t=2301s",
-     "kind": "analysis",
-     "note": "Described as top long ecosystem meme coin, used as whiteboard for spinning up RWA ecosystem opportunities, in steady state deployment."
-    },
-    {
-     "episode_id": "qkYKDed4Apk",
-     "episode_title": "\ud83d\udd34 LIVE: $CASHCAT Robinhood Listing | Uniswap Launchpad | Market Update + Interviews",
-     "start_seconds": 344.0,
-     "timestamp": "5:44",
-     "deep_link": "https://www.youtube.com/watch?v=qkYKDed4Apk&t=344s",
-     "kind": "analysis",
-     "note": "CashCat got listed; speakers discussed it previously at the bottom, mentioned buckets for long-term accumulation on Robinhood, and characterized it as a rotation game."
-    },
-    {
-     "episode_id": "qkYKDed4Apk",
-     "episode_title": "\ud83d\udd34 LIVE: $CASHCAT Robinhood Listing | Uniswap Launchpad | Market Update + Interviews",
-     "start_seconds": 10086.0,
-     "timestamp": "2:48:06",
-     "deep_link": "https://www.youtube.com/watch?v=qkYKDed4Apk&t=10086s",
-     "kind": "mention",
-     "note": "Identified as a meme token on Robinhood that the speaker dip bought. Referenced as the meme runner bucket example."
-    },
-    {
-     "episode_id": "qq_4gfyjN6s",
-     "episode_title": "\ud83d\udd34 LIVE: MonkeDAO Solana Product Spotlight + Trader Radio w/@ChillTRD | Market Updates",
-     "start_seconds": 11297.0,
-     "timestamp": "3:08:17",
-     "deep_link": "https://www.youtube.com/watch?v=qq_4gfyjN6s&t=11297s",
-     "kind": "analysis",
-     "note": "Speaker notes Cash Cat looks good but expects potential pullback to 100 mil support level before resuming uptrend, describing the current price action as unusual."
-    },
-    {
-     "episode_id": "qq_4gfyjN6s",
-     "episode_title": "\ud83d\udd34 LIVE: MonkeDAO Solana Product Spotlight + Trader Radio w/@ChillTRD | Market Updates",
-     "start_seconds": 11493.0,
-     "timestamp": "3:11:33",
-     "deep_link": "https://www.youtube.com/watch?v=qq_4gfyjN6s&t=11493s",
-     "kind": "analysis",
-     "note": "Speaker discusses potential range formation and price levels on Cash Cat, suggesting it may revisit tested levels and potentially slide higher before moving lower."
-    },
-    {
-     "episode_id": "twr8yC6xgVo",
-     "episode_title": "Scherwode.fun: The Launchpad Built for Robinhood Chain",
-     "start_seconds": 651.0,
-     "timestamp": "10:51",
-     "deep_link": "https://www.youtube.com/watch?v=twr8yC6xgVo&t=651s",
-     "kind": "mention",
-     "note": "Mentioned as an example of what could be included in a rooted token investment portfolio backed by a contract address."
-    },
-    {
-     "episode_id": "urLmYepetQI",
-     "episode_title": "\ud83d\udd34 LIVE: WTF is a V4 hook | $ETH bottom in? | Market Update + Interviews",
-     "start_seconds": 7299.0,
-     "timestamp": "2:01:39",
-     "deep_link": "https://www.youtube.com/watch?v=urLmYepetQI&t=7299s",
-     "kind": "analysis",
-     "note": "Cash Cat had a launchpad and was the only asset shown in Vlad's Q2 earnings report wallet holdings, causing a price wick from 36 million to 62 million; discussed as a leading meme on Robinhood chain and as an LP opportunity on Meteora using DLMM."
-    },
-    {
-     "episode_id": "urLmYepetQI",
-     "episode_title": "\ud83d\udd34 LIVE: WTF is a V4 hook | $ETH bottom in? | Market Update + Interviews",
-     "start_seconds": 7516.0,
-     "timestamp": "2:05:16",
-     "deep_link": "https://www.youtube.com/watch?v=urLmYepetQI&t=7516s",
-     "kind": "analysis",
-     "note": "Identified as the leader in the meme bucket on Robinhood, with traders choosing to trade it on Solana over Robinhood to avoid bridging processes."
-    },
-    {
-     "episode_id": "vBRvDqOdKwQ",
-     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
-     "start_seconds": 304.0,
-     "timestamp": "5:04",
-     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=304s",
-     "kind": "analysis",
-     "note": "Discussed as having reached $220 million market cap on Robinhood chain, positioned as one of the main runners alongside Pods and AI."
-    },
-    {
-     "episode_id": "vBRvDqOdKwQ",
-     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
-     "start_seconds": 480.0,
-     "timestamp": "8:00",
-     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=480s",
-     "kind": "analysis",
-     "note": "Named as one of four tokens that reached 100 million market cap and sustained that level; billion dollar projections mentioned."
-    },
-    {
-     "episode_id": "vqOeJKpQ61E",
-     "episode_title": "A Conversation with Sonder: Trading the Crypto Trenches",
-     "start_seconds": 317.0,
-     "timestamp": "5:17",
-     "deep_link": "https://www.youtube.com/watch?v=vqOeJKpQ61E&t=317s",
-     "kind": "analysis",
-     "note": "Cash was discussed as the foundational ecosystem asset; speaker noted it started going up, causing bridge funding issues, and that removal of friction around Cash fueled the move. Everything in the ecosystem relies on Cash according to the speaker's original thesis."
-    },
-    {
-     "episode_id": "vqOeJKpQ61E",
-     "episode_title": "A Conversation with Sonder: Trading the Crypto Trenches",
-     "start_seconds": 1209.0,
-     "timestamp": "20:09",
-     "deep_link": "https://www.youtube.com/watch?v=vqOeJKpQ61E&t=1209s",
-     "kind": "analysis",
-     "note": "Discussed as a memecoin on Robin Hood chain with significant early holder gains; speaker analyzes its market cap trajectory compared to similar projects like Toshi, suggests it could potentially reach 1 billion market cap, and states personal plan to accumulate and hold for a year."
-    },
-    {
-     "episode_id": "vqOeJKpQ61E",
-     "episode_title": "A Conversation with Sonder: Trading the Crypto Trenches",
-     "start_seconds": 2551.0,
-     "timestamp": "42:31",
-     "deep_link": "https://www.youtube.com/watch?v=vqOeJKpQ61E&t=2551s",
-     "kind": "analysis",
-     "note": "Described as fitting the prototype of a new chain with the largest retail consumer finance app in the world; speaker notes it could go to zero but matches criteria for potential billion-dollar market cap runners."
-    },
-    {
-     "episode_id": "wsTdtrlI2I8",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood launchpad war drama | Live Market Updates + Onchain Positioning",
-     "start_seconds": 7441.0,
-     "timestamp": "2:04:01",
-     "deep_link": "https://www.youtube.com/watch?v=wsTdtrlI2I8&t=7441s",
-     "kind": "analysis",
-     "note": "Identified as the leading meme token on Robinhood; speakers expect similar pattern to flagship memes on other chains, with analysis of potential rollover to 30 million market cap."
-    },
-    {
-     "episode_id": "x7qRX-hWxg8",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding (Memes, V4 Hooks, Infra) | Market Update + Interviews",
-     "start_seconds": 9445.0,
-     "timestamp": "2:37:25",
-     "deep_link": "https://www.youtube.com/watch?v=x7qRX-hWxg8&t=9445s",
-     "kind": "analysis",
-     "note": "Cash Cat described as the leading meme on Robinhood with thesis that it will reach a billion dollars. Listed on Robinhood at 210 million market cap with prediction of 100% gain within a week to 400 million."
-    },
-    {
-     "episode_id": "y4SqXgBAFFg",
-     "episode_title": "\ud83d\udd34 LIVE: RobinHood Chain Exploding! | War Back!?!? | Market Updates + Founder Interviews",
-     "start_seconds": 697.0,
-     "timestamp": "11:37",
-     "deep_link": "https://www.youtube.com/watch?v=y4SqXgBAFFg&t=697s",
-     "kind": "analysis",
-     "note": "Speakers note that Cashcat went to 130 million market cap after Vlad and Robinhood team members followed the account on social media."
-    },
-    {
-     "episode_id": "zTEsQqVVsZk",
-     "episode_title": "\ud83d\udd34 LIVE: Bear Market Ending? | RH Szn Continues | Market Update + Interviews",
-     "start_seconds": 9684.0,
-     "timestamp": "2:41:24",
-     "deep_link": "https://www.youtube.com/watch?v=zTEsQqVVsZk&t=9684s",
-     "kind": "analysis",
-     "note": "Speaker mentions currently dealing in Cash Cat and wants it listed on Sunrise/Meteora, expressing interest in providing liquidity and price action exposure."
-    }
-   ],
-   "episode_count": 34,
    "single_reference": false
   },
   {
@@ -114729,6 +114909,575 @@
    "single_reference": false
   },
   {
+   "symbol": "USDG",
+   "name": "USDG",
+   "asset_class": "crypto",
+   "mentions": 62,
+   "analysis": 24,
+   "moments": [
+    {
+     "episode_id": "-8z0M77EVZg",
+     "episode_title": "Whatthehook($WTH): The first MEV bot that gives instead of takes. Built directly inside a v4 hook.",
+     "start_seconds": 837.0,
+     "timestamp": "13:57",
+     "deep_link": "https://www.youtube.com/watch?v=-8z0M77EVZg&t=837s",
+     "kind": "mention",
+     "note": "Mentioned as an example of a stablecoin that could be paired with ETH in a pool."
+    },
+    {
+     "episode_id": "0bmVQog1A4U",
+     "episode_title": "Chief $CHOP cooking?",
+     "start_seconds": 241.0,
+     "timestamp": "4:01",
+     "deep_link": "https://www.youtube.com/watch?v=0bmVQog1A4U&t=241s",
+     "kind": "mention",
+     "note": "USDG is listed as one of the assets that can be paired with wrapped tokens in volatility farming pools."
+    },
+    {
+     "episode_id": "2NK_MBlFvtM",
+     "episode_title": "\ud83d\udd34 LIVE: So Early It Hurts | A Simple Strategy for Surviving a Sideways Crypto Market",
+     "start_seconds": 5343.0,
+     "timestamp": "1:29:03",
+     "deep_link": "https://www.youtube.com/watch?v=2NK_MBlFvtM&t=5343s",
+     "kind": "mention",
+     "note": "Mentioned as an example of something that can be bought on Robinhood with Apple Pay as part of on-ramps into Mancer."
+    },
+    {
+     "episode_id": "3EoyxkUDpdY",
+     "episode_title": "\ud83d\udd34 LIVE: Midterms Start Today | This Decides Crypto\u2019s Next 2 Years",
+     "start_seconds": 3890.0,
+     "timestamp": "1:04:50",
+     "deep_link": "https://www.youtube.com/watch?v=3EoyxkUDpdY&t=3890s",
+     "kind": "analysis",
+     "note": "Speaker explains that users can borrow USDG from the share lending market using tokenized stock shares as collateral, or deposit USDG to participate in yield strategies."
+    },
+    {
+     "episode_id": "4PlcWhQM96A",
+     "episode_title": "\ud83d\udd34 LIVE: Time To Log Off? | AI Fears, Debt Market Shutdown, Anthropic IPO",
+     "start_seconds": 3607.0,
+     "timestamp": "1:00:07",
+     "deep_link": "https://www.youtube.com/watch?v=4PlcWhQM96A&t=3607s",
+     "kind": "mention",
+     "note": "Listed as one of the assets paired in volatility farming pools."
+    },
+    {
+     "episode_id": "5frfwS8MvZI",
+     "episode_title": "\ud83d\udd34 LIVE: Elysium Dead on Arrival? | PumpFun Drama | Crypto Cooked?",
+     "start_seconds": 2112.0,
+     "timestamp": "35:12",
+     "deep_link": "https://www.youtube.com/watch?v=5frfwS8MvZI&t=2112s",
+     "kind": "mention",
+     "note": "USDG mentioned as one of the token pairs in V4 hooks liquidity pools alongside ETH."
+    },
+    {
+     "episode_id": "5frfwS8MvZI",
+     "episode_title": "\ud83d\udd34 LIVE: Elysium Dead on Arrival? | PumpFun Drama | Crypto Cooked?",
+     "start_seconds": 4465.0,
+     "timestamp": "1:14:25",
+     "deep_link": "https://www.youtube.com/watch?v=5frfwS8MvZI&t=4465s",
+     "kind": "mention",
+     "note": "USDG mentioned as a token paired with Ethereum for liquidity provision on Uniswap."
+    },
+    {
+     "episode_id": "8Tgu7gZ-7Lk",
+     "episode_title": "NetNet Capital:Reserve Manager for $NET on Robinhood Chain.",
+     "start_seconds": 639.0,
+     "timestamp": "10:39",
+     "deep_link": "https://www.youtube.com/watch?v=8Tgu7gZ-7Lk&t=639s",
+     "kind": "analysis",
+     "note": "Stablecoin that can be bonded for discounted NET tokens, with proceeds going directly to the protocol treasury."
+    },
+    {
+     "episode_id": "8Tgu7gZ-7Lk",
+     "episode_title": "NetNet Capital:Reserve Manager for $NET on Robinhood Chain.",
+     "start_seconds": 1020.0,
+     "timestamp": "17:00",
+     "deep_link": "https://www.youtube.com/watch?v=8Tgu7gZ-7Lk&t=1020s",
+     "kind": "analysis",
+     "note": "Treasury token earned through bonding and trading volume; currently holds 525k USDG in treasury, with a significant portion coming from trading fees and bonding."
+    },
+    {
+     "episode_id": "8Tgu7gZ-7Lk",
+     "episode_title": "NetNet Capital:Reserve Manager for $NET on Robinhood Chain.",
+     "start_seconds": 1323.0,
+     "timestamp": "22:03",
+     "deep_link": "https://www.youtube.com/watch?v=8Tgu7gZ-7Lk&t=1323s",
+     "kind": "analysis",
+     "note": "Stablecoin used as backing for Net token, with backing of 13 USDG per Net, increasing to 17 with RWAs included."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 3908.0,
+     "timestamp": "1:05:08",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=3908s",
+     "kind": "analysis",
+     "note": "Discussed as dominating order flow in pools on Uniswap, with higher volume relative to other trading pairs."
+    },
+    {
+     "episode_id": "ByBZ1Fa4A3g",
+     "episode_title": "GWOOD: The self-custody neobank on Robinhood Chain. Spend, save, borrow, invest from one vault",
+     "start_seconds": 710.0,
+     "timestamp": "11:50",
+     "deep_link": "https://www.youtube.com/watch?v=ByBZ1Fa4A3g&t=710s",
+     "kind": "mention",
+     "note": "Mentioned as a token users can earn back as cash back on starter tiers of the Greenwood/Robinhood platform."
+    },
+    {
+     "episode_id": "ByBZ1Fa4A3g",
+     "episode_title": "GWOOD: The self-custody neobank on Robinhood Chain. Spend, save, borrow, invest from one vault",
+     "start_seconds": 1688.0,
+     "timestamp": "28:08",
+     "deep_link": "https://www.youtube.com/watch?v=ByBZ1Fa4A3g&t=1688s",
+     "kind": "analysis",
+     "note": "Users can receive USDG and earn USDG in a vault; it is mentioned as one of the primary earning options."
+    },
+    {
+     "episode_id": "EHhZRRHMZQM",
+     "episode_title": "\ud83d\udd34 LIVE: Markets ripping |  RHC leading | Market Update + Founder Interview",
+     "start_seconds": 13112.0,
+     "timestamp": "3:38:32",
+     "deep_link": "https://www.youtube.com/watch?v=EHhZRRHMZQM&t=13112s",
+     "kind": "mention",
+     "note": "Mentioned as a stablecoin option for swap rewards."
+    },
+    {
+     "episode_id": "ElhoMK0uH4M",
+     "episode_title": "\ud83d\udd34 LIVE: Bearish Headlines Strike Again | More Chop or Bottom Signal?",
+     "start_seconds": 2724.0,
+     "timestamp": "45:24",
+     "deep_link": "https://www.youtube.com/watch?v=ElhoMK0uH4M&t=2724s",
+     "kind": "analysis",
+     "note": "USDG is described as a stablecoin that depositors can allocate to a premium pool for weekend short position coverage."
+    },
+    {
+     "episode_id": "H4kImk1Y7KQ",
+     "episode_title": "\ud83d\udd34 LIVE: FOMC, AI Panic, Clarity Act Vote | Market Update + Interviews",
+     "start_seconds": 1649.0,
+     "timestamp": "27:29",
+     "deep_link": "https://www.youtube.com/watch?v=H4kImk1Y7KQ&t=1649s",
+     "kind": "mention",
+     "note": "Mentioned as one of the vault options available for deposits."
+    },
+    {
+     "episode_id": "LN_42fexqdw",
+     "episode_title": "$OURO - A fee generation protocol on Robinhood Chain",
+     "start_seconds": 886.0,
+     "timestamp": "14:46",
+     "deep_link": "https://www.youtube.com/watch?v=LN_42fexqdw&t=886s",
+     "kind": "mention",
+     "note": "Mentioned as one of the deposit options for vaults alongside Ethereum."
+    },
+    {
+     "episode_id": "PZ5E7taO1Yo",
+     "episode_title": "\ud83d\udd34 LIVE: RWA Memes Heating Up | Next Leg Soon? | Market Update + Interviews",
+     "start_seconds": 10556.0,
+     "timestamp": "2:55:56",
+     "deep_link": "https://www.youtube.com/watch?v=PZ5E7taO1Yo&t=10556s",
+     "kind": "analysis",
+     "note": "Speakers note that NET is a reserve share backed by USDG stablecoin, with each share backed by at least one USDG in the on-chain reserve portfolio."
+    },
+    {
+     "episode_id": "PZ5E7taO1Yo",
+     "episode_title": "\ud83d\udd34 LIVE: RWA Memes Heating Up | Next Leg Soon? | Market Update + Interviews",
+     "start_seconds": 11149.0,
+     "timestamp": "3:05:49",
+     "deep_link": "https://www.youtube.com/watch?v=PZ5E7taO1Yo&t=11149s",
+     "kind": "analysis",
+     "note": "Protocol-issued stablecoin with reserves and RWA backing; every NET is backed by at least one USDG of risk-free value; up to 70% of idle USDG can be deployed for yield."
+    },
+    {
+     "episode_id": "RufYrYmMVwU",
+     "episode_title": "\ud83d\udd34 LIVE: Onchain Market Bottom Forming | Q4 Rally Setup + How to Maximize Returns",
+     "start_seconds": 7997.0,
+     "timestamp": "2:13:17",
+     "deep_link": "https://www.youtube.com/watch?v=RufYrYmMVwU&t=7997s",
+     "kind": "mention",
+     "note": "USDG is the stablecoin that users borrow against their assets on the Longbow lending platform."
+    },
+    {
+     "episode_id": "Uoz0bDgON5o",
+     "episode_title": "STATICS Mainnet Live | $20K Weekly Incentives + Uniswap V4 Hook",
+     "start_seconds": 158.0,
+     "timestamp": "2:38",
+     "deep_link": "https://www.youtube.com/watch?v=Uoz0bDgON5o&t=158s",
+     "kind": "mention",
+     "note": "USDG is one of the first two liquidity pools being incentivized on the Statics DEX."
+    },
+    {
+     "episode_id": "Uoz0bDgON5o",
+     "episode_title": "STATICS Mainnet Live | $20K Weekly Incentives + Uniswap V4 Hook",
+     "start_seconds": 1189.0,
+     "timestamp": "19:49",
+     "deep_link": "https://www.youtube.com/watch?v=Uoz0bDgON5o&t=1189s",
+     "kind": "analysis",
+     "note": "USDG can be used through the peg stability module to mint stablecoin without requiring any risk token."
+    },
+    {
+     "episode_id": "WBB3vdHLF2Q",
+     "episode_title": "\ud83d\udd34 LIVE: S&P New ATH | Uniswap Launchpad Coming | Market Update + Interview",
+     "start_seconds": 2351.0,
+     "timestamp": "39:11",
+     "deep_link": "https://www.youtube.com/watch?v=WBB3vdHLF2Q&t=2351s",
+     "kind": "mention",
+     "note": "Mentioned as an example asset type that could be picked on the launchpad, alongside RWAs and standard ERC20 tokens."
+    },
+    {
+     "episode_id": "X4_ZclvRjSc",
+     "episode_title": "$NOTE Breakdown: Robinhood Chain, Fair Launch & On-Chain Risk Management",
+     "start_seconds": 405.0,
+     "timestamp": "6:45",
+     "deep_link": "https://www.youtube.com/watch?v=X4_ZclvRjSc&t=405s",
+     "kind": "analysis",
+     "note": "Stablecoin used on the platform; USDG holders provide capital to the liquidity pool and receive coupon payments in exchange for selling insurance/protection on stocks, with returns dependent on the series."
+    },
+    {
+     "episode_id": "X4_ZclvRjSc",
+     "episode_title": "$NOTE Breakdown: Robinhood Chain, Fair Launch & On-Chain Risk Management",
+     "start_seconds": 636.0,
+     "timestamp": "10:36",
+     "deep_link": "https://www.youtube.com/watch?v=X4_ZclvRjSc&t=636s",
+     "kind": "analysis",
+     "note": "USDG is described as a stablecoin that holders would sell protection against Apple stock; users deposit USDG alongside Apple stock to participate in the hedging mechanism and earn fees from Apple stockholders."
+    },
+    {
+     "episode_id": "X4_ZclvRjSc",
+     "episode_title": "$NOTE Breakdown: Robinhood Chain, Fair Launch & On-Chain Risk Management",
+     "start_seconds": 1636.0,
+     "timestamp": "27:16",
+     "deep_link": "https://www.youtube.com/watch?v=X4_ZclvRjSc&t=1636s",
+     "kind": "analysis",
+     "note": "Stablecoin used as collateral to borrow against coupon legs for liquidity, and can be held idle to earn yield."
+    },
+    {
+     "episode_id": "XB71vFeU2zA",
+     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
+     "start_seconds": 4854.0,
+     "timestamp": "1:20:54",
+     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=4854s",
+     "kind": "analysis",
+     "note": "USDG pool is locked with a 10-year lock; one of two major pools in the Goldstein protocol alongside GLD pool."
+    },
+    {
+     "episode_id": "XB71vFeU2zA",
+     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
+     "start_seconds": 13036.0,
+     "timestamp": "3:37:16",
+     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=13036s",
+     "kind": "mention",
+     "note": "Named as a holding in Simple Farmer's portfolio."
+    },
+    {
+     "episode_id": "XxlT7dtD9JY",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Under $81K | Is This the 10/10 Crash All Over Again?",
+     "start_seconds": 2355.0,
+     "timestamp": "39:15",
+     "deep_link": "https://www.youtube.com/watch?v=XxlT7dtD9JY&t=2355s",
+     "kind": "analysis",
+     "note": "Users can deposit USDG into the Net Net Advance product for a 30-day lock-up in exchange for a 40% advance payout."
+    },
+    {
+     "episode_id": "YOWeFQZjsBs",
+     "episode_title": "$NET Al Dunlap: Treasury at 1.4x NAV, $1M+ Buybacks, No-Loss Sportsbook & NetLong Launch | MCG",
+     "start_seconds": 1093.0,
+     "timestamp": "18:13",
+     "deep_link": "https://www.youtube.com/watch?v=YOWeFQZjsBs&t=1093s",
+     "kind": "analysis",
+     "note": "Mentioned as an alternative deposit option in NetNet Advance product; users can deposit USDG for a 40% advance against future NET rebases."
+    },
+    {
+     "episode_id": "YOWeFQZjsBs",
+     "episode_title": "$NET Al Dunlap: Treasury at 1.4x NAV, $1M+ Buybacks, No-Loss Sportsbook & NetLong Launch | MCG",
+     "start_seconds": 1382.0,
+     "timestamp": "23:02",
+     "deep_link": "https://www.youtube.com/watch?v=YOWeFQZjsBs&t=1382s",
+     "kind": "mention",
+     "note": "Stablecoin used for betting in the prediction market sportsbook; mentioned as what users bet with."
+    },
+    {
+     "episode_id": "ZE1Qpclnq6I",
+     "episode_title": "You Have to TALK to this Robinhood Genie!",
+     "start_seconds": 515.0,
+     "timestamp": "8:35",
+     "deep_link": "https://www.youtube.com/watch?v=ZE1Qpclnq6I&t=515s",
+     "kind": "mention",
+     "note": "Mentioned as a destination for rebalancing funds in yield pools."
+    },
+    {
+     "episode_id": "ZHGRCslUV3E",
+     "episode_title": "\ud83d\udd34 LIVE: BASE ECO on fire while markets are melting!  | Live Market Updates + Onchain Positioning",
+     "start_seconds": 770.0,
+     "timestamp": "12:50",
+     "deep_link": "https://www.youtube.com/watch?v=ZHGRCslUV3E&t=770s",
+     "kind": "analysis",
+     "note": "USDG passed 3 billion in market cap with 700 million added on Solana; Athena deploying 700 million USDG directly into Solana as institutional validation of DeFi."
+    },
+    {
+     "episode_id": "ZSBmoD9oLw8",
+     "episode_title": "\ud83d\udd34 LIVE: The Battle Of Blockchains | Solana vs Robinhood | Market Update + Interviews",
+     "start_seconds": 4416.0,
+     "timestamp": "1:13:36",
+     "deep_link": "https://www.youtube.com/watch?v=ZSBmoD9oLw8&t=4416s",
+     "kind": "analysis",
+     "note": "Stablecoin that can be borrowed against collateral on the protocol; holders of Savings Green receive a percentage of protocol revenue from borrower interest and origination fees."
+    },
+    {
+     "episode_id": "ZVAE6F0FXQw",
+     "episode_title": "$WEBSITE: A tokenized ownable digital spaces",
+     "start_seconds": 832.0,
+     "timestamp": "13:52",
+     "deep_link": "https://www.youtube.com/watch?v=ZVAE6F0FXQw&t=832s",
+     "kind": "mention",
+     "note": "OpenSea shows 66.9 USDG in total volume for the NFT trading platform being discussed."
+    },
+    {
+     "episode_id": "Zh_Q0Z2TtVY",
+     "episode_title": "\ud83d\udd34 LIVE: Will Robinhood Szn Last? | Market Update + Founder Interviews",
+     "start_seconds": 7244.0,
+     "timestamp": "2:00:44",
+     "deep_link": "https://www.youtube.com/watch?v=Zh_Q0Z2TtVY&t=7244s",
+     "kind": "mention",
+     "note": "USDG mentioned as a stablecoin used for capital deposits in vaults on Sherwood protocol."
+    },
+    {
+     "episode_id": "_Duv4CxaoI4",
+     "episode_title": "Mancer's Books | Back Traders Instead of Memecoins (Robinhood Chain)",
+     "start_seconds": 705.0,
+     "timestamp": "11:45",
+     "deep_link": "https://www.youtube.com/watch?v=_Duv4CxaoI4&t=705s",
+     "kind": "mention",
+     "note": "Mentioned as an example of a cryptocurrency that can be bought on Robinhood with Apple Pay through on-ramps."
+    },
+    {
+     "episode_id": "_bXn26hfpJA",
+     "episode_title": "\ud83d\udd34 LIVE: No Sleep Szn is Here | Market Update + Interviews",
+     "start_seconds": 12365.0,
+     "timestamp": "3:26:05",
+     "deep_link": "https://www.youtube.com/watch?v=_bXn26hfpJA&t=12365s",
+     "kind": "mention",
+     "note": "Stablecoin option available as a reward choice within Stack NFTs."
+    },
+    {
+     "episode_id": "_bXn26hfpJA",
+     "episode_title": "\ud83d\udd34 LIVE: No Sleep Szn is Here | Market Update + Interviews",
+     "start_seconds": 12858.0,
+     "timestamp": "3:34:18",
+     "deep_link": "https://www.youtube.com/watch?v=_bXn26hfpJA&t=12858s",
+     "kind": "mention",
+     "note": "Stablecoin paired with Omni receipt token in Uniswap v4 before pool."
+    },
+    {
+     "episode_id": "_mLaSJLAPJs",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto is Crashing | Here\u2019s Exactly What to Do Right Now",
+     "start_seconds": 9501.0,
+     "timestamp": "2:38:21",
+     "deep_link": "https://www.youtube.com/watch?v=_mLaSJLAPJs&t=9501s",
+     "kind": "analysis",
+     "note": "Token used for earning on idle funds and for agent payments within the platform; speakers discuss its use case for monetizing agents."
+    },
+    {
+     "episode_id": "ayJIM0WPyHs",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Bottom In? | Do This Before the Next Move",
+     "start_seconds": 4286.0,
+     "timestamp": "1:11:26",
+     "deep_link": "https://www.youtube.com/watch?v=ayJIM0WPyHs&t=4286s",
+     "kind": "mention",
+     "note": "The speaker mentions that if Robinhood incentivizes lending, they could add yield on top of USDG, which would be beneficial for any team doing lending on USDG."
+    },
+    {
+     "episode_id": "c6yysVT-tOg",
+     "episode_title": "\ud83d\udd34 LIVE: Will Robinhood Selloff Continue? | Market Update + Founder Interview",
+     "start_seconds": 10636.0,
+     "timestamp": "2:57:16",
+     "deep_link": "https://www.youtube.com/watch?v=c6yysVT-tOg&t=10636s",
+     "kind": "mention",
+     "note": "Mentioned as infrastructure provided by Paxos on Robinhood chain."
+    },
+    {
+     "episode_id": "cHos0BsSoFM",
+     "episode_title": "\ud83d\udd34 LIVE: S&P New ATH, BTC Stuck at $86K | Crypto Uptober Canceled?",
+     "start_seconds": 938.0,
+     "timestamp": "15:38",
+     "deep_link": "https://www.youtube.com/watch?v=cHos0BsSoFM&t=938s",
+     "kind": "mention",
+     "note": "Mentioned as backing NET at $230 entry, and as currency used in RWA asset bond subscriptions for discounted stock purchases."
+    },
+    {
+     "episode_id": "cHos0BsSoFM",
+     "episode_title": "\ud83d\udd34 LIVE: S&P New ATH, BTC Stuck at $86K | Crypto Uptober Canceled?",
+     "start_seconds": 7200.0,
+     "timestamp": "2:00:00",
+     "deep_link": "https://www.youtube.com/watch?v=cHos0BsSoFM&t=7200s",
+     "kind": "mention",
+     "note": "Mentioned as a stablecoin held on Robinhood chain."
+    },
+    {
+     "episode_id": "ckSVVsCYrSI",
+     "episode_title": "\ud83d\udd34 LIVE: Uptober Turned Choptober | Bitcoin Holding $80K | What's Next?",
+     "start_seconds": 7825.0,
+     "timestamp": "2:10:25",
+     "deep_link": "https://www.youtube.com/watch?v=ckSVVsCYrSI&t=7825s",
+     "kind": "mention",
+     "note": "Mentioned as a token used to buy net exposure on a perpetual exchange with leverage."
+    },
+    {
+     "episode_id": "eLtX3KdYiZ0",
+     "episode_title": "Virtuals Day- Robinhood Ecosystem Project Spotlight",
+     "start_seconds": 3322.0,
+     "timestamp": "55:22",
+     "deep_link": "https://www.youtube.com/watch?v=eLtX3KdYiZ0&t=3322s",
+     "kind": "mention",
+     "note": "Mentioned as a treasury currency used to buy back tokens from users in early stages."
+    },
+    {
+     "episode_id": "eLtX3KdYiZ0",
+     "episode_title": "Virtuals Day- Robinhood Ecosystem Project Spotlight",
+     "start_seconds": 5379.0,
+     "timestamp": "1:29:39",
+     "deep_link": "https://www.youtube.com/watch?v=eLtX3KdYiZ0&t=5379s",
+     "kind": "analysis",
+     "note": "Described as Robinhood chain's dedicated stablecoin; speakers note a massive rise in USDG."
+    },
+    {
+     "episode_id": "fTT9R0_vqAY",
+     "episode_title": "\ud83d\udd34 LIVE: Is the Market Bottom In? | Anthropic\u2019s $1.5T Debut | Cyberattacks Intensify",
+     "start_seconds": 2584.0,
+     "timestamp": "43:04",
+     "deep_link": "https://www.youtube.com/watch?v=fTT9R0_vqAY&t=2584s",
+     "kind": "mention",
+     "note": "USDG is mentioned as a stablecoin option for paying entry fees and was used by entrants in the prior week's competition."
+    },
+    {
+     "episode_id": "hrmDHyMerQw",
+     "episode_title": "Josh addresses the recent MOTION going on with $NET( is it a SCAM!?)",
+     "start_seconds": 113.0,
+     "timestamp": "1:53",
+     "deep_link": "https://www.youtube.com/watch?v=hrmDHyMerQw&t=113s",
+     "kind": "mention",
+     "note": "USDG mentioned as the strike price currency for Net P-Team options and as a fee-generating token in the protocol."
+    },
+    {
+     "episode_id": "lN2kZJ0CNZg",
+     "episode_title": "\ud83d\udfe2 LIVE: Robinhood Chain Rally Incoming? How to Position",
+     "start_seconds": 4153.0,
+     "timestamp": "1:09:13",
+     "deep_link": "https://www.youtube.com/watch?v=lN2kZJ0CNZg&t=4153s",
+     "kind": "mention",
+     "note": "Mentioned as a pairing asset for stock tokens and as an alternative routing mechanism to Shroom."
+    },
+    {
+     "episode_id": "miXTiMNMDCc",
+     "episode_title": "\ud83d\udd34 LIVE: Onchain Volume Falling Across the Board | Why Stay Bullish?",
+     "start_seconds": 15061.0,
+     "timestamp": "4:11:01",
+     "deep_link": "https://www.youtube.com/watch?v=miXTiMNMDCc&t=15061s",
+     "kind": "mention",
+     "note": "Mentioned as an asset market with dynamic fees set by the team alongside ETH and RWA."
+    },
+    {
+     "episode_id": "n-1Tj9Emstc",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holding Above $82.5K | Calm Before the Storm?",
+     "start_seconds": 4210.0,
+     "timestamp": "1:10:10",
+     "deep_link": "https://www.youtube.com/watch?v=n-1Tj9Emstc&t=4210s",
+     "kind": "analysis",
+     "note": "Stablecoin used as capital by insurance sellers; providers of USDG receive coupon payments and returns if stock price stays above barrier, or receive underlying stock if barrier is breached; projected APY stated at around 20%."
+    },
+    {
+     "episode_id": "n-1Tj9Emstc",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holding Above $82.5K | Calm Before the Storm?",
+     "start_seconds": 4440.0,
+     "timestamp": "1:14:00",
+     "deep_link": "https://www.youtube.com/watch?v=n-1Tj9Emstc&t=4440s",
+     "kind": "analysis",
+     "note": "Stablecoin holders would act as counterparties (short the put option) in the autocallable structure, earning yield while Apple stockholders pay them for downside protection."
+    },
+    {
+     "episode_id": "qHavUGBG56A",
+     "episode_title": "\ud83d\udd34 LIVE: Black Monday Overblown? | Staying Bullish | Market Update",
+     "start_seconds": 3367.0,
+     "timestamp": "56:07",
+     "deep_link": "https://www.youtube.com/watch?v=qHavUGBG56A&t=3367s",
+     "kind": "mention",
+     "note": "Trading pair with Statics token, one of two initial incentivized pools."
+    },
+    {
+     "episode_id": "qHavUGBG56A",
+     "episode_title": "\ud83d\udd34 LIVE: Black Monday Overblown? | Staying Bullish | Market Update",
+     "start_seconds": 3831.0,
+     "timestamp": "1:03:51",
+     "deep_link": "https://www.youtube.com/watch?v=qHavUGBG56A&t=3831s",
+     "kind": "mention",
+     "note": "Referenced as an example of a pool that can be created, where you can create a USDG pool without needing a token."
+    },
+    {
+     "episode_id": "qHavUGBG56A",
+     "episode_title": "\ud83d\udd34 LIVE: Black Monday Overblown? | Staying Bullish | Market Update",
+     "start_seconds": 4663.0,
+     "timestamp": "1:17:43",
+     "deep_link": "https://www.youtube.com/watch?v=qHavUGBG56A&t=4663s",
+     "kind": "analysis",
+     "note": "USDG can be used through the PEG stability module to mint Statics dollar without requiring risk tokens."
+    },
+    {
+     "episode_id": "qq_4gfyjN6s",
+     "episode_title": "\ud83d\udd34 LIVE: MonkeDAO Solana Product Spotlight + Trader Radio w/@ChillTRD | Market Updates",
+     "start_seconds": 14479.0,
+     "timestamp": "4:01:19",
+     "deep_link": "https://www.youtube.com/watch?v=qq_4gfyjN6s&t=14479s",
+     "kind": "mention",
+     "note": "USDG vault mentioned as part of Bow protocol's fee distribution."
+    },
+    {
+     "episode_id": "qz5qB0AgC0Q",
+     "episode_title": "Nate (Long / $AI Founder): Robinhood Chain Isn\u2019t Dead | Wallet Integration, Why Stock Tokens Win",
+     "start_seconds": 802.0,
+     "timestamp": "13:22",
+     "deep_link": "https://www.youtube.com/watch?v=qz5qB0AgC0Q&t=802s",
+     "kind": "mention",
+     "note": "Mentioned as a potential asset for lending incentives and yield generation by Robinhood."
+    },
+    {
+     "episode_id": "vBRvDqOdKwQ",
+     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
+     "start_seconds": 7787.0,
+     "timestamp": "2:09:47",
+     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=7787s",
+     "kind": "mention",
+     "note": "Mentioned as an example token that could be configured in a decentralized ETF pool alongside ETH."
+    },
+    {
+     "episode_id": "vBZ8pcgAzJY",
+     "episode_title": "\ud83d\udd34 LIVE: Solana Onchain Surges While Robinhood Chain Cools | What's the Trade?",
+     "start_seconds": 2156.0,
+     "timestamp": "35:56",
+     "deep_link": "https://www.youtube.com/watch?v=vBZ8pcgAzJY&t=2156s",
+     "kind": "mention",
+     "note": "Mentioned as one of the stablecoins the Midas bot can rebalance wallet positions into."
+    },
+    {
+     "episode_id": "vgXFm_eqY8M",
+     "episode_title": "HyperDex($HYDX) | Best Rates Across Hyperliquid, Ondo & Lighter + Live Swap Demo",
+     "start_seconds": 2594.0,
+     "timestamp": "43:14",
+     "deep_link": "https://www.youtube.com/watch?v=vgXFm_eqY8M&t=2594s",
+     "kind": "mention",
+     "note": "Mentioned as a target asset for swapping 0.1 Ethereum, with an expected output of 0.01."
+    },
+    {
+     "episode_id": "zDMFsmfIkkM",
+     "episode_title": "\ud83d\udd34 LIVE: SEC Greenlights Onchain Stocks | Tokenization Supercycle | Market Update + Interviews",
+     "start_seconds": 10882.0,
+     "timestamp": "3:01:22",
+     "deep_link": "https://www.youtube.com/watch?v=zDMFsmfIkkM&t=10882s",
+     "kind": "analysis",
+     "note": "Described as used in a bonding mechanism where traders take USDG to buy NET, which adds to USD treasury."
+    }
+   ],
+   "episode_count": 46,
+   "single_reference": false
+  },
+  {
    "symbol": "LONG",
    "name": "Long.xyz",
    "asset_class": "other",
@@ -116140,566 +116889,6 @@
     }
    ],
    "episode_count": 17,
-   "single_reference": false
-  },
-  {
-   "symbol": "USDG",
-   "name": "USDG",
-   "asset_class": "crypto",
-   "mentions": 61,
-   "analysis": 23,
-   "moments": [
-    {
-     "episode_id": "-8z0M77EVZg",
-     "episode_title": "Whatthehook($WTH): The first MEV bot that gives instead of takes. Built directly inside a v4 hook.",
-     "start_seconds": 837.0,
-     "timestamp": "13:57",
-     "deep_link": "https://www.youtube.com/watch?v=-8z0M77EVZg&t=837s",
-     "kind": "mention",
-     "note": "Mentioned as an example of a stablecoin that could be paired with ETH in a pool."
-    },
-    {
-     "episode_id": "0bmVQog1A4U",
-     "episode_title": "Chief $CHOP cooking?",
-     "start_seconds": 241.0,
-     "timestamp": "4:01",
-     "deep_link": "https://www.youtube.com/watch?v=0bmVQog1A4U&t=241s",
-     "kind": "mention",
-     "note": "USDG is listed as one of the assets that can be paired with wrapped tokens in volatility farming pools."
-    },
-    {
-     "episode_id": "2NK_MBlFvtM",
-     "episode_title": "\ud83d\udd34 LIVE: So Early It Hurts | A Simple Strategy for Surviving a Sideways Crypto Market",
-     "start_seconds": 5343.0,
-     "timestamp": "1:29:03",
-     "deep_link": "https://www.youtube.com/watch?v=2NK_MBlFvtM&t=5343s",
-     "kind": "mention",
-     "note": "Mentioned as an example of something that can be bought on Robinhood with Apple Pay as part of on-ramps into Mancer."
-    },
-    {
-     "episode_id": "3EoyxkUDpdY",
-     "episode_title": "\ud83d\udd34 LIVE: Midterms Start Today | This Decides Crypto\u2019s Next 2 Years",
-     "start_seconds": 3890.0,
-     "timestamp": "1:04:50",
-     "deep_link": "https://www.youtube.com/watch?v=3EoyxkUDpdY&t=3890s",
-     "kind": "analysis",
-     "note": "Speaker explains that users can borrow USDG from the share lending market using tokenized stock shares as collateral, or deposit USDG to participate in yield strategies."
-    },
-    {
-     "episode_id": "4PlcWhQM96A",
-     "episode_title": "\ud83d\udd34 LIVE: Time To Log Off? | AI Fears, Debt Market Shutdown, Anthropic IPO",
-     "start_seconds": 3607.0,
-     "timestamp": "1:00:07",
-     "deep_link": "https://www.youtube.com/watch?v=4PlcWhQM96A&t=3607s",
-     "kind": "mention",
-     "note": "Listed as one of the assets paired in volatility farming pools."
-    },
-    {
-     "episode_id": "5frfwS8MvZI",
-     "episode_title": "\ud83d\udd34 LIVE: Elysium Dead on Arrival? | PumpFun Drama | Crypto Cooked?",
-     "start_seconds": 2112.0,
-     "timestamp": "35:12",
-     "deep_link": "https://www.youtube.com/watch?v=5frfwS8MvZI&t=2112s",
-     "kind": "mention",
-     "note": "USDG mentioned as one of the token pairs in V4 hooks liquidity pools alongside ETH."
-    },
-    {
-     "episode_id": "5frfwS8MvZI",
-     "episode_title": "\ud83d\udd34 LIVE: Elysium Dead on Arrival? | PumpFun Drama | Crypto Cooked?",
-     "start_seconds": 4465.0,
-     "timestamp": "1:14:25",
-     "deep_link": "https://www.youtube.com/watch?v=5frfwS8MvZI&t=4465s",
-     "kind": "mention",
-     "note": "USDG mentioned as a token paired with Ethereum for liquidity provision on Uniswap."
-    },
-    {
-     "episode_id": "8Tgu7gZ-7Lk",
-     "episode_title": "NetNet Capital:Reserve Manager for $NET on Robinhood Chain.",
-     "start_seconds": 639.0,
-     "timestamp": "10:39",
-     "deep_link": "https://www.youtube.com/watch?v=8Tgu7gZ-7Lk&t=639s",
-     "kind": "analysis",
-     "note": "Stablecoin that can be bonded for discounted NET tokens, with proceeds going directly to the protocol treasury."
-    },
-    {
-     "episode_id": "8Tgu7gZ-7Lk",
-     "episode_title": "NetNet Capital:Reserve Manager for $NET on Robinhood Chain.",
-     "start_seconds": 1020.0,
-     "timestamp": "17:00",
-     "deep_link": "https://www.youtube.com/watch?v=8Tgu7gZ-7Lk&t=1020s",
-     "kind": "analysis",
-     "note": "Treasury token earned through bonding and trading volume; currently holds 525k USDG in treasury, with a significant portion coming from trading fees and bonding."
-    },
-    {
-     "episode_id": "8Tgu7gZ-7Lk",
-     "episode_title": "NetNet Capital:Reserve Manager for $NET on Robinhood Chain.",
-     "start_seconds": 1323.0,
-     "timestamp": "22:03",
-     "deep_link": "https://www.youtube.com/watch?v=8Tgu7gZ-7Lk&t=1323s",
-     "kind": "analysis",
-     "note": "Stablecoin used as backing for Net token, with backing of 13 USDG per Net, increasing to 17 with RWAs included."
-    },
-    {
-     "episode_id": "ByBZ1Fa4A3g",
-     "episode_title": "GWOOD: The self-custody neobank on Robinhood Chain. Spend, save, borrow, invest from one vault",
-     "start_seconds": 710.0,
-     "timestamp": "11:50",
-     "deep_link": "https://www.youtube.com/watch?v=ByBZ1Fa4A3g&t=710s",
-     "kind": "mention",
-     "note": "Mentioned as a token users can earn back as cash back on starter tiers of the Greenwood/Robinhood platform."
-    },
-    {
-     "episode_id": "ByBZ1Fa4A3g",
-     "episode_title": "GWOOD: The self-custody neobank on Robinhood Chain. Spend, save, borrow, invest from one vault",
-     "start_seconds": 1688.0,
-     "timestamp": "28:08",
-     "deep_link": "https://www.youtube.com/watch?v=ByBZ1Fa4A3g&t=1688s",
-     "kind": "analysis",
-     "note": "Users can receive USDG and earn USDG in a vault; it is mentioned as one of the primary earning options."
-    },
-    {
-     "episode_id": "EHhZRRHMZQM",
-     "episode_title": "\ud83d\udd34 LIVE: Markets ripping |  RHC leading | Market Update + Founder Interview",
-     "start_seconds": 13112.0,
-     "timestamp": "3:38:32",
-     "deep_link": "https://www.youtube.com/watch?v=EHhZRRHMZQM&t=13112s",
-     "kind": "mention",
-     "note": "Mentioned as a stablecoin option for swap rewards."
-    },
-    {
-     "episode_id": "ElhoMK0uH4M",
-     "episode_title": "\ud83d\udd34 LIVE: Bearish Headlines Strike Again | More Chop or Bottom Signal?",
-     "start_seconds": 2724.0,
-     "timestamp": "45:24",
-     "deep_link": "https://www.youtube.com/watch?v=ElhoMK0uH4M&t=2724s",
-     "kind": "analysis",
-     "note": "USDG is described as a stablecoin that depositors can allocate to a premium pool for weekend short position coverage."
-    },
-    {
-     "episode_id": "H4kImk1Y7KQ",
-     "episode_title": "\ud83d\udd34 LIVE: FOMC, AI Panic, Clarity Act Vote | Market Update + Interviews",
-     "start_seconds": 1649.0,
-     "timestamp": "27:29",
-     "deep_link": "https://www.youtube.com/watch?v=H4kImk1Y7KQ&t=1649s",
-     "kind": "mention",
-     "note": "Mentioned as one of the vault options available for deposits."
-    },
-    {
-     "episode_id": "LN_42fexqdw",
-     "episode_title": "$OURO - A fee generation protocol on Robinhood Chain",
-     "start_seconds": 886.0,
-     "timestamp": "14:46",
-     "deep_link": "https://www.youtube.com/watch?v=LN_42fexqdw&t=886s",
-     "kind": "mention",
-     "note": "Mentioned as one of the deposit options for vaults alongside Ethereum."
-    },
-    {
-     "episode_id": "PZ5E7taO1Yo",
-     "episode_title": "\ud83d\udd34 LIVE: RWA Memes Heating Up | Next Leg Soon? | Market Update + Interviews",
-     "start_seconds": 10556.0,
-     "timestamp": "2:55:56",
-     "deep_link": "https://www.youtube.com/watch?v=PZ5E7taO1Yo&t=10556s",
-     "kind": "analysis",
-     "note": "Speakers note that NET is a reserve share backed by USDG stablecoin, with each share backed by at least one USDG in the on-chain reserve portfolio."
-    },
-    {
-     "episode_id": "PZ5E7taO1Yo",
-     "episode_title": "\ud83d\udd34 LIVE: RWA Memes Heating Up | Next Leg Soon? | Market Update + Interviews",
-     "start_seconds": 11149.0,
-     "timestamp": "3:05:49",
-     "deep_link": "https://www.youtube.com/watch?v=PZ5E7taO1Yo&t=11149s",
-     "kind": "analysis",
-     "note": "Protocol-issued stablecoin with reserves and RWA backing; every NET is backed by at least one USDG of risk-free value; up to 70% of idle USDG can be deployed for yield."
-    },
-    {
-     "episode_id": "RufYrYmMVwU",
-     "episode_title": "\ud83d\udd34 LIVE: Onchain Market Bottom Forming | Q4 Rally Setup + How to Maximize Returns",
-     "start_seconds": 7997.0,
-     "timestamp": "2:13:17",
-     "deep_link": "https://www.youtube.com/watch?v=RufYrYmMVwU&t=7997s",
-     "kind": "mention",
-     "note": "USDG is the stablecoin that users borrow against their assets on the Longbow lending platform."
-    },
-    {
-     "episode_id": "Uoz0bDgON5o",
-     "episode_title": "STATICS Mainnet Live | $20K Weekly Incentives + Uniswap V4 Hook",
-     "start_seconds": 158.0,
-     "timestamp": "2:38",
-     "deep_link": "https://www.youtube.com/watch?v=Uoz0bDgON5o&t=158s",
-     "kind": "mention",
-     "note": "USDG is one of the first two liquidity pools being incentivized on the Statics DEX."
-    },
-    {
-     "episode_id": "Uoz0bDgON5o",
-     "episode_title": "STATICS Mainnet Live | $20K Weekly Incentives + Uniswap V4 Hook",
-     "start_seconds": 1189.0,
-     "timestamp": "19:49",
-     "deep_link": "https://www.youtube.com/watch?v=Uoz0bDgON5o&t=1189s",
-     "kind": "analysis",
-     "note": "USDG can be used through the peg stability module to mint stablecoin without requiring any risk token."
-    },
-    {
-     "episode_id": "WBB3vdHLF2Q",
-     "episode_title": "\ud83d\udd34 LIVE: S&P New ATH | Uniswap Launchpad Coming | Market Update + Interview",
-     "start_seconds": 2351.0,
-     "timestamp": "39:11",
-     "deep_link": "https://www.youtube.com/watch?v=WBB3vdHLF2Q&t=2351s",
-     "kind": "mention",
-     "note": "Mentioned as an example asset type that could be picked on the launchpad, alongside RWAs and standard ERC20 tokens."
-    },
-    {
-     "episode_id": "X4_ZclvRjSc",
-     "episode_title": "$NOTE Breakdown: Robinhood Chain, Fair Launch & On-Chain Risk Management",
-     "start_seconds": 405.0,
-     "timestamp": "6:45",
-     "deep_link": "https://www.youtube.com/watch?v=X4_ZclvRjSc&t=405s",
-     "kind": "analysis",
-     "note": "Stablecoin used on the platform; USDG holders provide capital to the liquidity pool and receive coupon payments in exchange for selling insurance/protection on stocks, with returns dependent on the series."
-    },
-    {
-     "episode_id": "X4_ZclvRjSc",
-     "episode_title": "$NOTE Breakdown: Robinhood Chain, Fair Launch & On-Chain Risk Management",
-     "start_seconds": 636.0,
-     "timestamp": "10:36",
-     "deep_link": "https://www.youtube.com/watch?v=X4_ZclvRjSc&t=636s",
-     "kind": "analysis",
-     "note": "USDG is described as a stablecoin that holders would sell protection against Apple stock; users deposit USDG alongside Apple stock to participate in the hedging mechanism and earn fees from Apple stockholders."
-    },
-    {
-     "episode_id": "X4_ZclvRjSc",
-     "episode_title": "$NOTE Breakdown: Robinhood Chain, Fair Launch & On-Chain Risk Management",
-     "start_seconds": 1636.0,
-     "timestamp": "27:16",
-     "deep_link": "https://www.youtube.com/watch?v=X4_ZclvRjSc&t=1636s",
-     "kind": "analysis",
-     "note": "Stablecoin used as collateral to borrow against coupon legs for liquidity, and can be held idle to earn yield."
-    },
-    {
-     "episode_id": "XB71vFeU2zA",
-     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
-     "start_seconds": 4854.0,
-     "timestamp": "1:20:54",
-     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=4854s",
-     "kind": "analysis",
-     "note": "USDG pool is locked with a 10-year lock; one of two major pools in the Goldstein protocol alongside GLD pool."
-    },
-    {
-     "episode_id": "XB71vFeU2zA",
-     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
-     "start_seconds": 13036.0,
-     "timestamp": "3:37:16",
-     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=13036s",
-     "kind": "mention",
-     "note": "Named as a holding in Simple Farmer's portfolio."
-    },
-    {
-     "episode_id": "XxlT7dtD9JY",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Under $81K | Is This the 10/10 Crash All Over Again?",
-     "start_seconds": 2355.0,
-     "timestamp": "39:15",
-     "deep_link": "https://www.youtube.com/watch?v=XxlT7dtD9JY&t=2355s",
-     "kind": "analysis",
-     "note": "Users can deposit USDG into the Net Net Advance product for a 30-day lock-up in exchange for a 40% advance payout."
-    },
-    {
-     "episode_id": "YOWeFQZjsBs",
-     "episode_title": "$NET Al Dunlap: Treasury at 1.4x NAV, $1M+ Buybacks, No-Loss Sportsbook & NetLong Launch | MCG",
-     "start_seconds": 1093.0,
-     "timestamp": "18:13",
-     "deep_link": "https://www.youtube.com/watch?v=YOWeFQZjsBs&t=1093s",
-     "kind": "analysis",
-     "note": "Mentioned as an alternative deposit option in NetNet Advance product; users can deposit USDG for a 40% advance against future NET rebases."
-    },
-    {
-     "episode_id": "YOWeFQZjsBs",
-     "episode_title": "$NET Al Dunlap: Treasury at 1.4x NAV, $1M+ Buybacks, No-Loss Sportsbook & NetLong Launch | MCG",
-     "start_seconds": 1382.0,
-     "timestamp": "23:02",
-     "deep_link": "https://www.youtube.com/watch?v=YOWeFQZjsBs&t=1382s",
-     "kind": "mention",
-     "note": "Stablecoin used for betting in the prediction market sportsbook; mentioned as what users bet with."
-    },
-    {
-     "episode_id": "ZE1Qpclnq6I",
-     "episode_title": "You Have to TALK to this Robinhood Genie!",
-     "start_seconds": 515.0,
-     "timestamp": "8:35",
-     "deep_link": "https://www.youtube.com/watch?v=ZE1Qpclnq6I&t=515s",
-     "kind": "mention",
-     "note": "Mentioned as a destination for rebalancing funds in yield pools."
-    },
-    {
-     "episode_id": "ZHGRCslUV3E",
-     "episode_title": "\ud83d\udd34 LIVE: BASE ECO on fire while markets are melting!  | Live Market Updates + Onchain Positioning",
-     "start_seconds": 770.0,
-     "timestamp": "12:50",
-     "deep_link": "https://www.youtube.com/watch?v=ZHGRCslUV3E&t=770s",
-     "kind": "analysis",
-     "note": "USDG passed 3 billion in market cap with 700 million added on Solana; Athena deploying 700 million USDG directly into Solana as institutional validation of DeFi."
-    },
-    {
-     "episode_id": "ZSBmoD9oLw8",
-     "episode_title": "\ud83d\udd34 LIVE: The Battle Of Blockchains | Solana vs Robinhood | Market Update + Interviews",
-     "start_seconds": 4416.0,
-     "timestamp": "1:13:36",
-     "deep_link": "https://www.youtube.com/watch?v=ZSBmoD9oLw8&t=4416s",
-     "kind": "analysis",
-     "note": "Stablecoin that can be borrowed against collateral on the protocol; holders of Savings Green receive a percentage of protocol revenue from borrower interest and origination fees."
-    },
-    {
-     "episode_id": "ZVAE6F0FXQw",
-     "episode_title": "$WEBSITE: A tokenized ownable digital spaces",
-     "start_seconds": 832.0,
-     "timestamp": "13:52",
-     "deep_link": "https://www.youtube.com/watch?v=ZVAE6F0FXQw&t=832s",
-     "kind": "mention",
-     "note": "OpenSea shows 66.9 USDG in total volume for the NFT trading platform being discussed."
-    },
-    {
-     "episode_id": "Zh_Q0Z2TtVY",
-     "episode_title": "\ud83d\udd34 LIVE: Will Robinhood Szn Last? | Market Update + Founder Interviews",
-     "start_seconds": 7244.0,
-     "timestamp": "2:00:44",
-     "deep_link": "https://www.youtube.com/watch?v=Zh_Q0Z2TtVY&t=7244s",
-     "kind": "mention",
-     "note": "USDG mentioned as a stablecoin used for capital deposits in vaults on Sherwood protocol."
-    },
-    {
-     "episode_id": "_Duv4CxaoI4",
-     "episode_title": "Mancer's Books | Back Traders Instead of Memecoins (Robinhood Chain)",
-     "start_seconds": 705.0,
-     "timestamp": "11:45",
-     "deep_link": "https://www.youtube.com/watch?v=_Duv4CxaoI4&t=705s",
-     "kind": "mention",
-     "note": "Mentioned as an example of a cryptocurrency that can be bought on Robinhood with Apple Pay through on-ramps."
-    },
-    {
-     "episode_id": "_bXn26hfpJA",
-     "episode_title": "\ud83d\udd34 LIVE: No Sleep Szn is Here | Market Update + Interviews",
-     "start_seconds": 12365.0,
-     "timestamp": "3:26:05",
-     "deep_link": "https://www.youtube.com/watch?v=_bXn26hfpJA&t=12365s",
-     "kind": "mention",
-     "note": "Stablecoin option available as a reward choice within Stack NFTs."
-    },
-    {
-     "episode_id": "_bXn26hfpJA",
-     "episode_title": "\ud83d\udd34 LIVE: No Sleep Szn is Here | Market Update + Interviews",
-     "start_seconds": 12858.0,
-     "timestamp": "3:34:18",
-     "deep_link": "https://www.youtube.com/watch?v=_bXn26hfpJA&t=12858s",
-     "kind": "mention",
-     "note": "Stablecoin paired with Omni receipt token in Uniswap v4 before pool."
-    },
-    {
-     "episode_id": "_mLaSJLAPJs",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto is Crashing | Here\u2019s Exactly What to Do Right Now",
-     "start_seconds": 9501.0,
-     "timestamp": "2:38:21",
-     "deep_link": "https://www.youtube.com/watch?v=_mLaSJLAPJs&t=9501s",
-     "kind": "analysis",
-     "note": "Token used for earning on idle funds and for agent payments within the platform; speakers discuss its use case for monetizing agents."
-    },
-    {
-     "episode_id": "ayJIM0WPyHs",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Bottom In? | Do This Before the Next Move",
-     "start_seconds": 4286.0,
-     "timestamp": "1:11:26",
-     "deep_link": "https://www.youtube.com/watch?v=ayJIM0WPyHs&t=4286s",
-     "kind": "mention",
-     "note": "The speaker mentions that if Robinhood incentivizes lending, they could add yield on top of USDG, which would be beneficial for any team doing lending on USDG."
-    },
-    {
-     "episode_id": "c6yysVT-tOg",
-     "episode_title": "\ud83d\udd34 LIVE: Will Robinhood Selloff Continue? | Market Update + Founder Interview",
-     "start_seconds": 10636.0,
-     "timestamp": "2:57:16",
-     "deep_link": "https://www.youtube.com/watch?v=c6yysVT-tOg&t=10636s",
-     "kind": "mention",
-     "note": "Mentioned as infrastructure provided by Paxos on Robinhood chain."
-    },
-    {
-     "episode_id": "cHos0BsSoFM",
-     "episode_title": "\ud83d\udd34 LIVE: S&P New ATH, BTC Stuck at $86K | Crypto Uptober Canceled?",
-     "start_seconds": 938.0,
-     "timestamp": "15:38",
-     "deep_link": "https://www.youtube.com/watch?v=cHos0BsSoFM&t=938s",
-     "kind": "mention",
-     "note": "Mentioned as backing NET at $230 entry, and as currency used in RWA asset bond subscriptions for discounted stock purchases."
-    },
-    {
-     "episode_id": "cHos0BsSoFM",
-     "episode_title": "\ud83d\udd34 LIVE: S&P New ATH, BTC Stuck at $86K | Crypto Uptober Canceled?",
-     "start_seconds": 7200.0,
-     "timestamp": "2:00:00",
-     "deep_link": "https://www.youtube.com/watch?v=cHos0BsSoFM&t=7200s",
-     "kind": "mention",
-     "note": "Mentioned as a stablecoin held on Robinhood chain."
-    },
-    {
-     "episode_id": "ckSVVsCYrSI",
-     "episode_title": "\ud83d\udd34 LIVE: Uptober Turned Choptober | Bitcoin Holding $80K | What's Next?",
-     "start_seconds": 7825.0,
-     "timestamp": "2:10:25",
-     "deep_link": "https://www.youtube.com/watch?v=ckSVVsCYrSI&t=7825s",
-     "kind": "mention",
-     "note": "Mentioned as a token used to buy net exposure on a perpetual exchange with leverage."
-    },
-    {
-     "episode_id": "eLtX3KdYiZ0",
-     "episode_title": "Virtuals Day- Robinhood Ecosystem Project Spotlight",
-     "start_seconds": 3322.0,
-     "timestamp": "55:22",
-     "deep_link": "https://www.youtube.com/watch?v=eLtX3KdYiZ0&t=3322s",
-     "kind": "mention",
-     "note": "Mentioned as a treasury currency used to buy back tokens from users in early stages."
-    },
-    {
-     "episode_id": "eLtX3KdYiZ0",
-     "episode_title": "Virtuals Day- Robinhood Ecosystem Project Spotlight",
-     "start_seconds": 5379.0,
-     "timestamp": "1:29:39",
-     "deep_link": "https://www.youtube.com/watch?v=eLtX3KdYiZ0&t=5379s",
-     "kind": "analysis",
-     "note": "Described as Robinhood chain's dedicated stablecoin; speakers note a massive rise in USDG."
-    },
-    {
-     "episode_id": "fTT9R0_vqAY",
-     "episode_title": "\ud83d\udd34 LIVE: Is the Market Bottom In? | Anthropic\u2019s $1.5T Debut | Cyberattacks Intensify",
-     "start_seconds": 2584.0,
-     "timestamp": "43:04",
-     "deep_link": "https://www.youtube.com/watch?v=fTT9R0_vqAY&t=2584s",
-     "kind": "mention",
-     "note": "USDG is mentioned as a stablecoin option for paying entry fees and was used by entrants in the prior week's competition."
-    },
-    {
-     "episode_id": "hrmDHyMerQw",
-     "episode_title": "Josh addresses the recent MOTION going on with $NET( is it a SCAM!?)",
-     "start_seconds": 113.0,
-     "timestamp": "1:53",
-     "deep_link": "https://www.youtube.com/watch?v=hrmDHyMerQw&t=113s",
-     "kind": "mention",
-     "note": "USDG mentioned as the strike price currency for Net P-Team options and as a fee-generating token in the protocol."
-    },
-    {
-     "episode_id": "lN2kZJ0CNZg",
-     "episode_title": "\ud83d\udfe2 LIVE: Robinhood Chain Rally Incoming? How to Position",
-     "start_seconds": 4153.0,
-     "timestamp": "1:09:13",
-     "deep_link": "https://www.youtube.com/watch?v=lN2kZJ0CNZg&t=4153s",
-     "kind": "mention",
-     "note": "Mentioned as a pairing asset for stock tokens and as an alternative routing mechanism to Shroom."
-    },
-    {
-     "episode_id": "miXTiMNMDCc",
-     "episode_title": "\ud83d\udd34 LIVE: Onchain Volume Falling Across the Board | Why Stay Bullish?",
-     "start_seconds": 15061.0,
-     "timestamp": "4:11:01",
-     "deep_link": "https://www.youtube.com/watch?v=miXTiMNMDCc&t=15061s",
-     "kind": "mention",
-     "note": "Mentioned as an asset market with dynamic fees set by the team alongside ETH and RWA."
-    },
-    {
-     "episode_id": "n-1Tj9Emstc",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holding Above $82.5K | Calm Before the Storm?",
-     "start_seconds": 4210.0,
-     "timestamp": "1:10:10",
-     "deep_link": "https://www.youtube.com/watch?v=n-1Tj9Emstc&t=4210s",
-     "kind": "analysis",
-     "note": "Stablecoin used as capital by insurance sellers; providers of USDG receive coupon payments and returns if stock price stays above barrier, or receive underlying stock if barrier is breached; projected APY stated at around 20%."
-    },
-    {
-     "episode_id": "n-1Tj9Emstc",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holding Above $82.5K | Calm Before the Storm?",
-     "start_seconds": 4440.0,
-     "timestamp": "1:14:00",
-     "deep_link": "https://www.youtube.com/watch?v=n-1Tj9Emstc&t=4440s",
-     "kind": "analysis",
-     "note": "Stablecoin holders would act as counterparties (short the put option) in the autocallable structure, earning yield while Apple stockholders pay them for downside protection."
-    },
-    {
-     "episode_id": "qHavUGBG56A",
-     "episode_title": "\ud83d\udd34 LIVE: Black Monday Overblown? | Staying Bullish | Market Update",
-     "start_seconds": 3367.0,
-     "timestamp": "56:07",
-     "deep_link": "https://www.youtube.com/watch?v=qHavUGBG56A&t=3367s",
-     "kind": "mention",
-     "note": "Trading pair with Statics token, one of two initial incentivized pools."
-    },
-    {
-     "episode_id": "qHavUGBG56A",
-     "episode_title": "\ud83d\udd34 LIVE: Black Monday Overblown? | Staying Bullish | Market Update",
-     "start_seconds": 3831.0,
-     "timestamp": "1:03:51",
-     "deep_link": "https://www.youtube.com/watch?v=qHavUGBG56A&t=3831s",
-     "kind": "mention",
-     "note": "Referenced as an example of a pool that can be created, where you can create a USDG pool without needing a token."
-    },
-    {
-     "episode_id": "qHavUGBG56A",
-     "episode_title": "\ud83d\udd34 LIVE: Black Monday Overblown? | Staying Bullish | Market Update",
-     "start_seconds": 4663.0,
-     "timestamp": "1:17:43",
-     "deep_link": "https://www.youtube.com/watch?v=qHavUGBG56A&t=4663s",
-     "kind": "analysis",
-     "note": "USDG can be used through the PEG stability module to mint Statics dollar without requiring risk tokens."
-    },
-    {
-     "episode_id": "qq_4gfyjN6s",
-     "episode_title": "\ud83d\udd34 LIVE: MonkeDAO Solana Product Spotlight + Trader Radio w/@ChillTRD | Market Updates",
-     "start_seconds": 14479.0,
-     "timestamp": "4:01:19",
-     "deep_link": "https://www.youtube.com/watch?v=qq_4gfyjN6s&t=14479s",
-     "kind": "mention",
-     "note": "USDG vault mentioned as part of Bow protocol's fee distribution."
-    },
-    {
-     "episode_id": "qz5qB0AgC0Q",
-     "episode_title": "Nate (Long / $AI Founder): Robinhood Chain Isn\u2019t Dead | Wallet Integration, Why Stock Tokens Win",
-     "start_seconds": 802.0,
-     "timestamp": "13:22",
-     "deep_link": "https://www.youtube.com/watch?v=qz5qB0AgC0Q&t=802s",
-     "kind": "mention",
-     "note": "Mentioned as a potential asset for lending incentives and yield generation by Robinhood."
-    },
-    {
-     "episode_id": "vBRvDqOdKwQ",
-     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
-     "start_seconds": 7787.0,
-     "timestamp": "2:09:47",
-     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=7787s",
-     "kind": "mention",
-     "note": "Mentioned as an example token that could be configured in a decentralized ETF pool alongside ETH."
-    },
-    {
-     "episode_id": "vBZ8pcgAzJY",
-     "episode_title": "\ud83d\udd34 LIVE: Solana Onchain Surges While Robinhood Chain Cools | What's the Trade?",
-     "start_seconds": 2156.0,
-     "timestamp": "35:56",
-     "deep_link": "https://www.youtube.com/watch?v=vBZ8pcgAzJY&t=2156s",
-     "kind": "mention",
-     "note": "Mentioned as one of the stablecoins the Midas bot can rebalance wallet positions into."
-    },
-    {
-     "episode_id": "vgXFm_eqY8M",
-     "episode_title": "HyperDex($HYDX) | Best Rates Across Hyperliquid, Ondo & Lighter + Live Swap Demo",
-     "start_seconds": 2594.0,
-     "timestamp": "43:14",
-     "deep_link": "https://www.youtube.com/watch?v=vgXFm_eqY8M&t=2594s",
-     "kind": "mention",
-     "note": "Mentioned as a target asset for swapping 0.1 Ethereum, with an expected output of 0.01."
-    },
-    {
-     "episode_id": "zDMFsmfIkkM",
-     "episode_title": "\ud83d\udd34 LIVE: SEC Greenlights Onchain Stocks | Tokenization Supercycle | Market Update + Interviews",
-     "start_seconds": 10882.0,
-     "timestamp": "3:01:22",
-     "deep_link": "https://www.youtube.com/watch?v=zDMFsmfIkkM&t=10882s",
-     "kind": "analysis",
-     "note": "Described as used in a bonding mechanism where traders take USDG to buy NET, which adds to USD treasury."
-    }
-   ],
-   "episode_count": 45,
    "single_reference": false
   },
   {
@@ -118356,7 +118545,7 @@
    "symbol": "PEPE",
    "name": "Pepe",
    "asset_class": "crypto",
-   "mentions": 70,
+   "mentions": 72,
    "analysis": 22,
    "moments": [
     {
@@ -118493,6 +118682,24 @@
      "deep_link": "https://www.youtube.com/watch?v=5frfwS8MvZI&t=11848s",
      "kind": "mention",
      "note": "Pepe is mentioned in passing when comparing chart patterns, but not analyzed."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 737.0,
+     "timestamp": "12:17",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=737s",
+     "kind": "mention",
+     "note": "Speaker references Pepe as a comparison point to Cash Cat from a previous cycle."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 3382.0,
+     "timestamp": "56:22",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=3382s",
+     "kind": "mention",
+     "note": "Mentioned as a meme token deployed on the launchpad."
     },
     {
      "episode_id": "DCxwABH6umU",
@@ -118990,7 +119197,7 @@
      "note": "Named in passing when asking to send the CA in Discord."
     }
    ],
-   "episode_count": 52,
+   "episode_count": 53,
    "single_reference": false
   },
   {
@@ -129015,6 +129222,233 @@
    "single_reference": false
   },
   {
+   "symbol": "PONS",
+   "name": "Pons",
+   "asset_class": "other",
+   "mentions": 24,
+   "analysis": 15,
+   "moments": [
+    {
+     "episode_id": "2NK_MBlFvtM",
+     "episode_title": "\ud83d\udd34 LIVE: So Early It Hurts | A Simple Strategy for Surviving a Sideways Crypto Market",
+     "start_seconds": 7876.0,
+     "timestamp": "2:11:16",
+     "deep_link": "https://www.youtube.com/watch?v=2NK_MBlFvtM&t=7876s",
+     "kind": "mention",
+     "note": "Pons was one of two OG protocols added to Robinhood Wallet alongside Long."
+    },
+    {
+     "episode_id": "4PlcWhQM96A",
+     "episode_title": "\ud83d\udd34 LIVE: Time To Log Off? | AI Fears, Debt Market Shutdown, Anthropic IPO",
+     "start_seconds": 9755.0,
+     "timestamp": "2:42:35",
+     "deep_link": "https://www.youtube.com/watch?v=4PlcWhQM96A&t=9755s",
+     "kind": "analysis",
+     "note": "Established launchpad with market cap around 160, compared as roughly 15x larger than Torchpad."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 3805.0,
+     "timestamp": "1:03:25",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=3805s",
+     "kind": "analysis",
+     "note": "Token was successful, rose from five million to around a billion; enabled launchpad and airdrop community incentives."
+    },
+    {
+     "episode_id": "H4kImk1Y7KQ",
+     "episode_title": "\ud83d\udd34 LIVE: FOMC, AI Panic, Clarity Act Vote | Market Update + Interviews",
+     "start_seconds": 1589.0,
+     "timestamp": "26:29",
+     "deep_link": "https://www.youtube.com/watch?v=H4kImk1Y7KQ&t=1589s",
+     "kind": "mention",
+     "note": "Named as one of the sustainable tokens selected for liquidity positions."
+    },
+    {
+     "episode_id": "LN_42fexqdw",
+     "episode_title": "$OURO - A fee generation protocol on Robinhood Chain",
+     "start_seconds": 826.0,
+     "timestamp": "13:46",
+     "deep_link": "https://www.youtube.com/watch?v=LN_42fexqdw&t=826s",
+     "kind": "mention",
+     "note": "Mentioned as one of the tokens the team considers safe and sustainable for LP positions."
+    },
+    {
+     "episode_id": "UbKsP6WCsPs",
+     "episode_title": "\ud83d\udd34 LIVE: Market Cooling Off | Buy The Dip? | Market Update + Interviews",
+     "start_seconds": 2938.0,
+     "timestamp": "48:58",
+     "deep_link": "https://www.youtube.com/watch?v=UbKsP6WCsPs&t=2938s",
+     "kind": "analysis",
+     "note": "Speaker discusses Ponds as a great opportunity realized through their crypto research background, mentions it as a major position with $2.5 million floating in it."
+    },
+    {
+     "episode_id": "XB71vFeU2zA",
+     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
+     "start_seconds": 6738.0,
+     "timestamp": "1:52:18",
+     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=6738s",
+     "kind": "analysis",
+     "note": "Speakers discuss Pons integration into Robinhood wallet, describing it as a significant development and surface area for innovation."
+    },
+    {
+     "episode_id": "Xf3MBXMtfD0",
+     "episode_title": "\ud83d\udd34 LIVE: Bottom is in | Opportunities everywhere | Market Update + Interviews",
+     "start_seconds": 1078.0,
+     "timestamp": "17:58",
+     "deep_link": "https://www.youtube.com/watch?v=Xf3MBXMtfD0&t=1078s",
+     "kind": "mention",
+     "note": "Referenced as an example of a protocol with a day-one fee switch that generated significant revenue and performed buybacks."
+    },
+    {
+     "episode_id": "Xf3MBXMtfD0",
+     "episode_title": "\ud83d\udd34 LIVE: Bottom is in | Opportunities everywhere | Market Update + Interviews",
+     "start_seconds": 5967.0,
+     "timestamp": "1:39:27",
+     "deep_link": "https://www.youtube.com/watch?v=Xf3MBXMtfD0&t=5967s",
+     "kind": "mention",
+     "note": "Named as one of the tokens for which liquidity support is being built on the Robinhood chain platform."
+    },
+    {
+     "episode_id": "aGXTzl3g_cI",
+     "episode_title": "\ud83d\udd34 LIVE: Uniswap Top Pons Bottom? | RWA Memes on Solana $Stonk | Market Update + Interviews",
+     "start_seconds": 7985.0,
+     "timestamp": "2:13:05",
+     "deep_link": "https://www.youtube.com/watch?v=aGXTzl3g_cI&t=7985s",
+     "kind": "analysis",
+     "note": "Discussed as a leading launchpad on Robinhood that reclaimed the number one spot from Pools, doing 100k in buybacks daily, with price-to-earnings at approximately 0.66 and coins like H and Nasdaq launching successfully on it."
+    },
+    {
+     "episode_id": "ayJIM0WPyHs",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Bottom In? | Do This Before the Next Move",
+     "start_seconds": 2960.0,
+     "timestamp": "49:20",
+     "deep_link": "https://www.youtube.com/watch?v=ayJIM0WPyHs&t=2960s",
+     "kind": "mention",
+     "note": "Speaker mentions Pons as an example of infrastructure for launch pads, noting it functions as an app store showing launches on different chains like Mosh and Orbeo."
+    },
+    {
+     "episode_id": "cGukRd5BGeA",
+     "episode_title": "$BUN on MCG | Exciting Launches & Many More",
+     "start_seconds": 876.0,
+     "timestamp": "14:36",
+     "deep_link": "https://www.youtube.com/watch?v=cGukRd5BGeA&t=876s",
+     "kind": "analysis",
+     "note": "Discussed as a launch pad platform that added bond pairs; hit a $700 million market cap and experienced liquidity rotation issues as scam deployers and bundlers entered the market."
+    },
+    {
+     "episode_id": "cHos0BsSoFM",
+     "episode_title": "\ud83d\udd34 LIVE: S&P New ATH, BTC Stuck at $86K | Crypto Uptober Canceled?",
+     "start_seconds": 3601.0,
+     "timestamp": "1:00:01",
+     "deep_link": "https://www.youtube.com/watch?v=cHos0BsSoFM&t=3601s",
+     "kind": "mention",
+     "note": "PONS is mentioned as receiving a cut of trading fees in the AUR fee-sharing structure."
+    },
+    {
+     "episode_id": "cHos0BsSoFM",
+     "episode_title": "\ud83d\udd34 LIVE: S&P New ATH, BTC Stuck at $86K | Crypto Uptober Canceled?",
+     "start_seconds": 8051.0,
+     "timestamp": "2:14:11",
+     "deep_link": "https://www.youtube.com/watch?v=cHos0BsSoFM&t=8051s",
+     "kind": "analysis",
+     "note": "PONS discussed as finding a bottom and similar to AI's chart; speaker notes if PONS rips out of this area it could lead on-chain trading back again, with revenues needing to return."
+    },
+    {
+     "episode_id": "ckSVVsCYrSI",
+     "episode_title": "\ud83d\udd34 LIVE: Uptober Turned Choptober | Bitcoin Holding $80K | What's Next?",
+     "start_seconds": 2723.0,
+     "timestamp": "45:23",
+     "deep_link": "https://www.youtube.com/watch?v=ckSVVsCYrSI&t=2723s",
+     "kind": "analysis",
+     "note": "Described as a blockchain platform where coins are launched; speakers demonstrate a dashboard showing all coins launched on Pons being scanned by agents for malicious injections."
+    },
+    {
+     "episode_id": "ct401gJf-as",
+     "episode_title": "\ud83d\udd34 LIVE: Hood summit day | Revenue coins dominating | Interviews + Positioning",
+     "start_seconds": 9719.0,
+     "timestamp": "2:41:59",
+     "deep_link": "https://www.youtube.com/watch?v=ct401gJf-as&t=9719s",
+     "kind": "analysis",
+     "note": "Mentioned as adopting the revenue meta, with charts showing upward price movement."
+    },
+    {
+     "episode_id": "gbKVGLAGcU8",
+     "episode_title": "\ud83d\udfe2 LIVE: Onchain Crypto Market Turning Bullish | How To Maximize Your Gains",
+     "start_seconds": 9145.0,
+     "timestamp": "2:32:25",
+     "deep_link": "https://www.youtube.com/watch?v=gbKVGLAGcU8&t=9145s",
+     "kind": "analysis",
+     "note": "Described as number one on Top 15 protocols by buybacks on Robinhood Chain, with 8.5 million in buybacks this year for a $44 million market cap token, representing approximately 20% of supply."
+    },
+    {
+     "episode_id": "q7hcCdzTTiI",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holds Above $83K | Uptober Incoming? | Market Update + Interviews",
+     "start_seconds": 6042.0,
+     "timestamp": "1:40:42",
+     "deep_link": "https://www.youtube.com/watch?v=q7hcCdzTTiI&t=6042s",
+     "kind": "analysis",
+     "note": "Launchpad platform discussed; hit $700 million market cap with high revenues; speakers note challenges at its current stage including scam deployers and liquidity rotation."
+    },
+    {
+     "episode_id": "q7hcCdzTTiI",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holds Above $83K | Uptober Incoming? | Market Update + Interviews",
+     "start_seconds": 6961.0,
+     "timestamp": "1:56:01",
+     "deep_link": "https://www.youtube.com/watch?v=q7hcCdzTTiI&t=6961s",
+     "kind": "mention",
+     "note": "Mentioned as a blockchain or platform that the speaker's product is built on top of; later discussed as a launchpad layer in the ecosystem with buybacks and liquidity provision."
+    },
+    {
+     "episode_id": "q7hcCdzTTiI",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holds Above $83K | Uptober Incoming? | Market Update + Interviews",
+     "start_seconds": 7117.0,
+     "timestamp": "1:58:37",
+     "deep_link": "https://www.youtube.com/watch?v=q7hcCdzTTiI&t=7117s",
+     "kind": "mention",
+     "note": "Pons is mentioned as a blockchain or platform where third-party developers can be successful, and where tokens launched on MOSH appear."
+    },
+    {
+     "episode_id": "q7hcCdzTTiI",
+     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holds Above $83K | Uptober Incoming? | Market Update + Interviews",
+     "start_seconds": 7476.0,
+     "timestamp": "2:04:36",
+     "deep_link": "https://www.youtube.com/watch?v=q7hcCdzTTiI&t=7476s",
+     "kind": "analysis",
+     "note": "The speaker built on Pons because they were taking time, being disciplined, and not trying to vertically integrate everything."
+    },
+    {
+     "episode_id": "zDMFsmfIkkM",
+     "episode_title": "\ud83d\udd34 LIVE: SEC Greenlights Onchain Stocks | Tokenization Supercycle | Market Update + Interviews",
+     "start_seconds": 2065.0,
+     "timestamp": "34:25",
+     "deep_link": "https://www.youtube.com/watch?v=zDMFsmfIkkM&t=2065s",
+     "kind": "analysis",
+     "note": "PONS was dominating volume on Uniswap; Uniswap bought an undisclosed amount of PONS token supply and the two platforms are aligning on hooks and V4 pools to work together."
+    },
+    {
+     "episode_id": "zJsQAfBROiQ",
+     "episode_title": "$PONS on MCG | Discussing their beef with Uniswap\ud83d\udc40",
+     "start_seconds": 589.0,
+     "timestamp": "9:49",
+     "deep_link": "https://www.youtube.com/watch?v=zJsQAfBROiQ&t=589s",
+     "kind": "analysis",
+     "note": "Pons was dominating volume on Uniswap; Uniswap recently bought an undisclosed amount of Pons token supply as a vouch of support."
+    },
+    {
+     "episode_id": "zqOYgV9pXxI",
+     "episode_title": "Former Robinhood Employee on What\u2019s Actually Happening at Robinhood Right Now..",
+     "start_seconds": 1119.0,
+     "timestamp": "18:39",
+     "deep_link": "https://www.youtube.com/watch?v=zqOYgV9pXxI&t=1119s",
+     "kind": "analysis",
+     "note": "Discussed as a major project in the Robinhood ecosystem; speakers mention a panel with Carl from PONS and discuss PONS integration in the Robinhood wallet as a significant development."
+    }
+   ],
+   "episode_count": 19,
+   "single_reference": false
+  },
+  {
    "symbol": "CLAUDE",
    "name": "Kelly Claude",
    "asset_class": "other",
@@ -132799,224 +133233,6 @@
     }
    ],
    "episode_count": 21,
-   "single_reference": false
-  },
-  {
-   "symbol": "PONS",
-   "name": "Pons",
-   "asset_class": "other",
-   "mentions": 23,
-   "analysis": 14,
-   "moments": [
-    {
-     "episode_id": "2NK_MBlFvtM",
-     "episode_title": "\ud83d\udd34 LIVE: So Early It Hurts | A Simple Strategy for Surviving a Sideways Crypto Market",
-     "start_seconds": 7876.0,
-     "timestamp": "2:11:16",
-     "deep_link": "https://www.youtube.com/watch?v=2NK_MBlFvtM&t=7876s",
-     "kind": "mention",
-     "note": "Pons was one of two OG protocols added to Robinhood Wallet alongside Long."
-    },
-    {
-     "episode_id": "4PlcWhQM96A",
-     "episode_title": "\ud83d\udd34 LIVE: Time To Log Off? | AI Fears, Debt Market Shutdown, Anthropic IPO",
-     "start_seconds": 9755.0,
-     "timestamp": "2:42:35",
-     "deep_link": "https://www.youtube.com/watch?v=4PlcWhQM96A&t=9755s",
-     "kind": "analysis",
-     "note": "Established launchpad with market cap around 160, compared as roughly 15x larger than Torchpad."
-    },
-    {
-     "episode_id": "H4kImk1Y7KQ",
-     "episode_title": "\ud83d\udd34 LIVE: FOMC, AI Panic, Clarity Act Vote | Market Update + Interviews",
-     "start_seconds": 1589.0,
-     "timestamp": "26:29",
-     "deep_link": "https://www.youtube.com/watch?v=H4kImk1Y7KQ&t=1589s",
-     "kind": "mention",
-     "note": "Named as one of the sustainable tokens selected for liquidity positions."
-    },
-    {
-     "episode_id": "LN_42fexqdw",
-     "episode_title": "$OURO - A fee generation protocol on Robinhood Chain",
-     "start_seconds": 826.0,
-     "timestamp": "13:46",
-     "deep_link": "https://www.youtube.com/watch?v=LN_42fexqdw&t=826s",
-     "kind": "mention",
-     "note": "Mentioned as one of the tokens the team considers safe and sustainable for LP positions."
-    },
-    {
-     "episode_id": "UbKsP6WCsPs",
-     "episode_title": "\ud83d\udd34 LIVE: Market Cooling Off | Buy The Dip? | Market Update + Interviews",
-     "start_seconds": 2938.0,
-     "timestamp": "48:58",
-     "deep_link": "https://www.youtube.com/watch?v=UbKsP6WCsPs&t=2938s",
-     "kind": "analysis",
-     "note": "Speaker discusses Ponds as a great opportunity realized through their crypto research background, mentions it as a major position with $2.5 million floating in it."
-    },
-    {
-     "episode_id": "XB71vFeU2zA",
-     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
-     "start_seconds": 6738.0,
-     "timestamp": "1:52:18",
-     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=6738s",
-     "kind": "analysis",
-     "note": "Speakers discuss Pons integration into Robinhood wallet, describing it as a significant development and surface area for innovation."
-    },
-    {
-     "episode_id": "Xf3MBXMtfD0",
-     "episode_title": "\ud83d\udd34 LIVE: Bottom is in | Opportunities everywhere | Market Update + Interviews",
-     "start_seconds": 1078.0,
-     "timestamp": "17:58",
-     "deep_link": "https://www.youtube.com/watch?v=Xf3MBXMtfD0&t=1078s",
-     "kind": "mention",
-     "note": "Referenced as an example of a protocol with a day-one fee switch that generated significant revenue and performed buybacks."
-    },
-    {
-     "episode_id": "Xf3MBXMtfD0",
-     "episode_title": "\ud83d\udd34 LIVE: Bottom is in | Opportunities everywhere | Market Update + Interviews",
-     "start_seconds": 5967.0,
-     "timestamp": "1:39:27",
-     "deep_link": "https://www.youtube.com/watch?v=Xf3MBXMtfD0&t=5967s",
-     "kind": "mention",
-     "note": "Named as one of the tokens for which liquidity support is being built on the Robinhood chain platform."
-    },
-    {
-     "episode_id": "aGXTzl3g_cI",
-     "episode_title": "\ud83d\udd34 LIVE: Uniswap Top Pons Bottom? | RWA Memes on Solana $Stonk | Market Update + Interviews",
-     "start_seconds": 7985.0,
-     "timestamp": "2:13:05",
-     "deep_link": "https://www.youtube.com/watch?v=aGXTzl3g_cI&t=7985s",
-     "kind": "analysis",
-     "note": "Discussed as a leading launchpad on Robinhood that reclaimed the number one spot from Pools, doing 100k in buybacks daily, with price-to-earnings at approximately 0.66 and coins like H and Nasdaq launching successfully on it."
-    },
-    {
-     "episode_id": "ayJIM0WPyHs",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Bottom In? | Do This Before the Next Move",
-     "start_seconds": 2960.0,
-     "timestamp": "49:20",
-     "deep_link": "https://www.youtube.com/watch?v=ayJIM0WPyHs&t=2960s",
-     "kind": "mention",
-     "note": "Speaker mentions Pons as an example of infrastructure for launch pads, noting it functions as an app store showing launches on different chains like Mosh and Orbeo."
-    },
-    {
-     "episode_id": "cGukRd5BGeA",
-     "episode_title": "$BUN on MCG | Exciting Launches & Many More",
-     "start_seconds": 876.0,
-     "timestamp": "14:36",
-     "deep_link": "https://www.youtube.com/watch?v=cGukRd5BGeA&t=876s",
-     "kind": "analysis",
-     "note": "Discussed as a launch pad platform that added bond pairs; hit a $700 million market cap and experienced liquidity rotation issues as scam deployers and bundlers entered the market."
-    },
-    {
-     "episode_id": "cHos0BsSoFM",
-     "episode_title": "\ud83d\udd34 LIVE: S&P New ATH, BTC Stuck at $86K | Crypto Uptober Canceled?",
-     "start_seconds": 3601.0,
-     "timestamp": "1:00:01",
-     "deep_link": "https://www.youtube.com/watch?v=cHos0BsSoFM&t=3601s",
-     "kind": "mention",
-     "note": "PONS is mentioned as receiving a cut of trading fees in the AUR fee-sharing structure."
-    },
-    {
-     "episode_id": "cHos0BsSoFM",
-     "episode_title": "\ud83d\udd34 LIVE: S&P New ATH, BTC Stuck at $86K | Crypto Uptober Canceled?",
-     "start_seconds": 8051.0,
-     "timestamp": "2:14:11",
-     "deep_link": "https://www.youtube.com/watch?v=cHos0BsSoFM&t=8051s",
-     "kind": "analysis",
-     "note": "PONS discussed as finding a bottom and similar to AI's chart; speaker notes if PONS rips out of this area it could lead on-chain trading back again, with revenues needing to return."
-    },
-    {
-     "episode_id": "ckSVVsCYrSI",
-     "episode_title": "\ud83d\udd34 LIVE: Uptober Turned Choptober | Bitcoin Holding $80K | What's Next?",
-     "start_seconds": 2723.0,
-     "timestamp": "45:23",
-     "deep_link": "https://www.youtube.com/watch?v=ckSVVsCYrSI&t=2723s",
-     "kind": "analysis",
-     "note": "Described as a blockchain platform where coins are launched; speakers demonstrate a dashboard showing all coins launched on Pons being scanned by agents for malicious injections."
-    },
-    {
-     "episode_id": "ct401gJf-as",
-     "episode_title": "\ud83d\udd34 LIVE: Hood summit day | Revenue coins dominating | Interviews + Positioning",
-     "start_seconds": 9719.0,
-     "timestamp": "2:41:59",
-     "deep_link": "https://www.youtube.com/watch?v=ct401gJf-as&t=9719s",
-     "kind": "analysis",
-     "note": "Mentioned as adopting the revenue meta, with charts showing upward price movement."
-    },
-    {
-     "episode_id": "gbKVGLAGcU8",
-     "episode_title": "\ud83d\udfe2 LIVE: Onchain Crypto Market Turning Bullish | How To Maximize Your Gains",
-     "start_seconds": 9145.0,
-     "timestamp": "2:32:25",
-     "deep_link": "https://www.youtube.com/watch?v=gbKVGLAGcU8&t=9145s",
-     "kind": "analysis",
-     "note": "Described as number one on Top 15 protocols by buybacks on Robinhood Chain, with 8.5 million in buybacks this year for a $44 million market cap token, representing approximately 20% of supply."
-    },
-    {
-     "episode_id": "q7hcCdzTTiI",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holds Above $83K | Uptober Incoming? | Market Update + Interviews",
-     "start_seconds": 6042.0,
-     "timestamp": "1:40:42",
-     "deep_link": "https://www.youtube.com/watch?v=q7hcCdzTTiI&t=6042s",
-     "kind": "analysis",
-     "note": "Launchpad platform discussed; hit $700 million market cap with high revenues; speakers note challenges at its current stage including scam deployers and liquidity rotation."
-    },
-    {
-     "episode_id": "q7hcCdzTTiI",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holds Above $83K | Uptober Incoming? | Market Update + Interviews",
-     "start_seconds": 6961.0,
-     "timestamp": "1:56:01",
-     "deep_link": "https://www.youtube.com/watch?v=q7hcCdzTTiI&t=6961s",
-     "kind": "mention",
-     "note": "Mentioned as a blockchain or platform that the speaker's product is built on top of; later discussed as a launchpad layer in the ecosystem with buybacks and liquidity provision."
-    },
-    {
-     "episode_id": "q7hcCdzTTiI",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holds Above $83K | Uptober Incoming? | Market Update + Interviews",
-     "start_seconds": 7117.0,
-     "timestamp": "1:58:37",
-     "deep_link": "https://www.youtube.com/watch?v=q7hcCdzTTiI&t=7117s",
-     "kind": "mention",
-     "note": "Pons is mentioned as a blockchain or platform where third-party developers can be successful, and where tokens launched on MOSH appear."
-    },
-    {
-     "episode_id": "q7hcCdzTTiI",
-     "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holds Above $83K | Uptober Incoming? | Market Update + Interviews",
-     "start_seconds": 7476.0,
-     "timestamp": "2:04:36",
-     "deep_link": "https://www.youtube.com/watch?v=q7hcCdzTTiI&t=7476s",
-     "kind": "analysis",
-     "note": "The speaker built on Pons because they were taking time, being disciplined, and not trying to vertically integrate everything."
-    },
-    {
-     "episode_id": "zDMFsmfIkkM",
-     "episode_title": "\ud83d\udd34 LIVE: SEC Greenlights Onchain Stocks | Tokenization Supercycle | Market Update + Interviews",
-     "start_seconds": 2065.0,
-     "timestamp": "34:25",
-     "deep_link": "https://www.youtube.com/watch?v=zDMFsmfIkkM&t=2065s",
-     "kind": "analysis",
-     "note": "PONS was dominating volume on Uniswap; Uniswap bought an undisclosed amount of PONS token supply and the two platforms are aligning on hooks and V4 pools to work together."
-    },
-    {
-     "episode_id": "zJsQAfBROiQ",
-     "episode_title": "$PONS on MCG | Discussing their beef with Uniswap\ud83d\udc40",
-     "start_seconds": 589.0,
-     "timestamp": "9:49",
-     "deep_link": "https://www.youtube.com/watch?v=zJsQAfBROiQ&t=589s",
-     "kind": "analysis",
-     "note": "Pons was dominating volume on Uniswap; Uniswap recently bought an undisclosed amount of Pons token supply as a vouch of support."
-    },
-    {
-     "episode_id": "zqOYgV9pXxI",
-     "episode_title": "Former Robinhood Employee on What\u2019s Actually Happening at Robinhood Right Now..",
-     "start_seconds": 1119.0,
-     "timestamp": "18:39",
-     "deep_link": "https://www.youtube.com/watch?v=zqOYgV9pXxI&t=1119s",
-     "kind": "analysis",
-     "note": "Discussed as a major project in the Robinhood ecosystem; speakers mention a panel with Carl from PONS and discuss PONS integration in the Robinhood wallet as a significant development."
-    }
-   ],
-   "episode_count": 18,
    "single_reference": false
   },
   {
@@ -142688,6 +142904,125 @@
    "single_reference": false
   },
   {
+   "symbol": "OM",
+   "name": "Mantra",
+   "asset_class": "crypto",
+   "mentions": 12,
+   "analysis": 9,
+   "moments": [
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 4638.0,
+     "timestamp": "1:17:18",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=4638s",
+     "kind": "analysis",
+     "note": "Discussion of investment in Mantra on their launch, competitive relationship with Ascend, and speaker's acknowledgment of mistakes in prior interactions between the two projects."
+    },
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 5971.0,
+     "timestamp": "1:39:31",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=5971s",
+     "kind": "analysis",
+     "note": "Discussed as a competitor at the time with good alignments; mentioned that the speaker is one of the top tokens on Mantra with a market cap that almost reached 300-400K."
+    },
+    {
+     "episode_id": "51Gq2ynLdOg",
+     "episode_title": "Only Launchpad That Doesn\u2019t Extract From Traders | Ascend x Elysium",
+     "start_seconds": 1199.0,
+     "timestamp": "19:59",
+     "deep_link": "https://www.youtube.com/watch?v=51Gq2ynLdOg&t=1199s",
+     "kind": "analysis",
+     "note": "Discussed a conflict situation between Ascend and Mantra involving a DDoS attack on Ascend's launch day, with strategic investment considerations mentioned."
+    },
+    {
+     "episode_id": "51Gq2ynLdOg",
+     "episode_title": "Only Launchpad That Doesn\u2019t Extract From Traders | Ascend x Elysium",
+     "start_seconds": 1438.0,
+     "timestamp": "23:58",
+     "deep_link": "https://www.youtube.com/watch?v=51Gq2ynLdOg&t=1438s",
+     "kind": "analysis",
+     "note": "Speaker mentions Mantra team and model, describing it as beneficial to the ecosystem and competing positively with Ascend."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 2228.0,
+     "timestamp": "37:08",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=2228s",
+     "kind": "analysis",
+     "note": "Speakers discuss Mantra as a launch pad platform, mention it has done just about $100 million in volume, discuss its team and projects launched on it, and express enthusiasm about its future despite market conditions."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 3173.0,
+     "timestamp": "52:53",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=3173s",
+     "kind": "analysis",
+     "note": "Described as 'extremely impressive' in the context of a Hyperliquid-based product and launchpad."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 3472.0,
+     "timestamp": "57:52",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=3472s",
+     "kind": "analysis",
+     "note": "Discussed as a blockchain and launchpad emphasizing permissionlessness; tokenomics and fee structure explained, with an economic engine involving buybacks and burning paired with KNTQ."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 3787.0,
+     "timestamp": "1:03:07",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=3787s",
+     "kind": "analysis",
+     "note": "Discussed as a token that will accrue value to the ecosystem and creators; fees are used to buy back and burn Mantra tokens."
+    },
+    {
+     "episode_id": "VgNa1gilw74",
+     "episode_title": "\ud83d\udd34 LIVE: Is Crypto Worth Trading? | Onchain Reality Check",
+     "start_seconds": 2807.0,
+     "timestamp": "46:47",
+     "deep_link": "https://www.youtube.com/watch?v=VgNa1gilw74&t=2807s",
+     "kind": "mention",
+     "note": "Speaker mentions that a lot of FUD came out with Mantra and other projects, with accusations of rugging and poor price action."
+    },
+    {
+     "episode_id": "oh-PMIoVOVw",
+     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
+     "start_seconds": 1405.0,
+     "timestamp": "23:25",
+     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=1405s",
+     "kind": "mention",
+     "note": "Mentioned as a successful ecosystem project that has started integrating tokenized equity pairs."
+    },
+    {
+     "episode_id": "vBRvDqOdKwQ",
+     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
+     "start_seconds": 9407.0,
+     "timestamp": "2:36:47",
+     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=9407s",
+     "kind": "analysis",
+     "note": "OM token functionality is compared to DTF; the speaker notes that OM kept reserves of M and D, whereas the new protocol pairs DETF with a strategy vault rather than with D."
+    },
+    {
+     "episode_id": "vBRvDqOdKwQ",
+     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
+     "start_seconds": 10269.0,
+     "timestamp": "2:51:09",
+     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=10269s",
+     "kind": "mention",
+     "note": "Mentioned in passing alongside discussion of a token launch; speakers note Olympus DAO team connection."
+    }
+   ],
+   "episode_count": 6,
+   "single_reference": false
+  },
+  {
    "symbol": "CVT",
    "name": "CVT",
    "asset_class": "crypto",
@@ -143684,6 +144019,107 @@
     }
    ],
    "episode_count": 6,
+   "single_reference": false
+  },
+  {
+   "symbol": "KNTQ",
+   "name": "KNTQ",
+   "asset_class": "crypto",
+   "mentions": 10,
+   "analysis": 9,
+   "moments": [
+    {
+     "episode_id": "8CrGtoeuNCs",
+     "episode_title": "Can ELYSIUM be the next ROBINHOOD!?",
+     "start_seconds": 806.0,
+     "timestamp": "13:26",
+     "deep_link": "https://www.youtube.com/watch?v=8CrGtoeuNCs&t=806s",
+     "kind": "analysis",
+     "note": "Described as a kinetic token; the team plans to build deep liquidity for it on Elysium."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 1403.0,
+     "timestamp": "23:23",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=1403s",
+     "kind": "analysis",
+     "note": "Discussed as a quote token on Elysium, with sequencer fees partially accruing to it in addition to Hyperliquid, making it value accretive through Elysium's fee structure."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 3705.0,
+     "timestamp": "1:01:45",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=3705s",
+     "kind": "analysis",
+     "note": "Paired with Mantra token; Mantra fees involve buying back and burning KNTQ, with the speaker stating they are the largest purchaser of KNTQ at approximately $750,000 right after their launch."
+    },
+    {
+     "episode_id": "B2cg6LWD60g",
+     "episode_title": "\ud83d\udd34 LIVE: BTC Erases Rally | $870M+ Longs Liquidated | Time to Exit?",
+     "start_seconds": 4056.0,
+     "timestamp": "1:07:36",
+     "deep_link": "https://www.youtube.com/watch?v=B2cg6LWD60g&t=4056s",
+     "kind": "analysis",
+     "note": "Speakers plan to build deep liquidity for KNTQ, which is identified as a kinetic token."
+    },
+    {
+     "episode_id": "I8zDew2yaIY",
+     "episode_title": "Let\u2019s Make Elysium What We Thought HyperEVM Could Be",
+     "start_seconds": 146.0,
+     "timestamp": "2:26",
+     "deep_link": "https://www.youtube.com/watch?v=I8zDew2yaIY&t=146s",
+     "kind": "analysis",
+     "note": "Speakers discuss plans to cultivate deep liquidity for KNTQ and KHYPE as kinetic tokens on Elysium."
+    },
+    {
+     "episode_id": "VgNa1gilw74",
+     "episode_title": "\ud83d\udd34 LIVE: Is Crypto Worth Trading? | Onchain Reality Check",
+     "start_seconds": 2783.0,
+     "timestamp": "46:23",
+     "deep_link": "https://www.youtube.com/watch?v=VgNa1gilw74&t=2783s",
+     "kind": "analysis",
+     "note": "Speaker suggests that if bullish on Elysium, buying and accumulating KNTQ is a pretty good strategy."
+    },
+    {
+     "episode_id": "VgNa1gilw74",
+     "episode_title": "\ud83d\udd34 LIVE: Is Crypto Worth Trading? | Onchain Reality Check",
+     "start_seconds": 2985.0,
+     "timestamp": "49:45",
+     "deep_link": "https://www.youtube.com/watch?v=VgNa1gilw74&t=2985s",
+     "kind": "analysis",
+     "note": "Speaker analyzes the KNTQ chart, noting a pullback and describing it as a good size play with a five to 20 X opportunity."
+    },
+    {
+     "episode_id": "XB71vFeU2zA",
+     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
+     "start_seconds": 11057.0,
+     "timestamp": "3:04:17",
+     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=11057s",
+     "kind": "analysis",
+     "note": "Token charted as gauge for Elysium launch sentiment; up 7x from September bottom with low social signal but positive capital inflows; potential sell-off event expected at launch."
+    },
+    {
+     "episode_id": "XB71vFeU2zA",
+     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
+     "start_seconds": 11524.0,
+     "timestamp": "3:12:04",
+     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=11524s",
+     "kind": "analysis",
+     "note": "Speaker discusses KNTQ buybacks and Elysium functioning as a high-throughput execution layer that funnels volume and value back into HyperCore while supporting KNTQ via fees."
+    },
+    {
+     "episode_id": "_mLaSJLAPJs",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto is Crashing | Here\u2019s Exactly What to Do Right Now",
+     "start_seconds": 9044.0,
+     "timestamp": "2:30:44",
+     "deep_link": "https://www.youtube.com/watch?v=_mLaSJLAPJs&t=9044s",
+     "kind": "mention",
+     "note": "Speaker mentioned buying KNTQ in connection with Elysium ecosystem positioning."
+    }
+   ],
+   "episode_count": 7,
    "single_reference": false
   },
   {
@@ -145050,6 +145486,143 @@
     }
    ],
    "episode_count": 11,
+   "single_reference": false
+  },
+  {
+   "symbol": "AGI",
+   "name": "Agorian",
+   "asset_class": "crypto",
+   "mentions": 14,
+   "analysis": 8,
+   "moments": [
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 3014.0,
+     "timestamp": "50:14",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=3014s",
+     "kind": "analysis",
+     "note": "Described as an API for low-cost inference offering access to frontier models with a single API at the lowest cost, built on Elysium."
+    },
+    {
+     "episode_id": "EHhZRRHMZQM",
+     "episode_title": "\ud83d\udd34 LIVE: Markets ripping |  RHC leading | Market Update + Founder Interview",
+     "start_seconds": 2354.0,
+     "timestamp": "39:14",
+     "deep_link": "https://www.youtube.com/watch?v=EHhZRRHMZQM&t=2354s",
+     "kind": "analysis",
+     "note": "AI ecosystem is described as popping off; discussion of AI thesis and related meme coins in the ecosystem."
+    },
+    {
+     "episode_id": "EHhZRRHMZQM",
+     "episode_title": "\ud83d\udd34 LIVE: Markets ripping |  RHC leading | Market Update + Founder Interview",
+     "start_seconds": 2455.0,
+     "timestamp": "40:55",
+     "deep_link": "https://www.youtube.com/watch?v=EHhZRRHMZQM&t=2455s",
+     "kind": "analysis",
+     "note": "Memecoin created as first paired AI token after Nvidia earnings; launched at 355K market cap with approximately $200k in liquidity pool, conceived as thesis play on AGI focus of Nvidia earnings."
+    },
+    {
+     "episode_id": "LpwKHoAJu2Q",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood DEX volume at ATH's | Pennie stocks on Solana? | Market Update + Interviews",
+     "start_seconds": 8872.0,
+     "timestamp": "2:27:52",
+     "deep_link": "https://www.youtube.com/watch?v=LpwKHoAJu2Q&t=8872s",
+     "kind": "analysis",
+     "note": "Listed as a leader in the AI ecosystem; speaker notes uncertainty about market leadership versus SIT in this category."
+    },
+    {
+     "episode_id": "N0q17BVEOtQ",
+     "episode_title": "\ud83d\udd34 LIVE: HOOD Summit Approaches | Robinhood vs Solana | Market Update + Interviews",
+     "start_seconds": 11285.0,
+     "timestamp": "3:08:05",
+     "deep_link": "https://www.youtube.com/watch?v=N0q17BVEOtQ&t=11285s",
+     "kind": "mention",
+     "note": "Speaker noted that AGI ticker has been used many times across different projects."
+    },
+    {
+     "episode_id": "UbKsP6WCsPs",
+     "episode_title": "\ud83d\udd34 LIVE: Market Cooling Off | Buy The Dip? | Market Update + Interviews",
+     "start_seconds": 1281.0,
+     "timestamp": "21:21",
+     "deep_link": "https://www.youtube.com/watch?v=UbKsP6WCsPs&t=1281s",
+     "kind": "mention",
+     "note": "Speaker mentions AGI as an AI beta token but notes the chart is cooked and they don't want to buy it."
+    },
+    {
+     "episode_id": "_8vSxBK6kO8",
+     "episode_title": "\ud83d\udd34 LIVE: Meme Stocks PUMPING | STONK New ATH | Market Update + Interviews",
+     "start_seconds": 8208.0,
+     "timestamp": "2:16:48",
+     "deep_link": "https://www.youtube.com/watch?v=_8vSxBK6kO8&t=8208s",
+     "kind": "analysis",
+     "note": "People were bullish on AGI but it has pulled back heavily and had trouble breaking out."
+    },
+    {
+     "episode_id": "_8vSxBK6kO8",
+     "episode_title": "\ud83d\udd34 LIVE: Meme Stocks PUMPING | STONK New ATH | Market Update + Interviews",
+     "start_seconds": 8811.0,
+     "timestamp": "2:26:51",
+     "deep_link": "https://www.youtube.com/watch?v=_8vSxBK6kO8&t=8811s",
+     "kind": "mention",
+     "note": "Mentioned as a token that ran in the Stonk ecosystem."
+    },
+    {
+     "episode_id": "vBRvDqOdKwQ",
+     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
+     "start_seconds": 11878.0,
+     "timestamp": "3:17:58",
+     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=11878s",
+     "kind": "analysis",
+     "note": "AGI discussed as a potential beta play that competes with SIT for the top beta spot to AI; speaker suggests holding both AGI and SIT rather than choosing one."
+    },
+    {
+     "episode_id": "vBRvDqOdKwQ",
+     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
+     "start_seconds": 12218.0,
+     "timestamp": "3:23:38",
+     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=12218s",
+     "kind": "analysis",
+     "note": "Speakers discussed whether Nate owns AGI, expecting it to go higher, and speculating that he might buy it under pressure."
+    },
+    {
+     "episode_id": "vBRvDqOdKwQ",
+     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
+     "start_seconds": 12628.0,
+     "timestamp": "3:30:28",
+     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=12628s",
+     "kind": "mention",
+     "note": "Speaker recommended to own a little of both regarding AGI coverage."
+    },
+    {
+     "episode_id": "x7qRX-hWxg8",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding (Memes, V4 Hooks, Infra) | Market Update + Interviews",
+     "start_seconds": 9172.0,
+     "timestamp": "2:32:52",
+     "deep_link": "https://www.youtube.com/watch?v=x7qRX-hWxg8&t=9172s",
+     "kind": "analysis",
+     "note": "AGI is described as a beta to the main AI token with strong memetic lore, paired with Nvidia during earnings; seen as adding value to the main AI token and helping it accumulate tokenized stocks."
+    },
+    {
+     "episode_id": "x7qRX-hWxg8",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding (Memes, V4 Hooks, Infra) | Market Update + Interviews",
+     "start_seconds": 9235.0,
+     "timestamp": "2:33:55",
+     "deep_link": "https://www.youtube.com/watch?v=x7qRX-hWxg8&t=9235s",
+     "kind": "mention",
+     "note": "AGI mentioned as following AI in the wave of tokens."
+    },
+    {
+     "episode_id": "x7qRX-hWxg8",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding (Memes, V4 Hooks, Infra) | Market Update + Interviews",
+     "start_seconds": 12066.0,
+     "timestamp": "3:21:06",
+     "deep_link": "https://www.youtube.com/watch?v=x7qRX-hWxg8&t=12066s",
+     "kind": "mention",
+     "note": "Speaker mentions they might jump back into AGI, noting good mimemetics and positioning it as related to the board seat narrative."
+    }
+   ],
+   "episode_count": 8,
    "single_reference": false
   },
   {
@@ -148127,134 +148700,6 @@
    "single_reference": false
   },
   {
-   "symbol": "AGI",
-   "name": "AGI",
-   "asset_class": "crypto",
-   "mentions": 13,
-   "analysis": 7,
-   "moments": [
-    {
-     "episode_id": "EHhZRRHMZQM",
-     "episode_title": "\ud83d\udd34 LIVE: Markets ripping |  RHC leading | Market Update + Founder Interview",
-     "start_seconds": 2354.0,
-     "timestamp": "39:14",
-     "deep_link": "https://www.youtube.com/watch?v=EHhZRRHMZQM&t=2354s",
-     "kind": "analysis",
-     "note": "AI ecosystem is described as popping off; discussion of AI thesis and related meme coins in the ecosystem."
-    },
-    {
-     "episode_id": "EHhZRRHMZQM",
-     "episode_title": "\ud83d\udd34 LIVE: Markets ripping |  RHC leading | Market Update + Founder Interview",
-     "start_seconds": 2455.0,
-     "timestamp": "40:55",
-     "deep_link": "https://www.youtube.com/watch?v=EHhZRRHMZQM&t=2455s",
-     "kind": "analysis",
-     "note": "Memecoin created as first paired AI token after Nvidia earnings; launched at 355K market cap with approximately $200k in liquidity pool, conceived as thesis play on AGI focus of Nvidia earnings."
-    },
-    {
-     "episode_id": "LpwKHoAJu2Q",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood DEX volume at ATH's | Pennie stocks on Solana? | Market Update + Interviews",
-     "start_seconds": 8872.0,
-     "timestamp": "2:27:52",
-     "deep_link": "https://www.youtube.com/watch?v=LpwKHoAJu2Q&t=8872s",
-     "kind": "analysis",
-     "note": "Listed as a leader in the AI ecosystem; speaker notes uncertainty about market leadership versus SIT in this category."
-    },
-    {
-     "episode_id": "N0q17BVEOtQ",
-     "episode_title": "\ud83d\udd34 LIVE: HOOD Summit Approaches | Robinhood vs Solana | Market Update + Interviews",
-     "start_seconds": 11285.0,
-     "timestamp": "3:08:05",
-     "deep_link": "https://www.youtube.com/watch?v=N0q17BVEOtQ&t=11285s",
-     "kind": "mention",
-     "note": "Speaker noted that AGI ticker has been used many times across different projects."
-    },
-    {
-     "episode_id": "UbKsP6WCsPs",
-     "episode_title": "\ud83d\udd34 LIVE: Market Cooling Off | Buy The Dip? | Market Update + Interviews",
-     "start_seconds": 1281.0,
-     "timestamp": "21:21",
-     "deep_link": "https://www.youtube.com/watch?v=UbKsP6WCsPs&t=1281s",
-     "kind": "mention",
-     "note": "Speaker mentions AGI as an AI beta token but notes the chart is cooked and they don't want to buy it."
-    },
-    {
-     "episode_id": "_8vSxBK6kO8",
-     "episode_title": "\ud83d\udd34 LIVE: Meme Stocks PUMPING | STONK New ATH | Market Update + Interviews",
-     "start_seconds": 8208.0,
-     "timestamp": "2:16:48",
-     "deep_link": "https://www.youtube.com/watch?v=_8vSxBK6kO8&t=8208s",
-     "kind": "analysis",
-     "note": "People were bullish on AGI but it has pulled back heavily and had trouble breaking out."
-    },
-    {
-     "episode_id": "_8vSxBK6kO8",
-     "episode_title": "\ud83d\udd34 LIVE: Meme Stocks PUMPING | STONK New ATH | Market Update + Interviews",
-     "start_seconds": 8811.0,
-     "timestamp": "2:26:51",
-     "deep_link": "https://www.youtube.com/watch?v=_8vSxBK6kO8&t=8811s",
-     "kind": "mention",
-     "note": "Mentioned as a token that ran in the Stonk ecosystem."
-    },
-    {
-     "episode_id": "vBRvDqOdKwQ",
-     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
-     "start_seconds": 11878.0,
-     "timestamp": "3:17:58",
-     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=11878s",
-     "kind": "analysis",
-     "note": "AGI discussed as a potential beta play that competes with SIT for the top beta spot to AI; speaker suggests holding both AGI and SIT rather than choosing one."
-    },
-    {
-     "episode_id": "vBRvDqOdKwQ",
-     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
-     "start_seconds": 12218.0,
-     "timestamp": "3:23:38",
-     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=12218s",
-     "kind": "analysis",
-     "note": "Speakers discussed whether Nate owns AGI, expecting it to go higher, and speculating that he might buy it under pressure."
-    },
-    {
-     "episode_id": "vBRvDqOdKwQ",
-     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
-     "start_seconds": 12628.0,
-     "timestamp": "3:30:28",
-     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=12628s",
-     "kind": "mention",
-     "note": "Speaker recommended to own a little of both regarding AGI coverage."
-    },
-    {
-     "episode_id": "x7qRX-hWxg8",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding (Memes, V4 Hooks, Infra) | Market Update + Interviews",
-     "start_seconds": 9172.0,
-     "timestamp": "2:32:52",
-     "deep_link": "https://www.youtube.com/watch?v=x7qRX-hWxg8&t=9172s",
-     "kind": "analysis",
-     "note": "AGI is described as a beta to the main AI token with strong memetic lore, paired with Nvidia during earnings; seen as adding value to the main AI token and helping it accumulate tokenized stocks."
-    },
-    {
-     "episode_id": "x7qRX-hWxg8",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding (Memes, V4 Hooks, Infra) | Market Update + Interviews",
-     "start_seconds": 9235.0,
-     "timestamp": "2:33:55",
-     "deep_link": "https://www.youtube.com/watch?v=x7qRX-hWxg8&t=9235s",
-     "kind": "mention",
-     "note": "AGI mentioned as following AI in the wave of tokens."
-    },
-    {
-     "episode_id": "x7qRX-hWxg8",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding (Memes, V4 Hooks, Infra) | Market Update + Interviews",
-     "start_seconds": 12066.0,
-     "timestamp": "3:21:06",
-     "deep_link": "https://www.youtube.com/watch?v=x7qRX-hWxg8&t=12066s",
-     "kind": "mention",
-     "note": "Speaker mentions they might jump back into AGI, noting good mimemetics and positioning it as related to the board seat narrative."
-    }
-   ],
-   "episode_count": 7,
-   "single_reference": false
-  },
-  {
    "symbol": "ARROW",
    "name": "Arrow Finance",
    "asset_class": "other",
@@ -149972,89 +150417,6 @@
    "single_reference": false
   },
   {
-   "symbol": "KNTQ",
-   "name": "KNTQ",
-   "asset_class": "crypto",
-   "mentions": 8,
-   "analysis": 7,
-   "moments": [
-    {
-     "episode_id": "8CrGtoeuNCs",
-     "episode_title": "Can ELYSIUM be the next ROBINHOOD!?",
-     "start_seconds": 806.0,
-     "timestamp": "13:26",
-     "deep_link": "https://www.youtube.com/watch?v=8CrGtoeuNCs&t=806s",
-     "kind": "analysis",
-     "note": "Described as a kinetic token; the team plans to build deep liquidity for it on Elysium."
-    },
-    {
-     "episode_id": "B2cg6LWD60g",
-     "episode_title": "\ud83d\udd34 LIVE: BTC Erases Rally | $870M+ Longs Liquidated | Time to Exit?",
-     "start_seconds": 4056.0,
-     "timestamp": "1:07:36",
-     "deep_link": "https://www.youtube.com/watch?v=B2cg6LWD60g&t=4056s",
-     "kind": "analysis",
-     "note": "Speakers plan to build deep liquidity for KNTQ, which is identified as a kinetic token."
-    },
-    {
-     "episode_id": "I8zDew2yaIY",
-     "episode_title": "Let\u2019s Make Elysium What We Thought HyperEVM Could Be",
-     "start_seconds": 146.0,
-     "timestamp": "2:26",
-     "deep_link": "https://www.youtube.com/watch?v=I8zDew2yaIY&t=146s",
-     "kind": "analysis",
-     "note": "Speakers discuss plans to cultivate deep liquidity for KNTQ and KHYPE as kinetic tokens on Elysium."
-    },
-    {
-     "episode_id": "VgNa1gilw74",
-     "episode_title": "\ud83d\udd34 LIVE: Is Crypto Worth Trading? | Onchain Reality Check",
-     "start_seconds": 2783.0,
-     "timestamp": "46:23",
-     "deep_link": "https://www.youtube.com/watch?v=VgNa1gilw74&t=2783s",
-     "kind": "analysis",
-     "note": "Speaker suggests that if bullish on Elysium, buying and accumulating KNTQ is a pretty good strategy."
-    },
-    {
-     "episode_id": "VgNa1gilw74",
-     "episode_title": "\ud83d\udd34 LIVE: Is Crypto Worth Trading? | Onchain Reality Check",
-     "start_seconds": 2985.0,
-     "timestamp": "49:45",
-     "deep_link": "https://www.youtube.com/watch?v=VgNa1gilw74&t=2985s",
-     "kind": "analysis",
-     "note": "Speaker analyzes the KNTQ chart, noting a pullback and describing it as a good size play with a five to 20 X opportunity."
-    },
-    {
-     "episode_id": "XB71vFeU2zA",
-     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
-     "start_seconds": 11057.0,
-     "timestamp": "3:04:17",
-     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=11057s",
-     "kind": "analysis",
-     "note": "Token charted as gauge for Elysium launch sentiment; up 7x from September bottom with low social signal but positive capital inflows; potential sell-off event expected at launch."
-    },
-    {
-     "episode_id": "XB71vFeU2zA",
-     "episode_title": "\ud83d\udd34 LIVE: Largest Crypto Hack Ever | Binance Loses $6B | Is Crypto Cooked?",
-     "start_seconds": 11524.0,
-     "timestamp": "3:12:04",
-     "deep_link": "https://www.youtube.com/watch?v=XB71vFeU2zA&t=11524s",
-     "kind": "analysis",
-     "note": "Speaker discusses KNTQ buybacks and Elysium functioning as a high-throughput execution layer that funnels volume and value back into HyperCore while supporting KNTQ via fees."
-    },
-    {
-     "episode_id": "_mLaSJLAPJs",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto is Crashing | Here\u2019s Exactly What to Do Right Now",
-     "start_seconds": 9044.0,
-     "timestamp": "2:30:44",
-     "deep_link": "https://www.youtube.com/watch?v=_mLaSJLAPJs&t=9044s",
-     "kind": "mention",
-     "note": "Speaker mentioned buying KNTQ in connection with Elysium ecosystem positioning."
-    }
-   ],
-   "episode_count": 6,
-   "single_reference": false
-  },
-  {
    "symbol": "RBO",
    "name": "Orbeo",
    "asset_class": "crypto",
@@ -151044,6 +151406,152 @@
     }
    ],
    "episode_count": 16,
+   "single_reference": false
+  },
+  {
+   "symbol": "MANTRA",
+   "name": "Mantra",
+   "asset_class": "other",
+   "mentions": 15,
+   "analysis": 6,
+   "moments": [
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 2734.0,
+     "timestamp": "45:34",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=2734s",
+     "kind": "mention",
+     "note": "Mentioned as an ecosystem project that has integrated tokenized equity pairs."
+    },
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 5896.0,
+     "timestamp": "1:38:16",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=5896s",
+     "kind": "mention",
+     "note": "Blockchain or platform on which Tessera token was launched via fair launch."
+    },
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 7193.0,
+     "timestamp": "1:59:53",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=7193s",
+     "kind": "mention",
+     "note": "Speaker mentions discussing Mantra as one of the tokens on Elysium."
+    },
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 7569.0,
+     "timestamp": "2:06:09",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=7569s",
+     "kind": "analysis",
+     "note": "Speaker discusses potential risk related to tokens Ascend owns in Mantra and uncertainty about token resolution."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 780.0,
+     "timestamp": "13:00",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=780s",
+     "kind": "analysis",
+     "note": "Speaker discusses Mantra as a launch pad project they are involved with, describing its support system for builders and fee structure designed to benefit creators."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 1587.0,
+     "timestamp": "26:27",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=1587s",
+     "kind": "analysis",
+     "note": "Presented as a launchpad platform built on Elysium that facilitates token launches through three modes: simple token creation, custom partner tokens, and Mantra listings."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 2074.0,
+     "timestamp": "34:34",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=2074s",
+     "kind": "analysis",
+     "note": "Mantra token launched with a fair launch structure; initially there was no Mantra token, only Chameleon and other tokens, before Mantra went live on November 9th."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 2461.0,
+     "timestamp": "41:01",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=2461s",
+     "kind": "analysis",
+     "note": "Extensive discussion of Mantra token's economic engine, fee structure, tokenomics, airdrop mechanics (25% allocated to airdrop, 5% retroactive to early users), token supply structure (launched with $4B tokens, burned down to $1B circulating), and team allocation (15% for operations, market making, exchange listings)."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 2858.0,
+     "timestamp": "47:38",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=2858s",
+     "kind": "analysis",
+     "note": "Discussed as a token trading between three and four million market cap, with $100 million in volume generated, founder discussed ecosystem execution plans."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 4174.0,
+     "timestamp": "1:09:34",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=4174s",
+     "kind": "mention",
+     "note": "Speaker gives a shout-out to Mantra holders and states they remain committed to Mantra house of all launches."
+    },
+    {
+     "episode_id": "_mLaSJLAPJs",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto is Crashing | Here\u2019s Exactly What to Do Right Now",
+     "start_seconds": 4257.0,
+     "timestamp": "1:10:57",
+     "deep_link": "https://www.youtube.com/watch?v=_mLaSJLAPJs&t=4257s",
+     "kind": "mention",
+     "note": "Named as one of two launch events being watched; indicated to have an upcoming token and described as aligned with the speaker's team discussions."
+    },
+    {
+     "episode_id": "c-dQtmlJZxw",
+     "episode_title": "\ud83d\udd34 LIVE: The 2027 Outlook | Anthropic IPO Fallout + Cyberattacks Slam Europe",
+     "start_seconds": 2018.0,
+     "timestamp": "33:38",
+     "deep_link": "https://www.youtube.com/watch?v=c-dQtmlJZxw&t=2018s",
+     "kind": "mention",
+     "note": "Mentioned as the blockchain/platform where Liquid V team operates, creating tokens of traders from Hyperliquid."
+    },
+    {
+     "episode_id": "fHrSMN0VKHw",
+     "episode_title": "\ud83d\udd34 LIVE: Markets Are Dead\u2026 Time for GTA6? | Market Update",
+     "start_seconds": 4372.0,
+     "timestamp": "1:12:52",
+     "deep_link": "https://www.youtube.com/watch?v=fHrSMN0VKHw&t=4372s",
+     "kind": "mention",
+     "note": "Named in passing while looking at ecosystem trading data."
+    },
+    {
+     "episode_id": "fHrSMN0VKHw",
+     "episode_title": "\ud83d\udd34 LIVE: Markets Are Dead\u2026 Time for GTA6? | Market Update",
+     "start_seconds": 4437.0,
+     "timestamp": "1:13:57",
+     "deep_link": "https://www.youtube.com/watch?v=fHrSMN0VKHw&t=4437s",
+     "kind": "mention",
+     "note": "Speaker plans to keep an eye on Mantra as part of watching the on-chain infrastructure for AI agents ecosystem."
+    },
+    {
+     "episode_id": "omJuJAl69Zg",
+     "episode_title": "Tessera | The MCP Gateway Putting AI Agents on Elysium",
+     "start_seconds": 556.0,
+     "timestamp": "9:16",
+     "deep_link": "https://www.youtube.com/watch?v=omJuJAl69Zg&t=556s",
+     "kind": "mention",
+     "note": "Tessera token was fair launched on Mantra blockchain; the team chose Mantra over Ascend due to access issues with Ascend and alignment with Mantra's buyback and infrastructure goals."
+    }
+   ],
+   "episode_count": 6,
    "single_reference": false
   },
   {
@@ -155613,89 +156121,6 @@
    "single_reference": false
   },
   {
-   "symbol": "OM",
-   "name": "Mantra",
-   "asset_class": "crypto",
-   "mentions": 8,
-   "analysis": 5,
-   "moments": [
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 4638.0,
-     "timestamp": "1:17:18",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=4638s",
-     "kind": "analysis",
-     "note": "Discussion of investment in Mantra on their launch, competitive relationship with Ascend, and speaker's acknowledgment of mistakes in prior interactions between the two projects."
-    },
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 5971.0,
-     "timestamp": "1:39:31",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=5971s",
-     "kind": "analysis",
-     "note": "Discussed as a competitor at the time with good alignments; mentioned that the speaker is one of the top tokens on Mantra with a market cap that almost reached 300-400K."
-    },
-    {
-     "episode_id": "51Gq2ynLdOg",
-     "episode_title": "Only Launchpad That Doesn\u2019t Extract From Traders | Ascend x Elysium",
-     "start_seconds": 1199.0,
-     "timestamp": "19:59",
-     "deep_link": "https://www.youtube.com/watch?v=51Gq2ynLdOg&t=1199s",
-     "kind": "analysis",
-     "note": "Discussed a conflict situation between Ascend and Mantra involving a DDoS attack on Ascend's launch day, with strategic investment considerations mentioned."
-    },
-    {
-     "episode_id": "51Gq2ynLdOg",
-     "episode_title": "Only Launchpad That Doesn\u2019t Extract From Traders | Ascend x Elysium",
-     "start_seconds": 1438.0,
-     "timestamp": "23:58",
-     "deep_link": "https://www.youtube.com/watch?v=51Gq2ynLdOg&t=1438s",
-     "kind": "analysis",
-     "note": "Speaker mentions Mantra team and model, describing it as beneficial to the ecosystem and competing positively with Ascend."
-    },
-    {
-     "episode_id": "VgNa1gilw74",
-     "episode_title": "\ud83d\udd34 LIVE: Is Crypto Worth Trading? | Onchain Reality Check",
-     "start_seconds": 2807.0,
-     "timestamp": "46:47",
-     "deep_link": "https://www.youtube.com/watch?v=VgNa1gilw74&t=2807s",
-     "kind": "mention",
-     "note": "Speaker mentions that a lot of FUD came out with Mantra and other projects, with accusations of rugging and poor price action."
-    },
-    {
-     "episode_id": "oh-PMIoVOVw",
-     "episode_title": "Kinetiq Did It Again | Inside Elysium, the L2 Breaking Every Norm | Exclusive ELYSIUM Team interview",
-     "start_seconds": 1405.0,
-     "timestamp": "23:25",
-     "deep_link": "https://www.youtube.com/watch?v=oh-PMIoVOVw&t=1405s",
-     "kind": "mention",
-     "note": "Mentioned as a successful ecosystem project that has started integrating tokenized equity pairs."
-    },
-    {
-     "episode_id": "vBRvDqOdKwQ",
-     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
-     "start_seconds": 9407.0,
-     "timestamp": "2:36:47",
-     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=9407s",
-     "kind": "analysis",
-     "note": "OM token functionality is compared to DTF; the speaker notes that OM kept reserves of M and D, whereas the new protocol pairs DETF with a strategy vault rather than with D."
-    },
-    {
-     "episode_id": "vBRvDqOdKwQ",
-     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
-     "start_seconds": 10269.0,
-     "timestamp": "2:51:09",
-     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=10269s",
-     "kind": "mention",
-     "note": "Mentioned in passing alongside discussion of a token launch; speakers note Olympus DAO team connection."
-    }
-   ],
-   "episode_count": 5,
-   "single_reference": false
-  },
-  {
    "symbol": "FDRY",
    "name": "Foundry",
    "asset_class": "other",
@@ -158097,7 +158522,7 @@
    "symbol": "AMZN",
    "name": "Amazon",
    "asset_class": "stock",
-   "mentions": 25,
+   "mentions": 26,
    "analysis": 4,
    "moments": [
     {
@@ -158135,6 +158560,15 @@
      "deep_link": "https://www.youtube.com/watch?v=4PlcWhQM96A&t=6982s",
      "kind": "mention",
      "note": "Amazon has a $110 billion compute commitment with Anthropic through 2036."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 2927.0,
+     "timestamp": "48:47",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=2927s",
+     "kind": "mention",
+     "note": "Referenced as an example of a company whose chart took a decade to show significant value creation."
     },
     {
      "episode_id": "BBPaLILjEjk",
@@ -158326,7 +158760,7 @@
      "note": "Named as one of the stocks currently in the distribution basket."
     }
    ],
-   "episode_count": 19,
+   "episode_count": 20,
    "single_reference": false
   },
   {
@@ -166884,6 +167318,53 @@
    "single_reference": false
   },
   {
+   "symbol": "TOSHI",
+   "name": "Toshi",
+   "asset_class": "crypto",
+   "mentions": 4,
+   "analysis": 3,
+   "moments": [
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 0.0,
+     "timestamp": "0:00",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=0s",
+     "kind": "analysis",
+     "note": "Speaker invested a large amount into Toshi over approximately three years, viewing it as spiritually similar to Cash Cat and as a corporate L2 launching after Base with potential for exchange listings."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 697.0,
+     "timestamp": "11:37",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=697s",
+     "kind": "mention",
+     "note": "Speaker mentions buying Toshi as a crypto asset they own."
+    },
+    {
+     "episode_id": "vqOeJKpQ61E",
+     "episode_title": "A Conversation with Sonder: Trading the Crypto Trenches",
+     "start_seconds": 1239.0,
+     "timestamp": "20:39",
+     "deep_link": "https://www.youtube.com/watch?v=vqOeJKpQ61E&t=1239s",
+     "kind": "analysis",
+     "note": "Referenced as a fractal comparison for Cash Cat, noted as reaching 950 million market cap over approximately 18 months, with traders selling at various price levels."
+    },
+    {
+     "episode_id": "vqOeJKpQ61E",
+     "episode_title": "A Conversation with Sonder: Trading the Crypto Trenches",
+     "start_seconds": 3448.0,
+     "timestamp": "57:28",
+     "deep_link": "https://www.youtube.com/watch?v=vqOeJKpQ61E&t=3448s",
+     "kind": "analysis",
+     "note": "Speaker discusses people selling Toshi at various price points (30M, 20M, 10M) before it ran to 950M, illustrating the importance of holding tokens with long-term thesis."
+    }
+   ],
+   "episode_count": 2,
+   "single_reference": false
+  },
+  {
    "symbol": "XAI",
    "name": "X4021 Protocol",
    "asset_class": "other",
@@ -173006,6 +173487,53 @@
     }
    ],
    "episode_count": 4,
+   "single_reference": false
+  },
+  {
+   "symbol": "JELLY",
+   "name": "Jellycium",
+   "asset_class": "crypto",
+   "mentions": 4,
+   "analysis": 2,
+   "moments": [
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 3217.0,
+     "timestamp": "53:37",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=3217s",
+     "kind": "analysis",
+     "note": "Building a prop AMM operator for professional market makers on Elysium."
+    },
+    {
+     "episode_id": "x5BxStreTsU",
+     "episode_title": "$BELIEVE update w/ @stigstigstig_ and @ghoshal, also feat. @AIAgentsHub, @OOBEonSol, @radrdotfun",
+     "start_seconds": 1345.0,
+     "timestamp": "22:25",
+     "deep_link": "https://www.youtube.com/watch?v=x5BxStreTsU&t=1345s",
+     "kind": "analysis",
+     "note": "Speaker discusses Jelly Jelly's product that uses front and rear-facing cameras to capture conversations, and notes its chart has risen almost 700% since the start of November."
+    },
+    {
+     "episode_id": "x5BxStreTsU",
+     "episode_title": "$BELIEVE update w/ @stigstigstig_ and @ghoshal, also feat. @AIAgentsHub, @OOBEonSol, @radrdotfun",
+     "start_seconds": 17181.0,
+     "timestamp": "4:46:21",
+     "deep_link": "https://www.youtube.com/watch?v=x5BxStreTsU&t=17181s",
+     "kind": "mention",
+     "note": "At 470 (likely $470M market cap); noted as having 70% of token supply in hands of market makers, with speaker calling it a red flag."
+    },
+    {
+     "episode_id": "x5BxStreTsU",
+     "episode_title": "$BELIEVE update w/ @stigstigstig_ and @ghoshal, also feat. @AIAgentsHub, @OOBEonSol, @radrdotfun",
+     "start_seconds": 17522.0,
+     "timestamp": "4:52:02",
+     "deep_link": "https://www.youtube.com/watch?v=x5BxStreTsU&t=17522s",
+     "kind": "mention",
+     "note": "Described as a $500 million runner coming into the ecosystem to fill a gap left by other projects."
+    }
+   ],
+   "episode_count": 2,
    "single_reference": false
   },
   {
@@ -180596,35 +181124,6 @@
    "single_reference": false
   },
   {
-   "symbol": "TOSHI",
-   "name": "Toshi",
-   "asset_class": "crypto",
-   "mentions": 2,
-   "analysis": 2,
-   "moments": [
-    {
-     "episode_id": "vqOeJKpQ61E",
-     "episode_title": "A Conversation with Sonder: Trading the Crypto Trenches",
-     "start_seconds": 1239.0,
-     "timestamp": "20:39",
-     "deep_link": "https://www.youtube.com/watch?v=vqOeJKpQ61E&t=1239s",
-     "kind": "analysis",
-     "note": "Referenced as a fractal comparison for Cash Cat, noted as reaching 950 million market cap over approximately 18 months, with traders selling at various price levels."
-    },
-    {
-     "episode_id": "vqOeJKpQ61E",
-     "episode_title": "A Conversation with Sonder: Trading the Crypto Trenches",
-     "start_seconds": 3448.0,
-     "timestamp": "57:28",
-     "deep_link": "https://www.youtube.com/watch?v=vqOeJKpQ61E&t=3448s",
-     "kind": "analysis",
-     "note": "Speaker discusses people selling Toshi at various price points (30M, 20M, 10M) before it ran to 950M, illustrating the importance of holding tokens with long-term thesis."
-    }
-   ],
-   "episode_count": 1,
-   "single_reference": false
-  },
-  {
    "symbol": "DJT",
    "name": "Donald Trump stock",
    "asset_class": "stock",
@@ -181183,98 +181682,6 @@
     }
    ],
    "episode_count": 9,
-   "single_reference": false
-  },
-  {
-   "symbol": "MANTRA",
-   "name": "Mantra",
-   "asset_class": "other",
-   "mentions": 9,
-   "analysis": 1,
-   "moments": [
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 2734.0,
-     "timestamp": "45:34",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=2734s",
-     "kind": "mention",
-     "note": "Mentioned as an ecosystem project that has integrated tokenized equity pairs."
-    },
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 5896.0,
-     "timestamp": "1:38:16",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=5896s",
-     "kind": "mention",
-     "note": "Blockchain or platform on which Tessera token was launched via fair launch."
-    },
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 7193.0,
-     "timestamp": "1:59:53",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=7193s",
-     "kind": "mention",
-     "note": "Speaker mentions discussing Mantra as one of the tokens on Elysium."
-    },
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 7569.0,
-     "timestamp": "2:06:09",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=7569s",
-     "kind": "analysis",
-     "note": "Speaker discusses potential risk related to tokens Ascend owns in Mantra and uncertainty about token resolution."
-    },
-    {
-     "episode_id": "_mLaSJLAPJs",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto is Crashing | Here\u2019s Exactly What to Do Right Now",
-     "start_seconds": 4257.0,
-     "timestamp": "1:10:57",
-     "deep_link": "https://www.youtube.com/watch?v=_mLaSJLAPJs&t=4257s",
-     "kind": "mention",
-     "note": "Named as one of two launch events being watched; indicated to have an upcoming token and described as aligned with the speaker's team discussions."
-    },
-    {
-     "episode_id": "c-dQtmlJZxw",
-     "episode_title": "\ud83d\udd34 LIVE: The 2027 Outlook | Anthropic IPO Fallout + Cyberattacks Slam Europe",
-     "start_seconds": 2018.0,
-     "timestamp": "33:38",
-     "deep_link": "https://www.youtube.com/watch?v=c-dQtmlJZxw&t=2018s",
-     "kind": "mention",
-     "note": "Mentioned as the blockchain/platform where Liquid V team operates, creating tokens of traders from Hyperliquid."
-    },
-    {
-     "episode_id": "fHrSMN0VKHw",
-     "episode_title": "\ud83d\udd34 LIVE: Markets Are Dead\u2026 Time for GTA6? | Market Update",
-     "start_seconds": 4372.0,
-     "timestamp": "1:12:52",
-     "deep_link": "https://www.youtube.com/watch?v=fHrSMN0VKHw&t=4372s",
-     "kind": "mention",
-     "note": "Named in passing while looking at ecosystem trading data."
-    },
-    {
-     "episode_id": "fHrSMN0VKHw",
-     "episode_title": "\ud83d\udd34 LIVE: Markets Are Dead\u2026 Time for GTA6? | Market Update",
-     "start_seconds": 4437.0,
-     "timestamp": "1:13:57",
-     "deep_link": "https://www.youtube.com/watch?v=fHrSMN0VKHw&t=4437s",
-     "kind": "mention",
-     "note": "Speaker plans to keep an eye on Mantra as part of watching the on-chain infrastructure for AI agents ecosystem."
-    },
-    {
-     "episode_id": "omJuJAl69Zg",
-     "episode_title": "Tessera | The MCP Gateway Putting AI Agents on Elysium",
-     "start_seconds": 556.0,
-     "timestamp": "9:16",
-     "deep_link": "https://www.youtube.com/watch?v=omJuJAl69Zg&t=556s",
-     "kind": "mention",
-     "note": "Tessera token was fair launched on Mantra blockchain; the team chose Mantra over Ascend due to access issues with Ascend and alignment with Mantra's buyback and infrastructure goals."
-    }
-   ],
-   "episode_count": 5,
    "single_reference": false
   },
   {
@@ -183940,44 +184347,6 @@
     }
    ],
    "episode_count": 3,
-   "single_reference": false
-  },
-  {
-   "symbol": "JELLY",
-   "name": "Jelly Jelly",
-   "asset_class": "crypto",
-   "mentions": 3,
-   "analysis": 1,
-   "moments": [
-    {
-     "episode_id": "x5BxStreTsU",
-     "episode_title": "$BELIEVE update w/ @stigstigstig_ and @ghoshal, also feat. @AIAgentsHub, @OOBEonSol, @radrdotfun",
-     "start_seconds": 1345.0,
-     "timestamp": "22:25",
-     "deep_link": "https://www.youtube.com/watch?v=x5BxStreTsU&t=1345s",
-     "kind": "analysis",
-     "note": "Speaker discusses Jelly Jelly's product that uses front and rear-facing cameras to capture conversations, and notes its chart has risen almost 700% since the start of November."
-    },
-    {
-     "episode_id": "x5BxStreTsU",
-     "episode_title": "$BELIEVE update w/ @stigstigstig_ and @ghoshal, also feat. @AIAgentsHub, @OOBEonSol, @radrdotfun",
-     "start_seconds": 17181.0,
-     "timestamp": "4:46:21",
-     "deep_link": "https://www.youtube.com/watch?v=x5BxStreTsU&t=17181s",
-     "kind": "mention",
-     "note": "At 470 (likely $470M market cap); noted as having 70% of token supply in hands of market makers, with speaker calling it a red flag."
-    },
-    {
-     "episode_id": "x5BxStreTsU",
-     "episode_title": "$BELIEVE update w/ @stigstigstig_ and @ghoshal, also feat. @AIAgentsHub, @OOBEonSol, @radrdotfun",
-     "start_seconds": 17522.0,
-     "timestamp": "4:52:02",
-     "deep_link": "https://www.youtube.com/watch?v=x5BxStreTsU&t=17522s",
-     "kind": "mention",
-     "note": "Described as a $500 million runner coming into the ecosystem to fill a gap left by other projects."
-    }
-   ],
-   "episode_count": 1,
    "single_reference": false
   },
   {
@@ -189935,6 +190304,46 @@
      "deep_link": "https://www.youtube.com/watch?v=9B_MXvX0CuA&t=139s",
      "kind": "analysis",
      "note": "Water Miner token provides in-app utility for purchasing perks and unlocking premium features; over 1 million tokens distributed to users with 92,000 burned."
+    }
+   ],
+   "episode_count": 1,
+   "single_reference": true
+  },
+  {
+   "symbol": "NOSHA",
+   "name": "NOSHA",
+   "asset_class": "crypto",
+   "mentions": 1,
+   "analysis": 1,
+   "moments": [
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 1868.0,
+     "timestamp": "31:08",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=1868s",
+     "kind": "analysis",
+     "note": "NOSHA collapsed, which prompted the team to prioritize creating Let's Cash as a means to accumulate supply for Cash Cat."
+    }
+   ],
+   "episode_count": 1,
+   "single_reference": true
+  },
+  {
+   "symbol": "NUMPAY",
+   "name": "Numpay",
+   "asset_class": "crypto",
+   "mentions": 1,
+   "analysis": 1,
+   "moments": [
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 3247.0,
+     "timestamp": "54:07",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=3247s",
+     "kind": "analysis",
+     "note": "Enables instant borderless payments using just a phone number without banks, with privacy features and cross-border private payment capabilities on Elysium."
     }
    ],
    "episode_count": 1,
@@ -207505,6 +207914,26 @@
    "single_reference": true
   },
   {
+   "symbol": "EACAT",
+   "name": "E-A-Cat",
+   "asset_class": "crypto",
+   "mentions": 1,
+   "analysis": 0,
+   "moments": [
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 3183.0,
+     "timestamp": "53:03",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=3183s",
+     "kind": "mention",
+     "note": "Identified as a meme coin with no known utility."
+    }
+   ],
+   "episode_count": 1,
+   "single_reference": true
+  },
+  {
    "symbol": "GXY",
    "name": "Galaxy Digital",
    "asset_class": "other",
@@ -216405,10 +216834,10 @@
    "single_reference": true
   }
  ],
- "total_hits": 21092,
- "dropped_low_confidence": 2526,
- "dropped_not_an_asset": 2338,
- "episodes_processed": 709,
+ "total_hits": 21136,
+ "dropped_low_confidence": 2527,
+ "dropped_not_an_asset": 2345,
+ "episodes_processed": 710,
  "episode_ids": [
   "-6Sccmoz7RQ",
   "-8z0M77EVZg",
@@ -216506,6 +216935,7 @@
   "9B95AXMYjN4",
   "9B_MXvX0CuA",
   "9C9xhhe4_dU",
+  "9DG7UtBDWnM",
   "9YvEpM4b0Y4",
   "9bZPeck9Jeg",
   "9eQR5S6zBL0",
