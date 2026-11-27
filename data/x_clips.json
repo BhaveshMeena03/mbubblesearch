@@ -5885,5 +5885,35 @@
   "copies": 1,
   "heard_from": "audio",
   "placed": "2026-11-27"
+ },
+ "2126176274691596643": {
+  "account": "MCGlive",
+  "archive": "mcg",
+  "episode_id": "oyJMOrxUlLI",
+  "start": 2958,
+  "end": 3013,
+  "before": "to Spinner. Everyone has been super supportive in helping us build. And it's also, it's helping us get to PMF a lot faster, which is really important for us as a protocol and actually having real revenue and real users, not just, you know, some vaporware tech that nobody uses. Yeah, no, totally. I'm going to just get into specifics on some of these here. So you launched on Mantra.",
+  "after": "founders. Yeah, Spinner's definitely the GOAT. Do you have a relationship with Spinner and the team at Mantra? Yeah, yeah. A good friend introduced us to Spinner. nice and i'll talk about markets here because this is kind of what seems to me like the core difference between copy trading as a feature in an app versus it as a token which you guys have achieved is that third-party platforms like markets and fomo and the pump app etc who have their own crypto traders can also buy these v tokens and that's a fundamental difference than building this at the app layer. Are these tokens, the V tokens going to be available in markets.xyz? Because that's what they basically said here. Yes. Okay, and do you see that as a growth driver? Do you see these tokens being listed in all these apps as kind of the way to go versus just as a feature at the app layer? Definitely, yeah. I think, yeah, you can go. I guess I'll go. Definitely. I think it would be a huge, obviously, catalyst for Liquid V and Elysium as a whole once our tokens are on FOMO, PumFun, etc. It's also mainly, once again, like buying the tokens is great and all, but also like being able to build on top.",
+  "after_at": 3013,
+  "duration": 58.8,
+  "matches": 109,
+  "copies": 1,
+  "heard_from": "captions",
+  "placed": "2026-11-27"
+ },
+ "2126283354035405259": {
+  "account": "MCGlive",
+  "archive": "mcg",
+  "episode_id": "oyJMOrxUlLI",
+  "start": 2364,
+  "end": 2548,
+  "before": "portfolio margin or some other type of margin where they have like a huge buffer of usdc and they will have like a 20x long at like let's say 10 of their portfolio a 2x levered portfolio of that would have their position just be effectively 2x. Got it. Okay. Go ahead, Don, if you had a question. No, I guess I'm kind of just running through my head,",
+  "after": "okay maybe we could talk through more of like the end goal and kind of roadmap of the of the protocol here for sure you guys have got the mirroring down i think this is a pretty like simple to understand concept we all kind of get it what comes next in terms of roadmap for you guys what are you most focused on like how does this platform kind of grow from here yeah i think what really is like the next steps is uh we're going to create our goal here to create uh like the next meta on Elysium chain through the tokenization of these creators. And once we're able to get the creator's attention on these tokens and talking about them, I think it's going to be a huge catalyst for not only Liquid V, but Elysium as a whole. So for example, VAnsem talking about VAnsem and VFlood talking about VFlood, we think it's going to be just a huge catalyst for the entirety of Elysium. And what will they talk about? Will they say like, oh, you know, I'm profitable. And then all these token holders are like, yo, keep going, bro. Like, great trade. Like, I'm just trying to understand, like, how this manifests itself. Or are they tagging him in it and being like, dude, you know, like, you screwed up. Like,",
+  "after_at": 2554,
+  "duration": 179.8,
+  "matches": 285,
+  "copies": 1,
+  "heard_from": "captions",
+  "placed": "2026-11-27"
  }
 }
