@@ -4,8 +4,8 @@
    "symbol": "BTC",
    "name": "Bitcoin",
    "asset_class": "crypto",
-   "mentions": 1543,
-   "analysis": 849,
+   "mentions": 1545,
+   "analysis": 850,
    "moments": [
     {
      "episode_id": "-8z0M77EVZg",
@@ -11024,6 +11024,24 @@
      "note": "Speakers discussed Bitcoin macro chart and support levels around $110k, referencing October 10-21 timeframe where Jones Ryder identified potential bearish support at $28,200 if Bitcoin did not reclaim $42,200."
     },
     {
+     "episode_id": "l7nAlLJ7-WU",
+     "episode_title": "This Token Did +300% After Our Interview | LiquidV Interview (Hyperliquid Trader ETFs)",
+     "start_seconds": 433.0,
+     "timestamp": "7:13",
+     "deep_link": "https://www.youtube.com/watch?v=l7nAlLJ7-WU&t=433s",
+     "kind": "analysis",
+     "note": "Ansem is 10x short on Bitcoin, described as 'printing' (profitable)."
+    },
+    {
+     "episode_id": "l7nAlLJ7-WU",
+     "episode_title": "This Token Did +300% After Our Interview | LiquidV Interview (Hyperliquid Trader ETFs)",
+     "start_seconds": 801.0,
+     "timestamp": "13:21",
+     "deep_link": "https://www.youtube.com/watch?v=l7nAlLJ7-WU&t=801s",
+     "kind": "mention",
+     "note": "Referenced as an example of a leveraged position when discussing 10x long Bitcoin."
+    },
+    {
      "episode_id": "lHiHv6_Hfh0",
      "episode_title": "trading with @jonesrida owner @leftcurvedao and a $MET TGE update with $SEED @StarseedTeam",
      "start_seconds": 46.0,
@@ -13895,14 +13913,14 @@
      "note": "Speaker mentions companies using treasuries to buy Bitcoin."
     }
    ],
-   "episode_count": 404,
+   "episode_count": 405,
    "single_reference": false
   },
   {
    "symbol": "SOL",
    "name": "Solana",
    "asset_class": "crypto",
-   "mentions": 2785,
+   "mentions": 2788,
    "analysis": 847,
    "moments": [
     {
@@ -33184,6 +33202,33 @@
      "note": "An onchain identity plus verification protocol for agents is run autonomously on Solana mainnet."
     },
     {
+     "episode_id": "l7nAlLJ7-WU",
+     "episode_title": "This Token Did +300% After Our Interview | LiquidV Interview (Hyperliquid Trader ETFs)",
+     "start_seconds": 15.0,
+     "timestamp": "0:15",
+     "deep_link": "https://www.youtube.com/watch?v=l7nAlLJ7-WU&t=15s",
+     "kind": "mention",
+     "note": "Mentioned as the blockchain platform where MetaDAO operates."
+    },
+    {
+     "episode_id": "l7nAlLJ7-WU",
+     "episode_title": "This Token Did +300% After Our Interview | LiquidV Interview (Hyperliquid Trader ETFs)",
+     "start_seconds": 1648.0,
+     "timestamp": "27:28",
+     "deep_link": "https://www.youtube.com/watch?v=l7nAlLJ7-WU&t=1648s",
+     "kind": "mention",
+     "note": "Mentioned as a potential pairing alternative to Liquid V tokens in liquidity pools."
+    },
+    {
+     "episode_id": "l7nAlLJ7-WU",
+     "episode_title": "This Token Did +300% After Our Interview | LiquidV Interview (Hyperliquid Trader ETFs)",
+     "start_seconds": 2082.0,
+     "timestamp": "34:42",
+     "deep_link": "https://www.youtube.com/watch?v=l7nAlLJ7-WU&t=2082s",
+     "kind": "mention",
+     "note": "Speaker observes that there seems to be nothing going on in Solana currently, but notes builders are working through the bear market."
+    },
+    {
      "episode_id": "lHiHv6_Hfh0",
      "episode_title": "trading with @jonesrida owner @leftcurvedao and a $MET TGE update with $SEED @StarseedTeam",
      "start_seconds": 549.0,
@@ -38971,14 +39016,14 @@
      "note": "Speaker discusses Solana price levels, noting a 20x move from 500K to current 8 million levels and speculating on future levels in another month."
     }
    ],
-   "episode_count": 564,
+   "episode_count": 565,
    "single_reference": false
   },
   {
    "symbol": "ETH",
    "name": "Ethereum",
    "asset_class": "crypto",
-   "mentions": 1059,
+   "mentions": 1060,
    "analysis": 380,
    "moments": [
     {
@@ -46191,6 +46236,15 @@
      "note": "Referenced as part of Jones Ryder's bearish thesis with a support level at $2,800 ETH mentioned in October analysis."
     },
     {
+     "episode_id": "l7nAlLJ7-WU",
+     "episode_title": "This Token Did +300% After Our Interview | LiquidV Interview (Hyperliquid Trader ETFs)",
+     "start_seconds": 1648.0,
+     "timestamp": "27:28",
+     "deep_link": "https://www.youtube.com/watch?v=l7nAlLJ7-WU&t=1648s",
+     "kind": "mention",
+     "note": "Mentioned as a potential pairing alternative to Liquid V tokens in liquidity pools."
+    },
+    {
      "episode_id": "lHiHv6_Hfh0",
      "episode_title": "trading with @jonesrida owner @leftcurvedao and a $MET TGE update with $SEED @StarseedTeam",
      "start_seconds": 5893.0,
@@ -48513,15 +48567,15 @@
      "note": "Speaker mentions Solana DATs and companies using treasuries to buy ETH."
     }
    ],
-   "episode_count": 382,
+   "episode_count": 383,
    "single_reference": false
   },
   {
    "symbol": "HYPE",
    "name": "Hyperliquid",
    "asset_class": "crypto",
-   "mentions": 458,
-   "analysis": 287,
+   "mentions": 459,
+   "analysis": 288,
    "moments": [
     {
      "episode_id": "-iilkByxBa8",
@@ -51881,6 +51935,15 @@
      "note": "Mentioned as an example of a large buyback pressure-aligned token model that attracts liquid funds."
     },
     {
+     "episode_id": "l7nAlLJ7-WU",
+     "episode_title": "This Token Did +300% After Our Interview | LiquidV Interview (Hyperliquid Trader ETFs)",
+     "start_seconds": 124.0,
+     "timestamp": "2:04",
+     "deep_link": "https://www.youtube.com/watch?v=l7nAlLJ7-WU&t=124s",
+     "kind": "analysis",
+     "note": "A decentralized exchange platform whose traders are tokenized through Liquid V; enables copy trading functionality through Elysium."
+    },
+    {
      "episode_id": "n-1Tj9Emstc",
      "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holding Above $82.5K | Calm Before the Storm?",
      "start_seconds": 8646.0,
@@ -52646,7 +52709,7 @@
      "note": "A vault platform where trading activity is tracked and displayed; the speaker launched a vault on Sunday/Monday with 20x leverage, generating significant P&L over the first few days."
     }
    ],
-   "episode_count": 207,
+   "episode_count": 208,
    "single_reference": false
   },
   {
@@ -59137,7 +59200,7 @@
    "symbol": "USDC",
    "name": "USD Coin",
    "asset_class": "crypto",
-   "mentions": 521,
+   "mentions": 522,
    "analysis": 151,
    "moments": [
     {
@@ -62813,6 +62876,15 @@
      "note": "Mentioned as a potential payment method for computing through Conway, with discussion of whether compute can be purchased with USDC or if payment rails convert it to dollars."
     },
     {
+     "episode_id": "l7nAlLJ7-WU",
+     "episode_title": "This Token Did +300% After Our Interview | LiquidV Interview (Hyperliquid Trader ETFs)",
+     "start_seconds": 864.0,
+     "timestamp": "14:24",
+     "deep_link": "https://www.youtube.com/watch?v=l7nAlLJ7-WU&t=864s",
+     "kind": "mention",
+     "note": "Mentioned as a margin buffer that traders hold in portfolio margin accounts."
+    },
+    {
      "episode_id": "lN2kZJ0CNZg",
      "episode_title": "\ud83d\udfe2 LIVE: Robinhood Chain Rally Incoming? How to Position",
      "start_seconds": 2662.0,
@@ -63830,7 +63902,7 @@
      "note": "Mentioned as an asset users needed to send to Arbitrum to access perp platforms."
     }
    ],
-   "episode_count": 300,
+   "episode_count": 301,
    "single_reference": false
   },
   {
@@ -93003,6 +93075,746 @@
    "single_reference": false
   },
   {
+   "symbol": "ANSEM",
+   "name": "Ansem (The Black Bull)",
+   "asset_class": "crypto",
+   "mentions": 81,
+   "analysis": 53,
+   "moments": [
+    {
+     "episode_id": "1UFlORh3zt0",
+     "episode_title": "\ud83d\udd34 LIVE: FOMC Day, Onchain Rotations...Next Leg Loading? | Market Update + Interviews",
+     "start_seconds": 2189.0,
+     "timestamp": "36:29",
+     "deep_link": "https://www.youtube.com/watch?v=1UFlORh3zt0&t=2189s",
+     "kind": "mention",
+     "note": "Referenced as the top meme coin available as a default pairing option."
+    },
+    {
+     "episode_id": "2PHeTXu_wyY",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood Ecosystem Dumping... Here's My Plan | Market Update + Interviews",
+     "start_seconds": 2062.0,
+     "timestamp": "34:22",
+     "deep_link": "https://www.youtube.com/watch?v=2PHeTXu_wyY&t=2062s",
+     "kind": "analysis",
+     "note": "Speaker predicts new all-time high for Anom, noting sustained attention over time and expecting new all-time high within three months."
+    },
+    {
+     "episode_id": "2mftwe1oOVQ",
+     "episode_title": "One of crypto's most notorious scammers exposes the dark side of the industry | The Sahil Files.",
+     "start_seconds": 859.0,
+     "timestamp": "14:19",
+     "deep_link": "https://www.youtube.com/watch?v=2mftwe1oOVQ&t=859s",
+     "kind": "analysis",
+     "note": "Speaker alleges Ansem token was launched by Superman/DevTJR, involved distribution to endorsers who then shilled it, and eventually rugged."
+    },
+    {
+     "episode_id": "4PlcWhQM96A",
+     "episode_title": "\ud83d\udd34 LIVE: Time To Log Off? | AI Fears, Debt Market Shutdown, Anthropic IPO",
+     "start_seconds": 9972.0,
+     "timestamp": "2:46:12",
+     "deep_link": "https://www.youtube.com/watch?v=4PlcWhQM96A&t=9972s",
+     "kind": "analysis",
+     "note": "Discussed chart action with speakers disagreeing on bullish interpretation; at 70 million valuation with no clear positive momentum identified."
+    },
+    {
+     "episode_id": "50P-rICrUfs",
+     "episode_title": "\ud83d\udd34 LIVE: Launchpad Wars On Robinhood | Original $ANSEM Dev Interview | Onchain Update",
+     "start_seconds": 1036.0,
+     "timestamp": "17:16",
+     "deep_link": "https://www.youtube.com/watch?v=50P-rICrUfs&t=1036s",
+     "kind": "mention",
+     "note": "Anom token discussed; speaker mentions it was handed off from the original dev to another dev."
+    },
+    {
+     "episode_id": "50P-rICrUfs",
+     "episode_title": "\ud83d\udd34 LIVE: Launchpad Wars On Robinhood | Original $ANSEM Dev Interview | Onchain Update",
+     "start_seconds": 1232.0,
+     "timestamp": "20:32",
+     "deep_link": "https://www.youtube.com/watch?v=50P-rICrUfs&t=1232s",
+     "kind": "analysis",
+     "note": "Speaker discovered a black pole token project in Anom's public wallet after Anom posted his punk fund wallet; the token was originally launched 3 days prior, rugged down to 70k market cap, and speaker took over development and management of the project, paying for infrastructure including DexScreener updates, setting up staking contracts, and distributing supply to build volume."
+    },
+    {
+     "episode_id": "50P-rICrUfs",
+     "episode_title": "\ud83d\udd34 LIVE: Launchpad Wars On Robinhood | Original $ANSEM Dev Interview | Onchain Update",
+     "start_seconds": 1949.0,
+     "timestamp": "32:29",
+     "deep_link": "https://www.youtube.com/watch?v=50P-rICrUfs&t=1949s",
+     "kind": "analysis",
+     "note": "Discussed as a successful meme coin token with strong staying power due to the creator's constant engagement, growing lore, and successful trading calls; contrasted with 99% of other tokens that lack longevity."
+    },
+    {
+     "episode_id": "50P-rICrUfs",
+     "episode_title": "\ud83d\udd34 LIVE: Launchpad Wars On Robinhood | Original $ANSEM Dev Interview | Onchain Update",
+     "start_seconds": 2194.0,
+     "timestamp": "36:34",
+     "deep_link": "https://www.youtube.com/watch?v=50P-rICrUfs&t=2194s",
+     "kind": "analysis",
+     "note": "The speaker discusses the Anom ecosystem runup, mentions it happened quickly, and discusses using Anom tokens as staking rewards for Hyperbull."
+    },
+    {
+     "episode_id": "50P-rICrUfs",
+     "episode_title": "\ud83d\udd34 LIVE: Launchpad Wars On Robinhood | Original $ANSEM Dev Interview | Onchain Update",
+     "start_seconds": 2507.0,
+     "timestamp": "41:47",
+     "deep_link": "https://www.youtube.com/watch?v=50P-rICrUfs&t=2507s",
+     "kind": "analysis",
+     "note": "Discussed as a token with creator fees used to buy back Anom for stakers; expected to run exponentially; compared to other meme projects; described as having significant social attention and ecosystem development; speakers discuss its positioning and future potential."
+    },
+    {
+     "episode_id": "50P-rICrUfs",
+     "episode_title": "\ud83d\udd34 LIVE: Launchpad Wars On Robinhood | Original $ANSEM Dev Interview | Onchain Update",
+     "start_seconds": 2898.0,
+     "timestamp": "48:18",
+     "deep_link": "https://www.youtube.com/watch?v=50P-rICrUfs&t=2898s",
+     "kind": "analysis",
+     "note": "Described as one of the biggest trades this year; discussed extensively as a base token for ecosystem building, with mentions of hackathons, builder rewards, and potential launchpad development."
+    },
+    {
+     "episode_id": "50P-rICrUfs",
+     "episode_title": "\ud83d\udd34 LIVE: Launchpad Wars On Robinhood | Original $ANSEM Dev Interview | Onchain Update",
+     "start_seconds": 3423.0,
+     "timestamp": "57:03",
+     "deep_link": "https://www.youtube.com/watch?v=50P-rICrUfs&t=3423s",
+     "kind": "analysis",
+     "note": "Speaker discusses earning 600% APR in 24 hours by liquidity providing on Anom on Meteora, noting it's a hot memecoin launch with high fees."
+    },
+    {
+     "episode_id": "50P-rICrUfs",
+     "episode_title": "\ud83d\udd34 LIVE: Launchpad Wars On Robinhood | Original $ANSEM Dev Interview | Onchain Update",
+     "start_seconds": 3619.0,
+     "timestamp": "1:00:19",
+     "deep_link": "https://www.youtube.com/watch?v=50P-rICrUfs&t=3619s",
+     "kind": "analysis",
+     "note": "Token that V Funk positioned himself in by investing 50 grand to buy supply and build infrastructure; expected to reach a couple billion in valuation in a few months."
+    },
+    {
+     "episode_id": "5frfwS8MvZI",
+     "episode_title": "\ud83d\udd34 LIVE: Elysium Dead on Arrival? | PumpFun Drama | Crypto Cooked?",
+     "start_seconds": 6927.0,
+     "timestamp": "1:55:27",
+     "deep_link": "https://www.youtube.com/watch?v=5frfwS8MvZI&t=6927s",
+     "kind": "mention",
+     "note": "Ansem was mentioned as someone whom the speaker provided evidence about in an interview."
+    },
+    {
+     "episode_id": "5frfwS8MvZI",
+     "episode_title": "\ud83d\udd34 LIVE: Elysium Dead on Arrival? | PumpFun Drama | Crypto Cooked?",
+     "start_seconds": 6961.0,
+     "timestamp": "1:56:01",
+     "deep_link": "https://www.youtube.com/watch?v=5frfwS8MvZI&t=6961s",
+     "kind": "analysis",
+     "note": "Anthem coin was mentioned alongside TJR coin as a celebrity coin allegedly launched by Superman and part of an alleged pump-and-dump scheme."
+    },
+    {
+     "episode_id": "5quiPwAi2Y0",
+     "episode_title": "A Look into the Cade Cup by Pumpcade",
+     "start_seconds": 2712.0,
+     "timestamp": "45:12",
+     "deep_link": "https://www.youtube.com/watch?v=5quiPwAi2Y0&t=2712s",
+     "kind": "mention",
+     "note": "Described as one of the three most popular Pump Fun tokens; Pump Fund is offering $10,000 in Anom tokens as part of a Cade Cup sign-up promotion."
+    },
+    {
+     "episode_id": "AImBDqEWd8E",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding | Ceilings Rising | Market Update + Interviews",
+     "start_seconds": 15605.0,
+     "timestamp": "4:20:05",
+     "deep_link": "https://www.youtube.com/watch?v=AImBDqEWd8E&t=15605s",
+     "kind": "analysis",
+     "note": "Speaker discusses Anom Launchpad as a front end for Pump Fun, describes it as a way to burn Anom tokens, and mentions an Anom hackathon with prize pools in USD and Anom token."
+    },
+    {
+     "episode_id": "DhLaLq6NZJA",
+     "episode_title": "\ud83d\udd34 LIVE: On-chain crypto showing resilience | Pullback's to watch | Live Market Updates + Interviews",
+     "start_seconds": 1028.0,
+     "timestamp": "17:08",
+     "deep_link": "https://www.youtube.com/watch?v=DhLaLq6NZJA&t=1028s",
+     "kind": "analysis",
+     "note": "A memecoin mentioned as experiencing a dip; described as something that could work as a leverage proxy bet if one thinks Anom is too high. First real memecoin pairing with a memecoin chart."
+    },
+    {
+     "episode_id": "EHhZRRHMZQM",
+     "episode_title": "\ud83d\udd34 LIVE: Markets ripping |  RHC leading | Market Update + Founder Interview",
+     "start_seconds": 484.0,
+     "timestamp": "8:04",
+     "deep_link": "https://www.youtube.com/watch?v=EHhZRRHMZQM&t=484s",
+     "kind": "mention",
+     "note": "Developers can win $25,000 in Anthem and $25,000 in cash as part of the Kickstart hackathon track, with token prizes unlocked over time as builders continue developing."
+    },
+    {
+     "episode_id": "EHhZRRHMZQM",
+     "episode_title": "\ud83d\udd34 LIVE: Markets ripping |  RHC leading | Market Update + Founder Interview",
+     "start_seconds": 829.0,
+     "timestamp": "13:49",
+     "deep_link": "https://www.youtube.com/watch?v=EHhZRRHMZQM&t=829s",
+     "kind": "mention",
+     "note": "Speaker refers to the Anom ecosystem and mentions it could be behind high potential businesses in the hackathon."
+    },
+    {
+     "episode_id": "EHhZRRHMZQM",
+     "episode_title": "\ud83d\udd34 LIVE: Markets ripping |  RHC leading | Market Update + Founder Interview",
+     "start_seconds": 12109.0,
+     "timestamp": "3:21:49",
+     "deep_link": "https://www.youtube.com/watch?v=EHhZRRHMZQM&t=12109s",
+     "kind": "analysis",
+     "note": "Speakers discuss Anom's role in a hackathon, noting that the platform needs more visible endorsement from leadership to gain traction, and that project alignment with building on Anom versus launchpad incentives is misaligned."
+    },
+    {
+     "episode_id": "EHhZRRHMZQM",
+     "episode_title": "\ud83d\udd34 LIVE: Markets ripping |  RHC leading | Market Update + Founder Interview",
+     "start_seconds": 13941.0,
+     "timestamp": "3:52:21",
+     "deep_link": "https://www.youtube.com/watch?v=EHhZRRHMZQM&t=13941s",
+     "kind": "analysis",
+     "note": "Discussed as performing well with good LP opportunities; speaker notes strong volume at 5.7 million on the pool and good price ranging."
+    },
+    {
+     "episode_id": "F3chwn4aU3U",
+     "episode_title": "\ud83d\udd34 LIVE: Ansem Joins Launchpad Wars | Time to Buy Dips? | Market Update + Interview",
+     "start_seconds": 275.0,
+     "timestamp": "4:35",
+     "deep_link": "https://www.youtube.com/watch?v=F3chwn4aU3U&t=275s",
+     "kind": "mention",
+     "note": "Anom is mentioned in the title 'Anom joins Launchpad Wars' and referenced as joining launchpad competition."
+    },
+    {
+     "episode_id": "F3chwn4aU3U",
+     "episode_title": "\ud83d\udd34 LIVE: Ansem Joins Launchpad Wars | Time to Buy Dips? | Market Update + Interview",
+     "start_seconds": 494.0,
+     "timestamp": "8:14",
+     "deep_link": "https://www.youtube.com/watch?v=F3chwn4aU3U&t=494s",
+     "kind": "analysis",
+     "note": "Speaker discusses Anom launching Ansom.io where all fees will go to buying and burning Anom. Chart analysis shows Anom breaking out of a multi-week range, retesting a golden pocket, with expectation to reach 500 million market cap and new all-time highs."
+    },
+    {
+     "episode_id": "F3chwn4aU3U",
+     "episode_title": "\ud83d\udd34 LIVE: Ansem Joins Launchpad Wars | Time to Buy Dips? | Market Update + Interview",
+     "start_seconds": 880.0,
+     "timestamp": "14:40",
+     "deep_link": "https://www.youtube.com/watch?v=F3chwn4aU3U&t=880s",
+     "kind": "analysis",
+     "note": "Speaker discussed Anom as part of an ecosystem and stated it looks primed for new all-time highs; mentioned buying on breakout and being up significantly."
+    },
+    {
+     "episode_id": "F3chwn4aU3U",
+     "episode_title": "\ud83d\udd34 LIVE: Ansem Joins Launchpad Wars | Time to Buy Dips? | Market Update + Interview",
+     "start_seconds": 2468.0,
+     "timestamp": "41:08",
+     "deep_link": "https://www.youtube.com/watch?v=F3chwn4aU3U&t=2468s",
+     "kind": "mention",
+     "note": "Meme coin discussed earlier in the conversation."
+    },
+    {
+     "episode_id": "F3chwn4aU3U",
+     "episode_title": "\ud83d\udd34 LIVE: Ansem Joins Launchpad Wars | Time to Buy Dips? | Market Update + Interview",
+     "start_seconds": 9149.0,
+     "timestamp": "2:32:29",
+     "deep_link": "https://www.youtube.com/watch?v=F3chwn4aU3U&t=9149s",
+     "kind": "analysis",
+     "note": "Speaker notes Anom has a market cap of 300-340 million and discusses it as a launchpad platform creator competing with Pump Fun; speculates fees will go toward buying Anom."
+    },
+    {
+     "episode_id": "F3chwn4aU3U",
+     "episode_title": "\ud83d\udd34 LIVE: Ansem Joins Launchpad Wars | Time to Buy Dips? | Market Update + Interview",
+     "start_seconds": 9375.0,
+     "timestamp": "2:36:15",
+     "deep_link": "https://www.youtube.com/watch?v=F3chwn4aU3U&t=9375s",
+     "kind": "analysis",
+     "note": "Search term trends showed the token went crazy and coin launch, then price dipped but tokens held up well; speaker notes it near or at all-time highs and discusses potential for another retail leg from trending."
+    },
+    {
+     "episode_id": "FNFzeKpPEx0",
+     "episode_title": "\ud83d\udd34 LIVE: Will Ansem Save The Trenches? | Market Update + Founder Interview",
+     "start_seconds": 260.0,
+     "timestamp": "4:20",
+     "deep_link": "https://www.youtube.com/watch?v=FNFzeKpPEx0&t=260s",
+     "kind": "mention",
+     "note": "Named in passing; speaker requests audience opinion on what is going on with Anom."
+    },
+    {
+     "episode_id": "FNFzeKpPEx0",
+     "episode_title": "\ud83d\udd34 LIVE: Will Ansem Save The Trenches? | Market Update + Founder Interview",
+     "start_seconds": 726.0,
+     "timestamp": "12:06",
+     "deep_link": "https://www.youtube.com/watch?v=FNFzeKpPEx0&t=726s",
+     "kind": "analysis",
+     "note": "Speaker discusses Anom token with market cap around $142-145 million; notes that Anom has good intentions and is trying to re-engineer the behavior of onchain traders; mentions airdrops totaling approximately $10 million in value; describes Anom as a CT main character with cultural mindshare."
+    },
+    {
+     "episode_id": "FNFzeKpPEx0",
+     "episode_title": "\ud83d\udd34 LIVE: Will Ansem Save The Trenches? | Market Update + Founder Interview",
+     "start_seconds": 900.0,
+     "timestamp": "15:00",
+     "deep_link": "https://www.youtube.com/watch?v=FNFzeKpPEx0&t=900s",
+     "kind": "analysis",
+     "note": "Anom token is discussed as an attempt to onboard people to crypto through speculation while directing attention to solid protocols; speaker notes it ran fast and has potential to go higher."
+    },
+    {
+     "episode_id": "FNFzeKpPEx0",
+     "episode_title": "\ud83d\udd34 LIVE: Will Ansem Save The Trenches? | Market Update + Founder Interview",
+     "start_seconds": 1267.0,
+     "timestamp": "21:07",
+     "deep_link": "https://www.youtube.com/watch?v=FNFzeKpPEx0&t=1267s",
+     "kind": "analysis",
+     "note": "Discussed as a token with supply cornering, supply shock dynamics, price repricing, and market cap around 140 million; compared against Pump Fund with expectations it could flip Pump Fund's market cap, plus discussion of airdrop potential and founder reputation risk."
+    },
+    {
+     "episode_id": "FNFzeKpPEx0",
+     "episode_title": "\ud83d\udd34 LIVE: Will Ansem Save The Trenches? | Market Update + Founder Interview",
+     "start_seconds": 1653.0,
+     "timestamp": "27:33",
+     "deep_link": "https://www.youtube.com/watch?v=FNFzeKpPEx0&t=1653s",
+     "kind": "analysis",
+     "note": "Discussed as a meme coin representing Anom's bullish stance on Solana, with airdrops to previous OG Anom token holders; speakers analyze its role in directing volume and onboarding users."
+    },
+    {
+     "episode_id": "FNFzeKpPEx0",
+     "episode_title": "\ud83d\udd34 LIVE: Will Ansem Save The Trenches? | Market Update + Founder Interview",
+     "start_seconds": 2487.0,
+     "timestamp": "41:27",
+     "deep_link": "https://www.youtube.com/watch?v=FNFzeKpPEx0&t=2487s",
+     "kind": "mention",
+     "note": "Mentioned as currently gathering mind share, causing people to sell other assets and move money into it."
+    },
+    {
+     "episode_id": "FNFzeKpPEx0",
+     "episode_title": "\ud83d\udd34 LIVE: Will Ansem Save The Trenches? | Market Update + Founder Interview",
+     "start_seconds": 8425.0,
+     "timestamp": "2:20:25",
+     "deep_link": "https://www.youtube.com/watch?v=FNFzeKpPEx0&t=8425s",
+     "kind": "analysis",
+     "note": "Speakers discuss Anom as a memecoin token that cornered supply to reach $150 million market cap, comparing it to tech tokens and suggesting it as a singular token to buy instead of multiple beta projects."
+    },
+    {
+     "episode_id": "FNFzeKpPEx0",
+     "episode_title": "\ud83d\udd34 LIVE: Will Ansem Save The Trenches? | Market Update + Founder Interview",
+     "start_seconds": 10152.0,
+     "timestamp": "2:49:12",
+     "deep_link": "https://www.youtube.com/watch?v=FNFzeKpPEx0&t=10152s",
+     "kind": "mention",
+     "note": "Anom was mentioned in passing during discussion of breakdowns and onchain stuff happening."
+    },
+    {
+     "episode_id": "LpwKHoAJu2Q",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood DEX volume at ATH's | Pennie stocks on Solana? | Market Update + Interviews",
+     "start_seconds": 9129.0,
+     "timestamp": "2:32:09",
+     "deep_link": "https://www.youtube.com/watch?v=LpwKHoAJu2Q&t=9129s",
+     "kind": "mention",
+     "note": "Mentioned as receiving a board seat and noted as having been covered on the show."
+    },
+    {
+     "episode_id": "MvjP9JvGxnM",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto Looks Promising...Here's Why | Market Updates",
+     "start_seconds": 230.0,
+     "timestamp": "3:50",
+     "deep_link": "https://www.youtube.com/watch?v=MvjP9JvGxnM&t=230s",
+     "kind": "mention",
+     "note": "Mentioned in context of World Cup, with people wanting to help Anom onboard new users to crypto."
+    },
+    {
+     "episode_id": "MvjP9JvGxnM",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto Looks Promising...Here's Why | Market Updates",
+     "start_seconds": 2042.0,
+     "timestamp": "34:02",
+     "deep_link": "https://www.youtube.com/watch?v=MvjP9JvGxnM&t=2042s",
+     "kind": "analysis",
+     "note": "Discussed extensively regarding token strategy, Anom's approach to directing liquidity toward utility projects over memecoins, and his recent tweets about managing new token airdrops."
+    },
+    {
+     "episode_id": "MvjP9JvGxnM",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto Looks Promising...Here's Why | Market Updates",
+     "start_seconds": 2435.0,
+     "timestamp": "40:35",
+     "deep_link": "https://www.youtube.com/watch?v=MvjP9JvGxnM&t=2435s",
+     "kind": "analysis",
+     "note": "Speaker predicts the end is near for Anom token, noting the price is up and to the right but volume shows a different story."
+    },
+    {
+     "episode_id": "MvjP9JvGxnM",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto Looks Promising...Here's Why | Market Updates",
+     "start_seconds": 2851.0,
+     "timestamp": "47:31",
+     "deep_link": "https://www.youtube.com/watch?v=MvjP9JvGxnM&t=2851s",
+     "kind": "analysis",
+     "note": "Anom token has been the highest volume on FOMO, with 1-2% of buyers purchasing via Apple Pay; described as single-handedly propping up Solana on-chain."
+    },
+    {
+     "episode_id": "O4A8vFhlU2Q",
+     "episode_title": "\ud83d\udd34 LIVE: Saylor Selling | Onchain Cooking | Bear Market Update + Trader Radio",
+     "start_seconds": 1852.0,
+     "timestamp": "30:52",
+     "deep_link": "https://www.youtube.com/watch?v=O4A8vFhlU2Q&t=1852s",
+     "kind": "mention",
+     "note": "Ansem token mentioned as showing a clear shift in on-chain sentiment alongside market bubble."
+    },
+    {
+     "episode_id": "O4A8vFhlU2Q",
+     "episode_title": "\ud83d\udd34 LIVE: Saylor Selling | Onchain Cooking | Bear Market Update + Trader Radio",
+     "start_seconds": 3144.0,
+     "timestamp": "52:24",
+     "deep_link": "https://www.youtube.com/watch?v=O4A8vFhlU2Q&t=3144s",
+     "kind": "mention",
+     "note": "Ansem is mentioned as a coin that bridged through the system, generating a couple hundred bucks in fees for distribution."
+    },
+    {
+     "episode_id": "O4A8vFhlU2Q",
+     "episode_title": "\ud83d\udd34 LIVE: Saylor Selling | Onchain Cooking | Bear Market Update + Trader Radio",
+     "start_seconds": 4109.0,
+     "timestamp": "1:08:29",
+     "deep_link": "https://www.youtube.com/watch?v=O4A8vFhlU2Q&t=4109s",
+     "kind": "mention",
+     "note": "Named as a token available on the bridge platform."
+    },
+    {
+     "episode_id": "OvLPWlcdXew",
+     "episode_title": "\ud83d\udd34 LIVE: Onchain is Bullish! Equities \u2192 Crypto Rotation? | Market Updates + Founder Interviews",
+     "start_seconds": 378.0,
+     "timestamp": "6:18",
+     "deep_link": "https://www.youtube.com/watch?v=OvLPWlcdXew&t=378s",
+     "kind": "analysis",
+     "note": "Speaker discusses Anomcoin's token distribution strategy with an evergreen recurring airdrop model, comparing it to Pudgy Penguins' approach."
+    },
+    {
+     "episode_id": "OvLPWlcdXew",
+     "episode_title": "\ud83d\udd34 LIVE: Onchain is Bullish! Equities \u2192 Crypto Rotation? | Market Updates + Founder Interviews",
+     "start_seconds": 487.0,
+     "timestamp": "8:07",
+     "deep_link": "https://www.youtube.com/watch?v=OvLPWlcdXew&t=487s",
+     "kind": "analysis",
+     "note": "Discussed as a token with an innovative airdrop strategy that continuously drips tokens to users and active community members, and potentially integrates with other protocols."
+    },
+    {
+     "episode_id": "OvLPWlcdXew",
+     "episode_title": "\ud83d\udd34 LIVE: Onchain is Bullish! Equities \u2192 Crypto Rotation? | Market Updates + Founder Interviews",
+     "start_seconds": 951.0,
+     "timestamp": "15:51",
+     "deep_link": "https://www.youtube.com/watch?v=OvLPWlcdXew&t=951s",
+     "kind": "analysis",
+     "note": "Discussed as a memecoin with a trajectory potentially comparable to established memecoins, utilizing a slow-drip airdrop strategy over time rather than bulk airdrops, with a current valuation around 60-80 million, aimed at sustaining attention and eventually listing on centralized exchanges."
+    },
+    {
+     "episode_id": "OvLPWlcdXew",
+     "episode_title": "\ud83d\udd34 LIVE: Onchain is Bullish! Equities \u2192 Crypto Rotation? | Market Updates + Founder Interviews",
+     "start_seconds": 1155.0,
+     "timestamp": "19:15",
+     "deep_link": "https://www.youtube.com/watch?v=OvLPWlcdXew&t=1155s",
+     "kind": "analysis",
+     "note": "Discussed extensively as a memecoin with potential to build an ecosystem; speakers analyze its business model of generating fees that can fund airdrops and ecosystem development."
+    },
+    {
+     "episode_id": "OvLPWlcdXew",
+     "episode_title": "\ud83d\udd34 LIVE: Onchain is Bullish! Equities \u2192 Crypto Rotation? | Market Updates + Founder Interviews",
+     "start_seconds": 12926.0,
+     "timestamp": "3:35:26",
+     "deep_link": "https://www.youtube.com/watch?v=OvLPWlcdXew&t=12926s",
+     "kind": "analysis",
+     "note": "Anom coin launched on Pump Fund generated 112 million in volume in the past week and 183 million total since June 16th launch, peaked above 430 million market cap within three weeks, and is described as the biggest coin launched on Pump Fund in the last three months."
+    },
+    {
+     "episode_id": "PZ5E7taO1Yo",
+     "episode_title": "\ud83d\udd34 LIVE: RWA Memes Heating Up | Next Leg Soon? | Market Update + Interviews",
+     "start_seconds": 7096.0,
+     "timestamp": "1:58:16",
+     "deep_link": "https://www.youtube.com/watch?v=PZ5E7taO1Yo&t=7096s",
+     "kind": "mention",
+     "note": "Speaker mentioned Anom paired with Manlet as an example of good memetics/meme pairings."
+    },
+    {
+     "episode_id": "PZ5E7taO1Yo",
+     "episode_title": "\ud83d\udd34 LIVE: RWA Memes Heating Up | Next Leg Soon? | Market Update + Interviews",
+     "start_seconds": 7848.0,
+     "timestamp": "2:10:48",
+     "deep_link": "https://www.youtube.com/watch?v=PZ5E7taO1Yo&t=7848s",
+     "kind": "analysis",
+     "note": "Token with an ecosystem; people are rewarded with Anom tokens and it drives volume through projects like Manlet; Anom founder interacts with ecosystem projects meaningfully."
+    },
+    {
+     "episode_id": "WBB3vdHLF2Q",
+     "episode_title": "\ud83d\udd34 LIVE: S&P New ATH | Uniswap Launchpad Coming | Market Update + Interview",
+     "start_seconds": 12595.0,
+     "timestamp": "3:29:55",
+     "deep_link": "https://www.youtube.com/watch?v=WBB3vdHLF2Q&t=12595s",
+     "kind": "analysis",
+     "note": "A token with a market cap of approximately 450 million; discussed as a credibility play, with speakers debating whether they are bullish on it and noting it reached all-time highs."
+    },
+    {
+     "episode_id": "Xf3MBXMtfD0",
+     "episode_title": "\ud83d\udd34 LIVE: Bottom is in | Opportunities everywhere | Market Update + Interviews",
+     "start_seconds": 9035.0,
+     "timestamp": "2:30:35",
+     "deep_link": "https://www.youtube.com/watch?v=Xf3MBXMtfD0&t=9035s",
+     "kind": "analysis",
+     "note": "Used as an example of a token that could launch through Hooker Fun; discussed in the context of liquidity pools paired with Solana and how price changes based on pool composition."
+    },
+    {
+     "episode_id": "Xf3MBXMtfD0",
+     "episode_title": "\ud83d\udd34 LIVE: Bottom is in | Opportunities everywhere | Market Update + Interviews",
+     "start_seconds": 11589.0,
+     "timestamp": "3:13:09",
+     "deep_link": "https://www.youtube.com/watch?v=Xf3MBXMtfD0&t=11589s",
+     "kind": "analysis",
+     "note": "Main ecosystem token at $200 million market cap; thesis discussed about how paired tokens attract trading flows for smaller market cap speculators and drive demand for the main token through liquidity pools."
+    },
+    {
+     "episode_id": "ZHGRCslUV3E",
+     "episode_title": "\ud83d\udd34 LIVE: BASE ECO on fire while markets are melting!  | Live Market Updates + Onchain Positioning",
+     "start_seconds": 8939.0,
+     "timestamp": "2:28:59",
+     "deep_link": "https://www.youtube.com/watch?v=ZHGRCslUV3E&t=8939s",
+     "kind": "mention",
+     "note": "Anom tweeted about the base ecosystem and was bullish on base."
+    },
+    {
+     "episode_id": "Zh_Q0Z2TtVY",
+     "episode_title": "\ud83d\udd34 LIVE: Will Robinhood Szn Last? | Market Update + Founder Interviews",
+     "start_seconds": 4104.0,
+     "timestamp": "1:08:24",
+     "deep_link": "https://www.youtube.com/watch?v=Zh_Q0Z2TtVY&t=4104s",
+     "kind": "analysis",
+     "note": "Anom is discussed as a token with supply control and airdrop distribution; speaker clarifies it is not necessarily a creator coin but has creator-like qualities."
+    },
+    {
+     "episode_id": "_mLaSJLAPJs",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto is Crashing | Here\u2019s Exactly What to Do Right Now",
+     "start_seconds": 9158.0,
+     "timestamp": "2:32:38",
+     "deep_link": "https://www.youtube.com/watch?v=_mLaSJLAPJs&t=9158s",
+     "kind": "mention",
+     "note": "Mentioned that hackathon entries associated with Ansem are down 99 percent; speaker noted Ansem at 40 mil market cap."
+    },
+    {
+     "episode_id": "c6xFYSGZ0Fo",
+     "episode_title": "\ud83d\udd34 LIVE: Has Onchain Summer Begun? | Market Update + Founder Interviews",
+     "start_seconds": 4056.0,
+     "timestamp": "1:07:36",
+     "deep_link": "https://www.youtube.com/watch?v=c6xFYSGZ0Fo&t=4056s",
+     "kind": "analysis",
+     "note": "Speaker discusses Anom going from zero to 150 million as an example of a project with narrative-driven gains."
+    },
+    {
+     "episode_id": "c6xFYSGZ0Fo",
+     "episode_title": "\ud83d\udd34 LIVE: Has Onchain Summer Begun? | Market Update + Founder Interviews",
+     "start_seconds": 11224.0,
+     "timestamp": "3:07:04",
+     "deep_link": "https://www.youtube.com/watch?v=c6xFYSGZ0Fo&t=11224s",
+     "kind": "analysis",
+     "note": "Anom is mentioned as potentially returning believers to good market conditions and is noted as having shilled both Meteora and Backpack."
+    },
+    {
+     "episode_id": "dIsFawgT6DQ",
+     "episode_title": "\ud83d\udd34 LIVE: FOMO App Dominating | Onchain is HOT | Creator Coins Back? + Market Update",
+     "start_seconds": 1820.0,
+     "timestamp": "30:20",
+     "deep_link": "https://www.youtube.com/watch?v=dIsFawgT6DQ&t=1820s",
+     "kind": "analysis",
+     "note": "Referenced as a case study showing that a million to 2 million net buys are required to pump a coin to multiple hundred million market cap."
+    },
+    {
+     "episode_id": "gQU9V7n-cRM",
+     "episode_title": "\ud83d\udd34 LIVE: BTC cools while Alts show strength | RHC recovery? | Market update + Interviews",
+     "start_seconds": 9430.0,
+     "timestamp": "2:37:10",
+     "deep_link": "https://www.youtube.com/watch?v=gQU9V7n-cRM&t=9430s",
+     "kind": "mention",
+     "note": "Speaker said Ansem was huge for Solana and brought trenches back to life after there was no activity before that."
+    },
+    {
+     "episode_id": "gWC1Hq-i9-g",
+     "episode_title": "\ud83d\udd34 LIVE: The Bear Market is Almost Over...Here's Why | Market Update + Interviews",
+     "start_seconds": 11199.0,
+     "timestamp": "3:06:39",
+     "deep_link": "https://www.youtube.com/watch?v=gWC1Hq-i9-g&t=11199s",
+     "kind": "mention",
+     "note": "Described as a memecoin that went 20x plus on a call."
+    },
+    {
+     "episode_id": "iUVxxnoZH10",
+     "episode_title": "MCG x EasyA Ecosystem Day",
+     "start_seconds": 14404.0,
+     "timestamp": "4:00:04",
+     "deep_link": "https://www.youtube.com/watch?v=iUVxxnoZH10&t=14404s",
+     "kind": "mention",
+     "note": "Mentioned as running from zero to 90 million or 100 million on Solana."
+    },
+    {
+     "episode_id": "j7kHMGQ1Lyw",
+     "episode_title": "\ud83d\udd34 LIVE: Will $60 SOL Hold? Rotation back into Solana ? | Market Update + Founder Interview",
+     "start_seconds": 5437.0,
+     "timestamp": "1:30:37",
+     "deep_link": "https://www.youtube.com/watch?v=j7kHMGQ1Lyw&t=5437s",
+     "kind": "analysis",
+     "note": "Solana community growing Anom token; Blinks funding Solana builder community hackathon for Anom; adding utility and integration opportunities for the token."
+    },
+    {
+     "episode_id": "l7nAlLJ7-WU",
+     "episode_title": "This Token Did +300% After Our Interview | LiquidV Interview (Hyperliquid Trader ETFs)",
+     "start_seconds": 1828.0,
+     "timestamp": "30:28",
+     "deep_link": "https://www.youtube.com/watch?v=l7nAlLJ7-WU&t=1828s",
+     "kind": "analysis",
+     "note": "Discussed as an example trader token that could outperform FLUD in a pair trading scenario; mentioned as having a potential paired token called Ansem vFlood that accrues value based on spread between traders."
+    },
+    {
+     "episode_id": "oI9Hv_D6UFk",
+     "episode_title": "\ud83d\udd34LIVE: HyperEVM, SOL, RH, or Base? Bulls In Control | Time to Lock In | Market Update + Interview",
+     "start_seconds": 6019.0,
+     "timestamp": "1:40:19",
+     "deep_link": "https://www.youtube.com/watch?v=oI9Hv_D6UFk&t=6019s",
+     "kind": "analysis",
+     "note": "Discussed as a meme coin paired with Manlet on Stonfun; used as an example of multi-tiered meme coin pairing strategy."
+    },
+    {
+     "episode_id": "oI9Hv_D6UFk",
+     "episode_title": "\ud83d\udd34LIVE: HyperEVM, SOL, RH, or Base? Bulls In Control | Time to Lock In | Market Update + Interview",
+     "start_seconds": 12612.0,
+     "timestamp": "3:30:12",
+     "deep_link": "https://www.youtube.com/watch?v=oI9Hv_D6UFk&t=12612s",
+     "kind": "analysis",
+     "note": "Discussed as a $230 million market cap token with issues attracting capital flows from smaller traders; positioned as part of an ecosystem with paired memecoin tokens."
+    },
+    {
+     "episode_id": "oI9Hv_D6UFk",
+     "episode_title": "\ud83d\udd34LIVE: HyperEVM, SOL, RH, or Base? Bulls In Control | Time to Lock In | Market Update + Interview",
+     "start_seconds": 12912.0,
+     "timestamp": "3:35:12",
+     "deep_link": "https://www.youtube.com/watch?v=oI9Hv_D6UFk&t=12912s",
+     "kind": "analysis",
+     "note": "Speaker discussed Anom's launchpad and distribution challenges, suggesting waiting for price to come into a certain range."
+    },
+    {
+     "episode_id": "oSkWYs5rAGk",
+     "episode_title": "CLAWPUMP: ClawPump is the capital market for agents on Solana & Robinhood crypto chain.",
+     "start_seconds": 400.0,
+     "timestamp": "6:40",
+     "deep_link": "https://www.youtube.com/watch?v=oSkWYs5rAGk&t=400s",
+     "kind": "analysis",
+     "note": "Speakers discuss a hackathon with prize pool of 320k Anom (0.1% of supply) and explain the distribution: overall winner receives 25% of Anom, Claw Pom x Pom Fun winner receives 50% of Anom plus $35,000 cash, and inference market winner by UseBot receives 15% of Anom plus $10,000 compute credit."
+    },
+    {
+     "episode_id": "oSkWYs5rAGk",
+     "episode_title": "CLAWPUMP: ClawPump is the capital market for agents on Solana & Robinhood crypto chain.",
+     "start_seconds": 2152.0,
+     "timestamp": "35:52",
+     "deep_link": "https://www.youtube.com/watch?v=oSkWYs5rAGk&t=2152s",
+     "kind": "analysis",
+     "note": "Token alongside Claw receiving 10% of hackathon profits for buybacks as part of the economic flywheel; volume from hackathon projects will be used for buying back both Anom and Claw."
+    },
+    {
+     "episode_id": "q2zmdT9CnNA",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto Pulling Back... What's Next? | Market Update + Interviews",
+     "start_seconds": 9033.0,
+     "timestamp": "2:30:33",
+     "deep_link": "https://www.youtube.com/watch?v=q2zmdT9CnNA&t=9033s",
+     "kind": "mention",
+     "note": "Speaker mentioned the Anom token and that the OG Anom dev handed off the token; the dev was being brought on to MCG."
+    },
+    {
+     "episode_id": "qkYKDed4Apk",
+     "episode_title": "\ud83d\udd34 LIVE: $CASHCAT Robinhood Listing | Uniswap Launchpad | Market Update + Interviews",
+     "start_seconds": 10893.0,
+     "timestamp": "3:01:33",
+     "deep_link": "https://www.youtube.com/watch?v=qkYKDed4Apk&t=10893s",
+     "kind": "mention",
+     "note": "Suggested as an alternative token with real fundamentals."
+    },
+    {
+     "episode_id": "qq_4gfyjN6s",
+     "episode_title": "\ud83d\udd34 LIVE: MonkeDAO Solana Product Spotlight + Trader Radio w/@ChillTRD | Market Updates",
+     "start_seconds": 588.0,
+     "timestamp": "9:48",
+     "deep_link": "https://www.youtube.com/watch?v=qq_4gfyjN6s&t=588s",
+     "kind": "analysis",
+     "note": "Anom is a 200 million market cap token with an ecosystem strategy where the founder buys paired tokens at various market caps to capture flows; paired tokens include Manlet and others."
+    },
+    {
+     "episode_id": "qq_4gfyjN6s",
+     "episode_title": "\ud83d\udd34 LIVE: MonkeDAO Solana Product Spotlight + Trader Radio w/@ChillTRD | Market Updates",
+     "start_seconds": 8727.0,
+     "timestamp": "2:25:27",
+     "deep_link": "https://www.youtube.com/watch?v=qq_4gfyjN6s&t=8727s",
+     "kind": "analysis",
+     "note": "Speaker discusses Anom as a big token with 200 million market cap, noting that many traders avoid tokens at this cap level and thus miss meme coin flows."
+    },
+    {
+     "episode_id": "qq_4gfyjN6s",
+     "episode_title": "\ud83d\udd34 LIVE: MonkeDAO Solana Product Spotlight + Trader Radio w/@ChillTRD | Market Updates",
+     "start_seconds": 10008.0,
+     "timestamp": "2:46:48",
+     "deep_link": "https://www.youtube.com/watch?v=qq_4gfyjN6s&t=10008s",
+     "kind": "analysis",
+     "note": "Speaker analyzes Anom token's technical setup, noting support at 170 and a consolidation channel between 170-220, predicting a breakout; speaker is in at 170 and bullish on the token."
+    },
+    {
+     "episode_id": "qq_4gfyjN6s",
+     "episode_title": "\ud83d\udd34 LIVE: MonkeDAO Solana Product Spotlight + Trader Radio w/@ChillTRD | Market Updates",
+     "start_seconds": 10306.0,
+     "timestamp": "2:51:46",
+     "deep_link": "https://www.youtube.com/watch?v=qq_4gfyjN6s&t=10306s",
+     "kind": "analysis",
+     "note": "Discussed as a token with attention and reputation from a person named Anom; speakers mention potential VC bidding interest and describe it as having tailwinds, with one speaker expressing bullish sentiment on the token."
+    },
+    {
+     "episode_id": "urLmYepetQI",
+     "episode_title": "\ud83d\udd34 LIVE: WTF is a V4 hook | $ETH bottom in? | Market Update + Interviews",
+     "start_seconds": 8913.0,
+     "timestamp": "2:28:33",
+     "deep_link": "https://www.youtube.com/watch?v=urLmYepetQI&t=8913s",
+     "kind": "mention",
+     "note": "Token mentioned in context of a story about Anom token being handed off to Anom."
+    },
+    {
+     "episode_id": "vBRvDqOdKwQ",
+     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
+     "start_seconds": 480.0,
+     "timestamp": "8:00",
+     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=480s",
+     "kind": "mention",
+     "note": "Named as one of four tokens that reached 100 million market cap in the last eight months."
+    },
+    {
+     "episode_id": "vqOeJKpQ61E",
+     "episode_title": "A Conversation with Sonder: Trading the Crypto Trenches",
+     "start_seconds": 134.0,
+     "timestamp": "2:14",
+     "deep_link": "https://www.youtube.com/watch?v=vqOeJKpQ61E&t=134s",
+     "kind": "analysis",
+     "note": "Discussed as a signal showing renewed market appetite; it reignited on-chain activity with volume and new wallets, though speaker entered late and made a few multiples on it."
+    },
+    {
+     "episode_id": "vqOeJKpQ61E",
+     "episode_title": "A Conversation with Sonder: Trading the Crypto Trenches",
+     "start_seconds": 3649.0,
+     "timestamp": "1:00:49",
+     "deep_link": "https://www.youtube.com/watch?v=vqOeJKpQ61E&t=3649s",
+     "kind": "analysis",
+     "note": "Speaker is bidding Anom and believes it will be a 3-4x based on current price action; discusses it in context of Solana ecosystem positioning and airdrop strategy."
+    },
+    {
+     "episode_id": "x7qRX-hWxg8",
+     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding (Memes, V4 Hooks, Infra) | Market Update + Interviews",
+     "start_seconds": 11475.0,
+     "timestamp": "3:11:15",
+     "deep_link": "https://www.youtube.com/watch?v=x7qRX-hWxg8&t=11475s",
+     "kind": "mention",
+     "note": "Named as a meme coin alternative to RWA pairs on Pump Swap AMM."
+    },
+    {
+     "episode_id": "xbQIfWj3OQs",
+     "episode_title": "\ud83d\udd34 LIVE: Markets Melting as Tariffs Return | AI Bubble Popped? | 2027 Outlook",
+     "start_seconds": 7167.0,
+     "timestamp": "1:59:27",
+     "deep_link": "https://www.youtube.com/watch?v=xbQIfWj3OQs&t=7167s",
+     "kind": "mention",
+     "note": "Referenced as an example of a token held by a trader where there is uncertainty around holder dump risk, contrasted with getting direct exposure to that trader's edge through Liquid V instead."
+    }
+   ],
+   "episode_count": 39,
+   "single_reference": false
+  },
+  {
    "symbol": "BONK",
    "name": "Bonk",
    "asset_class": "crypto",
@@ -94505,737 +95317,6 @@
     }
    ],
    "episode_count": 99,
-   "single_reference": false
-  },
-  {
-   "symbol": "ANSEM",
-   "name": "Ansem (The Black Bull)",
-   "asset_class": "crypto",
-   "mentions": 80,
-   "analysis": 52,
-   "moments": [
-    {
-     "episode_id": "1UFlORh3zt0",
-     "episode_title": "\ud83d\udd34 LIVE: FOMC Day, Onchain Rotations...Next Leg Loading? | Market Update + Interviews",
-     "start_seconds": 2189.0,
-     "timestamp": "36:29",
-     "deep_link": "https://www.youtube.com/watch?v=1UFlORh3zt0&t=2189s",
-     "kind": "mention",
-     "note": "Referenced as the top meme coin available as a default pairing option."
-    },
-    {
-     "episode_id": "2PHeTXu_wyY",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood Ecosystem Dumping... Here's My Plan | Market Update + Interviews",
-     "start_seconds": 2062.0,
-     "timestamp": "34:22",
-     "deep_link": "https://www.youtube.com/watch?v=2PHeTXu_wyY&t=2062s",
-     "kind": "analysis",
-     "note": "Speaker predicts new all-time high for Anom, noting sustained attention over time and expecting new all-time high within three months."
-    },
-    {
-     "episode_id": "2mftwe1oOVQ",
-     "episode_title": "One of crypto's most notorious scammers exposes the dark side of the industry | The Sahil Files.",
-     "start_seconds": 859.0,
-     "timestamp": "14:19",
-     "deep_link": "https://www.youtube.com/watch?v=2mftwe1oOVQ&t=859s",
-     "kind": "analysis",
-     "note": "Speaker alleges Ansem token was launched by Superman/DevTJR, involved distribution to endorsers who then shilled it, and eventually rugged."
-    },
-    {
-     "episode_id": "4PlcWhQM96A",
-     "episode_title": "\ud83d\udd34 LIVE: Time To Log Off? | AI Fears, Debt Market Shutdown, Anthropic IPO",
-     "start_seconds": 9972.0,
-     "timestamp": "2:46:12",
-     "deep_link": "https://www.youtube.com/watch?v=4PlcWhQM96A&t=9972s",
-     "kind": "analysis",
-     "note": "Discussed chart action with speakers disagreeing on bullish interpretation; at 70 million valuation with no clear positive momentum identified."
-    },
-    {
-     "episode_id": "50P-rICrUfs",
-     "episode_title": "\ud83d\udd34 LIVE: Launchpad Wars On Robinhood | Original $ANSEM Dev Interview | Onchain Update",
-     "start_seconds": 1036.0,
-     "timestamp": "17:16",
-     "deep_link": "https://www.youtube.com/watch?v=50P-rICrUfs&t=1036s",
-     "kind": "mention",
-     "note": "Anom token discussed; speaker mentions it was handed off from the original dev to another dev."
-    },
-    {
-     "episode_id": "50P-rICrUfs",
-     "episode_title": "\ud83d\udd34 LIVE: Launchpad Wars On Robinhood | Original $ANSEM Dev Interview | Onchain Update",
-     "start_seconds": 1232.0,
-     "timestamp": "20:32",
-     "deep_link": "https://www.youtube.com/watch?v=50P-rICrUfs&t=1232s",
-     "kind": "analysis",
-     "note": "Speaker discovered a black pole token project in Anom's public wallet after Anom posted his punk fund wallet; the token was originally launched 3 days prior, rugged down to 70k market cap, and speaker took over development and management of the project, paying for infrastructure including DexScreener updates, setting up staking contracts, and distributing supply to build volume."
-    },
-    {
-     "episode_id": "50P-rICrUfs",
-     "episode_title": "\ud83d\udd34 LIVE: Launchpad Wars On Robinhood | Original $ANSEM Dev Interview | Onchain Update",
-     "start_seconds": 1949.0,
-     "timestamp": "32:29",
-     "deep_link": "https://www.youtube.com/watch?v=50P-rICrUfs&t=1949s",
-     "kind": "analysis",
-     "note": "Discussed as a successful meme coin token with strong staying power due to the creator's constant engagement, growing lore, and successful trading calls; contrasted with 99% of other tokens that lack longevity."
-    },
-    {
-     "episode_id": "50P-rICrUfs",
-     "episode_title": "\ud83d\udd34 LIVE: Launchpad Wars On Robinhood | Original $ANSEM Dev Interview | Onchain Update",
-     "start_seconds": 2194.0,
-     "timestamp": "36:34",
-     "deep_link": "https://www.youtube.com/watch?v=50P-rICrUfs&t=2194s",
-     "kind": "analysis",
-     "note": "The speaker discusses the Anom ecosystem runup, mentions it happened quickly, and discusses using Anom tokens as staking rewards for Hyperbull."
-    },
-    {
-     "episode_id": "50P-rICrUfs",
-     "episode_title": "\ud83d\udd34 LIVE: Launchpad Wars On Robinhood | Original $ANSEM Dev Interview | Onchain Update",
-     "start_seconds": 2507.0,
-     "timestamp": "41:47",
-     "deep_link": "https://www.youtube.com/watch?v=50P-rICrUfs&t=2507s",
-     "kind": "analysis",
-     "note": "Discussed as a token with creator fees used to buy back Anom for stakers; expected to run exponentially; compared to other meme projects; described as having significant social attention and ecosystem development; speakers discuss its positioning and future potential."
-    },
-    {
-     "episode_id": "50P-rICrUfs",
-     "episode_title": "\ud83d\udd34 LIVE: Launchpad Wars On Robinhood | Original $ANSEM Dev Interview | Onchain Update",
-     "start_seconds": 2898.0,
-     "timestamp": "48:18",
-     "deep_link": "https://www.youtube.com/watch?v=50P-rICrUfs&t=2898s",
-     "kind": "analysis",
-     "note": "Described as one of the biggest trades this year; discussed extensively as a base token for ecosystem building, with mentions of hackathons, builder rewards, and potential launchpad development."
-    },
-    {
-     "episode_id": "50P-rICrUfs",
-     "episode_title": "\ud83d\udd34 LIVE: Launchpad Wars On Robinhood | Original $ANSEM Dev Interview | Onchain Update",
-     "start_seconds": 3423.0,
-     "timestamp": "57:03",
-     "deep_link": "https://www.youtube.com/watch?v=50P-rICrUfs&t=3423s",
-     "kind": "analysis",
-     "note": "Speaker discusses earning 600% APR in 24 hours by liquidity providing on Anom on Meteora, noting it's a hot memecoin launch with high fees."
-    },
-    {
-     "episode_id": "50P-rICrUfs",
-     "episode_title": "\ud83d\udd34 LIVE: Launchpad Wars On Robinhood | Original $ANSEM Dev Interview | Onchain Update",
-     "start_seconds": 3619.0,
-     "timestamp": "1:00:19",
-     "deep_link": "https://www.youtube.com/watch?v=50P-rICrUfs&t=3619s",
-     "kind": "analysis",
-     "note": "Token that V Funk positioned himself in by investing 50 grand to buy supply and build infrastructure; expected to reach a couple billion in valuation in a few months."
-    },
-    {
-     "episode_id": "5frfwS8MvZI",
-     "episode_title": "\ud83d\udd34 LIVE: Elysium Dead on Arrival? | PumpFun Drama | Crypto Cooked?",
-     "start_seconds": 6927.0,
-     "timestamp": "1:55:27",
-     "deep_link": "https://www.youtube.com/watch?v=5frfwS8MvZI&t=6927s",
-     "kind": "mention",
-     "note": "Ansem was mentioned as someone whom the speaker provided evidence about in an interview."
-    },
-    {
-     "episode_id": "5frfwS8MvZI",
-     "episode_title": "\ud83d\udd34 LIVE: Elysium Dead on Arrival? | PumpFun Drama | Crypto Cooked?",
-     "start_seconds": 6961.0,
-     "timestamp": "1:56:01",
-     "deep_link": "https://www.youtube.com/watch?v=5frfwS8MvZI&t=6961s",
-     "kind": "analysis",
-     "note": "Anthem coin was mentioned alongside TJR coin as a celebrity coin allegedly launched by Superman and part of an alleged pump-and-dump scheme."
-    },
-    {
-     "episode_id": "5quiPwAi2Y0",
-     "episode_title": "A Look into the Cade Cup by Pumpcade",
-     "start_seconds": 2712.0,
-     "timestamp": "45:12",
-     "deep_link": "https://www.youtube.com/watch?v=5quiPwAi2Y0&t=2712s",
-     "kind": "mention",
-     "note": "Described as one of the three most popular Pump Fun tokens; Pump Fund is offering $10,000 in Anom tokens as part of a Cade Cup sign-up promotion."
-    },
-    {
-     "episode_id": "AImBDqEWd8E",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding | Ceilings Rising | Market Update + Interviews",
-     "start_seconds": 15605.0,
-     "timestamp": "4:20:05",
-     "deep_link": "https://www.youtube.com/watch?v=AImBDqEWd8E&t=15605s",
-     "kind": "analysis",
-     "note": "Speaker discusses Anom Launchpad as a front end for Pump Fun, describes it as a way to burn Anom tokens, and mentions an Anom hackathon with prize pools in USD and Anom token."
-    },
-    {
-     "episode_id": "DhLaLq6NZJA",
-     "episode_title": "\ud83d\udd34 LIVE: On-chain crypto showing resilience | Pullback's to watch | Live Market Updates + Interviews",
-     "start_seconds": 1028.0,
-     "timestamp": "17:08",
-     "deep_link": "https://www.youtube.com/watch?v=DhLaLq6NZJA&t=1028s",
-     "kind": "analysis",
-     "note": "A memecoin mentioned as experiencing a dip; described as something that could work as a leverage proxy bet if one thinks Anom is too high. First real memecoin pairing with a memecoin chart."
-    },
-    {
-     "episode_id": "EHhZRRHMZQM",
-     "episode_title": "\ud83d\udd34 LIVE: Markets ripping |  RHC leading | Market Update + Founder Interview",
-     "start_seconds": 484.0,
-     "timestamp": "8:04",
-     "deep_link": "https://www.youtube.com/watch?v=EHhZRRHMZQM&t=484s",
-     "kind": "mention",
-     "note": "Developers can win $25,000 in Anthem and $25,000 in cash as part of the Kickstart hackathon track, with token prizes unlocked over time as builders continue developing."
-    },
-    {
-     "episode_id": "EHhZRRHMZQM",
-     "episode_title": "\ud83d\udd34 LIVE: Markets ripping |  RHC leading | Market Update + Founder Interview",
-     "start_seconds": 829.0,
-     "timestamp": "13:49",
-     "deep_link": "https://www.youtube.com/watch?v=EHhZRRHMZQM&t=829s",
-     "kind": "mention",
-     "note": "Speaker refers to the Anom ecosystem and mentions it could be behind high potential businesses in the hackathon."
-    },
-    {
-     "episode_id": "EHhZRRHMZQM",
-     "episode_title": "\ud83d\udd34 LIVE: Markets ripping |  RHC leading | Market Update + Founder Interview",
-     "start_seconds": 12109.0,
-     "timestamp": "3:21:49",
-     "deep_link": "https://www.youtube.com/watch?v=EHhZRRHMZQM&t=12109s",
-     "kind": "analysis",
-     "note": "Speakers discuss Anom's role in a hackathon, noting that the platform needs more visible endorsement from leadership to gain traction, and that project alignment with building on Anom versus launchpad incentives is misaligned."
-    },
-    {
-     "episode_id": "EHhZRRHMZQM",
-     "episode_title": "\ud83d\udd34 LIVE: Markets ripping |  RHC leading | Market Update + Founder Interview",
-     "start_seconds": 13941.0,
-     "timestamp": "3:52:21",
-     "deep_link": "https://www.youtube.com/watch?v=EHhZRRHMZQM&t=13941s",
-     "kind": "analysis",
-     "note": "Discussed as performing well with good LP opportunities; speaker notes strong volume at 5.7 million on the pool and good price ranging."
-    },
-    {
-     "episode_id": "F3chwn4aU3U",
-     "episode_title": "\ud83d\udd34 LIVE: Ansem Joins Launchpad Wars | Time to Buy Dips? | Market Update + Interview",
-     "start_seconds": 275.0,
-     "timestamp": "4:35",
-     "deep_link": "https://www.youtube.com/watch?v=F3chwn4aU3U&t=275s",
-     "kind": "mention",
-     "note": "Anom is mentioned in the title 'Anom joins Launchpad Wars' and referenced as joining launchpad competition."
-    },
-    {
-     "episode_id": "F3chwn4aU3U",
-     "episode_title": "\ud83d\udd34 LIVE: Ansem Joins Launchpad Wars | Time to Buy Dips? | Market Update + Interview",
-     "start_seconds": 494.0,
-     "timestamp": "8:14",
-     "deep_link": "https://www.youtube.com/watch?v=F3chwn4aU3U&t=494s",
-     "kind": "analysis",
-     "note": "Speaker discusses Anom launching Ansom.io where all fees will go to buying and burning Anom. Chart analysis shows Anom breaking out of a multi-week range, retesting a golden pocket, with expectation to reach 500 million market cap and new all-time highs."
-    },
-    {
-     "episode_id": "F3chwn4aU3U",
-     "episode_title": "\ud83d\udd34 LIVE: Ansem Joins Launchpad Wars | Time to Buy Dips? | Market Update + Interview",
-     "start_seconds": 880.0,
-     "timestamp": "14:40",
-     "deep_link": "https://www.youtube.com/watch?v=F3chwn4aU3U&t=880s",
-     "kind": "analysis",
-     "note": "Speaker discussed Anom as part of an ecosystem and stated it looks primed for new all-time highs; mentioned buying on breakout and being up significantly."
-    },
-    {
-     "episode_id": "F3chwn4aU3U",
-     "episode_title": "\ud83d\udd34 LIVE: Ansem Joins Launchpad Wars | Time to Buy Dips? | Market Update + Interview",
-     "start_seconds": 2468.0,
-     "timestamp": "41:08",
-     "deep_link": "https://www.youtube.com/watch?v=F3chwn4aU3U&t=2468s",
-     "kind": "mention",
-     "note": "Meme coin discussed earlier in the conversation."
-    },
-    {
-     "episode_id": "F3chwn4aU3U",
-     "episode_title": "\ud83d\udd34 LIVE: Ansem Joins Launchpad Wars | Time to Buy Dips? | Market Update + Interview",
-     "start_seconds": 9149.0,
-     "timestamp": "2:32:29",
-     "deep_link": "https://www.youtube.com/watch?v=F3chwn4aU3U&t=9149s",
-     "kind": "analysis",
-     "note": "Speaker notes Anom has a market cap of 300-340 million and discusses it as a launchpad platform creator competing with Pump Fun; speculates fees will go toward buying Anom."
-    },
-    {
-     "episode_id": "F3chwn4aU3U",
-     "episode_title": "\ud83d\udd34 LIVE: Ansem Joins Launchpad Wars | Time to Buy Dips? | Market Update + Interview",
-     "start_seconds": 9375.0,
-     "timestamp": "2:36:15",
-     "deep_link": "https://www.youtube.com/watch?v=F3chwn4aU3U&t=9375s",
-     "kind": "analysis",
-     "note": "Search term trends showed the token went crazy and coin launch, then price dipped but tokens held up well; speaker notes it near or at all-time highs and discusses potential for another retail leg from trending."
-    },
-    {
-     "episode_id": "FNFzeKpPEx0",
-     "episode_title": "\ud83d\udd34 LIVE: Will Ansem Save The Trenches? | Market Update + Founder Interview",
-     "start_seconds": 260.0,
-     "timestamp": "4:20",
-     "deep_link": "https://www.youtube.com/watch?v=FNFzeKpPEx0&t=260s",
-     "kind": "mention",
-     "note": "Named in passing; speaker requests audience opinion on what is going on with Anom."
-    },
-    {
-     "episode_id": "FNFzeKpPEx0",
-     "episode_title": "\ud83d\udd34 LIVE: Will Ansem Save The Trenches? | Market Update + Founder Interview",
-     "start_seconds": 726.0,
-     "timestamp": "12:06",
-     "deep_link": "https://www.youtube.com/watch?v=FNFzeKpPEx0&t=726s",
-     "kind": "analysis",
-     "note": "Speaker discusses Anom token with market cap around $142-145 million; notes that Anom has good intentions and is trying to re-engineer the behavior of onchain traders; mentions airdrops totaling approximately $10 million in value; describes Anom as a CT main character with cultural mindshare."
-    },
-    {
-     "episode_id": "FNFzeKpPEx0",
-     "episode_title": "\ud83d\udd34 LIVE: Will Ansem Save The Trenches? | Market Update + Founder Interview",
-     "start_seconds": 900.0,
-     "timestamp": "15:00",
-     "deep_link": "https://www.youtube.com/watch?v=FNFzeKpPEx0&t=900s",
-     "kind": "analysis",
-     "note": "Anom token is discussed as an attempt to onboard people to crypto through speculation while directing attention to solid protocols; speaker notes it ran fast and has potential to go higher."
-    },
-    {
-     "episode_id": "FNFzeKpPEx0",
-     "episode_title": "\ud83d\udd34 LIVE: Will Ansem Save The Trenches? | Market Update + Founder Interview",
-     "start_seconds": 1267.0,
-     "timestamp": "21:07",
-     "deep_link": "https://www.youtube.com/watch?v=FNFzeKpPEx0&t=1267s",
-     "kind": "analysis",
-     "note": "Discussed as a token with supply cornering, supply shock dynamics, price repricing, and market cap around 140 million; compared against Pump Fund with expectations it could flip Pump Fund's market cap, plus discussion of airdrop potential and founder reputation risk."
-    },
-    {
-     "episode_id": "FNFzeKpPEx0",
-     "episode_title": "\ud83d\udd34 LIVE: Will Ansem Save The Trenches? | Market Update + Founder Interview",
-     "start_seconds": 1653.0,
-     "timestamp": "27:33",
-     "deep_link": "https://www.youtube.com/watch?v=FNFzeKpPEx0&t=1653s",
-     "kind": "analysis",
-     "note": "Discussed as a meme coin representing Anom's bullish stance on Solana, with airdrops to previous OG Anom token holders; speakers analyze its role in directing volume and onboarding users."
-    },
-    {
-     "episode_id": "FNFzeKpPEx0",
-     "episode_title": "\ud83d\udd34 LIVE: Will Ansem Save The Trenches? | Market Update + Founder Interview",
-     "start_seconds": 2487.0,
-     "timestamp": "41:27",
-     "deep_link": "https://www.youtube.com/watch?v=FNFzeKpPEx0&t=2487s",
-     "kind": "mention",
-     "note": "Mentioned as currently gathering mind share, causing people to sell other assets and move money into it."
-    },
-    {
-     "episode_id": "FNFzeKpPEx0",
-     "episode_title": "\ud83d\udd34 LIVE: Will Ansem Save The Trenches? | Market Update + Founder Interview",
-     "start_seconds": 8425.0,
-     "timestamp": "2:20:25",
-     "deep_link": "https://www.youtube.com/watch?v=FNFzeKpPEx0&t=8425s",
-     "kind": "analysis",
-     "note": "Speakers discuss Anom as a memecoin token that cornered supply to reach $150 million market cap, comparing it to tech tokens and suggesting it as a singular token to buy instead of multiple beta projects."
-    },
-    {
-     "episode_id": "FNFzeKpPEx0",
-     "episode_title": "\ud83d\udd34 LIVE: Will Ansem Save The Trenches? | Market Update + Founder Interview",
-     "start_seconds": 10152.0,
-     "timestamp": "2:49:12",
-     "deep_link": "https://www.youtube.com/watch?v=FNFzeKpPEx0&t=10152s",
-     "kind": "mention",
-     "note": "Anom was mentioned in passing during discussion of breakdowns and onchain stuff happening."
-    },
-    {
-     "episode_id": "LpwKHoAJu2Q",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood DEX volume at ATH's | Pennie stocks on Solana? | Market Update + Interviews",
-     "start_seconds": 9129.0,
-     "timestamp": "2:32:09",
-     "deep_link": "https://www.youtube.com/watch?v=LpwKHoAJu2Q&t=9129s",
-     "kind": "mention",
-     "note": "Mentioned as receiving a board seat and noted as having been covered on the show."
-    },
-    {
-     "episode_id": "MvjP9JvGxnM",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto Looks Promising...Here's Why | Market Updates",
-     "start_seconds": 230.0,
-     "timestamp": "3:50",
-     "deep_link": "https://www.youtube.com/watch?v=MvjP9JvGxnM&t=230s",
-     "kind": "mention",
-     "note": "Mentioned in context of World Cup, with people wanting to help Anom onboard new users to crypto."
-    },
-    {
-     "episode_id": "MvjP9JvGxnM",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto Looks Promising...Here's Why | Market Updates",
-     "start_seconds": 2042.0,
-     "timestamp": "34:02",
-     "deep_link": "https://www.youtube.com/watch?v=MvjP9JvGxnM&t=2042s",
-     "kind": "analysis",
-     "note": "Discussed extensively regarding token strategy, Anom's approach to directing liquidity toward utility projects over memecoins, and his recent tweets about managing new token airdrops."
-    },
-    {
-     "episode_id": "MvjP9JvGxnM",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto Looks Promising...Here's Why | Market Updates",
-     "start_seconds": 2435.0,
-     "timestamp": "40:35",
-     "deep_link": "https://www.youtube.com/watch?v=MvjP9JvGxnM&t=2435s",
-     "kind": "analysis",
-     "note": "Speaker predicts the end is near for Anom token, noting the price is up and to the right but volume shows a different story."
-    },
-    {
-     "episode_id": "MvjP9JvGxnM",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto Looks Promising...Here's Why | Market Updates",
-     "start_seconds": 2851.0,
-     "timestamp": "47:31",
-     "deep_link": "https://www.youtube.com/watch?v=MvjP9JvGxnM&t=2851s",
-     "kind": "analysis",
-     "note": "Anom token has been the highest volume on FOMO, with 1-2% of buyers purchasing via Apple Pay; described as single-handedly propping up Solana on-chain."
-    },
-    {
-     "episode_id": "O4A8vFhlU2Q",
-     "episode_title": "\ud83d\udd34 LIVE: Saylor Selling | Onchain Cooking | Bear Market Update + Trader Radio",
-     "start_seconds": 1852.0,
-     "timestamp": "30:52",
-     "deep_link": "https://www.youtube.com/watch?v=O4A8vFhlU2Q&t=1852s",
-     "kind": "mention",
-     "note": "Ansem token mentioned as showing a clear shift in on-chain sentiment alongside market bubble."
-    },
-    {
-     "episode_id": "O4A8vFhlU2Q",
-     "episode_title": "\ud83d\udd34 LIVE: Saylor Selling | Onchain Cooking | Bear Market Update + Trader Radio",
-     "start_seconds": 3144.0,
-     "timestamp": "52:24",
-     "deep_link": "https://www.youtube.com/watch?v=O4A8vFhlU2Q&t=3144s",
-     "kind": "mention",
-     "note": "Ansem is mentioned as a coin that bridged through the system, generating a couple hundred bucks in fees for distribution."
-    },
-    {
-     "episode_id": "O4A8vFhlU2Q",
-     "episode_title": "\ud83d\udd34 LIVE: Saylor Selling | Onchain Cooking | Bear Market Update + Trader Radio",
-     "start_seconds": 4109.0,
-     "timestamp": "1:08:29",
-     "deep_link": "https://www.youtube.com/watch?v=O4A8vFhlU2Q&t=4109s",
-     "kind": "mention",
-     "note": "Named as a token available on the bridge platform."
-    },
-    {
-     "episode_id": "OvLPWlcdXew",
-     "episode_title": "\ud83d\udd34 LIVE: Onchain is Bullish! Equities \u2192 Crypto Rotation? | Market Updates + Founder Interviews",
-     "start_seconds": 378.0,
-     "timestamp": "6:18",
-     "deep_link": "https://www.youtube.com/watch?v=OvLPWlcdXew&t=378s",
-     "kind": "analysis",
-     "note": "Speaker discusses Anomcoin's token distribution strategy with an evergreen recurring airdrop model, comparing it to Pudgy Penguins' approach."
-    },
-    {
-     "episode_id": "OvLPWlcdXew",
-     "episode_title": "\ud83d\udd34 LIVE: Onchain is Bullish! Equities \u2192 Crypto Rotation? | Market Updates + Founder Interviews",
-     "start_seconds": 487.0,
-     "timestamp": "8:07",
-     "deep_link": "https://www.youtube.com/watch?v=OvLPWlcdXew&t=487s",
-     "kind": "analysis",
-     "note": "Discussed as a token with an innovative airdrop strategy that continuously drips tokens to users and active community members, and potentially integrates with other protocols."
-    },
-    {
-     "episode_id": "OvLPWlcdXew",
-     "episode_title": "\ud83d\udd34 LIVE: Onchain is Bullish! Equities \u2192 Crypto Rotation? | Market Updates + Founder Interviews",
-     "start_seconds": 951.0,
-     "timestamp": "15:51",
-     "deep_link": "https://www.youtube.com/watch?v=OvLPWlcdXew&t=951s",
-     "kind": "analysis",
-     "note": "Discussed as a memecoin with a trajectory potentially comparable to established memecoins, utilizing a slow-drip airdrop strategy over time rather than bulk airdrops, with a current valuation around 60-80 million, aimed at sustaining attention and eventually listing on centralized exchanges."
-    },
-    {
-     "episode_id": "OvLPWlcdXew",
-     "episode_title": "\ud83d\udd34 LIVE: Onchain is Bullish! Equities \u2192 Crypto Rotation? | Market Updates + Founder Interviews",
-     "start_seconds": 1155.0,
-     "timestamp": "19:15",
-     "deep_link": "https://www.youtube.com/watch?v=OvLPWlcdXew&t=1155s",
-     "kind": "analysis",
-     "note": "Discussed extensively as a memecoin with potential to build an ecosystem; speakers analyze its business model of generating fees that can fund airdrops and ecosystem development."
-    },
-    {
-     "episode_id": "OvLPWlcdXew",
-     "episode_title": "\ud83d\udd34 LIVE: Onchain is Bullish! Equities \u2192 Crypto Rotation? | Market Updates + Founder Interviews",
-     "start_seconds": 12926.0,
-     "timestamp": "3:35:26",
-     "deep_link": "https://www.youtube.com/watch?v=OvLPWlcdXew&t=12926s",
-     "kind": "analysis",
-     "note": "Anom coin launched on Pump Fund generated 112 million in volume in the past week and 183 million total since June 16th launch, peaked above 430 million market cap within three weeks, and is described as the biggest coin launched on Pump Fund in the last three months."
-    },
-    {
-     "episode_id": "PZ5E7taO1Yo",
-     "episode_title": "\ud83d\udd34 LIVE: RWA Memes Heating Up | Next Leg Soon? | Market Update + Interviews",
-     "start_seconds": 7096.0,
-     "timestamp": "1:58:16",
-     "deep_link": "https://www.youtube.com/watch?v=PZ5E7taO1Yo&t=7096s",
-     "kind": "mention",
-     "note": "Speaker mentioned Anom paired with Manlet as an example of good memetics/meme pairings."
-    },
-    {
-     "episode_id": "PZ5E7taO1Yo",
-     "episode_title": "\ud83d\udd34 LIVE: RWA Memes Heating Up | Next Leg Soon? | Market Update + Interviews",
-     "start_seconds": 7848.0,
-     "timestamp": "2:10:48",
-     "deep_link": "https://www.youtube.com/watch?v=PZ5E7taO1Yo&t=7848s",
-     "kind": "analysis",
-     "note": "Token with an ecosystem; people are rewarded with Anom tokens and it drives volume through projects like Manlet; Anom founder interacts with ecosystem projects meaningfully."
-    },
-    {
-     "episode_id": "WBB3vdHLF2Q",
-     "episode_title": "\ud83d\udd34 LIVE: S&P New ATH | Uniswap Launchpad Coming | Market Update + Interview",
-     "start_seconds": 12595.0,
-     "timestamp": "3:29:55",
-     "deep_link": "https://www.youtube.com/watch?v=WBB3vdHLF2Q&t=12595s",
-     "kind": "analysis",
-     "note": "A token with a market cap of approximately 450 million; discussed as a credibility play, with speakers debating whether they are bullish on it and noting it reached all-time highs."
-    },
-    {
-     "episode_id": "Xf3MBXMtfD0",
-     "episode_title": "\ud83d\udd34 LIVE: Bottom is in | Opportunities everywhere | Market Update + Interviews",
-     "start_seconds": 9035.0,
-     "timestamp": "2:30:35",
-     "deep_link": "https://www.youtube.com/watch?v=Xf3MBXMtfD0&t=9035s",
-     "kind": "analysis",
-     "note": "Used as an example of a token that could launch through Hooker Fun; discussed in the context of liquidity pools paired with Solana and how price changes based on pool composition."
-    },
-    {
-     "episode_id": "Xf3MBXMtfD0",
-     "episode_title": "\ud83d\udd34 LIVE: Bottom is in | Opportunities everywhere | Market Update + Interviews",
-     "start_seconds": 11589.0,
-     "timestamp": "3:13:09",
-     "deep_link": "https://www.youtube.com/watch?v=Xf3MBXMtfD0&t=11589s",
-     "kind": "analysis",
-     "note": "Main ecosystem token at $200 million market cap; thesis discussed about how paired tokens attract trading flows for smaller market cap speculators and drive demand for the main token through liquidity pools."
-    },
-    {
-     "episode_id": "ZHGRCslUV3E",
-     "episode_title": "\ud83d\udd34 LIVE: BASE ECO on fire while markets are melting!  | Live Market Updates + Onchain Positioning",
-     "start_seconds": 8939.0,
-     "timestamp": "2:28:59",
-     "deep_link": "https://www.youtube.com/watch?v=ZHGRCslUV3E&t=8939s",
-     "kind": "mention",
-     "note": "Anom tweeted about the base ecosystem and was bullish on base."
-    },
-    {
-     "episode_id": "Zh_Q0Z2TtVY",
-     "episode_title": "\ud83d\udd34 LIVE: Will Robinhood Szn Last? | Market Update + Founder Interviews",
-     "start_seconds": 4104.0,
-     "timestamp": "1:08:24",
-     "deep_link": "https://www.youtube.com/watch?v=Zh_Q0Z2TtVY&t=4104s",
-     "kind": "analysis",
-     "note": "Anom is discussed as a token with supply control and airdrop distribution; speaker clarifies it is not necessarily a creator coin but has creator-like qualities."
-    },
-    {
-     "episode_id": "_mLaSJLAPJs",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto is Crashing | Here\u2019s Exactly What to Do Right Now",
-     "start_seconds": 9158.0,
-     "timestamp": "2:32:38",
-     "deep_link": "https://www.youtube.com/watch?v=_mLaSJLAPJs&t=9158s",
-     "kind": "mention",
-     "note": "Mentioned that hackathon entries associated with Ansem are down 99 percent; speaker noted Ansem at 40 mil market cap."
-    },
-    {
-     "episode_id": "c6xFYSGZ0Fo",
-     "episode_title": "\ud83d\udd34 LIVE: Has Onchain Summer Begun? | Market Update + Founder Interviews",
-     "start_seconds": 4056.0,
-     "timestamp": "1:07:36",
-     "deep_link": "https://www.youtube.com/watch?v=c6xFYSGZ0Fo&t=4056s",
-     "kind": "analysis",
-     "note": "Speaker discusses Anom going from zero to 150 million as an example of a project with narrative-driven gains."
-    },
-    {
-     "episode_id": "c6xFYSGZ0Fo",
-     "episode_title": "\ud83d\udd34 LIVE: Has Onchain Summer Begun? | Market Update + Founder Interviews",
-     "start_seconds": 11224.0,
-     "timestamp": "3:07:04",
-     "deep_link": "https://www.youtube.com/watch?v=c6xFYSGZ0Fo&t=11224s",
-     "kind": "analysis",
-     "note": "Anom is mentioned as potentially returning believers to good market conditions and is noted as having shilled both Meteora and Backpack."
-    },
-    {
-     "episode_id": "dIsFawgT6DQ",
-     "episode_title": "\ud83d\udd34 LIVE: FOMO App Dominating | Onchain is HOT | Creator Coins Back? + Market Update",
-     "start_seconds": 1820.0,
-     "timestamp": "30:20",
-     "deep_link": "https://www.youtube.com/watch?v=dIsFawgT6DQ&t=1820s",
-     "kind": "analysis",
-     "note": "Referenced as a case study showing that a million to 2 million net buys are required to pump a coin to multiple hundred million market cap."
-    },
-    {
-     "episode_id": "gQU9V7n-cRM",
-     "episode_title": "\ud83d\udd34 LIVE: BTC cools while Alts show strength | RHC recovery? | Market update + Interviews",
-     "start_seconds": 9430.0,
-     "timestamp": "2:37:10",
-     "deep_link": "https://www.youtube.com/watch?v=gQU9V7n-cRM&t=9430s",
-     "kind": "mention",
-     "note": "Speaker said Ansem was huge for Solana and brought trenches back to life after there was no activity before that."
-    },
-    {
-     "episode_id": "gWC1Hq-i9-g",
-     "episode_title": "\ud83d\udd34 LIVE: The Bear Market is Almost Over...Here's Why | Market Update + Interviews",
-     "start_seconds": 11199.0,
-     "timestamp": "3:06:39",
-     "deep_link": "https://www.youtube.com/watch?v=gWC1Hq-i9-g&t=11199s",
-     "kind": "mention",
-     "note": "Described as a memecoin that went 20x plus on a call."
-    },
-    {
-     "episode_id": "iUVxxnoZH10",
-     "episode_title": "MCG x EasyA Ecosystem Day",
-     "start_seconds": 14404.0,
-     "timestamp": "4:00:04",
-     "deep_link": "https://www.youtube.com/watch?v=iUVxxnoZH10&t=14404s",
-     "kind": "mention",
-     "note": "Mentioned as running from zero to 90 million or 100 million on Solana."
-    },
-    {
-     "episode_id": "j7kHMGQ1Lyw",
-     "episode_title": "\ud83d\udd34 LIVE: Will $60 SOL Hold? Rotation back into Solana ? | Market Update + Founder Interview",
-     "start_seconds": 5437.0,
-     "timestamp": "1:30:37",
-     "deep_link": "https://www.youtube.com/watch?v=j7kHMGQ1Lyw&t=5437s",
-     "kind": "analysis",
-     "note": "Solana community growing Anom token; Blinks funding Solana builder community hackathon for Anom; adding utility and integration opportunities for the token."
-    },
-    {
-     "episode_id": "oI9Hv_D6UFk",
-     "episode_title": "\ud83d\udd34LIVE: HyperEVM, SOL, RH, or Base? Bulls In Control | Time to Lock In | Market Update + Interview",
-     "start_seconds": 6019.0,
-     "timestamp": "1:40:19",
-     "deep_link": "https://www.youtube.com/watch?v=oI9Hv_D6UFk&t=6019s",
-     "kind": "analysis",
-     "note": "Discussed as a meme coin paired with Manlet on Stonfun; used as an example of multi-tiered meme coin pairing strategy."
-    },
-    {
-     "episode_id": "oI9Hv_D6UFk",
-     "episode_title": "\ud83d\udd34LIVE: HyperEVM, SOL, RH, or Base? Bulls In Control | Time to Lock In | Market Update + Interview",
-     "start_seconds": 12612.0,
-     "timestamp": "3:30:12",
-     "deep_link": "https://www.youtube.com/watch?v=oI9Hv_D6UFk&t=12612s",
-     "kind": "analysis",
-     "note": "Discussed as a $230 million market cap token with issues attracting capital flows from smaller traders; positioned as part of an ecosystem with paired memecoin tokens."
-    },
-    {
-     "episode_id": "oI9Hv_D6UFk",
-     "episode_title": "\ud83d\udd34LIVE: HyperEVM, SOL, RH, or Base? Bulls In Control | Time to Lock In | Market Update + Interview",
-     "start_seconds": 12912.0,
-     "timestamp": "3:35:12",
-     "deep_link": "https://www.youtube.com/watch?v=oI9Hv_D6UFk&t=12912s",
-     "kind": "analysis",
-     "note": "Speaker discussed Anom's launchpad and distribution challenges, suggesting waiting for price to come into a certain range."
-    },
-    {
-     "episode_id": "oSkWYs5rAGk",
-     "episode_title": "CLAWPUMP: ClawPump is the capital market for agents on Solana & Robinhood crypto chain.",
-     "start_seconds": 400.0,
-     "timestamp": "6:40",
-     "deep_link": "https://www.youtube.com/watch?v=oSkWYs5rAGk&t=400s",
-     "kind": "analysis",
-     "note": "Speakers discuss a hackathon with prize pool of 320k Anom (0.1% of supply) and explain the distribution: overall winner receives 25% of Anom, Claw Pom x Pom Fun winner receives 50% of Anom plus $35,000 cash, and inference market winner by UseBot receives 15% of Anom plus $10,000 compute credit."
-    },
-    {
-     "episode_id": "oSkWYs5rAGk",
-     "episode_title": "CLAWPUMP: ClawPump is the capital market for agents on Solana & Robinhood crypto chain.",
-     "start_seconds": 2152.0,
-     "timestamp": "35:52",
-     "deep_link": "https://www.youtube.com/watch?v=oSkWYs5rAGk&t=2152s",
-     "kind": "analysis",
-     "note": "Token alongside Claw receiving 10% of hackathon profits for buybacks as part of the economic flywheel; volume from hackathon projects will be used for buying back both Anom and Claw."
-    },
-    {
-     "episode_id": "q2zmdT9CnNA",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto Pulling Back... What's Next? | Market Update + Interviews",
-     "start_seconds": 9033.0,
-     "timestamp": "2:30:33",
-     "deep_link": "https://www.youtube.com/watch?v=q2zmdT9CnNA&t=9033s",
-     "kind": "mention",
-     "note": "Speaker mentioned the Anom token and that the OG Anom dev handed off the token; the dev was being brought on to MCG."
-    },
-    {
-     "episode_id": "qkYKDed4Apk",
-     "episode_title": "\ud83d\udd34 LIVE: $CASHCAT Robinhood Listing | Uniswap Launchpad | Market Update + Interviews",
-     "start_seconds": 10893.0,
-     "timestamp": "3:01:33",
-     "deep_link": "https://www.youtube.com/watch?v=qkYKDed4Apk&t=10893s",
-     "kind": "mention",
-     "note": "Suggested as an alternative token with real fundamentals."
-    },
-    {
-     "episode_id": "qq_4gfyjN6s",
-     "episode_title": "\ud83d\udd34 LIVE: MonkeDAO Solana Product Spotlight + Trader Radio w/@ChillTRD | Market Updates",
-     "start_seconds": 588.0,
-     "timestamp": "9:48",
-     "deep_link": "https://www.youtube.com/watch?v=qq_4gfyjN6s&t=588s",
-     "kind": "analysis",
-     "note": "Anom is a 200 million market cap token with an ecosystem strategy where the founder buys paired tokens at various market caps to capture flows; paired tokens include Manlet and others."
-    },
-    {
-     "episode_id": "qq_4gfyjN6s",
-     "episode_title": "\ud83d\udd34 LIVE: MonkeDAO Solana Product Spotlight + Trader Radio w/@ChillTRD | Market Updates",
-     "start_seconds": 8727.0,
-     "timestamp": "2:25:27",
-     "deep_link": "https://www.youtube.com/watch?v=qq_4gfyjN6s&t=8727s",
-     "kind": "analysis",
-     "note": "Speaker discusses Anom as a big token with 200 million market cap, noting that many traders avoid tokens at this cap level and thus miss meme coin flows."
-    },
-    {
-     "episode_id": "qq_4gfyjN6s",
-     "episode_title": "\ud83d\udd34 LIVE: MonkeDAO Solana Product Spotlight + Trader Radio w/@ChillTRD | Market Updates",
-     "start_seconds": 10008.0,
-     "timestamp": "2:46:48",
-     "deep_link": "https://www.youtube.com/watch?v=qq_4gfyjN6s&t=10008s",
-     "kind": "analysis",
-     "note": "Speaker analyzes Anom token's technical setup, noting support at 170 and a consolidation channel between 170-220, predicting a breakout; speaker is in at 170 and bullish on the token."
-    },
-    {
-     "episode_id": "qq_4gfyjN6s",
-     "episode_title": "\ud83d\udd34 LIVE: MonkeDAO Solana Product Spotlight + Trader Radio w/@ChillTRD | Market Updates",
-     "start_seconds": 10306.0,
-     "timestamp": "2:51:46",
-     "deep_link": "https://www.youtube.com/watch?v=qq_4gfyjN6s&t=10306s",
-     "kind": "analysis",
-     "note": "Discussed as a token with attention and reputation from a person named Anom; speakers mention potential VC bidding interest and describe it as having tailwinds, with one speaker expressing bullish sentiment on the token."
-    },
-    {
-     "episode_id": "urLmYepetQI",
-     "episode_title": "\ud83d\udd34 LIVE: WTF is a V4 hook | $ETH bottom in? | Market Update + Interviews",
-     "start_seconds": 8913.0,
-     "timestamp": "2:28:33",
-     "deep_link": "https://www.youtube.com/watch?v=urLmYepetQI&t=8913s",
-     "kind": "mention",
-     "note": "Token mentioned in context of a story about Anom token being handed off to Anom."
-    },
-    {
-     "episode_id": "vBRvDqOdKwQ",
-     "episode_title": "\ud83d\udd34 LIVE: There Is No Ceiling | Market Update + Interviews",
-     "start_seconds": 480.0,
-     "timestamp": "8:00",
-     "deep_link": "https://www.youtube.com/watch?v=vBRvDqOdKwQ&t=480s",
-     "kind": "mention",
-     "note": "Named as one of four tokens that reached 100 million market cap in the last eight months."
-    },
-    {
-     "episode_id": "vqOeJKpQ61E",
-     "episode_title": "A Conversation with Sonder: Trading the Crypto Trenches",
-     "start_seconds": 134.0,
-     "timestamp": "2:14",
-     "deep_link": "https://www.youtube.com/watch?v=vqOeJKpQ61E&t=134s",
-     "kind": "analysis",
-     "note": "Discussed as a signal showing renewed market appetite; it reignited on-chain activity with volume and new wallets, though speaker entered late and made a few multiples on it."
-    },
-    {
-     "episode_id": "vqOeJKpQ61E",
-     "episode_title": "A Conversation with Sonder: Trading the Crypto Trenches",
-     "start_seconds": 3649.0,
-     "timestamp": "1:00:49",
-     "deep_link": "https://www.youtube.com/watch?v=vqOeJKpQ61E&t=3649s",
-     "kind": "analysis",
-     "note": "Speaker is bidding Anom and believes it will be a 3-4x based on current price action; discusses it in context of Solana ecosystem positioning and airdrop strategy."
-    },
-    {
-     "episode_id": "x7qRX-hWxg8",
-     "episode_title": "\ud83d\udd34 LIVE: Robinhood Chain Exploding (Memes, V4 Hooks, Infra) | Market Update + Interviews",
-     "start_seconds": 11475.0,
-     "timestamp": "3:11:15",
-     "deep_link": "https://www.youtube.com/watch?v=x7qRX-hWxg8&t=11475s",
-     "kind": "mention",
-     "note": "Named as a meme coin alternative to RWA pairs on Pump Swap AMM."
-    },
-    {
-     "episode_id": "xbQIfWj3OQs",
-     "episode_title": "\ud83d\udd34 LIVE: Markets Melting as Tariffs Return | AI Bubble Popped? | 2027 Outlook",
-     "start_seconds": 7167.0,
-     "timestamp": "1:59:27",
-     "deep_link": "https://www.youtube.com/watch?v=xbQIfWj3OQs&t=7167s",
-     "kind": "mention",
-     "note": "Referenced as an example of a token held by a trader where there is uncertainty around holder dump risk, contrasted with getting direct exposure to that trader's edge through Liquid V instead."
-    }
-   ],
-   "episode_count": 38,
    "single_reference": false
   },
   {
@@ -109874,8 +109955,8 @@
    "symbol": "PEARL",
    "name": "Pearl",
    "asset_class": "crypto",
-   "mentions": 35,
-   "analysis": 30,
+   "mentions": 36,
+   "analysis": 31,
    "moments": [
     {
      "episode_id": "2NK_MBlFvtM",
@@ -110139,6 +110220,15 @@
      "note": "Speaker notes Pearl has been going crazy, recalls discussing it in early days when order books were thin and difficult, states it has ripped substantially."
     },
     {
+     "episode_id": "l7nAlLJ7-WU",
+     "episode_title": "This Token Did +300% After Our Interview | LiquidV Interview (Hyperliquid Trader ETFs)",
+     "start_seconds": 433.0,
+     "timestamp": "7:13",
+     "deep_link": "https://www.youtube.com/watch?v=l7nAlLJ7-WU&t=433s",
+     "kind": "analysis",
+     "note": "Ansem is long on Pearl, which is described as 'an outperformer.'"
+    },
+    {
      "episode_id": "miXTiMNMDCc",
      "episode_title": "\ud83d\udd34 LIVE: Onchain Volume Falling Across the Board | Why Stay Bullish?",
      "start_seconds": 8664.0,
@@ -110193,7 +110283,7 @@
      "note": "Mentioned as a new player in the store of value vertical, discussed in context of privacy and quantum resistance; previously had someone from the project on the show."
     }
    ],
-   "episode_count": 15,
+   "episode_count": 16,
    "single_reference": false
   },
   {
@@ -117373,7 +117463,7 @@
    "symbol": "CARS",
    "name": "RIP Cars",
    "asset_class": "crypto",
-   "mentions": 27,
+   "mentions": 28,
    "analysis": 25,
    "moments": [
     {
@@ -117557,6 +117647,15 @@
      "note": "Metadow curated launch with 50% sold at 1.1, resulting in 550k circulating market cap of which 200k is base treasury assets, with approximately 300k pre-money valuation."
     },
     {
+     "episode_id": "l7nAlLJ7-WU",
+     "episode_title": "This Token Did +300% After Our Interview | LiquidV Interview (Hyperliquid Trader ETFs)",
+     "start_seconds": 36.0,
+     "timestamp": "0:36",
+     "deep_link": "https://www.youtube.com/watch?v=l7nAlLJ7-WU&t=36s",
+     "kind": "mention",
+     "note": "Referenced as MetaDAO's own token with a notable chart on Solana."
+    },
+    {
      "episode_id": "n-1Tj9Emstc",
      "episode_title": "\ud83d\udd34 LIVE: Bitcoin Holding Above $82.5K | Calm Before the Storm?",
      "start_seconds": 1513.0,
@@ -117620,7 +117719,7 @@
      "note": "CARS announced raising up to 1.5 million dollars in additional capital, causing an initial sell-off; the asset subsequently rose 270% in value and 180% over a week; the capital raise is being done through OTC transactions with new institutional backers, and the market cap grew from 1 million to 8.8 million."
     }
    ],
-   "episode_count": 21,
+   "episode_count": 22,
    "single_reference": false
   },
   {
@@ -142599,6 +142698,206 @@
    "single_reference": false
   },
   {
+   "symbol": "MANTRA",
+   "name": "Mantra",
+   "asset_class": "other",
+   "mentions": 21,
+   "analysis": 10,
+   "moments": [
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 2734.0,
+     "timestamp": "45:34",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=2734s",
+     "kind": "mention",
+     "note": "Mentioned as an ecosystem project that has integrated tokenized equity pairs."
+    },
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 5896.0,
+     "timestamp": "1:38:16",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=5896s",
+     "kind": "mention",
+     "note": "Blockchain or platform on which Tessera token was launched via fair launch."
+    },
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 7193.0,
+     "timestamp": "1:59:53",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=7193s",
+     "kind": "mention",
+     "note": "Speaker mentions discussing Mantra as one of the tokens on Elysium."
+    },
+    {
+     "episode_id": "0YjNERA7ayY",
+     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
+     "start_seconds": 7569.0,
+     "timestamp": "2:06:09",
+     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=7569s",
+     "kind": "analysis",
+     "note": "Speaker discusses potential risk related to tokens Ascend owns in Mantra and uncertainty about token resolution."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 780.0,
+     "timestamp": "13:00",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=780s",
+     "kind": "analysis",
+     "note": "Speaker discusses Mantra as a launch pad project they are involved with, describing its support system for builders and fee structure designed to benefit creators."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 1587.0,
+     "timestamp": "26:27",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=1587s",
+     "kind": "analysis",
+     "note": "Presented as a launchpad platform built on Elysium that facilitates token launches through three modes: simple token creation, custom partner tokens, and Mantra listings."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 2074.0,
+     "timestamp": "34:34",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=2074s",
+     "kind": "analysis",
+     "note": "Mantra token launched with a fair launch structure; initially there was no Mantra token, only Chameleon and other tokens, before Mantra went live on November 9th."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 2461.0,
+     "timestamp": "41:01",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=2461s",
+     "kind": "analysis",
+     "note": "Extensive discussion of Mantra token's economic engine, fee structure, tokenomics, airdrop mechanics (25% allocated to airdrop, 5% retroactive to early users), token supply structure (launched with $4B tokens, burned down to $1B circulating), and team allocation (15% for operations, market making, exchange listings)."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 2858.0,
+     "timestamp": "47:38",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=2858s",
+     "kind": "analysis",
+     "note": "Discussed as a token trading between three and four million market cap, with $100 million in volume generated, founder discussed ecosystem execution plans."
+    },
+    {
+     "episode_id": "9DG7UtBDWnM",
+     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
+     "start_seconds": 4174.0,
+     "timestamp": "1:09:34",
+     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=4174s",
+     "kind": "mention",
+     "note": "Speaker gives a shout-out to Mantra holders and states they remain committed to Mantra house of all launches."
+    },
+    {
+     "episode_id": "NmI-zvqGlZM",
+     "episode_title": "Key Moments from the SPINOR Interview!",
+     "start_seconds": 507.0,
+     "timestamp": "8:27",
+     "deep_link": "https://www.youtube.com/watch?v=NmI-zvqGlZM&t=507s",
+     "kind": "analysis",
+     "note": "Token structure discussed: 25% allocated to airdrops, 15% for operations and market making, 4 billion initial circulating supply with 3 billion burned to price out snipers, anti-snipe tax implemented, then transitioned to conventional 1 billion circulating through Uniswap V4."
+    },
+    {
+     "episode_id": "_mLaSJLAPJs",
+     "episode_title": "\ud83d\udd34 LIVE: Crypto is Crashing | Here\u2019s Exactly What to Do Right Now",
+     "start_seconds": 4257.0,
+     "timestamp": "1:10:57",
+     "deep_link": "https://www.youtube.com/watch?v=_mLaSJLAPJs&t=4257s",
+     "kind": "mention",
+     "note": "Named as one of two launch events being watched; indicated to have an upcoming token and described as aligned with the speaker's team discussions."
+    },
+    {
+     "episode_id": "c-dQtmlJZxw",
+     "episode_title": "\ud83d\udd34 LIVE: The 2027 Outlook | Anthropic IPO Fallout + Cyberattacks Slam Europe",
+     "start_seconds": 2018.0,
+     "timestamp": "33:38",
+     "deep_link": "https://www.youtube.com/watch?v=c-dQtmlJZxw&t=2018s",
+     "kind": "mention",
+     "note": "Mentioned as the blockchain/platform where Liquid V team operates, creating tokens of traders from Hyperliquid."
+    },
+    {
+     "episode_id": "fHrSMN0VKHw",
+     "episode_title": "\ud83d\udd34 LIVE: Markets Are Dead\u2026 Time for GTA6? | Market Update",
+     "start_seconds": 4372.0,
+     "timestamp": "1:12:52",
+     "deep_link": "https://www.youtube.com/watch?v=fHrSMN0VKHw&t=4372s",
+     "kind": "mention",
+     "note": "Named in passing while looking at ecosystem trading data."
+    },
+    {
+     "episode_id": "fHrSMN0VKHw",
+     "episode_title": "\ud83d\udd34 LIVE: Markets Are Dead\u2026 Time for GTA6? | Market Update",
+     "start_seconds": 4437.0,
+     "timestamp": "1:13:57",
+     "deep_link": "https://www.youtube.com/watch?v=fHrSMN0VKHw&t=4437s",
+     "kind": "mention",
+     "note": "Speaker plans to keep an eye on Mantra as part of watching the on-chain infrastructure for AI agents ecosystem."
+    },
+    {
+     "episode_id": "l7nAlLJ7-WU",
+     "episode_title": "This Token Did +300% After Our Interview | LiquidV Interview (Hyperliquid Trader ETFs)",
+     "start_seconds": 1404.0,
+     "timestamp": "23:24",
+     "deep_link": "https://www.youtube.com/watch?v=l7nAlLJ7-WU&t=1404s",
+     "kind": "analysis",
+     "note": "Blockchain platform where Liquid V launched; supports V tokens as quote assets in trading pairs and provides launchpad services."
+    },
+    {
+     "episode_id": "omJuJAl69Zg",
+     "episode_title": "Tessera | The MCP Gateway Putting AI Agents on Elysium",
+     "start_seconds": 556.0,
+     "timestamp": "9:16",
+     "deep_link": "https://www.youtube.com/watch?v=omJuJAl69Zg&t=556s",
+     "kind": "mention",
+     "note": "Tessera token was fair launched on Mantra blockchain; the team chose Mantra over Ascend due to access issues with Ascend and alignment with Mantra's buyback and infrastructure goals."
+    },
+    {
+     "episode_id": "oyJMOrxUlLI",
+     "episode_title": "\ud83d\udd34 LIVE: Anthropic Below IPO Price | NVDA Dumping | Ansem Hacked? | Is the AI Trade Over?",
+     "start_seconds": 358.0,
+     "timestamp": "5:58",
+     "deep_link": "https://www.youtube.com/watch?v=oyJMOrxUlLI&t=358s",
+     "kind": "analysis",
+     "note": "Mantra has been up only since painting a bottom at 2 million and had a Hyper Liquid spot listing."
+    },
+    {
+     "episode_id": "oyJMOrxUlLI",
+     "episode_title": "\ud83d\udd34 LIVE: Anthropic Below IPO Price | NVDA Dumping | Ansem Hacked? | Is the AI Trade Over?",
+     "start_seconds": 2902.0,
+     "timestamp": "48:22",
+     "deep_link": "https://www.youtube.com/watch?v=oyJMOrxUlLI&t=2902s",
+     "kind": "mention",
+     "note": "Launch platform where Liquid V token was launched; praised by speaker as supportive to builders."
+    },
+    {
+     "episode_id": "xbQIfWj3OQs",
+     "episode_title": "\ud83d\udd34 LIVE: Markets Melting as Tariffs Return | AI Bubble Popped? | 2027 Outlook",
+     "start_seconds": 6333.0,
+     "timestamp": "1:45:33",
+     "deep_link": "https://www.youtube.com/watch?v=xbQIfWj3OQs&t=6333s",
+     "kind": "mention",
+     "note": "Requested to be pulled up on charts as part of Elysium conversation."
+    },
+    {
+     "episode_id": "xbQIfWj3OQs",
+     "episode_title": "\ud83d\udd34 LIVE: Markets Melting as Tariffs Return | AI Bubble Popped? | 2027 Outlook",
+     "start_seconds": 6548.0,
+     "timestamp": "1:49:08",
+     "deep_link": "https://www.youtube.com/watch?v=xbQIfWj3OQs&t=6548s",
+     "kind": "analysis",
+     "note": "Token with 25% of market cap earmarked for airdrop, paired with KNTQ in buyback mechanism; has listed on Hyperliquid with $4.6M market cap and over $100M in trading volume."
+    }
+   ],
+   "episode_count": 10,
+   "single_reference": false
+  },
+  {
    "symbol": "XAU",
    "name": "Gold",
    "asset_class": "commodity",
@@ -144726,197 +145025,6 @@
     }
    ],
    "episode_count": 23,
-   "single_reference": false
-  },
-  {
-   "symbol": "MANTRA",
-   "name": "Mantra",
-   "asset_class": "other",
-   "mentions": 20,
-   "analysis": 9,
-   "moments": [
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 2734.0,
-     "timestamp": "45:34",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=2734s",
-     "kind": "mention",
-     "note": "Mentioned as an ecosystem project that has integrated tokenized equity pairs."
-    },
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 5896.0,
-     "timestamp": "1:38:16",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=5896s",
-     "kind": "mention",
-     "note": "Blockchain or platform on which Tessera token was launched via fair launch."
-    },
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 7193.0,
-     "timestamp": "1:59:53",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=7193s",
-     "kind": "mention",
-     "note": "Speaker mentions discussing Mantra as one of the tokens on Elysium."
-    },
-    {
-     "episode_id": "0YjNERA7ayY",
-     "episode_title": "The HYPE'r Elysium Opportunity, will my $1860 PT on ETH hold?",
-     "start_seconds": 7569.0,
-     "timestamp": "2:06:09",
-     "deep_link": "https://www.youtube.com/watch?v=0YjNERA7ayY&t=7569s",
-     "kind": "analysis",
-     "note": "Speaker discusses potential risk related to tokens Ascend owns in Mantra and uncertainty about token resolution."
-    },
-    {
-     "episode_id": "9DG7UtBDWnM",
-     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
-     "start_seconds": 780.0,
-     "timestamp": "13:00",
-     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=780s",
-     "kind": "analysis",
-     "note": "Speaker discusses Mantra as a launch pad project they are involved with, describing its support system for builders and fee structure designed to benefit creators."
-    },
-    {
-     "episode_id": "9DG7UtBDWnM",
-     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
-     "start_seconds": 1587.0,
-     "timestamp": "26:27",
-     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=1587s",
-     "kind": "analysis",
-     "note": "Presented as a launchpad platform built on Elysium that facilitates token launches through three modes: simple token creation, custom partner tokens, and Mantra listings."
-    },
-    {
-     "episode_id": "9DG7UtBDWnM",
-     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
-     "start_seconds": 2074.0,
-     "timestamp": "34:34",
-     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=2074s",
-     "kind": "analysis",
-     "note": "Mantra token launched with a fair launch structure; initially there was no Mantra token, only Chameleon and other tokens, before Mantra went live on November 9th."
-    },
-    {
-     "episode_id": "9DG7UtBDWnM",
-     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
-     "start_seconds": 2461.0,
-     "timestamp": "41:01",
-     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=2461s",
-     "kind": "analysis",
-     "note": "Extensive discussion of Mantra token's economic engine, fee structure, tokenomics, airdrop mechanics (25% allocated to airdrop, 5% retroactive to early users), token supply structure (launched with $4B tokens, burned down to $1B circulating), and team allocation (15% for operations, market making, exchange listings)."
-    },
-    {
-     "episode_id": "9DG7UtBDWnM",
-     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
-     "start_seconds": 2858.0,
-     "timestamp": "47:38",
-     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=2858s",
-     "kind": "analysis",
-     "note": "Discussed as a token trading between three and four million market cap, with $100 million in volume generated, founder discussed ecosystem execution plans."
-    },
-    {
-     "episode_id": "9DG7UtBDWnM",
-     "episode_title": "From Cash Cat to Montra: Spinor on Building Through Every Marke",
-     "start_seconds": 4174.0,
-     "timestamp": "1:09:34",
-     "deep_link": "https://www.youtube.com/watch?v=9DG7UtBDWnM&t=4174s",
-     "kind": "mention",
-     "note": "Speaker gives a shout-out to Mantra holders and states they remain committed to Mantra house of all launches."
-    },
-    {
-     "episode_id": "NmI-zvqGlZM",
-     "episode_title": "Key Moments from the SPINOR Interview!",
-     "start_seconds": 507.0,
-     "timestamp": "8:27",
-     "deep_link": "https://www.youtube.com/watch?v=NmI-zvqGlZM&t=507s",
-     "kind": "analysis",
-     "note": "Token structure discussed: 25% allocated to airdrops, 15% for operations and market making, 4 billion initial circulating supply with 3 billion burned to price out snipers, anti-snipe tax implemented, then transitioned to conventional 1 billion circulating through Uniswap V4."
-    },
-    {
-     "episode_id": "_mLaSJLAPJs",
-     "episode_title": "\ud83d\udd34 LIVE: Crypto is Crashing | Here\u2019s Exactly What to Do Right Now",
-     "start_seconds": 4257.0,
-     "timestamp": "1:10:57",
-     "deep_link": "https://www.youtube.com/watch?v=_mLaSJLAPJs&t=4257s",
-     "kind": "mention",
-     "note": "Named as one of two launch events being watched; indicated to have an upcoming token and described as aligned with the speaker's team discussions."
-    },
-    {
-     "episode_id": "c-dQtmlJZxw",
-     "episode_title": "\ud83d\udd34 LIVE: The 2027 Outlook | Anthropic IPO Fallout + Cyberattacks Slam Europe",
-     "start_seconds": 2018.0,
-     "timestamp": "33:38",
-     "deep_link": "https://www.youtube.com/watch?v=c-dQtmlJZxw&t=2018s",
-     "kind": "mention",
-     "note": "Mentioned as the blockchain/platform where Liquid V team operates, creating tokens of traders from Hyperliquid."
-    },
-    {
-     "episode_id": "fHrSMN0VKHw",
-     "episode_title": "\ud83d\udd34 LIVE: Markets Are Dead\u2026 Time for GTA6? | Market Update",
-     "start_seconds": 4372.0,
-     "timestamp": "1:12:52",
-     "deep_link": "https://www.youtube.com/watch?v=fHrSMN0VKHw&t=4372s",
-     "kind": "mention",
-     "note": "Named in passing while looking at ecosystem trading data."
-    },
-    {
-     "episode_id": "fHrSMN0VKHw",
-     "episode_title": "\ud83d\udd34 LIVE: Markets Are Dead\u2026 Time for GTA6? | Market Update",
-     "start_seconds": 4437.0,
-     "timestamp": "1:13:57",
-     "deep_link": "https://www.youtube.com/watch?v=fHrSMN0VKHw&t=4437s",
-     "kind": "mention",
-     "note": "Speaker plans to keep an eye on Mantra as part of watching the on-chain infrastructure for AI agents ecosystem."
-    },
-    {
-     "episode_id": "omJuJAl69Zg",
-     "episode_title": "Tessera | The MCP Gateway Putting AI Agents on Elysium",
-     "start_seconds": 556.0,
-     "timestamp": "9:16",
-     "deep_link": "https://www.youtube.com/watch?v=omJuJAl69Zg&t=556s",
-     "kind": "mention",
-     "note": "Tessera token was fair launched on Mantra blockchain; the team chose Mantra over Ascend due to access issues with Ascend and alignment with Mantra's buyback and infrastructure goals."
-    },
-    {
-     "episode_id": "oyJMOrxUlLI",
-     "episode_title": "\ud83d\udd34 LIVE: Anthropic Below IPO Price | NVDA Dumping | Ansem Hacked? | Is the AI Trade Over?",
-     "start_seconds": 358.0,
-     "timestamp": "5:58",
-     "deep_link": "https://www.youtube.com/watch?v=oyJMOrxUlLI&t=358s",
-     "kind": "analysis",
-     "note": "Mantra has been up only since painting a bottom at 2 million and had a Hyper Liquid spot listing."
-    },
-    {
-     "episode_id": "oyJMOrxUlLI",
-     "episode_title": "\ud83d\udd34 LIVE: Anthropic Below IPO Price | NVDA Dumping | Ansem Hacked? | Is the AI Trade Over?",
-     "start_seconds": 2902.0,
-     "timestamp": "48:22",
-     "deep_link": "https://www.youtube.com/watch?v=oyJMOrxUlLI&t=2902s",
-     "kind": "mention",
-     "note": "Launch platform where Liquid V token was launched; praised by speaker as supportive to builders."
-    },
-    {
-     "episode_id": "xbQIfWj3OQs",
-     "episode_title": "\ud83d\udd34 LIVE: Markets Melting as Tariffs Return | AI Bubble Popped? | 2027 Outlook",
-     "start_seconds": 6333.0,
-     "timestamp": "1:45:33",
-     "deep_link": "https://www.youtube.com/watch?v=xbQIfWj3OQs&t=6333s",
-     "kind": "mention",
-     "note": "Requested to be pulled up on charts as part of Elysium conversation."
-    },
-    {
-     "episode_id": "xbQIfWj3OQs",
-     "episode_title": "\ud83d\udd34 LIVE: Markets Melting as Tariffs Return | AI Bubble Popped? | 2027 Outlook",
-     "start_seconds": 6548.0,
-     "timestamp": "1:49:08",
-     "deep_link": "https://www.youtube.com/watch?v=xbQIfWj3OQs&t=6548s",
-     "kind": "analysis",
-     "note": "Token with 25% of market cap earmarked for airdrop, paired with KNTQ in buyback mechanism; has listed on Hyperliquid with $4.6M market cap and over $100M in trading volume."
-    }
-   ],
-   "episode_count": 9,
    "single_reference": false
   },
   {
@@ -160348,6 +160456,62 @@
    "single_reference": false
   },
   {
+   "symbol": "LIQUID",
+   "name": "Liquid",
+   "asset_class": "other",
+   "mentions": 5,
+   "analysis": 5,
+   "moments": [
+    {
+     "episode_id": "6s2rJfz01jQ",
+     "episode_title": "\ud83d\udd34  LIVE: The First Pullback is Here. Time to Sell or Look For Entries? | Market Updates + Alpha",
+     "start_seconds": 11018.0,
+     "timestamp": "3:03:38",
+     "deep_link": "https://www.youtube.com/watch?v=6s2rJfz01jQ&t=11018s",
+     "kind": "analysis",
+     "note": "Speakers discussed Liquid, noting it recently introduced a token migration feature enabling creators to bring OG communities forward, and that it works with Rainbow and functions as Rainbow's launchpad."
+    },
+    {
+     "episode_id": "jxmiWjMnKcU",
+     "episode_title": "\ud83d\udd34 LIVE NOW: Titan, US mortgage market onchain, TACO holding | Onchain Market Updates + Alpha!",
+     "start_seconds": 9010.0,
+     "timestamp": "2:30:10",
+     "deep_link": "https://www.youtube.com/watch?v=jxmiWjMnKcU&t=9010s",
+     "kind": "analysis",
+     "note": "Rainbow's new token launcher with $4.2 million in trading volume recorded, 280 tokens created, and Rainbow accounting for 84% of token creation, with circulating market cap around 2 million."
+    },
+    {
+     "episode_id": "l7nAlLJ7-WU",
+     "episode_title": "This Token Did +300% After Our Interview | LiquidV Interview (Hyperliquid Trader ETFs)",
+     "start_seconds": 1244.0,
+     "timestamp": "20:44",
+     "deep_link": "https://www.youtube.com/watch?v=l7nAlLJ7-WU&t=1244s",
+     "kind": "analysis",
+     "note": "Protocol token that will receive 80% of protocol revenue through buybacks; speakers discuss tokenomic model and value accrual to token holders."
+    },
+    {
+     "episode_id": "l7nAlLJ7-WU",
+     "episode_title": "This Token Did +300% After Our Interview | LiquidV Interview (Hyperliquid Trader ETFs)",
+     "start_seconds": 1738.0,
+     "timestamp": "28:58",
+     "deep_link": "https://www.youtube.com/watch?v=l7nAlLJ7-WU&t=1738s",
+     "kind": "analysis",
+     "note": "Referred to as a token with potential utility as quote tokens; discussed as central to the Liquid V platform and ecosystem alongside Elysium."
+    },
+    {
+     "episode_id": "xbQIfWj3OQs",
+     "episode_title": "\ud83d\udd34 LIVE: Markets Melting as Tariffs Return | AI Bubble Popped? | 2027 Outlook",
+     "start_seconds": 6141.0,
+     "timestamp": "1:42:21",
+     "deep_link": "https://www.youtube.com/watch?v=xbQIfWj3OQs&t=6141s",
+     "kind": "analysis",
+     "note": "Speaker holds the token since 200K, noting it is pumping with volume as the key metric of interest; characterized as an amazing trade and bought on a dip around 220-230."
+    }
+   ],
+   "episode_count": 4,
+   "single_reference": false
+  },
+  {
    "symbol": "PAYI",
    "name": "Payi",
    "asset_class": "crypto",
@@ -171517,44 +171681,6 @@
    "single_reference": false
   },
   {
-   "symbol": "LIQUID",
-   "name": "Liquid",
-   "asset_class": "other",
-   "mentions": 3,
-   "analysis": 3,
-   "moments": [
-    {
-     "episode_id": "6s2rJfz01jQ",
-     "episode_title": "\ud83d\udd34  LIVE: The First Pullback is Here. Time to Sell or Look For Entries? | Market Updates + Alpha",
-     "start_seconds": 11018.0,
-     "timestamp": "3:03:38",
-     "deep_link": "https://www.youtube.com/watch?v=6s2rJfz01jQ&t=11018s",
-     "kind": "analysis",
-     "note": "Speakers discussed Liquid, noting it recently introduced a token migration feature enabling creators to bring OG communities forward, and that it works with Rainbow and functions as Rainbow's launchpad."
-    },
-    {
-     "episode_id": "jxmiWjMnKcU",
-     "episode_title": "\ud83d\udd34 LIVE NOW: Titan, US mortgage market onchain, TACO holding | Onchain Market Updates + Alpha!",
-     "start_seconds": 9010.0,
-     "timestamp": "2:30:10",
-     "deep_link": "https://www.youtube.com/watch?v=jxmiWjMnKcU&t=9010s",
-     "kind": "analysis",
-     "note": "Rainbow's new token launcher with $4.2 million in trading volume recorded, 280 tokens created, and Rainbow accounting for 84% of token creation, with circulating market cap around 2 million."
-    },
-    {
-     "episode_id": "xbQIfWj3OQs",
-     "episode_title": "\ud83d\udd34 LIVE: Markets Melting as Tariffs Return | AI Bubble Popped? | 2027 Outlook",
-     "start_seconds": 6141.0,
-     "timestamp": "1:42:21",
-     "deep_link": "https://www.youtube.com/watch?v=xbQIfWj3OQs&t=6141s",
-     "kind": "analysis",
-     "note": "Speaker holds the token since 200K, noting it is pumping with volume as the key metric of interest; characterized as an amazing trade and bought on a dip around 220-230."
-    }
-   ],
-   "episode_count": 3,
-   "single_reference": false
-  },
-  {
    "symbol": "PYPL",
    "name": "PayPal",
    "asset_class": "stock",
@@ -172993,6 +173119,44 @@
      "deep_link": "https://www.youtube.com/watch?v=mtKICofZcFU&t=504s",
      "kind": "analysis",
      "note": "Stable coin backed by basis trade strategy that generates yield via permissionless staking; uses off-chain perpetual markets and basis trade to generate steady yield, historically around 15% annualized."
+    }
+   ],
+   "episode_count": 3,
+   "single_reference": false
+  },
+  {
+   "symbol": "LIQ",
+   "name": "LIQ",
+   "asset_class": "other",
+   "mentions": 3,
+   "analysis": 3,
+   "moments": [
+    {
+     "episode_id": "ZHGRCslUV3E",
+     "episode_title": "\ud83d\udd34 LIVE: BASE ECO on fire while markets are melting!  | Live Market Updates + Onchain Positioning",
+     "start_seconds": 7286.0,
+     "timestamp": "2:01:26",
+     "deep_link": "https://www.youtube.com/watch?v=ZHGRCslUV3E&t=7286s",
+     "kind": "analysis",
+     "note": "Previously discussed on the show; speaker indicates it has had significant price movement and relates to launching tokens paired with BBV."
+    },
+    {
+     "episode_id": "jxmiWjMnKcU",
+     "episode_title": "\ud83d\udd34 LIVE NOW: Titan, US mortgage market onchain, TACO holding | Onchain Market Updates + Alpha!",
+     "start_seconds": 8487.0,
+     "timestamp": "2:21:27",
+     "deep_link": "https://www.youtube.com/watch?v=jxmiWjMnKcU&t=8487s",
+     "kind": "analysis",
+     "note": "Base-based token recommended by Game in a Telegram group; has a relationship with Rainbow Wallet; founded by the creator of Clanker; real circulating supply is $2 million with $60,000 staked for a year."
+    },
+    {
+     "episode_id": "l7nAlLJ7-WU",
+     "episode_title": "This Token Did +300% After Our Interview | LiquidV Interview (Hyperliquid Trader ETFs)",
+     "start_seconds": 82.0,
+     "timestamp": "1:22",
+     "deep_link": "https://www.youtube.com/watch?v=l7nAlLJ7-WU&t=82s",
+     "kind": "analysis",
+     "note": "A project that tokenizes HyperLiquid traders on Elysium, allowing users to long or short positions of specific traders; uses precompile technology for faster on-chain transactions."
     }
    ],
    "episode_count": 3,
@@ -182236,35 +182400,6 @@
      "deep_link": "https://www.youtube.com/watch?v=aDTNm0gTsTA&t=1907s",
      "kind": "analysis",
      "note": "Discussed as a token that holders receive street points through emissions; future point distribution may be split between CLA and other tokens as new projects onboard."
-    }
-   ],
-   "episode_count": 2,
-   "single_reference": false
-  },
-  {
-   "symbol": "LIQ",
-   "name": "LIQ",
-   "asset_class": "other",
-   "mentions": 2,
-   "analysis": 2,
-   "moments": [
-    {
-     "episode_id": "ZHGRCslUV3E",
-     "episode_title": "\ud83d\udd34 LIVE: BASE ECO on fire while markets are melting!  | Live Market Updates + Onchain Positioning",
-     "start_seconds": 7286.0,
-     "timestamp": "2:01:26",
-     "deep_link": "https://www.youtube.com/watch?v=ZHGRCslUV3E&t=7286s",
-     "kind": "analysis",
-     "note": "Previously discussed on the show; speaker indicates it has had significant price movement and relates to launching tokens paired with BBV."
-    },
-    {
-     "episode_id": "jxmiWjMnKcU",
-     "episode_title": "\ud83d\udd34 LIVE NOW: Titan, US mortgage market onchain, TACO holding | Onchain Market Updates + Alpha!",
-     "start_seconds": 8487.0,
-     "timestamp": "2:21:27",
-     "deep_link": "https://www.youtube.com/watch?v=jxmiWjMnKcU&t=8487s",
-     "kind": "analysis",
-     "note": "Base-based token recommended by Game in a Telegram group; has a relationship with Rainbow Wallet; founded by the creator of Clanker; real circulating supply is $2 million with $60,000 staked for a year."
     }
    ],
    "episode_count": 2,
@@ -202698,6 +202833,26 @@
    "single_reference": true
   },
   {
+   "symbol": "FLUD",
+   "name": "Flood",
+   "asset_class": "crypto",
+   "mentions": 1,
+   "analysis": 1,
+   "moments": [
+    {
+     "episode_id": "l7nAlLJ7-WU",
+     "episode_title": "This Token Did +300% After Our Interview | LiquidV Interview (Hyperliquid Trader ETFs)",
+     "start_seconds": 1828.0,
+     "timestamp": "30:28",
+     "deep_link": "https://www.youtube.com/watch?v=l7nAlLJ7-WU&t=1828s",
+     "kind": "analysis",
+     "note": "Discussed as an example trader token that could underperform Ansem in a pair trading scenario; used to illustrate concept of comparative trader performance."
+    }
+   ],
+   "episode_count": 1,
+   "single_reference": true
+  },
+  {
    "symbol": "WHEAT",
    "name": "Wheat Token",
    "asset_class": "crypto",
@@ -219618,10 +219773,10 @@
    "single_reference": true
   }
  ],
- "total_hits": 21427,
+ "total_hits": 21443,
  "dropped_low_confidence": 2547,
- "dropped_not_an_asset": 2378,
- "episodes_processed": 715,
+ "dropped_not_an_asset": 2382,
+ "episodes_processed": 716,
  "episode_ids": [
   "-6Sccmoz7RQ",
   "-8z0M77EVZg",
@@ -220177,6 +220332,7 @@
   "ksTLtTmt3Hc",
   "ktrph5SXzWU",
   "l6c1Ha15aV0",
+  "l7nAlLJ7-WU",
   "lHiHv6_Hfh0",
   "lN2kZJ0CNZg",
   "lN7Fi1ZGfQI",
